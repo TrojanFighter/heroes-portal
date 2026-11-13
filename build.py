@@ -135,7 +135,8 @@ table.atlas tr:hover td{background:var(--accent-soft)}
 .feed li:last-child{border-bottom:0}
 .feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
 .feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
-.feed .m{color:#453c2b;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.feed .m{color:#453c2b;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
 article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px}
 article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
@@ -164,7 +165,7 @@ article.doc a:hover{color:var(--accent)}
 .filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
 .foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
 .foot a{color:var(--muted)}
-.tworow{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
 @media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
 .stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
 .chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
