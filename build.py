@@ -166,6 +166,8 @@ article.doc a:hover{color:var(--accent)}
 .foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
 .foot a{color:var(--muted)}
 .tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
 @media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
 .stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
 .chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
