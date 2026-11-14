@@ -10,7 +10,8 @@ REPO_URL = "https://github.com/TrojanFighter/IndieGameLegendaryHeroes"
 SESSION_URL = "https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b"
 GEN_DATE = "2026-11-14"
 
-RENDER_DIRS = ["book/", "cases/", "claims/"]
+RENDER_DIRS = ["book/", "cases/", "claims/", "evidence/", "sister-projects/",
+               "country-studies/", "cross-industry/", "translations/en/"]
 
 def site_path(repo_path):
     """repo-relative .md path -> site path (root-relative), or None."""
@@ -80,14 +81,18 @@ CSS = """
 :root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
 --border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
 --teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
 --serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
 --mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
 *{box-sizing:border-box;margin:0}
 html{font-size:16px}
 body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased}
 a{color:var(--accent);text-decoration:none}
 a:hover{text-decoration:underline}
-.nav{position:sticky;top:0;z-index:50;background:rgba(250,246,234,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
 .nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
 .brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
 .seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
@@ -100,7 +105,7 @@ a:hover{text-decoration:underline}
 .hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
 .hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
 .hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
-.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:#453c2b}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
 .hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
 .stat{background:var(--paper);padding:16px 14px}
@@ -127,7 +132,7 @@ table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
 table.atlas tr:hover td{background:var(--accent-soft)}
 .panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
 .why h3{font-size:17px;margin-bottom:10px}
-.why p,.why li{font-size:14.5px;color:#453c2b}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
 .why ul{padding-left:20px;margin-top:8px}
 .why li{margin-bottom:6px}
 .feed{list-style:none;padding:0}
@@ -135,7 +140,7 @@ table.atlas tr:hover td{background:var(--accent-soft)}
 .feed li:last-child{border-bottom:0}
 .feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
 .feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
-.feed .m{color:#453c2b;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
 .feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
 article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px}
@@ -146,10 +151,10 @@ article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
 article.doc p{margin:.9em 0}
 article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
 article.doc li{margin-bottom:.35em}
-article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:#4a4130;font-style:italic}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
 article.doc blockquote strong{font-style:normal}
-article.doc strong{color:#1f1a10}
-article.doc code{font-family:var(--mono);font-size:.85em;background:rgba(43,36,23,.06);padding:2px 6px;border-radius:4px}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
 article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
 article.doc pre code{background:none;color:inherit;padding:0}
 article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
@@ -173,10 +178,43 @@ article.doc a:hover{color:var(--accent)}
 .chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
 .chip b{color:var(--ink);font-weight:600}
 .status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
 """
 
 TPL = """<!doctype html>
-<html lang="zh-CN">
+<html lang="{lang}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -192,24 +230,44 @@ TPL = """<!doctype html>
 <a class="nl{n_start}" href="/book/START-HERE.html">从这儿读</a>
 <a class="nl{n_ch}" href="/chapters.html">章节</a>
 <a class="nl{n_pf}" href="/profiles.html">人物</a>
-<a class="nl{n_rt}" href="/book/DECISION-ROUTER.html">决策路由</a>
+<a class="nl{n_rt}" href="/router.html">决策路由</a>
 <a class="nl{n_at}" href="/atlas.html">案例地图</a>
 <a class="nl{n_cl}" href="/claims.html">命题</a>
 <a class="nl{n_no}" href="/notes.html">笔记</a>
+<a class="nl{n_sec}" href="/sections.html">分区</a>
 <span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
 <a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
 </div></nav>
+<div id="prog"><i id="prog-i"></i></div>
 {body}
 <footer class="foot"><div class="wrap">
 《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（{date} 快照） · <a href="{sess}">向 Devin 提修改需求</a>
 </div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
 </body></html>"""
 
-def page(title, body, nav=""):
-    keys = {k: "" for k in ["n_start","n_ch","n_pf","n_rt","n_at","n_cl","n_no"]}
+def page(title, body, nav="", lang="zh-CN"):
+    keys = {k: "" for k in ["n_start","n_ch","n_pf","n_rt","n_at","n_cl","n_no","n_sec"]}
     if nav:
         keys[nav] = ' class="on"'
     t = TPL.replace("{title}", html.escape(title)).replace("{css}", CSS)
+    t = t.replace("{lang}", lang)
     t = t.replace("{body}", body).replace("{date}", GEN_DATE).replace("{sess}", SESSION_URL)
     for k, v in keys.items():
         t = t.replace("{" + k + "}", v)
@@ -217,8 +275,8 @@ def page(title, body, nav=""):
 
 MDX = markdown.Markdown(extensions=["extra", "toc", "sane_lists", "smarty"])
 
-def render_doc(repo_path):
-    """Render one repo md file; return (title, out_rel_path)."""
+def render_doc(repo_path, docset):
+    """Render one repo md file; return (title, article_html, nav_key, lang)."""
     raw = open(os.path.join(SRC, repo_path), encoding="utf-8").read()
     body = strip_frontmatter(raw)
     title = first_h1(body) or os.path.basename(repo_path)[:-3]
@@ -227,11 +285,39 @@ def render_doc(repo_path):
     MDX.reset()
     inner = MDX.convert(body)
     crumbs = '<div class="crumbs"><a href="/">书阁</a> / ' + html.escape(repo_path) + '</div>'
-    art = f'<article class="doc"><div class="col">{inner}{crumbs}</div></article>'
-    nav = {"book/chapters/": "n_ch", "book/profiles/": "n_pf", "book/research-notes/": "n_no",
-           "book/life-routes/": "n_rt", "cases/": "n_at", "claims/": "n_cl"}.get(
-               next((p for p in ("book/chapters/","book/profiles/","book/research-notes/","book/life-routes/","cases/","claims/") if repo_path.startswith(p)), ""), "n_start" if repo_path.startswith("book/") else "")
-    return title, art, nav
+    # bilingual switch when a rendered counterpart exists
+    sw = ""
+    if repo_path.startswith("translations/en/"):
+        cp = repo_path[len("translations/en/"):]
+        if cp in docset:
+            sw = f'<div class="lang-sw"><a href="{site_path(cp)}">阅读中文原文 →</a></div>'
+    else:
+        cp = "translations/en/" + repo_path
+        if cp in docset:
+            sw = f'<div class="lang-sw"><a href="{site_path(cp)}">English translation →</a></div>'
+    # per-page TOC sidebar from h2/h3 (wide screens only)
+    toc = ""
+    heads = re.findall(r'<h([23])[^>]*id="([^"]+)"[^>]*>(.*?)</h\1>', inner)
+    if len(heads) >= 3:
+        items = ""
+        for lv, hid, txt in heads:
+            t = re.sub(r"<[^>]+>", "", txt).strip()
+            if t:
+                items += f'<a href="#{hid}" class="t{lv}">{html.escape(t)}</a>'
+        if items:
+            toc = f'<aside class="toc"><div class="toc-t">本页目录</div>{items}</aside>'
+    art = toc + f'<article class="doc"><div class="col">{sw}{inner}{crumbs}</div></article>'
+    prefixes = ("book/chapters/","book/profiles/","book/research-notes/","book/life-routes/",
+                "cases/","claims/","evidence/","sister-projects/","country-studies/",
+                "cross-industry/","translations/en/")
+    nav_map = {"book/chapters/":"n_ch","book/profiles/":"n_pf","book/research-notes/":"n_no",
+               "book/life-routes/":"n_rt","cases/":"n_at","claims/":"n_cl",
+               "evidence/":"n_sec","sister-projects/":"n_sec","country-studies/":"n_sec",
+               "cross-industry/":"n_sec","translations/en/":"n_sec"}
+    nav = nav_map.get(next((p for p in prefixes if repo_path.startswith(p)), ""),
+                      "n_start" if repo_path.startswith("book/") else "")
+    lang = "en" if repo_path.startswith("translations/en/") else "zh-CN"
+    return title, art, nav, lang
 
 def write(rel, content):
     p = os.path.join(OUT, rel.lstrip("/"))
@@ -261,15 +347,33 @@ def main():
         shutil.rmtree(OUT)
     os.makedirs(OUT)
 
-    docs = collect("book") + collect("cases") + collect("claims") + ["README.md"]
+    docs = (collect("book") + collect("cases") + collect("claims") + collect("evidence")
+            + collect("sister-projects") + collect("country-studies") + collect("cross-industry")
+            + collect("translations/en") + ["README.md"])
+    docset = set(docs)
     doc_titles = {}
     for rp in sorted(docs):
-        title, art, nav = render_doc(rp)
+        title, art, nav, lang = render_doc(rp, docset)
         doc_titles[rp] = title
-        write(site_path(rp), page(title, art, nav))
+        write(site_path(rp), page(title, art, nav, lang))
     print("rendered docs:", len(docs))
 
     gh = json.load(open(DATA, encoding="utf-8"))
+
+    # case id -> source ledger file
+    ledger = {}
+    for f in docs:
+        m = re.match(r"evidence/(CASE-\d+)-[^/]*source-ledger\.md$", f)
+        if m:
+            ledger[m.group(1)] = f
+
+    def L(key_map):
+        """Resolve quiz read keys -> {href,title} using doc titles where available."""
+        out = {}
+        for k, (label, rp) in key_map.items():
+            href = site_path(rp) if rp in docset else f"{REPO_URL}/blob/main/{rp}"
+            out[k] = {"h": href, "t": doc_titles.get(rp, label) or label}
+        return out
 
     # ---- index ----
     cases = [f for f in docs if re.match(r"cases/CASE-", f)]
@@ -281,6 +385,7 @@ def main():
 
     stats = [
         (str(len(cases)), "编号研究案例"),
+        (str(len(ledger)), "案例证据台账"),
         (str(len(profs)), "人物传记"),
         (str(len(chaps)), "跨人物章节"),
         ("15", "跨案例命题"),
@@ -335,11 +440,12 @@ def main():
 </div></header>
 
 <section class="sect"><div class="wrap">
-<h2>两个入口<small>读人生，或者查证据</small></h2>
-<p class="lede">第一次来只想读人和故事，走左边；想核每句话的证据强度，走右边。</p>
+<h2>怎么进这本书<small>读人生，查证据，或先定位自己</small></h2>
+<p class="lede">第一次来只想读人和故事，走第一张卡；想核每句话的证据强度，走第二张；不确定自己该读谁，先做三题问答。</p>
 <div class="gate">
 <a class="card" href="/book/START-HERE.html"><span class="tag">读者入口</span><h3>第一次来，先从这里读 →</h3><p>按现实问题组织：不知道该做什么、该不该辞职、没钱怎么办、失败还有没有意义。七篇跨人物章节 + 十四篇人物传记。</p></a>
-<a class="card" href="/atlas.html"><span class="tag">研究后台</span><h3>案例地图与证据台账 →</h3><p>63 个编号 Case 档案、15 个可证伪命题、证据等级 P0/P1/S1/S2/H、反例与禁止外推。每句话都能追来源。</p></a>
+<a class="card" href="/atlas.html"><span class="tag">研究后台</span><h3>案例地图与证据台账 →</h3><p>63 个编号 Case 档案、15 个可证伪命题、逐案的证据台账、反例与禁止外推。每句话都能追来源。</p></a>
+<a class="card" href="/router.html"><span class="tag">互动工具</span><h3>你的处境 → 该先读谁 →</h3><p>三步问答（已有能力 / 风险处境 / 这次想移动什么），按 DECISION-ROUTER 原文的规则落到推荐书目。</p></a>
 </div>
 </div></section>
 
@@ -402,12 +508,13 @@ def main():
         n_cases += 1
         subj = re.sub(r'[*`]', '', subj).strip()
         blurb = re.sub(r'`', '', blurb).strip()
-        trs += f'<tr><td class="id"><a href="{site_path(link)}">{cid}</a></td><td>{html.escape(subj)}</td><td>{html.escape(blurb)}</td></tr>'
+        led = f'<td class="id"><a href="{site_path(ledger[cid])}">台账</a></td>' if cid in ledger else '<td class="id" style="color:var(--faint)">—</td>'
+        trs += f'<tr><td class="id"><a href="{site_path(link)}">{cid}</a></td><td>{html.escape(subj)}</td><td>{html.escape(blurb)}</td>{led}</tr>'
     body = f'''<section class="sect"><div class="wrap">
 <h2>案例地图<small>{n_cases} 个编号 Case</small></h2>
-<p class="lede">Case ID 用于审计，不代表证据成熟度或推荐阅读顺序。带"待核"标记的对象尚未全部核实生产史与独立资格。</p>
+<p class="lede">Case ID 用于审计，不代表证据成熟度或推荐阅读顺序。带"待核"标记的对象尚未全部核实生产史与独立资格；「台账」列进该案的来源清单（P0/P1/S1/S2/H）。</p>
 <input class="filter" id="f" placeholder="筛选案例：编号 / 游戏名 / 关键词…" oninput="q(this.value)">
-<table class="atlas" id="t"><tr><th>Case</th><th>对象</th><th>它主要让我们看见什么</th></tr>{trs}</table>
+<table class="atlas" id="t"><tr><th>Case</th><th>对象</th><th>它主要让我们看见什么</th><th>证据</th></tr>{trs}</table>
 </div></section>
 <script>function q(v){{v=v.toLowerCase();document.querySelectorAll('#t tr').forEach((r,i)=>{{if(i==0)return;r.style.display=r.innerText.toLowerCase().includes(v)?'':'none'}})}}</script>'''
     write("/atlas.html", page("案例地图", body, "n_at"))
@@ -446,6 +553,137 @@ def main():
 </div></section>
 <script>function q(v){{v=v.toLowerCase();document.querySelectorAll('#t li').forEach(r=>{{r.style.display=r.innerText.toLowerCase().includes(v)?'':'none'}})}}</script>'''
     write("/notes.html", page("研究笔记", body, "n_no"))
+
+    # ---- sections index: evidence ledgers + satellite programs + translations ----
+    def grp_list(prefix, excl_readme=False):
+        fs = [f for f in docs if f.startswith(prefix)]
+        if excl_readme:
+            fs = [f for f in fs if "README" not in f]
+        fs.sort(key=lambda f: (0 if f.endswith("README.md") else 1, f))
+        return fs
+    groups = [
+        ("案例证据台账", "每个 Case 的来源清单：URL、作者/机构、日期、证据等级（P0/P1/S1/S2/H）与对应事实。", grp_list("evidence/")),
+        ("斯拉夫游戏英雄传说 · 姊妹篇", "同一套方法论下的东欧 / 俄语区游戏产业研究（Wargaming、GSC、IL-2 等）。", grp_list("sister-projects/")),
+        ("中国国情研究", "教育、社会化与制度环境怎样影响创作者的生产条件。", grp_list("country-studies/")),
+        ("跨行业研究", "工业革命比较实验室与创新者研究；不计入独立篇 Case 统计。", grp_list("cross-industry/")),
+        ("English translations", "社区翻译层——目前覆盖有限，新译稿随仓库更新自动接入。", grp_list("translations/en/")),
+    ]
+    sec_html = ""
+    for gname, gdesc, files in groups:
+        lis = "".join(f'<li><a href="{site_path(f)}">{html.escape(doc_titles.get(f, f))}</a></li>' for f in files)
+        sec_html += f'<div class="sect-grp"><h3>{gname}<span class="pill">{len(files)}</span></h3><div class="gd">{gdesc}</div><ul>{lis}</ul></div>'
+    body = f'''<section class="sect"><div class="wrap">
+<h2>分区<small>证据层与外围研究</small></h2>
+<p class="lede">主书之外的证据层和研究分区：逐案台账、斯拉夫姊妹篇、中国国情、跨行业与英文翻译。研究对象按“它正在回答什么问题”路由（PROGRAM-MAP）。</p>
+<input class="filter" placeholder="筛选全部分区文档…" oninput="q(this.value)">
+<div id="t">{sec_html}</div>
+</div></section>
+<script>function q(v){{v=v.toLowerCase();document.querySelectorAll('#t li').forEach(r=>{{r.style.display=r.innerText.toLowerCase().includes(v)?'':'none'}})}}</script>'''
+    write("/sections.html", page("分区", body, "n_sec"))
+
+    # ---- interactive decision router ----
+    READ_KEYS = {
+        "gunpoint": ("Gunpoint / Tom Francis 人物稿", "book/profiles/gunpoint.md"),
+        "wehle": ("The First Tree / David Wehle 人物稿", "book/profiles/david-wehle-first-tree.md"),
+        "c42": ("CASE-042 The First Tree 研究档案", "cases/CASE-042-the-first-tree.md"),
+        "c43": ("CASE-043 Everything / David OReilly", "cases/CASE-043-everything-david-oreilly.md"),
+        "zach": ("Zachtronics / Zach Barth 人物稿", "book/profiles/zach-barth-zachtronics.md"),
+        "c51": ("CASE-051 Zachtronics 研究档案", "cases/CASE-051-zachtronics.md"),
+        "c45": ("CASE-045 RimWorld / Tynan Sylvester", "cases/CASE-045-rimworld.md"),
+        "c54": ("CASE-054 Limit Theory / FIT-TRAP", "cases/CASE-054-limit-theory-fit-trap.md"),
+        "c55": ("CASE-055 Factorio / 停止条件", "cases/CASE-055-factorio-stop-conditions.md"),
+        "ch06": ("第六篇：你缺的真是一支团队吗？", "book/chapters/06-you-do-not-need-a-standard-studio.md"),
+        "lr4": ("LR-004 项目已定但能力不足", "book/life-routes/project-thesis-capability-gap-004.md"),
+        "nomada": ("Nomada / GRIS 人物稿", "book/profiles/nomada-gris-neva.md"),
+        "c50": ("CASE-050 Nomada 研究档案", "cases/CASE-050-nomada-gris-neva.md"),
+        "playdead": ("CASE-056 Playdead 创始人治理", "cases/CASE-056-playdead-founder-governance.md"),
+        "c47": ("CASE-047 The Witness", "cases/CASE-047-the-witness.md"),
+        "c49": ("CASE-049 Outer Wilds", "cases/CASE-049-outer-wilds.md"),
+        "c52": ("CASE-052 House House / Big Walk", "cases/CASE-052-house-house-goose-game.md"),
+        "c57": ("CASE-057 thatgamecompany / 股权扩张", "cases/CASE-057-thatgamecompany-vc-equity-expansion.md"),
+        "c20": ("CASE-020 Into the Breach / Subset", "cases/CASE-020-into-the-breach.md"),
+        "c36": ("CASE-036 Manor Lords", "cases/CASE-036-manor-lords.md"),
+        "c53": ("CASE-053 Kenny Sun", "cases/CASE-053-kenny-sun.md"),
+        "kenshi": ("Kenshi 人物稿", "book/profiles/kenshi.md"),
+        "sv": ("Stardew Valley 人物稿", "book/profiles/stardew-valley.md"),
+        "c04": ("CASE-004 Stardew Valley 研究档案", "cases/CASE-004-stardew-valley.md"),
+        "ftl": ("FTL 人物稿", "book/profiles/ftl.md"),
+        "rl": ("Rocket League / Psyonix 人物稿", "book/profiles/rocket-league.md"),
+        "c09": ("CASE-009 Project Wingman", "cases/CASE-009-project-wingman.md"),
+        "c23": ("CASE-023 despelote", "cases/CASE-023-despelote.md"),
+        "c25": ("CASE-025 Bills Must Be Paid", "cases/CASE-025-bills-must-be-paid.md"),
+        "c58": ("CASE-058 Spiderweb / FIT-LOCK-IN", "cases/CASE-058-spiderweb-fit-lock-in.md"),
+        "c60": ("CASE-060 Croteam / 分阶段脱出", "cases/CASE-060-croteam-staged-lockin-escape.md"),
+        "lridx": ("Life Risk Routes 全部路线", "book/life-routes/README.md"),
+        "arch": ("按主创者能力进入", "book/READER-ARCHETYPES.md"),
+        "router": ("DECISION-ROUTER 完整原文", "book/DECISION-ROUTER.md"),
+    }
+    R = L(READ_KEYS)
+    QUIZ = [
+        {"k":"cap","title":"第一步 · 你已经能做什么，还缺什么？","desc":"同一个『程序员』处境可能完全不同，先定位能力结构。","multi":False,"opts":[
+            {"k":"A","b":"我有一个明显强项，但项目还没定","s":"程序 / 技术美术 / 视觉 / 写作 / 世界构建 / 系统设计，或 mod、UGC、服务器运营经验","reads":["gunpoint","wehle","c42","c43","zach","c51","c45","c54","c55"],"note":"SHAPE——先问：有没有一种项目形态，会让我的强项成为玩家价值，而不只是生产便利？Limit Theory 与 Factorio 是对照：强项也可能让人选错问题。"},
+            {"k":"B","b":"我已经有清楚的作品方向，但缺关键能力","s":"视觉作者缺技术、程序员缺美术 / 制作管理、设计者一个人做不完","reads":["ch06","lr4","nomada","c50","playdead","c47","c49","c52","c57","c20","c36"],"note":"三条补齐路线成本完全不同：COMPOSE（共同创始人）、EXPAND（用资金）、PERIPHERALIZE（专业协作者）——到第三步选你要比较的那种。"},
+            {"k":"C","b":"我什么都会一点，但没有明显单项护城河","s":"关键看是更快做出作品并获得反馈，还是一个人硬扛全部岗位","reads":["c53","kenshi","sv","c04","ftl","c25"],"note":"区分三种过程：劳动压缩 / 重新定义项目 / 逐步积累能力（ACCRETE）。连续练习不保证同样结果。"},
+            {"k":"D","b":"我已经成功过一次 / 手里有一笔资本","s":"资金能增加能力，也能买探索时间——警惕先变成更高固定支出","reads":["c20","c47","c52","c57"],"note":"两种用钱方式：BUY CAPABILITY（雇人获得能力）vs BUY OPTIONALITY（保留选择与放弃空间）。"}],
+        },
+        {"k":"risk","title":"第二步 · 你的生活能承担什么风险？","desc":"能力相似，不代表风险承受力相似。","multi":False,"opts":[
+            {"k":"R0","b":"我不能承受长期无收入","s":"无储蓄 / 房贷 / 孩子 / 赡养 / 签证医疗债务约束","reads":["gunpoint","wehle","c42","kenshi","rl"],"note":"在承担难以撤回的投入前，先做出可玩版、拿到陌生人反馈、核查市场证据。辞职的勇气不能替代这些信息。"},
+            {"k":"R1","b":"能支持几个月到一年制作，但还没有强证据","s":"适合有边界的试验：投入多久、验证什么、什么结果会改变决定","reads":["ftl","c09","c23"],"note":"BOUNDED EXPERIMENT——在资金窗口耗尽前，拿到足以判断停项 / 继续 / 转向 / 向资方提案的外部证据。"},
+            {"k":"R2","b":"有稳定工资、支出较低，可以慢慢试","s":"低支出延长试错，也可能让错误维持更久","reads":["gunpoint","wehle","c42","c53"],"note":"检查：阶段截止期限、陌生人反馈、能否缩小范围、什么情况停止、业余项目留下了什么能力。"},
+            {"k":"R3","b":"已有前作收入 / 组织现金流 / 很高退出能力","s":"资源可以买探索时间，也可以加人手——先分清缺哪个","reads":["c20","c47","c52"],"note":"先问：现在缺的是更多人手，还是更多尝试不同方向的时间？"},
+            {"k":"R4","b":"准备与发行商、股权投资者或共同创始人合作","s":"会增加资源，也会改变决定怎样作出、权利怎样分配","reads":["c49","nomada","c50","playdead","c57"],"note":"至少查清：谁持股、谁在董事会、谁能停项目、谁定发售、谁拥有知识产权、回报与义务由谁承担。"}],
+        },
+        {"k":"move","title":"第三步 · 这次到底应该移动什么？（可多选）","desc":"把真实问题对上调整变量；每条都带需要检查的风险。","multi":True,"opts":[
+            {"k":"SHAPE","b":"强项明显，项目未定 → 围绕能力形成作品","s":"强项是否使你选错问题","reads":["gunpoint","wehle","zach"]},
+            {"k":"COMPOSE","b":"方向明确，缺共同核心能力 → 与共同创始人组合","s":"治理、股份与作者权利","reads":["nomada","playdead"]},
+            {"k":"EXPAND","b":"体验已验证，缺生产能力 → 用资金获得能力","s":"支出、控制权与后续资金依赖","reads":["c47","c49","c52","c57"]},
+            {"k":"ACCRETE","b":"多种技能未成熟 → 用连续项目积累","s":"一直练习却不接受市场检验","reads":["c53","c25"]},
+            {"k":"STOP","b":"技术强，局部问题无限多 → 明确做到什么程度就够","s":"引擎进展是否转成产品进展","reads":["c55","c54"]},
+            {"k":"PRESERVE","b":"第一次成功，选择变多 → 保留探索与放弃空间","s":"过早增加固定支出","reads":["c20","c52"]},
+            {"k":"AUDIT","b":"多年固定制作方式 → 核对转型限制","s":"切换成本与新受众的建立","reads":["c51","c58"]},
+            {"k":"ESCAPE","b":"想从成熟制作路线转出 → 分开改变不同层面","s":"个案不能证明普遍规律；2014 与 2023 所有权不同","reads":["c60","c51","c58"]}],
+        },
+    ]
+    import json as _json
+    data_js = "var R=" + _json.dumps(R, ensure_ascii=False) + ";\nvar STEPS=" + _json.dumps(QUIZ, ensure_ascii=False) + ";"
+    body = f'''<section class="sect"><div class="col" style="max-width:820px">
+<h2 style="font-size:26px;font-weight:900;margin-bottom:6px">决策路由 · 互动版</h2>
+<p class="lede">三题问答：已有能力 → 风险处境 → 这次想移动什么。推荐规则逐字取自 <a href="/book/DECISION-ROUTER.html">DECISION-ROUTER 原文</a>——它给的是“先读谁、先比什么”，不是替你决定。</p>
+<div id="quiz"></div>
+<div class="qz-res" id="res"><h3>建议你先读这些</h3><div id="resin"></div></div>
+</div></section>
+<script>
+{data_js}
+var ans={{}},msel={{}};STEPS.forEach(function(s){{msel[s.k]={{}}}});
+var qz=document.getElementById('quiz'),res=document.getElementById('res'),resin=document.getElementById('resin');
+STEPS.forEach(function(s,si){{
+var st=document.createElement('div');st.className='qz-step';
+st.innerHTML='<h3>'+s.title+'</h3><div class="qd">'+s.desc+'</div>';
+s.opts.forEach(function(o){{
+var b=document.createElement('button');b.className='qz-opt';b.dataset.k=o.k;b.dataset.s=s.k;
+b.innerHTML='<b>'+o.k+' · '+o.b+'</b><span>'+o.s+'</span>';
+b.onclick=function(){{
+if(s.multi){{msel[s.k][o.k]=!msel[s.k][o.k];b.classList.toggle('sel',msel[s.k][o.k]);}}
+else{{ans[s.k]=o.k;st.querySelectorAll('.qz-opt').forEach(function(x){{x.classList.toggle('sel',x.dataset.k===o.k)}});}}
+res_r();}};
+st.appendChild(b);}});
+qz.appendChild(st);}});
+function res_r(){{
+var out='',any=false;
+STEPS.forEach(function(s){{
+var ks=s.multi?s.opts.filter(function(o){{return msel[s.k][o.k]}}).map(function(o){{return o.k}}):(ans[s.k]?[ans[s.k]]:[]);
+ks.forEach(function(ok){{var o=s.opts.filter(function(x){{return x.k===ok}})[0];any=true;
+out+='<h4>'+s.title.split(' · ')[0]+' → '+o.k+'</h4>';
+if(o.note)out+='<div class="qz-note">'+o.note+'</div>';
+out+='<ul>'+o.reads.map(function(r){{return '<li><a href="'+R[r].h+'">'+R[r].t+'</a></li>'}}).join('')+'</ul>';
+if(s.multi)out+='<div class="qn">⚠ 需要检查：'+o.s+'</div>';}});}});
+if(!any){{res.style.display='none';return}}
+out+='<div class="qz-warn">四个误用警告：① 不要只按职业认领案例；② 不要只按年龄认领案例——比较家庭支出、债务、医疗签证、再就业条件；③ 不要把成功结果倒写成正确动作（哪一年？什么平台？什么融资环境？）；④ 至少匹配两个坐标（能力缺口 / 风险时间 / 项目阶段 / 市场接入 / 治理）再谈“这个案例像我”。</div>';
+out+='<h4>还可以继续</h4><ul><li><a href="'+R.lridx.h+'">'+R.lridx.t+'</a> —— LR-001 至 LR-005，按具体人生处境读</li><li><a href="'+R.arch.h+'">'+R.arch.t+'</a> —— 按职业/能力结构找人物</li><li><a href="'+R.router.h+'">'+R.router.t+'</a></li></ul>';
+resin.innerHTML=out;res.style.display='block';res.scrollIntoView({{behavior:'smooth',block:'nearest'}});
+}}
+</script>'''
+    write("/router.html", page("决策路由 · 互动版", body, "n_rt"))
 
     print("done ->", OUT)
 
