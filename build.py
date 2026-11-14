@@ -225,6 +225,13 @@ article.doc a:hover{color:var(--accent)}
 .heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
 .thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
 .docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
 """
 
 TPL = """<!doctype html>
@@ -249,6 +256,7 @@ TPL = """<!doctype html>
 <a class="nl{n_cl}" href="/claims.html">命题</a>
 <a class="nl{n_no}" href="/notes.html">笔记</a>
 <a class="nl{n_sec}" href="/sections.html">分区</a>
+<a class="nl{n_ga}" href="/gallery.html">图鉴</a>
 <span class="sp"></span>
 <button class="tbtn" id="thm" title="切换明暗主题">◐</button>
 <a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
@@ -277,7 +285,7 @@ document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(funct
 </body></html>"""
 
 def page(title, body, nav="", lang="zh-CN"):
-    keys = {k: "" for k in ["n_start","n_ch","n_pf","n_rt","n_at","n_cl","n_no","n_sec"]}
+    keys = {k: "" for k in ["n_start","n_ch","n_pf","n_rt","n_at","n_cl","n_no","n_sec","n_ga"]}
     if nav:
         keys[nav] = ' class="on"'
     t = TPL.replace("{title}", html.escape(title)).replace("{css}", CSS)
@@ -331,6 +339,9 @@ def render_doc(repo_path, docset):
         stem = os.path.basename(repo_path)[:-3]
         if os.path.exists(f"/home/ubuntu/heroes-portal/assets/pf-{stem}.webp"):
             fig = f"/assets/pf-{stem}.webp"
+    mlr = re.search(r"book/life-routes/.*-0*(\d+)\.md$", repo_path)
+    if not fig and mlr and os.path.exists(f"/home/ubuntu/heroes-portal/assets/lr-{int(mlr.group(1)):02d}.webp"):
+        fig = f"/assets/lr-{int(mlr.group(1)):02d}.webp"
     if fig:
         inner = re.sub(r'</h1>', f'</h1><img class="docfig" src="{fig}" alt="">', inner, count=1)
     lit = any(repo_path.startswith(p) for p in ("book/chapters/", "book/profiles/", "book/life-routes/"))
@@ -550,6 +561,7 @@ def main():
     body = f'''<section class="sect"><div class="wrap">
 <h2>案例地图<small>{n_cases} 个编号 Case</small></h2>
 <p class="lede">Case ID 用于审计，不代表证据成熟度或推荐阅读顺序。带"待核"标记的对象尚未全部核实生产史与独立资格；「台账」列进该案的来源清单（P0/P1/S1/S2/H）。</p>
+<img class="band" src="/assets/band-atlas.webp" alt="" loading="lazy">
 <input class="filter" id="f" placeholder="筛选案例：编号 / 游戏名 / 关键词…" oninput="q(this.value)">
 <table class="atlas" id="t"><tr><th>Case</th><th>对象</th><th>它主要让我们看见什么</th><th>证据</th></tr>{trs}</table>
 </div></section>
@@ -573,6 +585,7 @@ def main():
     body = f'''<section class="sect"><div class="wrap">
 <h2>跨案例命题<small>{len(crows)} 个</small></h2>
 <p class="lede">每个命题都可被支持、削弱或证伪。SUPPORTED 只表示已有多源 / 跨案例支持，仍不等于普遍规律或因果定论；C013–C015 有完整档案可点进。</p>
+<img class="band" src="/assets/band-claims.webp" alt="" loading="lazy">
 <table class="atlas"><tr><th>Claim</th><th>状态</th><th>暂定命题</th></tr>{trs}</table>{extra}
 </div></section>'''
     write("/claims.html", page("跨案例命题", body, "n_cl"))
@@ -585,6 +598,7 @@ def main():
     body = f'''<section class="sect"><div class="wrap">
 <h2>研究笔记<small>{len(notes)} 篇</small></h2>
 <p class="lede">过程性研究产出：审计、对照矩阵、叙事试验、清理记录——支撑章节与命题的底稿。</p>
+<img class="band" src="/assets/band-notes.webp" alt="" loading="lazy">
 <input class="filter" id="f" placeholder="筛选笔记…" oninput="q(this.value)">
 <ul id="t" style="columns:2;column-gap:40px;font-size:14.5px;line-height:2">{items}</ul>
 </div></section>
@@ -612,6 +626,7 @@ def main():
     body = f'''<section class="sect"><div class="wrap">
 <h2>分区<small>证据层与外围研究</small></h2>
 <p class="lede">主书之外的证据层和研究分区：逐案台账、斯拉夫姊妹篇、中国国情、跨行业与英文翻译。研究对象按“它正在回答什么问题”路由（PROGRAM-MAP）。</p>
+<img class="band" src="/assets/band-sections.webp" alt="" loading="lazy">
 <input class="filter" placeholder="筛选全部分区文档…" oninput="q(this.value)">
 <div id="t">{sec_html}</div>
 </div></section>
@@ -686,6 +701,7 @@ def main():
     body = f'''<section class="sect"><div class="col" style="max-width:820px">
 <h2 style="font-size:26px;font-weight:900;margin-bottom:6px">决策路由 · 互动版</h2>
 <p class="lede">三题问答：已有能力 → 风险处境 → 这次想移动什么。推荐规则逐字取自 <a href="/book/DECISION-ROUTER.html">DECISION-ROUTER 原文</a>——它给的是“先读谁、先比什么”，不是替你决定。</p>
+<img class="band" src="/assets/band-router.webp" alt="" loading="lazy">
 <div id="quiz"></div>
 <div class="qz-res" id="res"><h3>建议你先读这些</h3><div id="resin"></div></div>
 </div></section>
@@ -753,6 +769,46 @@ resin.innerHTML=out;res.style.display='block';res.scrollIntoView({{behavior:'smo
 <div style="margin-top:16px" class="lang-sw"><a href="/">中文版 →</a> · <a href="/translations/en/cases/CASE-001-ftl.html">CASE-001 in English →</a></div>
 </div></section>'''
     write("/en/index.html", page("Home", body, "", "en"))
+
+    # ---- gallery ----
+    gal_groups = [("题图与横幅", [
+        ("hero.webp", "首页题图 · 书阁藏书票", "/"),
+        ("hero-alt.webp", "首页题图 · 备选（书页山径）", "/"),
+        ("band-atlas.webp", "案例地图 · 横幅", "/atlas.html"),
+        ("band-claims.webp", "命题 · 横幅", "/claims.html"),
+        ("band-notes.webp", "研究笔记 · 横幅", "/notes.html"),
+        ("band-sections.webp", "分区 · 横幅", "/sections.html"),
+        ("band-router.webp", "决策路由 · 题图", "/router.html")])]
+    ch_items = []
+    for f in chaps:
+        num = os.path.basename(f)[:2]
+        ch_items.append((f"ch-{num}.webp", doc_titles.get(f, f), site_path(f)))
+    gal_groups.append(("章节题图", ch_items))
+    pf_items = []
+    for f in profs:
+        stem = os.path.basename(f)[:-3]
+        if os.path.exists(f"/home/ubuntu/heroes-portal/assets/pf-{stem}.webp"):
+            pf_items.append((f"pf-{stem}.webp", doc_titles.get(f, stem), site_path(f)))
+    gal_groups.append(("人物题图", pf_items))
+    lr_items = []
+    for f in routes:
+        m = re.search(r"-0*(\d+)\.md$", f)
+        if m and os.path.exists(f"/home/ubuntu/heroes-portal/assets/lr-{int(m.group(1)):02d}.webp"):
+            lr_items.append((f"lr-{int(m.group(1)):02d}.webp", doc_titles.get(f, f), site_path(f)))
+    gal_groups.append(("生命路线题图", lr_items))
+    gal = ""
+    for gname, items in gal_groups:
+        cards = "".join(
+            f'<a class="gcard" href="{href}"><img src="/assets/{img}" alt="" loading="lazy">'
+            f'<div class="gc-t">{html.escape(title)}<small>{img}</small></div></a>'
+            for img, title, href in items)
+        gal += f'<h3 style="font-size:17px;margin:28px 0 10px">{gname}<span class="pill">{len(items)}</span></h3><div class="ggrid">{cards}</div>'
+    body = f'''<section class="sect"><div class="wrap">
+<h2>图鉴<small>站内全部生成插图</small></h2>
+<p class="lede">同一套风格约束下逐图命题的木刻藏书票插图（纸色底 + 墨线 + 一点朱红）：每张对应一章、一个人物或一个分区的论点意象。点图进对应页面；PNG 原稿在站点仓库 assets/。</p>
+{gal}
+</div></section>'''
+    write("/gallery.html", page("图鉴", body, "n_ga"))
 
     print("done ->", OUT)
 
