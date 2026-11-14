@@ -211,6 +211,7 @@ article.doc a:hover{color:var(--accent)}
 .sect-grp h3{font-size:18px;margin-bottom:4px}
 .sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
 .sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
 """
 
 TPL = """<!doctype html>
@@ -346,6 +347,11 @@ def main():
     if os.path.exists(OUT):
         shutil.rmtree(OUT)
     os.makedirs(OUT)
+    # copy generated art assets (webp only; PNG masters stay in assets/)
+    os.makedirs(os.path.join(OUT, "assets"))
+    for n in os.listdir("/home/ubuntu/heroes-portal/assets"):
+        if n.endswith(".webp"):
+            shutil.copy(os.path.join("/home/ubuntu/heroes-portal/assets", n), os.path.join(OUT, "assets", n))
 
     docs = (collect("book") + collect("cases") + collect("claims") + collect("evidence")
             + collect("sister-projects") + collect("country-studies") + collect("cross-industry")
@@ -436,6 +442,7 @@ def main():
 <div class="en">那些本来"做不起游戏"的人，究竟是怎样把游戏做出来的</div>
 <blockquote class="quote">不包装天才神话，不把"坚持"和"运气"当答案——追踪的是开工前会什么、靠什么活下来、失败如何变成下一作的资产、以及什么能复制、什么不能。</blockquote>
 <div class="byline">作者 / 主创：洪荒行者 · Sparky（TrojanFighter） · Wunderwaffe Development</div>
+<img class="heroart" src="/assets/hero.webp" alt="木刻题图：伏案的独立开发者，屏幕里是自己的游戏，远山之上飘着骑士旗">
 <div class="stats">{stat_html}</div>
 </div></header>
 
