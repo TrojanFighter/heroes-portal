@@ -89,7 +89,8 @@ CSS = """
 --teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
 *{box-sizing:border-box;margin:0}
 html{font-size:16px}
-body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
 a{color:var(--accent);text-decoration:none}
 a:hover{text-decoration:underline}
 .nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
@@ -98,6 +99,7 @@ a:hover{text-decoration:underline}
 .seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
 .nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
 .nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
 .nav .sp{flex:1}
 .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
 .col{max-width:760px;margin:0 auto;padding:0 20px}
@@ -116,7 +118,10 @@ a:hover{text-decoration:underline}
 .sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
 .sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
 .gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
-.card{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
 a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
 .card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
 .card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
@@ -129,6 +134,7 @@ table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-t
 table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
 table.atlas tr:last-child td{border-bottom:0}
 table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
 table.atlas tr:hover td{background:var(--accent-soft)}
 .panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
 .why h3{font-size:17px;margin-bottom:10px}
@@ -143,7 +149,8 @@ table.atlas tr:hover td{background:var(--accent-soft)}
 .feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
 .feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
-article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
 article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
 article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
 article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
@@ -178,6 +185,10 @@ article.doc a:hover{color:var(--accent)}
 .chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
 .chip b{color:var(--ink);font-weight:600}
 .status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
 .tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
 .tbtn:hover{color:var(--accent);border-color:var(--accent)}
 #prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
@@ -285,6 +296,8 @@ def render_doc(repo_path, docset):
     body = rewrite_md(body, src_dir)
     MDX.reset()
     inner = MDX.convert(body)
+    # drop-cap marker: first real paragraph (skip ©/rights lines)
+    inner = re.sub(r'<p>(?!©)', '<p class="dc">', inner, count=1)
     crumbs = '<div class="crumbs"><a href="/">书阁</a> / ' + html.escape(repo_path) + '</div>'
     # bilingual switch when a rendered counterpart exists
     sw = ""
@@ -307,7 +320,8 @@ def render_doc(repo_path, docset):
                 items += f'<a href="#{hid}" class="t{lv}">{html.escape(t)}</a>'
         if items:
             toc = f'<aside class="toc"><div class="toc-t">本页目录</div>{items}</aside>'
-    art = toc + f'<article class="doc"><div class="col">{sw}{inner}{crumbs}</div></article>'
+    lit = any(repo_path.startswith(p) for p in ("book/chapters/", "book/profiles/", "book/life-routes/"))
+    art = toc + f'<article class="doc{" lit" if lit else ""}"><div class="col">{sw}{inner}{crumbs}</div></article>'
     prefixes = ("book/chapters/","book/profiles/","book/research-notes/","book/life-routes/",
                 "cases/","claims/","evidence/","sister-projects/","country-studies/",
                 "cross-industry/","translations/en/")
@@ -404,7 +418,7 @@ def main():
     for f in chaps:
         t, teaser = meta(f)
         num = os.path.basename(f)[:2]
-        chap_cards += f'''<a class="card" href="{site_path(f)}"><span class="tag">第 {num} 章</span><h3>{html.escape(t)}</h3><p>{html.escape(teaser)}</p></a>'''
+        chap_cards += f'''<a class="card" href="{site_path(f)}"><span class="bignum">{num}</span><span class="tag">第 {num} 章</span><h3>{html.escape(t)}</h3><p>{html.escape(teaser)}</p></a>'''
 
     feed_items = ""
     icon = {"push": "PUSH", "pr-opened": "PR", "pr-merged": "MERGED", "pr-closed": "PR",
@@ -438,7 +452,7 @@ def main():
     body = f'''
 <header class="hero"><div class="wrap">
 <div class="kicker">Indie Game Legendary Heroes · 在线书阁</div>
-<h1>独立游戏英雄传说</h1>
+<h1>独立游戏英雄传说<span class="stamp">传</span></h1>
 <div class="en">那些本来"做不起游戏"的人，究竟是怎样把游戏做出来的</div>
 <blockquote class="quote">不包装天才神话，不把"坚持"和"运气"当答案——追踪的是开工前会什么、靠什么活下来、失败如何变成下一作的资产、以及什么能复制、什么不能。</blockquote>
 <div class="byline">作者 / 主创：洪荒行者 · Sparky（TrojanFighter） · Wunderwaffe Development</div>
@@ -492,7 +506,7 @@ def main():
     for f in chaps:
         t, teaser = meta(f)
         num = os.path.basename(f)[:2]
-        cards += f'<a class="card" href="{site_path(f)}"><span class="tag">第 {num} 章</span><h3>{html.escape(t)}</h3><p>{html.escape(teaser)}</p></a>'
+        cards += f'<a class="card" href="{site_path(f)}"><span class="bignum">{num}</span><span class="tag">第 {num} 章</span><h3>{html.escape(t)}</h3><p>{html.escape(teaser)}</p></a>'
     body = f'<section class="sect"><div class="wrap"><h2>跨人物章节<small>{len(chaps)} 篇样稿</small></h2><p class="lede">把多个人物放进同一个现实问题里读：目标、时间、失败、技术、市场、团队、以及第一次成功之后。</p><div class="grid2">{cards}</div></div></section>'
     write("/chapters.html", page("章节", body, "n_ch"))
 
@@ -538,7 +552,7 @@ def main():
     for cid, stmt, st in crows:
         link = claim_file.get(cid)
         cell = f'<a href="{site_path(link)}">{cid}</a>' if link else cid
-        trs += f'<tr><td class="id">{cell}</td><td><span class="status">{st}</span></td><td>{html.escape(stmt)}</td></tr>'
+        trs += f'<tr><td class="id">{cell}</td><td><span class="status st-{st.lower()}">{st}</span></td><td>{html.escape(stmt)}</td></tr>'
     extra = f'<div style="margin-top:14px"><a href="/claims/CROSS-CASE-READINGS.html">跨案例综合、反例与边界 →</a></div>'
     body = f'''<section class="sect"><div class="wrap">
 <h2>跨案例命题<small>{len(crows)} 个</small></h2>
