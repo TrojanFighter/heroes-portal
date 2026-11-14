@@ -223,6 +223,8 @@ article.doc a:hover{color:var(--accent)}
 .sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
 .sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
 .heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
 """
 
 TPL = """<!doctype html>
@@ -320,6 +322,17 @@ def render_doc(repo_path, docset):
                 items += f'<a href="#{hid}" class="t{lv}">{html.escape(t)}</a>'
         if items:
             toc = f'<aside class="toc"><div class="toc-t">本页目录</div>{items}</aside>'
+    # generated illustration for chapters / profiles
+    fig = None
+    mc = re.match(r"book/chapters/(\d\d)", repo_path)
+    if mc and os.path.exists(f"/home/ubuntu/heroes-portal/assets/ch-{mc.group(1)}.webp"):
+        fig = f"/assets/ch-{mc.group(1)}.webp"
+    elif repo_path.startswith("book/profiles/"):
+        stem = os.path.basename(repo_path)[:-3]
+        if os.path.exists(f"/home/ubuntu/heroes-portal/assets/pf-{stem}.webp"):
+            fig = f"/assets/pf-{stem}.webp"
+    if fig:
+        inner = re.sub(r'</h1>', f'</h1><img class="docfig" src="{fig}" alt="">', inner, count=1)
     lit = any(repo_path.startswith(p) for p in ("book/chapters/", "book/profiles/", "book/life-routes/"))
     art = toc + f'<article class="doc{" lit" if lit else ""}"><div class="col">{sw}{inner}{crumbs}</div></article>'
     prefixes = ("book/chapters/","book/profiles/","book/research-notes/","book/life-routes/",
@@ -418,7 +431,7 @@ def main():
     for f in chaps:
         t, teaser = meta(f)
         num = os.path.basename(f)[:2]
-        chap_cards += f'''<a class="card" href="{site_path(f)}"><span class="bignum">{num}</span><span class="tag">第 {num} 章</span><h3>{html.escape(t)}</h3><p>{html.escape(teaser)}</p></a>'''
+        chap_cards += f'''<a class="card" href="{site_path(f)}"><span class="bignum">{num}</span><img class="thumb" src="/assets/ch-{num}.webp" alt="" loading="lazy"><span class="tag">第 {num} 章</span><h3>{html.escape(t)}</h3><p>{html.escape(teaser)}</p></a>'''
 
     feed_items = ""
     icon = {"push": "PUSH", "pr-opened": "PR", "pr-merged": "MERGED", "pr-closed": "PR",
@@ -453,6 +466,7 @@ def main():
 <header class="hero"><div class="wrap">
 <div class="kicker">Indie Game Legendary Heroes · 在线书阁</div>
 <h1>独立游戏英雄传说<span class="stamp">传</span></h1>
+<div class="lang-sw" style="margin:0 0 4px"><a href="/en/index.html">English →</a></div>
 <div class="en">那些本来"做不起游戏"的人，究竟是怎样把游戏做出来的</div>
 <blockquote class="quote">不包装天才神话，不把"坚持"和"运气"当答案——追踪的是开工前会什么、靠什么活下来、失败如何变成下一作的资产、以及什么能复制、什么不能。</blockquote>
 <div class="byline">作者 / 主创：洪荒行者 · Sparky（TrojanFighter） · Wunderwaffe Development</div>
@@ -506,7 +520,7 @@ def main():
     for f in chaps:
         t, teaser = meta(f)
         num = os.path.basename(f)[:2]
-        cards += f'<a class="card" href="{site_path(f)}"><span class="bignum">{num}</span><span class="tag">第 {num} 章</span><h3>{html.escape(t)}</h3><p>{html.escape(teaser)}</p></a>'
+        cards += f'<a class="card" href="{site_path(f)}"><span class="bignum">{num}</span><img class="thumb" src="/assets/ch-{num}.webp" alt="" loading="lazy"><span class="tag">第 {num} 章</span><h3>{html.escape(t)}</h3><p>{html.escape(teaser)}</p></a>'
     body = f'<section class="sect"><div class="wrap"><h2>跨人物章节<small>{len(chaps)} 篇样稿</small></h2><p class="lede">把多个人物放进同一个现实问题里读：目标、时间、失败、技术、市场、团队、以及第一次成功之后。</p><div class="grid2">{cards}</div></div></section>'
     write("/chapters.html", page("章节", body, "n_ch"))
 
@@ -514,7 +528,9 @@ def main():
     cards = ""
     for f in profs:
         t, teaser = meta(f)
-        cards += f'<a class="card" href="{site_path(f)}"><h3>{html.escape(t)}</h3><p>{html.escape(teaser)}</p></a>'
+        stem = os.path.basename(f)[:-3]
+        th = f'<img class="thumb" src="/assets/pf-{stem}.webp" alt="" loading="lazy">' if os.path.exists(f"/home/ubuntu/heroes-portal/assets/pf-{stem}.webp") else ""
+        cards += f'<a class="card" href="{site_path(f)}">{th}<h3>{html.escape(t)}</h3><p>{html.escape(teaser)}</p></a>'
     body = f'<section class="sect"><div class="wrap"><h2>人物传记<small>{len(profs)} 篇</small></h2><p class="lede">制作经历与职业选择：从插画师与 AAA 程序员的合伙，到上班养游戏的个人作者。</p><div class="grid2">{cards}</div></div></section>'
     write("/profiles.html", page("人物传记", body, "n_pf"))
 
@@ -705,6 +721,38 @@ resin.innerHTML=out;res.style.display='block';res.scrollIntoView({{behavior:'smo
 }}
 </script>'''
     write("/router.html", page("决策路由 · 互动版", body, "n_rt"))
+
+    # ---- English landing ----
+    en_stats = [
+        (str(len(cases)), "numbered case files"),
+        (str(len(ledger)), "evidence ledgers"),
+        (str(len(profs)), "profiles"),
+        (str(len(chaps)), "chapters"),
+        ("15", "falsifiable claims"),
+        (str(len(notes)), "research notes"),
+    ]
+    en_stat_html = "".join(f'<div class="stat"><b>{n}</b><span>{s}</span></div>' for n, s in en_stats)
+    body = f'''
+<header class="hero"><div class="wrap">
+<div class="kicker">Indie Game Legendary Heroes · Online Reading Room</div>
+<h1>Indie Game Legendary Heroes<span class="stamp">传</span></h1>
+<div class="en">How people who "couldn't afford to make games" actually made them</div>
+<blockquote class="quote">Not talent myths, not "just persist" — this project tracks what makers knew before they started, what paid for their time, how failures became the next game's assets, and which decisions are still copyable today.</blockquote>
+<div class="byline">Author: 洪荒行者 · Sparky (TrojanFighter) · Wunderwaffe Development</div>
+<img class="heroart" src="/assets/hero.webp" alt="Woodcut frontispiece: an indie developer at a desk, their game on screen, a knight's banner over distant mountains">
+<div class="stats">{en_stat_html}</div>
+</div></header>
+<section class="sect"><div class="wrap">
+<h2>Where to start<small>two doors and a quiz</small></h2>
+<p class="lede">Most of the book is in Chinese; English translations are growing in <a href="/sections.html">translations/en</a> — CASE-001 (FTL) is fully translated. Pages with a translation show a language toggle on top.</p>
+<div class="gate">
+<a class="card" href="/book/START-HERE.html"><span class="tag">Readers</span><h3>Start here →</h3><p>Seven cross-character chapters and fourteen profiles, organized by real questions: what to make, whether to quit, what failure is worth. <i>(Chinese)</i></p></a>
+<a class="card" href="/atlas.html"><span class="tag">Research</span><h3>Case atlas &amp; evidence →</h3><p>63 numbered case files, falsifiable claims, per-case source ledgers graded P0/P1/S1/S2/H, counter-examples and no-extrapolation rules. <i>(Chinese)</i></p></a>
+<a class="card" href="/router.html"><span class="tag">Interactive</span><h3>Which case is yours? →</h3><p>A three-step questionnaire (capability → risk → what to move) that lands on recommended reading, faithful to the book's DECISION-ROUTER. <i>(Chinese)</i></p></a>
+</div>
+<div style="margin-top:16px" class="lang-sw"><a href="/">中文版 →</a> · <a href="/translations/en/cases/CASE-001-ftl.html">CASE-001 in English →</a></div>
+</div></section>'''
+    write("/en/index.html", page("Home", body, "", "en"))
 
     print("done ->", OUT)
 
