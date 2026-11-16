@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>036 — 项目没有回本，家人也没有收回尊重：李远扬 × Gianfranco Berardi 两种“失败后的家庭” · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl class="on"" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0" class="t2">0. 终于找到一位中国主创：两次卖得惨淡，家人没有因此要求他退出</a><a href="#a2017830" class="t3">证据 A：2017年8月30日，本人亲述“小时候偷玩、现在家人支持”</a><a href="#b2019829" class="t3">证据 B：2019年8月29日，三种发行/两轮挫败以后，家里仍未给太多压力</a><a href="#_1" class="t3">必须独立保留的人生背景：不是“家里有矿所以可任性”</a><a href="#_2" class="t3">与其他公共记录的冲突与后续时效</a><a href="#gianfranco-berardi" class="t2">一、另一个更硬的“失败以后依然被家人认可”：Gianfranco Berardi的妻子</a><a href="#20102011" class="t3">2010—2011：从受雇到一年项目拖延</a><a href="#20123" class="t3">2012年3月：仍没有赚钱时，他写出未婚妻的支持</a><a href="#20132" class="t3">2013年2月：项目失败、重新就业以后，她依然肯定那段尝试</a><a href="#doom" class="t2">二、为什么这两个人比再讲一次 DOOM 和解更重要</a><a href="#_3" class="t2">三、对中国“家长阻挠→游戏缺原创”研究的反压力价值</a><a href="#_4" class="t2">四、读者可读的结尾：认可一个人，可以不替他的每个项目买单</a><a href="#2025berardi" class="t2">四点五、时效回访：2025年Berardi仍没有第二次全职创业，但没有停止做游戏</a><a href="#_5" class="t2">五、待核与下一步</a></aside><article class="doc"><div class="col"><h1 id="036-gianfranco-berardi">036 — 项目没有回本，家人也没有收回尊重：李远扬 × Gianfranco Berardi 两种“失败后的家庭”</h1>
+<ul>
+<li><strong>Status:</strong> RESEARCH NOTE / SOURCE-LED COMPARATIVE LIFE HISTORIES / PRE-CLAIM / 2026-10-07</li>
+<li><strong>Question:</strong> 创作职业无法覆盖成本以后，家庭认可究竟会不会撤销？支持失败者是否等于继续无限期为其创业买单？</li>
+<li><strong>Anchors:</strong> <a href="/heroes-portal/book/research-notes/family-acceptance-non-success-countercases-035.html">035 家庭认可与失败反压力</a>；<a href="/heroes-portal/book/research-notes/doom-intergenerational-reconciliation-032.html">032 DOOM迟到和解</a>；<a href="/heroes-portal/book/research-notes/family-gates-game-creator-us-china-029.html">029 家庭作为能力入口</a>；<a href="/heroes-portal/book/research-notes/media-selection-survivorship-and-denominator-protocol-028.html">028分母/媒体选择协议</a>。</li>
+<li><strong>Scope:</strong> 2013–2019李远扬/厦门地心游戏《纽扣兄弟》；2010–2013美国 Gianfranco Berardi/GBGames 《Stop That Hero!》；2019/2023/2026公开作品状态限制。</li>
+<li><strong>Sampling:</strong> TWO PURPOSIVE MECHANISM CASES, BOTH VISIBLE/INTERVIEWED. 不是代表性中国家庭与美国家庭对照，也不是家长支持率抽样。</li>
+<li><strong>Two most important verdicts:</strong> <code>PRE-COMMERCIAL-PARENTAL-PERMISSION DOCUMENTED</code>（中国）；<code>POST-FAILURE-SPOUSAL-AFFIRMATION DOCUMENTED VIA HUSBAND</code>（美国）。<strong>没有证据能把任一家庭认证为永远无条件支持所有职业风险。</strong></li>
+<li><strong>Material safety:</strong> 父母、妻子均非独立受访，尊重公开当事人/编辑录入，不追访未经许可的非公众家属、不整理私人住址与子女细节。</li>
+</ul>
+<h2 id="0">0. 终于找到一位中国主创：两次卖得惨淡，家人没有因此要求他退出</h2>
+<p class="dc">最关键不是某家父母在创作者发财以后献花道歉，而是<strong>2017年的家庭已允许、2019年的游戏仍不赚钱、2019年的家人也没有施加太大压力</strong>，三者可以按时间观察。</p>
+<h3 id="a2017830">证据 A：2017年8月30日，本人亲述“小时候偷玩、现在家人支持”</h3>
+<p>GameRes采访《纽扣人兄弟》制作人李远扬，编辑开头称“以下内容由李远扬讲述”：
+https://bbs.gameres.com/thread_772870_1_1.html （2017-08-30）</p>
+<ul>
+<li>他曾在家长管束下偷偷玩游戏。注意不是从小父母只允许“所有游戏”，这与Romero、梁其伟所遇的“玩游戏”和“学编程/画画”分别评价相似。</li>
+<li>到2017年，他公开说家庭已改变看法，支持其以游戏为正式工作和主要任务；此时已有Ludum Dare 34（2015）的外部奖项与2017多个竞赛奖项，但<strong>尚未实现《纽扣兄弟》商业回本</strong>。故 <strong>“没有销售成功就支持”成立；“从未受到任何社会认可也支持”不成立</strong>。</li>
+<li>2013年团队由南京艺术学院数字媒体/游戏相关同学组成；2015年Jam产出双人纽扣机关解谜prototype；2017年Steam EA；仍靠自资、合同/外包或筹钱继续。那时不能由“家人支持”反推出家庭具体给了多少现金。</li>
+</ul>
+<p>这是当时直接本人讲话，按 <code>P0 CONTEMPORANEOUS INTERVIEW FOR 2017 ATTITUDE</code>；儿童时代记忆仍是 <code>P1 RETROSPECTIVE</code>。原文既能说明游戏消费被管制，也能说明游戏创作职业获得了较晚许可，<strong>两者不可相互抵消或视为同一时期</strong>。</p>
+<h3 id="b2019829">证据 B：2019年8月29日，三种发行/两轮挫败以后，家里仍未给太多压力</h3>
+<p>游戏葡萄记者菲斯喵访谈文章（GameRes完整转载）：
+https://www.gameres.com/852295.html
+同稿新浪转载：https://dj.sina.com.cn/article/hytcern4417507.shtml</p>
+<ul>
+<li>2017年7月 Steam Early Access 第一轮发售，据李远扬回忆销售仅数百份，认为发行商宣传投入不足；此时正处在国内独立游戏商店/发行渠道摸索期。</li>
+<li>2018年11月iOS买断版发行（标价人民币6元），同样未实现回本。记者从第三方数据源得到约1.3万次下载监测，制作人估计实际销售可能不足5000份，两套口径不相容且未核，<strong>禁止取其均值</strong>。作者称可能要卖5万–10万份才能覆盖发行商预付款所带来的回收门槛。<strong>“没有收入”意指团队未从该项目结到能回流的收益，并非没人支付购买价、更不是工作室不存在发行预付、外包收入或投资</strong>。</li>
+<li>2019年8月9日推出完整版 Steam，原本数月的修补加进3–5小时单人关卡、多人派对等，项目累计约四年。记者访谈时制作者估计销售量在两三千份量级，仍远不及原先期望的万份“底线”；这些都是 <code>2019 CREATOR-REPORTED / UN-AUDITED</code>，不推断2026终身销量。</li>
+<li>连续尝试没有带来足以自养的游戏销售现金时，李远扬仍在访谈里承认家人提供过支持，并称家庭没有给予太大压力；他也解释父母很早鼓励自己走艺术道路、考美术院校，理解创作游戏是艺术表达的一种形式。</li>
+<li>但<strong>母亲早在他高中到大二间重病并去世，长达数年家庭曾为救治付出大量费用</strong>。所以这不是“2019父母两人仍共同口头支持”的可证事实；“父母很早鼓励艺术”是过去时，2017–2019“家人没有太大压力”是他本人对现有家庭处境的描述。不能为了写温暖故事，把已经去世的母亲当作2019年的说话人。</li>
+<li>保持4–5人团队（报道口径）与每月约人民币1–2万、后来3–5万支出的关键不是无限家庭资金，而是早年承接外包、其他商业手游、发行预付/融资、压缩工资和运营成本及人员长期信任。李本人月薪几千、团队集体宿舍，体现对失败的现实管理。此处支出为2019本人估算，并非审计报表；外包/其他游戏现金不等于《纽扣兄弟》本作销售收入。</li>
+<li>文章也明确作者与主创对失败原因意见不全一致：发行宣传缺位可能是其中之一，但<strong>Party Game需求/客厅场景在国内购买转化、线上联机缺失、反复美术重做、EA原型与新版增加单人内容、展会夸大真实购买意向、延期和版号/手游运营因素</strong>都可能参与。2019稿中“遇到好发行游戏必然成功”本身属于当事人期待，不能当研究结论。</li>
+</ul>
+<p><strong>2019年这份观察支持：家庭的价值许可在商业挫败之后仍未被完全撤销。</strong> 它不支持 “父母长期无条件愿意拿钱填无底洞”，更不能说家长在《纽扣兄弟》最终亏损多少时没有任何分歧（家属没有接受采访）。</p>
+<h3 id="_1">必须独立保留的人生背景：不是“家里有矿所以可任性”</h3>
+<p>母亲长期重病与医疗花费是一段家庭资产与照护压力，不能只摘录“家境还行”并写成可无限承担项目损失。2019记者恰恰在回应公众对家庭财富的猜测；工作室有外部订单/发行预付款/投资/员工低薪与共同住房的混合runway。<strong>这位主创拥有的资源并非零，获得的支持也并非纯情绪支持；其失败与持续开发都不能套进“靠家里躺赢”或“纯粹理想无现金来源”的任一单色传说。</strong></p>
+<h3 id="_2">与其他公共记录的冲突与后续时效</h3>
+<ul>
+<li>2019-08首发采访称PC完整版自己发行；Steam 2026可见商店页 <code>Developer: Centrosphere Games / Publisher: Kunpan Games</code>。这些标注可能在多年间变更，不应据后来的商店字段判定2019当事人的描述为假，<strong><code>PUBLISHER ATTRIBUTION TIMELINE UNKNOWN</code></strong>。Steam商店：https://store.steampowered.com/app/623320/Button_Button_Up/?l=schinese</li>
+<li>2023年12月前后第三方页面显示手机版取得/重新取得版号、后续上线仍待确认；TapTap开发者页面说2018已完成手机版但大陆渠道曾受版权/发行权/版号阻隔，后正在处理发行许可。这里能证明市场/政策接口长尾存在，不代表2023年仍然“赚不到钱”。来源：https://www.taptap.cn/app/143656 ；https://www.3839.com/a/103005.htm 。<strong>2020–2026利润/工作室存续/家人态度均未审计，结论严格停在2017–2019观察窗口。</strong></li>
+<li>CiGA关于2013–2019团队与厦门Game Jam的外部组织观察可验证2013毕业组团、2015年Ludum Dare与跨年社群的存在：https://www.ciga.me/blog/global-game-jam 。但不能把一篇官方组织的正面人物报道当作项目盈利核验。</li>
+</ul>
+<h2 id="gianfranco-berardi">一、另一个更硬的“失败以后依然被家人认可”：Gianfranco Berardi的妻子</h2>
+<p>英国/美国之外找到美国一位<strong>没有靠名作成名</strong>的独立开发者，留下接近同步的可连续核查日志。</p>
+<h3 id="20102011">2010—2011：从受雇到一年项目拖延</h3>
+<p>Gianfranco Berardi，GBGames。2010年5月辞职成为全职独立开发者；其游戏《Stop That Hero!》起源于2010年Ludum Dare 18的72小时原型，开发者以为扩成可卖产品大概只要一个月；实际上2011年末/2012年初才公开一个尚未完成的可购买alpha。其2010年Jam事后检讨：https://www.gbgames.com/2010/10/06/ld18-stop-that-hero-post-mortem/ 。</p>
+<p><strong>第一次卖出游戏≠解决事业现金流。</strong> 他2012年3月本人博客说已有第一位买家、几个回馈，但项目迟迟没完成，存款接近耗尽。</p>
+<h3 id="20123">2012年3月：仍没有赚钱时，他写出未婚妻的支持</h3>
+<p>2012-03-22同日纪念创业周年文章：
+https://www.gbgames.com/2012/03/22/i-need-to-prepare-for-anniversaries-better/</p>
+<p>他公开写 <code>fiancée is incredibly supportive</code>；她会在他为事业进展缓慢而自责时提醒他保持现实视角。两人即将结婚，现实规划让他担心继续不赚钱会成为婚姻障碍；但他开始承认全职创业与美满婚姻不必绑死，转回兼职也不是世界末日。<strong>支持的是这个人和他继续创造的权利，不是承诺对每一张账单永久无视。</strong></p>
+<p>这里是开发者的一手当期自述（P0），未婚妻没有本人独立文章，不可给她捏造逐字报价或情绪。</p>
+<h3 id="20132">2013年2月：项目失败、重新就业以后，她依然肯定那段尝试</h3>
+<p>2013-02-18 本人博客 <em>I Have a Day Job Again</em>：
+https://www.gbgames.com/2013/02/18/i-have-a-day-job-again/</p>
+<p>其自述按一年准备的runway因生活城市成本较低、妻子等家庭支持、软件行业协会职务小额津贴维持到2012；靠微薄项目销售无法支付普通开销和房贷。试过PHP外包但合同消失；他找回一份稳定全职工作。</p>
+<p>本人坦陈两年全职indie时误判制作周期、拖慢发售、把原定一月项目做一年、有预售但收入不足，最后重返雇佣岗位。他很沮丧，觉得对曾经鼓励他的人失信。他转述妻子的意思：<strong>毕竟你有两年多真正投入试过，这是很多人连尝试都没有获得的机会</strong>。这显然不是“等赚到钱才能和你成家/认可你”的安排，而是在<strong>事业无法自养、已经退出全职独立</strong>之后，对人的努力和现实选择作出肯定。</p>
+<p><code>P0 CONCURRENT SELF-DOCUMENTED: CAREER FAILURE + SPOUSAL APPRECIATION OF ATTEMPT</code>，但妻子的话仍是丈夫的<strong>二手转述</strong>，不能升级成独立受访者原话。离开全职indie ≠ 永远不做游戏，他声明会继续做兼职作品。</p>
+<p>其工作室官方2020s press history也承认 <em>Stop That Hero!</em> <strong>never truly finished and not a financial success</strong>（本人机构回顾，不是独立审计）：https://www.gbgames.com/press/ 。因此无需把2013年的“失败后仍获配偶尊重”倒写成成功英雄中途卧薪尝胆。</p>
+<h2 id="doom">二、为什么这两个人比再讲一次 DOOM 和解更重要</h2>
+<table>
+<thead>
+<tr>
+<th>审计问题</th>
+<th>李远扬 / 《纽扣兄弟》</th>
+<th>Berardi / GBGames</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>成年前/起点有何门槛</td>
+<td>童年玩游戏受家长限制，但美术教育受家庭支持，后考入南艺数字媒体/游戏相关专业</td>
+<td>原生家庭/童年游戏许可 UNKNOWN；已有计算机/软件就业经验，不能构建不存在的家长斗争</td>
+</tr>
+<tr>
+<td>首次家庭许可可观察日期</td>
+<td>2017本人说家人已转而支持做游戏</td>
+<td>2012本人明确未婚妻在持续亏损期给予情感支持</td>
+</tr>
+<tr>
+<td>是否已有外部认可</td>
+<td>2017 jam与竞赛成绩已突出，尚未市场回本</td>
+<td>2012已极小规模预售与玩家反馈，但无法养活自己</td>
+</tr>
+<tr>
+<td>市场挫败的可见结果</td>
+<td>2017 EA、2018 iOS、2019完整版均低于商业预期；版号/发行商/玩法转换/展会转化问题并存</td>
+<td>2011–12一年开发成未完成付费alpha，收入不足生活、2012左右重返正式工作（2013发文总结）</td>
+</tr>
+<tr>
+<td>失败后家人做什么</td>
+<td>2019本人说家里没有施加太大压力、仍感谢家人认可自己艺术创作，<strong>未见家属独立访谈</strong></td>
+<td>2013本人记妻子肯定他获得两年尝试机会，并未要求把失败等同个人失败，<strong>妻子本人未受访</strong></td>
+</tr>
+<tr>
+<td>钱从哪里来</td>
+<td>家庭曾提供一定支持，但运营靠外包、商业小项目、投资/预付、低薪与集体宿舍</td>
+<td>储蓄、较低生活成本、协会津贴、妻子及生活支持；2012左右重新获得工资（准确入职日未核）</td>
+</tr>
+<tr>
+<td>是否“永久无条件支持”</td>
+<td>UNKNOWN；2017到2019数年确有许可未完全撤销</td>
+<td>UNKNOWN；仅2012—2013妻子持续肯定，重返工作以保护现金约束</td>
+</tr>
+<tr>
+<td>当年失败性质</td>
+<td><strong>2019 SNAPSHOT: shipped but commercially disappointing</strong>；2026累计销售 UNKNOWN</td>
+<td><strong>2013 SNAPSHOT: full-time indie attempt failed, game unfinished/low sales</strong>；2020s回顾称项目未真正完成</td>
+</tr>
+<tr>
+<td>价值转换</td>
+<td>家庭认可“以游戏实现艺术追求”，而经济能否覆盖团队仍由市场决定</td>
+<td>家庭评价“两年敢于尝试/职业可持续”，而不是“没赚钱就不值得”</td>
+</tr>
+</tbody>
+</table>
+<p><strong>两个不同生活方案</strong>：李远扬在项目不挣钱时通过外包/其他商业项目/低成本让团队仍然开发；Berardi主动恢复工资、把游戏变回业余/副业。二者都能在家庭关系未必破裂的前提下生活。<strong>不能把创业成功/坚持全职工作室作为衡量主创人生尊严的唯一坐标。</strong></p>
+<h2 id="_3">三、对中国“家长阻挠→游戏缺原创”研究的反压力价值</h2>
+<p>该中国案例不能当成“国情没问题”的反证——早先我们已明确原生经验门控和职业许可的总体普遍性是 <strong>DENOMINATOR UNKNOWN</strong>，社会有多少人始终没获许可必须另建 frame D；媒体愿意报道一个父母较支持、又获奖的小团队，本身就是强媒体选择。</p>
+<p>更重要的是把<strong>家庭门槛和行业门槛拆开</strong>：</p>
+<ol>
+<li><strong>家庭教育的规则可高度分域。</strong> 李远扬小时候仍要偷偷玩游戏，但家长支持艺术专业，允许他把美术融入游戏。并不等于所有孩子有此艺术出路。</li>
+<li><strong>即便顺利通过家庭关口，商业接口可以失败。</strong> 他有南艺设计技能、老同学团队与Ludum Dare获奖，在国内宣传/发行、品类需求、联机功能和市场反馈的转化上仍有致命挑战。</li>
+<li><strong>外部荣誉并非市场购买。</strong> 展会上“一家老小很开心”曾让团队对party游戏产生自信；后来市场销售并未转化。这与收入接口如何筛选创作者能力的中国行业史研究形成独立可核的联结，不能归咎于家长。</li>
+<li><strong>“家长没有催你退出”不等于“你有商业上无限坚持的理性理由”。</strong> 这里甚至可能存在 <code>SUPPORT ENABLES OVERCOMMITMENT</code> 的反方机制假说：家庭容忍与外包现金让团队能多次延长项目、重做美术和新模式，项目本身可能错过便宜的早期止损。但该项目多次延长是否净亏、2019以后积累的能力是否回流其他业务、家庭如何参与决策均UNKNOWN，不能把猜想写成当事人失误的确定根因。</li>
+</ol>
+<p>真正值得设计的对照是<strong>同收入阶层/同毕业年份/同获奖或未获奖水平的中国游戏社团成员、毕业工作室与无法成立的未入场者</strong>。比较获得家庭许可之后，外部发行/融资与团队能力又如何影响能否完成/持续，而不是把一切社会问题装进“中国家长反对”。不能因此反向说中国无需改善游戏合法性。</p>
+<h2 id="_4">四、读者可读的结尾：认可一个人，可以不替他的每个项目买单</h2>
+<p>2019年，《纽扣兄弟》累计做了近四年，游戏从两枚互助闯关的纽扣，增加单人旅程、多人对战。发行、转平台、版本、预付与低销量使它成为艰难的商业实验。制作人李远扬没有在采访里说父亲愤怒要求他回大厂；他反而说家里没给太大压力。他也没有把这理解为“家里会永远替游戏付账”——工作室不断接活、压低自己工资、与老同学继续合作。曾经被家长约束而偷偷玩游戏的孩子，在游戏没卖动时仍获得了部分作为艺术创作者的家庭尊重。</p>
+<p>2013年，另一位美国开发者Berardi回顾自己此前已经返回的全职雇佣。他坐在电脑前写文章，承认自己把一个一月项目做到一年多、两年试作收入微薄，觉得辜负了很多期待。但他在当天的文字里转述了妻子的安慰：你至少真的有过时间去试、去做。<strong>她肯定的不是一款畅销游戏，而是丈夫的尝试具有可被保留的人生价值。</strong> 这个现实没有《DOOM》畅销或父母幡然悔悟的戏剧性，却对大多数经济普通的读者更重要。</p>
+<p>这两种家庭关系共同否定一个危险的价值交换：<strong>只有作品赚钱，一个人才配为自己年轻时的选择辩护。</strong></p>
+<p><strong>但也同时否定另一个危险交换：既然家人尊重你，就应该不计成本地持续承担一切亏损。</strong> 有时最成熟的和解是共同承认：这一次商业实验没有达到目标，你仍然可以在不放弃创造的情况下改变挣钱与生活的方式。</p>
+<h2 id="2025berardi">四点五、时效回访：2025年Berardi仍没有第二次全职创业，但没有停止做游戏</h2>
+<p><a href="/heroes-portal/book/research-notes/family-legitimacy-visible-labor-and-fifteen-year-exit-037.html">037：可见劳动与十五年后仍在创作的人</a>补入 <a href="https://www.gbgames.com/2025/05/21/15-years-after-going-full-time-indie/">2025-05-21的Berardi自述</a> 和2026游戏开发日志。</p>
+<ul>
+<li><strong>重要日期修正：</strong> <code>I Have a Day Job Again</code>发表于2013-02-18，但2013原文明确说储蓄支撑到<strong>2012年</strong>，之后开始补收入/回受雇；2025本人直接把重回day job定为<strong>2012年</strong>。此处不再把2013博客发表日当作正式入职年；确切月份仍UNKNOWN。</li>
+<li>2025他回忆原本计划一两年后再次辞职，婚姻/家庭和稳定收入改变了决策边界。距2010首次全职indie已15年，他<strong>仍未实现第二次全职创业</strong>。这不是说他2012以后没有做/发游戏：2016《Toytles: Leaf Raking》、后来《Toy Factory Fixer》，2025《Clown Alley Creator》等均有官方记录；2026-07-14还写了后者的开发复盘。</li>
+<li>他仍有明确失落感，同时始终坚持兼职制作/每年<code>Indie Day</code>；<strong>长期未重新全职 ≠ 永久离开制作</strong>。对个人生活究竟值不值得的评价不能只用是否再次辞职。</li>
+<li>妻子在2012–13被本人描述为理解他的尝试，但没有妻子<strong>2025</strong>直接叙述；不可把十多年前的肯定未经验证延伸成“妻子如今支持所有新计划”。</li>
+</ul>
+<h2 id="_5">五、待核与下一步</h2>
+<ol>
+<li><strong>2017李远扬 GameRes原音或家庭直接访谈</strong>：是谁改变观念、何时、为什么？不只靠“家人”概括。</li>
+<li><strong>2017/2018/2019财务层</strong>：三次发行各自毛收入、开发者实际结算、预付款回收、每年外包与小商业项目现金流、投资是否股权/预付；拒绝以“三次发行没半点收入”混为全部公司零营收。</li>
+<li><strong>2019后状态</strong>：Steam开发者发行商字段变化、Switch销量、2023手机版版号/运营权变更，以及是否存在后来的回本或另作职业转型。年份不闭环不说“永远失败”。</li>
+<li><strong>2013 Berardi夫人直接自愿文章</strong>及两人的后续看法未知；不把丈夫“妻子很支持”当经过两人一致核证。</li>
+<li><strong>主要反证</strong>：现实里有没有家庭很支持却让创作者背负不应承担的义务或无法止损？有没有失败后家长撤销原先许可，而非一直支持？对应失败与支持之间双向因果，不在这两例里自动解决。</li>
+<li><strong>真正上游缺席的青年</strong>：同教育背景的未报考/没做首个playable的人，仍需 frame D / 非媒体样本，不能让有节目、获奖和博客的人代表大多数。</li>
+</ol><div class="crumbs"><a href="/heroes-portal/">书阁</a> / book/research-notes/family-support-after-commercial-failure-li-yuanyang-berardi-036.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

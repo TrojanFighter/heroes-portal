@@ -1,0 +1,781 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CASE-053 — Kenny Sun：能力不是出身标签，而是一条十年生产链 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl class="on"" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#why-this-case" class="t2">Why this case</a><a href="#1-myth" class="t2">1. Myth</a><a href="#2-contextsituationaction-snapshot" class="t2">2. Context–Situation–Action Snapshot</a><a href="#era-production-regime" class="t3">Era / Production Regime</a><a href="#actor-situation" class="t3">Actor Situation</a><a href="#action-maneuver" class="t3">Action / Maneuver</a><a href="#anachronism-check" class="t3">Anachronism Check</a><a href="#3-origin" class="t2">3. Origin</a><a href="#4-capability" class="t2">4. Capability</a><a href="#_1" class="t3">早期能力</a><a href="#harmonix" class="t3">Harmonix 阶段</a><a href="#generalist" class="t3">Generalist 阶段</a><a href="#team-lead" class="t3">Team-lead 阶段</a><a href="#5-runway" class="t2">5. Runway</a><a href="#6-production" class="t2">6. Production</a><a href="#circa-infinity" class="t3">Circa Infinity</a><a href="#mr-suns-hatbox" class="t3">Mr. Sun&amp;rsquo;s Hatbox</a><a href="#ball-x-pit" class="t3">BALL x PIT</a><a href="#7-scope-failure-reversal" class="t2">7. Scope / Failure / Reversal</a><a href="#hatbox-2016" class="t3">Hatbox 2016：过早的大项目</a><a href="#8-capabilityproject-fit" class="t2">8. Capability–Project Fit</a><a href="#9-market" class="t2">9. Market</a><a href="#10-environment" class="t2">10. Environment</a><a href="#11-luck" class="t2">11. Luck</a><a href="#12-verdict" class="t2">12. Verdict</a><a href="#13-transfer" class="t2">13. Transfer</a><a href="#14-non-transfer" class="t2">14. Non-transfer</a><a href="#15-temporal-validity" class="t2">15. Temporal Validity</a><a href="#16-evidence-index" class="t2">16. Evidence Index</a><a href="#17-open-questions" class="t2">17. Open Questions</a><a href="#creator-life-decision-audit" class="t2">Creator Life / Decision Audit</a></aside><article class="doc"><div class="col"><h1 id="case-053-kenny-sun">CASE-053 — Kenny Sun：能力不是出身标签，而是一条十年生产链</h1>
+<ul>
+<li>Case ID: CASE-053</li>
+<li>Subject: Kenny Sun / Circa Infinity → YANKAI / Twinfold → Mr. Sun&rsquo;s Hatbox → BALL x PIT</li>
+<li>Period covered: 2007 early Flash experiments → 2014–2015 Circa Infinity → Harmonix + weekend indie → 2018 full-time indie → 2019–2023 Hatbox → 2025–2026 BALL x PIT</li>
+<li>Research status: RESEARCHING</li>
+<li>Corpus role: <code>LONGITUDINAL CAPABILITY ACCRETION / PROGRAMMER-GENERALIST / SOLO→TEAM-LEAD / PUBLISHER-PERIPHERY</code></li>
+<li>Related Claims: C015</li>
+<li>Evidence Ledger: <a href="/heroes-portal/evidence/CASE-053-kenny-sun-source-ledger.html">来源账本</a></li>
+</ul>
+<h2 id="why-this-case">Why this case</h2>
+<p class="dc">Kenny Sun 不是用来再证明一次“程序员也能做成功独游”。</p>
+<p>它补的是当前 Capability–Project Fit 体系里一个更重要的纵向缺口：</p>
+<blockquote>
+<p><strong>能力向量不是立项时给定的常量。前一个小项目、职业工作、合作关系、发行关系和商业结果，都可能生产下一阶段的新能力与选择权。</strong></p>
+</blockquote>
+<p>目前的 C015 主要观察：</p>
+<p><code>pre-existing capability / constraint → project shape</code></p>
+<p>Kenny 的纵向轨迹要求再加一条尚未正式升格的研究假说：</p>
+<p><code>project_t → shipped evidence / skill / revenue / network → capability_(t+1) → larger feasible project set</code></p>
+<p>因此本案不新增新的 fit 标签；它先作为对现有框架的纵向修正。</p>
+<p>最重要的不是把 Kenny 的履历拼成“数学 + 摄影 + 音乐游戏 = 天才配方”。那会重新落入 biography fallacy。</p>
+<p>真正可观察的是：</p>
+<ol>
+<li>高中 Flash / Newgrounds 实验先制造基础开发能力；</li>
+<li>NYU 游戏设计课程、Ludum Dare 与 Incubator 把兴趣压成可发售作品；</li>
+<li><code>Circa Infinity</code> 的作品证据帮助他进入 Harmonix 做 gameplay programming；</li>
+<li>在全职行业工作期间继续用周末完成自己的小作品；</li>
+<li>这些作品收入逐渐能覆盖生活，才在 2018 年转为全职独立开发；</li>
+<li><code>Mr. Sun's Hatbox</code> 2016 原型因为“项目太大 + 当时只有业余时间”被主动搁置，直到生产条件改变后才于 2019 重启；</li>
+<li>做到 2021 年以后，他又明确承认自己“会做游戏但不擅长卖游戏”，因此没有强迫自己 internalize QA / localization / porting / marketing，而是找 Raw Fury；</li>
+<li>到 <code>BALL x PIT</code>，他第一次明确以 team lead 方式组织六位核心 specialist，并由 Devolver 承担更强的 market / publishing perimeter。</li>
+</ol>
+<p>这是一条罕见的：</p>
+<blockquote>
+<p><strong>solo capability-shaped production → publisher-expanded solo production → author-led specialist team</strong></p>
+</blockquote>
+<p>的同人纵向。</p>
+<p>它没有填补 VC / CAPABILITY-COMPOSED failure / second FIT-LOCK-IN / FIT-TRAP 这四个既有缺口；它补的是<strong>能力形成机制本身</strong>。</p>
+<h2 id="1-myth">1. Myth</h2>
+<p>最容易出现的流行叙事是：</p>
+<blockquote>
+<p>Kenny Sun 从数学/程序、摄影和节奏游戏工业经验中自然长成了一个“视觉、逻辑、手感三修”的独立作者，最后在 BALL x PIT 集大成。</p>
+</blockquote>
+<p>其中只有一部分目前可证：</p>
+<ul>
+<li>长期个人做游戏：成立；</li>
+<li>大学时期做 concert photography：成立；</li>
+<li>Harmonix gameplay-programming 经历：成立；</li>
+<li>多年 solo / weekend shipping 后转全职：成立；</li>
+<li>BALL x PIT 被 Kenny 本人称为十年独立开发经验的 culmination：成立；</li>
+<li>“摄影直接导致屏幕震动/视觉反馈能力”：目前只是 H；</li>
+<li>“Harmonix 直接教会了他某种手感方法”：目前只是 H；</li>
+<li>“NYU 数学 + CS 双学位”：当前未取得足够强的一手材料，保持 UNKNOWN；</li>
+<li>“Cisco 工作是为了满足父母期待”：当前未取得足够强的公开材料，保持 UNKNOWN。</li>
+</ul>
+<p>本案因此研究的是<strong>可观察生产链</strong>，不是人格拼图。</p>
+<h2 id="2-contextsituationaction-snapshot">2. Context–Situation–Action Snapshot</h2>
+<h3 id="era-production-regime">Era / Production Regime</h3>
+<p>Kenny 的形成跨越至少三个不同 regime：</p>
+<ul>
+<li>2000s 末—2010s 初：Flash portal / Newgrounds / Kongregate 仍是青少年开发者低门槛出货与反馈场；</li>
+<li>2014–2016：Ludum Dare、GameMaker、Steam Greenlight、NYU Incubator 和 IGF 构成学生作者从 prototype 到 commercial artifact 的一条可行路径；</li>
+<li>2015–2018：稳定行业工资 + 周末独立开发可以作为低资本 capability accumulation；</li>
+<li>2019–2023：成熟数字发行与 boutique publisher 可以为 solo-core 补 funding、QA、localization、porting 与 marketing；</li>
+<li>2025：Steam demo / Next Fest + specialist remote team + Devolver 级 publisher 能把一个作者型项目扩到更大 market surface。</li>
+</ul>
+<p>这些路径的具体平台价值都高度年份依赖。尤其 Greenlight、2010s Flash portal、2015 Incubator exposure 不应照抄到 2026。</p>
+<h3 id="actor-situation">Actor Situation</h3>
+<p>可确认的关键状态：</p>
+<ul>
+<li>Kenny 自述 2007 起持续个人做游戏，2015 才开始商业发布；</li>
+<li>高中已用 Flash 并向 Newgrounds / Kongregate 上传作品；</li>
+<li>大学阶段的游戏设计课程重新点燃游戏创作兴趣；</li>
+<li><code>Circa Infinity</code> 由 2014 Ludum Dare prototype 生长，随后进入 NYU Incubator；</li>
+<li>该作品帮助他获得 Harmonix programmer 工作；</li>
+<li>在 Harmonix 全职工作数年时继续周末做个人游戏；</li>
+<li>个人作品收入最终足以覆盖生活，因此 2018 年辞职做 full-time indie；</li>
+<li><code>Hatbox</code> 第一次 prototype 时，他仍有全职工作，时间是 binding constraint；</li>
+<li><code>BALL x PIT</code> 时他已经不再坚持“所有东西都自己做”，而是第一次明确领导一个 specialist team。</li>
+</ul>
+<h3 id="action-maneuver">Action / Maneuver</h3>
+<table>
+<thead>
+<tr>
+<th>时间/窗口</th>
+<th>Binding constraint</th>
+<th>具体行动</th>
+<th>直接结果</th>
+<th>Evidence</th>
+<th>Transfer boundary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>高中 / 2007+</td>
+<td>无正式游戏职业入口</td>
+<td>Flash 小作上传 Newgrounds / Kongregate</td>
+<td>获得最早开发/出货回路</td>
+<td>E001, E002</td>
+<td>Flash portal 生态已历史化</td>
+</tr>
+<tr>
+<td>2014–2015</td>
+<td>学生、经验有限</td>
+<td>Ludum Dare 做 Circa Infinity；把 infinite runner 改成 level-based；继续 incubator / commercial polish</td>
+<td>一个 jam prototype 变成可销售作品与职业信号</td>
+<td>E002–E004</td>
+<td>Greenlight / 当时学生节展窗口不可照抄</td>
+</tr>
+<tr>
+<td>2015–2018</td>
+<td>想继续个人创作，但已有全职行业工作</td>
+<td>Harmonix gameplay programmer + 周末持续做自己的游戏</td>
+<td>同时积累行业工程能力、个人 catalog 与收入</td>
+<td>E001, E005</td>
+<td>因果上不能把所有后续设计能力归功于 Harmonix</td>
+</tr>
+<tr>
+<td>2016</td>
+<td>Hatbox scope 明显超过业余时间</td>
+<td>快速放弃 prototype，而不是继续硬扛</td>
+<td>保存 idea，避免当时进入不可承受长周期</td>
+<td>E006</td>
+<td>“搁置”只有在未来条件可能变化时才有 option value</td>
+</tr>
+<tr>
+<td>2018–2019</td>
+<td>独游收入开始可覆盖生活</td>
+<td>辞 Harmonix；2019 重启 Hatbox</td>
+<td>runway 与可投入时间改变后，旧 idea 重新变得可行</td>
+<td>E005, E006</td>
+<td>收入规模、储蓄与生活成本仍 UNKNOWN</td>
+</tr>
+<tr>
+<td>2021–2023</td>
+<td>Hatbox 已投入 &gt;2 年，仍需约一年；market/release perimeter 是弱项</td>
+<td>找 publisher；选择 Raw Fury 获取 finish funding、marketing、QA、localization、porting</td>
+<td>solo-core 不必把外围能力全部内化</td>
+<td>E006</td>
+<td>合同金额、recoup、IP / approval rights UNKNOWN</td>
+</tr>
+<tr>
+<td>2021–2022</td>
+<td>出现高价值外部项目机会</td>
+<td>暂停一年参与 Return to Monkey Island，负责 gameplay/puzzle/cutscene programming</td>
+<td>增加另一段专业系统实现经验</td>
+<td>E001, E007</td>
+<td>对 BALL x PIT 的具体因果迁移暂不能直接证明</td>
+</tr>
+<tr>
+<td>2025</td>
+<td>项目已超出一人资产生产边界</td>
+<td>首次明确 lead team；配置 3D、tech art、pixel art、concept、UI/art、music specialist；Devolver publishing</td>
+<td>从“自己做绝大多数”转向 author-led capability composition/periphery</td>
+<td>E008</td>
+<td>collaborator 的 employment/equity/decision-right structure 仍 UNKNOWN</td>
+</tr>
+</tbody>
+</table>
+<h3 id="anachronism-check">Anachronism Check</h3>
+<ul>
+<li>Flash portals, Steam Greenlight and the 2015 NYU Incubator / festival path are historical conditions, not 2026 tactics.</li>
+<li>The durable mechanism is not “repeat Ludum Dare → Greenlight → IGF”, but <code>small public artifact → evidence → next opportunity</code>.</li>
+<li>2021–2025 publisher / remote-specialist access is closer to current conditions, but contract economics and discoverability remain title- and year-dependent.</li>
+<li>BALL x PIT’s Devolver support must not be projected backward as something Kenny had access to when building Circa Infinity or the first Hatbox prototype.</li>
+<li>Current AI / asset / no-code tools can widen a 2026 creator’s feasible set, but they cannot be used to retroactively judge why Kenny did or did not internalize art, audio, QA or marketing in earlier periods.</li>
+</ul>
+<h2 id="3-origin">3. Origin</h2>
+<p>当前可确认：</p>
+<ul>
+<li>Kenny 现居 Brooklyn；</li>
+<li>自述 2007 起个人做游戏；</li>
+<li>高中时期使用 Flash，并把作品发布到 Newgrounds / Kongregate；</li>
+<li>大学期间修读 NYU game-design courses；</li>
+<li>大学时期同时进行 concert photography，作品曾刊于 Pitchfork、Billboard、Stereogum 等；</li>
+<li><code>Circa Infinity</code> 从 2014 年 Ludum Dare 起步，并进入 2015 NYU Game Center Incubator。</li>
+</ul>
+<p>当前不作为已确认事实写入主叙事：</p>
+<ul>
+<li>“NYU Computer Science + Mathematics 双学位”；</li>
+<li>“2015 年先去 Cisco，原因是父母要求稳定工作”；</li>
+<li>“从小在纽约/新泽西成长、去加州前从未长期离开”；</li>
+<li>亚裔家庭压力对职业选择的直接因果。</li>
+</ul>
+<p>这些信息可以继续核验，但在取得原始来源前只作为 research lead。</p>
+<h2 id="4-capability">4. Capability</h2>
+<h3 id="_1">早期能力</h3>
+<p><code>Circa Infinity</code> 前已经可观察到：</p>
+<ul>
+<li>basic programming / GameMaker / Flash；</li>
+<li>rapid prototyping；</li>
+<li>abstract visual design；</li>
+<li>独立完成小项目的能力；</li>
+<li>摄影实践与图像表达经验。</li>
+</ul>
+<p>但“摄影训练直接造成游戏视觉节奏”仍是 H，不应从履历自动推断。</p>
+<h3 id="harmonix">Harmonix 阶段</h3>
+<p>Harmonix 官方履历可由 Kenny 本人确认的项目包括：</p>
+<ul>
+<li>Rock Band Rivals；</li>
+<li>Dance Central VR；</li>
+<li>Fuser。</li>
+</ul>
+<p>能安全推论的是：</p>
+<blockquote>
+<p>他获得了职业级 gameplay programming experience。</p>
+</blockquote>
+<p>不能未经直接证据继续写成：</p>
+<blockquote>
+<p>Harmonix 因此教会他 BALL x PIT 的手感 / 节奏 / feedback grammar。</p>
+</blockquote>
+<h3 id="generalist">Generalist 阶段</h3>
+<p>到 <code>Mr. Sun's Hatbox</code>，Kenny 自述几乎独立承担：</p>
+<ul>
+<li>design；</li>
+<li>programming；</li>
+<li>art；</li>
+<li>animation；</li>
+<li>sound design；</li>
+<li>music。</li>
+</ul>
+<p>这不是“天生全能”，而是前面多年高频个人项目产生的 longitudinal capability bundle。</p>
+<h3 id="team-lead">Team-lead 阶段</h3>
+<p><code>BALL x PIT</code> 则出现明显结构变化：</p>
+<ul>
+<li>Kenny 不再承担所有视觉资产；</li>
+<li>core team 有 3D、technical art、low-poly pixel art、concept、pixel/UI、music 等 specialist；</li>
+<li>他本人称这是第一次真正 lead a team；</li>
+<li>Devolver 又补 publisher market perimeter。</li>
+</ul>
+<p>因此这里更准确的不是“solo developer 变大”，而是：</p>
+<blockquote>
+<p><strong>作者决策密度仍集中，但执行能力集合开始通过 specialist network 扩张。</strong></p>
+</blockquote>
+<h2 id="5-runway">5. Runway</h2>
+<table>
+<thead>
+<tr>
+<th>时段</th>
+<th>来源</th>
+<th>金额/口径</th>
+<th>证据</th>
+<th>置信度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2015–2018</td>
+<td>Harmonix 全职 programmer 工资</td>
+<td>UNKNOWN</td>
+<td>E001, E005</td>
+<td>HIGH（来源存在，金额未知）</td>
+</tr>
+<tr>
+<td>同期</td>
+<td>周末独立游戏收入</td>
+<td>最终足以覆盖生活</td>
+<td>E005</td>
+<td>HIGH</td>
+</tr>
+<tr>
+<td>2018+</td>
+<td>独立游戏收入 / catalog</td>
+<td>具体年度收入 UNKNOWN</td>
+<td>E005</td>
+<td>MEDIUM-HIGH</td>
+</tr>
+<tr>
+<td>Hatbox 后期</td>
+<td>Raw Fury finish funding + publishing services</td>
+<td>金额 / recoup UNKNOWN</td>
+<td>E006</td>
+<td>HIGH（资金用途确认）</td>
+</tr>
+<tr>
+<td>2021–2022</td>
+<td>Return to Monkey Island programming work</td>
+<td>报酬 UNKNOWN</td>
+<td>E007</td>
+<td>HIGH（工作存在，金额未知）</td>
+</tr>
+<tr>
+<td>BALL x PIT</td>
+<td>Devolver publishing support</td>
+<td>advance / recoup / ownership UNKNOWN</td>
+<td>E008</td>
+<td>HIGH（关系存在，财务未知）</td>
+</tr>
+</tbody>
+</table>
+<p>本案最重要的 runway 机制不是具体金额，而是：</p>
+<blockquote>
+<p><strong>先用工资保护 experimentation，再让 side-project revenue 替代工资，最后才全职独立。</strong></p>
+</blockquote>
+<h2 id="6-production">6. Production</h2>
+<h3 id="circa-infinity">Circa Infinity</h3>
+<ul>
+<li>core creation: Kenny Sun；</li>
+<li>soundtrack: Jack + Jim Fay；</li>
+<li>GameMaker + Adobe Fireworks；</li>
+<li>Ludum Dare prototype → 学期 part-time → 毕业后 full-time → 约 9 个月；</li>
+<li>NYU Incubator 提供 playtest / business / release 环境。</li>
+</ul>
+<p>因此不可把它写成“完全无外围支持的纯 solo”。</p>
+<h3 id="mr-suns-hatbox">Mr. Sun&rsquo;s Hatbox</h3>
+<ul>
+<li>Kenny 为 solo core，承担几乎全部游戏本体工种；</li>
+<li>commissioned key art 等外围存在；</li>
+<li>Raw Fury 提供 funding、marketing、QA、localization、porting 等 release perimeter。</li>
+</ul>
+<p>这是一个很清晰的：</p>
+<p><code>solo authorial core + specialist / publisher periphery</code></p>
+<h3 id="ball-x-pit">BALL x PIT</h3>
+<p>Kenny 本人列出的 core team 除自己外有六位 specialist：</p>
+<ul>
+<li>Sergio H. Alcelay — 3D Art；</li>
+<li>Fernando Labarta Martin — Technical Art；</li>
+<li>Mohammed Bakir Khawam — Low Poly Pixel Art；</li>
+<li>Lisa Fasol — Concept Art；</li>
+<li>Luka Parascandalo — Pixel Art / UI；</li>
+<li>Amos Roddy — Music / some sound design。</li>
+</ul>
+<p>Publisher: Devolver Digital。</p>
+<p>“六人 team + Kenny”是功能分工层面的 core-team 表述；劳动合同、全职/兼职、equity、外包关系仍需进一步审计。</p>
+<h2 id="7-scope-failure-reversal">7. Scope / Failure / Reversal</h2>
+<p>本案最有价值的 failure evidence 不是商业 flop，而是<strong>主动不做</strong>。</p>
+<h3 id="hatbox-2016">Hatbox 2016：过早的大项目</h3>
+<p>Kenny 明确说：</p>
+<ul>
+<li>2015 产生想法；</li>
+<li>2016 开始 prototype；</li>
+<li>很快发现，在仍有 full-time job、free time 有限的情况下，这个项目“太大”；</li>
+<li>因此快速放弃；</li>
+<li>直到 2019 production situation 改变后才重启。</li>
+</ul>
+<p>这是一条极强的 capability-fit 行动链：</p>
+<p><code>same idea + wrong current production frontier → shelve</code></p>
+<p>而不是：</p>
+<p><code>good idea → persistence at any cost</code></p>
+<p>它补充 C015 一个常被忽略的边界：</p>
+<blockquote>
+<p><strong>项目适配不是只看“这个人最终能不能做”，还要看“此刻的这个人、在此刻的 runway 下能不能便宜地做”。</strong></p>
+</blockquote>
+<h2 id="8-capabilityproject-fit">8. Capability–Project Fit</h2>
+<p>当前结论：</p>
+<blockquote>
+<p><strong>FIT-STRONG / longitudinal CAPABILITY-SHAPED → CAPABILITY-EXPANDED transition</strong></p>
+</blockquote>
+<p>但这不是新的正式 taxonomy 标签。</p>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>Capability state</th>
+<th>Project maneuver</th>
+<th>Cost removed / transferred</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Circa Infinity</td>
+<td>programmer + abstract visual experimenter</td>
+<td>单核心 mechanic、level-based teaching、极少系统并发</td>
+<td>避免内容/系统爆炸</td>
+<td>coherent first commercial artifact</td>
+</tr>
+<tr>
+<td>周末独游</td>
+<td>gameplay programmer + growing generalist</td>
+<td>反复做小作品</td>
+<td>用时间累计多工种而非一次扩团队</td>
+<td>catalog + living-cost revenue</td>
+</tr>
+<tr>
+<td>Hatbox 2016</td>
+<td>idea ambition &gt; available time</td>
+<td>主动 shelve</td>
+<td>避免以夜间劳动硬填巨大 scope</td>
+<td>保存 future option</td>
+</tr>
+<tr>
+<td>Hatbox 2019–23</td>
+<td>full-time generalist</td>
+<td>solo-core 做本体；publisher 买 release capability</td>
+<td>marketing / QA / localization / porting 外部化</td>
+<td>完成更大项目</td>
+</tr>
+<tr>
+<td>BALL x PIT</td>
+<td>experienced author / programmer / generalist</td>
+<td>直接组织 specialist core + publisher</td>
+<td>大量资产与表现能力不再由 Kenny 单人吸收</td>
+<td>更大 production frontier</td>
+</tr>
+</tbody>
+</table>
+<p>这个纵向样本提示：</p>
+<blockquote>
+<p><strong>Capability–Project Fit 不是一次性的人格匹配，而可能是一种反复重算 production frontier 的技术。</strong></p>
+</blockquote>
+<h2 id="9-market">9. Market</h2>
+<p>可确认的重要节点：</p>
+<ul>
+<li><code>Circa Infinity</code> 参加 Steam Greenlight、PAX / XOXO / IGF 等学生/独立游戏曝光通道；</li>
+<li>Hatbox 第一次正式使用 publisher；</li>
+<li>Kenny 明确把“我会做游戏、但不擅长卖游戏”作为寻找 Raw Fury 的原因之一；</li>
+<li><code>BALL x PIT</code> 由 Devolver 发布，Devolver 为 Summer Game Fest announcement 投入明显 marketing support；</li>
+<li>Devolver 2025 年全年公告显示，<code>BALL x PIT</code> 2025 年 10 月发售后到 12 月底前十周，Steam 单平台销量已超过 100 万。</li>
+</ul>
+<p>因此“百万销量”可以记录，但不能倒推出：</p>
+<ul>
+<li>因为 Kenny 有摄影背景所以营销成功；</li>
+<li>因为 Devolver 所以必然成功；</li>
+<li>因为十年积累所以必然成功。</li>
+</ul>
+<p>这里只能确认一个更窄的事实：</p>
+<blockquote>
+<p>到 2025，他的 production model 已经从作者单核扩成了 author + specialist team + major indie publisher market perimeter。</p>
+</blockquote>
+<h2 id="10-environment">10. Environment</h2>
+<p>有利条件：</p>
+<ul>
+<li>NYU Game Center / Incubator；</li>
+<li>2010s GameMaker、Ludum Dare、Greenlight 与 indie festival ecology；</li>
+<li>Harmonix 提供稳定行业工资和职业工程环境；</li>
+<li>数字商店允许多个小型个人项目长期累积收入；</li>
+<li>boutique publishers 能分担 solo author 的 release perimeter；</li>
+<li>2025 Steam demo / festival / publisher-marketing infrastructure。</li>
+</ul>
+<p>阻碍 / 成本：</p>
+<ul>
+<li>full-time job 下大型项目时间不可承受；</li>
+<li>solo generalist 的制作速度；</li>
+<li>self-marketing / selling 明确是作者自认弱项；</li>
+<li>项目规模变大后，资产、QA、本地化、移植和市场都要求新的组织形态。</li>
+</ul>
+<h2 id="11-luck">11. Luck</h2>
+<p>当前不把任何单一事件指定为主要 luck cause。</p>
+<p>需要继续审计：</p>
+<ul>
+<li><code>Circa Infinity</code> 被 IGF / PAX / XOXO 等选中对职业机会的实际边际影响；</li>
+<li>Harmonix hiring 的完整渠道；</li>
+<li>Raw Fury / Devolver publisher pitch 中的竞争与关系路径；</li>
+<li>BALL x PIT 的 Steam algorithm / Next Fest / creator amplification；</li>
+<li>2025 market timing 对其 breakout 的影响。</li>
+</ul>
+<h2 id="12-verdict">12. Verdict</h2>
+<p>成立：</p>
+<ul>
+<li>Kenny 是从长期个人小作逐步进入职业开发，再回到 full-time indie；</li>
+<li>Harmonix 工作期间仍持续周末独立开发；</li>
+<li>个人作品收入最终成为辞职条件；</li>
+<li>Hatbox 曾因当时 scope/time mismatch 被主动放弃；</li>
+<li>Raw Fury 被用来补 finish funding + marketing / QA / localization / porting；</li>
+<li>BALL x PIT 是第一次明确的 team-led production；</li>
+<li>BALL x PIT 在 2025 年已达到官方确认的百万级销量。</li>
+</ul>
+<p>部分成立：</p>
+<ul>
+<li>“斜杠青年 → 跨学科作者”可以作为叙事入口，但必须拆成可观察 capability acquisition，而不是人格神话。</li>
+</ul>
+<p>尚未验证：</p>
+<ul>
+<li>NYU CS + Mathematics 双学位；</li>
+<li>Cisco 阶段与父母期待；</li>
+<li>纽约/新泽西成长史的具体版本；</li>
+<li>摄影训练直接塑造游戏视觉 feedback；</li>
+<li>Harmonix 直接塑造其“手感”方法；</li>
+<li>publisher contracts 的 funding / recoup / IP / approval / milestone / ownership 条款。</li>
+</ul>
+<h2 id="13-transfer">13. Transfer</h2>
+<p>可迁移机制：</p>
+<ol>
+<li><strong>把 side projects 当 capability portfolio，而不只当“赌爆款”。</strong></li>
+<li><strong>项目 scope 要跟当前 production frontier 匹配，而不是跟终局野心匹配。</strong></li>
+<li><strong>搁置一个好 idea 可以是理性 option preservation，不是失败。</strong></li>
+<li><strong>工资型 runway 可以同时购买生活安全和低风险能力积累。</strong></li>
+<li><strong>当某个弱项已经被清楚识别，不必把“成为全能者”当唯一解。</strong></li>
+<li><strong>publisher / specialists 可以被理解为 capability bundle，而不是抽象的“资源”。</strong></li>
+<li><strong>成功后扩大 production frontier，不必等于稀释 authorial thesis；可以从“自己做”转向“自己决定 + specialist 执行”。</strong></li>
+</ol>
+<h2 id="14-non-transfer">14. Non-transfer</h2>
+<p>不可直接复制：</p>
+<ul>
+<li>2010s Flash / Greenlight / IGF / student-incubator discovery regime；</li>
+<li>NYU Game Center network；</li>
+<li>Harmonix 这样的职业训练与工资型 runway；</li>
+<li>Kenny 本人的长期跨工种熟练度；</li>
+<li>十年以上小作品 catalog 与收入积累；</li>
+<li>能同时获得多个 publisher offer 的 bargaining position；</li>
+<li>Raw Fury / Devolver 的具体服务、合同和市场能力。</li>
+</ul>
+<h2 id="15-temporal-validity">15. Temporal Validity</h2>
+<table>
+<thead>
+<tr>
+<th>Mechanism</th>
+<th style="text-align: right;">Observed years</th>
+<th>2026 transfer status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>small shipped projects → capability evidence</td>
+<td style="text-align: right;">2007–2025</td>
+<td>DURABLE</td>
+</tr>
+<tr>
+<td>salary runway + weekend experimentation</td>
+<td style="text-align: right;">2015–2018</td>
+<td>DURABLE / CONDITIONAL</td>
+</tr>
+<tr>
+<td>jam → incubator → Greenlight</td>
+<td style="text-align: right;">2014–2015</td>
+<td>HISTORICAL</td>
+</tr>
+<tr>
+<td>solo-core + publisher periphery</td>
+<td style="text-align: right;">2021–2023</td>
+<td>DURABLE / CONTRACT-DEPENDENT</td>
+</tr>
+<tr>
+<td>specialist core + publisher market perimeter</td>
+<td style="text-align: right;">2024–2026</td>
+<td>CURRENT / CONDITIONAL</td>
+</tr>
+<tr>
+<td>specific Steam / Next Fest / SGF exposure path</td>
+<td style="text-align: right;">2025</td>
+<td>CURRENT but re-check before transfer</td>
+</tr>
+</tbody>
+</table>
+<h2 id="16-evidence-index">16. Evidence Index</h2>
+<ul>
+<li>CASE-053:E001 — Kenny official About：2007+ personal dev、Harmonix、Return to Monkey Island、concert photography。</li>
+<li>CASE-053:E002 — GameDeveloper 2016：Flash / Newgrounds / Kongregate、NYU courses、GameMaker、Circa development timeline。</li>
+<li>CASE-053:E003 — NYU 2016 IGF interview：Ludum Dare origin、infinite-runner → level-based change、solo coherence。</li>
+<li>CASE-053:E004 — NYU 2015 Incubator materials：Greenlight / Incubator / post-incubator release / Harmonix transition。</li>
+<li>CASE-053:E005 — Kenny 2023 IGF repost：weekend indie、2018 full-time transition、Hatbox solo capability。</li>
+<li>CASE-053:E006 — Kenny 2022 Hatbox announcement：2016 abandon、2019 restart、publisher rationale 与 Raw Fury perimeter。</li>
+<li>CASE-053:E007 — Kenny Return to Monkey Island work notes。</li>
+<li>CASE-053:E008 — Kenny 2025 BALL x PIT announcement：first team-leading structure、six specialists、Devolver support。</li>
+<li>CASE-053:E009 — Devolver FY2025：Steam first ten weeks &gt;1M units。</li>
+<li>CASE-053:E010 — NYU / current recognition context：Circa / BALL x PIT external validation。</li>
+</ul>
+<h2 id="17-open-questions">17. Open Questions</h2>
+<ol>
+<li>找到可靠原始材料核 NYU degree：是否确为 CS + Mathematics double major？</li>
+<li>Cisco 经历是否存在？若存在，时间在 Harmonix 之前还是其他阶段？“父母期待”是否有当事人原话？</li>
+<li>Concert photography 对具体游戏 design / visual feedback 是否有 Kenny 本人明确归因？</li>
+<li>Harmonix 训练对其后来玩法、feedback、audio timing 是否有本人明确归因？</li>
+<li>2018 “收入足以 cover living expenses”的收入结构：哪些作品、哪类平台、是否含 savings？</li>
+<li>Raw Fury 与 Devolver 的 advance / recoup / IP / milestone / approval / ownership surface。</li>
+<li>BALL x PIT 六位 core collaborators 的合同关系、投入周期与 decision rights。</li>
+<li>BALL x PIT 2025–2026 爆发中 demo / Next Fest / Devolver / creator / Steam recommendation 各自贡献多少？</li>
+<li>这条 longitudinal capability-accretion 机制是否能在第二、第三个创作者身上重复观察，足以升级为正式 Claim？</li>
+</ol>
+<h2 id="creator-life-decision-audit">Creator Life / Decision Audit</h2>
+<ul>
+<li><strong>Audit status:</strong> SUBSTANTIAL</li>
+<li><strong>Life stage:</strong> 从高中/大学低成本作品循环进入职业 gameplay programming，再用几年“全职行业工作 + 周末独立开发”积累 catalog；2018 在个人作品收入可覆盖生活后才转 full-time indie。</li>
+<li><strong>Household:</strong> relationship / children / housing / dependents <code>UNKNOWN</code>。</li>
+<li><strong>Runway:</strong> salaried Harmonix employment + weekend indie revenue → self-sustaining indie income → Raw Fury finish funding / QA / localization / porting / marketing → later Devolver publishing + specialist team。</li>
+<li><strong>Household burn:</strong> 金额 <code>UNKNOWN</code>；“个人作品收入足以覆盖生活”是关键阈值，但生活成本与储蓄未公开。</li>
+<li><strong>Exit / recovery:</strong> <strong>HIGH</strong> — gameplay programmer 职业履历、持续 shipping、publisher network 与多款商业作品共同形成较强职业可逆性；精确就业 fallback 未直接记录。</li>
+<li><strong>Capability vector:</strong> programming/generalist/game feel + repeated shipping；后期主动承认 market/release perimeter 是弱项，用 publisher 补齐；BALL x PIT 时升级为 specialist team lead。</li>
+<li><strong>Problem ownership:</strong> <strong>HIGH</strong> — 个人项目长期由 Kenny 主导；publisher 补外围，不等于替代 product thesis。</li>
+<li><strong>Validation architecture:</strong> Flash/public portals → Ludum Dare prototype → Incubator/commercial release → salaried job + repeated weekend shipping → indie revenue threshold → Hatbox publisher expansion → BALL x PIT demo/market + specialist team。</li>
+<li><strong>Reality adjudication:</strong> <strong>STRONG</strong> — Hatbox 2016 因 scope 超出业余时间而主动搁置；生产条件变化后才重启；又明确承认“会做游戏但不擅长卖游戏”，据此改变组织方案。</li>
+<li><strong>Capability capture risk:</strong> <strong>LOW→MEDIUM</strong> — 多年 generalist 习惯最终被主动打破，没有继续强迫自己覆盖 marketing/QA/art 全外围。</li>
+<li><strong>Market sufficiency / legibility:</strong> <strong>PARTIAL / PROJECT-DEPENDENT</strong> — repeated small releases 形成现实反馈；BALL x PIT 的更大市场结果属于后期，不应用来重写早期路径。</li>
+<li><strong>Capability scaling:</strong> <strong>LONGITUDINAL</strong> — solo experiment → salaried specialist → full-time solo → publisher-expanded solo → author-led specialist team。</li>
+<li><strong>Major unknowns:</strong> household economics、2018 收入/储蓄阈值、publisher合同、BALL x PIT collaborator employment/equity。</li>
+</ul><div class="crumbs"><a href="/heroes-portal/">书阁</a> / cases/CASE-053-kenny-sun.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

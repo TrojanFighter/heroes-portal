@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LR-005 — 成熟工业能力如何组成作者型团队：带走专业，不带走旧组织的题目 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl class="on"" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#_1" class="t2">适用性限制：这个案例库不是同类员工的随机样本</a><a href="#1" class="t2">1. 何时进入</a><a href="#2" class="t2">2. 三次拆分</a><a href="#_2" class="t3">职位与能力</a><a href="#_3" class="t3">作者与控制权</a><a href="#_4" class="t3">能力与项目形状</a><a href="#3" class="t2">3. 最小验证实验</a><a href="#4" class="t2">4. 何时升级资源</a><a href="#5" class="t2">5. 正反案例各说明什么</a><a href="#6" class="t2">6. “声望保全型变形”的取证边界</a><a href="#7" class="t2">7. 失败后还剩什么</a><a href="#8" class="t2">8. 最小行动</a></aside><article class="doc lit"><div class="col"><h1 id="lr-005">LR-005 — 成熟工业能力如何组成作者型团队：带走专业，不带走旧组织的题目</h1><img class="docfig" src="/heroes-portal/assets/lr-05.webp" alt="">
+<ul>
+<li>Status: READER ROUTE / EVIDENCE-BOUNDED</li>
+<li>Last verified: 2026-10-07</li>
+<li>Best-fit: AAA / commercial game designer, gameplay programmer, producer, technical artist, QA lead, veteran cofounding an original-IP studio</li>
+<li>Core cases: CASE-061 Supergiant; CASE-062 Red Hook; CASE-059 Mega Crit; CASE-046 Sandfall; 王妙一/WILL</li>
+<li>Failure controls: CASE-048 The Magic Circle; CASE-054 Limit Theory; 月下/铸仙之境; CASE-056 Playdead</li>
+<li>Related: <a href="/heroes-portal/book/life-routes/big-company-veteran-to-author-001.html">LR-001 身份/评分器退出</a>, <a href="/heroes-portal/book/life-routes/salaried-creator-staged-commitment-002.html">LR-002 工资/辞职时点</a>, <a href="/heroes-portal/book/life-routes/household-high-burn-creator-003.html">LR-003 家庭生存期</a>, <a href="/heroes-portal/book/research-notes/industrial-capability-independent-authorship-comparison-027.html">研究 027</a></li>
+<li>Boundary: 非成功概率预测；不以国籍/大厂名推断个人创造力。</li>
+</ul>
+<h2 id="_1">适用性限制：这个案例库不是同类员工的随机样本</h2>
+<p class="dc">以下人物因为成功、项目知名度、媒体采访与公开复盘而容易被研究者发现。他们证明某些生产组合 <strong>可能奏效</strong>，不告诉你一般大厂员工中有多少能做到，也不能据此预估个人成功率。</p>
+<p>尤其 Red Hook、The Magic Circle 等公开失败/经济压力案例，同样经过可见性筛选，不能作为全体失败项目的随机对照。读者应将案例当作“风险与行动结构的参照”，而非“这种路径通常有效”的统计证明。</p>
+<p><a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes/blob/main/schemas/creator-visibility-sampling-gate.md">取样与分母审计</a> · <a href="/heroes-portal/book/research-notes/media-selection-survivorship-and-denominator-protocol-028.html">研究 028</a></p>
+<hr />
+<h2 id="1">1. 何时进入</h2>
+<p>在成熟团队里，你可能已经做过可靠的系统、美术、测试或生产管理。准备和合作者做自己的作品时，新的问题是：这些能力要服务什么体验，由谁决定，哪些工作值得长期承担？如果先照原公司的岗位和审批搭一个小版本，作品的题目可能仍没有确定。</p>
+<p>还没有自己想检验的作品主张，可以先看LR-001的身份与问题定义审计；已经有主张，却不清楚怎样组合技能、资金和决策权，再使用这条路线。它检查的是转型中的具体选择，不从职业标签推断个人创造力。</p>
+<h2 id="2">2. 三次拆分</h2>
+<h3 id="_2">职位与能力</h3>
+<p>按实际参与的工作核算：
+- 玩法和引擎实现、测试、游玩数据收集；
+- 视觉、技术美术和动画；
+- 叙事、设计和音频；
+- 制作协调、营销和本地化；
+- 作品判断、此前自主作品及合作经历。</p>
+<p>职位、名校、公司 logo 本身不等于能力证据；同样，退出大厂不意味着应丢掉工程纪律和质量标准。</p>
+<h3 id="_3">作者与控制权</h3>
+<p>在雇佣/融资前弄清：
+- 谁能改变作品的核心主张，或决定停止项目？
+- 共同创始人、投资人、发行商各有哪些知识产权、里程碑、预算与创作否决权？
+- 哪些过去成功的规格和判断能进入新产品，哪些必须重新验证？
+- 如果一个创始人退出，创作成果和股权如何处置？</p>
+<h3 id="_4">能力与项目形状</h3>
+<p>每项制作任务都要说明它给玩家带来什么，不能只列“正规项目应有”。
+先问：
+- 哪些体验必须依靠工业质量才能成立？
+- 哪些美术/工具/流程只需够用？
+- 缺失能力需要共同作者、合同协作者、第三方工具，还是删掉对应功能？
+- 核心玩法循环现在能让陌生玩家实际操作吗？</p>
+<h2 id="3">3. 最小验证实验</h2>
+<p>建议在充分遵守原雇佣合同、IP/保密约束的私人时间内，用 1–3 个核心成员做一个粗糙但完成交互闭环的 playable；让陌生玩家操作，并记录哪里理解、哪里失败、哪些反馈导致产品改变。</p>
+<p>实验长度和材料要随待回答的问题变化，不设统一的两周或四周指标。Red Hook在筹资前制作预告、积累邮件名单，留下了检验作品能否吸引受众的另一类材料；短片与邮件反馈仍不能替代玩家实际操作，也不能仅凭有人关注就确认付费规模。</p>
+<p>同时写一页：
+1. 用户为什么玩、为什么回来；
+2. 一次完整核心 loop 的实现成本；
+3. 从 playable 到最小销售产品还缺哪几项能力；
+4. 项目和 household 各能承受多少 burn；
+5. 停止/转向/加人门槛。</p>
+<h2 id="4">4. 何时升级资源</h2>
+<table>
+<thead>
+<tr>
+<th>Evidence</th>
+<th>推荐动作</th>
+<th>不要自动采取</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>只有理念</td>
+<td>压缩原型、补自发学习与合作者</td>
+<td>先建立完整工作室</td>
+</tr>
+<tr>
+<td>可玩但理解率低</td>
+<td>改 UX / core loop / thesis</td>
+<td>先花钱做电影宣传</td>
+</tr>
+<tr>
+<td>陌生玩家主动复玩</td>
+<td>验证市场与最低内容义务</td>
+<td>直接套 AAA 对标</td>
+</tr>
+<tr>
+<td>证明了受众但执行瓶颈具体</td>
+<td>买缺失美术/QA/发行能力</td>
+<td>按旧职级完整招聘</td>
+</tr>
+<tr>
+<td>有付费信号且权利明确</td>
+<td>核算 permanent burn 后再扩张</td>
+<td>把融资等同 market fit</td>
+</tr>
+</tbody>
+</table>
+<h2 id="5">5. 正反案例各说明什么</h2>
+<p><strong>Mega Crit：工作之外已经有哪些作品和合作者？</strong> Casey Yano与Anthony Giovannetti大学时就一起制作小型游戏。Casey后来在Amazon做QA，Anthony则在受雇软件行业期间写出《Slay the Spire》的设计文档；2017年的访谈还记录，原型先于Anthony辞职全职加入。这段经历让职业能力与自主创作各有可查的前史，不能只用Amazon标签解释作品，也不能把QA直接当作中国游戏制作人的同岗对照。见 <a href="/heroes-portal/cases/CASE-059-slay-the-spire-mega-crit.html">CASE-059及账本E001/E002</a>。</p>
+<p><strong>Supergiant：专业分工之外，还有谁承担成本？</strong> 2009年，创始人离开EA；《Bastion》由七人团队制作，2011年发售。Amir Rao在发售后的制作复盘中讲到自筹资金、低创始人工资，以及没有接受发行商开发款的选择。多年后的回忆又交代，父亲在San Jose的住宅用作办公室，项目失败后还有回去工作的预期。<a href="/heroes-portal/evidence/CASE-061-supergiant-bastion-aaa-to-author-source-ledger.html">CASE-061账本E003、E004、E006</a> 分别承担这些事实。专业经验与同事关系进入了小团队，但不能把场地支持略去，也不能由住宅推出家庭财富或完整补贴金额。七人的分工、自有IP与发行支持共同构成这次制作，不提供一个普遍适用的团队人数。</p>
+<p><strong>Red Hook：补进资金，仍要核算此前和此后的投入。</strong> Chris Bourassa与Tyler Sigman已有职业友谊和多年的创作讨论，2013年开始作出项目承诺。后来的访谈分别谈到团队九个月未领薪、个人储蓄和退休账户、早期借款；Bourassa在2023年回顾时还讲到育儿与房贷责任。<a href="/heroes-portal/evidence/CASE-062-red-hook-darkest-dungeon-veteran-household-risk-source-ledger.html">CASE-062账本E001、E003、E004、E005</a> 支撑这些不同时间的陈述，不能合并成一份已审计的家庭或工作室财务表。Kickstarter筹款属于毛承诺额，不能等同可用现金或总开发成本；借款币种、条款与家庭收入仍未明确。与Supergiant相比，这里能看见另一组筹资和生活责任，也更容易看出“已有专业能力”没有消除现金风险。</p>
+<p><strong>Sandfall：离开成熟分工以后，谁来补工作？</strong> Guillaume Broche在2021年项目早期采访里谈到四年以上Ubisoft经历，与另一位Ubisoft开发者共同创办公司，也谈到小团队失去高度专业分工后，他自己承担角色制作等工作，借助现成工具补足角色与动画流程。这些材料记录了工业经验如何进入另一种制作规模，不足以把整个工作室都算成Ubisoft旧同事。完整个人原型与招募顺序仍需另核。见 <a href="/heroes-portal/cases/CASE-046-sandfall-expedition33.html">CASE-046及账本E001</a>。</p>
+<p><strong>Question：做出了自己的作品，市场仍须另答。</strong> 三位核心创作者把系统、AI和叙事经历带进《The Magic Circle》，Jordan Thomas却在2016年把当时销售称为不可持续。工作室继续制作后作，不等于财务已经恢复；能力与题材相配，仍不足以证明有足够用户购买。见 <a href="/heroes-portal/cases/CASE-048-the-magic-circle.html">CASE-048</a>。</p>
+<p><strong>Limit Theory：技术进展与完整游戏相距多远？</strong> Josh Parnell在2018年取消项目时说，引擎比游戏代码成熟，游戏距离功能完成仍很远。这个差距提示需要分别核对技术成果与交付义务，不能把失败单独归咎于自研引擎。见 <a href="/heroes-portal/cases/CASE-054-limit-theory-fit-trap.html">CASE-054</a>。</p>
+<p><strong>Playdead：作品之后还有共同决定。</strong> Arnt Jensen的作品方向与Dino Patti的组织贡献支持团队完成《LIMBO》《INSIDE》，两位创始人仍发生冲突，Patti在2016年退出。合作补足能力，也留下决定权、股权和退出安排；具体冲突原因与双方责任不能由现有材料裁定。见 <a href="/heroes-portal/cases/CASE-056-playdead-founder-governance.html">CASE-056</a>。</p>
+<h2 id="6">6. “声望保全型变形”的取证边界</h2>
+<p>规模和质量要求本身不能说明创作者为何这样选择。发行商验收、平台规范、受众的最低美术要求、个人审美和跨平台技术，都可能需要较高规格，应先逐项核对这些解释。</p>
+<p>只有采访或项目时间线表明，高规格、过早招聘或过度审批主要服务于维护名校、名企身份，而非上述玩家、合同或技术要求，才可以讨论“声望保全型变形”（Prestige-Preserving Distortion）。材料不足就保留未知，不能从项目大、招聘早或审批多反推心理动机。这里保留的是一个待取证的解释，不是对大厂背景创作者的普遍归类。</p>
+<h2 id="7">7. 失败后还剩什么</h2>
+<p>项目停止后，代码、工具、美术、受众、合作关系、作品信用和独立IP权利，哪些还能保留或用于下一作，需要逐项确认。还要一起记录付出的现金、照护和家务劳动、债务、健康代价，以及失去的市场机会。</p>
+<p>“学到了很多”不能自动抵消净亏损。</p>
+<h2 id="8">8. 最小行动</h2>
+<p>用一页记录团队实际做过什么、作品要检验什么、授权和决定权怎样分配、家庭与项目各消耗多少现金、陌生玩家给了什么反馈，以及什么时候暂停或改变方向。准备增加岗位或高规格内容时，指出它要解决哪项已有外部证据支持的玩家价值问题；尚不清楚，就先保留调整余地，避免把未确定的需求变成长期组织义务。</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / book/life-routes/industrial-capability-authorial-studio-005.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

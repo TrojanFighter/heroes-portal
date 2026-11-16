@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Evidence Ledger — CASE-012 Kenshi / Lo-Fi Games · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl class="on"" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#e001-chris-hunt-interview-on-eight-year-development" class="t2">E001 — Chris Hunt interview on eight-year development</a><a href="#e002-lo-fi-games-official-history-fact-sheet" class="t2">E002 — Lo-Fi Games official history / fact sheet</a><a href="#e006-public-development-altered-work-and-feedback" class="t2">E006 — Public development altered work and feedback</a><a href="#2026-10-09-detail-readback-of-e001e004" class="t2">2026-10-09 detail readback of E001/E004</a><a href="#e003-learning-to-share-control-a-simulated-town-goes-wrong" class="t2">E003 — Learning to share control; a simulated town goes wrong</a><a href="#e004-tgs-2018-working-week-contributors-and-japanese-reception" class="t2">E004 — TGS 2018: working week, contributors and Japanese reception</a><a href="#e005-release-week-account-trust-and-ageing-technology" class="t2">E005 — Release-week account: trust and ageing technology</a><a href="#e007-early-programming-recollection-in-the-2019-ama" class="t2">E007 — Early programming recollection in the 2019 AMA</a><a href="#e008-a-chinese-interview-on-why-a-sequel-was-planned" class="t2">E008 — A Chinese interview on why a sequel was planned</a><a href="#current-evidence-level-conclusions" class="t2">Current evidence-level conclusions</a><a href="#strongly-supported" class="t3">STRONGLY SUPPORTED</a><a href="#unknown" class="t3">UNKNOWN</a></aside><article class="doc"><div class="col"><h1 id="evidence-ledger-case-012-kenshi-lo-fi-games">Evidence Ledger — CASE-012 Kenshi / Lo-Fi Games</h1>
+<ul>
+<li>Case: <code>CASE-012</code></li>
+<li>Status: ACTIVE</li>
+<li>Last updated: 2026-10-11</li>
+</ul>
+<h2 id="e001-chris-hunt-interview-on-eight-year-development">E001 — Chris Hunt interview on eight-year development</h2>
+<ul>
+<li>Class: P1 — direct creator interview</li>
+<li>Source: Siliconera, <code>Kenshi’s Eight Year Development Journey From One-Man RPG To A Team’s Success</code></li>
+<li>Author / organization: Chris Priestman / Siliconera; interviewee Chris Hunt</li>
+<li>Publication date: 2015-08-30</li>
+<li>URL: https://www.siliconera.com/kenshis-eight-year-development-journey-from-one-man-rpg-to-a-teams-success/</li>
+<li>Access date: 2026-10-09</li>
+</ul>
+<p class="dc">Chris Hunt states:
+- he had started Kenshi around eight years earlier;
+- for the first five or six years he worked alone on it full-time while juggling a minimum-wage night security job to survive;
+- much of that time went into fundamental systems and reaching a playable state;
+- after Steam Early Access he could afford additional manpower;
+- before that, alpha sales through his own website already supported himself and freelancers; Steam did not originate all player-funded income;
+- over roughly two years he built a small team including programming, world design, PR/writing and art roles;
+- he states a design preference against the hand-holding of most big RPGs that begin with an already-strong hero (added 2026-10-11);
+- he names the 2015 team individually and calls Sam the team&rsquo;s first programmer (added 2026-10-11).</p>
+<p>Direct quote (short extract, re-read 2026-10-09 and 2026-10-11):</p>
+<blockquote>
+<p>&ldquo;Before we got Greenlit in 2013, I was alpha funding it myself through my own website, which was enough to support myself and hire freelancers.&rdquo;</p>
+</blockquote>
+<ul>
+<li>The rest of that answer is paraphrased here instead of quoted: Steam Early Access then gave him the funding to get a team together and make progress. Full text at the URL above.</li>
+</ul>
+<p>Design intent (short quotation, added 2026-10-11; page re-read directly from the URL above):</p>
+<ul>
+<li>Answering &ldquo;What would you say is the concept at the center of Kenshi?&rdquo;, Hunt rejects a genre convention:</li>
+</ul>
+<blockquote>
+<p>&ldquo;I&rsquo;ve never liked the hand-holding that most of the big RPGs give the player where you&rsquo;ll start off a hero, strong from the very beginning, nothing to fear.&rdquo;</p>
+</blockquote>
+<ul>
+<li>The rest of that answer is paraphrased here instead of quoted: Kenshi starts the player as an ordinary weakling with no special powers and no higher stats, for whom survival itself is a struggle. Full text at the URL above.</li>
+<li>Boundary: this is a design preference about <em>most big RPGs</em> as a matter of genre and scale, not a claim about studios by company size, and not an audited statement about how those games shipped. Keep &ldquo;many big RPGs&rdquo; distinct from &ldquo;big studios&rdquo;.</li>
+</ul>
+<p>Team roster (same interview, same answer as the funding quote above; one short quotation, the rest paraphrased):</p>
+<ul>
+<li>Team as named in 2015: Sam (first programmer), Oli (world designer), Natalie (PR contact and writer), Otto (3D and concept designer), Maykol (second programmer).</li>
+<li>Only the role ordering is quoted: <code>Sam, our first programmer</code>.</li>
+<li>Boundary: &ldquo;first programmer&rdquo; orders roles inside the team as it stood in 2015. It does not establish Sam as the first team member or the first employee.</li>
+<li>This is the 2015 roster (five named people). E004 (2018) names four core members plus two freelancers. Do not merge the two rosters, and do not read either as lifetime headcount.</li>
+</ul>
+<p>Correction note (2026-10-11):
+- A Lane C revision (PR #333, candidate v4) deleted two things because the summary above did not carry them: Hunt&rsquo;s stated dislike of big-RPG hand-holding, and Sam&rsquo;s &ldquo;first programmer&rdquo; role. Both are verbatim in the same interview this record already cites, so the summary was incomplete — not the source.
+- Rule this records: a reader-layer edit that finds no support in a ledger summary has <strong>not</strong> established that the source lacks it. The question goes back to Lane B. Both nodes and their quotes are inline now, so the same deletion cannot happen silently again.</p>
+<p>Correction note (2026-10-09):
+- An earlier summary of this evidence ended at &ldquo;after Steam Early Access he could afford additional manpower&rdquo; and dropped the pre-Steam own-site stage. Reader-layer prose built on that summary then made Steam the first revenue that funded production. The short extract above keeps the pre-Steam stage in the record, and the paraphrased line keeps the second stage, so the order cannot be summarised away again.</p>
+<p>Supports:
+- C002: sustainable recurring income can be more important than a single financing event.
+- C003/C011: the later studio form rests on years of solo foundation.
+- C010: market access is part of production, and it can begin before a platform storefront.</p>
+<h2 id="e002-lo-fi-games-official-history-fact-sheet">E002 — Lo-Fi Games official history / fact sheet</h2>
+<ul>
+<li>Class: P1 — official institutional retrospective</li>
+<li>Source: Lo-Fi Games, <code>Fact Sheet</code></li>
+<li>Author / organization: Lo-Fi Games</li>
+<li>Publication date: UNKNOWN (undated, historical institutional page)</li>
+<li>URL: https://lofigames.com/press/</li>
+<li>Access date: 2026-10-09</li>
+</ul>
+<p>Official history states:
+- Hunt spent his early twenties working as a game programmer;
+- in 2008 he left and worked on Kenshi full-time while doing night security shifts to scrape by;
+- after Steam Greenlight / Early Access in 2013, Kenshi raised enough money to fund a small team.</p>
+<p>Supports:
+- professional programming prehistory;
+- salary cross-subsidy → own-site alpha sales → Steam-funded team expansion sequence (own-site stage established by E001).</p>
+<p>Boundary:
+- does not give exact wages, savings, EA revenue or total budget.</p>
+<h2 id="e006-public-development-altered-work-and-feedback">E006 — Public development altered work and feedback</h2>
+<ul>
+<li>Case ID: CASE-012</li>
+<li>Source class: P1 (past work recollection); P0 (2018 production situation); S1 (reporting)</li>
+<li>Source title: 1人で10年作り続けたRPGが日本で突然ヒット！「Kenshi」クリエイターインタビュー</li>
+<li>Author / organization: 一條貴彰 / Business 4Gamer; interviewee Chris Hunt</li>
+<li>Publication date: 2018-10-02</li>
+<li>URL: https://business.4gamer.net/article/1810/18100201/</li>
+<li>Access date: 2026-10-09</li>
+<li>Verification Status: PARTIAL (interview body read; mediated Japanese testimony)</li>
+</ul>
+<p>Hunt recalls occasionally taking a week away before public release, then being continually busy once public. Long bug lists and thousands of comments could be discouraging; he also found useful causes in angry bug feedback. These are his accounts, not surveyed sentiment or hours. His closing advice that money follows creative conviction is personal counsel, not an established commercial mechanism.</p>
+<p>Conflict/boundary: title says one person for ten years, body says solo for six; introduction mismatches 2019 with TGS 2018; Greenlight/Steam dates compress different stages and conflict with E001. Do not use these as a ten-year solo history or date authority. No names, user counts, revenue, complete technical-stack origin or single-video causation are adopted here.</p>
+<h2 id="2026-10-09-detail-readback-of-e001e004">2026-10-09 detail readback of E001/E004</h2>
+<ul>
+<li>E001: Hunt describes a weak starting character, raids even in town, wound/bleeding consequences, later recruitment and building, and the pressure of keeping publicly sold Early Access builds stable/playable while adding work. These are creator explanations of design and production, not audited player frequencies or all shipped feature states.</li>
+<li>E004: at the interview four core people are named: Hunt design/code; Sam Gin programming; sister Natalie scenario/business; Oli Hatton graphics. Two freelancers handle music/sound and media art. Hunt describes keeping his own salary minimal and experiencing difficult periods. Neither this nor the two-security-day/five-development-day recollection supplies a total income, payroll, cash reserve or annual schedule audit.</li>
+</ul>
+<h2 id="e003-learning-to-share-control-a-simulated-town-goes-wrong">E003 — Learning to share control; a simulated town goes wrong</h2>
+<ul>
+<li>Case ID: CASE-012</li>
+<li>Source class: P1 (team recollection); P0 (ongoing development account)</li>
+<li>Source title: Behind the Scenes With the Developers of Kenshi</li>
+<li>Author / organization: ESpalding / GameSkinny; interviewee Chris Hunt</li>
+<li>Publication date: 2017-03-14</li>
+<li>URL: https://www.gameskinny.com/culture/behind-the-scenes-with-the-developers-of-kenshi/</li>
+<li>Access date: 2026-10-09</li>
+<li>Verification Status: PARTIAL (interview body read; creator claims not independently audited)</li>
+</ul>
+<p>Hunt recalls initially struggling to delegate to programmer Sam. His example of a mercenary entering a house instead of a bar shows a bug escalating through residents, guards and allies; this is a developer&rsquo;s illustration, not an independently witnessed event. Five-person studio wording applies to this interview only. His account of player reactions is not a representative survey. Release expectations here are forecasts.</p>
+<h2 id="e004-tgs-2018-working-week-contributors-and-japanese-reception">E004 — TGS 2018: working week, contributors and Japanese reception</h2>
+<ul>
+<li>Case ID: CASE-012</li>
+<li>Source class: P1 (past work); P0 (current team and choices); S1 (reporting)</li>
+<li>Source title: ［TGS 2018］ついに正式リリースが目前に迫った「Kenshi」。そのデザイナーへ足掛け10年以上に渡る開発の日々を聞いた</li>
+<li>Author / organization: 徳岡正肇 / 4Gamer; interviewee Chris Hunt</li>
+<li>Publication date: 2018-09-26</li>
+<li>URL: https://www.4gamer.net/games/339/G033926/20180926049/</li>
+<li>Access date: 2026-10-09</li>
+<li>Verification Status: PARTIAL (Japanese interview body read; mediated testimony)</li>
+</ul>
+<p>Hunt recalls two nights of security work and five development days per week during the first six years. The interview identifies four core members plus two freelancers, not six total credited contributors. He learned of Japanese growth through sales, watched a Japanese cannibal-escape video, and commissioned company translation after earlier fan work. No single video is proved to cause the increase. His phrase about accumulated development work is not cash savings. Refusal of subcontract work and publisher finance describes the interview period. Influences include Fallout, XCOM and Japanese film/culture; the setting is not historical Japan.</p>
+<h2 id="e005-release-week-account-trust-and-ageing-technology">E005 — Release-week account: trust and ageing technology</h2>
+<ul>
+<li>Case ID: CASE-012</li>
+<li>Source class: P1 (development recollection); P0 (release-period intentions); S1 (reporting)</li>
+<li>Source title: How Kenshi survived Steam Greenlight and over a decade in development</li>
+<li>Author / organization: Natalie Clayton / PC Games Insider; interviewee Chris Hunt</li>
+<li>Publication date: 2018-12-06</li>
+<li>URL: https://www.pcgamesinsider.biz/indie-interview/68200/surviving-steam-greenlight-and-decade-of-development-with-lo-fi-games-chris-hunt/</li>
+<li>Access date: 2026-10-09</li>
+<li>Verification Status: PARTIAL (body read; date inconsistency retained)</li>
+</ul>
+<p>Hunt describes distrust during update gaps and after other Early Access abandonments, and recalls repeated engine upgrades/workarounds, with further improvement requiring major rewriting. Reporter places Greenlight in 2012 in the opening and 2013 later; exact approval date remains unresolved, and neither wording establishes the EA release date. Do not treat steady updates as proof of inevitable completion or general commercial causality.</p>
+<h2 id="e007-early-programming-recollection-in-the-2019-ama">E007 — Early programming recollection in the 2019 AMA</h2>
+<ul>
+<li>Case ID: CASE-012</li>
+<li>Source class: P1 (Hunt&rsquo;s recollection, not the surrounding community questions)</li>
+<li>Source title: My name&rsquo;s Chris Hunt, game developer behind Kenshi and founder of Lo-Fi Games. I spent 12 years creating my dream game, ask me anything!</li>
+<li>Author / organization: Chris Hunt, account Captain_Deathbeard / Reddit r/IAmA</li>
+<li>Publication date: 2019-08-08</li>
+<li>URL: https://www.reddit.com/r/IAmA/comments/cnmwen/comment/ewcgr1j/</li>
+<li>Access date: 2026-10-09</li>
+<li>Verification Status: PARTIAL (original answer read; retrospective account, no independent education record)</li>
+</ul>
+<p>In his reply to Intrexa, Hunt rejects identification with another person of the same name. He recalls not figuring out how to make games until about eighteen, despite already being able to program; displaying graphics had been the obstacle. The age refers to figuring out game-making, not a separately established date for learning graphics. No first game, school, degree or employment history is identified. Do not adopt the questioner&rsquo;s college/friendship story as Hunt&rsquo;s biography.</p>
+<p>Identity/event cross-check: the thread identifies Hunt and links the Lo-Fi account&rsquo;s proof post, which could not be opened in this read. The institutional Japanese channel&rsquo;s 2019-08-13 translation independently identifies Hunt and Natalie as participants in the August 8 Reddit AMA: https://kenshi-jp.hatenablog.com/entry/ar1799350 (title: 「Kenshi」クリス・ハントQ&amp;A：パート１　「Kenshi２ではビークシングが2倍になる」！？; author/organization Kenshi_JP; accessed 2026-10-09). This corroborates the event, not the age recollection. No global promotion of the AMA&rsquo;s engine, sales or sequel claims is made.</p>
+<h2 id="e008-a-chinese-interview-on-why-a-sequel-was-planned">E008 — A Chinese interview on why a sequel was planned</h2>
+<ul>
+<li>Case ID: CASE-012</li>
+<li>Source class: P0 (2019 plans attributed to Hunt); S1 (interview framing); mediated Chinese publication</li>
+<li>Source title: 游研社专访Kenshi制作人：会做到第三代，再去想别的事</li>
+<li>Author / organization: 游研社 (individual interviewer not identified in the accessible copy) / its Sohu publication</li>
+<li>Publication date: 2019-12-16</li>
+<li>URL: https://www.sohu.com/a/360833121_628730</li>
+<li>Access date: 2026-10-09</li>
+<li>Verification Status: PARTIAL (published Chinese Q&amp;A read; original spoken language/recording unavailable)</li>
+</ul>
+<p>In the WePlay Q&amp;A, Hunt explains the planned sequel by the need for a new engine and environment, which patches or DLC could not deliver to his satisfaction. He describes more staff and funding and estimates release within two years. These are reported 2019 intentions and a forecast, not a verified subsequent delivery, audited finances or proof that every defect came from the engine. Introductory dates, solo-duration claims, team totals and universal claims about games are not adopted. The accessible copy credits 游研社; no additional Sohu repost is counted as independent corroboration.</p>
+<h2 id="current-evidence-level-conclusions">Current evidence-level conclusions</h2>
+<h3 id="strongly-supported">STRONGLY SUPPORTED</h3>
+<ul>
+<li>long solo phase existed but did not cover the whole production history.</li>
+<li>minimum-wage night work supported the long early runway.</li>
+<li>Early Access income enabled team expansion.</li>
+<li>professional programming experience predated Kenshi.</li>
+</ul>
+<h3 id="unknown">UNKNOWN</h3>
+<ul>
+<li>exact personal burn / savings;</li>
+<li>full contributor map and outsourcing;</li>
+<li>annual sales and headcount trajectory;</li>
+<li>exact causal role of Steam Greenlight versus prior distribution; pre-Steam own-site alpha revenue is established by E001, amounts and exact dates are not.</li>
+</ul><div class="crumbs"><a href="/heroes-portal/">书阁</a> / evidence/CASE-012-kenshi-source-ledger.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

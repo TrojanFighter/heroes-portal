@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bills Must Be Paid：七个月爆款之前，是七年和一百个原型 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl class="on"" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#_1" class="t2">第一款失败之后，还在继续制作</a><a href="#_2" class="t2">合同原型支付生活，也带来一种工作习惯</a><a href="#2023" class="t2">2023年底，一段发行商关系结束</a><a href="#2026-1" class="t2">到 2026 年 1 月，他们并不是现金充裕后从容立项</a><a href="#demo" class="t2">愿望单约两百时，正式版还是demo</a><a href="#demo_1" class="t2">demo带回玩家，也带回制作问题</a><a href="#_3" class="t2">“没有发行商”不等于“没有营销系统”</a><a href="#_4" class="t2">中国给了他们一段几乎无法复制的右尾事件</a><a href="#61000-wishlist-next-fest" class="t2">61,000 wishlist 也不是从 Next Fest 一次长出来的</a><a href="#72" class="t2">所以 72 小时十万份，并不是故事的起点</a><a href="#_5" class="t2">七个月包含了什么</a><a href="#_6" class="t2">什么可以学</a><a href="#_7" class="t3">可迁移</a><a href="#_8" class="t3">不可直接复制</a><a href="#_9" class="t2">仍待核验</a><a href="#2026-surface" class="t2">时效性｜这是 2026 近时样本，但平台 surface 仍会快速过期</a><a href="#_10" class="t2">研究依据</a></aside><article class="doc lit"><div class="col"><h1 id="bills-must-be-paid">Bills Must Be Paid：七个月爆款之前，是七年和一百个原型</h1><img class="docfig" src="/heroes-portal/assets/pf-bills-must-be-paid.webp" alt="">
+<p>© 2026 洪荒行者。All Rights Reserved.</p>
+<p class="dc">Steam 页面上线约三周，《Bills Must Be Paid》只有大约200个愿望单。Roxy 和 Mike 在公开帖子里讨论，要不要四月就发售，还是等到六月 Next Fest。他们担心增量游戏正在迅速变热，等得太久可能错过机会。</p>
+<p>这是2026年成功发生前留下的记录。后来，Rike Games 没有按考虑中的四月计划发正式版，而是把已打磨的部分做成demo。七月发售后，团队宣布不到72小时售出十万份以上；当时还在犹豫的发售选择，才被后来的结果照亮。</p>
+<p>这两位共同生活、共同创业的开发者，已经从2019年做到了2026年。理解他们为什么既能迅速做出游戏，又需要重新学习怎样发售，要从此前的移动端与网页游戏工作说起。</p>
+<hr />
+<h2 id="_1">第一款失败之后，还在继续制作</h2>
+<p>官方press kit记录，Roxy 主要负责美术，Mike 主要负责程序与技术，两人也跨职能参与开发。按他们2026年的回顾，2019年第一款简单移动游戏做了约三个月，商业上失败；之后继续做游戏，到《Bills Must Be Paid》时累计约一百个原型或游戏。</p>
+<p>这个混合口径不能换成一百款完整商业成品，却足以提醒读者：七个月描述的是最后这个项目的制作窗口。短周期试做、交付和重来，已经发生过多年；两人配合制作的经验，也在这段前史里积累。核心两人之外的音乐、音效、翻译、QA与素材贡献尚未完整核清，不能据小工作室人数推出全部劳动都由两人完成。</p>
+<hr />
+<h2 id="_2">合同原型支付生活，也带来一种工作习惯</h2>
+<p>他们说，约四年的生活依赖移动发行商合同付款。常见节奏是一个月做一到两个简单原型，快速搭出玩法，再按早期指标决定继续、修改或淘汰。四年是团队回顾的合同工作年数，具体收入和是否连续全职并未核清。</p>
+<p>反复做可测试的版本，训练了实现核心动作、控制范围以及美术与程序配合的能力。与此同时，付款依赖与尽早看指标的工作方式也被带了下来。团队一直想摆脱对发行商付款的依赖；后来进入Steam时，这套熟悉的方法既提供了制作经验，也影响了他们对发售时机的判断。</p>
+<hr />
+<h2 id="2023">2023年底，一段发行商关系结束</h2>
+<p>据团队回顾，2023年底一位合作发行商终止了关系。此前的合同收入不能再按原方式维持，他们把过去失败或没走远的原型重新整理，自行在移动端发行，通过广告和内购变现，也投向 CrazyGames、Poki、GameDistribution、Yandex 等浏览器平台。</p>
+<p>《No Pain No Gain》后来在网页与移动端积累了较大规模。官方press kit把它明确称作通往Steam的桥梁：团队先移植已有作品学习平台，再制作首款premium Steam游戏《Bills Must Be Paid》。平台学习因此已有一段单独经历，并非全部压在新作的发售上。</p>
+<p>这些旧作收入具体是多少，尚未形成账本。团队自己说，所得仍只是勉强支持继续制作；传播规模不能直接换成现金储备。</p>
+<hr />
+<h2 id="2026-1">到 2026 年 1 月，他们并不是现金充裕后从容立项</h2>
+<p>团队自己的说法是：当时只剩“几个月 runway”。</p>
+<p>这是成功后的现金窗口回顾，不能据此算出家庭储蓄或每月支出。两人仍需让下一款作品承担新的收入机会，但没有证据保证他们当时能预知结果。</p>
+<p>他们回忆，经过长时间构思、放弃多个方案后，才选中砸存钱罐得到钱的核心动作。先做很小的原型，从一开始就打磨这个动作的反馈，再逐步考虑体力、账单、技能树、破产、重置，以及不同锤子与存钱罐等扩展。</p>
+<p>制作资源首先集中在容易感知、试玩和展示的动作上。这样安排范围有助于解释两人怎样组织这次制作，却不能从后来的销量推出“简单增量游戏”本身就是充分的成功条件。</p>
+<hr />
+<h2 id="demo">愿望单约两百时，正式版还是demo</h2>
+<p>早期帖子里，两人认为demo已接近完成，正式版也可能再用一个月做完。他们熟悉移动端快速制作、测试和发布的节奏，担心等待节庆会错过品类热度。这些是当时的判断，尚没有后来的销量可以参照。</p>
+<p>最后，原来考虑四月发布的正式版改成了公开demo。团队在后来的复盘里认为，沿用早期指标淘汰或快速正式发售的办法，可能浪费掉这款作品。这个反事实属于成功后的解释；能直接核对的行动是，他们确实调整了发布内容与时间，把后续制作留给试玩反馈。</p>
+<hr />
+<h2 id="demo_1">demo带回玩家，也带回制作问题</h2>
+<p>四月下旬demo上线后，团队记录它意外进入 Steam Trending Free，同时在线玩家一度约340人；当时他们无法识别清楚的外部触发原因，不能把曝光写成某个动作必然换来的奖励。</p>
+<p>公开试玩随后让bug、平衡讨论和玩家反馈进入 Discord 与 Steam 讨论区，正式版也据此继续改变。创作者拿到了能直接玩的版本，玩家有了免费体验与加入愿望单的入口。同一个demo同时承担测试、社区交流与市场展示，市场接入由此参与了后续制作。</p>
+<hr />
+<h2 id="_3">“没有发行商”不等于“没有营销系统”</h2>
+<p>Roxy和Mike自己承担了这次发售的市场工作。按他们的复盘，Steam页面在2026年2月14日上线，首日只有11个愿望单，到4月20日累计528个。页面先存在，关注却没有自动长成规模。</p>
+<p>demo做好以后，他们在Reddit发布，把试玩版分发到itch.io、CrazyGames和Armor Games。Next Fest前，团队累计联系近一千位内容创作者，也联络媒体、制作预告片，借Steam新闻、Discord和发售日公告继续接触玩家。有人没有回复联络却发布了视频，有人自行发现作品或收到观众推荐；这份工作记录不能换成“联系一千人带来多少愿望单”的采购账。</p>
+<p>团队还报告了一次约200美元的Reddit广告测试，UTM追踪只记录到19个愿望单，没有明显的持续抬升。就这次追踪结果看，付费测试表现弱；未被追踪的效果不能据此全部排除，也不能推成Steam游戏普遍不该买广告。</p>
+<p>后来愿望单加速增长时，demo、创作者、中国自然传播、媒体报道和Steam曝光都在场，发售日期公布后的日历与即将推出页面曝光也与增长同时出现。各渠道的份额尚不能分清，但团队确实做了让作品可见、可玩、可讨论的工作。<strong>没有发行商，并没有省掉这些工作。</strong></p>
+<hr />
+<h2 id="_4">中国给了他们一段几乎无法复制的右尾事件</h2>
+<p>团队的复盘记下了中国关注的几个节点。早期，一位Bilibili创作者自行发现预告片，带来一次仍然不大的愿望单增长；demo随后得到更多关注。正式发售以前，作品被反编译、重传，盗版事件又成为新闻，后续创作者内容带来了新的增长波峰。</p>
+<p>这个过程包含团队不能安排的事：谁会发现作品，盗版是否发生，媒体是否报道，下一位创作者是否跟进。具体哪一次传播带来多少新增关注仍不清楚，不能把连续出现的波峰整理成一份可重复执行的营销计划。</p>
+<p>两人已经做出的页面、预告片和可玩demo，则让偶然发现有东西可以接触，也让关注能够继续进入试玩与交流。作者把这段经历称作<strong>准备好了以后撞上的右尾放大</strong>：准备工作有实际价值，异常强烈的扩散却不能作为下一次发售的预期收入或曝光。</p>
+<hr />
+<h2 id="61000-wishlist-next-fest">61,000 wishlist 也不是从 Next Fest 一次长出来的</h2>
+<p>进入2026年六月Next Fest时，团队报告已有15,623个愿望单，活动期间又增加约7,000个，包括相关报道带来的关注。这段增量重要，却不是整条传播路径的起点，也不能全部单独归给节庆。</p>
+<p>他们另一款游戏参加当年二月Next Fest时，已有约800个愿望单，最后只增加约173个。同一团队的两次结果提示，<strong>Next Fest不是固定倍率机器</strong>。作品、demo、已有受众与外部传播条件都需要放回比较；这仍不是能把各因素权重分开的对照实验。</p>
+<p>发售前七天，团队在Steam托管的开发者公告中宣布愿望单超过40,000；发售日复盘报告超过61,000。这些仍是开发者披露，不能直接换算成销量，却已留下发布之前持续积累关注的记录。七月的发售接在这段过程之后，不能从首日销量才开始讲它怎样被看见。</p>
+<hr />
+<h2 id="72">所以 72 小时十万份，并不是故事的起点</h2>
+<p>2026 年 7 月 29 日，《Bills Must Be Paid》正式发售。</p>
+<p>定价 6.99 美元，首发折扣 30%。</p>
+<p>8 月 1 日，开发者在 Steam 上宣布：</p>
+<blockquote>
+<p>100k+ copies sold in less than 72h。</p>
+</blockquote>
+<p>他们在 Reddit 的更精确自报是：67 小时，101,079 copies。</p>
+<p>这个数字目前仍然是第一方销售披露，不是 Valve 财报，所以不应该被进一步换算成某个“准确净收入”。</p>
+<p>SteamDB 后续几千条评论提供了量级上的旁证，却不能验证精确销量或净利润。销售成为这段生产史里的新收入来源，能支持未来多久，仍要看退款、税费、区域定价、平台分成与持续销售，不能只用十万份里程碑作答。</p>
+<hr />
+<h2 id="_5">七个月包含了什么</h2>
+<p>Roxy 和 Mike 在成功复盘中强调继续做下去。放回他们的具体经历，这句话包含了多次工作方式的改变：合同原型的制作经验，旧项目的再发行，用前作学习Steam，以及在低愿望单阶段改变正式发售计划。</p>
+<p>这些行动让失败留下可继续使用的经验和渠道，也说明旧经验需要重新检验。移动端练出的快速制作能力仍然有用，快速发布或按早期指标淘汰的判断则未必适合这次Steam项目。</p>
+<p>七个月的作品由这样的七年前史支撑，又遇上团队无法控制的传播放大。它描述了一条已经发生的路径；没有失败团队的总体分母，也没有各渠道的独立因果账本，不能从中算出坚持多久就会成功。</p>
+<hr />
+<h2 id="_6">什么可以学</h2>
+<h3 id="_7">可迁移</h3>
+<ul>
+<li><strong>不要拿正式立项日当能力起点。</strong> 短开发周期可能建立在很长的失败前史上。</li>
+<li><strong>失败项目应该留下资产。</strong> 代码、工具、平台知识、产品判断、发行经验都算。</li>
+<li><strong>高风险平台首作之前，可以先做一个低风险 platform-learning project。</strong></li>
+<li><strong>一个公开、可试玩、容易被传播的 artifact 会制造被偶然发现的接口。</strong></li>
+<li><strong>Demo 可以同时服务产品与市场。</strong></li>
+<li><strong>发现世界模型不对时，要改 launch plan，而不是维护计划的面子。</strong></li>
+<li><strong>“无 publisher”与“无 market-access work”是两回事。</strong></li>
+</ul>
+<h3 id="_8">不可直接复制</h3>
+<ul>
+<li>七年 tacit knowledge；</li>
+<li>夫妻共同创业结构；</li>
+<li>四年 mobile publisher 高频训练；</li>
+<li>约百个 prototype 的累计失败资本；</li>
+<li>中国 creator / piracy-news 事件；</li>
+<li>Steam Trending Free 与最终 platform exposure；</li>
+<li>2026 incremental market 窗口；</li>
+<li>团队自述的极端工作强度。</li>
+</ul>
+<p>最后一条尤其不应该被美化。</p>
+<p>“几乎所有清醒时间都在工作”只是他们的自述，不是经过验证的成功必要条件，更不应该被转成别人的健康建议。</p>
+<hr />
+<h2 id="_9">仍待核验</h2>
+<p>目前我们还不知道：</p>
+<ul>
+<li>publisher 合同到底来自哪些公司、付了多少钱；</li>
+<li>household burn 和储蓄；</li>
+<li><code>No Pain No Gain</code> 真正赚了多少；</li>
+<li>music / SFX / localization / QA / asset / contractor 的完整 contributor boundary；</li>
+<li>61k wishlist 最终怎样转换成 day-1 / week-1 sales；</li>
+<li>China、creator、Steam、Next Fest 各自到底贡献多少；</li>
+<li>100k milestone 之后的 lifetime sales / profit。</li>
+</ul>
+<p>这些没有证据之前，不应该因为故事已经很好听就自动补齐。</p>
+<hr />
+<h2 id="2026-surface">时效性｜这是 2026 近时样本，但平台 surface 仍会快速过期</h2>
+<ul>
+<li><strong>Observed:</strong> 2019–2026 能力形成；核心 Steam launch path 发生于 2026。</li>
+<li><strong>2026 status:</strong> <code>CURRENT — Verified 2026-10</code> for 已登记 demo / creator / Steam / browser chronology；具体算法和 surface 效果仍是 <code>CONDITIONAL</code>。</li>
+<li><strong>不要照抄：</strong> 某个 Trending / Next Fest / creator 数量公式。</li>
+<li><strong>今天真正保留：</strong> 允许外部信号修正 launch plan；不要把 mobile KPI 世界模型机械迁移到 premium Steam。</li>
+</ul>
+<p>完整规则：<a href="/heroes-portal/book/TEMPORAL-VALIDITY.html">Temporal Validity Gate</a>。</p>
+<hr />
+<h2 id="_10">研究依据</h2>
+<p>本文只使用仓库中已登记的 CASE-025 证据边界：</p>
+<ul>
+<li><strong>E001 — Rike Games official press kit</strong>：两人团队、2019 起步、mobile/web 前史、<code>No Pain No Gain</code> 作为 Steam bridge；</li>
+<li><strong>E002 — developer 100k postmortem</strong>：约百个 prototype、四年 publisher work、runway、七个月项目与销售自报；</li>
+<li><strong>E003 — 61k wishlist postmortem</strong>：完整 pre-launch market funnel；</li>
+<li><strong>E004 — 成功前的 200 wishlist 帖</strong>：保留团队当时真实的 mobile-to-Steam world model；</li>
+<li><strong>E005 — Steam developer news</strong>：demo / launch / wishlist / 100k milestone 时间线；</li>
+<li><strong>E006–E008</strong>：SteamDB、browser distribution 与后续 mobile-publishing retrospective 的交叉补充。</li>
+</ul>
+<p>完整来源、证据等级与 UNKNOWN 项见 <a href="/heroes-portal/evidence/CASE-025-bills-must-be-paid-source-ledger.html"><code>CASE-025 Evidence Ledger</code></a>。</p>
+<ul>
+<li>研究档案：<a href="/heroes-portal/cases/CASE-025-bills-must-be-paid.html">CASE-025</a></li>
+</ul><div class="crumbs"><a href="/heroes-portal/">书阁</a> / book/profiles/bills-must-be-paid.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

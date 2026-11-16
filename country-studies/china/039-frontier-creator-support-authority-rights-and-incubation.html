@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>039 — 旧导师不懂新范式以后：创作者的知识主权、资源扶持和组织权利 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl class="on"" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0" class="t2">0. 新的逻辑层：失效的可能不是上一代的善意，而是知识权限配置</a><a href="#1" class="t2">1. 导师的四种能力必须分开</a><a href="#2" class="t2">2. 国际制度比较：从“给自由”推进到真实可查的合同与权益</a><a href="#int-01supercell-2026" class="t3">INT-01｜Supercell 2026：创意团队自治 + 预算约束 + 成功分享</a><a href="#int-02supercell-sparkgame-jam" class="t3">INT-02｜Supercell Spark：Game Jam不是交“高完成度作品集”</a><a href="#int-03roblox-2026" class="t3">INT-03｜Roblox 2026：门槛低，但正式支持既非无成本也非所有人可得</a><a href="#int-04kowloon-nights" class="t3">INT-04｜Kowloon Nights：资助方不教你玩法，合同写明不越权</a><a href="#int-05indie-fund" class="t3">INT-05｜Indie Fund：独立权利不等于无条件赠款</a><a href="#int-06pubg" class="t3">INT-06｜韩国PUBG：发现外来玩家知识，但资方也需要独立的产品判断</a><a href="#3" class="t2">3. 中国反例与实际制度供给：比空谈“全中国都不行”更有研究价值</a><a href="#cn-012011" class="t3">CN-01｜上海交通大学—米哈游（2011）：“学校不一定天然不支持自发作品”</a><a href="#cn-02gamera" class="t3">CN-02｜Gamera × 柚子猫《戴森球计划》：先看到原作者原型，再做发行</a><a href="#cn-03gamera2021" class="t3">CN-03｜Gamera“叶绿素计划”（2021）：“资源”有可衡量的制度安排</a><a href="#cn-042026" class="t3">CN-04｜2026最新企业表态：有转型意愿，不等于达成目标</a><a href="#4" class="t2">4. 教育上的对应制度：成年人不必预知新游戏，但能提供学习土壤</a><a href="#5" class="t2">5. 六种权利：今后比较学校、平台、投资/发行机构的标准审计</a><a href="#6" class="t2">6. 组织挑选新范式作者，也有自己的过拟合风险</a><a href="#7" class="t2">7. 下一轮真实统计：把“识别”和“支持”拆成两张数据表</a><a href="#8" class="t2">8. 新的全书命题</a><a href="#9-2026-10-10" class="t2">9. 作者命题的进一步收紧：识别天才不等于有能力教他；学校与私企的退出机制不同（2026-10-10）</a><a href="#91" class="t3">9.1 三种“教不了”不能混同</a><a href="#92" class="t3">9.2 “最多给点资源”可以是积极制度，但必须防止越权</a><a href="#93" class="t3">9.3 为什么作者认为竞争性私企相对学校没那么保守</a><a href="#94" class="t3">9.4 实证上的三个反事实</a></aside><article class="doc"><div class="col"><h1 id="039">039 — 旧导师不懂新范式以后：创作者的知识主权、资源扶持和组织权利</h1>
+<ul>
+<li><strong>Status:</strong> CROSS-NATIONAL SOURCE-LED CASE COMPARISON / AUTHOR-ORIGIN HYPOTHESIS / PRACTICE-VERIFIED, CAUSAL PREVALENCE UNKNOWN（2026-10-10）。</li>
+<li><strong>Scope:</strong> 《独立游戏英雄传说》的中外游戏作者形成、行业实践教育、学校与企业孵化、权利治理。只服务本项目，不涉及其他游戏工程。</li>
+<li><strong>Research parents:</strong> <a href="/heroes-portal/country-studies/china/037-family-school-agency-risk-hero-nondeparture.html">037家校控制与英雄尚未出发</a>；<a href="/heroes-portal/country-studies/china/038-education-maker-funnel-empirical-measurement-ceps-pisa-ggj.html">038创造测试/知识饮食/Game Jam履历化</a>；<a href="/heroes-portal/country-studies/china/032-exam-overfit-routine-expertise-open-domain-transfer.html">中国教育032</a>；<a href="/heroes-portal/book/BOOK-ARCHITECTURE.html">Book Architecture</a>。</li>
+<li><strong>Author correction:</strong> “识别出原创年轻人，又能由谁培养？上一代可能自己不会新范式。竞争中的私企比学校更容易承认边界并支持新作者。”本篇将此观点拆成<strong>导师能教什么、知识能否由谁裁决、资金与创意权怎样分配、制度能否转移未来作品的试错权</strong>四个可核问题，而不是从少数企业宣传直接推断全国学校/企业的固定优劣。</li>
+<li><strong>Source levels:</strong> 公司自述与项目/制度条款=一手<strong>主张和设计事实</strong>，并不自动证明内部执行和长期结果；2017同期人物采访及2011学校新闻=接近同期事件；2026行业采访=当前政策方向，效果须另验。数据基数/总体人才产出率均未获得同口径对照。</li>
+</ul>
+<h2 id="0">0. 新的逻辑层：失效的可能不是上一代的善意，而是知识权限配置</h2>
+<p class="dc">以前讨论青年作者时往往默认导师=上位者=创作知识持有人。这个模型在新玩法、新媒介/工具和自发玩家社群快速成长时可能失效：</p>
+<ul>
+<li><strong>领域前沿知识</strong>：一名青少年MOD/Roblox/UGC作者已试过多种真实玩法，上一代资深手游/院校教师未必知道这条新路径；</li>
+<li><strong>可迁移的通用能力</strong>：资深工程、数学、艺术、财务、市场/用户研究者仍可能教得更好，不应把“不会一种新品类”推成“什么也教不了”；</li>
+<li><strong>治理权</strong>：谁出钱、招生或持有行政职务，未必就是最有资格决定核心玩法的人；</li>
+<li><strong>实验权</strong>：市场上出现新东西，不要求资助方事前预测其所有规则，只要求能让创作者在成本边界内产生可靠信号。</li>
+</ul>
+<p>本篇的核心研究词：<strong>FRONTIER-KNOWLEDGE ASYMMETRY / 前沿知识不对称</strong>、<strong>AUTHORITY–EXPERTISE MISALIGNMENT / 权威与实务知识错配</strong>、<strong>RESOURCE WITHOUT DOMAIN OVERRULE / 资源扶持但不越权裁定产品方向</strong>。</p>
+<p>不能把它写成“年轻人天然懂创新、老年人天然不懂”。决定知识位置的是<strong>实际领域经验、材料摄入、测试与反馈</strong>，而不是出生年代。</p>
+<h2 id="1">1. 导师的四种能力必须分开</h2>
+<table>
+<thead>
+<tr>
+<th>角色</th>
+<th>可以有效提供什么</th>
+<th>没有相关实务时不应自动拥有</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>旧赛道成功制作人</strong></td>
+<td>大规模工程、稳定运营、成熟类型商业化、组织过程</td>
+<td>从零发现陌生新品类/玩家需求的最终解释权</td>
+</tr>
+<tr>
+<td><strong>专业教师/技术导师</strong></td>
+<td>基础技能、数学、工程、美术、调查方法、信息检索、项目分解</td>
+<td>学生个人兴趣、产品题目、真实玩家品味的当然裁判权</td>
+</tr>
+<tr>
+<td><strong>同代/跨代前沿实践者</strong></td>
+<td>MOD、新技术、特定玩法的真实反馈、失败案例与社区语法</td>
+<td>对资金、合同、团队安全及全部伦理权利的无条件支配</td>
+</tr>
+<tr>
+<td><strong>资金/发行/平台支持者</strong></td>
+<td>现金、分发、托管、法律、招聘、数据、可逆试错环境</td>
+<td>因出钱便默认获得全部产品决策权、IP、续作、品牌权</td>
+</tr>
+</tbody>
+</table>
+<p>最好的制度并不取消成年人或教师，而是由<strong>证据、能力和明确授权</strong>决定何人可以在哪一件事上拥有决定权。年龄与学历既不能自动授予权威，也不能自动否定能力。</p>
+<h2 id="2">2. 国际制度比较：从“给自由”推进到真实可查的合同与权益</h2>
+<h3 id="int-01supercell-2026">INT-01｜Supercell 2026：创意团队自治 + 预算约束 + 成功分享</h3>
+<p><a href="https://supercell.com/en/news/the-best-games-havent-been-made-yet/">2026-02-10 CEO 原始报告</a>公开承认：公司先前虽招募创业型团队并给予独立性，<strong>仍未真正具备创业组织应有条件</strong>。改革点包括：
+- 新游戏与成熟运营拆为不同领导和组织；2025年新游戏投入较2024年翻倍，2026计划再大致翻倍（公司自报，非审计效果）。
+- <strong>批准团队而非批准预设游戏概念</strong>；团队拥有创意选择和玩法试验权，同时承担有真实现金约束的项目预算，而不是无限延期和无限人力。
+- 成功项目团队按游戏利润享有经济上行分成，公司承担发行、玩家触达、运营、法务、人力等后台工作。<strong>利润分成不等于已明确的独立法律IP权；不得将官方“own the game”直接译成版权全部属团队。</strong>
+- <a href="https://supercell.com/en/new-games/">官方New Games介绍</a>明确表示没有创意委员会、不预设游戏类型/平台/形式。</p>
+<p><strong>最强失败反例</strong>：上述CEO报告详细复盘<strong>Squad Busters</strong>：2023年第二轮封闭测试14万+玩家、D7留存38%；发行前大力推广，最终获得4,000万预注册、首年7,500万下载、收入超过1亿美元，却因实际长期留存和预期不符决定关闭。公司指出只验证短期D7、soft launch仅一个月、未充分测试长期meta。这说明<strong>团队自治不是豁免玩家验证</strong>，强执行和强发行能力反而可能掩盖产品真实性问题。</p>
+<h3 id="int-02supercell-sparkgame-jam">INT-02｜Supercell Spark：Game Jam不是交“高完成度作品集”</h3>
+<p><a href="https://spark.supercell.com/">官方Spark说明</a>提供<strong>16周</strong>的团队孵化实践，独立/未组队个人与已有团队均可进入；<a href="https://supercell.com/en/news/forever-game/">2025公司解释</a>强调用Jam和快速原型<strong>检验共同工作方式、团队能力</strong>，获批的是团队，Jam阶段的原型并非预先立项的商业产品。</p>
+<p><strong>对应此前038的“Jam履历化”</strong>：同样是限时创作，若目标是识别<strong>能否共同发现和迭代开放问题</strong>，不同于培训机构以“有参赛证书/作品集外观”作为主要成果。不过Spark也是高选择性精英筛选；并不能从个别受选团队推断普及教育效果，或从其存在证明一般学校都应变成职业孵化器。</p>
+<h3 id="int-03roblox-2026">INT-03｜Roblox 2026：门槛低，但正式支持既非无成本也非所有人可得</h3>
+<p><a href="https://about.roblox.com/newsroom/2026/03/roblox-announces-incubator-jumpstart-creator-programs">Roblox 2026-03-09公告</a>：
+- <strong>Incubator</strong>：6个月，有里程碑的团队项目，每期最多40支小型有经验团队；
+- <strong>Jumpstart</strong>：滚动接收新/外部创作者，提供专家、推广和运营支持；<a href="https://create.roblox.com/docs/creator-programs/jumpstart">官方FAQ</a>明确主要为<strong>非现金支持</strong>，不是工资或传统出版合同，并要求至少一位团队成员满18岁。
+- 技术与平台生态支持普通人<strong>无需先完成专业学历</strong>就尝试做作品，<strong>不等于</strong>平台给所有青少年提供生计保障，也不等于不存在算法/分成/平台依赖风险。</p>
+<p>该平台同时允许制度化筛选：谁能拿更多曝光与支持仍有企业标准。应区分<code>PERMISSIONLESS ENTRY</code>（初始制作进入机会）和<code>SELECTIVE SCALING SUPPORT</code>（被选入平台扶持），不能混为一谈。</p>
+<h3 id="int-04kowloon-nights">INT-04｜Kowloon Nights：资助方不教你玩法，合同写明不越权</h3>
+<p><a href="https://medium.com/@makers.kowloon/introducing-kowloon-nights-adc564e71244">创始人2018年公开原则</a>及<a href="https://www.gamedaily.biz/kowloon-nights-we-need-to-realign-the-power-dynamic-between-developers-and-publishers/">2019年专访</a>、<a href="https://www.gematsu.com/2021/02/kowloon-nights-announces-funding-for-23-new-titles-from-kaizen-game-works-massive-damage-night-school-thunder-lotus-more">2021年23项目公告</a>一致提出：
+- 开发者保留<strong>IP和续作权</strong>、完全创意控制；
+- 开发者直接收平台回款，从第一份销售收入起参与收益分配；
+- 不实行刚性进度、传统“全部回本后才分账”规则；
+- 资金机构不等于发行商，不保证包办营销。</p>
+<p><strong>源等级</strong>：这些是资方公开合同原则与项目公告，不是逐份合同已获独立审计，也不意味着每个团队都因此实现商业成功。</p>
+<h3 id="int-05indie-fund">INT-05｜Indie Fund：独立权利不等于无条件赠款</h3>
+<p><a href="https://indie-fund.com/about">官方资金规则</a>：以两笔预算拨付为基础且可调整；项目发行后先回收投资，再分享25%收入；到投资方获得初始投入双倍、或发行两年时，协议结束（以先到为准）。没有固定开发里程碑，也不提供完整发行支持。<strong>与Kowloon不同的资金逻辑，不能把两个项目统称“资助且不回本”。</strong></p>
+<h3 id="int-06pubg">INT-06｜韩国PUBG：发现外来玩家知识，但资方也需要独立的产品判断</h3>
+<p><a href="https://www.pcgamer.com/from-modder-to-pro-the-making-of-playerunknowns-battleground/">2017-06 Brendan Greene直接采访</a>确认其先在ARMA/DayZ/H1Z1的MOD圈积累大逃杀经验，被Bluehole的Changhan Kim联系并邀请制作standalone。<a href="https://game.watch.impress.co.jp/docs/news/1082426.html">2017-09 GAME Watch双人采访</a>称Kim给予Greene很大的玩法设计权。</p>
+<p><strong>必须修正简单的版本</strong>：<a href="https://www.4gamer.net/games/348/G034868/20171117015/">Kim本人2017 G-Star采访</a>表明他<strong>不是完全不懂、只会出钱的外行</strong>；他在找Greene之前就想做大逃杀，并认为公司既有MMORPG级别工程经验可用于大地图产品。这个案例的真正优点是<strong>资方有自己的赛道机会判断，仍主动把国外MOD实践者的特定知识引入，并让二者互补</strong>。不是“老一代一无所知、年轻人独自创造”的寓言。</p>
+<h2 id="3">3. 中国反例与实际制度供给：比空谈“全中国都不行”更有研究价值</h2>
+<h3 id="cn-012011">CN-01｜上海交通大学—米哈游（2011）：“学校不一定天然不支持自发作品”</h3>
+<p><a href="https://news.sjtu.edu.cn/zhxw/20180404/25832.html">上交大2011-11-22官方新闻</a>记录米哈游研究生创业团队已拥有萌系游戏产品项目，并获得<strong>上海市大学生科技创业基金会</strong>天使基金资助，在校外创业赛中获奖。该证据<strong>不意味着大学是其原创玩法导师</strong>，也不意味着大学整个学生队列都能获得同样资源；但足以推翻“学校不可能支持先做后认证”这种全称判断。</p>
+<h3 id="cn-02gamera">CN-02｜Gamera × 柚子猫《戴森球计划》：先看到原作者原型，再做发行</h3>
+<p><a href="https://www.gameres.com/880415.html">2021 Gamera CEO访谈</a>记录发行方看到团队公开的早期游戏视频，主动联系；<a href="https://www.gameres.com/880221.html">《戴森球计划》开发者采访</a>记录2021年1月抢先体验上市后一周销量超过35万份；<a href="https://www.chuapp.com/article/287514.html">2020触乐长访</a>描述发行方愿支持微型团队，在宣传、运营、发行以外提供多种非核心技术帮助，甚至可与低销售预期的作者合作。</p>
+<h3 id="cn-03gamera2021">CN-03｜Gamera“叶绿素计划”（2021）：“资源”有可衡量的制度安排</h3>
+<p><a href="https://www.ithome.com/0/592/114.htm">2021-12-13商业媒体对官方宣布的报道</a>：面向大学生及≤3人微团队；宣布游戏销量达到<strong>1万份前不参与收入分成</strong>，通过发行和社区资源降低首次商业化门槛。要核真实项目数量、选择条件及合同是否覆盖全部交易费用；<strong>公司宣布计划不等于已实现人才形成效果</strong>。</p>
+<h3 id="cn-042026">CN-04｜2026最新企业表态：有转型意愿，不等于达成目标</h3>
+<p><a href="https://www.thegamebusiness.com/p/tencents-bid-to-create-the-next-fromsoftware">2026-09-29 The Game Business对腾讯朱永毅采访</a>提出以Larian与FromSoftware长期迭代路径为参照，愿意支持有明确愿景的团队跨多款作品积累；<a href="https://www.3dmgame.com/news/202610/3955392.html">2026-10-06中文转述</a>也提及缩小概念期团队规模以管理风险。</p>
+<p>此处证明<strong>中国大型商业组织在2026年已明确表述“长期支持原创团队”的政策意愿</strong>，但不能因此推定实际创意权已足额下放、扶持总规模已达国际水平，更不能把“表态”与“执行中合同/项目失误/退出权”混为一谈。</p>
+<h2 id="4">4. 教育上的对应制度：成年人不必预知新游戏，但能提供学习土壤</h2>
+<p>MIT Media Lab的Lifelong Kindergarten/Scratch是关键教育反例。其<a href="https://betterworld.mit.edu/creative-learning-media-lab/">MIT原始介绍</a>与<a href="https://direct.mit.edu/books/book/3134/Lifelong-KindergartenCultivating-Creativity">Mitchel Resnick《Lifelong Kindergarten》</a>明确主张<strong>Projects、Passion、Peers、Play</strong>（项目、热情、同伴、游戏式探索）。<a href="https://thereader.mitpress.mit.edu/ten-tips-for-cultivating-creativity/">Resnick方法文章</a>描述想象→制作→分享→反思→再想象的学习螺旋。</p>
+<p>这证明“旧一代只能给钱、不能教任何东西”过强：<strong>教师不需要预知孩子要制作哪款游戏，也能教编程与基本方法、设计工具、提供同伴和试错环境</strong>。但教师<strong>没有</strong>因传授基础技能便获得定义孩子最终产品的天然权利。</p>
+<p>教育改革要区分：<code>FOUNDATIONAL INSTRUCTION</code>（可持续传授的基础技能）、<code>OPEN EXPLORATION</code>（自己找问题）、<code>PROJECT MENTORSHIP</code>（在真实证据上提出建议）与<code>CREATIVE JUDGMENT AUTHORITY</code>（谁有最终决定权）。</p>
+<h2 id="5">5. 六种权利：今后比较学校、平台、投资/发行机构的标准审计</h2>
+<table>
+<thead>
+<tr>
+<th>权利</th>
+<th>审计问题</th>
+<th>可能的伪自治</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>探索权</strong></td>
+<td>可否选择机构未熟悉/短期不盈利的新机制？</td>
+<td>号称自由创新，实际只能从批准的爆款标签选题</td>
+</tr>
+<tr>
+<td><strong>创意否决权</strong></td>
+<td>谁能因自己品味/职级否决核心玩法？</td>
+<td>团队自治，最终需委员会批准方向</td>
+</tr>
+<tr>
+<td><strong>预算权</strong></td>
+<td>钱由谁分配，能否小额迭代与及时止损？</td>
+<td>给巨额承诺却用过密里程碑操控方向</td>
+</tr>
+<tr>
+<td><strong>IP与续作权</strong></td>
+<td>谁持法律IP、续作/衍生权、用户资产、品牌？</td>
+<td>“你拥有作品”只是口号，合同版权归资方</td>
+</tr>
+<tr>
+<td><strong>收益权</strong></td>
+<td>何时分账、亏损谁承担、作者是否有显著上行？</td>
+<td>只有固定薪水，成功后资源权被上级收回</td>
+</tr>
+<tr>
+<td><strong>退出权</strong></td>
+<td>分歧后能否带走团队、代码和作品，在别处继续？</td>
+<td>能辞职，但不能合法继续自己的产品或再发行</td>
+</tr>
+</tbody>
+</table>
+<p><strong>两个不可混淆的“自治”</strong>：
+- <code>RIGHT TO MAKE</code> 初始制作权限：一个青少年不需要大学/企业认证就能开始；
+- <code>RIGHT TO SCALE / RIGHT TO KEEP</code> 商业扩张和长期控制权：一旦需要资金、平台和发行，可能又被合同与平台规则重新筛选。前者增长并不自动保障后者。</p>
+<p>对合同的解释不能凭宣传推断：以上只是调查表，个别条款必须获得实际授权文本核对。</p>
+<h2 id="6">6. 组织挑选新范式作者，也有自己的过拟合风险</h2>
+<p><strong>团队先于创意</strong>有优点：资方承认事前预测作品容易错，不让旧品味过滤所有新想法。但仍存在新的筛选错误：
+1. 管理者只认自己喜欢的“创业气质”，把不善推销、内向、难以迅速组队的作者排除；
+2. Spark式十几周Jam测的是高压力团队表现，未必代表需要数年孤独探索的艺术家；
+3. 平台只给长线支持高留存和可规模化作品，可能压制小众、叙事、文化实验；此前Roblox Incubator尤其强调规模与18+玩家市场；
+4. 有基金扶持但没有基本生活工资，家庭经济优势会再次决定谁能坚持；
+5. 学校可以主动创造安全探索入口、同伴及基础知识，不能按“公立”身份直接推出保守属性；私企也可能为短期收益压缩实验。</p>
+<p>因此不把“私人企业优于学校”当作已证明总体排序；目前较强的结构性解释是<strong>竞争更容易让部分企业有改变筛选制度的经济动机，学校对课程、认证、监管和责任承担的调整较慢</strong>。要比较实际制度改革的频率、规模、成功/失败与能否持续，而不是比企业宣传话术。</p>
+<h2 id="7">7. 下一轮真实统计：把“识别”和“支持”拆成两张数据表</h2>
+<p><strong>人才识别队列</strong>：每个项目、Jam、教育项目收集申请数、试作数、选拔数、学校/家境、先前作品、反例、拒绝原因、首次发布与第二次试验。不要只采访入选者或成功作者。</p>
+<p><strong>资源/自治队列</strong>：收集入选后现金/服务规模、实际IP权、创意否决机制、运营与推广资源、预算调整次数、退出率和退出后作品归属；追踪1、3、5年结局而非只问第一次发行是否成功。</p>
+<p><strong>最值得优先验证的三个问句</strong>：
+- 学校与商业扶持在类似学生/创作者中，哪一种真实<strong>首作→二作</strong>转化率更高？是否主要由资源与自选择差别驱动？
+- 管理者“自称不干预创作”是否在合同和关键否决事件中成立？受支持团队有多少因此实现多次探索？
+- 资金/IP/自主权与受访创作者的家庭经济基础相比，哪一种更能解释能够长期坚持的数量级差别？</p>
+<p><strong>反证要求</strong>：必须加入某些学校提供卓越Maker入口、某些企业吸走或束缚IP、拿到基金后没有好作品、无法获得基金却仍成功、由传统导师教授通用技能后能力真正提高等案例。<strong>不能让选好的案例自动等于总体因果强度</strong>。</p>
+<h2 id="8">8. 新的全书命题</h2>
+<blockquote>
+<p>上一代未必具备下一代新范式的实践知识，但上一代仍可能握有课程、预算、声望和IP等关键资源。一个社会能否形成更多原创作者，取决于这些权力能否从“替他们决定要做什么”，转换成“让他们低成本亲自探索、接受证据检验、保留成果并反复尝试”。</p>
+</blockquote>
+<p>这不是“没有导师的教育”，而是<strong>导师失去无根据的创意裁判权，知识与资源支持却更加容易获得的教育</strong>。</p>
+<p>将“学校 vs 私企”重新分为：<code>EDUCATION ACCESS</code>（谁有机会接触规则和材料）、<code>PERMISSIONLESS FIRST WORK</code>（谁可先做）、<code>FRONTIER KNOWLEDGE</code>（谁掌握真实新玩法）、<code>RESOURCE &amp; RIGHTS GOVERNANCE</code>（谁控制商业生存权）。这样才不会用某一家公司的好制度直接证成整个国家、年代或部门的优劣。</p>
+<h2 id="9-2026-10-10">9. 作者命题的进一步收紧：识别天才不等于有能力教他；学校与私企的退出机制不同（2026-10-10）</h2>
+<p><strong>原始作者判断（原话，保留尖锐性，作为待检验命题而非已证事实）：</strong>“就算识别出来了又能怎么样，上一代也不能教他们什么，自己就不会，最多给点资源就大不了了。而且相对来说私企还是没有学校那么保守反动。”</p>
+<h3 id="91">9.1 三种“教不了”不能混同</h3>
+<table>
+<thead>
+<tr>
+<th>情况</th>
+<th>用什么证据区别</th>
+<th>组织应怎样做</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>会而不教</strong>：有新范式能力，却因激励不分享</td>
+<td>同期真实作品与培训效果证明能力存在，却被组织关系阻断传播</td>
+<td>改革知识分享、晋升激励与组织政治</td>
+</tr>
+<tr>
+<td><strong>不会且自知</strong>：旧赛道资历不等于新UGC/MOD/独游玩法经验</td>
+<td>能教工程、基础理论或商业，但拿不出目标新品类的实际测试经历</td>
+<td><strong>提供资源与可验证的通用教学，不凭资历接管玩法</strong></td>
+</tr>
+<tr>
+<td><strong>不会却自认为会</strong>：以旧范式声望裁判新范式</td>
+<td>让陌生玩法按既有商业模型、美术完成度、过期留存指标与大厂流程先验获批</td>
+<td><strong>限制未经验证的创意否决权，以原型与玩家证据纠错</strong></td>
+</tr>
+</tbody>
+</table>
+<p>第三种是候选的<strong><code>NEGATIVE MENTORSHIP TRANSFER / 导师负迁移</code></strong>：一名创作者进入传统“培养”体系以后，可能获得更多训练与监管，反而失去新玩法试验空间。<strong>是否实际降低作品质量或二次创作率，尚待比较</strong>。它并非以年龄定义：关键是实务知识在哪一方，以及谁拥有否决权。</p>
+<h3 id="92">9.2 “最多给点资源”可以是积极制度，但必须防止越权</h3>
+<p>可提供的资源并不限于现金：生存时间、设备与基础技术、服务器、测试玩家、职业后勤、财务法务、招人、发行、IP保障、第二次试错预算。成年人能教有证据支持的工程、数学、艺术、组织或生活技能，但不因自己提供了这些资源便自动成为学生的<strong>未知新品类产品方向裁判</strong>。</p>
+<p><strong>从TALENT DISCOVERY升级为TALENT NON-SUPPRESSION</strong>：发现异类并非成就，只是避免进一步错误指导的起点。必须继续问：组织会不会通过导师指导、课程、成果考核、预算里程碑或合同IP重新夺取游戏的<code>PROBLEM OWNERSHIP</code>？一切自治承诺必须以谁能否决、谁能保留产品和收益、作者能否退出为准。</p>
+<p><strong>不能偷换成</strong>“无导师就一定成功”或“资方从此不能质疑作者”：法律、安全、财务、玩家体验和团队协作仍需要审查；有证据的批评与没有相关经验却按旧模板下达命令，性质不同。</p>
+<h3 id="93">9.3 为什么作者认为竞争性私企相对学校没那么保守</h3>
+<table>
+<thead>
+<tr>
+<th>制度因素</th>
+<th>竞争性私人企业（条件性倾向）</th>
+<th>正规学校（条件性倾向）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>可用反馈</strong></td>
+<td>产品收入、用户流失和项目成本相对更快惩罚部分错误选择</td>
+<td>标准课程、学业资格与合规成绩较容易延续旧内容；没有出发的学生缺少产品记录</td>
+</tr>
+<tr>
+<td><strong>获得未知能力</strong></td>
+<td>可投资、合伙、收购或聘请比管理者更懂新玩法的实践者，而无需先教会管理者</td>
+<td>可设实验室、社团、Scratch/Maker路径，但课程与成绩认证更难因陌生产品快速改写</td>
+</tr>
+<tr>
+<td><strong>否决和退出</strong></td>
+<td>有替代雇主、发行商与自主开发可能，但也存在竞业、IP、资本和平台锁定</td>
+<td>未成年人的正式课程和升学轨道退出成本较高，课外探索与非正式社群仍可能打开入口</td>
+</tr>
+<tr>
+<td><strong>权威的存续</strong></td>
+<td>在真实竞争下长期错误可能失去经营资源；垄断、平台和大公司也可缓慢纠错</td>
+<td>教师与考试权威来自制度认证，未必随下一代游戏范式同步更新</td>
+</tr>
+<tr>
+<td><strong>正当责任</strong></td>
+<td>项目生存压力强，但也可能唯短期利润、抄热点</td>
+<td>普及基础知识、保护未成年人、安全平等与质量可审计是正当责任，不可全部归为反创新</td>
+</tr>
+</tbody>
+</table>
+<p>作者比较中的关键不是“所有民企都比所有学校开放”，而是：<strong>某些私企即使不会新玩法，也可以改变合同和资源配置，让懂的人试；某些学校既不知道新玩法，又把自己既有的评价权延伸为学生能不能试的许可权。</strong> 此为<code>INCENTIVE–AUTHORITY GAP / 激励—权威错配</code>假说；实证规模未知。</p>
+<p><strong>反压力</strong>：2011上交大支持米哈游创业、MIT Scratch属于学校积极打开探索入口的案例；私企同样可以夺走产品IP并干预创意；Bluehole金昌汉本身有大逃杀赛道判断，不是完全无知的出资者；Supercell公开改革说明即使理念先进的私企也可能多年没有真正给出创作条件。不能用几例推出部门总体排序。</p>
+<h3 id="94">9.4 实证上的三个反事实</h3>
+<ol>
+<li><strong>同等初期作者</strong>，比较仅提供资源与玩家测试、由拥有相关新范式作品的同行指导、由传统资深但缺目标赛道实践的导师指导——观察陌生机制试验、真实玩家反馈与第二次作品，不以自报满意度代替效果。</li>
+<li><strong>同等原型、不同权利</strong>：作者有创意否决与IP/续作权，或由资方控制方向；追踪预算、方案改变、持续探索与退出损失。</li>
+<li><strong>相近学生及创作者队列的学校/企业比较</strong>：纳入未入选、退出与自愿不创作的人，记录能否自选题目、获得玩家、恢复失败、教师/制作人否决次数及实际产品/职业结果。只有算出覆盖率、转换率和效应区间，才能讨论“相对更保守”有多大数量级。</li>
+</ol>
+<p><strong>凝练结论</strong>：旧一代可能并非不肯传授正确方法，而是<strong>自己还没有新范式的知识，却依旧握有定义“什么值得学习、什么值得制作”的权力</strong>。好的上一代也许无法教会别人某个尚未出现的产品，却可以确保自己不以无根据的资历阻碍它出现。</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / country-studies/china/039-frontier-creator-support-authority-rights-and-incubation.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Evidence Ledger — CASE-007 Gunpoint / Tom Francis · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl class="on"" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#e001-gunpoint-development-breakdown" class="t2">E001 — Gunpoint Development Breakdown</a><a href="#e002-2013-personal-retrospective-sales-enabled-job-exit" class="t2">E002 — 2013 personal retrospective: sales enabled job exit</a><a href="#e001-narrative-revision-detail-re-read-2026-10-09" class="t3">E001 narrative revision detail (re-read 2026-10-09)</a><a href="#e003-creator-resume-career-prehistory" class="t2">E003 — Creator résumé / career prehistory</a><a href="#e004-road-to-the-igf-journalism-as-taste-selection-capital" class="t2">E004 — Road to the IGF: journalism as taste / selection capital</a><a href="#e005-gdc-europe-nine-years-of-reviewing-as-design-training" class="t2">E005 — GDC Europe: nine years of reviewing as design training</a><a href="#e006-non-stick-plan-compress-the-thing-you-love-into-a-small-rule-system" class="t2">E006 — Non-Stick Plan: compress the thing you love into a small rule system</a><a href="#e007-longitudinal-check-criticism-explicit-difference-new-game" class="t2">E007 — Longitudinal check: criticism → explicit difference → new game</a><a href="#e008-scope-taste-cutting-authored-spectacle-that-added-little-as-a-game" class="t2">E008 — Scope taste: cutting authored spectacle that added little as a game</a><a href="#e009-life-before-the-prototype-giant-bomb-interview" class="t2">E009 — Life before the prototype: Giant Bomb interview</a><a href="#e010-private-dick-contemporaneous-announcement-and-uncertain-plans" class="t2">E010 — Private Dick: contemporaneous announcement and uncertain plans</a><a href="#e011-collision-first-implementation-bottleneck" class="t2">E011 — Collision: first implementation bottleneck</a><a href="#e012-making-the-jump-feedback-changed-movement" class="t2">E012 — Making The Jump: feedback changed movement</a><a href="#2026-10-09-bounded-re-read-of-existing-sources" class="t2">2026-10-09 bounded re-read of existing sources</a><a href="#current-evidence-level-conclusions" class="t2">Current evidence-level conclusions</a><a href="#e013-success-created-room-to-decline-a-sequel" class="t2">E013 — Success created room to decline a sequel</a><a href="#e014-heat-signature-launch-risk" class="t2">E014 — Heat Signature launch risk</a><a href="#e015-tactical-breach-wizards-release-endpoint" class="t2">E015 — Tactical Breach Wizards release endpoint</a><a href="#strongly-supported" class="t3">STRONGLY SUPPORTED</a><a href="#supported-interpretation" class="t3">SUPPORTED INTERPRETATION</a><a href="#forbidden-inference" class="t3">FORBIDDEN INFERENCE</a><a href="#unknown" class="t3">UNKNOWN</a></aside><article class="doc"><div class="col"><h1 id="evidence-ledger-case-007-gunpoint-tom-francis">Evidence Ledger — CASE-007 Gunpoint / Tom Francis</h1>
+<ul>
+<li>Case: <code>CASE-007</code></li>
+<li>Status: ACTIVE</li>
+<li>Last updated: 2026-10-09</li>
+</ul>
+<h2 id="e001-gunpoint-development-breakdown">E001 — Gunpoint Development Breakdown</h2>
+<ul>
+<li>Class: P1 — creator postmortem</li>
+<li>Source: Tom Francis, <code>Gunpoint Development Breakdown</code>, 2013-10-15</li>
+<li>URL: https://www.pentadact.com/2013-10-15-gunpoint-development-breakdown/</li>
+</ul>
+<p class="dc">Direct creator account:
+- Francis blogged development from the first weekend through the game&rsquo;s roughly three-year development.
+- He recruited artists by open sample submissions; selected John Roberts and Fabian van Dommelen.
+- Music contributors included Ryan Ike, John Robert Matz and Francisco Cerda.
+- The remote team was distributed internationally and communicated primarily by email.
+- Once the project became commercial, contributors agreed to revenue shares based on contribution.
+- Francis says the second explanatory video drove widespread press coverage, first ~7,000 Twitter followers, ~15,000 testers and strong demand that the project be sold rather than released free.
+- Valve contacted him about Steam distribution before Greenlight.</p>
+<p>Supports:
+- C003: core solo ownership != no contributors.
+- C010: devlog/video/press/platform access were active market infrastructure.
+- C004/C007: low-cost production used a deliberately different organization and representation model.</p>
+<p>Boundary:
+- Creator postmortem is retrospective and naturally selects what Francis considered important.
+- Tester/follower numbers are acquisition/community signals, not sales or retention. Re-read 2026-10-09: the testing section specifies a final-beta mailing list of 15,500, later builds sent to 1,000–2,000 people each, and feedback from fewer than 10%. The promotion summary&rsquo;s approximate 15,000 is not a count of active testers or feedback submissions. Preserve the distinction in reader prose.</p>
+<h2 id="e002-2013-personal-retrospective-sales-enabled-job-exit">E002 — 2013 personal retrospective: sales enabled job exit</h2>
+<h3 id="e001-narrative-revision-detail-re-read-2026-10-09">E001 narrative revision detail (re-read 2026-10-09)</h3>
+<p>Francis recalls an initial space-robot idea, then a robot posing as a private investigator, then a human with gadgets. He discarded almost all early client scripts except the opening and postponed further story writing until most gameplay existed, around two years into development. This is post-release recollection, not proof of when each change happened or permanent rejection of narrative. It complements E008&rsquo;s contemporaneous decision to cut non-interactive sequences; the two entries cannot be collapsed into one dated action.</p>
+<ul>
+<li>Class: P1 — creator retrospective</li>
+<li>Source: Tom Francis, <code>2013</code>, 2013-12-31</li>
+<li>URL: https://www.pentadact.com/2013-12-31-2013/</li>
+</ul>
+<p>Creator account:
+- During launch week sales passed the threshold at which he had decided he would quit his job.
+- Because he was already on sabbatical, he resigned without returning to the PC Gamer role.</p>
+<p>Supports:
+- Stable employment preceded the full-time indie transition.
+- Commercial validation changed employment state after, not necessarily before, most development.</p>
+<p>Boundary:
+- Does not quantify salary, savings, or exact sabbatical terms.</p>
+<h2 id="e003-creator-resume-career-prehistory">E003 — Creator résumé / career prehistory</h2>
+<ul>
+<li>Class: P0/P1 — creator-maintained career record</li>
+<li>Source: Tom Francis, <code>Résumé</code></li>
+<li>URL: https://www.pentadact.com/2012-04-13-resume/</li>
+<li>Publication date: 2012-04-13 (URL date; career record may be updated)</li>
+<li>Access date: 2026-10-09</li>
+</ul>
+<p>Reported by creator:
+- PC Gamer writer/editor career began in the mid-2000s.
+- Gunpoint was entered in IGF and became an Excellence in Design finalist.
+- His résumé lists a First Class BSc in Mathematics and Philosophy at the University of Southampton, 2000–2003.
+- He says he was assembling skateboards in a warehouse when he unsuccessfully applied for a PC Gamer staff-writer vacancy. He later obtained a coverdisc job, then became a writer a year or two into that employment. The heading dates the PC Gamer period from 2004; it does not date the first unsuccessful application.</p>
+<p>Boundary / conflict check:
+- Self-maintained résumé, not independently checked academic or payroll records. Its “present” headings must not be read as current employment in 2026.
+- E009 compresses the job opening into landing the dream job. Use this more specific account for the sequence; do not invent an immediate staff-writer appointment.</p>
+<p>Supports:
+- Gunpoint was built on a long game-analysis/media prehistory.
+- Competition/festival access existed before launch.</p>
+<h2 id="e004-road-to-the-igf-journalism-as-taste-selection-capital">E004 — Road to the IGF: journalism as taste / selection capital</h2>
+<ul>
+<li>Class: P1/S1 — direct creator interview in professional trade media</li>
+<li>Source: Game Developer / Gamasutra, <code>Road to the IGF: Tom Francis' Gunpoint</code>, 2012</li>
+<li>URL: https://www.gamedeveloper.com/business/road-to-the-igf-tom-francis-i-gunpoint-i-</li>
+</ul>
+<p>Direct creator account:
+- Francis says he had no prior game-development background and began making a game partly because, as a critic, he kept forming ideas about how games could be improved and wanted to test whether those ideas were actually right.
+- He says discovering that <em>Spelunky</em> was made in GameMaker was a practical trigger: the tool seemed novice-friendly, and within less than a month he had a movement prototype that could be sent to testers.
+- Asked whether games journalism helped, he says it definitely did. The most useful part was having an overview of what was already out there and what was notable among it.
+- He explicitly connects that overview to judging whether an idea is unusual enough to be interesting: he did not know whether Gunpoint&rsquo;s central mechanic would work, but believed that if it worked it would at least be unusual.
+- He then describes a reinforcing chain: unusual idea → public interest → ability to recruit artists → better presentation → more interest → ability to recruit musicians.</p>
+<p>Supports:
+- C003/C011: the nominally first commercial game sat on years of analysis/taste accumulation.
+- C004: creator judgment can manufacture production conditions by selecting ideas that are both distinctive and testable.
+- C010: product distinctiveness and public attention were already coupled to contributor acquisition before launch.</p>
+<p>Boundary:
+- “Taste” is an analytical label used by this project; Francis describes specific habits and advantages rather than claiming a general theory that taste guarantees success.
+- His PC Gamer role also created network/visibility advantages; the evidence does not isolate taste from occupational access.</p>
+<h2 id="e005-gdc-europe-nine-years-of-reviewing-as-design-training">E005 — GDC Europe: nine years of reviewing as design training</h2>
+<ul>
+<li>Class: P1/P0 — creator conference talk / official GDC session record</li>
+<li>Source: GDC Europe 2013, <code>How Reviewing Games for Nine Years Helped in Designing Gunpoint</code></li>
+<li>URL: https://www.gdcvault.com/play/1019415/How-Reviewing-Games-for-Nine</li>
+</ul>
+<p>Official session framing:
+- Francis worked on Gunpoint during weekends while employed full-time as a games critic for PC Gamer.
+- The talk is explicitly about what can be learned from games one loves and hates and how to pick them apart.
+- Its premise is not that criticism automatically transfers to development skill, but that years of analytical comparison gave Francis material he could test once he began building his own game.</p>
+<p>Supports:
+- C003/C011: capability prehistory includes critical analysis, not only programming/art production.
+- The reader-layer thesis that “taste” can be a form of accumulated capability when it is made explicit and testable.</p>
+<p>Boundary:
+- GDC session metadata establishes the talk&rsquo;s thesis and career framing; specific slide-level claims should be quoted only after direct transcript/video verification.</p>
+<h2 id="e006-non-stick-plan-compress-the-thing-you-love-into-a-small-rule-system">E006 — Non-Stick Plan: compress the thing you love into a small rule system</h2>
+<ul>
+<li>Class: P1 — creator design-method post</li>
+<li>Source: Tom Francis, <code>Game Design: The Non-Stick Plan</code>, 2014-01-25</li>
+<li>URL: https://www.pentadact.com/2014-01-25-game-design-the-non-stick-plan/</li>
+</ul>
+<p>Direct creator account:
+- Francis says his projects often start from excitement about something in another game, film or imagined design.
+- The transition from “I like this” to “I want to make a game about this” happens when he becomes convinced that the exciting quality can be compressed into a simple set of rules that regenerate the excitement repeatedly.
+- For Gunpoint, the starting excitement included finding clever ways to infiltrate buildings in <em>Deus Ex</em>.
+- He describes resolving broad design unknowns by finding reusable classifications/templates rather than hand-authoring every case; for Gunpoint, hackable objects became electrical devices that could trigger whatever they were connected to.</p>
+<p>Supports:
+- C007: small-team design advantage can come from changing representation and system structure rather than reproducing source-game scope.
+- C004: taste becomes production-relevant when it identifies the emotional/interactive essence worth preserving and discards the expensive shell around it.</p>
+<p>Boundary:
+- Written after Gunpoint&rsquo;s release and therefore partly retrospective/formalized method.
+- Does not prove every Gunpoint decision followed this explicit framework at the time it was made.</p>
+<h2 id="e007-longitudinal-check-criticism-explicit-difference-new-game">E007 — Longitudinal check: criticism → explicit difference → new game</h2>
+<ul>
+<li>Class: P1/S1 — direct creator interview, later project</li>
+<li>Source: PC Gamer, <code>XCOM 2's problems inspired a whole other tactics game</code>, 2020-11-10</li>
+<li>URL: https://www.pcgamer.com/tactical-breach-wizards-interview/</li>
+</ul>
+<p>Direct creator account:
+- Francis describes his process as playing a game, articulating what he wishes were different, then making a game that does it that way.
+- For <em>Tactical Breach Wizards</em>, he began from both affection for and detailed objections to <em>XCOM 2</em>, then converted those objections into concrete design constraints such as simpler combat spaces and free rewind.</p>
+<p>Supports:
+- The Gunpoint-era critic→designer pattern persisted beyond one lucky first project.
+- “Taste” in this case is not merely preference; it is repeated comparative diagnosis translated into executable design constraints.</p>
+<p>Boundary:
+- This is evidence about Francis&rsquo; later stable method, not direct evidence that every Gunpoint feature originated the same way.</p>
+<h2 id="e008-scope-taste-cutting-authored-spectacle-that-added-little-as-a-game">E008 — Scope taste: cutting authored spectacle that added little as a game</h2>
+<ul>
+<li>Class: P0 — contemporaneous creator development post</li>
+<li>Source: Tom Francis, <code>Gunpoint And The Other Game</code>, 2010-10-25</li>
+<li>URL: https://pentadact.wordpress.com/2010/10/25/gunpoint-and-the-other-game/</li>
+<li>Access date: 2026-10-09</li>
+<li>Classification correction: the dated post records an ongoing project decision, rather than a later recollection. This corrects the previous P1 label, without upgrading its causal reach.</li>
+</ul>
+<p>Contemporaneous creator account:
+- Francis describes realizing that he had automatically included scripted sequences, major characters and predetermined developments because he had already imagined and written them.
+- Re-examining the roadmap, he noticed how much coding those non-interactive sequences required relative to how little they added “as a game.”
+- He therefore treats them as a scope/design mistake rather than preserving them because work or writing had already been invested.</p>
+<p>Supports:
+- C007: scope control can be driven by a clear hierarchy of what the creator believes the game is <em>for</em>.
+- C004: taste has a negative function as well as a positive one — it tells the creator what not to build.</p>
+<p>Boundary:
+- This is one concrete decision, not proof that Francis always avoided sunk-cost or scope errors.</p>
+<h2 id="e009-life-before-the-prototype-giant-bomb-interview">E009 — Life before the prototype: Giant Bomb interview</h2>
+<ul>
+<li>Case ID: CASE-007</li>
+<li>Related Claim IDs: context for C003/C011; no status change</li>
+<li>Source class: P1 for Francis&rsquo; recollections; S1 for Patrick Klepek&rsquo;s reporting and appraisal</li>
+<li>Source title: One Tom Francis Is All You Need</li>
+<li>Author / organization: Patrick Klepek / Giant Bomb; interviewee Tom Francis</li>
+<li>Publication date: 2013-08-22</li>
+<li>URL: https://giantbomb.com/articles/one-tom-francis-is-all-you-need</li>
+<li>Access date: 2026-10-09</li>
+<li>Verification Status: PARTIAL (body read; recollections not independently corroborated)</li>
+</ul>
+<p>Source-derived fact:
+- The interview describes a school-age wish to write about games, a university-era turn toward making them, and a game design document and science-fiction television pilot written after graduation, around 2003.
+- Francis recalls seeing Darwinia as evidence that small teams could make a favourite game, while still regarding its creator&rsquo;s ability as beyond his own. Spelunky&rsquo;s approachable scale and GameMaker then made attempting a game seem more feasible.</p>
+<p>Boundary / conflict check:
+- These are retrospective accounts of aspiration and perception. They establish neither inevitable vocation nor the contributor count of Darwinia or Spelunky.
+- Job sequence is compressed relative to E003. The article&rsquo;s “never stopped” cannot establish continuous work: E001/E002 record a two-month lapse. Art-submission counts differ (34 in E001, “over 35” here); do not resolve by silently choosing a number.
+- Exclude the internally ambiguous Blood/Blood II correspondence, Spelunky release-year claim, and birthday playtest comparison until separately verified. Klepek&rsquo;s praise and language of inevitability are his appraisal, not historical causality.
+- Archive / backup: not captured; original publication identity retained. User-supplied forum URL is a discovery pointer, not this article&rsquo;s canonical URL.</p>
+<h2 id="e010-private-dick-contemporaneous-announcement-and-uncertain-plans">E010 — Private Dick: contemporaneous announcement and uncertain plans</h2>
+<ul>
+<li>Case ID: CASE-007</li>
+<li>Related Claim IDs: context for C007/C011; no status change</li>
+<li>Source class: P0</li>
+<li>Source title: Private Dick</li>
+<li>Author / organization: Tom Francis / personal development blog</li>
+<li>Publication date: 2010-05-03 (dated permalink; relocated page)</li>
+<li>URL: https://www.pentadact.com/2010-05-03-private-dick/</li>
+<li>Access date: 2026-10-09</li>
+<li>Verification Status: VERIFIED (direct correspondence of body and recorded account; not an audit of shipped features)</li>
+</ul>
+<p>Source-derived fact:
+- He publicly announced an unfinished project under the working title Private Dick, linking his start to Spelunky and GameMaker, and describing a longstanding adult urge to make games.
+- Plans included consequential gunfire, failure without mandatory restart, reconfigurable environments and superhuman but physically coherent movement. He did not yet know what he could do well or should focus on.
+- He reported working a few evenings a week; estimated six to twelve months with explicit uncertainty. Blogging was intended to clarify thinking, solicit feedback and make abandonment more embarrassing.</p>
+<p>Exact Wording:</p>
+<blockquote>
+<p>I&rsquo;m making a game! I will probably never finish it!</p>
+</blockquote>
+<p>Boundary / conflict check:
+- Proposed goals are not all confirmed shipped features; forecast is not actual duration or a promise. E001&rsquo;s retrospective weekend routine cannot overwrite this early evening routine. No uniform weekly schedule is established.
+- No mental diagnosis, financial runway amount or independent feasibility proof follows from this self-account.
+- Archive / backup: not captured. Reader comments are excluded from this record.</p>
+<h2 id="e011-collision-first-implementation-bottleneck">E011 — Collision: first implementation bottleneck</h2>
+<ul>
+<li>Case ID: CASE-007</li>
+<li>Related Claim IDs: context for C007/C011; no status change</li>
+<li>Source class: P0</li>
+<li>Source title: Collision</li>
+<li>Author / organization: Tom Francis / personal development blog</li>
+<li>Publication date: 2010-05-18 (dated permalink; relocated page)</li>
+<li>URL: https://www.pentadact.com/2010-05-18-collision/</li>
+<li>Access date: 2026-10-09</li>
+<li>Verification Status: VERIFIED (creator&rsquo;s contemporary account)</li>
+</ul>
+<p>Source-derived fact:
+- He found collision unexpectedly difficult: fast motion could cross a wall between frames, and changing human poses complicated collision bounds.
+- He implemented a fallback searching nearby empty space when the character became stuck. He described robust collision as his hardest work so far, hoping to reach questions about fun once movement worked.</p>
+<p>Boundary / conflict check:
+- Account of his own implementation, not a general impossibility theorem or audited engine architecture. Do not turn the article&rsquo;s rhetorical “impossible” into a technical fact.
+- The fallback does not prove all bugs were solved. Reader proposals are not his decisions. E009&rsquo;s later rewrite count is not a count recorded in this post.
+- Archive / backup: not captured.</p>
+<h2 id="e012-making-the-jump-feedback-changed-movement">E012 — Making The Jump: feedback changed movement</h2>
+<ul>
+<li>Case ID: CASE-007</li>
+<li>Related Claim IDs: context for C007/C011; no status change</li>
+<li>Source class: P0</li>
+<li>Source title: Gunpoint: Making The Jump</li>
+<li>Author / organization: Tom Francis / personal development blog</li>
+<li>Publication date: 2010-07-14 (dated permalink; relocated page)</li>
+<li>URL: https://www.pentadact.com/2010-07-14-gunpoint-making-the-jump/</li>
+<li>Access date: 2026-10-09</li>
+<li>Verification Status: VERIFIED (creator&rsquo;s contemporary account)</li>
+</ul>
+<p>Source-derived fact:
+- By this post he had provisionally renamed the project Gunpoint. About ten people tested the first movement milestone. He added an unspecified move they wanted, reporting improved feel.
+- Players struggled to predict the jump. He implemented an arc preview and replaced holding to charge with selecting a more distant target for a longer jump.
+- He reported only about ten hours since the previous milestone five weeks earlier, explaining fatigue, distraction and reluctance to face difficult tasks. He limited planning to two or three milestones ahead.</p>
+<p>Boundary / conflict check:
+- Hours cover this interval, not all development. Explanations are his self-account, not diagnosis. Tester count is approximate; the “100%” poll of testers named “me” is a joke, not survey evidence.
+- Preview performance and improved feel are not independently benchmarked. Do not infer that his university degree caused the commercial result.
+- Archive / backup: not captured; reader comments excluded.</p>
+<h2 id="2026-10-09-bounded-re-read-of-existing-sources">2026-10-09 bounded re-read of existing sources</h2>
+<p>For the following extensions, author/title/URL/class remain those of the corresponding entry. Access date: 2026-10-09; verification: direct body correspondence, without independent corroboration of retrospective claims.</p>
+<ul>
+<li>E001: Francis recalls a brief school Visual Basic course largely forgotten, before learning GameMaker. Early work sometimes occupied only one weekend a month; he forgot the project for two months. Late in development he cut planned scenes/features, booked a three-month sabbatical and released about two months into it. Feedback prompted removal/rework of unpopular levels, while he also rejected suggestions he disagreed with. Sabbatical pay and exhaustive hours remain UNKNOWN.</li>
+<li>E002: His year-end account credits luck and encouragement from family/friends, explicitly rejects success as a universal consequence of trying hard, and describes adjusting to work without his PC Gamer identity. Encouragement does not establish financial or production support. Source date remains 2013-12-31.</li>
+<li>E004: precise publication date 2012-01-30; author Mike Rose. Francis says his improvement suggestions were cut from reviews and he wanted to test them. Integration made him a bottleneck despite incoming art; he recalls a week spent getting an elevator outline working after expecting an afternoon. These are self-described production difficulties, not measured contributor hours or a transferable schedule.</li>
+</ul>
+<h2 id="current-evidence-level-conclusions">Current evidence-level conclusions</h2>
+<h2 id="e013-success-created-room-to-decline-a-sequel">E013 — Success created room to decline a sequel</h2>
+<ul>
+<li>Case ID: CASE-007</li>
+<li>Source class: P1 (past choices); P0 (ongoing project intentions); S1 (reporting)</li>
+<li>Source title: Gunpoint and Heat Signature developer Tom Francis on going from critic to creator</li>
+<li>Author / organization: MCV Staff / MCV; interviewee Tom Francis</li>
+<li>Publication date: 2015-07-09</li>
+<li>URL: https://mcvuk.com/business-news/media-pr/gunpoint-and-heat-signature-developer-tom-francis-on-going-from-critic-to-creator/</li>
+<li>Access date: 2026-10-09</li>
+<li>Verification Status: PARTIAL (body read; recollections not independently corroborated)</li>
+</ul>
+<p>Francis attributes his freedom to avoid a sequel to Gunpoint&rsquo;s earnings. He recalls an older, initially 3D space-game idea becoming feasible as a 2D project after learning GameMaker, when a friend reminded him of it. This records his choice and retrospective feasibility judgment, not guaranteed commercial viability. The article&rsquo;s ten-day departure wording is not used to replace E002&rsquo;s launch-week threshold account. No Claim status changes.</p>
+<p>E013 detail readback: Francis reports requests for a Gunpoint sequel and describes ports, DLC and sequels as hypothetical survival choices had he needed to extract more income. These are his counterfactual options, not work all actually performed.</p>
+<h2 id="e014-heat-signature-launch-risk">E014 — Heat Signature launch risk</h2>
+<ul>
+<li>Case ID: CASE-007</li>
+<li>Source class: P0 (launch observations); P1 (development expenditure recollection)</li>
+<li>Source title: Heat Signature’s Launch, And First Player Legend</li>
+<li>Author / organization: Tom Francis / personal blog</li>
+<li>Publication date: 2017-09-27</li>
+<li>URL: https://www.pentadact.com/2017-09-27-heat-signatures-launch-and-first-player-legend/</li>
+<li>Access date: 2026-10-09</li>
+<li>Verification Status: PARTIAL (body and page credits read; no accounts audit)</li>
+</ul>
+<p>Six days after launch he reports 3.5 years and about GBP 200,000 spent, and an early performance slightly above Gunpoint in the same interval, with the long tail explicitly unknown. This is personal expenditure framing, not independently audited total budget or profit. Page credits also name John Roberts (art), John Winder (code), John Halpart and Chris Harvey (music). His market explanation is his interpretation, not measured industry causation.</p>
+<p>E014 detail readback: he calls the project probably the biggest risk of his life. Preserve this as personal assessment, including “probably,” not objective financial comparison.</p>
+<h2 id="e015-tactical-breach-wizards-release-endpoint">E015 — Tactical Breach Wizards release endpoint</h2>
+<ul>
+<li>Case ID: CASE-007</li>
+<li>Source class: P0</li>
+<li>Source title: Tactical Breach Wizards Is Out!</li>
+<li>Author / organization: Tom Francis / personal blog</li>
+<li>Publication date: 2024-08-22</li>
+<li>URL: https://www.pentadact.com/2024-08-22-tactical-breach-wizards-is-out/</li>
+<li>Access date: 2026-10-09</li>
+<li>Verification Status: PARTIAL (creator release announcement read)</li>
+</ul>
+<p>The announcement states that the team worked on the game for 6.8 years. This is an elapsed project duration, not 6.8 years of one person&rsquo;s full-time hours. It supports the release endpoint, not lifetime sales or a complete contributor perimeter. E007 remains the authority for the 2020 design interview.</p>
+<h3 id="strongly-supported">STRONGLY SUPPORTED</h3>
+<ul>
+<li>Gunpoint was not literally a one-human production.</li>
+<li>Development was publicly documented over about three years.</li>
+<li>Salary employment / sabbatical protected much of the pre-launch development period.</li>
+<li>Market access included devlogs, videos, testers, media, IGF and Steam.</li>
+<li>Francis developed Gunpoint alongside a professional game-criticism career. The 2013 talk&rsquo;s nine-year framing includes the development period; it is not nine years completed before starting.</li>
+<li>He explicitly identifies broad market/game literacy as useful for judging whether an idea is unusual enough to attract interest.</li>
+<li>His documented design method repeatedly turns likes/dislikes into explicit, testable design constraints and favors compressing an experience into reusable rules.</li>
+</ul>
+<h3 id="supported-interpretation">SUPPORTED INTERPRETATION</h3>
+<ul>
+<li>For this case, <strong>taste is a form of capability capital</strong>: comparative exposure + articulated preference + willingness to test + the discipline to cut things that do not serve the chosen experience.</li>
+<li>This helps explain why “little programming experience” did not mean “little relevant prehistory.”</li>
+</ul>
+<h3 id="forbidden-inference">FORBIDDEN INFERENCE</h3>
+<ul>
+<li>Good taste by itself produces successful games.</li>
+<li>Being a critic/journalist is generally a superior route into game development.</li>
+<li>Francis&rsquo; media employment can be reduced to taste alone; it also supplied salary, network, visibility and professional communication skill.</li>
+<li>An unusual idea is sufficient for market success.</li>
+</ul>
+<h3 id="unknown">UNKNOWN</h3>
+<ul>
+<li>Full opportunity cost.</li>
+<li>Contributor hours and final revenue shares.</li>
+<li>Exact causal advantage from Francis&rsquo; journalist identity versus product quality, public development and occupational network.</li>
+<li>How much of Gunpoint&rsquo;s final commercial performance can be attributed specifically to idea selection versus execution, distribution and luck.</li>
+</ul><div class="crumbs"><a href="/heroes-portal/">书阁</a> / evidence/CASE-007-gunpoint-source-ledger.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

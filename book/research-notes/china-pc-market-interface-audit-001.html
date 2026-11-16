@@ -1,0 +1,771 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>中国 PC 独立游戏 Market-Interface Audit 001：七个项目如何找到、错过或失去自己的市场接口 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl class="on"" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0" class="t2">0. 结论先行</a><a href="#_1" class="t3">数据边界</a><a href="#_2" class="t2">时间线</a><a href="#_3" class="t2">关键机制</a><a href="#ac-009" class="t2">对 AC-009 的意义</a><a href="#_4" class="t2">时间线</a><a href="#_5" class="t2">市场接口</a><a href="#_6" class="t2">海内外结构</a><a href="#ac-009_1" class="t2">对 AC-009 的意义</a><a href="#_7" class="t2">时间线</a><a href="#_8" class="t2">市场接口</a><a href="#_9" class="t2">当前受众结构</a><a href="#ac-009_2" class="t2">对 AC-009 的意义</a><a href="#_10" class="t2">时间线</a><a href="#_11" class="t2">“墙”是什么</a><a href="#ac-009_3" class="t2">对 AC-009 的意义</a><a href="#_12" class="t2">时间线</a><a href="#_13" class="t2">海外进入的实际难题</a><a href="#proxy" class="t2">当前受众 proxy</a><a href="#ac-009_4" class="t2">对 AC-009 的意义</a><a href="#_14" class="t2">时间线</a><a href="#_15" class="t2">市场接口</a><a href="#ac-009_5" class="t2">对 AC-009 的意义</a><a href="#_16" class="t2">时间线与入口</a><a href="#proof" class="t2">首发 proof 并不差</a><a href="#_17" class="t2">后续失败</a><a href="#ac-009_6" class="t2">对 AC-009 的意义</a><a href="#rule-1-geography-market-interface" class="t2">Rule 1 — Geography != Market Interface</a><a href="#rule-2-market-selection-should-happen-before-marketing-optimization" class="t2">Rule 2 — Market selection should happen before marketing optimization</a><a href="#rule-3-china-first-can-be-rational" class="t2">Rule 3 — China-first can be rational</a><a href="#rule-4-global-first-is-easiest-when-the-product-grammar-is-already-global" class="t2">Rule 4 — Global-first is easiest when the product grammar is already global</a><a href="#rule-5-cultural-difference-is-an-onboarding-cost-problem-not-a-binary-demand-problem" class="t2">Rule 5 — Cultural difference is an onboarding-cost problem, not a binary demand problem</a><a href="#rule-6-market-access-sustainable-business" class="t2">Rule 6 — Market Access != Sustainable Business</a><a href="#a-historical-interface-lag" class="t3">A. Historical Interface Lag</a><a href="#b-capability-path-dependence" class="t3">B. Capability Path Dependence</a><a href="#c-world-model-lag" class="t3">C. World-model Lag</a><a href="#d-productmarket-interface-mismatch" class="t3">D. Product–Market Interface Mismatch</a><a href="#e-selection-product-failure" class="t3">E. Selection / Product Failure</a><a href="#preliminary-verdict" class="t2">Preliminary Verdict</a></aside><article class="doc"><div class="col"><h1 id="pc-market-interface-audit-001">中国 PC 独立游戏 Market-Interface Audit 001：七个项目如何找到、错过或失去自己的市场接口</h1>
+<ul>
+<li>Status: RESEARCH NOTE / CROSS-CASE AUDIT</li>
+<li>Scope: 中国 PC premium / indie / indie-adjacent projects</li>
+<li>Related: <code>author-corpus/AC-009-invisible-wall-distribution-regime.md</code>, <code>book/research-notes/china-indie-distribution-regime-001.md</code></li>
+<li>Cases / comparators: My Time at Portia, Dyson Sphere Program, Eastward, The Scroll of Taiwu, Amazing Cultivation Simulator, Sultan&rsquo;s Game, Boundary</li>
+<li>Core question: <strong>中国开发者真正缺的是“国内流量”还是“知道自己的玩家在哪里、该用什么市场接口接触他们”的能力？</strong></li>
+</ul>
+<hr />
+<h2 id="0">0. 结论先行</h2>
+<p class="dc">这七个项目不支持一个简单结论：</p>
+<blockquote>
+<p>“国产独立游戏只要出海就会成功。”</p>
+</blockquote>
+<p>它们更支持一个精确得多的判断：</p>
+<blockquote>
+<p><strong>市场接口（market interface）必须与产品的真实可寻址受众、传播语法、本地化成本和生产/运营能力相匹配。</strong></p>
+</blockquote>
+<p>七个项目至少形成五种不同路径：</p>
+<ol>
+<li><strong>GLOBAL-FIRST / 全球先验型</strong>：My Time at Portia、Eastward；</li>
+<li><strong>DUAL-MARKET FROM OUTSET / 从立项即双市场型</strong>：Dyson Sphere Program；</li>
+<li><strong>CHINA-FIRST, GLOBAL-LATER / 中文市场先完成验证，再补海外接口</strong>：The Scroll of Taiwu、Amazing Cultivation Simulator；</li>
+<li><strong>STEAM-DIRECT, CHINA-DOMINANT / 绕开传统国内渠道，但主要由中文 creator network 驱动</strong>：Sultan&rsquo;s Game；</li>
+<li><strong>GLOBAL-ACCESS BUT OPERATIONAL FAILURE / 全球入口充分，但产品/组织/服务续航失败</strong>：Boundary。</li>
+</ol>
+<p>因此，“看不见的墙”不是一堵统一的墙。</p>
+<p>它更接近：</p>
+<blockquote>
+<p><strong>开发者是否把自己产品放进了正确的需求发现系统，并且是否知道当前数据究竟来自哪个市场。</strong></p>
+</blockquote>
+<hr />
+<h1 id="1">1. 审计矩阵</h1>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>Steam/公开市场入口</th>
+<th>验证发生在哪里</th>
+<th>发行/平台外围</th>
+<th>可见市场结构</th>
+<th>当前解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>My Time at Portia</td>
+<td>SteamDB first seen 2017-06-23；2017 Kickstarter；2018 EA</td>
+<td>全球玩家 / Kickstarter / Steam</td>
+<td>Team17</td>
+<td>2019 公开口径：海外销量约64%，海外收入约80%</td>
+<td><strong>最干净的 global-first 正例</strong>：国内团队但从产品、众筹、发行到市场都按全球接口设计</td>
+</tr>
+<tr>
+<td>Dyson Sphere Program</td>
+<td>SteamDB first seen 2020-07-06；2021-01 EA</td>
+<td>中外同步，自动化/建造品类全球受众</td>
+<td>Gamera Game</td>
+<td>2021 公开材料约三分之一海外；今日 Steam 英文评论约2.46万 vs 简中约4.89万</td>
+<td><strong>dual-market</strong>：题材/玩法天然跨文化，发行商做笨重但真实的全球 outreach</td>
+</tr>
+<tr>
+<td>Eastward</td>
+<td>Chucklefish 2018-04全球宣布；SteamDB first seen 2018-11；2019 Nintendo Indie World；2020 IGF</td>
+<td>全球媒体/展会/主机平台 + 中国玩家</td>
+<td>Chucklefish / XD</td>
+<td>Steam 评论简中约8.5k、英文约3.6k；主机销量地域未知</td>
+<td><strong>global interface from birth</strong>：中国地理位置不决定市场接口</td>
+</tr>
+<tr>
+<td>The Scroll of Taiwu</td>
+<td>SteamDB first seen 2018-03；2018-09 EA</td>
+<td>中文 Steam 市场先爆</td>
+<td>自发行</td>
+<td>首周约30万；2019 约200万；2026 超300万；2018 起已有海外 Discord/民间翻译需求</td>
+<td><strong>China-first success</strong>：海外不是必要前提，但本地化成为长期机会成本</td>
+</tr>
+<tr>
+<td>Amazing Cultivation Simulator</td>
+<td>SteamDB first seen 2018-10；2019-01 EA；2020-11 英文1.0</td>
+<td>先在中文市场完成大规模验证</td>
+<td>GSQ + Gamera</td>
+<td>英文版前已在中国卖约70万；当前 Steam 简中评论约1.63万、英文约1.84k</td>
+<td><strong>local proof → localization expansion</strong>：文化解释成本真实存在，但不是“外国人不喜欢中国题材”</td>
+</tr>
+<tr>
+<td>Sultan&rsquo;s Game</td>
+<td>SteamDB first seen 2024-07；2024-09 Demo；2024-10 Next Fest；2025-03正式</td>
+<td>Steam Demo + 中文 creator / 二创网络为主</td>
+<td>2P Games</td>
+<td>Demo后不到2个月10万 wishlist；美/日愿望单已有明显数据；发行方称几乎无买量；2025-07破100万销量；Steam评论高度中文主导</td>
+<td><strong>绕开旧渠道 ≠ 海外先行</strong>：Steam 本身就是全球接口，但实际增长可主要来自中文 creator network</td>
+</tr>
+<tr>
+<td>Boundary</td>
+<td>2016 China Hero Project；SteamDB first seen 2020-07；2023-04 EA</td>
+<td>全球 FPS 受众 / PlayStation / Steam</td>
+<td>China Hero Project + Huya + Skystone</td>
+<td>上线前公开材料称&gt;50万 wishlist；首日&gt;10万销量；2024停服</td>
+<td><strong>global access is not enough</strong>：入口、曝光、首销都成功，retention / update / live ops / publisher relation 仍可把项目杀死</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_1">数据边界</h3>
+<ul>
+<li>Steam review language 只能作为<strong>受众语言结构 proxy</strong>，不能直接等于销量地域。</li>
+<li>“海外销量占比”只有在开发者/发行商明确公开时才记为事实；媒体估算必须另标。</li>
+<li>Wishlist 只能证明兴趣，不证明长期 retention。</li>
+<li>本轮不比较利润率，因为多数项目没有可审计完整成本。</li>
+</ul>
+<hr />
+<h1 id="2-my-time-at-portia">2. My Time at Portia：最干净的“全球市场不是后补项”</h1>
+<h2 id="_2">时间线</h2>
+<ul>
+<li>SteamDB first seen：2017-06-23。</li>
+<li>2017-09 左右在 Kickstarter 发起海外众筹。</li>
+<li>公开复盘称，Team17 正是在 Kickstarter 期间发现项目，并在约两周后达成合作。</li>
+<li>2018 年初 Steam Early Access。</li>
+<li>EA 上线前公开 wishlist 约 7 万；首日销售约 1.4–1.5 万份。</li>
+<li>2019 年团队公开口径：累计销量 86 万时，海外销量约 64%，海外收入约 80%。</li>
+</ul>
+<p>Sources:
+- SteamDB: https://steamdb.info/app/666140/info/
+- GameRes / Pathea postmortem: https://www.gameres.com/850614.html
+- GameRes / wishlist + Kickstarter + Team17: https://www.gameres.com/forum/t/857225
+- Game Daily / Pathea global publishing history: https://news.yxrb.net/202209/19230849.html
+- GamesBeat / Team17 partnership: https://gamesbeat.com/my-time-at-portia-marks-team17s-first-ever-partnership-with-a-chinese-developer/</p>
+<h2 id="_3">关键机制</h2>
+<p>《波西亚时光》不是“中国游戏先做出来，再想办法出口”。</p>
+<p>帕斯亚公开回顾显示，其更早的《星球探险家》本来就主要面向海外；创始人吴自非有海外行业经历，团队从很早就把：</p>
+<ul>
+<li>Kickstarter；</li>
+<li>Steam Early Access；</li>
+<li>英语社区；</li>
+<li>海外 publisher；</li>
+<li>主播/KOL；</li>
+<li>多语言；</li>
+</ul>
+<p>作为正常生产外围，而不是“出海部门”。</p>
+<p>Team17 的价值也不是神秘流量，而是明确的：</p>
+<ul>
+<li>海外媒体关系；</li>
+<li>平台关系；</li>
+<li>KOL / creator 关系；</li>
+<li>主机发行经验。</li>
+</ul>
+<h2 id="ac-009">对 AC-009 的意义</h2>
+<p>这是一个反例：</p>
+<blockquote>
+<p><strong>中国公司完全可以在 2010s 就不把国内渠道当默认世界。</strong></p>
+</blockquote>
+<p>因此“看不见的墙”不是地理宿命；它部分取决于创始人世界模型和组织历史。</p>
+<hr />
+<h1 id="3-dyson-sphere-program-niche-aggregation">3. Dyson Sphere Program：全球 niche aggregation + 笨办法发行</h1>
+<h2 id="_4">时间线</h2>
+<ul>
+<li>SteamDB first seen：2020-07-06。</li>
+<li>2021-01-21 Early Access。</li>
+<li>发售约一周销量 35 万，Steam 全球热销长期前列。</li>
+<li>2021-09 发行商公开口径：全球销量已突破 150 万。</li>
+</ul>
+<p>Sources:
+- SteamDB: https://steamdb.info/app/1366540/info/
+- GameRes研发采访: https://www.gameres.com/880221.html
+- Gamera访谈: https://k.sina.cn/article_1887344341_707e96d5020014sty.html</p>
+<h2 id="_5">市场接口</h2>
+<p>Youthcat 主创明确说过，全球发行是较早就做好的决定，并考虑中英文同步。</p>
+<p>Gamera 的海外动作反而非常“低科技”：</p>
+<ul>
+<li>给媒体逐封发邮件；</li>
+<li>主动给目标玩家和社区发消息；</li>
+<li>参加 TGS 线上活动；</li>
+<li>建海外社区；</li>
+<li>寻找自动化/建造类玩家；</li>
+<li>与同类型游戏玩家圈互动。</li>
+</ul>
+<p>发行负责人后来甚至概括为：前期就是一个玩家一个玩家积累。</p>
+<p>Sources:
+- GameRes marketing interview: https://www.gameres.com/880415.html
+- Observers/Gamera interview: https://k.sina.cn/article_1887344341_707e96d5020014sty.html</p>
+<h2 id="_6">海内外结构</h2>
+<p>公开二手行业材料曾给出约三分之一海外用户/销量口径；更稳妥的当前可见 proxy 是 Steam 评论：英文评论约 2.46 万，简中约 4.89 万，显示它确实拥有大规模英语用户，而不是纯中国爆款。</p>
+<p>Sources:
+- Steam English: https://store.steampowered.com/app/1366540/Dyson_Sphere_Program/?l=english
+- Steam Chinese: https://store.steampowered.com/app/1366540/Dyson_Sphere_Program/?l=schinese</p>
+<h2 id="ac-009_1">对 AC-009 的意义</h2>
+<p>它说明全球化不必等于：</p>
+<blockquote>
+<p>大笔海外投放 + 国际大厂发行商。</p>
+</blockquote>
+<p>更基础的动作是：</p>
+<blockquote>
+<p><strong>先确认全球存在一个已经会寻找这类产品的 niche，再把产品放到他们能看见的接口上。</strong></p>
+</blockquote>
+<p>自动化/Factory 类玩家本来就跨国存在；《戴森球计划》没有先教育世界“为什么应该喜欢自动化游戏”。</p>
+<hr />
+<h1 id="4-eastward">4. Eastward：出生在上海，但市场接口从一开始就是全球</h1>
+<h2 id="_7">时间线</h2>
+<ul>
+<li>Pixpil 2013 年成立，2015 年开始做 Eastward。</li>
+<li>Chucklefish 2018-04-26 正式宣布合作和游戏。</li>
+<li>2018 EGX 英国提供试玩。</li>
+<li>SteamDB first seen：2018-11-05。</li>
+<li>2019 Nintendo Indie World 宣布 Switch。</li>
+<li>2020 获 IGF 视觉提名，并公开 demo / 社区活动。</li>
+<li>2021 Nintendo Indie World 公布发售日，Steam + Switch 同期全球发售。</li>
+</ul>
+<p>Sources:
+- Chucklefish announcement: https://chucklefish.org/blog/introducing-eastward-by-pixpil/
+- EGX 2018: https://chucklefish.org/blog/chucklefish-at-egx-2018/
+- Nintendo Indie World 2019: https://chucklefish.org/blog/eastward-is-coming-to-nintendo-switch/
+- Release date / Nintendo Indie World 2021: https://chucklefish.org/blog/all-aboard-for-the-eastward-release-date/
+- SteamDB: https://steamdb.info/app/977880/screenshots/</p>
+<h2 id="_8">市场接口</h2>
+<p>Chucklefish 在作品仍开发很早时就已经承担：</p>
+<ul>
+<li>全球 announcement；</li>
+<li>英语社区；</li>
+<li>展会；</li>
+<li>Nintendo 平台关系；</li>
+<li>creator form；</li>
+<li>Discord / Reddit / Twitter；</li>
+<li>dev blogs；</li>
+<li>IGF 传播。</li>
+</ul>
+<p>2021 AMA 里 Chucklefish community manager 直接把社区内容拆成：</p>
+<ul>
+<li>engagement；</li>
+<li>entertainment；</li>
+<li>education。</li>
+</ul>
+<p>Source:
+https://www.reddit.com/r/NintendoSwitch/comments/pyh9vo</p>
+<h2 id="_9">当前受众结构</h2>
+<p>Steam 当前 purchaser reviews 大约：</p>
+<ul>
+<li>简体中文 8.5k；</li>
+<li>英文 3.6k；</li>
+<li>另有繁中、葡语、西语、俄语等。</li>
+</ul>
+<p>Steam 只是其中一个平台，不能由 review language 推出全平台销售地域；但至少说明：</p>
+<blockquote>
+<p><strong>全球发行并没有让它“脱离中国市场”，而是同时拥有两个大市场接口。</strong></p>
+</blockquote>
+<p>Source:
+https://store.steampowered.com/app/977880/Eastward/?l=english</p>
+<h2 id="ac-009_2">对 AC-009 的意义</h2>
+<p>这是最直接的地理反证：</p>
+<blockquote>
+<p><strong>工作室在哪，不等于市场接口在哪。</strong></p>
+</blockquote>
+<p>真正决定接口的是 publisher network、语言、平台、展会、creator 与社区布局。</p>
+<hr />
+<h1 id="5-the-scroll-of-taiwu">5. The Scroll of Taiwu：中文市场足以证明产品，海外需求被本地化卡住</h1>
+<h2 id="_10">时间线</h2>
+<ul>
+<li>SteamDB first seen：2018-03-30。</li>
+<li>2018-09-20 Early Access。</li>
+<li>上线首周公开采访称销量约 30 万。</li>
+<li>2019 已有约 200 万销量报道。</li>
+<li>2026 完整版阶段公开报道称累计销量超过 300 万。</li>
+</ul>
+<p>Sources:
+- SteamDB: https://steamdb.info/app/838350/history/
+- 2018 producer interview: https://www.sohu.com/a/256802866_662623
+- 2019 2m coverage: https://games.sina.com.cn/y/n/2019-10-11/icezuev1411495.shtml
+- 2026 CNR 3m: https://www.cnr.cn/yn/jdt/20260618/t20260618_527665946.shtml</p>
+<h2 id="_11">“墙”是什么</h2>
+<p>2018 年发售时，游戏缺英语版本；制作人公开承认：</p>
+<ul>
+<li>团队太小；</li>
+<li>文本量巨大；</li>
+<li>琴棋书画诗酒茶等传统文化概念很难高质量翻译。</li>
+</ul>
+<p>与此同时，外国玩家已经在评论区主动求英文版。</p>
+<p>到 2026 年，团队又公开表示：</p>
+<ul>
+<li>从 2018 年就有官方 Discord；</li>
+<li>群中有一万多名外国玩家；</li>
+<li>玩家来自欧美、韩国、越南、菲律宾等；</li>
+<li>长期存在玩家自主翻译；</li>
+<li>非中文用户 wishlist 已达到几十万量级的内部调查口径。</li>
+</ul>
+<p>Sources:
+- 2018 interview: https://www.sohu.com/a/258522909_115479
+- 2026 UCG interview: https://www.ucg.cn/newsinfo/10941699.html</p>
+<h2 id="ac-009_3">对 AC-009 的意义</h2>
+<p>太吾不是“因为没出海所以失败”。恰恰相反，它证明：</p>
+<blockquote>
+<p><strong>本地市场足够大时，China-first 完全可以是理性策略。</strong></p>
+</blockquote>
+<p>真正的问题是 optionality：</p>
+<blockquote>
+<p>当海外已经主动证明需求存在时，团队有没有能力购买 localization / cultural translation，把 latent demand 转成第二增长曲线？</p>
+</blockquote>
+<p>这比口号式“必须出海”更准确。</p>
+<hr />
+<h1 id="6-amazing-cultivation-simulator-70">6. Amazing Cultivation Simulator：先中文卖 70 万，再尝试跨文化解释</h1>
+<h2 id="_12">时间线</h2>
+<ul>
+<li>SteamDB first seen：2018-10-01。</li>
+<li>2019-01 Early Access。</li>
+<li>2020-11 正式版 / 英文版本上线。</li>
+<li>海外英文版本上线前，公开报道称其已在中国市场卖出超过 70 万份。</li>
+</ul>
+<p>Sources:
+- SteamDB: https://steamdb.info/app/955900/info/
+- Steam current page: https://store.steampowered.com/app/955900/Amazing_Cultivation_Simulator/?l=english</p>
+<h2 id="_13">海外进入的实际难题</h2>
+<p>Gamera 发行负责人公开说，《修仙模拟器》海外发行的困难不是“外国人不接受中国文化”，而是：</p>
+<ul>
+<li>五行；</li>
+<li>八卦；</li>
+<li>风水；</li>
+<li>修仙语法；</li>
+</ul>
+<p>这些都需要额外玩家教育。</p>
+<p>他们并没有全部改写成西方熟悉词汇，而是保留概念，让愿意进入这个 niche 的玩家自己学习；后来确实出现海外玩家主动分享、解释这些概念。</p>
+<p>Source:
+https://k.sina.cn/article_1887344341_707e96d5020014sty.html</p>
+<h2 id="proxy">当前受众 proxy</h2>
+<p>Steam 当前可见 reviews：</p>
+<ul>
+<li>简中约 16.3k；</li>
+<li>英文约 1.84k；</li>
+<li>繁中约 470。</li>
+</ul>
+<p>说明英语 niche 确实存在且好评率高，但整体仍明显中文主导。</p>
+<p>Source:
+https://store.steampowered.com/app/955900/Amazing_Cultivation_Simulator/?l=english</p>
+<h2 id="ac-009_4">对 AC-009 的意义</h2>
+<p>这里的“墙”不是渠道，而是：</p>
+<blockquote>
+<p><strong>semantic / cultural onboarding cost。</strong></p>
+</blockquote>
+<p>所以 market interface audit 必须区分：</p>
+<ul>
+<li>玩家根本看不到产品；</li>
+<li>玩家看到了但看不懂；</li>
+<li>玩家看懂了但不想要；</li>
+<li>玩家想要，但本地化/支付/平台还没准备好。</li>
+</ul>
+<p>这四种失败不能统称“海外难做”。</p>
+<hr />
+<h1 id="7-sultans-gamesteam-direct">7. Sultan&rsquo;s Game：Steam-direct 可以高度中国化，也可以几乎不买量</h1>
+<h2 id="_14">时间线</h2>
+<ul>
+<li>SteamDB first seen：2024-07-18。</li>
+<li>2024-09 Demo。</li>
+<li>2024-10 Steam Next Fest。</li>
+<li>2024-11 初：官方宣布 wishlist 突破 10 万；采访称从 Demo 到 10 万不到两个月。</li>
+<li>2024-12 摩点众筹。</li>
+<li>2025-03-31 正式发售。</li>
+<li>2025-07-10 官方宣布销量突破 100 万。</li>
+</ul>
+<p>Sources:
+- SteamDB: https://steamdb.info/app/3117820/history/
+- 10w wishlist / interview: https://www.sohu.com/a/823126740_628730
+- Next Fest 10w milestone: https://www.gamersky.com/news/202411/1838467.shtml
+- crowdfunding: https://www.gamersky.com/news/202412/1862237.shtml
+- 1m official Weibo: https://weibo.com/7836958764/PAqQThO40</p>
+<h2 id="_15">市场接口</h2>
+<p>开发团队 2024 采访明确表示：</p>
+<ul>
+<li>日本和美国 wishlist 数据也不错；</li>
+<li>发行商在协助多语言本地化；</li>
+<li>但大文本量使翻译成本很高。</li>
+</ul>
+<p>Source:
+https://www.sydneytoday.com/content-50004821794</p>
+<p>后续媒体引用 2P Games 负责人说法称，项目“几乎没有买量”，并且没有走传统国内游戏渠道，而是 Steam 买断制；国内增长大量来自：</p>
+<ul>
+<li>Demo；</li>
+<li>Steam 新品节；</li>
+<li>Bilibili；</li>
+<li>小红书；</li>
+<li>抖音；</li>
+<li>剧情讨论；</li>
+<li>二创 / Cos / 玩家内容。</li>
+</ul>
+<p>Sources:
+- https://cj.sina.com.cn/articles/view/1750070171/684ff39b02001ck2a
+- https://www.sohu.com/a/905972037_114778</p>
+<h2 id="ac-009_5">对 AC-009 的意义</h2>
+<p>它非常重要，因为它证明：</p>
+<blockquote>
+<p><strong>“离开国内旧渠道”与“主要靠海外市场”完全不是同一个命题。</strong></p>
+</blockquote>
+<p>Steam 是全球市场接口，但中文用户完全可以在 Steam + 国内 creator network 上形成巨大自然量。</p>
+<p>因此真正要问的是：</p>
+<blockquote>
+<p><strong>谁拥有购买意愿，而不是服务器/平台在国内还是国外。</strong></p>
+</blockquote>
+<hr />
+<h1 id="8-boundary">8. Boundary：市场入口其实成功了，项目仍然死了</h1>
+<p>CASE-029 已经研究其生产与组织扩张。本轮只审计 market access。</p>
+<h2 id="_16">时间线与入口</h2>
+<ul>
+<li>2016 即进入 PlayStation China Hero Project 第一批体系；</li>
+<li>后续公开 PS4/PC、VR 等方向；</li>
+<li>2019–2020 已持续接受海外媒体采访；</li>
+<li>SteamDB first seen：2020-07-02；</li>
+<li>2021 Skystone 接手大中华区以外全球发行，Huya 负责 Greater China；</li>
+<li>2023-04-13 Steam Early Access。</li>
+</ul>
+<p>Sources:
+- China Hero / studio interview: https://passthecontrolleruk.weebly.com/features/boundary-interview-with-surgical-scalpels
+- International interview: https://www.capsulecomputers.com.au/2020/08/boundary-interview-with-technical-director-and-co-founder-frank-mingbo-li/
+- SteamDB: https://steamdb.info/app/1364020/subs/
+- Launch press release: https://www.gamespress.com/Boundary-Launches-via-Steam-on-April-13th</p>
+<h2 id="proof">首发 proof 并不差</h2>
+<p>公开宣传材料称：</p>
+<ul>
+<li>Steam wishlist 超过 50 万；</li>
+<li>Early Access 上线 24 小时销量超过 10 万。</li>
+</ul>
+<p>Source:
+https://worthplaying.com/article/2023/4/14/news/136766-boundary-sells-100k-steam-early-access-copies-in-its-first-24-hours/</p>
+<p>这意味着至少首发阶段：</p>
+<blockquote>
+<p><strong>发现性不是最主要瓶颈。</strong></p>
+</blockquote>
+<h2 id="_17">后续失败</h2>
+<p>2024-06 Skystone 宣布 relinquish publishing rights，并称长期更新延迟、内容缺失；开发商随后公开反驳，并称存在运营权与收入争议。由于双方公开陈述冲突，本项目不得单方判责。</p>
+<p>Source:
+https://steamcommunity.com/app/1364020/allnews/</p>
+<p>但无论责任归属如何，一个事实很清楚：</p>
+<blockquote>
+<p><strong>一个拥有全球 publisher、平台背书、50万级 wishlist 和首日10万销量的产品，仍然可以在一年多后失去服务能力。</strong></p>
+</blockquote>
+<h2 id="ac-009_6">对 AC-009 的意义</h2>
+<p>Boundary 是本轮最重要的反压力：</p>
+<blockquote>
+<p>“看不见的墙”不能退化为“只要懂海外营销，一切问题都会解决”。</p>
+</blockquote>
+<p>多人产品必须同时拥有：</p>
+<ul>
+<li>acquisition；</li>
+<li>retention；</li>
+<li>concurrency density；</li>
+<li>live ops；</li>
+<li>update throughput；</li>
+<li>publisher / revenue / server continuity。</li>
+</ul>
+<p>市场接口只负责让人进门，不能替代房子本身。</p>
+<hr />
+<h1 id="9">9. 七个案例推出来的六条规则</h1>
+<h2 id="rule-1-geography-market-interface">Rule 1 — Geography != Market Interface</h2>
+<p>中国工作室可以 global-first；外国 publisher 也可以服务中国用户；Steam 也可以承载高度中文主导的产品。</p>
+<p>所以“国产游戏 / 出海游戏”这种二元词汇经常遮蔽真正的市场结构。</p>
+<hr />
+<h2 id="rule-2-market-selection-should-happen-before-marketing-optimization">Rule 2 — Market selection should happen before marketing optimization</h2>
+<p>先问：</p>
+<blockquote>
+<p><strong>谁会自然想玩？他们在哪？他们怎样发现新游戏？</strong></p>
+</blockquote>
+<p>再问：</p>
+<blockquote>
+<p>买量、媒体、主播、展会、publisher、Next Fest 中哪一个值得投入？</p>
+</blockquote>
+<p>反过来先拿一个平台/发行商当标准答案，容易形成 AC-009 的 Distribution-Regime Misrecognition。</p>
+<hr />
+<h2 id="rule-3-china-first-can-be-rational">Rule 3 — China-first can be rational</h2>
+<p>太吾、修仙模拟器、苏丹都说明：</p>
+<blockquote>
+<p>中文 Steam 市场本身已经足够支持非常大的 premium PC 成功。</p>
+</blockquote>
+<p>因此“必须海外先验证”同样是一种错误答案化。</p>
+<p>真正问题是：</p>
+<blockquote>
+<p>是否知道自己放弃海外时放弃了多少 optionality，以及未来补接口需要多少钱。</p>
+</blockquote>
+<hr />
+<h2 id="rule-4-global-first-is-easiest-when-the-product-grammar-is-already-global">Rule 4 — Global-first is easiest when the product grammar is already global</h2>
+<p>《波西亚时光》《戴森球计划》分别借用了：</p>
+<ul>
+<li>life sim / crafting；</li>
+<li>factory / automation；</li>
+</ul>
+<p>这些已经存在全球玩家语法。</p>
+<p>团队主要工作是让目标用户看到产品，而不是先教育全球玩家为什么这种 genre 值得存在。</p>
+<hr />
+<h2 id="rule-5-cultural-difference-is-an-onboarding-cost-problem-not-a-binary-demand-problem">Rule 5 — Cultural difference is an onboarding-cost problem, not a binary demand problem</h2>
+<p>太吾、修仙模拟器都证明：</p>
+<ul>
+<li>海外需求可以存在；</li>
+<li>文化越深，本地化越不只是翻译；</li>
+<li>fan translation / Discord / guide 甚至可以成为 community production capacity。</li>
+</ul>
+<p>所以以后记录海外失败时，必须区分：</p>
+<p><code>no demand</code> / <code>no visibility</code> / <code>no localization</code> / <code>high learning cost</code> / <code>bad packaging</code>。</p>
+<hr />
+<h2 id="rule-6-market-access-sustainable-business">Rule 6 — Market Access != Sustainable Business</h2>
+<p>Boundary 证明：</p>
+<blockquote>
+<p>wishlist、首销、平台和 publisher 都可以很好，仍然不能替代 retention 和组织交付。</p>
+</blockquote>
+<p>因此 market-interface audit 必须和：</p>
+<ul>
+<li>production audit；</li>
+<li>scope audit；</li>
+<li>organizational audit；</li>
+<li>live-service audit；</li>
+</ul>
+<p>并列，而不是凌驾于它们之上。</p>
+<hr />
+<h1 id="10">10. 对“中国独立游戏为什么晚/菜”的更精确表述</h1>
+<p>这七个案例暂时不支持把问题简化成：</p>
+<blockquote>
+<p>中国开发者技术差 / 不够努力 / 没钱。</p>
+</blockquote>
+<p>更值得继续验证的是五类错配：</p>
+<h3 id="a-historical-interface-lag">A. Historical Interface Lag</h3>
+<p>中国开发者更晚获得 premium PC / global digital distribution 的稳定路径，因此 peer knowledge 晚一代形成。</p>
+<h3 id="b-capability-path-dependence">B. Capability Path Dependence</h3>
+<p>网游/F2P/mobile 训练出的强能力，不一定直接迁移到 premium small-team product selection。</p>
+<h3 id="c-world-model-lag">C. World-model Lag</h3>
+<p>市场基础设施已经变了，但开发者仍按旧渠道/买量/发行商中心模型规划产品。</p>
+<h3 id="d-productmarket-interface-mismatch">D. Product–Market Interface Mismatch</h3>
+<p>产品本来面向全球 niche，却只在本地接口上找用户；或者产品高度本地化，却把“全球化”当 KPI 强推。</p>
+<h3 id="e-selection-product-failure">E. Selection / Product Failure</h3>
+<p>有时没有墙：产品本身的 hook、retention、scope、质量或组织就是不够好。</p>
+<p>这五类必须分开。</p>
+<hr />
+<h1 id="11-pc-market-interface">11. 以后每个中国 PC 案例强制补的 Market-Interface 字段</h1>
+<p>以后新增或回填中国案例，建议至少记录：</p>
+<ol>
+<li>Steam page / SteamDB first-seen date；</li>
+<li>首个中文与英文商店页时间；</li>
+<li>demo / festival / public alpha 时间；</li>
+<li>wishlist milestone 及其发生窗口；</li>
+<li>publisher 介入时间：验证前还是验证后；</li>
+<li>国内 creator / 海外 creator 的首批传播节点；</li>
+<li>是否买量，若有则市场与规模；</li>
+<li>Kickstarter / crowdfunding / grant / platform showcase；</li>
+<li>launch sales 与首月 retention；</li>
+<li>sales region / language proxy；</li>
+<li>localization 首发还是后补；</li>
+<li>玩家教育成本：genre grammar / cultural grammar；</li>
+<li>中国平台和海外平台是否出现 cross-border feedback loop；</li>
+<li>团队事前认为“玩家在哪”，事后真实用户又在哪；</li>
+<li>如果失败：是 no visibility、no demand、no retention、no localization 还是 organization failure。</li>
+</ol>
+<hr />
+<h1 id="12">12. 下一轮值得补的对象</h1>
+<p>为了避免这七个案例变成选择性样本，下一轮优先补：</p>
+<ul>
+<li><code>Chinese Online Game</code>：极端 China-specific 文化模拟，验证“本地语法就是产品核心”的边界；</li>
+<li><code>Outpost: Infinity Siege</code>：全球视觉包装、复杂 feature stack 与首发口碑/后续修复；</li>
+<li><code>Volcano Princess</code>：小团队、美术/角色二创、东亚与海外受众传播；</li>
+<li><code>Party Animals</code>：中国团队、全球 creator-first、多人与平台接口；但必须单列资本/所有权，不冒充 core indie；</li>
+<li><code>F.I.S.T.: Forged In Shadow Torch</code>：China Hero / console/global publisher 路径；</li>
+<li><code>The Rewinder</code> / <code>Firework</code>：中式题材的小体量全球化边界；</li>
+<li><code>Sandrock</code>：用《波西亚时光》积累的海外用户直接降低续作 market-access 成本。</li>
+</ul>
+<p>这些对象能继续回答：</p>
+<blockquote>
+<p><strong>当中国开发者真正知道世界有多个市场接口以后，他们是否开始形成可复用的全球发行能力资本？</strong></p>
+</blockquote>
+<hr />
+<h2 id="preliminary-verdict">Preliminary Verdict</h2>
+<blockquote>
+<p><strong>中国独立游戏的“看不见的墙”不是简单的网络墙、渠道墙或文化墙，而是市场世界模型与产品真实需求网络之间的错位。最成熟的团队不是“更会营销”，而是更早知道自己的玩家是谁、在哪、需要什么证据才值得继续投入。</strong></p>
+</blockquote>
+<p>同样重要的反命题是：</p>
+<blockquote>
+<p><strong>全球市场不是万能逃生舱。市场入口只能解决发现性；产品选择、范围、质量、retention、组织交付和持续运营仍然必须分别成立。</strong></p>
+</blockquote><div class="crumbs"><a href="/heroes-portal/">书阁</a> / book/research-notes/china-pc-market-interface-audit-001.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

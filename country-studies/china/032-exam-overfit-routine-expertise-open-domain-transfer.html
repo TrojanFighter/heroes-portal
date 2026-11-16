@@ -1,0 +1,1405 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>032 — Exam Overfit：应试教育过拟合、Routine Expertise 与开放问题迁移失败 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl class="on"" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0" class="t2">0. 核心纠偏：此前我们已经有材料，却没有把它提升为教育主机制</a><a href="#21-external-problem-definition" class="t2">2.1 EXTERNAL PROBLEM DEFINITION</a><a href="#22-known-evaluator" class="t2">2.2 KNOWN EVALUATOR</a><a href="#23-stable-rubric" class="t2">2.3 STABLE RUBRIC</a><a href="#24-bounded-context" class="t2">2.4 BOUNDED CONTEXT</a><a href="#25-short-horizon-feedback" class="t2">2.5 SHORT-HORIZON FEEDBACK</a><a href="#26-high-consequence-of-deviation" class="t2">2.6 HIGH CONSEQUENCE OF DEVIATION</a><a href="#_1" class="t3">信息不对称不能解释全部</a><a href="#a-problem-framing" class="t3">A. Problem framing</a><a href="#b-information-acquisition" class="t3">B. Information acquisition</a><a href="#c-evaluation-creation" class="t3">C. Evaluation creation</a><a href="#d-premise-rejection" class="t3">D. Premise rejection</a><a href="#e-delayed-closure" class="t3">E. Delayed closure</a><a href="#f-cheap-experiment" class="t3">F. Cheap experiment</a><a href="#g-goal-revision" class="t3">G. Goal revision</a><a href="#h-cross-context-transfer" class="t3">H. Cross-context transfer</a><a href="#_2" class="t3">可证伪的研究变量</a><a href="#251" class="t2">25.1 作者新增观察与独立理论命题</a><a href="#252-vs" class="t2">25.2 必须区分五层任务，而不是“确定技术 vs 纯运气”二分</a><a href="#253" class="t2">25.3 外部理论与可直接利用的证据</a><a href="#254-2k" class="t2">25.4 与2K模型相连：模型无法表达的不是全部随机</a><a href="#255" class="t2">25.5 必须分开评价事前质量、事后结果、学习能力</a><a href="#256" class="t2">25.6 下一轮测量实验</a><a href="#257-pabl" class="t2">25.7 与中国普通作者PABL的具体连接</a><a href="#261" class="t2">26.1 知识处理、理性信念和决策目标必须分开</a><a href="#262" class="t2">26.2 决策不仅是“预测答案”，还包括控制行动的不可逆性</a><a href="#263-localthunk" class="t2">26.3 LocalThunk：学校分数不代表作者形成，设计先例的缺席有时也是主动决策</a><a href="#264" class="t2">26.4 两个普通失败者：作者自主权不等于判断能力、完成作品不等于经济存活</a><a href="#265-pabl" class="t2">26.5 三案例加中国普通作者PABL的最小比较</a><a href="#266" class="t2">26.6 对作者传记与企业评价的四项补充字段</a><a href="#271" class="t2">27.1 管理者不一定比真正参与创作的人更会识别新创意</a><a href="#272" class="t2">27.2 数量级压力测试：专家项目评审与完成稿评审不必同方向</a><a href="#273" class="t2">27.3 游戏一手误判对照：不要用结果成功直接谴责当时评审人</a><a href="#274-2k" class="t2">27.4 与应试过拟合／2K模型的精确关系</a><a href="#275" class="t2">27.5 训练和鉴别的建议，不要再陷入“只换一套评分器”</a><a href="#281-decision-tempo-overfit" class="t2">28.1 DECISION-TEMPO OVERFIT / 决策节奏过拟合</a><a href="#282-value-of-information-blindness" class="t2">28.2 VALUE-OF-INFORMATION BLINDNESS / 信息增益盲区</a><a href="#283-research-work-invisibility" class="t2">28.3 RESEARCH WORK INVISIBILITY / 研究劳动不可见性</a><a href="#284" class="t2">28.4 权力、父权、信息不对称与应试过拟合：四者不能互相替代</a><a href="#285" class="t2">28.5 决策过程四种正交能力</a><a href="#286-question-first-evidence-next-decision-last" class="t2">28.6 反考试化会议协议：QUESTION FIRST, EVIDENCE NEXT, DECISION LAST</a><a href="#287" class="t2">28.7 可证伪审计：同类项目比较即时会议与预研会议</a><a href="#288" class="t2">28.8 本轮结论</a><a href="#291" class="t2">29.1 从截图中提取的作者观察（不作人群比例证据）</a><a href="#292" class="t2">29.2 最小双条件对照实验</a><a href="#_3" class="t3">预先锁定的评价指标</a><a href="#293" class="t2">29.3 理论接口：迁移不是自动发生</a><a href="#294" class="t2">29.4 对作者创新教育的操作修正</a><a href="#281" class="t2">28.1 主观题不等于真正开放：隐藏评分器的服从考试</a><a href="#282" class="t2">28.2 临时脑暴轶事的首要证据是工作流程，不是参与者脑力</a><a href="#283" class="t2">28.3 考试结果的道德化：自我惩罚可能先于正式淘汰</a><a href="#284_1" class="t2">28.4 玩家评价同样是工业能力形成的输入：既要保护批评权，也要分清“目标失效”与“对标补齐”</a><a href="#285_1" class="t2">28.5 平台分发是竞争性解释，不可以把所有同质化都归为做题家</a><a href="#286" class="t2">28.6 认知责任倒置：当汇报接受者具有职位权威</a><a href="#287_1" class="t2">28.7 专业选择的长期复利，以及咨询市场对“确定答案”的商业供给</a><a href="#288_1" class="t2">28.8 三种惩罚如何连接而不能互相证明</a><a href="#291-2025-research-policy" class="t2">29.1 2025 Research Policy：专业知识的正作用可能被正式决策者身份抵消</a><a href="#292-2018-amj" class="t2">29.2 2018 AMJ：社会认可线索可以替代作品创造性的判断</a><a href="#293-2025-obhdp" class="t2">29.3 2025 OBHDP：创新背书的地位激励不是简单的利润激励</a><a href="#294_1" class="t2">29.4 决策权也可能改善筛选，不应浪漫化全面无领导</a><a href="#295-2k" class="t2">29.5 与“决策能力贬值／2K缓存”关联的完整机制图（假说）</a><a href="#296" class="t2">29.6 研究设计与实验变量</a><a href="#30-2026-10-10exam-overfit" class="t2">30. 2026-10-10：Exam Overfit 的更早来源——选择权有没有真正交接？</a><a href="#31-2026-10-10" class="t2">31. 2026-10-10：知识摄入与指定材料竞争——应试教育的双重压缩</a><a href="#32-2026-10-10" class="t2">32. 导师负迁移：老一代可能不是不想教，而是根本不知道新题域怎么做（2026-10-10）</a></aside><article class="doc"><div class="col"><h1 id="032-exam-overfitroutine-expertise">032 — Exam Overfit：应试教育过拟合、Routine Expertise 与开放问题迁移失败</h1>
+<ul>
+<li>Program: C / 中国国情研究 × 教育社会化 × 创新认知 × 游戏生产</li>
+<li>Status: <strong>SYNTHESIS FRAMEWORK / AUTHOR-ORIGIN + EXTERNAL LITERATURE PRESSURE TEST</strong></li>
+<li>As-of: 2026-10-08</li>
+<li>Parents:</li>
+<li><a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes/blob/main/author-corpus/AC-008-china-good-student-syndrome.md">AC-008 — 中国好学生综合征</a></li>
+<li><a href="/heroes-portal/country-studies/china/027-individualism-as-innovation-infrastructure.html">027 — Individualism as Innovation Infrastructure</a></li>
+<li><a href="/heroes-portal/country-studies/china/028-hacker-spirit-scale-down-commercial-antitraining.html">028 — Hacker Spirit × Scale Down × Commercial Anti-Training</a></li>
+<li><a href="/heroes-portal/country-studies/china/031-education-east-asian-discipline-reference-repertoire.html">031 — Education × East-Asian Discipline × Reference Repertoire</a></li>
+<li>Boundary:</li>
+<li><code>EXAM OVERFIT / 应试教育过拟合</code> 是本项目的分析隐喻，不声称人脑等同机器学习模型；</li>
+<li>它不等于“考试有害”“成绩好的人不会创新”“中国学生都没有创造力”；</li>
+<li>正式学术邻接概念主要是 <code>routine expertise / adaptive expertise</code>、transfer、teaching-to-the-test 与评价收窄；</li>
+<li>个体截图/轶事只能作为作者原始观察与机制例，不用于估计发生率。</li>
+</ul>
+<p class="dc"><strong>教育方法增量（2026-10-08）：</strong> <a href="/heroes-portal/country-studies/china/034-epistemic-discipline-authority-legacy-and-knowledge-aversion.html">034 — 认识论规训、遗制权威与知识载体污染</a> 把 <code>RUBRIC-AS-TRUTH</code>、<code>JUDGMENT-RIGHTS DECOUPLING</code>、<code>KNOWLEDGE-CARRIER AVERSION</code> 独立为待检验假说，并提出以历史决策节点/同期史料取代人物表彰式标准答案的教学对照协议；区分“反对说教”与“证据能力已经形成”。</p>
+<h2 id="0">0. 核心纠偏：此前我们已经有材料，却没有把它提升为教育主机制</h2>
+<p>项目此前已经积累大量同构观察：
+- “中国好学生综合征”：别人出题，我们做题；
+- 有限材料、短上下文、快速收敛；
+- 离开老师/主管/考试后不知道该学什么；
+- 会议现场临时出题、现场收卷，而不是提前研究；
+- 高学历走上领导岗位后仍把开放决策当作临场答题；
+- 立项以后把方向当成考题，不重新检查问题定义；
+- 大厂里 benchmark / KPI / feature list 成为新考纲；
+- 独游里不会 scale down，而倾向于把缺能力翻译成“缺资源”。</p>
+<p>此前这些被拆散在教育、组织、行业与独游章节中。</p>
+<p>本章统一提出：</p>
+<h1 id="exam-overfit"><code>EXAM-OVERFIT / 应试教育过拟合</code></h1>
+<blockquote>
+<p><strong>长期在题目外部给定、评价标准稳定、信息边界清晰、短周期评分的环境中优化后，个体形成极强的封闭域效率；随后把这套认知与工作习惯错误泛化到题目本身不确定、评价函数未知、需要调查与反复重定义的开放域。</strong></p>
+</blockquote>
+<p>这不是说受教育者“笨”，而恰恰经常意味着：</p>
+<blockquote>
+<p><strong>在训练分布内非常强，在分布外迁移不足。</strong></p>
+</blockquote>
+<hr />
+<h1 id="1-routine-expertise-vs-adaptive-expertise">1. 与成熟研究最接近的概念：Routine Expertise vs Adaptive Expertise</h1>
+<p>Hatano &amp; Inagaki 系列传统把 expertise 区分为：
+- <code>routine expertise</code>：熟悉情境中高效、准确、稳定地执行既有方法；
+- <code>adaptive expertise</code>：面对任务、方法或目标都不预先确定的新情境时，仍能理解 why / when，并重组或发明方法。</p>
+<p>综述材料强调：两类专家可能拥有相当高的领域知识和熟练度；真正差异往往在陌生情境中暴露。</p>
+<p>Sources:
+- https://www.sciencedirect.com/science/article/pii/S1747938X14000116
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC9645329/</p>
+<p>所以我们自己的 <code>EXAM-OVERFIT</code> 更正式地可以理解为：</p>
+<pre><code class="language-text">high routine efficiency
++ narrow evaluation ecology
++ weak open-domain practice
+→ routine-expertise lock-in
+→ closed-domain transfer error
+</code></pre>
+<p>不是：</p>
+<blockquote>
+<p>学会 routine skill 本身有害。</p>
+</blockquote>
+<p>真正问题是：</p>
+<blockquote>
+<p><strong>只在 routine / rubric-known 环境中获得成功，却把这种成功误当作 general intelligence / general decision competence。</strong></p>
+</blockquote>
+<hr />
+<h1 id="2">2. 什么样的训练环境最容易产生“过拟合”？</h1>
+<p>不是“有考试”就会产生。</p>
+<p>本项目关注的是以下条件长期同时存在：</p>
+<h2 id="21-external-problem-definition">2.1 <code>EXTERNAL PROBLEM DEFINITION</code></h2>
+<p>题目由外部给定。</p>
+<h2 id="22-known-evaluator">2.2 <code>KNOWN EVALUATOR</code></h2>
+<p>存在老师、命题人、领导、评审等明确评分者。</p>
+<h2 id="23-stable-rubric">2.3 <code>STABLE RUBRIC</code></h2>
+<p>评分逻辑相对稳定，可以通过刷题、总结采分点、识别偏好来提高成绩。</p>
+<h2 id="24-bounded-context">2.4 <code>BOUNDED CONTEXT</code></h2>
+<p>信息范围大致清楚，通常不要求自己决定“还应该去哪里找信息”。</p>
+<h2 id="25-short-horizon-feedback">2.5 <code>SHORT-HORIZON FEEDBACK</code></h2>
+<p>做完很快得到分数、排名、对错。</p>
+<h2 id="26-high-consequence-of-deviation">2.6 <code>HIGH CONSEQUENCE OF DEVIATION</code></h2>
+<p>偏离标准路径会直接影响分数、升学、资格。</p>
+<p>长期运行后，环境会高奖励：
+- examiner-intent inference；
+- rapid convergence；
+- template retrieval；
+- parameter optimization；
+- clean completion；
+- answer presentation。</p>
+<p>而较少奖励：
+- problem finding；
+- “我现在信息不够”；
+- 延迟决策；
+- 自己扩展上下文；
+- 修改题目；
+- 拒绝前提；
+- 设计新的评价标准；
+- 长期无即时反馈探索。</p>
+<hr />
+<h1 id="3-closed-domain-transfer-error">3. <code>CLOSED-DOMAIN TRANSFER ERROR</code>：把考试能力错误迁移到开放世界</h1>
+<p>AC-008 已经提出封闭题域迁移谬误。</p>
+<p>本章进一步把它写成：</p>
+<pre><code class="language-text">exam success
+→ self-model: I am good at solving problems
+→ open-domain role
+→ assumes problems are already correctly specified
+→ optimizes answer before validating question
+</code></pre>
+<p>真正的开放问题往往先问：
+- 这是不是正确问题？
+- 谁说这是目标？
+- 哪些信息还没搜？
+- 哪个前提可能错？
+- 应该先做实验还是先决策？
+- 有没有理由暂时不决定？
+- 这个成功标准是谁定义的？</p>
+<p>所以：</p>
+<h1 id="problem-definition-gap-answer-quality-gap"><code>PROBLEM-DEFINITION GAP &gt; ANSWER-QUALITY GAP</code></h1>
+<blockquote>
+<p><strong>很多开放域失败，并不是答案写得不够好，而是根本没有先验证题目。</strong></p>
+</blockquote>
+<hr />
+<h1 id="4-meeting-as-exam">4. 截图中的会议现象：<code>MEETING-AS-EXAM</code></h1>
+<p>作者旧观察反复出现一种会议结构：</p>
+<pre><code class="language-text">leader arrives
+→ asks a broad problem on the spot
+→ subordinates immediately produce opinions
+→ meeting seeks quick convergence
+→ consensus / leader choice becomes answer
+→ execution begins
+</code></pre>
+<p>这里并不一定存在明确恶意，也不一定只是权力压制。</p>
+<p>更值得检验的是：</p>
+<h1 id="meeting-as-exam"><code>MEETING-AS-EXAM / 会议考试化</code></h1>
+<blockquote>
+<p><strong>把本应通过预研、证据搜集、方案生成与多轮比较完成的开放决策，组织成一次现场限时答题。</strong></p>
+</blockquote>
+<p>其典型症状：
+- 开会前不提前布置研究问题；
+- 现场才知道题目；
+- 默认“聪明人应该马上有答案”；
+- “我需要几天查资料”被视为拖延或能力不足；
+- 讨论的终点是达成答案，而不是识别未知；
+- 会后执行，而非先做 cheap probe / research sprint。</p>
+<p>这和应试习惯高度同构：</p>
+<pre><code class="language-text">题目发下来
+→ 限时
+→ 调用已有知识
+→ 给出完整答案
+→ 交卷
+</code></pre>
+<h3 id="_1">信息不对称不能解释全部</h3>
+<p>某些会议问题当然只是：
+- 上级掌握更多背景；
+- 下级不知道已有约束；
+- 任务本来就只需要执行。</p>
+<p>但如果：
+- 上级自己也没有完成预研；
+- 问题本身是开放决策；
+- 可以低成本提前几天研究；
+- 却仍长期偏好“当场问、当场定”；</p>
+<p>则“考试化会议”是值得独立研究的组织习惯。</p>
+<hr />
+<h1 id="5-completion-over-improvement">5. <code>COMPLETION OVER IMPROVEMENT</code>：完成答卷，而不是继续提升决策</h1>
+<p>截图里的另一类现象是：</p>
+<blockquote>
+<p>“只要我现在给了一个能交的方案，下次就会默认更快。”</p>
+</blockquote>
+<p>这可以定义为：</p>
+<h1 id="answer-closure-bias"><code>ANSWER-CLOSURE BIAS / 答案闭合偏差</code></h1>
+<blockquote>
+<p><strong>一旦形成可提交答案，系统倾向于把任务认定为完成，而不是继续问：更多调查是否能显著提高决策质量？</strong></p>
+</blockquote>
+<p>应试环境里：
+- 交卷以后不能再继续查；
+- 时间到就必须完成；
+- 90分答案比“再研究三天可能更好”更有现实价值。</p>
+<p>开放决策里却常常相反：
+- 多一天用户研究可能改变产品方向；
+- 多一个 prototype 可能推翻立项；
+- 多读十个案例可能发现整个方案空间此前都错了。</p>
+<p>所以：</p>
+<h1 id="deadline-transfer-error"><code>DEADLINE TRANSFER ERROR</code></h1>
+<blockquote>
+<p><strong>把考试中的固定交卷时刻，迁移成所有认知工作的默认截止逻辑。</strong></p>
+</blockquote>
+<hr />
+<h1 id="6-parameter-excellence-without-goal-formation">6. <code>PARAMETER EXCELLENCE WITHOUT GOAL FORMATION</code>：中国好学生综合征的核心</h1>
+<p>作者旧命题：</p>
+<blockquote>
+<p><strong>被环境训练成参数优秀的人，而不是目的驱动的人。</strong></p>
+</blockquote>
+<p>这和“应试过拟合”完全一致。</p>
+<p>在考试中，目标函数固定：
+- 分数更高；
+- 排名更前；
+- 正确率更高。</p>
+<p>因此训练的是：</p>
+<pre><code class="language-text">given objective
+→ optimize parameters
+</code></pre>
+<p>而开放创新要求：</p>
+<pre><code class="language-text">choose objective
+→ inspect reality
+→ revise objective
+→ invent metric
+→ then optimize
+</code></pre>
+<p>所以一个人可以：
+- 学得快；
+- 测试成绩高；
+- 执行可靠；
+- 参数调得漂亮；</p>
+<p>却仍然缺：
+- 自己找问题；
+- 形成长期兴趣；
+- 判断什么值得做；
+- 从现实反馈中改变目标。</p>
+<p>这不矛盾。</p>
+<hr />
+<h1 id="7">7. 为什么“转专业先要原专业表现好”也同构？</h1>
+<p>截图讨论的“先在原专业表现好，才允许转专业”，其隐含逻辑可能是：</p>
+<pre><code class="language-text">current track score
+→ proof of worthiness
+→ permission to choose another track
+</code></pre>
+<p>这会把：</p>
+<blockquote>
+<p>“你真正想学什么？”</p>
+</blockquote>
+<p>改写成：</p>
+<blockquote>
+<p>“你先证明自己是一个合格答题者，才获得修改题目的资格。”</p>
+</blockquote>
+<p>因此定义：</p>
+<h1 id="choice-by-performance-gate"><code>CHOICE-BY-PERFORMANCE GATE / 选择权绩效化</code></h1>
+<p>其潜在后果：
+- 强化 sunk-cost；
+- 延迟兴趣发现；
+- 鼓励在不匹配领域继续优化；
+- 把“改变方向”理解成对既有评分系统的奖赏，而不是基本探索权。</p>
+<p>美国 undeclared / flexible-major 只是可能的比较对象，不能用几个学校制度直接推出国别总论。</p>
+<hr />
+<h1 id="8-project-initiation-as-exam-question">8. <code>PROJECT INITIATION AS EXAM QUESTION</code>：为什么会“立项定生死”</h1>
+<p>这直接连接中国游戏工业。</p>
+<p>如果长期训练的是：</p>
+<blockquote>
+<p>题目一旦发下来，下一步就是把它答好。</p>
+</blockquote>
+<p>那么项目组织很容易自然变成：</p>
+<pre><code class="language-text">greenlight / 立项
+→ question fixed
+→ execution quality becomes the main variable
+→ changing premise feels like failure
+</code></pre>
+<p>于是出现：
+- 先立赛道；
+- 先定 benchmark；
+- 先定完整产品想象；
+- 然后拼执行；
+- 中途发现 premise 有问题，也更倾向于“补资源”而非“改题”。</p>
+<p>这和028的 <code>SPEC PRESERVATION / RESOURCE REFLEX</code> 完全接通。</p>
+<p>正式链条：</p>
+<pre><code class="language-text">EXAM OVERFIT
+→ external problem acceptance
+→ project-spec sanctification
+→ resource reflex
+→ weak scale-down / weak problem reformulation
+</code></pre>
+<hr />
+<h1 id="9-benchmark">9. Benchmark 为什么像“标准答案”？</h1>
+<p>后发商业游戏尤其容易出现：</p>
+<pre><code class="language-text">successful product
+→ becomes benchmark
+→ benchmark becomes answer key
+→ feature list becomes rubric
+→ production team competes on execution score
+</code></pre>
+<p>这不是普通借鉴。</p>
+<p>当 benchmark 从：</p>
+<blockquote>
+<p>“一个值得研究的案例”</p>
+</blockquote>
+<p>变成：</p>
+<blockquote>
+<p>“命题人已经告诉我们正确答案长什么样”</p>
+</blockquote>
+<p>就形成：</p>
+<h1 id="benchmark-as-answer-key"><code>BENCHMARK AS ANSWER KEY</code></h1>
+<p>它和应试教育的认知结构高度兼容：
+- 不必自己定义问题；
+- 不必证明目标函数；
+- 只要找到评分器认可的现成答案；
+- 再用组织资源把答案做得更完整。</p>
+<p>这也是为什么后发答案红利、数据驱动抄赛道和应试认知可能发生互相强化，而不是独立发生。</p>
+<hr />
+<h1 id="10">10. 为什么这对独立游戏尤其是反训练？</h1>
+<p>独立游戏的核心环境几乎与考试相反：</p>
+<table>
+<thead>
+<tr>
+<th>Exam-like closed domain</th>
+<th>Indie/open domain</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>题目外部给定</td>
+<td>自己选问题</td>
+</tr>
+<tr>
+<td>标准答案存在</td>
+<td>答案可能不存在</td>
+</tr>
+<tr>
+<td>范围清晰</td>
+<td>上下文必须自己扩展</td>
+</tr>
+<tr>
+<td>命题人知道评分标准</td>
+<td>玩家需求可能连玩家自己都说不清</td>
+</tr>
+<tr>
+<td>时间到必须交卷</td>
+<td>何时继续、何时砍掉都要自己决定</td>
+</tr>
+<tr>
+<td>错题可以按答案订正</td>
+<td>错误可能来自题目本身</td>
+</tr>
+<tr>
+<td>高分代表成功</td>
+<td>demo可能证明整个方向应放弃</td>
+</tr>
+</tbody>
+</table>
+<p>因此独立制作需要的不是更强“做题能力”，而是：
+- <code>PROBLEM OWNERSHIP</code>；
+- <code>REFERENCE REPERTOIRE</code>；
+- <code>RESEARCH BEFORE COMMITMENT</code>；
+- <code>THESIS-PRESERVING SCALE DOWN</code>；
+- <code>CHEAP PROTOTYPE</code>；
+- <code>REALITY ADJUDICATION</code>；
+- <code>GOAL REVISION</code>。</p>
+<p>这正好解释为什么：</p>
+<blockquote>
+<p><strong>商业游戏中的高绩效员工，未必自动拥有独立游戏所需的开放域能力。</strong></p>
+</blockquote>
+<hr />
+<h1 id="11">11. “最适合做独游的人不是技术专家”为什么可能成立？</h1>
+<p>用户旧观察中提到：
+- 一些技术全能的“好学生”做飞行射击/学生作品时，乐趣与成绩不成比例；
+- 一些独游作者初始技术并不完整，却是资深玩家，先判断方向，再现学引擎或补技能。</p>
+<p>这不能推出：</p>
+<blockquote>
+<p>技术不重要。</p>
+</blockquote>
+<p>更准确的模型是：</p>
+<pre><code class="language-text">REFERENCE / TASTE / PROBLEM JUDGMENT
+→ choose tractable thesis
+→ acquire missing skill just-in-time
+→ prototype
+</code></pre>
+<p>对比：</p>
+<pre><code class="language-text">high generic skill
+→ no strong self-authored problem
+→ reproduce familiar product grammar
+</code></pre>
+<p>所以：</p>
+<h1 id="skill-acquisition-after-thesis"><code>SKILL ACQUISITION AFTER THESIS</code></h1>
+<blockquote>
+<p><strong>在独游里，一部分具体技能可以后补；但“玩过什么、想做什么、为什么值得做”的判断资本更难在立项后临时生成。</strong></p>
+</blockquote>
+<p>这与 The First Tree、Gunpoint、Pope 等能力塑形案例相容，但不能把所有成功作者都归为“技术差的资深玩家”。</p>
+<hr />
+<h1 id="12">12. 游戏玩得少为什么会让“应试过拟合”更加严重？</h1>
+<p>031/028 已提出 reference repertoire。</p>
+<p>现在可以得到更完整的乘法：</p>
+<pre><code class="language-text">EXAM-OVERFIT
+×
+NARROW REFERENCE REPERTOIRE
+×
+COMMERCIAL BENCHMARK REINFORCEMENT
+=
+STRONG ONTOLOGY LOCK
+</code></pre>
+<p>应试过拟合让人倾向寻找“正确答案”。</p>
+<p>游戏阅历窄则意味着：</p>
+<blockquote>
+<p><strong>可供选择的答案样本本来就很少。</strong></p>
+</blockquote>
+<p>商业大厂再不断重复少数成功模板：</p>
+<blockquote>
+<p><strong>其中一个局部答案就会被强化成“游戏本体”。</strong></p>
+</blockquote>
+<p>所以“不广泛阅读 / 不广泛玩游戏 / benchmark化 / 不会scale down”不是四件孤立问题。</p>
+<hr />
+<h1 id="13-short-context-intelligence">13. <code>SHORT-CONTEXT INTELLIGENCE</code>：有限材料速答为什么会被误认成通用聪明</h1>
+<p>作者旧讨论曾把应试环境概括为：</p>
+<blockquote>
+<p>有限材料速答。</p>
+</blockquote>
+<p>这可以操作化为：</p>
+<h1 id="short-context-performance"><code>SHORT-CONTEXT PERFORMANCE</code></h1>
+<p>擅长：
+- 在给定材料里迅速提取；
+- 识别题型；
+- 组织完整回答；
+- 时间压力下收敛。</p>
+<p>开放研究则需要：</p>
+<h1 id="long-context-model-building"><code>LONG-CONTEXT MODEL BUILDING</code></h1>
+<ul>
+<li>长期积累跨域知识；</li>
+<li>知道当前材料不够；</li>
+<li>主动找外部一手资料；</li>
+<li>容忍几天/几周没有完整答案；</li>
+<li>让模型在证据进入后持续改变。</li>
+</ul>
+<p>所以：</p>
+<blockquote>
+<p><strong>“现场答得快”与“最终判断质量高”不能视为同一个能力。</strong></p>
+</blockquote>
+<p>这正是截图中“不开会前预研、现场硬想”的核心问题。</p>
+<hr />
+<h1 id="14">14. 应试教育为什么可能“抬底部、卡顶部”？</h1>
+<p>华东师大2023综述非常适合作为边界材料：
+- 没有足够证据简单断言中国学生总体创造力低；
+- 但作者认为应试教育可能对拔尖/高创造力学生造成更明显约束；
+- 候选机制包括知识宽度/深度、冒险质疑精神、不确定容忍和内在动机。</p>
+<p>Source:
+- https://xbjk.ecnu.edu.cn/EN/10.16382/j.cnki.1000-5560.2023.04.006</p>
+<p>这与“过拟合”模型并不矛盾。</p>
+<p>统一解释：</p>
+<pre><code class="language-text">standardized training
+→ raises routine floor
+→ improves comparable execution
+→ narrows variance / exploration for some cohorts
+→ top-end adaptive / divergent capability may face higher opportunity cost
+</code></pre>
+<p>这里必须保留：</p>
+<blockquote>
+<p><strong>“可能”“特定群体”“机制候选”，不能升级成已证明全国因果。</strong></p>
+</blockquote>
+<hr />
+<h1 id="15-teaching-to-the-test">15. Teaching-to-the-test：为什么“分数涨了”也不能自动证明广义学习涨了？</h1>
+<p>教育研究长期担心：</p>
+<blockquote>
+<p>针对具体测验的训练可能提高该测验表现，却把教学资源从更广泛理解与问题解决移开。</p>
+</blockquote>
+<p>一项研究直接比较了 test-specific preparation 与更广泛测试表现，明确把“test score improvement是否代表general learning”作为独立问题。</p>
+<p>Source:
+- https://www.sciencedirect.com/science/article/pii/S0738059321000754</p>
+<p>这给 <code>EXAM-OVERFIT</code> 一个重要方法边界：</p>
+<blockquote>
+<p><strong>训练集成绩必须和跨任务迁移表现分开测。</strong></p>
+</blockquote>
+<p>不能用：
+- 高考高分；
+- 名校学历；
+- 大厂绩效；
+- KPI完成；</p>
+<p>直接替代：
+- open-ended research；
+- original problem framing；
+- founder judgment；
+- indie 0→1。</p>
+<hr />
+<h1 id="16">16. 组织为什么会继续复制这种认知结构？</h1>
+<p>因为这种人并不是“没用”。</p>
+<p>相反，他们往往：
+- 可预测；
+- 交付稳定；
+- 执行快；
+- 接受清晰目标；
+- 对指标敏感；
+- 擅长高强度竞争。</p>
+<p>大型组织非常需要这些能力。</p>
+<p>于是可能形成：</p>
+<h1 id="routine-expertise-promotion-loop"><code>ROUTINE-EXPERTISE PROMOTION LOOP</code></h1>
+<pre><code class="language-text">school rewards rubric performance
+→ firm hires credentialed high performers
+→ firm rewards execution against KPI
+→ high performers become managers
+→ managers reproduce exam-like task structures
+→ next generation trains under same logic
+</code></pre>
+<p>这解释截图中的一个关键直觉：</p>
+<blockquote>
+<p><strong>高学历升成领导以后，认知方式未必自动从“答题”升级成“命题/研究/判断”。</strong></p>
+</blockquote>
+<p>角色升级 ≠ 认知制度升级。</p>
+<hr />
+<h1 id="17">17. 父权 / 权力不是替代解释，而可能是放大器</h1>
+<p>截图中也出现“父权/家族式权力混入形式权力”的讨论。</p>
+<p>本章不把所有现场决策归因于考试认知。</p>
+<p>更可能存在交互：</p>
+<pre><code class="language-text">examiner-subject habit
++ paternal authority
++ organizational hierarchy
+→ leader expected to know answer
+→ subordinate expected to answer immediately
+→ admitting uncertainty becomes status loss
+</code></pre>
+<p>因此：
+- 权力结构决定谁有资格出题；
+- 应试过拟合决定大家默认怎样对待题目；
+- 父权文化可能提高“上级必须显得知道答案”的压力。</p>
+<p>这是三个不同变量。</p>
+<hr />
+<h1 id="18">18. 反例：为什么不能把它写成“中国人天生不会开放问题”？</h1>
+<p>项目已有大量内部反例：
+- DeepSeek / 梁文锋：frontier problem ownership；
+- NExT：小队demo、100人日review、逐级资源；
+- 66RPG：hobbyist self-directed making；
+- CUSGA / 中传：大量学生完成完整作品；
+- Game Science / 4A / Supergiant等不同路径说明工业技能可以被重新组织。</p>
+<p>所以真正问题是：</p>
+<h1 id="distribution-of-adaptive-practice"><code>DISTRIBUTION OF ADAPTIVE PRACTICE</code></h1>
+<blockquote>
+<p><strong>一个社会有多少人，在成长过程中反复接受“题目不确定、答案不唯一、必须自己找证据并允许重写目标”的训练？</strong></p>
+</blockquote>
+<p>不是：</p>
+<blockquote>
+<p>“这个民族会不会思考。”</p>
+</blockquote>
+<hr />
+<h1 id="19">19. 如何真正测量“应试教育过拟合”？</h1>
+<p>不能问：</p>
+<blockquote>
+<p>“你觉得应试教育害了你吗？”</p>
+</blockquote>
+<p>应该设计迁移任务与真实行为指标。</p>
+<p>候选维度：</p>
+<h3 id="a-problem-framing">A. Problem framing</h3>
+<p>给一个模糊业务/设计问题，看是否先重写问题而非立即答。</p>
+<h3 id="b-information-acquisition">B. Information acquisition</h3>
+<p>是否主动指出缺信息、寻找外部资料、要求时间。</p>
+<h3 id="c-evaluation-creation">C. Evaluation creation</h3>
+<p>能否自行提出成功/失败标准。</p>
+<h3 id="d-premise-rejection">D. Premise rejection</h3>
+<p>能否指出上级/题目本身可能错误。</p>
+<h3 id="e-delayed-closure">E. Delayed closure</h3>
+<p>是否能接受“今天不下结论”。</p>
+<h3 id="f-cheap-experiment">F. Cheap experiment</h3>
+<p>是否用prototype / research sprint换信息，而不是继续争论。</p>
+<h3 id="g-goal-revision">G. Goal revision</h3>
+<p>新证据进来后是否愿意改目标而非只修答案。</p>
+<h3 id="h-cross-context-transfer">H. Cross-context transfer</h3>
+<p>在新领域能否迁移原理而不是复制表面模板。</p>
+<p>然后才比较：
+- 不同教育经历；
+- 不同公司经历；
+- 学生/普通员工/manager/founder；
+- 中国内部不同地区/学校；
+- 日本/台湾/韩国/美国等comparators。</p>
+<hr />
+<h1 id="20">20. 对游戏行业研究的直接修改</h1>
+<p>以后研究中国策划/制作人，不只记录：
+- 职级；
+- 项目；
+- 技能；
+- decision rights。</p>
+<p>还记录：
+- <code>problem_source</code>：问题是谁提出的；
+- <code>research_latency</code>：问题提出后多久开始决策；
+- <code>context_expansion</code>：是否主动找外部资料；
+- <code>prototype_before_commitment</code>；
+- <code>premise_revision_count</code>；
+- <code>benchmark_role</code>：reference还是answer key；
+- <code>meeting_as_exam</code>；
+- <code>answer_closure_bias</code>；
+- <code>goal_revision_evidence</code>；
+- <code>adaptive_practice_history</code>：jam / mod / research / hobby making。</p>
+<p>这样才能把“执行强/原创弱”从情绪判断变成可观察行为。</p>
+<hr />
+<h1 id="21">21. 对第四次工业革命的含义</h1>
+<p>AI会进一步削弱 routine-answer production 的稀缺性。</p>
+<p>如果：
+- 标准代码；
+- 标准文案；
+- 标准分析；
+- benchmark总结；
+- 常规方案生成</p>
+<p>越来越便宜，那么价值更集中到：
+- 提什么问题；
+- 找什么证据；
+- 哪个答案不该信；
+- 何时不做；
+- 如何设计现实实验；
+- 如何把不同领域reference重组。</p>
+<p>因此：</p>
+<h1 id="ai-punishes-closed-domain-overfit"><code>AI PUNISHES CLOSED-DOMAIN OVERFIT</code></h1>
+<p>不是因为AI让考试知识“没用”，而是：</p>
+<blockquote>
+<p><strong>当标准答案生产被自动化，无法自主定义问题与更新目标的人，其比较优势会下降。</strong></p>
+</blockquote>
+<p>这与本项目此前“AI负责更多答案，人负责问题与现实裁决”的方向一致。</p>
+<hr />
+<h1 id="22-full-cycle-author-practice">22. FULL-CYCLE AUTHOR PRACTICE：技术任务熟练，不等于经历过完整的作者循环</h1>
+<p>本节只补“训练任务的实际分布”这一增量，不重复<a href="/heroes-portal/book/research-notes/creator-selection-institution-comparison-050.html">作者筛选制度比较050</a>的企业门槛、greenlight和IP/退出权。</p>
+<p>一名专业人士可以很熟练地完成被分配的关卡、代码或美术任务，却从未经历以下整轮工作：</p>
+<ol>
+<li>自己提出一个值得验证的玩家体验问题；</li>
+<li>将它压成能力与时间允许的小型可玩原型；</li>
+<li>向真实玩家交付并观察预期外的反馈；</li>
+<li>根据现实证据保留或推翻原始目标；</li>
+<li>独立裁定做与不做，并为结果保留可复用的知识与作品。</li>
+</ol>
+<p>这称为 <strong>FULL-CYCLE AUTHOR PRACTICE / 全周期作者练习</strong>；<strong>不是</strong>“每个人必须兼任所有专业岗位”。多人分工团队也可能共同经历完整作者循环。</p>
+<p><em>教育实验线索</em>：
+- <strong>S1（2023）</strong> Riikka Aurava与Kati Sormunen：系统性综述汇集2010–2022年25篇Game Jam原始研究，归纳跨学科知识、认知与元认知、社交及实践技能的可能学习收益；同时指出研究场景异质，不能将jam自动等同于长期能力形成。原文：https://www.sciencedirect.com/science/article/pii/S2666557323000071
+- <strong>S1（2026-06-19发表；2026-08-31正式版本）</strong> Arya与Bani-Taha：以一处GGJ站点的回顾性访谈研究Game Jam如何连接业余/正式教育与职业经验；受访者把从idea到working prototype的全流程经验视作重要收益。研究明确承认单站点、自述回忆、缺乏雇主和指导者访谈的限制；<strong>不能</strong>推算“参赛者几年后成为职业主创”的胜率。原文：https://link.springer.com/article/10.1007/s44217-026-01810-5
+- <strong>S1（2021）</strong> Aurava、Meriläinen等在芬兰普通高中环境的研究：Game Jam可嵌入正式教育，但资源、教师能力、非竞技性和包容设计影响参与门槛与体验，不能将高强度jam浪漫化为人人适用的教育替代品。原文：https://www.sciencedirect.com/science/article/pii/S2212868921000192</p>
+<p><strong>核心边界</strong>：一次48小时活动的完成度 ≠ 可持续作者能力；持续做项目的能力还取决于家庭经济、时间、合作网络、作品署名、受众与重试机会。此处仅说明“训练目标”和“训练格式”可能不同，并未估计中国与欧美参与者的形成率差异。</p>
+<hr />
+<h1 id="23">23. 两次不同的筛选：有没有形成能力，以及有没有资格使用能力</h1>
+<p>必须将教育与组织选择明确分开：</p>
+<ul>
+<li><strong>FORMATION GATE / 形成关</strong>：学生或员工是否真实获得过自定题目、外部取材、原型验证、目标修正的完整练习机会？</li>
+<li><strong>AUTHORITY GATE / 授权关</strong>：当他已经做出证据充分的作品后，是否有资格发起下一轮原型，掌握核心方向、争取资源并在失败后再次尝试？</li>
+</ul>
+<p>二者不能互为代理。存在专业执行很强但尚无完整作者练习的人；也存在已建立作者能力，却长期缺少组织内创作授权的人。</p>
+<h3 id="_2">可证伪的研究变量</h3>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>不应只问</th>
+<th>应测量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FORMATIVE TASK DISTRIBUTION</td>
+<td>从业多少年、毕业于哪所学校</td>
+<td>做过几次自己定义题目并完成全循环的原型</td>
+</tr>
+<tr>
+<td>GOAL REVISION UNDER FEEDBACK</td>
+<td>善不善于写方案</td>
+<td>出现反例后曾否主动改变目标、删去原定功能</td>
+</tr>
+<tr>
+<td>ARTIFACT-TO-RIGHTS CONVERSION</td>
+<td>有多少优秀Demo</td>
+<td>哪些Demo作者获得团队、持续项目权、署名和后续再尝试权</td>
+</tr>
+<tr>
+<td>SECOND-ATTEMPT SURVIVAL</td>
+<td>是否曾参与成功产品</td>
+<td>失败后能力、关系、资金与原型通道有多少被保存</td>
+</tr>
+<tr>
+<td>NEGATIVE CONTROLS</td>
+<td>学历高/低、中资/外资</td>
+<td>控制职业、家庭资本、项目类型、入行年代、领域知识和组织规模</td>
+</tr>
+</tbody>
+</table>
+<p>这里的竞争性解释包括行业成熟商业函数、组织治理、招聘结构、平台市场条件、家庭与个人经历。<strong>不能因为“应试结构”和“执行者困在原岗位”同现，就断定前者已被证明造成后者</strong>；也不能以一家特殊孵化部门的存在反推全行业数量级。</p>
+<p>与<a href="/heroes-portal/book/research-notes/creator-selection-institution-comparison-050.html">050</a>、<a href="/heroes-portal/book/research-notes/capability-reproduction-trap-horizontal-discovery-048.html">048 能力复制陷阱</a>及<a href="/heroes-portal/country-studies/china/023-creator-class-formation-intergenerational-reproduction.html">中国023创作者阶层再生产</a>联动。</p>
+<hr />
+<h1 id="24">24. 当前最小结论</h1>
+<blockquote>
+<p><strong>“应试教育过拟合”是本项目对中国好学生综合征更上游、更统一的机制描述：一个系统长期奖励外部出题、稳定rubric、有限上下文、快速收敛与按时交卷，可以生产极强的routine expertise，却不保证adaptive expertise。真正的产业风险发生在这种封闭域高表现被错误外推到开放决策：会议被组织成现场考试，立项被当成题目冻结，benchmark变成答案册，缺资源替代改问题，完成答卷替代持续研究。中国商业游戏工业随后可能进一步奖励这种能力，于是教育形成与行业版本产生连续性。独立游戏则处在几乎相反的任务分布：题目要自己找、上下文要自己扩、答案可能不存在、现实反馈可以推翻目标。因此老中研究以后不能只问“执行为什么强、原创为什么弱”，而必须测 TRAINING-DISTRIBUTION FIT：一个人在什么题域里被训练得很强，这套能力又被错误泛化到了哪里。</strong></p>
+</blockquote>
+<hr />
+<h1 id="25-judgment-devaluation2026-10">25. JUDGMENT DEVALUATION：将不确定性决策误判成随机/投机（2026-10增量）</h1>
+<h2 id="251">25.1 作者新增观察与独立理论命题</h2>
+<p>作者指出的现象不只是“应试精英缺乏模糊决策能力”，而是<strong>部分封闭题域高绩效者会在价值与方法上贬低这种能力的存在</strong>：数学/考试式、快速确定对错的hard skill才算真本事；涉及概率、模糊目标、市场时机、作者审美、可逆转向的判断被笼统归为运气、投机或事后归因；错误立项时则主张“失败以后再选就行”。</p>
+<p>定义工作术语：
+- <code>CERTAINTY-SKILL BIAS / 确定性技能崇拜</code>：误把有唯一标准答案/短期可评分，当作衡量全部专业能力的标准。
+- <code>JUDGMENT DEVALUATION / 决策能力贬值</code>：将可学习、可校准、可审计的概率判断与深度不确定性决策，错误归入不可评价的纯随机。
+- <code>RESIDUAL-AS-LUCK / 把模型残差归因于运气</code>：仅凭粗粒度范式解释成败，遗漏变量一律视作噪声，拒绝校正自身领域知识或模型。
+- <code>RESELECT FALLACY / 重新选择即重置谬误</code>：认为失败后再选便能回到首次选择前状态，忽视沉没投入、不可逆专用技能、人员、发行窗口、团队信任与资本机会成本。</p>
+<p><strong>注意</strong>：这是作者对某些交谈与职场经验提出的机制假说，不是对“中国高学历者”或任何学校毕业生的已测定普遍属性；职业、产业、家庭与企业激励可能共同作用。</p>
+<h2 id="252-vs">25.2 必须区分五层任务，而不是“确定技术 vs 纯运气”二分</h2>
+<ol>
+<li><strong>确定性求解</strong>：规则完整、存在可靠标准答案，重在推理/执行。</li>
+<li><strong>可估计风险决策</strong>：已知或能合理估计概率及损失，重在收益/风险/校准。</li>
+<li><strong>不确定条件下预测</strong>：对未来事件作概率预测，通过长期校准与区分能力评价。</li>
+<li><strong>深度不确定性决策</strong>：未知选项、市场与概率，重在试验、控制可承受损失、获取信息、保留转向余地。</li>
+<li><strong>创造性问题/目标定义</strong>：决定何种体验或新市场值得被创造，重在跨领域知识、作者目的、原型检验与动态修改目标。</li>
+</ol>
+<p>训练/评分方法不可互推。不能因为第五类无法事先证明成功，就宣称它不具备专业性；也不能因为有人作出大胆判断，便免除后续证据责任。</p>
+<h2 id="253">25.3 外部理论与可直接利用的证据</h2>
+<ul>
+<li><strong>Frank H. Knight（1921）风险与真正不确定性</strong>：不能计算精确风险的决策仍然是创业判断和组织能力的重要研究对象。1921原著： https://www.econlib.org/library/Knight/knRUP.html 。现代澄清Westgren &amp; Holmes（2022）：https://link.springer.com/article/10.1007/s40926-021-00183-z 。</li>
+<li><strong>Baron &amp; Hershey（1988），Outcome Bias in Decision Evaluation</strong>：5个实验显示，被试在对决策前信息相同的情境，仍因结果好坏评价思考质量与人更好/更差。说明单次成功/失败不能充分测量当时的决策质量。 https://pubmed.ncbi.nlm.nih.gov/3367280/ 。</li>
+<li><strong>Mellers等（2014），Psychological Strategies for Winning a Geopolitical Forecasting Tournament</strong>：多大学两年预测竞赛中的概率训练、团队讨论与跟踪改进概率校准和辨别力；反驳“未来不确定=预测只有运气”，但不能把地缘事件预测实验直接外推成游戏原发范式的预测准确率。 https://www.psychologicalscience.org/journals/psychological-science/0956797614524255/ 。</li>
+<li><strong>Sarasvathy（2001），Causation and Effectuation</strong>：在创业未知环境中可从已有手段/伙伴/可承担损失开始创造机会，而非一定先预测最优市场目标。该论文主要建立理论框架，不当作已证实的国别成功率。 https://journals.aom.org/doi/10.5465/AMR.2001.4378020 。</li>
+<li><strong>Dixit &amp; Pindyck（1994），Investment under Uncertainty</strong>：不可逆投资下保留等待/实验选择权有价值，重选不是时光倒流。https://press.princeton.edu/books/paperback/9780691034102/investment-under-uncertainty ；检索版 https://www.jstor.org/stable/j.ctt7sncv 。</li>
+<li><strong>Klein等，Recognition-Primed Decision</strong>：资深消防指挥员能利用丰富领域图式作快速情境判断；快决策可以是高水平专业能力，但必须区分经验型快速识别与缺乏领域积累的拍脑袋。原研究重刊：https://journals.sagepub.com/doi/10.1518/155534310X12844000801203 。</li>
+</ul>
+<h2 id="254-2k">25.4 与2K模型相连：模型无法表达的不是全部随机</h2>
+<pre><code class="language-text">narrow reference repertoire + high closed-domain score
+→ confidence in simple familiar rubrics
+→ complex rationale treated as poor communication / unnecessary
+→ unexplained business outcomes assigned to chance
+→ little motive to expand knowledge or learn probabilistic judgment
+→ choice-making rights remain concentrated despite weak model
+</code></pre>
+<p>这条是机制推演而非已识别的教育因果。与“2K内存”概念的关系是：<strong>有效领域图式/外部记录/团队知识集成不足</strong>，而非人体硬件容量真的等于2K或学历越高硬件越差。</p>
+<p>识别关键反例：高水平领域专家有时也用极短规则迅速决策，但可交代何种经验支撑规则、何种信号说明规则失效。判断是否“2K”不能看PPT页数/脑图尺寸，要看<strong>是否识别反例与未纳入变量</strong>。</p>
+<h2 id="255">25.5 必须分开评价事前质量、事后结果、学习能力</h2>
+<ul>
+<li><strong>EX ANTE DECISION QUALITY</strong>：作选择当时掌握的证据、假设、已知风险、低成本检验以及可接受损失。</li>
+<li><strong>EX POST OUTCOME</strong>：作品最终结果；仍需时间尺度、市场条件及可比项目基准。</li>
+<li><strong>CALIBRATION / LEARNING</strong>：同类多次判断中，概率是否校准、能否主动更新信念、避免自我保护式事后归因。</li>
+</ul>
+<p>同理：优秀决策可能遭遇失败，不良决策可能幸运成功；但长期结果也不可被无限用“运气”忽略。</p>
+<h2 id="256">25.6 下一轮测量实验</h2>
+<p>对持有真实决策权的人使用同类游戏提案，要求：
+1. 预先记录“成功/失败信号、关键变量、假设被推翻条件”；
+2. 对预期结果以概率或区间表达不确定性，而不是要求每次唯一正确答案；
+3. 允许有成本的查资料、采访玩家、做demo或等待以取得信息；
+4. 在补充反证后决定继续、删减、停项或改写目标；
+5. 复盘时盲化最终市场结果，先评估当时的判断，再观察长期预测准确率；
+6. 固定同口径分母比较教育经历/原型经验/职位/组织权限，不用少数精英的轶事推国家差异。</p>
+<h2 id="257-pabl">25.7 与中国普通作者PABL的具体连接</h2>
+<p><a href="/heroes-portal/book/research-notes/pabl-solo-author-scope-down-career-054.html">研究054（内购人生PABL）</a> 2018第一手访谈指出作者先测试搜索机制可行，再据已有阅读写作/PS资源主动缩小范围，未知商业结果时仍完成并发行。《前程似锦》是<strong>不确定条件下主动管理可控变量</strong>的例子，不是证明他事先准确预测销量。第三作至2026能观察到作品延续，但其生存资金、就业与失败路径未知；不可将持续发售误写成“决策总是正确”。</p>
+<hr />
+<hr />
+<h1 id="26">26. 决策能力的合法性：为什么“只有确定答案才算硬功夫”可能阻断作者培养</h1>
+<p>本节续第25节 <code>JUDGMENT DEVALUATION</code>：新增的不只是“谁能作出模糊决策”，更是<strong>谁承认在不确定性条件下仍存在可学习、可评估、可负责的专业判断力</strong>。以下为作者提出的解释框架及可核反例，尚无证据支持将该态度归因于中国所有高学历者。</p>
+<h2 id="261">26.1 知识处理、理性信念和决策目标必须分开</h2>
+<p><strong>Keith E. Stanovich（1994）：Dysrationalia</strong>，独立于智力测验成绩的理性信念与合理行动能力，不能把高智力/成绩直接视作理性决策的充分条件。原文：https://journals.sagepub.com/doi/10.3102/0013189X023004011；Stanovich &amp; West（2014）关于 IQ≠RQ 的研究摘要：https://eric.ed.gov/?id=EJ1032814 。</p>
+<p>本项目进一步提出 <code>COMPETENCE-LEGITIMACY OVERFIT / 能力合法性过拟合</code>：当长期评分生态只承认存在清晰答案、短期可判对错的技能，参与者可能误认“不能立刻给出唯一正确解”的审美、市场、创业、战略判断只是运气/投机。<strong>这是机制假说而非Stanovich本人对中国教育的结论</strong>。它与第25节的“具体决策能力不足”不同：这里指<strong>否认别人拥有可学习的决策能力</strong>，进而影响人才选拔与资源配置。</p>
+<p><strong>Kahneman与Gary Klein（2009）</strong>《Conditions for Intuitive Expertise》，将真正可训练专家直觉的两个重要条件限定为：
+- 环境中存在可学习的规律（不全是随机且非完全不可预测）；
+- 判断者有充分、有效的反馈以习得规律；
+主观自信不是准确性的可靠指标。https://doi.org/10.1037/a0016755 。</p>
+<p>故“秒懂／一页报告”既可能是多年专业模式学习后的高质量压缩，也可能是稀疏知识下的低质量拟合。<strong>不能通过报告篇幅、决策速度或职级判断是否有‘2K瓶颈’；必须观察模型失效边界、推翻条件和反馈校准。</strong></p>
+<h2 id="262">26.2 决策不仅是“预测答案”，还包括控制行动的不可逆性</h2>
+<p><strong>Bezos 2015、2016亚马逊股东信</strong>分别提出one-way（高不可逆，慎重）与two-way door（容易回退，快速试验），并指出高质量、高速度决策须能及时校正而非要求每次收齐全部资料。2016信“70%”仅是管理经验法则，不能变成游戏研发投入的定量通过线。
+- 2015：https://ir.aboutamazon.com/files/doc_financials/annual/2015-Letter-to-Shareholders.PDF
+- 2016：https://www.aboutamazon.com/news/company-news/2016-letter-to-shareholders</p>
+<p>由此修正第25节“再选谬误”：<strong>并不是重新选择总错误</strong>；在低成本可逆的试验中，快速重选就是好决策。错误是误以为已经招聘大团队、投入多年、产生项目专用资产、丢失窗口之后，下一次选择还能回到原始状态。</p>
+<p>真正的模糊决策技能至少包括：问题定义、获得新信息、建立小试验、限制损失、管理可逆性、识别异常、概率校准，以及保留继续选择的经济/心理/组织空间。</p>
+<h2 id="263-localthunk">26.3 LocalThunk：学校分数不代表作者形成，设计先例的缺席有时也是主动决策</h2>
+<p><strong>P0作者第一手博客（2026-02-20）《Bad Grades》</strong>：https://localthunk.com/blog/bad-grades</p>
+<ul>
+<li>其原机械工程成绩尚可，但为追随编程兴趣在接近毕业时转到计算机科学，部分课程勉强及格；课外则长期编写模拟程序。</li>
+<li>曾花两年多制作未完成、未命名的战略模拟游戏，回顾时仍将其视为自己坚持创作十年的重要训练；不能以学分/毕业时间/首个作品是否发售评价这段作者能力形成史。</li>
+</ul>
+<p><strong>P0作者个人开发年表（2025-03-06）</strong>：https://localthunk.com/blog/balatro-timeline-3aarh</p>
+<ul>
+<li><code>Balatro</code>始于2021-12私人朋友间纸牌游戏，随后迭代为单人机制实验；不是先做成熟赛道数据选择。</li>
+<li>作者<strong>有意识回避同类Roguelike/Deckbuilder</strong>，为了保留“自己探索、犯错、重复造轮子”的兴趣，并明确承认此举不等于商业最优；2023-05出于手柄操作研究才首次玩《Slay the Spire》。</li>
+<li>2022年有朋友投入几十小时试玩，令作者调整范围；2023年因迁居离职、已有储蓄而短期全职3–6个月，并不表明人人都可无成本全职独游。</li>
+<li>2023-05底Steam仅48愿望单；2023-06底通过小主播、社区反馈及发行商接触，才形成更新的商业判断；不能后验编造作者一开始准确预测数百万销量。</li>
+<li>作者的后来成功需考虑伙伴支持、个人时间资本、外部传播与运气；本人2025-09《I’m Slow》反思了冲刺工作带来的倦怠：https://localthunk.com/blog/im-slow 。</li>
+</ul>
+<p><strong>解释：<code>DELIBERATE REFERENCE ISOLATION</code>（有意识参考隔离）</strong>≠被动信息茧房。前者拥有实践经验和查找渠道，选择暂时不吸收特定类型惯例并持续接受现实反馈；后者可能不知道有哪些选择或否认其他路径的合法性。<strong>广泛知识储备对作者可能有益，但不是要求所有创作者在新项目构想阶段先玩遍同一赛道的唯一正确流程。</strong>此人是幸存者，不能由成功反推主动回避参考必然提高成功率。</p>
+<h2 id="264">26.4 两个普通失败者：作者自主权不等于判断能力、完成作品不等于经济存活</h2>
+<p><strong>P0开发者本人 2024-04《Zofia — Post Mortem》</strong>：https://itch.io/blog/716710/zofia-post-mortem</p>
+<ul>
+<li>原始构想是本地合作RPG需求；团队多轮改动魔法、美术与对话系统，美术路线更换约使项目多两年工作量，局部意见不断冲淡核心设计支柱。</li>
+<li>抢先体验时作品完成度与用户预期错配，测试反馈不充分且影响士气；作者回顾发现本地合作实际使用比例很小。</li>
+<li>案例说明即使<strong>有权自发题、允许充分讨论</strong>，若缺少系统耦合分析、范围控制、阶段性止损和准确市场反馈，也会失败。不能把失败简单归类为创作者不够勇敢或仅仅市场随机。</li>
+</ul>
+<p><strong>P0开发者本人 2020《Rose Seed Replica postmortem》</strong>：https://lezliz.itch.io/rose-seed-replica/devlog/179880/rose-seed-replica-postmortem-mistakes-were-made</p>
+<ul>
+<li>作者自报约三年开发及生活维持成本超过€26,000，首周卖130份、约€1,000收入；成本含最低生活与基础设施，不是单项制作预算。</li>
+<li>资金来源包括政府创业支持、零工和私人存款，不能省略其存活条件；作者详细反思分支内容过多、工期低估、营销入口不足，发售前只有268个愿望单。</li>
+<li>这是<strong>有个人目的主权、能完成作品，但没建立可持续商业判断与资本约束</strong>的案例。失败者一手账本应同《Balatro》作者时间线并列分析，不能只讲后来成功者如何“早有洞见”。</li>
+</ul>
+<h2 id="265-pabl">26.5 三案例加中国普通作者PABL的最小比较</h2>
+<table>
+<thead>
+<tr>
+<th>案例</th>
+<th>有证据的决策行为</th>
+<th>已知结果</th>
+<th>禁止后验推断</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PABL《前程似锦》2017–18</td>
+<td>自主提出搜索调查玩法，测试可行性，现学编程缩小范围</td>
+<td>首作完成、2019/2026仍有后续作品</td>
+<td>连续全职/净利润/早期销量预测正确</td>
+</tr>
+<tr>
+<td>LocalThunk《Balatro》2021–24</td>
+<td>业余长期实验、有意识参考隔离、依据试玩与商业信号渐增投入</td>
+<td>成功上市，市场远超初期预期</td>
+<td>事先看准赛道、回避学习同类作品是成功原因</td>
+</tr>
+<tr>
+<td>《Zofia》2024复盘</td>
+<td>有原创目标与协作授权，但未控制范围及产品/反馈时机</td>
+<td>完成1.0，未达作者商业预期</td>
+<td>所有充分授权的团队都不擅长项目管理</td>
+</tr>
+<tr>
+<td>《Rose Seed Replica》2020复盘</td>
+<td>明确作者目标，最终完成，但制作估时与需求判断不足</td>
+<td>作者自报严重财务失败</td>
+<td>原创内容没价值、后续一定失败</td>
+</tr>
+</tbody>
+</table>
+<p>以上四例是<strong>机制对照，不是代表性国别样本</strong>。与第25节的 <code>EX ANTE DECISION QUALITY / EX POST OUTCOME / CALIBRATION</code> 三层相连：不同案例都能贡献对失败成本、反馈机会与判断质量的理解，只有足够完整的时间线与当时可得信息，才能避免结果偏差。</p>
+<h2 id="266">26.6 对作者传记与企业评价的四项补充字段</h2>
+<ul>
+<li><code>COMPETENCE_LEGITIMACY</code>：管理者承不承认独立判断/概率/体验取舍是可检验的职业技能？</li>
+<li><code>VALID_FEEDBACK</code>：当事人是否在有规律环境中反复获得明确反馈？何时转入新领域，经验是否失效？</li>
+<li><code>REVERSIBILITY_AUDIT</code>：每项关键决定会损失多少现金、人员、时间与后续选项？</li>
+<li><code>REFERENCE_POLICY</code>：主动隔离已有范式、广泛参考、还是被动信息缺失？是否能在需要时主动搜索和修正？</li>
+</ul>
+<p><strong>本轮最小结论：确定性执行、开放问题理性和作者实践是交叉而不等同的能力；更危险的不是某个人不会预测，而是其拥有资源裁决权时，否认专业决策判断可被训练、且把自己既有的封闭评分器推广为唯一合法的能力标准。</strong></p>
+<hr />
+<h1 id="27-2026-10-08">27. 谁评判新作者：创意预测能力与证据阶段（2026-10-08增量）</h1>
+<p>本节从第25–26节的“模糊决策能力被贬值”推进到独立的<strong>创意预测／创意鉴别能力</strong>（creative forecasting / idea selection）。作者先前对高校应试精英、管理者认知容量、同行霸凌与创新者识别困难的观察是待测机制，<strong>不能直接当作国别群体平均差异的证据</strong>。</p>
+<h2 id="271">27.1 管理者不一定比真正参与创作的人更会识别新创意</h2>
+<p><strong>S1：Justin M. Berg（2016），《Balancing on the Creative Highwire》，Administrative Science Quarterly。</strong> 339名马戏创意行业从业者预测新演出的观众评价，并用13,248位观众反馈评估预测准确性；研究还包括实验。发现：<strong>创作者预测别人的新创意时比管理者准确，但评价自己的创意时未保持优势；过去偶然成功的低质量创意也会削弱这种优势。</strong> 实验支持角色训练的解释：创作者通常兼有发散（生成）和收敛（筛选）练习，管理者可能长期主要练习收敛评估。领域为马戏，<strong>不是已测的中国游戏策划，亦非“所有经理都不如作者”。</strong>
+- 一手学术摘要：https://www.gsb.stanford.edu/faculty-research/publications/balancing-creative-high-wire-forecasting-success-novel-ideas
+- 期刊：https://doi.org/10.1177/0001839216642211</p>
+<p><strong>S1：Mueller, Melwani &amp; Goncalo（2012），《The Bias Against Creativity》，Psychological Science。</strong> 两项实验操纵对减少不确定性的动机，发现人们即使表面赞成创造力，也可能在希望消除不确定性时产生隐性反创造力偏差，且影响识别创造性方案的能力。该实验不能估计中国教育造成多少百分点的偏差，但提供“口号支持创新 ≠ 真实判定能力”的可实验机制。
+- https://www.psychologicalscience.org/journals/psychological-science/0956797611421018/</p>
+<p><strong>S1：Berg（2019），《When Silver Is Gold》，OBHDP。</strong> 五项实验中，参与者评价自身尚未完成的创意，往往低估最有潜力的初始方案、将后来最好的选项排第二；提高抽象层次的评估方式可改善。<strong>不能认为创作者自己对自己永远最准。</strong>
+- https://www.gsb.stanford.edu/faculty-research/publications/when-silver-gold-forecasting-potential-creativity-initial-ideas</p>
+<h2 id="272">27.2 数量级压力测试：专家项目评审与完成稿评审不必同方向</h2>
+<table>
+<thead>
+<tr>
+<th>场景 / 研究</th>
+<th>观察规模</th>
+<th>主要结果</th>
+<th>不能推出</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>医学科研项目申请（Boudreau、Guinan、Lakhani、Riedl 2012/后续论文）</td>
+<td>142名专家、150份提案、<strong>2,130随机匹配评价</strong></td>
+<td>方案新颖性增加1个标准差，预期排名下降约4.5个百分点；认知距离/理解问题可能重要</td>
+<td>“所有专家审查总是惩罚新颖性”</td>
+</tr>
+<tr>
+<td>科学期刊完成稿（Teplitskiy、Peng、Blasco、Lakhani 2022《PNAS》）</td>
+<td><strong>49期刊、27,323份投稿</strong>（20,538生命科学+6,785物理科学）</td>
+<td>论文新颖性最高五分位录用概率较最低五分位高约<strong>6.5个百分点</strong>（摘要的模型口径）；“常规性”同时也正相关</td>
+<td>“投稿录用=早期项目容易取得经费”；不能认为所有机制厌恶新颖性</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>项目随机评审研究：https://dash.harvard.edu/entities/publication/73120378-ab5f-6bd4-e053-0100007fdf3b ；后续同行评审文章：https://pmc.ncbi.nlm.nih.gov/articles/PMC5062254/</li>
+<li>PNAS：https://www.pnas.org/doi/10.1073/pnas.2118046119</li>
+</ul>
+<p><strong>核心区分</strong>：early proposal ≠ working prototype ≠ completed artifact。事前未知越大，概念陌生且评审者缺少相关领域图式时，可能更难识别价值；作品可验证性提高后，新颖性不必然受到惩罚。两项研究的领域、评价单位和新颖性测量方法不同，差异不能未经识别就全部归因为“从提案到成品”的时间效应。</p>
+<h2 id="273">27.3 游戏一手误判对照：不要用结果成功直接谴责当时评审人</h2>
+<p><strong>P1：吉田修平2012-02-10《Game Informer》访谈</strong> https://gameinformer.com/b/news/archive/2012/02/10/shuhei-yoshida-interview</p>
+<p>索尼当年拒绝承担《Demon&rsquo;s Souls》欧美发行，吉田修平承认失误。他回顾曾试玩接近完成的版本约2小时仍卡在开头，形成负面印象；同时说明早期版本帧率和网络功能有问题，无法清晰展示最终体验。Atlus与Namco接手相应地区发行。</p>
+<p>这可以分为：<strong>A.作品阶段展示/Vertical Slice未充分呈现产品价值；B.评审者未有效识别潜在体验价值。</strong> 不能从后来成功推出当时那个有技术问题的版本已十分优秀；也不能把日本大企业一次误判推导成中国或西方的比例结论。</p>
+<h2 id="274-2k">27.4 与应试过拟合／2K模型的精确关系</h2>
+<p>机制假说：</p>
+<p>```text
+长期在外部题目/单一评分器中获得高绩效
+→ 将可快速给出答案视作唯一合法技能
+→ 既无充分原创实践，也没有对新创意的校准记录
+→ 倾向以既有作品相似性替代未知创意价值
+→ 取得项目否决权后将自身理解困难误判为“创意没有价值”
+→ 原型机会受限，后续作者训练与评价分母进一步收窄
+```</p>
+<p>但必须同时测试<strong>逆向机制</strong>：有些组织可能激励实际新颖性；资深经理可能拥有更好的预算纪律/跨项目风险管理；创作者可能高估自己的创意；方案被拒绝可能因为测试条件、资金和技术问题，而非“领导2K”。</p>
+<p><strong>以评审人的履历/职级替代 creative-forecasting 记录，是当前作者研究应警惕的外生代理变量错误。</strong></p>
+<h2 id="275">27.5 训练和鉴别的建议，不要再陷入“只换一套评分器”</h2>
+<p>对初学者保留低成本原型入口；对成熟创作者可用<strong>盲评可玩作品→作者解释玩家体验目标→小额实验→观众行为→记录事前判断及否决理由→追踪下一次提案</strong>。</p>
+<p>最需要追踪的是：评审者对不同作者的预测是否在长期得到校准；新颖作品被拒后是否存在低成本证伪机会；多次失败者是否展现可观察的学习和有效重构。单个名校/海外履历、经理简历、一次销量或一次投票<strong>都不构成原创鉴别能力的充分证据</strong>。</p>
+<p>与<a href="/heroes-portal/book/research-notes/creator-selection-institution-comparison-050.html">研究050</a>、<a href="/heroes-portal/book/research-notes/double-fine-amnesia-public-pitch-cohorts-051.html">研究051</a>及<a href="/heroes-portal/book/research-notes/pabl-solo-author-scope-down-career-054.html">普通作者PABL研究054</a>联动。固定比较时点、提案分母和重复进入的作者，不能只访成功作品与高曝光工作室。</p>
+<hr />
+<hr />
+<h1 id="28-2026-10-08">28. 决策节奏过拟合：开放问题为何被做成现场收卷？（2026-10-08增量）</h1>
+<p>这一节不另立“中国人不会决策”的并行理论，而是在 <code>EXAM-OVERFIT</code> / <code>MEETING-AS-EXAM</code> 基础上，补入一个此前没有真正量化的维度：<strong>组织究竟如何决定“什么时候回答、什么时候还应该研究”？</strong></p>
+<h2 id="281-decision-tempo-overfit">28.1 <code>DECISION-TEMPO OVERFIT / 决策节奏过拟合</code></h2>
+<p>作者提供的交流材料显示一种待验证的日常组织行为：</p>
+<ul>
+<li>模糊而重要的问题直到会议开始才交给相关人员；</li>
+<li>参与者在缺少资料与预研的条件下现场给出方案；</li>
+<li>上级把“很快能得到一个答复”视为工作效率；</li>
+<li>在非紧急情境下，主动申请更多调查、比较与试验时间的建议仍难被理解；</li>
+<li>当一份方案可以提交时，知识工作就被认定为已完成。</li>
+</ul>
+<p>这不是纯粹的权力压制，也不是“某位管理者性格差”的充分证据。问题在于：</p>
+<blockquote>
+<p><strong>把封闭考试中“必须立即作答、到点交卷”的时间制度，迁移到本可通过新增信息大幅改善的开放决策。</strong></p>
+</blockquote>
+<p>对应旧章：
+- <code>EXTERNAL PROBLEM DEFINITION</code>；
+- <code>SHORT-CONTEXT PERFORMANCE</code>；
+- <code>ANSWER-CLOSURE BIAS</code>；
+- <code>COMPLETION OVER IMPROVEMENT</code>。</p>
+<p>但本节要再分开三个不同变量：
+1. <code>RESPONSE SPEED</code>：多快提交一个可听的方案？
+2. <code>DECISION QUALITY</code>：事前有多少证据、方案比较、错误代价审计？
+3. <code>LEARNING VALUE</code>：决策过程保留了多少可迁移知识和修正能力？</p>
+<p>高 response speed 不自动等于高 decision quality，也不自动意味着低质量。有些紧急、可逆、熟悉任务就应该立即决策。</p>
+<h2 id="282-value-of-information-blindness">28.2 <code>VALUE-OF-INFORMATION BLINDNESS / 信息增益盲区</code></h2>
+<p>在决策分析中，额外调查、测试与证据搜集是否值得做，核心是比较：</p>
+<ul>
+<li>通过新增信息降低错误决策概率及损失的预期收益；</li>
+<li>调查/实验的直接成本；</li>
+<li>延迟决策带来的窗口损失和机会成本。</li>
+</ul>
+<p>正式邻接概念：<code>Expected Value of Information (EVI/VOI)</code> 与 <code>Expected Value of Sample Information (EVSI)</code>；这里借鉴其逻辑，<strong>不声称能从匿名对话给出精确货币化数值</strong>。</p>
+<p>S1：
+- ISPOR 2020 Value of Information Introduction：https://www.ispor.org/heor-resources/good-practices/article/value-of-information-analysis-for-research-decisions-an-introduction
+- 美国国家研究委员会《Environmental Decisions in the Face of Uncertainty》信息价值部分：https://www.ncbi.nlm.nih.gov/books/NBK200840/</p>
+<pre><code class="language-text">If expected benefit from better information &gt; research + delay costs:
+    investigate / prototype first
+Else:
+    decide now / cheap reversible probe
+</code></pre>
+<p>因此：</p>
+<blockquote>
+<p><strong>“现场拿出方案”与“先研究数日”之间不存在永远正确的答案；优秀的决策能力包括判断何时值得延迟收敛。</strong></p>
+</blockquote>
+<p>截图个例的诊断条件是：问题并非迫在眉睫、存在可低成本取得的新材料/对照方案、这些材料有实质可能改变决策，却没有被要求或允许获得。</p>
+<h2 id="283-research-work-invisibility">28.3 <code>RESEARCH WORK INVISIBILITY / 研究劳动不可见性</code></h2>
+<p>部分组织对“工作”的默认可见形态可能是：
+- 当场表态；
+- 很快提交PPT或方案；
+- 会议达成一致；
+- 任务开始执行。</p>
+<p>而：
+- 追踪资料来源；
+- 核验需求前提；
+- 扩展陌生案例；
+- 对冲突证据保留不确定性；
+- 设计能否证伪的 cheap experiment；</p>
+<p>容易被误认成尚未开始工作。</p>
+<p>这是一种<strong>评价偏差候选机制</strong>，不能根据一例认定普遍存在。</p>
+<p>它能使“做得好的人”承担额外不利：</p>
+<pre><code class="language-text">fast deliverable
+→ supervisor learns &quot;one-day answer is available&quot;
+→ next task allocates even less research time
+→ research/information-gathering becomes unbudgeted
+→ stronger exam-like decision loop
+</code></pre>
+<p>真正要问：</p>
+<blockquote>
+<p><strong>组织记录的是“第一份方案何时交”，还是“最终决策在投入相同资源后有多大改善”？</strong></p>
+</blockquote>
+<p>这也连接 <code>双环学习</code>：如果组织只改进“下次开会更快提交”，却不检验“为什么要在会上决定”，反馈仍停在single-loop。
+- <a href="/heroes-portal/cross-industry/double-loop-learning-defensive-routines-001.html">跨行业：Double-Loop Learning / Defensive Routines</a>。</p>
+<h2 id="284">28.4 权力、父权、信息不对称与应试过拟合：四者不能互相替代</h2>
+<p>对会议现场速答，至少存在四种竞争解释：</p>
+<table>
+<thead>
+<tr>
+<th>候选机制</th>
+<th>关键预测</th>
+<th>反证方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>EXAM OVERFIT</code></td>
+<td>非紧急开放问题也偏向现场速答、不能容忍“待查”，跨组织持续</td>
+<td>同人遇开放问题会主动争取资料/时间</td>
+</tr>
+<tr>
+<td><code>AUTHORITY / STATUS</code></td>
+<td>越高级越难承认未知、越有权现场收卷；下级缺修改题目权</td>
+<td>同等组织权力下不同训练者行为明显不同</td>
+</tr>
+<tr>
+<td><code>INFORMATION ASYMMETRY</code></td>
+<td>领导事先掌握资料/目标，实际只在分配执行任务</td>
+<td>证据表明上级自身也无预研，需团队真正决策</td>
+</tr>
+<tr>
+<td><code>REAL URGENCY / COORDINATION</code></td>
+<td>时间窗口短、决策可逆或信息难在期限内改善</td>
+<td>低紧迫、收益大的研究同样被禁止</td>
+</tr>
+</tbody>
+</table>
+<p>相关动力还可能来自商业压力、行业经验、资源预算，而非仅教育经历。</p>
+<p>所谓“父权混入形式权力”目前保留为H；不能凭一段私聊证明具体组织或管理者的长期心理机制。</p>
+<h2 id="285">28.5 决策过程四种正交能力</h2>
+<ol>
+<li><code>PROBLEM OWNERSHIP</code>：敢问目标本身对不对。</li>
+<li><code>INFORMATION SEARCH</code>：知道缺什么，主动找材料。</li>
+<li><code>DECISION-TEMPO CALIBRATION</code>：知道何时立即定、何时等证据、何时做可逆小实验。</li>
+<li><code>FEEDBACK-BASED REVISION</code>：新信息来了会改题，而不只是优化原答案。</li>
+</ol>
+<p>“能立刻给出一个看上去合理的方案”主要测第2与第3项以外的一部分表达/经验调用能力；不能代表四项全部。</p>
+<h2 id="286-question-first-evidence-next-decision-last">28.6 反考试化会议协议：<code>QUESTION FIRST, EVIDENCE NEXT, DECISION LAST</code></h2>
+<p>仅用于<strong>非紧急且真实存在多种开放选项</strong>的任务，不把程序官僚化成另一套强制考试。</p>
+<p><strong>A. 明确决策问题和裁决权</strong>
+- 谁决定？
+- 谁提出目标？
+- 谁承担错误代价？
+- 目标本身能不能被修改？</p>
+<p><strong>B. 先列最小信息缺口</strong>
+- 现有事实/推测/未知；
+- 可能改变结论的证据；
+- 哪项资料几小时可得、哪项要几天；
+- 不等待的损失。</p>
+<p><strong>C. 至少保留两个可行动方案</strong>
+- 包括“不行动/分阶段试”；
+- 每个方案的可逆性、资源、失败成本；
+- 避免把第一份上交方案当成默认获选方案。</p>
+<p><strong>D. 决定信息获取节奏</strong>
+- 紧急、信息价值低：立即决策；
+- 不确定但可逆：小实验/原型；
+- 不确定、损失大且新证据可能改结论：先分配调查周期；
+- 若延迟本身代价高：同时购买选项或分阶段提交。</p>
+<p><strong>E. 会议不是收卷，而是裁决</strong>
+- 哪项新证据改变了原方案？
+- 为什么此时已有足够理由commit？
+- 什么条件出现时我们会撤销本次决定？
+- 何时复盘预测误差和研究成本？</p>
+<p>这个协议绝不是说“每次都开三天会”；它强调以<strong>信息价值与可逆性</strong>选择动作时间。</p>
+<h2 id="287">28.7 可证伪审计：同类项目比较即时会议与预研会议</h2>
+<p>如果要验证此机制，采用固定起点的项目或会议队列，比较：
+- <code>ADVANCE_BRIEF_LEAD_TIME</code>：会前多久明确任务？
+- <code>EVIDENCE_EXPANSION</code>：有多少新的独立资料被吸纳？
+- <code>ALTERNATIVES_COUNT</code>：讨论过多少实质不同的方案？
+- <code>PREMISE_CHALLENGE</code>：是否允许改变目标？
+- <code>DECISION-TO-EXPERIMENT_LATENCY</code>：从意见到首个低成本验证多久？
+- <code>FORECAST_CALIBRATION</code>：事前置信区间与后续结果差异；
+- <code>REWORK_COST</code>：方向错误造成的返工与错失窗口；
+- <code>LEARNING_RETENTION</code>：复盘是否修改后续规则与决策权配置。</p>
+<p>测量时对任务难度、紧迫度、资料可得性、组织权力、行业生命周期和成员资历分层；不要“研究组赢一回”就推出普遍规律。</p>
+<p><strong>公开材料边界</strong>：聊天截图仅用于匿名机制抽取，不保留普通人的可识别姓名、群聊细节和可反推的工作岗位。</p>
+<h2 id="288">28.8 本轮结论</h2>
+<blockquote>
+<p><strong>应试过拟合不只决定“谁来出题”，还可能决定“大家认为多快交卷才算聪明”。真正的开放决策能力包括对新增信息价值的判断：必要时快速行动，必要时保护调查与原型窗口，必要时推翻最初题目。若组织把快速提交等同于高绩效，甚至把会前搜证和延迟收敛当成低效率，便会系统性地惩罚本来能改善决策的认识劳动。</strong></p>
+</blockquote>
+<hr />
+<h1 id="29-closed-book-decision-vs-research-first-decision2026-10-09">29. CLOSED-BOOK DECISION VS RESEARCH-FIRST DECISION：把“会议考试化”做成可检验实验（2026-10-09）</h1>
+<p>本节是现有 <code>MEETING-AS-EXAM / DECISION-TEMPO OVERFIT</code> 的测量增量，<strong>不是</strong>另立应试过拟合理论。</p>
+<h2 id="291">29.1 从截图中提取的作者观察（不作人群比例证据）</h2>
+<p>案例中的关键不是上级是否有正式决定权，而是一个尚未明确方向、可以事先调查的问题被压成现场答题：没有提前提供研究问题，讨论迅速收敛，执行被立即启动，而提出“分几天研究、比较方案再定”未获得可见的正面处理。</p>
+<p>相邻案例包括：
+- “大厂会议：无预研→现场问答→即时定案”；
+- “学生转专业：只有先在原专业得到高分才具备转专业资格”；
+- “独游创业：把先写完整规格、拿融资、配置部门看作唯一正统”；
+- “评判模糊决策：认为只有确定答案的技能有价值，未知决策都是运气”。</p>
+<p>前两条分别指组织与校园规则；后两条涉及生产惯例与社会评价。<strong>相似性只证明值得比较，不证明同一教育因果已经成立。</strong></p>
+<h2 id="292">29.2 最小双条件对照实验</h2>
+<p>选择同等开放程度的实际产品提案与研究题目，以同类资历人员随机分组：</p>
+<ul>
+<li><strong>A：CLOSED-BOOK / EXAM-TEMPO</strong>：会议现场首次收到问题，20分钟交一份答案。</li>
+<li><strong>B：RESEARCH-FIRST / QUESTION-REVISION</strong>：提前72小时收到问题，允许公开资料、竞品试玩、采访、讨论和小原型；参与者可提交“先改题”或“暂不决策”方案。</li>
+<li><strong>C：TIME-MATCHED CONTROL</strong>：同样72小时日历时间，但限制外部信息搜集，观察收益是来自思考时间、信息扩展还是题目修改权。</li>
+</ul>
+<p>尽可能记录实际工作时长与参与成本，避免简单把 B 的资源优势误判为认知能力优势。以配对任务或交叉设计控制领域专长和题目差异。</p>
+<h3 id="_3">预先锁定的评价指标</h3>
+<ol>
+<li><code>QUESTION_CHALLENGE_RATE</code>：主动识别初始题目隐含假设并提出可检验替代定义的比例。</li>
+<li><code>EVIDENCE_EXPANSION</code>：新增外部资料的相关性、来源独立性与反证覆盖，而非链接数量。</li>
+<li><code>OPTION_SET_BREADTH</code>：实际可执行备选方案种类及关键 trade-off。</li>
+<li><code>UNCERTAINTY CALIBRATION</code>：预报成功概率、关键假设与失败信号，长期观测后校准。</li>
+<li><code>REVERSIBILITY AWARENESS</code>：是否区分可廉价试错与难以逆转的资源承诺。</li>
+<li><code>EX-ANTE DECISION QUALITY</code>：由盲评专家根据当时已知资料评估，不以最终结果回填“当时理应知道”。</li>
+<li><code>ARTIFACT / PROTOTYPE QUALITY</code>：有条件时用真实玩家/用户任务验证，而不是由上级满意度评分。</li>
+</ol>
+<p><strong>禁止把“方案更长、会议更多”当质量提升。</strong> 若 B 只是材料更多却不能推翻错误前提，实验不支持我们的强假说。</p>
+<h2 id="293">29.3 理论接口：迁移不是自动发生</h2>
+<ul>
+<li>2007年 <code>Transfer from structured to open-ended problem solving in a computerized metacognitive environment</code> 研究以231名13–14岁学生开展不同元认知支持条件的实验，发现支持组在近迁移与远迁移的过程/结果上优于控制组。它支持“训练安排可改变开放问题表现”，<strong>不直接证明中国应试教育造成产业决策缺陷</strong>。https://www.sciencedirect.com/science/article/abs/pii/S0959475207001053</li>
+<li>2022年 <code>Transfer of metacognitive skills in self-regulated learning</code> 指出，远迁移依赖学习者对目标任务具有充分的领域策略知识；不能只说“聪明人会自动迁移”。https://link.springer.com/article/10.1007/s11409-022-09322-x</li>
+<li>2025年 <code>Far Transfer of Metacognitive Regulation</code> 在学生随机分组训练中观察到幅度较小的远迁移效应；说明可训练，但不能把教学干预写成万能药。https://link.springer.com/article/10.1007/s10648-024-09983-x</li>
+</ul>
+<h2 id="294">29.4 对作者创新教育的操作修正</h2>
+<p>在“完整作者练习”中保留两种不同任务：</p>
+<ul>
+<li><strong>给定题目做原型</strong>：训练专业执行、约束处理、缩模、交付；</li>
+<li><strong>允许推翻题目的原型</strong>：训练题目是否值得做、如何提出反证、什么时候不做或另做。</li>
+</ul>
+<p>二者都应练；若只练第二种，可能失去专业交付纪律；若只练第一种，则继续把原型制作成新型考试。</p>
+<blockquote>
+<p><strong>本项目新的判断纪律：不能因某人能快速拿出一个答案就默认他具备开放决策能力，也不能因某人要求更多资料就默认他更有判断力。判断质量须看：信息增量是否改变了方案、反证是否被认真对待、成本是否可逆、长期校准是否改善。</strong></p>
+</blockquote>
+<p>第29节的实验只测量<code>DECISION-TEMPO / OPEN-DECISION QUALITY</code>，不直接证明教育到组织代际传递。涉及招聘、晋升、授权、下一代评价函数复制的假说与外部实证另见<a href="/heroes-portal/book/research-notes/china-creator-constraints-three-layer-map-018.html">创作者三层约束018 §3.6</a>和<a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes/blob/main/OPEN-QUESTIONS.md">OQ-022</a>。</p>
+<h1 id="28-20232026">28. 二次回读用户2023–2026截图：伪开放问题、惩罚型评分与认知责任倒置</h1>
+<p><strong>来源等级：O / 作者提供的匿名聊天截图、公开自述截屏和观点观察；本节是待验证机制，不作为人群频率、他人能力或教育因果的确定证据。</strong> 不收录私人参与者姓名/身份、图片或心理诊断。此前讨论在创新教育和案例研究中反复忽略下列问题，这里只保留确有增量的部分。</p>
+<h2 id="281">28.1 主观题不等于真正开放：隐藏评分器的服从考试</h2>
+<p>作者2024-07-08讨论指出：一旦“主观题”只是在测试是否摸中权威偏好，它仍属标准答案制度，甚至让学生进一步练习察言观色。2023-12对话中管理者笼统要求“你做个创新的，自己想”，却不定义目标、资源、验证渠道及可保持的裁决权，此为<strong>名义授权、实质上级隐藏评分</strong>。</p>
+<p><strong>研究变量：</strong>
+- 谁能定义目标与成功条件（不只是“谁能提出idea”）；
+- 是否允许质疑原题、带入额外证据、拒绝上级前提；
+- 评委是否可随结果任意变更隐性标准；
+- 方案被否后是否能获得具体、可行动的理由和试验机会。</p>
+<p>禁止把任何开放式命题都说成阴谋：真实开放问题也可能需要目标和预算边界。关键是<strong>可谈判的目标权</strong>和<strong>可审计的评价权</strong>。</p>
+<h2 id="282">28.2 临时脑暴轶事的首要证据是工作流程，不是参与者脑力</h2>
+<p>2024年群聊转发一位自称游戏公司策划的公开回忆：四位策划被临时召集、无事前告知与材料、五分钟内无人产生新提案。<strong>不能从一个自述推定参会员工普遍无原创能力</strong>。更高价值的机制问题是为何某些专业组织会将创作研究组织为<strong>即兴限时考试</strong>，而不是先调查、原型、独立探索和迭代。</p>
+<p>应查实会议目的、是否提前研究、后续项目成果与员工真实职业路径；`MEETING_AS_EXAM`的直接受测对象应首先包含<strong>管理者对创作流程的设计能力</strong>。</p>
+<h2 id="283">28.3 考试结果的道德化：自我惩罚可能先于正式淘汰</h2>
+<p>2026-10公共文章截图中，作者使用“高考宗教化／自我绝罚”等说法，将一次升学挫折转化为长时段放弃竞争、快乐或亲密关系的自我惩罚叙事。不能由一篇自述推断普遍比例，更不能以截图诊断当事人或假定单一因果。</p>
+<p>值得检验的机制是：当评价从<strong>有限范围的能力测量</strong>变为<strong>人是否配得到幸福、能否继续尝试的道德资格</strong>，个人可能在制度正式拒绝前就主动退出试验与第二次机会。这把`EXAM OVERFIT`与`SELF-SANCTION / 自我制裁`相连；需要保护失败后重试的个人正当性，但应独立研究心理健康、家庭和经济因素。</p>
+<h2 id="284_1">28.4 玩家评价同样是工业能力形成的输入：既要保护批评权，也要分清“目标失效”与“对标补齐”</h2>
+<p>2024-10与2026-09群聊批评“照着另一款游戏补齐全部惯例，补完就成同质化产品”，同时包含对《WARDOGS》、日本Steam评论、Tabelog差评文化的互相反驳。</p>
+<p><strong>两种不同的产品批评：</strong>
+1. <strong>合法目标内缺陷</strong>：基础稳定性、服务/服务器、既有付费承诺、操作可读性、游戏自己的体验目标没有实现；
+2. <strong>强加熟悉品类规范</strong>：因没有某个成熟竞品的功能/节奏，就否认项目其自身目标或设计探索的存在权。</p>
+<p>第一种不能因为游戏“实验性”就被羞辱或排除；第二种是否在不同语种/市场更常见，是新假说而非从一款游戏地区好评率可以推断的事实。该群聊内部存在日本玩家更严苛的对照，反对“中国独有”的直觉。比较需控制游玩版本、语言、价格、联网质量、评分阶段和玩家选择偏差。</p>
+<p><strong>待测两侧循环</strong>：已接触游戏参考集→消费者熟悉度偏见→企业对市场负面反馈的理解→更多对标产物→玩家参考集更窄；不能预设教育是主因。</p>
+<h2 id="285_1">28.5 平台分发是竞争性解释，不可以把所有同质化都归为做题家</h2>
+<p>群聊提出“平台／赛博地主控制信息流；若大家产品可替代则重新沦为流量竞赛”。这构成独立于教育的<strong>发现成本、用户注意力和平台租金</strong>机制假说：</p>
+<ul>
+<li>复制既有品类也可能导致产品可替代性升高，发行投入成为瓶颈；</li>
+<li>依赖平台流量不自动证明平台必然反原创，新颖作品也可能从推荐机制获利；</li>
+<li>要区分Steam、国内渠道和短剧平台等不同市场制度，比较平台规则、曝光、转化与真正用户留存；不直接用“赛博地主”修辞替代实证测量。</li>
+</ul>
+<p>与本库平台、渠道为王和原发创新/同构异性创新研究连接，补齐<strong>供给侧教育—需求侧评价—平台发现机制</strong>三分法。</p>
+<h2 id="286">28.6 认知责任倒置：当汇报接受者具有职位权威</h2>
+<p>作者原始职场观察：复杂立项论证可能被拥有决定权、却不愿深入处理关键变量的主管解释为“下属表达不好”；这不只是“2K内存”隐喻，而是<strong>对理解失败由谁负责的权力分配</strong>。</p>
+<p>严格区分：
+- 报告真有不清楚、缺重点的问题；
+- 决策者精通领域，依靠正确的高水平压缩快速询问关键前提；
+- 决策者缺领域知识，拒绝可追溯的细节与反证，同时把模型外变量视作无关信息。</p>
+<p>不看PPT页数/汇报时长判断优劣。检测方法：一页摘要＋完整可追溯因果链＋关键反例、证伪条件与复核问答；观察上级是否能指出可能改变结论的关键遗漏。</p>
+<h2 id="287_1">28.7 专业选择的长期复利，以及咨询市场对“确定答案”的商业供给</h2>
+<p>2024-06作者使用公共创业者职业路径作例，意在说明早期专业与职业路径会改变未来信息、技能、伙伴和选择空间；<strong>“事后才知道谁对”不等于决策时无人持有更好的私人信息</strong>。但不能从成功传记推断单次选专业是全部后续成就的因果原因。</p>
+<p>同期提到高考志愿咨询/个人职业导航：咨询服务可能<strong>补全学生缺失的信息</strong>，也可能以令人恐惧的确定性建议<strong>替客户作决定、使客户不再学习自主调查</strong>。不得笼统否定行业；重点测咨询是否提高委托人自主判断、行业研究和反事实比较能力。</p>
+<p><strong>新增机制：DECISION OUTSOURCING / 决策外包</strong>。在缺乏开放域训练时，社会不只是缺少判断技能，还可能形成售卖“替你选择”的权威产品市场。将其与已有`AUTHORIAL AGENCY`及个人目的主权区分。</p>
+<h2 id="288_1">28.8 三种惩罚如何连接而不能互相证明</h2>
+<ul>
+<li><strong>自我惩罚</strong>：失败者把一次测评视作长期人格负债；</li>
+<li><strong>组织惩罚</strong>：不合隐藏评分器的想法在讨论前就被否决或羞辱；</li>
+<li><strong>消费评价惩罚</strong>：玩家把个人偏好/熟悉惯例上升为对全部新产品的规范要求。</li>
+</ul>
+<p>三者具有“单一评价标准跨越其适用范围”的机制相似性，<strong>但不是已经证明由同一教育原因造成的同一现象</strong>。研究目标应是确定哪些边界下评价尺度的错误迁移发生，以及谁能维护低成本试验与失败再试的空间。</p>
+<p><strong>本轮结论：不能只问中国是否产生新作者，也要问新作者所处的社会是否允许‘问题尚未定义清楚、原型尚未成熟、专业判断尚未被共识承认’这些正常阶段存在。</strong> 作者本人的经验、截图故事属于线索，不是统计证明。</p>
+<hr />
+<h1 id="29-2k2026-10">29. 创意鉴别的权力效应：不只是“2K决策者不懂”，还可能是有专业知识的人被职位与地位激励扭曲（2026-10）</h1>
+<p>承接第27、28节：<strong>把评价权给予一个专业人士，与使其更有能力识别新的创意，是两件独立的事情。</strong> 此节不声称所有中国高学历群体、所有中外企业管理者都具有这种偏差；机制证据主要来自国际跨行业实验与企业平台记录，用户职场轶事为提出问题的原始线索。</p>
+<h2 id="291-2025-research-policy">29.1 2025 Research Policy：专业知识的正作用可能被正式决策者身份抵消</h2>
+<p><strong>P1论文 Beretta, Deichmann, Frederiksen &amp; Stam (2025), &ldquo;Do you see what I see? How expertise and a decision-maker role influence the recognition and selection of novel ideas&rdquo;, Research Policy 54(1), 105139, DOI:</strong> https://doi.org/10.1016/j.respol.2024.105139</p>
+<ul>
+<li>第一项实验区分专家知识与正式决策角色；第二项使用一家跨国企业创意平台连续<strong>11个月</strong>的数据。</li>
+<li><strong>知识有助于识别/选择新颖创意；担任决策角色倾向减少对新颖创意的选择；专业知识优势在决策者角色下减弱。</strong></li>
+<li>边界：不是“晋升后智商下降”，未给出中国游戏公司、NExT或民间开发者的发生率；可以并列考察预算问责、职业自我保护、社会认可压力和早期技术/商业证据不足。</li>
+</ul>
+<h2 id="292-2018-amj">29.2 2018 AMJ：社会认可线索可以替代作品创造性的判断</h2>
+<p><strong>P1论文 Mueller, Melwani, Loewenstein &amp; Deal (2018), &ldquo;Reframing the Decision-Makers&rsquo; Dilemma&rdquo;, Academy of Management Journal 61(1), DOI:</strong> https://doi.org/10.5465/amj.2013.0887</p>
+<ul>
+<li>实验与准实验中，资源配置决策身份更易引发经济评估心态；<strong>社会认可较弱</strong>的创意，即使具有创造性，也更可能被降级。</li>
+<li>研究中决策角色、经济心态、社会认可水平与方案实用性评分没有直接同向关系，需严格区分`NO_SOCIAL_APPROVAL`（尚无先例/无人背书）与`NO_VALUE`。</li>
+<li>不要求决策者无视商业风险，而是要求不可将“缺少别人批准”直接变成“设计无效”的充分证据。</li>
+</ul>
+<h2 id="293-2025-obhdp">29.3 2025 OBHDP：创新背书的地位激励不是简单的利润激励</h2>
+<p><strong>P1 Wayne Johnson &amp; Brian J. Lucas（2025），&rdquo;The idea endorser&rsquo;s dilemma: How status dynamics disincentivize creative idea endorsement&rdquo;, OBHDP 190, 104439.</strong>
+DOI: https://doi.org/10.1016/j.obhdp.2025.104439</p>
+<p>四项研究显示：
+- 当管理者背书的员工创意失败，可能面临比创意成功时收益更大的社会地位损失；
+- 创意成功时，提出者得到的地位提升可能超过支持者，从而缩小二者的地位差距；
+- 实验中的管理者预期拒绝提案能够避免地位损失，甚至拉大其与提案员工的地位差距。
+- 研究提供<strong>可能的独立激励机制</strong>；绝对不能凭一段具体职场冲突诊断某位经理的主观动机，更不能当作中国独有的道德属性。</p>
+<p><strong>2026新增后果证据：</strong> Lim, Krause &amp; Katz (2026-09-23), &ldquo;Creative idea evaluation affects trust in decision-makers&rdquo;, European Journal of Work and Organizational Psychology，两个实验中创意被评委错误拒绝，会让提案者与旁观者对评委能力与信任下降。论文：https://doi.org/10.1080/1359432X.2026.2735268 。此结果不能直接外推为已经识别的员工离职因果效应。</p>
+<h2 id="294_1">29.4 决策权也可能改善筛选，不应浪漫化全面无领导</h2>
+<p><strong>P1 Keum &amp; See（2017），&rdquo;The Influence of Hierarchy on Idea Generation and Selection in the Innovation Process&rdquo;, Organization Science 28(4)</strong> https://doi.org/10.1287/orsc.2017.1142</p>
+<p>现场研究与实验发现：层级对<strong>创意生成阶段</strong>不利，却可能改善<strong>筛选选择阶段</strong>表现。这是对“越少管理权越创新”粗暴论断的实证反证。应将：
+- idea generation：去地位惩罚、鼓励非共识想法与开放参照；
+- low-cost experiment：验证问题价值、允许低成本失败；
+- resource selection：清晰预算与可否决标准、与有领域经验的评委协同；
+分为不同机制阶段，避免靠一套权力流程从提案伊始就过滤所有探索。</p>
+<h2 id="295-2k">29.5 与“决策能力贬值／2K缓存”关联的完整机制图（假说）</h2>
+<p>```text
+单一考试/执行型评价体系（候选上游之一）
+→ 以可量化的既有成绩任命项目评委
+→ 正式决策权改变其注意力、风险与社会地位激励
+→ 更依赖社会认可、成熟竞品和“先证明你一定成功”
+→ 低资源作者早期版本无法获得小额验证机会
+→ 有些创意通过脱离内部审批，在开放市场/平台获得玩家信号
+→ 事前被拒的版本与最终成功版本差异需严谨核算
+```</p>
+<p>注意：上游教育归因尚未建立，且跨国均有类似组织机制。真正要测的是<strong>不同机制的数量级与交互效应</strong>，而非假定所有创新拒绝均是无能或地位嫉妒。</p>
+<h2 id="296">29.6 研究设计与实验变量</h2>
+<ul>
+<li><strong>评委资历</strong>与<strong>正式批准权</strong>分开记录：同一评委在拥有/没有资源责任时如何评价同组匿名提案。</li>
+<li><strong>先例与认可操纵</strong>：匿名玩家试玩评分相同，随机改变“知名发行商支持／不支持”“大厂履历／普通作者”的信息，检查创新评分变化。</li>
+<li><strong>失败成本</strong>：不同预算、可逆性、资金来源，对合法风险控制进行分层。</li>
+<li><strong>决定时可见版本</strong>：封存pitch / prototype / demo / shipping版；最终销量不得倒推早期被拒版本已经具有相同质量。</li>
+<li><strong>评委损益</strong>：背书失败、背书成功、否决后竞争产品成功，各自的个人晋升/声望/预算后果。</li>
+<li><strong>决定记录</strong>：预先写明改变评委判断所需的关键证据、实验门槛与建议，不准事后修改。</li>
+</ul>
+<p>结论：优秀创新生态不只是培养原创者，还须培育<strong>有知识、能识别自身地位激励、愿给未知产品获得证据机会</strong>的评估者；但管理者合理的风险约束仍然是生产所需的专业能力。</p>
+<hr />
+<h2 id="30-2026-10-10exam-overfit">30. 2026-10-10：Exam Overfit 的更早来源——选择权有没有真正交接？</h2>
+<p>参见<a href="/heroes-portal/country-studies/china/037-family-school-agency-risk-hero-nondeparture.html">中国037家校控制、选择权与风险训练</a>。此前对考试/招聘/晋升中<strong>外部出题—标准答案—绩效筛选</strong>的分析，大多研究已经进入学校或公司的受评者；此次将样本往前推到<strong>形成第一份自选作品之前</strong>。</p>
+<p>两组独立变量不可混淆：
+1. <strong>封闭题域训练强度</strong>：课程、考核、错题、成绩压力和明确评分器。它可能训练可靠的基础知识与常规技能。
+2. <strong>选择权移交情况</strong>：学生是否能自定非考试阅读/项目目标、获得真实反馈、修改目标并承担有限后果。考试成绩不能作为其充分代理指标。</p>
+<p>特别关注一种竞争性路径：<strong>并非学生天生不愿选择，而是家校为了成绩和管理简化，减少了可选择的题目；此后雇主再次奖励擅长既定答案的员工，造成学习主权低迁移的组织再生产。</strong> 这仍是需测量的中介假说，不是“一切都因应试教育”的定论。</p>
+<p>研究最小样本须加入“未做任何作品却可能拥有兴趣”的学生/青年；只调查大厂员工无法估计被筛出队列。对照学校给出社团/导师机会的反例、高考成绩优秀却形成原创项目者、完全自主却不愿制作的人。合法安全边界、专业基础训练与学生自主权可以并存。</p>
+<h2 id="31-2026-10-10">31. 2026-10-10：知识摄入与指定材料竞争——应试教育的双重压缩</h2>
+<p><a href="/heroes-portal/country-studies/china/038-education-maker-funnel-empirical-measurement-ceps-pisa-ggj.html#6-2026-10-10-修订创意题分数--游戏知识语料与设计范式掌握">中国038第6节</a>修正了此前容易高估PISA创意思维的适用范围：<strong>被给定的情境中生成独特回答，不等于长期自主扩大游戏语法、发现新产品机会、制作并迭代原创游戏</strong>。OECD本身把测验限定为15岁、给定情境与短时开放作答；其得分并不测游戏阅历。</p>
+<p>新的<strong>可证伪机制</strong>：
+- 学校/家庭/培训机构决定<strong>哪些知识值得输入</strong>，并为特定范围的知识获取赋予高回报；
+- 由此可能减少超出课纲的阅读、游戏、创作工具、陌生品类和他人实践经验；
+- 狭窄且重复的信息语料限制了新设计可调用的<strong>规则关系</strong>，不仅是减少可排列组合的元素；
+- 职业/升学市场再奖赏<strong>可展示的履历成果</strong>，即Game Jam等活动也可能从自主探索变成标准化凭证；
+- 但好成绩与宽广阅历并不互斥，优秀学生可能主动获得广泛信息、掌握多种游戏语法；学校与Jam同样能提供跨阶层材料入口。</p>
+<p><strong>不允许</strong>以两个流行游戏的经历断言某一创作者胜过全国同龄人；不允许用个别“预制Jam”指控估计国内总体作弊率。要调查参照游戏的<strong>有效类型距离/规则机制种类、理解深度、输入来源、开放设计任务及事后玩家测试</strong>，而不是游戏时长或Steam库大小。尤其保留<strong>基础训练是正向输入</strong>和“模仿已有框架也可能是有价值的初学阶段”作为反压力。</p>
+<h2 id="32-2026-10-10">32. 导师负迁移：老一代可能不是不想教，而是根本不知道新题域怎么做（2026-10-10）</h2>
+<p>此前<code>Exam Overfit</code>侧重学生只会解外部规定题目；<a href="/heroes-portal/country-studies/china/039-frontier-creator-support-authority-rights-and-incubation.html">中国039第9节</a>补足其<strong>代际复制</strong>：年轻人通过玩家、MOD、Roblox及跨类型游戏阅历得到的实务知识可能不在学校或旧职业导师手里，但这些导师仍通过学历、职位与行业资历占据课程/评价/项目裁判权。</p>
+<p>研究需分开<code>会而不教／不会但自知／不会却仍作指导并保留否决权</code>。最后一类的<code>NEGATIVE MENTORSHIP TRANSFER</code>可能使指导减少真正的试验空间。测量导师有没有目标类型的真实作品、建议如何影响核心设计、学生能否保留替代方案、入组后规则语法输入是否收窄、陌生玩家测试是否改善。</p>
+<p>这不是反对工程、美术、组织等基础训练：<strong>知识与教学权应当按其实际有效范围配置，不得因资历自动扩展到未知产品方向</strong>。学校相对私企的改进速度差异仍属有反例的制度假说。</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / country-studies/china/032-exam-overfit-routine-expertise-open-domain-transfer.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

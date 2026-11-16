@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NExT Studios Portfolio Efficiency Audit 014：从早期小项目到 SYNCED 的资源升级 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl class="on"" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#2026-10-07" class="t2">2026-10-07 配套组织治理研究（避免只看卖了什么，不问谁能批准）</a><a href="#1-portfolio" class="t2">1. 为什么要做 portfolio 而不是只盯《重生边缘》</a><a href="#2-best-effort-public-master-list" class="t2">2. Best-effort public master list</a><a href="#3-early-portfolio-scope-hook" class="t2">3. Early portfolio：低/中 scope、单一 hook、相对清晰产品边界</a><a href="#death-coming" class="t3">Death Coming</a><a href="#irisfall" class="t3">Iris.Fall</a><a href="#bladed-fury" class="t3">Bladed Fury</a><a href="#unheard" class="t3">Unheard</a><a href="#biped" class="t3">Biped</a><a href="#crown-trick" class="t3">Crown Trick</a><a href="#4-early-portfolio-production-grammar" class="t2">4. Early portfolio 的共同 production grammar</a><a href="#5-onlineservice-escalation" class="t2">5. Online/service escalation：风险结构发生变化</a><a href="#6-syncedportfolio-regime-jump" class="t2">6. SYNCED：portfolio 中最大的 regime jump</a><a href="#7" class="t2">7. 效费比目前能说什么</a><a href="#_1" class="t3">可以说</a><a href="#_2" class="t3">不能说</a><a href="#8-portfolio-level-hypothesis" class="t2">8. 当前最强 portfolio-level hypothesis</a><a href="#9" class="t2">9. 对“圈养创新失败论”的修正</a></aside><article class="doc"><div class="col"><h1 id="next-studios-portfolio-efficiency-audit-014-synced">NExT Studios Portfolio Efficiency Audit 014：从早期小项目到 SYNCED 的资源升级</h1>
+<ul>
+<li>Status: RESEARCH NOTE / PORTFOLIO AUDIT</li>
+<li>Last verified: 2026-10-06</li>
+<li>Scope: NExT Studios 公开自研/主导项目的产品谱系与可观察效费比</li>
+<li>Boundary: 多数项目缺完整预算与 headcount，因此不做伪精确 ROI；用产品规模、开发周期、公开团队信息、Steam review、生命周期与停运状态做 qualitative / ordinal comparison。</li>
+</ul>
+<h2 id="2026-10-07">2026-10-07 配套组织治理研究（避免只看卖了什么，不问谁能批准）</h2>
+<p class="dc">新 <a href="/heroes-portal/country-studies/china/010-next-studios-greenlight-rights-governance-lifecycle-2017-2024.html">010 — NExT内部提案与绿灯权的时间线</a>核到2018年员工私人Demo转为公司游戏、100人日Review、双重匿名意见/经理最终仲裁与项目缩队回炉的<strong>直接管理者公开记述</strong>；2019腾讯母体约略提案、立项、上线数量的高管口述；2023人员组织调整与2024集团新立项策略。<strong>本014档统计的是上市作品的商业/产品状态，不是内部全部试作的cohort。</strong> “孵化30–40次、十多个产品化”不能与下方发售游戏作品清单一一对应或推ROI；2023项目部门调整不等于本清单所有小作品没有商业价值。</p>
+<h2 id="1-portfolio">1. 为什么要做 portfolio 而不是只盯《重生边缘》</h2>
+<p>单独看《重生边缘》很容易得到两个相反但都过强的结论：</p>
+<ul>
+<li>“NExT 圈养创新完全失败”；</li>
+<li>“《重生边缘》失败只是一次正常探索，不能代表 NExT”。</li>
+</ul>
+<p>更合理的方法是把 NExT 的公开 portfolio 分层：</p>
+<ol>
+<li>早期 small-scope / experimental；</li>
+<li>中等规模 premium；</li>
+<li>mobile / service experiments；</li>
+<li>scaled 2A / live-service；</li>
+<li>tech demos / shared technology。</li>
+</ol>
+<p>然后看资源扩大后，产品结果是否同步扩大。</p>
+<h2 id="2-best-effort-public-master-list">2. Best-effort public master list</h2>
+<p>下表综合 NExT 官方、Steam、MobyGames 与公开产品资料。它是“公开可识别项目清单”，不是腾讯内部所有项目的完整 inventory。</p>
+<table>
+<thead>
+<tr>
+<th>年份</th>
+<th>项目</th>
+<th>类型/角色</th>
+<th>当前状态</th>
+<th>研究备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2017</td>
+<td>Death Coming /《死神来了》</td>
+<td>小体量 premium puzzle</td>
+<td>released</td>
+<td>NExT 最早代表性差异化作品之一</td>
+</tr>
+<tr>
+<td>2017</td>
+<td>San Giorli /《三竹里》</td>
+<td>mobile puzzle / Kepler-related</td>
+<td>released</td>
+<td>早期实验性移动项目</td>
+</tr>
+<tr>
+<td>2017</td>
+<td>Shadow Mist</td>
+<td>small puzzle/action</td>
+<td>released/limited visibility</td>
+<td>legacy title</td>
+</tr>
+<tr>
+<td>2018</td>
+<td>Nishan Shaman /《尼山萨满》</td>
+<td>mobile music/culture</td>
+<td>released</td>
+<td>小体量文化实验</td>
+</tr>
+<tr>
+<td>2018</td>
+<td>Meowoof</td>
+<td>mobile small game</td>
+<td>released</td>
+<td>小体量</td>
+</tr>
+<tr>
+<td>2018</td>
+<td>Iris.Fall /《彩虹坠入》</td>
+<td>premium puzzle/adventure</td>
+<td>released</td>
+<td>强视觉、短流程</td>
+</tr>
+<tr>
+<td>2018</td>
+<td>Bladed Fury /《幽林怪谈》</td>
+<td>premium action</td>
+<td>released</td>
+<td>中国题材、有限 scope</td>
+</tr>
+<tr>
+<td>2018</td>
+<td>Project Siren</td>
+<td>digital-human tech demo</td>
+<td>tech demo</td>
+<td>技术资产，不等于商业游戏</td>
+</tr>
+<tr>
+<td>2018</td>
+<td>Arena of Valor Switch port</td>
+<td>port/support</td>
+<td>released</td>
+<td>不应与原创自研等价</td>
+</tr>
+<tr>
+<td>2019</td>
+<td>Unheard /《疑案追声》</td>
+<td>premium audio detective</td>
+<td>released, long tail</td>
+<td>portfolio 中商业/口碑最强样本之一</td>
+</tr>
+<tr>
+<td>2019</td>
+<td>佳期</td>
+<td>mobile cultural puzzle</td>
+<td>released/collab</td>
+<td>追梦计划/合作属性</td>
+</tr>
+<tr>
+<td>2020</td>
+<td>Biped /《只只大冒险》</td>
+<td>premium co-op puzzle/platform</td>
+<td>released, sequel later</td>
+<td>明确合作机制 hook</td>
+</tr>
+<tr>
+<td>2020</td>
+<td>Crown Trick /《不思议的皇冠》</td>
+<td>premium roguelike</td>
+<td>released</td>
+<td>Team17 联合发行</td>
+</tr>
+<tr>
+<td>2020</td>
+<td>Spiral Storm /《陀螺风暴》</td>
+<td>mobile card/RTS</td>
+<td>released/service history limited</td>
+<td>service experiment</td>
+</tr>
+<tr>
+<td>2021</td>
+<td>Metal Revolution /《金属对决》</td>
+<td>online fighting</td>
+<td>released in some markets / later unstable</td>
+<td>service/online obligation 明显更高</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>SYNCED /《重生边缘》</td>
+<td>F2P PvPvE looter shooter</td>
+<td>released → service ended 2024</td>
+<td>百人/五年、最大规模负样本</td>
+</tr>
+<tr>
+<td>2025</td>
+<td>Biped 2 /《只只大冒险2》</td>
+<td>premium co-op sequel</td>
+<td>released</td>
+<td>对早期成功 mechanic 的 sequel exploitation</td>
+</tr>
+<tr>
+<td>announced/cancelled</td>
+<td>Story of Seasons mobile-related project</td>
+<td>IP mobile collaboration</td>
+<td>not publicly released / cancelled or unresolved</td>
+<td>需继续核官方最终状态</td>
+</tr>
+</tbody>
+</table>
+<p>Core sources:
+- NExT official: https://www.nextstudios.com/next/index_en.html
+- Steam developer page: https://store.steampowered.com/developer/NEXTStudios
+- MobyGames credited catalog: https://www.mobygames.com/company/32033/next-studios/games/
+- public historical list: https://zh.wikipedia.org/wiki/NEXT_Studios (secondary only)</p>
+<h2 id="3-early-portfolio-scope-hook">3. Early portfolio：低/中 scope、单一 hook、相对清晰产品边界</h2>
+<h3 id="death-coming">Death Coming</h3>
+<p>Steam:
+- $6.99；
+- single-player puzzle；
+- 2017 release；
+- current English reviews 470, 83% positive.</p>
+<p>Source:
+https://store.steampowered.com/app/705120/Death_Coming/</p>
+<p>研究意义：
+- scope 很容易解释；
+- 玩法 hook 可一句话表达；
+- 内容规模有限；
+- 不承担服务器人口、赛季和长期 economy。</p>
+<h3 id="irisfall">Iris.Fall</h3>
+<p>Steam:
+- 2018；
+- single-player puzzle/adventure；
+- current English reviews ~345, 85% positive.</p>
+<p>Source:
+https://store.steampowered.com/app/907470/IrisFall/</p>
+<p>研究意义：
+- 强视觉长板；
+- 游戏机制直接围绕光影主题；
+- 产品义务有限。</p>
+<h3 id="bladed-fury">Bladed Fury</h3>
+<p>Steam:
+- 2018；
+- $9.99；
+- current total reviews &gt;3k including non-purchasers, purchaser reviews ~2.9k；
+- 简中评论明显多于英文。</p>
+<p>Source:
+https://store.steampowered.com/app/927250/Bladed_fury/</p>
+<p>研究意义：
+- 中国题材 premium 可以在有限 scope 内直接测试；
+- 不是“先搭长期服务再找玩家”。</p>
+<h3 id="unheard">Unheard</h3>
+<p>Steam:
+- 2019；
+- audio-based detective；
+- current purchaser reviews ~31k；
+- all-language reviews &gt;34k；
+- Overwhelmingly Positive；
+- 简中 purchaser reviews ~27k，英文 ~2.8k；
+- 后续跨主机版本。</p>
+<p>Source:
+https://store.steampowered.com/app/942970/Unheard_Voices_of_Crime/</p>
+<p>研究意义：
+- 这是 NExT portfolio 最强的“单一新 interaction → 清晰产品 → 长尾”样本之一；
+- 它说明 NExT 早期制度不是没有生产有效 0→1。</p>
+<h3 id="biped">Biped</h3>
+<p>Steam:
+- 2020；
+- two-player co-op / physics puzzle；
+- purchaser reviews ~9k，all-language reviews &gt;11k；
+- 2025 有 sequel。</p>
+<p>Source:
+https://store.steampowered.com/app/1071870/Biped/</p>
+<p>研究意义：
+- 一个清晰的合作控制 gimmick 足以支撑中小 premium；
+- sequel 说明 mechanic/IP 至少获得了继续投资的组织判断。</p>
+<h3 id="crown-trick">Crown Trick</h3>
+<p>Steam:
+- 2020；
+- $19.99；
+- Team17 + NExT；
+- English reviews ~567, 86% positive；
+- Metacritic 83 shown on Steam.</p>
+<p>Source:
+https://store.steampowered.com/app/1000010/Crown_Trick/</p>
+<p>研究意义：
+- 中型 premium + 外部 publisher；
+- 不支持“NExT 小项目全部靠腾讯流量”的简单说法。</p>
+<h2 id="4-early-portfolio-production-grammar">4. Early portfolio 的共同 production grammar</h2>
+<p>这些项目高度异质，但反复出现：</p>
+<ul>
+<li>单一明确 hook；</li>
+<li>低到中等内容义务；</li>
+<li>premium / finite product；</li>
+<li>小团队可直接理解的 scope；</li>
+<li>不依赖 massive concurrency；</li>
+<li>失败时损失相对可控；</li>
+<li>即使销量普通，项目仍可以 ship、形成 credits 和团队经验。</li>
+</ul>
+<p>这与 NExT 早期公开制度相吻合：</p>
+<blockquote>
+<p>self-proposal → small resource incubation → playable/vertical slice → review → expand if justified.</p>
+</blockquote>
+<p>因此“早期 NExT 只是技术演示，没有产品能力”不成立。</p>
+<h2 id="5-onlineservice-escalation">5. Online/service escalation：风险结构发生变化</h2>
+<p>Metal Revolution、Spiral Storm、SYNCED 等服务型/在线项目引入了完全不同的 obligation：</p>
+<ul>
+<li>server / matchmaking；</li>
+<li>content cadence；</li>
+<li>progression/economy；</li>
+<li>live balancing；</li>
+<li>acquisition；</li>
+<li>retention；</li>
+<li>concurrency；</li>
+<li>monetization；</li>
+<li>long-term operations。</li>
+</ul>
+<p>其中 SYNCED 是最清楚的 scale-up case。</p>
+<h2 id="6-syncedportfolio-regime-jump">6. SYNCED：portfolio 中最大的 regime jump</h2>
+<p>公开资料：</p>
+<ul>
+<li>2018 开始筹备；</li>
+<li>2019 团队从 13 人扩大到 48；</li>
+<li>后续百人规模；</li>
+<li>总开发约五年；</li>
+<li>2019 即以 2A、AAA pipeline / technology accumulation 为目标公开；</li>
+<li>项目目标长期发生变化；</li>
+<li>2023-09 launch；</li>
+<li>2024-03 后基本停止大更新；</li>
+<li>2024-09 service ended.</li>
+</ul>
+<p>Sources:
+- https://www.youxituoluo.com/522992.html
+- https://youxichaguan.com/archives/128234
+- https://www.gameres.com/903715.html
+- https://steamcommunity.com/app/1008080/allnews/
+- https://36kr.com/p/2855126478555781</p>
+<p>这使 SYNCED 与早期产品的差别不只是“质量好坏”，而是 production regime 彻底变化：</p>
+<table>
+<thead>
+<tr>
+<th>Early NExT</th>
+<th>SYNCED</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>finite premium</td>
+<td>F2P/live-service</td>
+</tr>
+<tr>
+<td>单一 hook</td>
+<td>PVE/PVP/build/characters/live ops</td>
+</tr>
+<tr>
+<td>小/中团队</td>
+<td>百人级</td>
+</tr>
+<tr>
+<td>小项目失败可接受</td>
+<td>五年组织能力建设载体</td>
+</tr>
+<tr>
+<td>ship 即完成主要价值</td>
+<td>上线只是长期义务开始</td>
+</tr>
+<tr>
+<td>acquisition 不要求大 DAU</td>
+<td>concurrency / retention 是生存条件</td>
+</tr>
+</tbody>
+</table>
+<h2 id="7">7. 效费比目前能说什么</h2>
+<h3 id="_1">可以说</h3>
+<ol>
+<li>早期小/中 premium portfolio 产生了多个已 ship、口碑稳定、部分具有明显长尾的产品；</li>
+<li>Unheard / Biped 的 current review scale 明显高于 Iris.Fall / Crown Trick 等，说明早期 portfolio 自身也有较大结果分布；</li>
+<li>SYNCED 的开发周期、组织规模和 asset production obligation 显著高于早期项目；</li>
+<li>SYNCED 上线不足一年停服，因此其直接产品市场结果与投入规模明显不匹配；</li>
+<li>但 SYNCED 可能产生工具、技术、人才训练和 pipeline 残值，不能把全部投入视为“归零”。</li>
+</ol>
+<h3 id="_2">不能说</h3>
+<ul>
+<li>不知道所有项目预算，因此不能给真实 ROI 排名；</li>
+<li>Steam review 不是销量；</li>
+<li>NExT 内部 shared staff / tech lab 成本无法按项目准确分摊；</li>
+<li>early small games 也可能得到腾讯共享资源；</li>
+<li>SYNCED 不能代表 NExT 所有“大项目”。</li>
+</ul>
+<h2 id="8-portfolio-level-hypothesis">8. 当前最强 portfolio-level hypothesis</h2>
+<blockquote>
+<p><strong>NExT 的制度在 small-scope 0→1 上有可观察成功；真正值得解释的是，当组织把“创新”与 2A/AAA 能力建设、F2P/GaaS、全球主流市场和大团队扩张绑定后，验证成本与错误持续成本是否非线性上升。</strong></p>
+</blockquote>
+<p>Status:
+PROMISING / one major scaled failure is not enough to prove a universal curve.</p>
+<h2 id="9">9. 对“圈养创新失败论”的修正</h2>
+<p>Reject:</p>
+<blockquote>
+<p>“NExT 所有项目都失败，所以腾讯内部创新无效。”</p>
+</blockquote>
+<p>Supportable:</p>
+<blockquote>
+<p>“NExT 早期 portfolio 证明大公司内部可以制度化产生有差异化的 0→1；SYNCED 则显示，当同一组织转向规模化、服务化和 AAA 能力建设后，原本低成本 portfolio search 的优势可能被高 obligation、目标漂移和资源升级抵消。”</p>
+</blockquote>
+<p>这比单纯成功/失败叙事更接近效费比问题。</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / book/research-notes/next-studios-portfolio-efficiency-audit-014.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

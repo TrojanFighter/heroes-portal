@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>腾讯式商业游戏“霸权语法”假说：行业正统、岗位训练与独立开发迁移 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl class="on"" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0" class="t2">0. 研究问题</a><a href="#1" class="t2">1. 为什么腾讯是“默认正统”候选</a><a href="#11" class="t3">1.1 规模与持续成功</a><a href="#12" class="t3">1.2 岗位体系把商业目标制度化</a><a href="#13" class="t3">1.3 人才外溢使方法离开腾讯继续传播</a><a href="#2-next" class="t2">2. NExT 是最重要的内部反证</a><a href="#21-production-regime-boundary" class="t2">2.1 腾讯高层公开材料反而明确承认 production-regime boundary</a><a href="#22-1500" class="t3">2.2 “稳定团队 / 1500 个决策”不是“大团队越大越好”</a><a href="#23-next" class="t3">2.3 NExT 不能暂时编码为“圈养创新完全失败”</a><a href="#3-persistence-hybridization-inversion" class="t2">3. 三种迁移状态：Persistence / Hybridization / Inversion</a><a href="#31-persistence-sea" class="t3">3.1 Persistence — Sea /《安尼姆的无尽旅途》</a><a href="#32-hybridization" class="t3">3.2 Hybridization — 张哲川 / 身梦科技</a><a href="#33-inversion-mario-pets" class="t3">3.3 Inversion — Mario囧 /《PETS》</a><a href="#4" class="t2">4. 技术/程序侧为什么更常出现“纯独游味”：当前机制</a><a href="#5" class="t2">5. 《无人》：非腾讯技术侧相邻样本</a><a href="#6" class="t2">6. “很多公司只是想成为腾讯而不可得”如何转成可检验命题</a><a href="#7" class="t2">7. “职业驯化”应操作化为重复目标函数训练</a><a href="#8" class="t2">8. 当前判断</a><a href="#h1-tencent-style-commercial-grammar-exists" class="t3">H1 — Tencent-style commercial grammar exists</a><a href="#h2-role-exposure-matters" class="t3">H2 — Role exposure matters</a><a href="#h3-programmer-purity-observation-may-be-real-but-mediated" class="t3">H3 — Programmer-purity observation may be real but mediated</a><a href="#h4-resource-mismatched-emulation" class="t3">H4 — Resource-mismatched emulation</a><a href="#h5-regime-boundary-can-be-known-institutionally-but-violated-individually" class="t3">H5 — Regime boundary can be known institutionally but violated individually</a><a href="#h6-team-continuity-is-distinct-from-resume-quality" class="t3">H6 — Team continuity is distinct from résumé quality</a><a href="#9-source-anchors" class="t2">9. Source anchors</a><a href="#10-boundary" class="t2">10. Boundary</a></aside><article class="doc"><div class="col"><h1 id="_1">腾讯式商业游戏“霸权语法”假说：行业正统、岗位训练与独立开发迁移</h1>
+<ul>
+<li>Status: RESEARCH NOTE / HYPOTHESIS / STRUCTURAL PRESSURE TEST</li>
+<li>Last verified: 2026-10-06</li>
+<li>Scope: 腾讯式商业游戏生产是否构成中国游戏行业最强的默认专业范式之一，以及这种范式如何通过岗位训练、人才流动、创业与 benchmark 扩散</li>
+<li>Related: china-commercial-game-training-role-origin-audit-005.md; china-commercial-game-training-role-origin-audit-006-tencent-producer-pressure-test.md; chillyroom-programmer-producer-to-plannerized-live-service-007.md</li>
+<li>Claim status: <strong>NOT A FORMAL CLAIM</strong></li>
+</ul>
+<h2 id="0">0. 研究问题</h2>
+<p class="dc">一个候选解释是：腾讯不仅是一家成功公司，也长期构成中国商业游戏产业最强的专业参照系之一。其成功规模、组织成熟度、人才流动与创业者外溢，使一套特定的产品与生产语言被广泛视为“成熟”“专业”“可规模化”的标准答案。</p>
+<blockquote>
+<p><strong>Tencent-style Commercial Game Hegemonic Grammar / 腾讯式商业游戏霸权语法</strong></p>
+</blockquote>
+<p>“霸权”在这里不是价值判断，而是指：一套实践在行业中取得足够大的商业成功、组织合法性和人才扩散后，逐渐成为默认参照，甚至让从业者在没有腾讯资源时仍然用腾讯式问题定义来理解自己的项目。</p>
+<p>当前不接受以下强说法：腾讯代表全部中国游戏；所有商业公司都在模仿腾讯；腾讯策划普遍缺乏创意；程序员天然更适合独立开发；commercial/live-service 与 indie/premium 必然对立。</p>
+<h2 id="1">1. 为什么腾讯是“默认正统”候选</h2>
+<h3 id="11">1.1 规模与持续成功</h3>
+<p>腾讯 2025 年本土市场游戏收入达到人民币 1642 亿元，同比增长 18%。规模本身不能证明行业都学腾讯，但能解释为什么腾讯经验在招聘、创业和融资中拥有强职业合法性，也解释腾讯离职者为何持续成为创业者、制作人和行业管理层。</p>
+<h3 id="12">1.2 岗位体系把商业目标制度化</h3>
+<p>腾讯当前公开招聘可直接观察到：数值策划负责战斗、养成、经济与投放并强调线上验证；用户运营负责生命周期、留存、版本活动与量化指标；系统/产品岗位负责功能指标、线上数据、玩家反馈和持续迭代。</p>
+<p>这些都是合理且专业的 live-service 能力。研究问题不是“这些能力错了”，而是：当目标函数切换到有限作品、极小团队和 premium 后，从业者是否仍把这些变量当作设计的普遍公理。</p>
+<h3 id="13">1.3 人才外溢使方法离开腾讯继续传播</h3>
+<p>2016 年行业媒体已粗略统计出约 35 家腾讯系知名创业公司。莉莉丝联合创始人袁帅从腾讯客户端程序转策划，离职后与旧同事创业，《刀塔传奇》迅速成为动作卡牌手游的重要行业标杆。腾讯经验因人才流动、创业与同行模仿持续扩散。</p>
+<h2 id="2-next">2. NExT 是最重要的内部反证</h2>
+<p>2018 年 NExT Studios 负责人公开把自己的制度与传统商业游戏模式对照：自下而上立项、创意与资历解绑、允许单一长板、前期小资源孵化，方向明确后再扩大投入；同时把商业游戏概括为“看准机会后大资源快速投入、搏爆款”。</p>
+<p>这说明“腾讯式商业游戏语法”不是外界强贴标签，而是腾讯内部创新组织设计制度时主动区别的参照物。NExT 同时否定“腾讯人天然不会做创新/作者型游戏”。真正变量仍是 production regime。</p>
+<h2 id="21-production-regime-boundary">2.1 腾讯高层公开材料反而明确承认 production-regime boundary</h2>
+<p>马晓轶的公开访谈给出了一个对本研究非常重要、而且比外部批评更直接的边界条件。2020 年他明确表示：腾讯当时的发行模式更适合“品类的头部产品”，因为腾讯积累的工具集也是朝这个方向形成的；如果产品类型不是头部类型，使用这些工具时会出现明显的匹配问题。换言之，<strong>腾讯高层本人公开承认腾讯能力栈存在 product-market / scale fit，而不是普适模板。</strong></p>
+<p>到 2024 年，他又用“0→1 → 1→10 → 10→100”框架进一步量化了这条边界：</p>
+<ul>
+<li>对买断制，他把约 300 万销量视作“0→1”的一个合格线，把约 800 万销量视作“1→10”的量级；</li>
+<li>对 GaaS / F2P，他明确表示在用户规模很小、仍处于 0→1 时“不建议”做免费游戏，并称在买断产品做到约 800 万销量之前都不建议转免费/GaaS；</li>
+<li>他给出的理由不是审美，而是 <strong>scale economics</strong>：用户规模不足时，F2P 的流失率与商业模式无法成立；如果约 200 万销量里 90% 都是核心用户，也没有必要为了理论上的扩圈强做移动端/GaaS；</li>
+<li>同一套战略又通过 Tencent Gameplay Innovation Fund（TGIF）从全球寻找 5–10 人级别的小团队和细分赛道 0→1 项目，而不是要求所有团队一开始就按腾讯头部 GaaS 组织形态生产；</li>
+<li>马晓轶 2020 年还明确表示“品类没有偏好”，非常小众的品类也值得投资，关键是先得到核心用户认可。</li>
+</ul>
+<p>这使原假说需要进一步收窄：</p>
+<blockquote>
+<p><strong>不能把“腾讯方法”理解成腾讯高层相信所有项目都应该腾讯化。恰恰相反，腾讯当前的资本配置逻辑公开承认：0→1、细分 premium 与 10→100 / GaaS 是不同 production regime。</strong></p>
+</blockquote>
+<p>因此更值得研究的不是“腾讯知不知道细分赛道不能照搬 GaaS”，而是：</p>
+<blockquote>
+<p><strong>公司层面已经知道 regime boundary，但长期在头部 F2P/live-service 岗位中受训的个人，在离开组织后是否仍会携带原 objective function。</strong></p>
+</blockquote>
+<p>这把“腾讯式霸权语法”从“管理层错误理论”改写为更强也更可证伪的 <strong>institutional-prior persistence</strong>：一个组织可以在投资层面高度理解多样生产制度，同时其主流业务仍会因为收入结构、岗位 KPI 与晋升机制，大规模训练某一种 problem framing。</p>
+<h3 id="22-1500">2.2 “稳定团队 / 1500 个决策”不是“大团队越大越好”</h3>
+<p>马晓轶在同一轮公开访谈中借与宫崎英高的交流提出：一款产品从立项到上线可能面对约 1500 个不同层面的决策，成熟团队因为长期共事，可以把大量决策转化为已经内化的共同知识；腾讯因此更愿意相信有历史积累的工作室，而不是只挖明星个人重新组队。</p>
+<p>这个论点支持的是 <strong>team-specific tacit capital / 团队隐性资本</strong>，而不是“豪华履历 + 大量人力 = 创新”。对本研究反而意味着：</p>
+<ul>
+<li>从 Ubisoft / 腾讯 / 网易等大厂抽取一批资深个人重新拼队，不等于继承原工作室的团队资本；</li>
+<li>“在某赛道做过十年”与“这批人作为同一个团队做过十年”必须分开编码；</li>
+<li>对小团队而言，长期稳定的共同 prototype / ship history 可能比成员简历总和更有解释力；</li>
+<li>大厂离职创业时，真正丢失的可能不仅是资源，还包括原组织替个人吸收的数百个默认决策。</li>
+</ul>
+<p>这也是后续 Role-Origin Dataset 应新增 <strong>team continuity / prior shared shipping history</strong> 字段的理由。</p>
+<h3 id="23-next">2.3 NExT 不能暂时编码为“圈养创新完全失败”</h3>
+<p>用户讨论中提出过“NExT 式内部圈养创新是否失败”的强判断，但当前公开证据不足以支持“完全失败”。2018–2019 年公开材料能确认 NExT 确实使用自下而上提案、100 人日 review、vertical slice、动态追加资源等机制，也产出过多款口碑型中小作品；NExT 官方目前仍以差异化、高品质、跨平台和新玩法探索作为公开定位。</p>
+<p>因此当前只能提出更窄的问题：</p>
+<blockquote>
+<p><strong>NExT 是否证明了大公司可以制度化地产生 0→1 prototype，却未必证明这种内部创新组织能够稳定产生与其人力投入相匹配的全球商业回报？</strong></p>
+</blockquote>
+<p>这需要补齐项目级 headcount、budget、销量/收入、取消项目和组织调整资料后再判断。不能用聊天中的“所有游戏都输了”直接升级为公开事实。</p>
+<h2 id="3-persistence-hybridization-inversion">3. 三种迁移状态：Persistence / Hybridization / Inversion</h2>
+<h3 id="31-persistence-sea">3.1 Persistence — Sea /《安尼姆的无尽旅途》</h3>
+<p>Sea 在腾讯魔方 11 年，先后承担《TNT》《全民水浒》《火影忍者》《一人之下》等项目主策或制作人职责。离职后，《安尼姆》在核心审美和玩法上有明显作者表达，但 production/business model 首先仍选择免费+内购 GaaS。Sea 后续直接把“先做手游”称为工作惯性，并承认很多大公司经验并不适合小公司，后续应降低预算、先由 1–2 人做核心 Demo。</p>
+<blockquote>
+<p>核心创意可以已经脱离腾讯主流，但目标函数与生产先验仍可能继续存活。</p>
+</blockquote>
+<h3 id="32-hybridization">3.2 Hybridization — 张哲川 / 身梦科技</h3>
+<p>张哲川进入腾讯前已是独立游戏作者，在 NExT 又长期负责创新项目和创意孵化。离职创业后，他明确提出“独游的创作方式 + 服务型游戏的商业化思路”。《塔方对决》及后续《Plants on Fire》表现为：0→1 先验证 3×3、Merge、PvP；1→N 再增加题材可读性、成长、经济、长期内容与服务化包装。</p>
+<blockquote>
+<p>这不是简单“被腾讯改造成商业游戏”，而是作者型 0→1 与服务型 1→N 的主动 Hybridization。</p>
+</blockquote>
+<h3 id="33-inversion-mario-pets">3.3 Inversion — Mario囧 /《PETS》</h3>
+<p>公开资料可确认 Mario囧在学生阶段已经长期参加游戏制作比赛和个人开发；苏希烔作为发明人出现在腾讯科技申请的游戏技术专利中；《PETS》由个人/极小团队约 5 个月完成，Steam 产品为单人、有限流程、约 2 小时的 premium puzzle-platformer。</p>
+<blockquote>
+<p>技术资本被保留，但 live-service 的成长、留存、经济与长期运营 obligation 没有一起迁移。</p>
+</blockquote>
+<h2 id="4">4. 技术/程序侧为什么更常出现“纯独游味”：当前机制</h2>
+<p>当前小样本中，技术 / programmer-generalist 更频繁出现单核心机制、短 prototype latency、有限 scope、实现成本直接可见、先做出来再判断、有限作品而非无限运营。</p>
+<p>更可检验的解释不是“程序员更有创意”，而是四个变量：implementation accountability、cost visibility、prototype authority、lower organizational mediation。它们与 programmer title 可能高相关，但也能被 technical planner、gameplay planner、AI coding 或高 ownership 制作人获得。</p>
+<h2 id="5">5. 《无人》：非腾讯技术侧相邻样本</h2>
+<p>《无人》主创无郎公开说明自己是计算机/渲染背景，曾在大厂中台做游戏引擎/UE 技术美术相关工作。离职后约 3 人开发，主动采用类似《8番出口》的单场景结构，以限制场景数量、集中发挥美术长板，玩法可压缩为“找异常、拍照”。</p>
+<blockquote>
+<p>这是 capability-shaped product selection + scope-first production 的清楚样本。</p>
+</blockquote>
+<p>当前公开资料不足以稳定编码为腾讯员工，因此只作为技术侧相邻样本，不进入 Tencent alumni treatment group。</p>
+<h2 id="6">6. “很多公司只是想成为腾讯而不可得”如何转成可检验命题</h2>
+<blockquote>
+<p><strong>Resource-mismatched Emulation Hypothesis / 资源错配型模仿假说</strong>：部分中小商业游戏公司采用由头部 F2P/live-service 企业验证过的组织、系统和指标语法，却没有对应的用户规模、投放能力、IP、资金、平台关系与长期内容产能，从而承担头部产品的 obligation，却无法获得头部产品的规模收益。</p>
+</blockquote>
+<p>后续可编码指标：团队很小却按完整职能表配岗；核心体验未验证便搭大量成长/经济/活动外围；用成熟爆款 benchmark 作为立项合法性；假设后续融资/买量/渠道会补足当前产品；依赖留存/LTV/付费深度但没有足够获客规模；试图复制长青产品的 content cadence 却没有相同 production perimeter。</p>
+<p>这条目前仍 UNDER-EVIDENCED，需要大量非腾讯中小公司样本。</p>
+<h2 id="7">7. “职业驯化”应操作化为重复目标函数训练</h2>
+<p>一个策划如果连续多年被奖励：留存、成长层、付费深度、用户分层、成熟 benchmark、版本产出和线上数据优化，那么这些能力会越来越强。</p>
+<p>问题只发生在目标函数切换以后：原目标函数变化 → 职业默认答案没有变化 → 旧 best practice 继续被调用 → 在新资源/商业环境里成为负迁移。</p>
+<blockquote>
+<p>“驯化”不意味着能力降低。恰恰相反：一个人可能因为在旧体系中过度专业，反而更需要 deliberate unlearning 才能适应新体系。</p>
+</blockquote>
+<h2 id="8">8. 当前判断</h2>
+<h3 id="h1-tencent-style-commercial-grammar-exists">H1 — Tencent-style commercial grammar exists</h3>
+<blockquote>
+<p>腾讯长期成功、规模、职业合法性与人才外溢，使其商业游戏方法成为中国行业最强默认专业语法之一。
+Status: PLAUSIBLE / STRUCTURAL EVIDENCE STRONG / INDUSTRY-WIDE CAUSAL GENERALIZATION NOT YET PROVEN.</p>
+</blockquote>
+<h3 id="h2-role-exposure-matters">H2 — Role exposure matters</h3>
+<blockquote>
+<p>长期负责 economy/meta/live-ops/retention 的岗位，相比高 prototype authority / implementation accountability 岗位，进入极小团队 premium production 时可能需要更多 unlearning。
+Status: SUPPORTED BY CASE CONTRASTS / NEEDS ROLE-ORIGIN DATASET.</p>
+</blockquote>
+<h3 id="h3-programmer-purity-observation-may-be-real-but-mediated">H3 — Programmer-purity observation may be real but mediated</h3>
+<blockquote>
+<p>技术/programmer-generalist 转独立后更常出现“单机制、有限 scope、直接 playable”的产品形态，但原因可能是 design-loop proximity、cost visibility 与 pre-existing author capital，而非职位本身。
+Status: PROMISING / SELECTION BIAS HIGH.</p>
+</blockquote>
+<h3 id="h4-resource-mismatched-emulation">H4 — Resource-mismatched emulation</h3>
+<blockquote>
+<p>中国大量中小商业团队可能复制头部公司的 product grammar 和 obligation，却缺少对应规模资源，从而形成“低配大厂”式失配。
+Status: PROMISING / CURRENTLY UNDER-EVIDENCED.</p>
+</blockquote>
+<h3 id="h5-regime-boundary-can-be-known-institutionally-but-violated-individually">H5 — Regime boundary can be known institutionally but violated individually</h3>
+<blockquote>
+<p>腾讯高层公开资本配置逻辑已经区分细分 0→1 / premium 与大规模 GaaS；因此负迁移若存在，更可能表现为岗位训练形成的 individual prior persistence，而不是“腾讯管理层不知道小赛道怎么做”。
+Status: DIRECT EXECUTIVE EVIDENCE FOR THE BOUNDARY / INDIVIDUAL-TRANSFER CAUSAL LINK STILL NEEDS DATA.</p>
+</blockquote>
+<h3 id="h6-team-continuity-is-distinct-from-resume-quality">H6 — Team continuity is distinct from résumé quality</h3>
+<blockquote>
+<p>长期共同开发形成的 tacit team capital 可能比单个成员的大厂履历更能解释复杂项目决策质量。
+Status: EXECUTIVE/INDUSTRY HYPOTHESIS / NEEDS PROJECT-LEVEL COMPARISON.</p>
+</blockquote>
+<h2 id="9-source-anchors">9. Source anchors</h2>
+<ul>
+<li>Tencent 2025 annual results: https://static.www.tencent.com/uploads/2026/03/18/559e5d480a4411165e6c7367d61fefbd.pdf</li>
+<li>腾讯招聘 / Supercell《部落冲突》资深数值策划: https://careers.tencent.com/jobdesc.html?postId=2087091672277233664</li>
+<li>腾讯招聘 /《英雄联盟》用户运营: https://careers.tencent.com/jobdesc.html?postId=2100246114195390464</li>
+<li>腾讯招聘 /《逆战：未来》系统策划: https://careers.tencent.com/jobdesc.html?postId=2054447946463883264</li>
+<li>GameRes / NExT Studios 负责人访谈: https://www.gameres.com/824633.html</li>
+<li>触乐 / 马晓轶“从零到百，以及之后”: https://www.chuapp.com/article/289989.html</li>
+<li>触乐 / 马晓轶谈工作室、1500 个决策与 GaaS 边界: https://www.chuapp.com/?a=index&amp;c=Article&amp;id=289990</li>
+<li>游戏葡萄 2020 马晓轶创新访谈存档 / 小团队、TGIF、细分品类: https://www.sohu.com/a/404873495_116018</li>
+<li>NExT Studios 官方定位: https://www.nextstudios.com/cn/to_be_updated/next.html</li>
+<li>游戏茶馆 / Sea 腾讯魔方 11 年: https://www.sohu.com/a/747433409_116126</li>
+<li>游戏葡萄 / Sea 创业复盘: https://www.taptap.cn/moment/602724648508985028</li>
+<li>用户提供存档 /《安尼姆》商业化拆解: https://mp.weixin.qq.com/s/vbFAyFA7qew_RXYacJMmcQ</li>
+<li>游戏新知 / 张哲川与《塔方对决》: https://caifuhao.eastmoney.com/news/20240223184009514227490</li>
+<li>Enjoy出海 /《Plants on Fire》产品化演化: https://www.enjoyglobal.net/detail/news/2026092901</li>
+<li>Google Patents / 苏希烔腾讯技术专利: https://patents.google.com/patent/CN118142173A/zh</li>
+<li>Mario囧 Bilibili /《PETS》约 5 个月制作: https://www.bilibili.com/video/BV174cLeeEkK/</li>
+<li>Steam / PETS: https://store.steampowered.com/app/3362790/PETS/</li>
+<li>TapTap发现好游戏存档 /《无人》: https://mp.weixin.qq.com/s/BChIzs2no3EfivCw87L1Ww</li>
+<li>游戏茶馆 /《无人》后续采访: https://www.sohu.com/a/850980329_116126</li>
+<li>GameRes / 腾讯系创业者统计: https://www.gameres.com/484854.html</li>
+<li>GameRes / 莉莉丝袁帅腾讯程序→策划→创业: https://www.gameres.com/891274.html</li>
+</ul>
+<h2 id="10-boundary">10. Boundary</h2>
+<p>本笔记仍不能证明：腾讯方法在中国所有商业公司中占绝对多数；前腾讯程序员做独游的成功率高于前腾讯策划；腾讯商业游戏方法本身劣于 premium indie；腾讯离职者的后续作品只由腾讯职业训练决定。</p>
+<p>主要混杂变量：进入腾讯前已有个人 prototype/独立创作的人并非随机样本；愿意离职创业的程序员是强烈自选择群体；制作人比普通策划更容易被媒体采访；商业模式本身会反向决定岗位与系统；腾讯内部 NExT、天美、魔方、光子等制度差异很大。</p>
+<p>后续应通过 30–50 人 Role-Origin Dataset 与非腾讯对照组继续验证。</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / book/research-notes/china-tencent-commercial-hegemonic-grammar-008.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

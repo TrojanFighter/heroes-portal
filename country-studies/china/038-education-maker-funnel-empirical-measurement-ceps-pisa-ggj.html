@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>038 — 从考试成绩到第一件作品：CEPS × PISA × Game Jam 的创作者形成管道审计 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl class="on"" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0" class="t2">0. 最重要的认知修正：四种“创造性”不是同一个东西</a><a href="#1-oecd-pisa-2022" class="t2">1. OECD PISA 2022 创造性思维：强反例，不是中国大陆总体证据</a><a href="#_1" class="t3">一手统计</a><a href="#2-ceps" class="t2">2. 中国人民大学 CEPS：已经存在全国学校队列，但未测游戏作者命运</a><a href="#_2" class="t3">已查实的数据基础设施</a><a href="#_3" class="t3">最低可执行证据工作</a><a href="#3-global-game-jam-2026" class="t2">3. Global Game Jam 2026：有规模的非考试原型入口，但不能代表普通青年</a><a href="#_4" class="t3">主办方的数据</a><a href="#_5" class="t3">中国及青少年入口不是空白</a><a href="#4" class="t2">4. 统一分母：一次兴趣到反复制作的真实漏斗</a><a href="#_6" class="t3">拟议试点：两校＋两个创作社区，但不是“研究已经完成”</a><a href="#5" class="t2">5. 对书稿的反向约束</a><a href="#6-2026-10-10" class="t2">6. 2026-10-10 修订：创意题分数 ≠ 游戏知识语料与设计范式掌握</a><a href="#61" class="t3">6.1 不应遗漏的五个独立变量</a><a href="#62-pisa-2022" class="t3">6.2 PISA 2022创意评估究竟能反驳什么</a><a href="#63-game-jam-vs" class="t3">6.3 Game Jam 的双重机制：探索入口 vs 可购买履历</a><a href="#64-jam" class="t3">6.4 全新的验证口径：不再只数Jam作品和参加人次</a><a href="#65" class="t3">6.5 更新本书的核心研究框架</a><a href="#7-2026-10-10" class="t2">7. 做出第一件作品后，谁能继续控制它？（2026-10-10）</a></aside><article class="doc"><div class="col"><h1 id="038-ceps-pisa-game-jam">038 — 从考试成绩到第一件作品：CEPS × PISA × Game Jam 的创作者形成管道审计</h1>
+<ul>
+<li><strong>Status</strong>: SOURCE-LED EMPIRICAL INFRASTRUCTURE / CROSS-SOURCE DENOMINATOR AUDIT / 2026-10-10</li>
+<li><strong>Parent</strong>: <a href="/heroes-portal/country-studies/china/037-family-school-agency-risk-hero-nondeparture.html">037家校自主权与英雄未出发</a>、<a href="/heroes-portal/country-studies/china/031-education-east-asian-discipline-reference-repertoire.html">031自主探索</a>、<a href="/heroes-portal/country-studies/china/032-exam-overfit-routine-expertise-open-domain-transfer.html">032 Exam Overfit</a>、<a href="/heroes-portal/book/research-notes/china-creator-constraints-three-layer-map-018.html">018创作者三层约束</a>、<a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes/blob/main/OPEN-QUESTIONS.md">OQ-023</a></li>
+<li><strong>核心改动</strong>：不再只依赖有代表性的创作者轶事证明教育问题，给“谁有机会制作第一份游戏”建立可核的<strong>数据来源目录、测量定义、反例压力与调查落地方案</strong>。三套资料的<strong>分母不同，不得拼接为全国流失率</strong>。</li>
+<li><strong>知识纪律</strong>：公开页面事实≠已下载和运行微观数据；活动参与者≠普通青年人口；创造性思维测验≠自我出题能力；艺术/游戏兴趣≠注定成为商业独游作者。</li>
+</ul>
+<h2 id="0">0. 最重要的认知修正：四种“创造性”不是同一个东西</h2>
+<table>
+<thead>
+<tr>
+<th>层次</th>
+<th>可测的产出</th>
+<th>现实困境</th>
+<th>代理变量局限</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Creative Thinking</strong></td>
+<td>在已有任务里产生、评估、修订多样想法</td>
+<td>很多创造力测验仍由考试系统<strong>提供题目</strong></td>
+<td>不能直接测是否会自主定义一项人生/创作问题</td>
+</tr>
+<tr>
+<td><strong>Problem Ownership</strong></td>
+<td>能主动选择题目、寻找信息、改变目标</td>
+<td>人可能知识充分，但缺少决定目标的权力与练习</td>
+<td>自述“喜欢创新”不足以证明实际选择行为</td>
+</tr>
+<tr>
+<td><strong>Maker Conversion</strong></td>
+<td>兴趣→第一份完成/公开的<code>artifact</code></td>
+<td>缺设备、时间、同伴、工具、合法性或反馈渠道</td>
+<td>只数游戏jam投稿，漏掉从未参与者</td>
+</tr>
+<tr>
+<td><strong>Authorial Persistence</strong></td>
+<td>第二/第三次尝试、真实作品迭代、组队与持续制作</td>
+<td>第一次参与容易，长期坚持要承担生活/职业与项目风险</td>
+<td>参赛满意度、想再参加≠实际跨年留存</td>
+</tr>
+</tbody>
+</table>
+<p class="dc">因此我们的书要区分两个本质不同的问题：<strong>学生会不会在给定题目下产生新想法？学生是否有机会和权力自行决定做什么，并持续把它变成作品？</strong></p>
+<h2 id="1-oecd-pisa-2022">1. OECD PISA 2022 创造性思维：强反例，不是中国大陆总体证据</h2>
+<h3 id="_1">一手统计</h3>
+<p>OECD <a href="https://www.oecd.org/en/publications/pisa-2022-results-volume-iii_765ee8c2-en.html">2024年6月18日PISA 2022第三卷</a>正式评估64个国家/经济体的15岁学生，衡量在<strong>书面表达、视觉表达、社会问题解决、科学问题解决</strong>任务里生成多种想法、提出创意、评估改进的表现。测试范围具有外部给出的任务条件，未直接测量学生自己选题及真实作品生命周期。</p>
+<table>
+<thead>
+<tr>
+<th>国家/经济体</th>
+<th style="text-align: right;">创造性思维平均分（满分60）</th>
+<th>信息出处</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>新加坡</td>
+<td style="text-align: right;"><strong>41</strong></td>
+<td><a href="https://www.oecd.org/en/publications/pisa-results-2022-volume-iii-factsheets_041a90f1-en/singapore_3e8ab415-en.html">OECD 新加坡官方简报</a></td>
+</tr>
+<tr>
+<td>韩国</td>
+<td style="text-align: right;"><strong>38</strong></td>
+<td><a href="https://www.oecd.org/en/publications/pisa-results-2022-volume-iii-factsheets_041a90f1-en/korea_adb21d76-en.html">OECD 韩国官方简报</a></td>
+</tr>
+<tr>
+<td>OECD平均</td>
+<td style="text-align: right;"><strong>33</strong></td>
+<td><a href="https://www.oecd.org/en/publications/pisa-2022-results-volume-iii_765ee8c2-en.html">OECD 2024 第三卷</a></td>
+</tr>
+<tr>
+<td>中国台北</td>
+<td style="text-align: right;"><strong>33</strong></td>
+<td><a href="https://www.oecd.org/en/publications/pisa-results-2022-volume-iii-factsheets_041a90f1-en/chinese-taipei_0906cd49-en.html">OECD 中国台北官方简报</a></td>
+</tr>
+<tr>
+<td>中国香港</td>
+<td style="text-align: right;"><strong>32</strong></td>
+<td><a href="https://www.oecd.org/en/publications/pisa-results-2022-volume-iii-factsheets_041a90f1-en/hong-kong-china_d46422e4-en.html">OECD 中国香港官方简报</a></td>
+</tr>
+</tbody>
+</table>
+<p><strong>必须禁止</strong>：
+- <strong>大陆未参加本轮创造性思维测试</strong>：不能借中国香港/澳门/台湾分数代表中国大陆。
+- 把香港32、台湾33描述成缺乏创造力：它们在量表上大致位于OECD均值附近；报告强调<strong>相对于其数学/阅读高分，创造性思维的比较优势偏弱</strong>，并不等于绝对分数极低。
+- 把整个东亚判为“应试杀死创造力”：新加坡、韩国是<strong>高学科成绩且高创意思维表现的同时存在反例</strong>，韩国内部具备一定传统升学压力，故需分开具体教学与激励机制。
+- 将PISA分数与游戏创业率作个体因果回归：年龄、出生队列、国家、工具与招聘渠道、结果变量均不同，<strong>尚无微观链接和识别策略</strong>。</p>
+<p><strong>由此可提出的新假说</strong>：即使创造性思维表现不错，<code>Problem Ownership</code>和独立<code>Maker Conversion</code>也未必自动良好；这需要设计另外的观察/实验，而不是仅凭PISA作推论。</p>
+<h2 id="2-ceps">2. 中国人民大学 CEPS：已经存在全国学校队列，但未测游戏作者命运</h2>
+<h3 id="_2">已查实的数据基础设施</h3>
+<p>人大“中国教育追踪调查”（CEPS）的官方<a href="https://ceps.ruc.edu.cn/info/1006/1017.htm">2014年7月16日基线报告</a>明确说明：</p>
+<ul>
+<li>2013—2014学年基线：<strong>19,487名初一/初三学生</strong>，438个班、112所初中、28个县/区，采用学校基础的多阶段概率抽样；</li>
+<li>同期还有19,007名家长、1,412名教师及112名学校负责人参与；</li>
+<li><a href="https://ceps.ruc.edu.cn/English/Overview/Overview.htm">项目概况</a>说明其为全国学校学生样本、具追踪性质；<a href="https://ceps.ruc.edu.cn/xmwd/jsbg.htm">技术报告</a>列出的问卷主题涵盖家庭教育、家校关系、课外活动、亲子互动、教育期望、学校设施与教师工作；</li>
+<li><a href="https://ceps.ruc.edu.cn/xmwd/dcwj.htm">公开问卷入口</a>提供学生/家长/教师/学校多方问卷，<a href="https://ceps.ruc.edu.cn/info/1006/1008.htm">2015年数据发布消息</a>说明数据用于学术研究。</li>
+</ul>
+<p><strong>它能够帮助研究</strong>：家庭/学校的控制、学生自主活动与家校互动如何在不同经济和学校环境中共变；既有样本能减少只访谈大学精英/独游作者造成的选择偏差。</p>
+<p><strong>它没有自动给出</strong>：游戏参照积累、第一次自己立项、第一次完成游戏、jam/mod社区参与、第二次制作或最后成为独游作者的完整追踪变量。问卷具体题项尚待逐页编码；数据虽面向研究开放，<strong>目前我们并没有获取微观数据、运行统计或验证所有必要变量存在</strong>。不得把“有两万学生面板”误写为“已测量教育挡掉多少创作者”。</p>
+<p>时间适用性：2013—2014学生所处智能手机/课外培训/游戏制作工具环境与2026不同；可用于旧出生队列比较，<strong>不能直接套为2026当代现状</strong>。</p>
+<h3 id="_3">最低可执行证据工作</h3>
+<ol>
+<li>下载并逐题核对CEPS七/九年级学生、家长、校长、教师问卷，建立<code>VARIABLE EXISTS / PROXY / MISSING</code>对照表；</li>
+<li>若有授权访问微观数据，按抽样权重与学校聚类研究自主活动、家长/学校控制、社经背景的关系；只报告<strong>现有变量实际能估计的结果</strong>；</li>
+<li>用另行获得知情同意的现代固定队列补<code>FIRST ARTIFACT / INITIATIVE / SECOND ATTEMPT</code>；不得未经授权将旧CEPS个体与当代平台身份拼接。</li>
+</ol>
+<h2 id="3-global-game-jam-2026">3. Global Game Jam 2026：有规模的非考试原型入口，但不能代表普通青年</h2>
+<h3 id="_4">主办方的数据</h3>
+<p><a href="https://globalgamejam.org/news/global-game-jam-2026-jammer-survey-data">GGJ 2026官方活动及Jammer调查</a>记载约<strong>3.9万人、近1万份游戏、90多个国家</strong>。同一官方站点的<a href="https://globalgamejam.org/history">年度历史页</a>与<a href="https://globalgamejam.org/news/global-game-jam-2026-jammer-survey-data">2026年问卷报道</a>对人数和站点数略有不同（历史页列<strong>39,069人、811站</strong>，问卷报道列<strong>39,197人、824站</strong>）。不揣测是最终结算、去重还是口径变更；对外以<strong>约3.9万</strong>表述，想精确量化须联系主办方核验同口径底表。</p>
+<p><strong>调查来源与局限</strong>：主办方称活动后自愿问卷收到<strong>3,535份</strong>，覆盖全体注册者约<strong>9%</strong>，问题后部回答率更低。报告称：
+- <strong>28%</strong>的答卷人之前完全不认识本次队友；另<strong>28%</strong>认识一半队友；
+- <strong>71%</strong>的活动站点有导师；
+- <strong>88%</strong>受访者自称学到/提升了技能；
+- <strong>94%</strong>受访者称提交了游戏；
+- <strong>61%</strong>受访者以前参加过某种game jam，只有37%以前参加过GGJ。</p>
+<p><strong>这些比例是受访者或报告站点比例，不是随机抽取的一般青年样本</strong>。不能用GGJ 94%提交率推定“只要办一次jam就能让94%的孩子做出游戏”，也不能从主办方满意度计算独立游戏创业转化率。相对可靠的论点是：<strong>在有短期可实施题目、同伴、导师和公开提交流程的社区，确实存在大量非职业者完成原型的现实例证</strong>。存在性、传播规模与教育效果应分开。</p>
+<h3 id="_5">中国及青少年入口不是空白</h3>
+<ul>
+<li><a href="https://globalgamejam.org/jam-sites/2026/ggj-china-2026-cigaxianshangzhandianonline-site">GGJ China 2026 CiGA上海线上站</a>公开列有中国参与通道；<a href="https://globalgamejam.org/jam-sites/2026/ggj-china-2026-x-ciga-beijing-sfk-games">北京SFK线下站</a>记载公开报名、48小时协作、最终展示/试玩，年龄门槛<strong>14+</strong>、最大80人；<a href="https://globalgamejam.org/jam-sites/2026/ggj-china-2026-sia-guangzhou">广州SIA站</a>则注明限定参与对象。</li>
+<li><a href="https://globalgamejam.org/2026">GGJ Next</a>是面向<strong>10—18岁</strong>青少年的独立创作项目，<strong>不计入普通GGJ成人总体</strong>；<a href="https://globalgamejam.org/ur/group/31296">深圳前海ARTDiCO 2026青少年站点</a>有2026年3月的报名/活动计划。站点公告不等于已核对到场、作品数、费用及教育成效。</li>
+<li><a href="https://globalgamejam.org/news/global-game-jam-celebrates-2026-ggj-next-national-award-winners">GGJ Next 2026主办方总结</a>称含GGJ Next和18—25岁Next Gen Expert活动在内，约<strong>4,000名学生参与、覆盖70国</strong>。<strong>不能把4,000全部当成10—18岁，也不能推导中国人数。</strong></li>
+</ul>
+<p>这组事实直接反驳“中国完全没有非学校创作入口”的全称命题。它提出更精确、可测量的差别：从学校、家庭到开放社区的引导、接入成本、年龄限制、留存、第二次作品及其对家庭条件的依赖。</p>
+<h2 id="4">4. 统一分母：一次兴趣到反复制作的真实漏斗</h2>
+<p>不能把<code>CEPS 19,487学生</code>、<code>PISA某经济体15岁学生</code>、<code>GGJ 约3.9万参加者</code>相除、相加或作为同一队列。它们年龄、年份、覆盖范围、测量与选择机制全不同。</p>
+<p><strong>未来真实固定队列</strong>应对<strong>同一进入人群</strong>在各时点记录：</p>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>需要知道的分子/分母</th>
+<th>关键分类</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F0 同龄人群基线</td>
+<td>年龄/地区/家庭/学校总样本</td>
+<td>不预设所有人喜欢游戏或愿创作</td>
+</tr>
+<tr>
+<td>F1 有接触</td>
+<td>曾玩/读/观赏各品类、接触可制作工具者/总样本</td>
+<td>兴趣与访问权分开</td>
+</tr>
+<tr>
+<td>F2 有意愿并能选择</td>
+<td>曾自主挑选非考试学习/创作目标者/总样本</td>
+<td>可以主动选择不做</td>
+</tr>
+<tr>
+<td>F3 第一次尝试</td>
+<td>有独立/协作制作动作与过程记录者/总样本</td>
+<td>不只收成功作品</td>
+</tr>
+<tr>
+<td>F4 第一件完成作品</td>
+<td>有可检查<code>artifact</code>者/所有起步者（同时报对总样本）</td>
+<td>不等于商业成功</td>
+</tr>
+<tr>
+<td>F5 第二次尝试/作品</td>
+<td>固定观察窗口内再尝试者/首作完成者（同时报对总样本）</td>
+<td>处理失访和退出</td>
+</tr>
+<tr>
+<td>F6 可持续作者道路</td>
+<td>有长期制作、合伙、收入或作者就业者/进入过F3者</td>
+<td>按类别说明含义</td>
+</tr>
+</tbody>
+</table>
+<p><strong>失联/不进入/退出原因</strong>单独记：兴趣自然转变、课程挤压、家长否决、工具不足、没有同伴、经济支持不足、作品被否定、个人主动不愿做。不存在“没有选择做游戏＝受害者”这样的默认归因。</p>
+<p><strong>研究所需的实证比较</strong>：同一地区/年级/家庭收入范围内，有无老师/导师/社团、同样课时/考核负担下的F3/F4/F5过渡。需预先指定混杂因素（先前兴趣、硬件、家庭教育、学校质量）、提供置信区间、处理自选择及失访，先报告相关性，再研究真正有识别力的环境变动。</p>
+<h3 id="_6">拟议试点：两校＋两个创作社区，但不是“研究已经完成”</h3>
+<ul>
+<li><strong>学校配对</strong>：匹配年龄、城市、家庭收入背景，比较提供课外maker/jam/自主议题时段与没有提供的校区/年级，避免只抽优等生；</li>
+<li><strong>社区配对</strong>：选中国至少一个GGJ/CiGA或国内独立开发社区与另一个可比社群，不只收站点获奖游戏，还应记录首次参赛与退出、重复参与、实际作品；</li>
+<li><strong>公开观察表</strong>：自行设计的调查需征得同意，未成年人经必要监护同意，并作匿名与最小必要采集；</li>
+<li><strong>效果终点</strong>：不是“谁成功创业”，而是<strong>是否有自己定义/改变题目的真实机会、完成第一件作品的比例、同一人下一次仍敢尝试的比例、工具/人员支持对这些过渡的影响</strong>；</li>
+<li><strong>同时测创意任务与原型行为</strong>，检查“创造性测试优秀但不动手”和“考试表现普通但能持续做作品”的实际发生率。</li>
+</ul>
+<h2 id="5">5. 对书稿的反向约束</h2>
+<p>可以写成有研究价值的前提：
+- 一些年轻人在行业出现前就不曾得到选择题目与制作作品的机会；
+- 国际创作活动说明非正式社区是一种可供调查的转换基础设施；
+- 中国也存在游戏jam与青少年活动站点，真正需要比较其覆盖率与持续性；
+- 东亚教育存在高学科成绩且高创造性思维分数的反例，不能做文化本质论。</p>
+<p><strong>仍不能写成确定性结论</strong>：
+- 中国教育压制了某个确定数量或比例的未来独游作者；
+- 新加坡或韩国一定比中国有更多商业独游作者；
+- PISA测试成绩代表自选目标与创作生涯；
+- 成绩压力/父母控制是已测量的全国独游创作人数差距的最大因；
+- 参与游戏jam必然增强长期作者能力，或94%普通学生参与后会出作品；
+- 深圳站点存在即证明整个城市所有学生都能无条件进入此类教育生态。</p>
+<p><strong>下一阶段最优投入</strong>：先把CEPS问卷的变量核查与GGJ/CiGA非获奖参与者和退出者的真实基数补齐，再谈因果及国别量级。若不能拿到这些数据，保留<code>H/OPEN</code>而不是进一步增加相同论点的英雄传记。</p>
+<h2 id="6-2026-10-10">6. 2026-10-10 修订：创意题分数 ≠ 游戏知识语料与设计范式掌握</h2>
+<p><strong>作者修正的来源与地位</strong>：作者依据多年游玩《铁血联盟2》（Jagged Alliance 2）与《R.U.S.E.》及国内Game Jam群聊截图提出：<strong>高考试能力+有限信息摄入</strong>可能导致“在有限材料内部高效排列组合”，但不足以产生进入游戏行业时有竞争力的新系统。截图显示部分Jam开发者对联网、枪械、素材和UI的不同完成顺序，以及多名成员对培训机构Jam履历化/预制菜的指控。<strong>仅作为内部观察与假说来源；不公开参与者ID、群聊详情或认定具体个人/机构违规。</strong></p>
+<h3 id="61">6.1 不应遗漏的五个独立变量</h3>
+<table>
+<thead>
+<tr>
+<th>变量</th>
+<th>要测量什么</th>
+<th>重要边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Information Diet / 信息饮食</strong></td>
+<td>真正接触过多少不同设计范式、历史阶段、媒介、玩法，不只游戏时长与热门游戏数量</td>
+<td>输入多不自动高质量，重复同质信息不会同比增加有效参照</td>
+</tr>
+<tr>
+<td><strong>Relational Model / 规则关系理解</strong></td>
+<td>能解释一款游戏哪些规则/约束产生具体决策与情绪结果</td>
+<td>“玩过/通关”不等于理解其机制</td>
+</tr>
+<tr>
+<td><strong>Cross-Domain Transfer / 跨类型迁移</strong></td>
+<td>能把战略、战术、经济、叙事等不同语法重组，预测冲突并做原型</td>
+<td>组合可能产生真正有价值的新品类，但需测试</td>
+</tr>
+<tr>
+<td><strong>Problem Ownership / 问题主权</strong></td>
+<td>谁选题，能否拒绝题目、修改目标、承担停止决策</td>
+<td>有想法与有权实际实施是两回事</td>
+</tr>
+<tr>
+<td><strong>Artifact &amp; Feedback / 原型验证</strong></td>
+<td>从设计假设到试玩、反馈、修订和第二次尝试的可核过程</td>
+<td>外观完成、联网框架、参赛证书并不等于核心玩法成立</td>
+</tr>
+</tbody>
+</table>
+<p><strong>更恰当的假说不是“应试生没有创造力”</strong>，而是：如果教育/家庭/平台长期奖励读少量指定资料→在指定问题中给高分→减少额外阅读/游玩/制作时间→从几个热点范式中挑选预期安全的项目，那么<strong>问题搜索空间和可迁移的游戏语法可能变窄</strong>。这条链每一步都须实测，不能把任何成绩优良者认作必定如此。</p>
+<p>作者的JA2与R.U.S.E.例子展示<strong>不同层级设计知识的潜在互补</strong>：前者将个人战术/角色/装备/战略资源联系起来，后者把侦察、欺骗、信息不完整与战场行动联系起来。不同规则集使可想象组合更丰富，但<strong>作者个人作品及设计能力的相对优势仍需外部试玩盲评</strong>，不因自述玩得多而自动认定“碾压全部学生”。</p>
+<h3 id="62-pisa-2022">6.2 PISA 2022创意评估究竟能反驳什么</h3>
+<p>OECD原始<a href="https://www.oecd.org/en/publications/pisa-2022-assessment-and-analytical-framework_dfe0bf9c-en/full-report/component-5.html">2022创造性思维框架</a>注明：设计给<strong>15岁、约60分钟、共同给定题目/情境</strong>，原创新颖性参照同一题目其他学生答卷；并未测试从兴趣到原创商业游戏的数年积累。</p>
+<p>该测验实属开放回答、有新颖性评价，<strong>并非普通机械做题</strong>，其分数有效反驳“东亚学生完全不会在给定新问题上产生不同想法”；但不评价<strong>游戏类型阅历、玩法语法、非考试自主选题、跨类型设计创新、原型长期存活率</strong>。其内部也承认领域知识与准备度影响表现。</p>
+<p>2025年<a href="https://www.oecd.org/en/publications/seven-questions-about-creativity-and-creative-thinking_0aa52128-en.html">OECD进一步分析</a>在完成多个创意任务的样本中发现，跨多个情境同时高分的学生占比有限，进一步支持区分“在一个被给定的题域里表现好”与“可以跨题域长期生成和评估创造性作品”。</p>
+<p><strong>Boden概念空间框架</strong>：组合式、探索式、变革式创造各自有价值，不可把一切组合式发明视为低级；<a href="https://www.cambridge.org/core/journals/behavioral-and-brain-sciences/article/abs/precis-of-the-creative-mind-myths-and-mechanisms/561CD37A4005A4EF6BF37E662ACF1192">Boden的原始理论摘要</a>、<a href="https://escholarship.org/uc/item/4600g227">探索式游戏设计论文</a>均强调知识材料、原型与试玩反馈。真正需要审计的是<strong>设计规则能否改变真实玩家决策，而非“元素借鉴得是否够原创”</strong>。</p>
+<h3 id="63-game-jam-vs">6.3 Game Jam 的双重机制：探索入口 vs 可购买履历</h3>
+<p>先分类三种不同情形：
+1. <strong>合法的工程复用</strong>：用旧引擎、服务器通用件、合法素材/代码工具加速，现场才提出新玩法、形成可信原型；不应被叫作弊。
+2. <strong>赛前练习和导师训练</strong>：符合规则、真实参与并能解释自有贡献，可为新人创造学习机会；即使作品能用于求职也并非无效。
+3. <strong>Credential Substitution / 创作凭证替代创作能力</strong>：在求职/升学/作品集目标下，先产出高度模板化的核心游戏或让机构代做，现场仅替换主题、美术、局部功能，却以限时自主原创包装。这会使<strong>看似有作品的指标与真实设计/工程能力脱钩</strong>；其发生率和中国相较海外的差距<strong>UNKNOWN</strong>。</p>
+<p><strong>国际规则的实际边界</strong>：<a href="https://globalgamejam.org/jam-sites/2025/otautahi-christchurch-2025">GGJ 2025基督城站FAQ</a>允许预存代码/美术/音效，但明确不允许直接带完成的游戏；<a href="https://globalgamejam.org/node/1602">GGJ 2026另一站的FAQ</a>要求披露预制资产。各站规则不完全相同，不得把“用了旧素材”直接等同于违规。</p>
+<p><strong>国内商业化事实证据</strong>：
+- <a href="https://www.flippedstudio.tech/">FSG游戏留学服务</a>官网把Game Jam竞赛、个性化作品集、院校/海外申请与大厂实习纳入同一服务目录；这证明<strong>履历化供给</strong>存在，不证明作品代做或违规。
+- <a href="https://www.ccw.site/gamejam/about">共创世界2026 Game Jam</a>活动宣传直接把Jam与白名单赛事、升学竞争和赛前14天特训相联；说明创造性活动可以被考试激励吸纳，不代表赛事或参加者都不真实创造。
+- <a href="https://www.52jingsai.com/article-22393-1.html">2025未来游戏制作人种子训练营</a>将Jam、证书、推荐信和作品联系为职业路径；提供<strong>履历化经济激励</strong>的另一事实入口。
+- 对照<a href="https://rajo.indienova.com/blogread/35669">2024年CiGA参赛者技术复盘</a>，有参与者具体记录首次包体、玩家试玩和继续修复BUG的问题，说明中国也存在直接以真实原型反馈为核心的Jam实践。<strong>不能把最具争议的聊天截屏当国内整体的随机样本。</strong></p>
+<h3 id="64-jam">6.4 全新的验证口径：不再只数Jam作品和参加人次</h3>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>分子/分母与取材</th>
+<th>防止什么错</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>首作来源</strong></td>
+<td>同届参与者赛前已有的可玩核心/素材清单，版本库时间戳、许可、真实声明</td>
+<td>合法复用与假冒现场原作混同</td>
+</tr>
+<tr>
+<td><strong>贡献归属</strong></td>
+<td>具体角色，开赛前后功能/玩法差异、提交记录；团队成员一致性</td>
+<td>多人团队同写“独立开发”</td>
+</tr>
+<tr>
+<td><strong>设计知识深度</strong></td>
+<td>给一个陌生玩家情境，限时说明规则关系/找到风险/指出可测试假设</td>
+<td>能熟练模仿一个模板冒充跨类型设计</td>
+</tr>
+<tr>
+<td><strong>陌生主题迁移</strong></td>
+<td>无法事先知道的题目，随机给不同约束，观察玩法从何形成</td>
+<td>预制游戏只换皮即可“参赛”</td>
+</tr>
+<tr>
+<td><strong>长期再尝试</strong></td>
+<td>参赛后3/6/12月的独立项目、试玩与失败报告（含退出队列）</td>
+<td>证书或单次演示替代长期作者能力</td>
+</tr>
+<tr>
+<td><strong>机构/国家发生率</strong></td>
+<td>中国与海外各选有代表性的不同类型站点、同口径抽样</td>
+<td>3条群聊消息推导“国内第一”或“越来越普遍”</td>
+</tr>
+</tbody>
+</table>
+<p><strong>制度设计建议</strong>：Jam/学校可把“参赛证明”和“过程能力证据”拆开，允许所有人如实披露复用、外部辅导与团队分工；以<strong>主题揭晓后的设计决策日志、玩家首测录像、变化对照、真实贡献和复盘</strong>评价培养效果，而不是以48小时完成度、UI外观、证书数量作唯一指标。其效果仍需评估，不把审计再做成重型KPI。</p>
+<h3 id="65">6.5 更新本书的核心研究框架</h3>
+<p>之前关注：<code>家校是否允许探索 → 有没有第一件作品 → 是否能持续。</code></p>
+<p>现在加上一个从前端到后端都不能省略的结构变量：<strong>学生究竟接触过多少种值得研究的世界/产品/系统，是否有足够时间理解这些系统，而不是只学少数得分模板？</strong></p>
+<p>《独立游戏英雄传说》因此必须同时研究：<code>KNOWLEDGE DIET / INPUT DIVERSITY</code>、<code>GAME-DESIGN LITERACY</code>、<code>PROBLEM OWNERSHIP</code>、<code>ARTIFACT/FEEDBACK</code>、<code>CREDENTIAL INCENTIVE</code>。只有把这些分别量化，才能比较“高分创造性测验”与“原创游戏产品竞争力”之间真正的落差。</p>
+<h2 id="7-2026-10-10">7. 做出第一件作品后，谁能继续控制它？（2026-10-10）</h2>
+<p>见<a href="/heroes-portal/country-studies/china/039-frontier-creator-support-authority-rights-and-incubation.html">中国039</a>：原来的Maker Conversion/F3–F6漏斗还需审计探索权、创意否决、预算、IP/续作、收益与退出权。Supercell Spark用16周Jam和组队评估团队而非单张履历；Roblox Jumpstart提供的主要是服务和平台资源而不是工资；Kowloon Nights/Indie Fund有具体、但不同的财务和IP安排。中国有Gamera与大学扶持的真实反例。<strong>宣传扶持≠受支持者实际拥有权利≠长期独立续作的因果效果</strong>。</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / country-studies/china/038-education-maker-funnel-empirical-measurement-ceps-pisa-ggj.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

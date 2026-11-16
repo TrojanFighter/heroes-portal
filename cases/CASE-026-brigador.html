@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CASE-026 — Brigador / Stellar Jockeys · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl class="on"" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#why-this-case" class="t2">Why this case</a><a href="#myth" class="t2">Myth</a><a href="#production-cost-structure" class="t2">Production / Cost Structure</a><a href="#long-self-funded-build" class="t3">Long self-funded build</a><a href="#product-taste-was-not-absent" class="t2">Product Taste Was Not Absent</a><a href="#selection-failure-1-controls-onboarding" class="t2">Selection Failure 1 — Controls / Onboarding</a><a href="#selection-failure-2-presentation-did-not-match-product-reality" class="t2">Selection Failure 2 — Presentation Did Not Match Product Reality</a><a href="#selection-failure-3-visibility-vs-price" class="t2">Selection Failure 3 — Visibility vs Price</a><a href="#market-access-was-not-zero" class="t2">Market Access Was Not Zero</a><a href="#2016-launch-failure" class="t2">2016 Launch Failure</a><a href="#recovery-failure-was-a-state-not-the-end" class="t2">Recovery — Failure Was a State, Not the End</a><a href="#taste-capital-audit" class="t2">Taste Capital Audit</a><a href="#execution-failure-vs-selection-failure" class="t2">Execution Failure vs Selection Failure</a><a href="#_1" class="t3">执行上，他们完成了非常困难的东西</a><a href="#_2" class="t3">但正因为执行很强，选择问题更明显</a><a href="#capabilityproject-fit-counterpressure-fit-strong-launch-failed" class="t2">Capability–Project Fit Counterpressure — FIT-STRONG, LAUNCH-FAILED</a><a href="#provisional-verdict" class="t2">Provisional Verdict</a><a href="#transferable" class="t2">Transferable</a><a href="#non-transfer-boundaries" class="t2">Non-transfer / Boundaries</a><a href="#evidence-index" class="t2">Evidence Index</a></aside><article class="doc"><div class="col"><h1 id="case-026-brigador-stellar-jockeys">CASE-026 — Brigador / Stellar Jockeys</h1>
+<ul>
+<li>Status: RESEARCHING — FAILURE COMPARATOR</li>
+<li>Subject: Brigador / Stellar Jockeys</li>
+<li>Related Claims: C010, C015</li>
+<li>Evidence Ledger: <a href="/heroes-portal/evidence/CASE-026-brigador-source-ledger.html"><code>../evidence/CASE-026-brigador-source-ledger.md</code></a></li>
+<li>C015 role: <code>FIT-STRONG / LAUNCH-FAILED</code> counterpressure</li>
+</ul>
+<h2 id="why-this-case">Why this case</h2>
+<p class="dc">Brigador 是本项目第一个主动以“失败者 / 失败阶段”为中心正式编号的 Case。</p>
+<p>它重要的原因不是“好游戏也可能卖不好”这句常识，而是它提供了一个罕见的、由开发者本人公开复盘的结构：</p>
+<blockquote>
+<p><strong>产品内部质量很高，并不自动意味着市场能够正确理解它、第一小时能够正确进入它、商店页面能够正确定位它，或开发者选择的价格 / 发行 / onboarding / visibility 方案与产品相匹配。</strong></p>
+</blockquote>
+<p>这使它成为 <code>Taste Capital / Selection Capability</code> 的关键反压力样本。</p>
+<h2 id="myth">Myth</h2>
+<p>最容易出现的两个过度简化版本是：</p>
+<blockquote>
+<p>“Brigador 是神作，只是没营销。”</p>
+</blockquote>
+<p>以及：</p>
+<blockquote>
+<p>“Brigador 就是定价太贵，所以失败。”</p>
+</blockquote>
+<p>当前证据都不支持把失败压成一个变量。</p>
+<p>开发者自己的 2017 GDC 复盘把问题同时放在 <strong>marketing 与 design</strong> 上，并明确总结为：<code>good intentions can make for bad decisions</code>、<code>audience expectations are everything</code>。</p>
+<h2 id="production-cost-structure">Production / Cost Structure</h2>
+<h3 id="long-self-funded-build">Long self-funded build</h3>
+<p>同期开发者表述：</p>
+<ul>
+<li>团队从 2011 左右开始；</li>
+<li>2015 Early Access 时称核心约 4 人；</li>
+<li>自研 custom engine；</li>
+<li>没有 Kickstarter，也没有 publisher；</li>
+<li>主要自掏腰包；</li>
+<li>开发者在 2016 年公开估计，每人投入超过 10,000 小时；</li>
+<li>他们认为若只按最低工资补偿开发时间，需要约 25,000 份；考虑 contractors 与合理生活则约 50,000 份。</li>
+</ul>
+<p>这些是开发者自己的成本口径，不等于审计后的总预算，但足够说明：</p>
+<blockquote>
+<p><strong>五年 sunk cost、极高自有劳动投入与售价判断之间存在明显心理/经济耦合。</strong></p>
+</blockquote>
+<h2 id="product-taste-was-not-absent">Product Taste Was Not Absent</h2>
+<p>Brigador 不能合理归类为“创作者没有产品品味”：</p>
+<ul>
+<li>custom engine 直接服务高度可破坏环境；</li>
+<li>世界观、美术、音乐、机械系统形成高度一致的作者性；</li>
+<li>2016 首发后 Steam 用户评价长期很高；</li>
+<li>媒体与 GDC 资料都明确把“游戏本身得到积极评价但商业失败”作为案例前提。</li>
+</ul>
+<p>因此它的价值恰恰在于：</p>
+<blockquote>
+<p><strong>强产品判断可以和弱 market legibility / onboarding / expectation management 同时存在。</strong></p>
+</blockquote>
+<h2 id="selection-failure-1-controls-onboarding">Selection Failure 1 — Controls / Onboarding</h2>
+<p>开发者公开复盘中最有价值的事实之一，是 tank controls。</p>
+<p>同期/复盘资料显示：
+- <code>W</code> 是向载具朝向前进，而不是屏幕向上；
+- playtest 中有人需要很长时间才适应；
+- 团队观察到玩家一旦适应后往往很喜欢，因此长期把初始摩擦视作可接受代价。</p>
+<p>2017 Up-Armored Edition 后来增加新的默认控制方案，并重做更适合新玩家的 campaign / onboarding。</p>
+<p>这不是“核心机制错了”的简单证据，而是一个更精确的问题：</p>
+<blockquote>
+<p><strong>团队可能正确判断长期 mastery 的价值，却错误判断了首局学习成本对陌生用户转化的破坏程度。</strong></p>
+</blockquote>
+<h2 id="selection-failure-2-presentation-did-not-match-product-reality">Selection Failure 2 — Presentation Did Not Match Product Reality</h2>
+<p>2016 年首发后，Hugh Monahan 在 Steam 社区直接承认：</p>
+<ul>
+<li>很多人把 Brigador 看成 twin-stick shooter；</li>
+<li>真正想要 twin-stick shooter 的人进入后，又会遇到远比预期更密集的机械系统；</li>
+<li>团队自己的 trailer / presentation 没有把“玩起来是什么感觉”表达清楚。</li>
+</ul>
+<p>这是非常干净的 <code>market legibility</code> 失败：</p>
+<blockquote>
+<p><strong>产品身份存在，但外部信号把它编码错了。</strong></p>
+</blockquote>
+<p>因此“没有曝光”和“曝光后被错误理解”必须分开记录。</p>
+<h2 id="selection-failure-3-visibility-vs-price">Selection Failure 3 — Visibility vs Price</h2>
+<p>Brigador 在 EA 期间 $20 的定价曾引发争论。开发者用五年劳动、自研引擎、内容量和长期可持续性为这一价格辩护。</p>
+<p>但到 2017 年，Monahan 在 Steam 讨论中明确说：</p>
+<blockquote>
+<p>price 是 friction point，但他认为 <strong>visibility 才是更大的问题</strong>；如果主要问题是价格，50% 折扣时应看到更高的销售峰值。</p>
+</blockquote>
+<p>因此本案不能简单归类为“定价失败”。</p>
+<p>更合理的审计问题是：</p>
+<ul>
+<li>生产成本是否影响了团队对“公平价格”的判断？</li>
+<li>玩家愿付价格与开发者成本回收价格是否发生错位？</li>
+<li>visibility / positioning / onboarding 是否比 nominal price 更关键？</li>
+</ul>
+<h2 id="market-access-was-not-zero">Market Access Was Not Zero</h2>
+<p>“完全没营销”同样不成立。</p>
+<p>首发前后至少存在：</p>
+<ul>
+<li>两年 convention touring；</li>
+<li>PAX / Indie Megabooth；</li>
+<li>预购；</li>
+<li>Early Access；</li>
+<li>PC Gamer、Kill Screen、RPS 等媒体积极报道；</li>
+<li>Evolve PR 协助向 creators 发 keys；</li>
+<li>Hugh 本人给 NorthernLion demo；</li>
+<li>TotalBiscuit / Giant Bomb 后来带来可见销售 spike。</li>
+</ul>
+<p>所以问题不是 <code>marketing = 0</code>，而是：</p>
+<blockquote>
+<p><strong>大量 market activity 没有在 launch 时形成足够的、正确预期下的 demand concentration。</strong></p>
+</blockquote>
+<p>这对 C010 很重要：市场接入不是二元变量，还要看“是否抵达正确受众、是否正确解释产品、是否在正确时间形成转换”。</p>
+<h2 id="2016-launch-failure">2016 Launch Failure</h2>
+<p>GDC 官方将 2016-06-02 launch 定义为 <code>doomed launch</code> / effectively a commercial failure：</p>
+<ul>
+<li>两年 conventions；</li>
+<li>多家媒体积极覆盖；</li>
+<li>Steam 高用户好评；</li>
+<li>仍然在发售时“barely registered a blip”。</li>
+</ul>
+<p>2017 年初社区讨论中流传约 15k units 的量级，但当前把它视为当时公开估算 / community figure，而不是平台审计数字。</p>
+<h2 id="recovery-failure-was-a-state-not-the-end">Recovery — Failure Was a State, Not the End</h2>
+<p>Brigador 的后续尤其重要，因为它防止我们把“launch failure”误写成“项目永久失败”。</p>
+<p>2017 Up-Armored Edition 做了多项修正：</p>
+<ul>
+<li>新 campaign / 更好的新手引导；</li>
+<li>新 default controls；</li>
+<li>大量 balance 与效果调整；</li>
+<li>多语言 localization；</li>
+<li>discount / relaunch；</li>
+<li>持续内容与维护。</li>
+</ul>
+<p>后续官方资料明确说 localization 帮助游戏触达原先无法触达的受众；团队继续维护多年，并最终继续开发 Brigador Killers。</p>
+<p>因此本案的第二个生产史价值是：</p>
+<blockquote>
+<p><strong>一次 launch selection failure 可以通过 post-launch learning、repositioning、localization 和长期维护被部分逆转。</strong></p>
+</blockquote>
+<h2 id="taste-capital-audit">Taste Capital Audit</h2>
+<p>Brigador 强迫 TC-001 从“有没有品味”升级成“品味在哪个 domain”。</p>
+<p>至少要拆成：</p>
+<ol>
+<li><strong>Product / interaction selection</strong> — Brigador 很强；</li>
+<li><strong>Aesthetic / world selection</strong> — 很强；</li>
+<li><strong>Technical representation selection</strong> — custom engine 与破坏系统形成独特价值，但成本极高；</li>
+<li><strong>Onboarding selection</strong> — 首发阶段存在明显问题；</li>
+<li><strong>Market / audience legibility</strong> — 首发阶段明显失配；</li>
+<li><strong>Pricing / business-model judgment</strong> — 有争议，但不能单独解释失败；</li>
+<li><strong>Feedback integration</strong> — 后续 Up-Armored / localization 表明团队具有较强修正能力。</li>
+</ol>
+<p>所以本案目前更支持：</p>
+<blockquote>
+<p><strong>Taste Capital 不是一个人格总分，而是一组 domain-specific selection capabilities。</strong></p>
+</blockquote>
+<h2 id="execution-failure-vs-selection-failure">Execution Failure vs Selection Failure</h2>
+<p>Brigador 不能被纯粹放进任何一边。</p>
+<h3 id="_1">执行上，他们完成了非常困难的东西</h3>
+<ul>
+<li>custom engine；</li>
+<li>高密度破坏；</li>
+<li>大量手工地图与单位；</li>
+<li>高完成度音画与系统。</li>
+</ul>
+<h3 id="_2">但正因为执行很强，选择问题更明显</h3>
+<ul>
+<li>过高的第一小时 friction；</li>
+<li>product presentation 与实际体验不匹配；</li>
+<li>开发成本和市场可回收规模之间可能存在错位；</li>
+<li>五年后才在 launch 时发现 audience expectation 问题，反馈回路过慢。</li>
+</ul>
+<p>因此这是 TC-002 “选择失败”目前最有价值的正式 Case 之一。</p>
+<h2 id="capabilityproject-fit-counterpressure-fit-strong-launch-failed">Capability–Project Fit Counterpressure — FIT-STRONG, LAUNCH-FAILED</h2>
+<p>Brigador 现在可以承担 C015 最重要的一类反压力：</p>
+<blockquote>
+<p><strong>能力反向立项可以非常强，但它不是商业成功的充分条件。</strong></p>
+</blockquote>
+<p>这不是事后从成品“看起来很适合团队”倒推。</p>
+<p>2015 年 Hugh Monahan 的同期访谈提供了更完整的行动链：</p>
+<ul>
+<li>团队在 Brigador 前已经做过多轮 student / hobby prototypes；</li>
+<li>到最终方向前约经历七个 prototype；</li>
+<li>他们最初做过 2D / four-player arena 方向，后来明确意识到团队本身并不喜欢这种游戏，于是放弃；</li>
+<li>Hugh / Jack 的 taste 更偏 Crusader、MechWarrior、慢速、重量感、deliberate combat；</li>
+<li>Dale Kim 的 Counter-Strike 背景直接进入 aiming thesis：瞄准应当是需要 precision 的 skill；</li>
+<li>Jack 的 Ma.K. / kitbash 视觉兴趣不仅塑造 aesthetic，也被转成极高效率的 digital-kitbash asset pipeline；</li>
+<li>单艺术家管线之所以可行，不是“少做美术”，而是项目美学和资产生产方式被一起重写；</li>
+<li>传统线性叙事被弱化，世界观扩展被转移到 description、novel / audiobook；</li>
+<li>soundtrack 等外围能力交给高度匹配的 specialist collaborator。</li>
+</ul>
+<p>这符合 C015 的核心路径：</p>
+<p><code>existing taste / capability → project re-selection → production method → player-facing form</code></p>
+<p>而且 fit 并不弱：</p>
+<ul>
+<li>industrial-design / worldbuilding taste → bulky retro-future vehicles；</li>
+<li>programmers → custom engine / destructibility / aiming；</li>
+<li>single artist → kitbash / sprite-render pipeline；</li>
+<li>specialist writer / musician → peripheralized narrative / music。</li>
+</ul>
+<p>但 2016 launch 仍然商业失败。</p>
+<p>因此 Brigador 对 C015 的意义不是反驳“能力反向立项存在”，而是反驳更强的成功学版本：</p>
+<blockquote>
+<p><strong>FIT-STRONG ≠ MARKET-SUFFICIENT。</strong></p>
+</blockquote>
+<p>项目仍可能因为：
+- onboarding friction；
+- market legibility；
+- audience expectation；
+- attention concentration；
+- cost / market-size mismatch；
+- feedback-loop timing</p>
+<p>而失败。</p>
+<p>这也要求后续 Capability–Project Fit Audit 把两个问题分开：</p>
+<ol>
+<li>这个项目是不是按团队能力塑形的？</li>
+<li>这个塑形后的项目有没有足够市场、可读性和低摩擦入口？</li>
+</ol>
+<p>Brigador 对第一个问题接近 <code>FIT-STRONG</code>，对第二个问题的 2016 launch 答案却是否定的。</p>
+<h2 id="provisional-verdict">Provisional Verdict</h2>
+<blockquote>
+<p><strong>Brigador 的 2016 失败，不是“差游戏失败”，也不是“神作纯因运气失败”。它更像一个执行能力很强、核心产品判断很强，但在 onboarding、市场可读性、受众预期与生产成本—市场规模匹配上发生结构性错位的项目。</strong></p>
+</blockquote>
+<p>真正的教训不是“迎合市场”，而是：</p>
+<blockquote>
+<p><strong>一个作者可以坚持高摩擦、高密度、非大众的核心体验，同时仍然必须让目标玩家快速判断“这是不是给我的”、理解为什么值得学习，并让第一小时的摩擦服务于体验而不是阻断体验。</strong></p>
+</blockquote>
+<h2 id="transferable">Transferable</h2>
+<ul>
+<li>区分 <code>product quality</code>、<code>market legibility</code> 与 <code>commercial fit</code>；</li>
+<li>playtester 最终喜欢，不代表 onboarding 没问题；</li>
+<li>trailer / store page 必须表达真实 play feel，而不是只展示资产与气氛；</li>
+<li>“我们做了很多营销”不等于目标受众已经正确理解产品；</li>
+<li>不要用开发成本直接推导市场愿付价格；</li>
+<li>高 sunk cost 项目尤其需要早期 audience / expectation validation；</li>
+<li>launch failure 后仍可通过 relaunch、localization、控制/教程修正和长尾运营恢复价值。</li>
+</ul>
+<h2 id="non-transfer-boundaries">Non-transfer / Boundaries</h2>
+<ul>
+<li>2011–2016 的 Steam / Early Access 市场与今天不同；</li>
+<li>团队自研引擎的历史条件与今日 Unity / Unreal / Godot 生态不同；</li>
+<li>Brigador 的小众 mech / isometric / tank-control 产品结构非常特殊；</li>
+<li>后续 recovery 不代表所有首发失败都能靠长期维护救回；</li>
+<li>当前没有完整 audited budget / net revenue，因此禁止计算精确 ROI。</li>
+</ul>
+<h2 id="evidence-index">Evidence Index</h2>
+<p>详见 <a href="/heroes-portal/evidence/CASE-026-brigador-source-ledger.html"><code>../evidence/CASE-026-brigador-source-ledger.md</code></a>。</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / cases/CASE-026-brigador.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

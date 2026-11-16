@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FTL：几个月的小项目怎样长成一款商业游戏 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl class="on"" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#_1" class="t2">一、在上海相识的两种开发能力</a><a href="#_2" class="t2">二、储蓄先买到了几个月</a><a href="#ftl_1" class="t2">三、第一版 FTL 并不需要证明它能养一家公司</a><a href="#kickstarter" class="t2">四、在 Kickstarter 之前，他们已经主动寻找外部判定</a><a href="#kickstarter_1" class="t2">五、Kickstarter 很重要，但它不是创世事件</a><a href="#_3" class="t2">六、“两个人做的”仍然不是“只有两个人参与”</a><a href="#ftl_2" class="t2">七、FTL 最值得复制的不是众筹，而是分阶段承诺</a><a href="#_4" class="t2">八、这一案不能被浪漫化的部分</a><a href="#_5" class="t2">九、一次有限试验之后</a><a href="#_6" class="t2">可迁移机制</a><a href="#_7" class="t2">不可直接复制</a><a href="#_8" class="t2">仍待核验</a><a href="#kickstarter-staged-commitment" class="t2">时效性｜Kickstarter 是时代入口，staged commitment 才是结构机制</a><a href="#_9" class="t2">研究与证据入口</a></aside><article class="doc lit"><div class="col"><h1 id="ftl">FTL：几个月的小项目怎样长成一款商业游戏</h1><img class="docfig" src="/heroes-portal/assets/pf-ftl.webp" alt="">
+<p>© 2026 洪荒行者。All Rights Reserved.</p>
+<p class="dc">Justin Ma 和 Matthew Davis 开始一起做小项目时，手里的储蓄足以支持几个月。两人已经在传统游戏工作室做过开发，暂时可以把时间用在自己的作品上，却还没有一款需要养活公司的商业游戏。</p>
+<p>几年后的回顾里，Davis说，最初的项目也可以留在履历上，帮助他们寻找下一份更感兴趣的工作。商业成功当时只是可能的结果之一。后来，原型参加竞赛，外部反馈促使两人继续投入，才逐步走到众筹与完整产品。</p>
+<p>2012年的Kickstarter最终有9,818人支持，承诺金额达200,542美元，远超10,000美元的目标。这些数字记录了一次强烈的市场反应，也容易遮住此前的小步试探。理解FTL，要先回到那几个月：他们用有限的积蓄给一个可以失败的项目买了时间，再根据得到的反馈提高赌注。</p>
+<hr />
+<h2 id="_1">一、在上海相识的两种开发能力</h2>
+<p>Ma和Davis在2K Shanghai相识。Davis偏重程序，Ma的工作覆盖设计、美术与脚本；两人共同承担设计。Ma在大学时已经做过小型原型，职业工作又让他们在同一家工作室里积累了开发经验。</p>
+<p>这些能力后来被放进一个两人核心项目，音乐等专业工作则有外部贡献者参与。组织很小，开工前的技能积累却不能从成本中删去。“两个人做出FTL”描述的是核心规模，不能理解成两个零经验的人包办了一间工作室的全部工作。<strong>项目创建日，不是能力创建日。</strong></p>
+<hr />
+<h2 id="_2">二、储蓄先买到了几个月</h2>
+<p>2012年的发售后采访中，两人说，他们在传统工作室工作时攒下的钱足以支持几个月的小项目。确切金额至今未知；可知的是，他们最初购买的时间有上限，没有一开始就为多年制作和公司存续作出承诺。</p>
+<p>Davis在2022年的回顾里还谈到另一种预期：工作间隙的原型可以帮助扩充履历，之后去寻找更感兴趣的工作。即使项目没有成为商品，投入也可能留下职业用途。这让失败的代价有机会被限制在一次试验之内，但不能据此保证两人随时都能轻松再就业。</p>
+<p>储蓄与职业能力提供了两种不同的缓冲：前者支付眼前的制作时间，后者保留项目结束后的回撤选项。它们都发生在众筹之前，不能由后来的200,542美元替代。</p>
+<hr />
+<h2 id="ftl_1">三、第一版 FTL 并不需要证明它能养一家公司</h2>
+<p>最初几个月里，两人要做的是一个小项目。2013年GDC复盘的演讲简介，将起点概括为让玩家体验星舰舰长的角色：体验目标先于固定的类型与机制，设计元素在制作中反复改变或被放弃。我们能从简介确认这种探索方式，具体每次删改的过程仍需继续核对。</p>
+<p>最终作品把房间、船员、武器、资源、事件与跳跃节点放在玩家面前，主要让人通过规则、信息和组合决策管理飞船。作者据此提出一个生产解释：<strong>他们改变了太空幻想的生产表达式，让两人的能力有机会承担它。</strong> 若沿着复杂3D驾驶和电影化表现去做，同一种幻想可能要求另一套资产与技术投入；但这里仍是待原型演变进一步检验的解释，不能替两人补出每项设计的成本动机。</p>
+<p>有限试验的意义就在此处。初期可以先探索这种体验是否成立，而暂不要求它同时养活创始人、支撑多年制作和完整公司。创作问题与生存问题终究要相接，起步时却可以分清先需要回答哪一道。</p>
+<hr />
+<h2 id="kickstarter">四、在 Kickstarter 之前，他们已经主动寻找外部判定</h2>
+<p>做了几个月以后，Ma和Davis把项目送进竞赛。2012年发售后的采访中，两人说，正面反馈让他们决定尝试把它做成商业产品。改变投入方向的依据，来自已经做出的东西与外界回应。</p>
+<p>FTL成为2011年China Independent Games Festival的finalist，又获得2012年IGF的honorable mentions，媒体与同行也开始关注。这些接触都在Kickstarter之前，支持了团队对作品吸引力的判断。竞赛认可与媒体兴趣还没有回答最终会有多少人购买，却让继续制作有了比自己喜欢原型更多的依据。</p>
+<p>主动把作品交出去接受判定，也是这条路中的一项工作。几个月储蓄先让原型存在，提交与反馈再推动商业化；众筹到来时，前面的尝试已经留下了作品和外部信号。</p>
+<hr />
+<h2 id="kickstarter_1">五、Kickstarter 很重要，但它不是创世事件</h2>
+<p>2012年2月27日，FTL上线Kickstarter。到4月1日结束时，9,818名支持者承诺了200,542美元，目标为10,000美元。超过目标约二十倍的反应，给后续制作带来重要资金来源，也把此前的外部兴趣变成了更具体的支持。</p>
+<p>这笔数字记录的是承诺总额，扣费、税务和支出后的净可用资金仍未核清，更不等于完整开发预算。几个月储蓄、原型与竞赛反馈已经发生，无法由众筹金额倒过来解释项目起点。</p>
+<p>支持者也改变了试验的责任。原本可能留在履历里的小项目，现在面对近万名支持者的期待，要走向一款可交付的游戏。作者在这里同时看机会与承诺：资金使继续制作更有余地，向别人承诺完成作品，也提高了停止或改变方向的代价。</p>
+<hr />
+<h2 id="_3">六、“两个人做的”仍然不是“只有两个人参与”</h2>
+<p>Ma和Davis共同设计，分别承担美术、脚本与程序等主要开发工作。创作者的复盘还专门感谢Ben Prunty的音乐，它也是最终体验的一部分。两人的互补让核心制作能够推进，其他人的专业贡献则进入了成品；完整的测试、平台支持和外围协作边界仍待核。</p>
+<p>这份分工还提出了一个制作问题：哪些工作留在核心，哪些交给协作者，哪些内容不做？把所有职业塞进两个人身体里，并没有回答它。FTL至少让我们看见了核心职责与音乐贡献的区别，却还不能列出一张已审计完整的分工或权利表。</p>
+<hr />
+<h2 id="ftl_2">七、FTL 最值得复制的不是众筹，而是分阶段承诺</h2>
+<p><strong>先让一个项目拥有便宜失败的资格。</strong> 这是作者从FTL路径中提取的分阶段承诺判断：初期用几个月做小实验，外部反馈增强以后，再承担商业制作与融资的责任。Davis后来所说的履历用途，还留下了一种预期中的回撤选择。这里值得研究的是投入怎样随依据改变，而不是把当年的竞赛与众筹顺序直接规定为今天的创业步骤。</p>
+<hr />
+<h2 id="_4">八、这一案不能被浪漫化的部分</h2>
+<p>两人已有职业经验与互补技能，又遇到了2011–2012年的独立游戏、竞赛和众筹窗口。超过目标约二十倍的支持，是这次试验实际得到的结果，不能作为下一位创作者的起步预期。</p>
+<p>尚未核清的成本同样重要：确切储蓄、每月生活与开发支出、上海生活成本的作用、完整机会成本、全部外围贡献与支持劳动，以及众筹净可用资金。没有这些记录，就无法计算这条路适合谁、能给谁留下多少次尝试。FTL显示了一种风险承担顺序；它没有许诺辞职做一份demo，就会有人提供二十万美元。</p>
+<hr />
+<h2 id="_5">九、一次有限试验之后</h2>
+<p>Ma和Davis最初只给小项目买了几个月。原型获得反馈以后，他们才继续扩大投入；众筹又让近万名支持者进入这个故事，延长制作时间，也增加了交付义务。早期的职业间隙实验由此长成一款必须完成的商业游戏。</p>
+<p>本篇保留的判断是：创作不必在第一天就承担完整创业的成本，可以先争取一个有限、可失败的试验窗口，再让证据决定下一轮是否加码。这种结构没有消除风险，更不会保证众筹超募；它改变了Ma和Davis承担风险的顺序。</p>
+<hr />
+<h2 id="_6">可迁移机制</h2>
+<ul>
+<li>用有限 runway 做有限实验，而不是一开始承担无限期限；</li>
+<li>保留再就业 / 回撤选项，降低失败的永久成本；</li>
+<li>用互补能力组织极小核心，而不是追求“每个人都全能”；</li>
+<li>通过 representation 重写昂贵幻想的成本结构；</li>
+<li>在大规模融资前主动寻找高质量外部判断；</li>
+<li>把承诺等级与真实证据同步提高。</li>
+</ul>
+<h2 id="_7">不可直接复制</h2>
+<ul>
+<li>2011–2012 Kickstarter 与 indie boom 的历史窗口；</li>
+<li>China IGF / IGF 具体路径；</li>
+<li>两位创始人的职业能力前史；</li>
+<li>众筹 20 倍超募这一右尾结果；</li>
+<li>上海对实际 burn 的贡献目前仍无法量化。</li>
+</ul>
+<h2 id="_8">仍待核验</h2>
+<ul>
+<li>savings 与 monthly burn；</li>
+<li>上海住房 / 生活成本的真实作用；</li>
+<li>完整 contributor / QA / platform-support 边界；</li>
+<li>FTL 从 hobby prototype 转商业项目的更精确时间线；</li>
+<li>Kickstarter 资金在具体生产项上的使用结构。</li>
+</ul>
+<hr />
+<h2 id="kickstarter-staged-commitment">时效性｜Kickstarter 是时代入口，staged commitment 才是结构机制</h2>
+<ul>
+<li><strong>Observed:</strong> 2011–2012 prototype / festival / Kickstarter / launch。</li>
+<li><strong>2026 status:</strong> <code>DURABLE</code> for bounded experiment、回撤能力、证据增强后再加码；<code>HISTORICAL / CONDITIONAL</code> for 早期 Kickstarter/IGF 路径。</li>
+<li><strong>不要照抄：</strong> “辞职做 demo → Kickstarter 超募”。</li>
+<li><strong>今天真正保留：</strong> 先购买一个可失败的实验窗口，而不是第一天购买完整创业。</li>
+</ul>
+<p>完整规则：<a href="/heroes-portal/book/TEMPORAL-VALIDITY.html">Temporal Validity Gate</a>。</p>
+<hr />
+<h2 id="_9">研究与证据入口</h2>
+<p>本文使用的事实边界以研究后台为准；储蓄、burn、上海生活成本与完整 contributor boundary 等仍有 UNKNOWN。</p>
+<ul>
+<li><a href="/heroes-portal/cases/CASE-001-ftl.html">CASE-001 — FTL / Subset Games</a></li>
+<li><a href="/heroes-portal/evidence/CASE-001-ftl-source-ledger.html">CASE-001 Evidence Ledger</a></li>
+<li>当前研究状态：<strong>RESEARCHING</strong></li>
+</ul><div class="crumbs"><a href="/heroes-portal/">书阁</a> / book/profiles/ftl.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

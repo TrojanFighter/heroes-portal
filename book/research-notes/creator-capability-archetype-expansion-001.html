@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Creator Capability Archetype Expansion 001｜主创能力类型案例矩阵 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl class="on"" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#a-technical-artist-visual-first" class="t2">A. Technical Artist / visual-first / 美术—技术桥接型</a><a href="#a1-case-042-the-first-tree-david-wehle" class="t3">A1. CASE-042 — The First Tree / David Wehle</a><a href="#a2-case-043-everything-david-oreilly" class="t3">A2. CASE-043 — Everything / David OReilly</a><a href="#a3-case-050-nomada-studio-gris-neva" class="t3">A3. CASE-050 — Nomada Studio / GRIS → Neva</a><a href="#a4-case-023-despelote" class="t3">A4. CASE-023 — despelote</a><a href="#a5-pressure-control" class="t3">A5. Pressure / control — 《牛来》 / 信雨萌</a><a href="#b-programmer-engine-systems-first" class="t2">B. Programmer / engine / systems-first</a><a href="#b1-case-016-early-id-carmack" class="t3">B1. CASE-016 — Early id / Carmack</a><a href="#b2-case-018-rollercoaster-tycoon-chris-sawyer" class="t3">B2. CASE-018 — RollerCoaster Tycoon / Chris Sawyer</a><a href="#b3-case-035-factorio-wube" class="t3">B3. CASE-035 — Factorio / Wube</a><a href="#b4-case-005-dwarf-fortress-bay-12" class="t3">B4. CASE-005 — Dwarf Fortress / Bay 12</a><a href="#b5-case-051-zachtronics-zach-barth" class="t3">B5. CASE-051 — Zachtronics / Zach Barth</a><a href="#b6-missing-control" class="t3">B6. Missing control</a><a href="#c-game-designer-critic-selection-first" class="t2">C. Game Designer / critic / selection-first</a><a href="#c1-case-007-gunpoint-tom-francis" class="t3">C1. CASE-007 — Gunpoint / Tom Francis</a><a href="#c2-case-008-dream-quest-peter-whalen" class="t3">C2. CASE-008 — Dream Quest / Peter Whalen</a><a href="#c3-case-031-jonas-tyroller" class="t3">C3. CASE-031 — Jonas Tyroller</a><a href="#c4-case-020-into-the-breach-subset" class="t3">C4. CASE-020 — Into the Breach / Subset</a><a href="#c5-case-045-rimworld-tynan-sylvester" class="t3">C5. CASE-045 — RimWorld / Tynan Sylvester</a><a href="#c6-pressure-case-026-brigador" class="t3">C6. Pressure — CASE-026 Brigador</a><a href="#c7-pressure-case-048-the-magic-circle" class="t3">C7. Pressure — CASE-048 The Magic Circle</a><a href="#d-modder-server-admin-ugc-community-creator" class="t2">D. Modder / server admin / UGC / community creator</a><a href="#d1-case-032-playerunknown-brendan-greene" class="t3">D1. CASE-032 — PLAYERUNKNOWN / Brendan Greene</a><a href="#d2-case-040-tripwire-lineage" class="t3">D2. CASE-040 — Tripwire lineage</a><a href="#d3-case-021-roblox-creator-cluster" class="t3">D3. CASE-021 — Roblox Creator Cluster</a><a href="#d4-case-044-garry-newman-garrys-mod-facepunch-sbox" class="t3">D4. CASE-044 — Garry Newman / Garry&amp;rsquo;s Mod → Facepunch → s&amp;amp;box</a><a href="#d5-dean-hall-dayz" class="t3">D5. Dean Hall / DayZ</a><a href="#d6-case-044-current-pressure-layer-sbox-garry-newman" class="t3">D6. CASE-044 current pressure layer — s&amp;amp;box / Garry Newman</a><a href="#e-commercial-aaa-authorial-project" class="t2">E. Commercial / AAA → authorial project</a><a href="#e1-case-003-papers-please-lucas-pope" class="t3">E1. CASE-003 — Papers, Please / Lucas Pope</a><a href="#e2-case-038-sultans-game-double-cross" class="t3">E2. CASE-038 — Sultan&amp;rsquo;s Game / Double Cross</a><a href="#e3-case-041-next-portfolio-synced" class="t3">E3. CASE-041 — NExT portfolio → SYNCED</a><a href="#e4-case-046-sandfall-interactive-clair-obscur-expedition-33" class="t3">E4. CASE-046 — Sandfall Interactive / Clair Obscur: Expedition 33</a><a href="#e5-case-047-the-witness-jonathan-blow" class="t3">E5. CASE-047 — The Witness / Jonathan Blow</a><a href="#e6-jonathan-blow-braid" class="t3">E6. Jonathan Blow / Braid</a><a href="#e7-case-049-outer-wilds-mobius-digital" class="t3">E7. CASE-049 — Outer Wilds / Mobius Digital</a><a href="#f-solo-generalist" class="t2">F. Solo / generalist</a><a href="#g-business-operations-producer-first" class="t2">G. Business / operations / producer-first</a></aside><article class="doc"><div class="col"><h1 id="creator-capability-archetype-expansion-001">Creator Capability Archetype Expansion 001｜主创能力类型案例矩阵</h1>
+<ul>
+<li>Status: ACTIVE RESEARCH MATRIX</li>
+<li>Last updated: 2026-10-07</li>
+<li>Reader entry: <a href="/heroes-portal/book/READER-ARCHETYPES.html">READER-ARCHETYPES</a></li>
+<li>Method: <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes/blob/main/schemas/capability-project-fit-audit.md">Capability–Project Fit Audit</a></li>
+<li>Temporal rule: <a href="/heroes-portal/book/TEMPORAL-VALIDITY.html">Temporal Validity Gate</a></li>
+</ul>
+<p class="dc">这张表不是“什么职业最容易成功”的排行榜。</p>
+<p>它问的是：</p>
+<blockquote>
+<p><strong>一个主创者已经拥有什么不对称能力？项目有没有把这种能力变成核心体验、生产杠杆和市场可读性？</strong></p>
+</blockquote>
+<p>这一轮进一步把“fit”拆成一个更前置的机制：<a href="/heroes-portal/claims/C015-capability-shaped-project-formation.html">C015 Capability-Shaped Project Formation</a>：主创先识别自己的能力向量与弱项，再反向定义项目。</p>
+<p>同一对象可以同时属于多个 archetype。职业 title 只用于导航；最终要核真实 capability、decision rights、runway、scope、periphery 与时代条件。</p>
+<hr />
+<h2 id="a-technical-artist-visual-first">A. Technical Artist / visual-first / 美术—技术桥接型</h2>
+<h3 id="a1-case-042-the-first-tree-david-wehle">A1. CASE-042 — The First Tree / David Wehle</h3>
+<ul>
+<li>Status: FORMAL CASE / RESEARCHING.</li>
+<li>Observed: 2014–2019；核心 2016–2017。</li>
+<li>Why: Media Arts / motion / interactive → Unity technical artist → short exploration game；licensed assets、环境设计、叙事与 GIF market surface 形成同一能力链。</li>
+<li>Pressure: 前作 Home is Where One Starts… 提供 shipping / market-learning 对照；console port 暴露 solo boundary。</li>
+<li>2026: visual-first mechanism = DURABLE；2016–2017 social tactic = HISTORICAL / CONDITIONAL。</li>
+<li>Case: <a href="/heroes-portal/cases/CASE-042-the-first-tree.html">CASE-042</a></li>
+</ul>
+<h3 id="a2-case-043-everything-david-oreilly">A2. CASE-043 — Everything / David OReilly</h3>
+<ul>
+<li>Status: FORMAL CASE / RESEARCHING.</li>
+<li>Observed: Mountain 2014 → Everything 2017。</li>
+<li>Why: animation auteur 进入 game design，不按传统角色动画 / quest / authored-content pipeline 复制商业游戏，而把 abstraction、object agency、procedural movement 变成作品语言。</li>
+<li>Research question: 这是 <code>cost avoidance → aesthetic conversion</code>，还是工程成本只是从动画转移到 simulation / tooling？</li>
+<li>Evidence starts:</li>
+<li>Game Developer 2017 — How Everything connects animation and game design: https://www.gamedeveloper.com/design/how-i-everything-i-connects-the-arts-of-animation-and-game-design</li>
+<li>Game Developer 2017 — animation vs game dev: https://www.gamedeveloper.com/business/animation-vs-game-dev-i-everything-i-creator-david-oreilly-breaks-down-the-differences</li>
+<li>2026: underlying problem-redefinition = DURABLE；2017 distribution / attention = CONDITIONAL。</li>
+<li>Case: <a href="/heroes-portal/cases/CASE-043-everything-david-oreilly.html">CASE-043</a></li>
+</ul>
+<h3 id="a3-case-050-nomada-studio-gris-neva">A3. CASE-050 — Nomada Studio / GRIS → Neva</h3>
+<ul>
+<li>Status: FORMAL CASE / RESEARCHING.</li>
+<li>Observed: visual thesis → complementary founder formation → GRIS 2018 → Neva 2024。</li>
+<li>Why: Roset 的 illustrator/visual-author capability 与 Cuevas/Mendoza 的 AAA programming capability 不是后期 outsourcing，而是在 founding stage 组成项目需要的 capability set。</li>
+<li>New mode: <code>CAPABILITY-COMPOSED</code>。项目 thesis 可以先出现，再通过 complementary cofounders 形成 founding capability vector。</li>
+<li>Production boundary: core founding team 很小，但 art/animation production perimeter 明显更大；公开 headcount 口径约 17–26，定义不同，禁止压成“三个人做出 GRIS”。</li>
+<li>Longitudinal value: Neva 保留 visual-author core，同时扩展 combat/mechanics vocabulary，说明 capability fit 可以演化而不是只能重复。</li>
+<li>2026: complementary-founder mechanism = DURABLE；2016–2018 publisher/demo/market window = HISTORICAL / CONDITIONAL。</li>
+<li>Case: <a href="/heroes-portal/cases/CASE-050-nomada-gris-neva.html">CASE-050</a></li>
+</ul>
+<h3 id="a4-case-023-despelote">A4. CASE-023 — despelote</h3>
+<ul>
+<li>Status: FORMAL CASE.</li>
+<li>Why: cultural memory、location、sound、low-asset-density expression 形成作者能力与 production model 的另一种视觉/叙事路线。</li>
+<li>Use: 对照 The First Tree 的“漂亮可传播 3D”路线，避免把 visual-first 等同于 polish-first。</li>
+</ul>
+<h3 id="a5-pressure-control">A5. Pressure / control — 《牛来》 / 信雨萌</h3>
+<ul>
+<li>Status: CROSS-MEDIA COMPARATOR.</li>
+<li>Why: 极端个人 labor compression；公开材料显示作者也做范围取舍，但大量传统动画问题仍由长期个人劳动承担。</li>
+<li>Use: 检验 <code>Problem Redefinition</code> 与 <code>one person does five jobs</code> 的真正差异。</li>
+<li>Current location: <a href="/heroes-portal/cases/BACKLOG.html">Case Backlog</a>.</li>
+</ul>
+<hr />
+<h2 id="b-programmer-engine-systems-first">B. Programmer / engine / systems-first</h2>
+<h3 id="b1-case-016-early-id-carmack">B1. CASE-016 — Early id / Carmack</h3>
+<ul>
+<li>Created-window archetype：主创自己推进 renderer / engine frontier。</li>
+<li>Temporal: 1990s tactics HISTORICAL；frontier creation / tool leverage DURABLE。</li>
+</ul>
+<h3 id="b2-case-018-rollercoaster-tycoon-chris-sawyer">B2. CASE-018 — RollerCoaster Tycoon / Chris Sawyer</h3>
+<ul>
+<li>Extreme implementation-capital archetype：长期代码资本、极端熟练技术栈与专业外围。</li>
+<li>Research pressure: 不得推出“程序越强项目越应该技术复杂”。</li>
+</ul>
+<h3 id="b3-case-035-factorio-wube">B3. CASE-035 — Factorio / Wube</h3>
+<ul>
+<li>Systems + engineering + paid-alpha feedback loop。</li>
+<li>Use: 技术能力与系统产品形态、长期迭代、市场接口的共同作用。</li>
+</ul>
+<h3 id="b4-case-005-dwarf-fortress-bay-12">B4. CASE-005 — Dwarf Fortress / Bay 12</h3>
+<ul>
+<li>Representation-cost redefinition：复杂系统深度并不要求行业标准视觉资产生产。</li>
+<li>Use: extreme systems-first longevity comparator。</li>
+</ul>
+<h3 id="b5-case-051-zachtronics-zach-barth">B5. CASE-051 — Zachtronics / Zach Barth</h3>
+<ul>
+<li>Status: FORMAL CASE / RESEARCHING.</li>
+<li>Observed: college/freeware → SpaceChem → TIS-100 / SHENZHEN I/O / Opus Magnum → deliberate 2022 studio closure。</li>
+<li>Why: computer science / computer engineering / programming literacy 不只是 implementation capital，而被直接转成 open-ended engineering puzzle language。</li>
+<li>Strong C015 evidence: TIS-100 来自一个 art/content burden 过高的更大个人项目；Barth 删除昂贵 obligation，保留 assembly/system-author core，项目 identity 因此改变。</li>
+<li>Market coherence: programmer niche 被显性当作 discoverability strategy；Opus Magnum solution GIF 又让 core system output 直接变成传播表面。</li>
+<li>Longitudinal pressure: Barth 2022 明确说团队已经非常擅长做 “Zachtronics games”，却越来越难做别的；因此建立第一份 <code>FIT-LOCK-IN / CAPABILITY PATH DEPENDENCE</code> 锚点。</li>
+<li>2026: engineering-as-game-language = DURABLE；2011–2018 Steam niche economics = HISTORICAL / CONDITIONAL。</li>
+<li>Case: <a href="/heroes-portal/cases/CASE-051-zachtronics.html">CASE-051</a></li>
+</ul>
+<h3 id="b6-missing-control">B6. Missing control</h3>
+<p>仍缺一个证据足够强的：</p>
+<blockquote>
+<p><strong>工程能力很强，但因为 product selection / scope / platform bet 反复失败的 programmer-led project。</strong></p>
+</blockquote>
+<p>在找到 P0/P1 postmortem 前，不用“程序员容易 overengineer”这种行业刻板印象代替证据。</p>
+<hr />
+<h2 id="c-game-designer-critic-selection-first">C. Game Designer / critic / selection-first</h2>
+<h3 id="c1-case-007-gunpoint-tom-francis">C1. CASE-007 — Gunpoint / Tom Francis</h3>
+<ul>
+<li>Critic → explicit taste → cheap prototype → deletion / selection。</li>
+<li>Core question: 判断能否被快速送到现实中反驳。</li>
+</ul>
+<h3 id="c2-case-008-dream-quest-peter-whalen">C2. CASE-008 — Dream Quest / Peter Whalen</h3>
+<ul>
+<li>Heavy-player knowledge / rules-first design。</li>
+<li>Use: taste capital 与表现能力分离。</li>
+</ul>
+<h3 id="c3-case-031-jonas-tyroller">C3. CASE-031 — Jonas Tyroller</h3>
+<ul>
+<li>Repeated prototype / public explanation / project selection longitudinal sample。</li>
+<li>Use: 同一个人多轮项目中的 selection mechanism。</li>
+</ul>
+<h3 id="c4-case-020-into-the-breach-subset">C4. CASE-020 — Into the Breach / Subset</h3>
+<ul>
+<li>Success-after-success control：有资源以后为什么仍长期删掉做得出来的功能。</li>
+<li>Use: selection scarcity &gt; execution abundance 的强候选。</li>
+</ul>
+<h3 id="c5-case-045-rimworld-tynan-sylvester">C5. CASE-045 — RimWorld / Tynan Sylvester</h3>
+<ul>
+<li>Status: FORMAL CASE / RESEARCHING.</li>
+<li>Observed: 2013 crowdfunding / alpha → Steam 2016 → 1.0 2018。</li>
+<li>Why: creator publicly reframed product from conventional colony sim to “story generator,” then used this definition to omit seemingly standard features.</li>
+<li>Evidence starts:</li>
+<li>GDC Vault 2017: https://www.gdcvault.com/play/1024686/-RimWorld-Contrarian-Ridiculous-and</li>
+<li>Game Developer overview: https://www.gamedeveloper.com/design/video-how-i-rimworld-i-found-success-through-ridiculous-contrarian-design</li>
+<li>Research question: a strong design thesis 是否真正 reduced production cost / decision entropy，还是后验成功叙事？</li>
+<li>2026: thesis-driven selection mechanism DURABLE；crowdfunding / Steam window CONDITIONAL。</li>
+<li>Case: <a href="/heroes-portal/cases/CASE-045-rimworld.html">CASE-045</a></li>
+</ul>
+<h3 id="c6-pressure-case-026-brigador">C6. Pressure — CASE-026 Brigador</h3>
+<ul>
+<li>已升级为 <code>FIT-STRONG / LAUNCH-FAILED</code>。</li>
+<li>多轮 prototype、precision aiming、custom engine、digital kitbash art pipeline 和 specialist periphery 都与团队能力高度耦合。</li>
+<li>但 strong fit 没有自动解决 onboarding / market legibility / audience expectation。</li>
+<li>Use: “taste”不能被写成单一总分；Capability–Project Fit 也不能被写成成功充分条件。</li>
+</ul>
+<h3 id="c7-pressure-case-048-the-magic-circle">C7. Pressure — CASE-048 The Magic Circle</h3>
+<ul>
+<li>Status: FORMAL CASE / <code>FIT-STRONG / MARKET-FAILED</code>。</li>
+<li>三位 immersive-sim / AAA veteran 的职业前史直接变成题材、editable-AI mechanic 与高 authorial-density production model。</li>
+<li>Creator–Project Fit 很强，但 creator-reported sales 仍被评价为不可持续；unclear genre / niche-within-niche / no marketing budget 成为显性问题。</li>
+<li>Use: 强制把 <code>Creator–Project Fit</code> 与 <code>Project–Market Selection</code> 分开；“最像自己的项目”不等于“当前最值得做的商业项目”。</li>
+<li>Case: <a href="/heroes-portal/cases/CASE-048-the-magic-circle.html">CASE-048</a></li>
+</ul>
+<hr />
+<h2 id="d-modder-server-admin-ugc-community-creator">D. Modder / server admin / UGC / community creator</h2>
+<h3 id="d1-case-032-playerunknown-brendan-greene">D1. CASE-032 — PLAYERUNKNOWN / Brendan Greene</h3>
+<ul>
+<li>Public mod artifact → H1Z1 → commercial organization → PUBG。</li>
+<li>Bridge from rule invention to industrial amplification。</li>
+</ul>
+<h3 id="d2-case-040-tripwire-lineage">D2. CASE-040 — Tripwire lineage</h3>
+<ul>
+<li>Red Orchestra mod → Make Something Unreal → company formation → Killing Floor / Rising Storm。</li>
+<li>Validation ladder / community-as-production。</li>
+</ul>
+<h3 id="d3-case-021-roblox-creator-cluster">D3. CASE-021 — Roblox Creator Cluster</h3>
+<ul>
+<li>UGC platform compresses learning、shipping、distribution、income and studio formation。</li>
+<li>Must retain winner-selection bias.</li>
+</ul>
+<h3 id="d4-case-044-garry-newman-garrys-mod-facepunch-sbox">D4. CASE-044 — Garry Newman / Garry&rsquo;s Mod → Facepunch → s&amp;box</h3>
+<ul>
+<li>Status: FORMAL CASE / RESEARCHING.</li>
+<li>Observed: Half-Life 2 mod era → paid Garry&rsquo;s Mod → Rust → s&amp;box。</li>
+<li>Why: exceptionally long creator-platform lineage; modding is not merely a résumé but becomes a company and then a creator-platform thesis.</li>
+<li>Evidence start:</li>
+<li>PC Gamer 15-year Garry&rsquo;s Mod interview: https://www.pcgamer.com/garrys-mod-interview/</li>
+<li>Research question: 哪些 mod-era instincts scale to a creator platform，哪些 become liabilities when discovery / quality control / user expectation change？</li>
+<li>Case: <a href="/heroes-portal/cases/CASE-044-garry-newman-sbox.html">CASE-044</a></li>
+</ul>
+<h3 id="d5-dean-hall-dayz">D5. Dean Hall / DayZ</h3>
+<ul>
+<li>Status: STRONG CANDIDATE.</li>
+<li>Observed: DayZ mod 2012 → commercial DayZ transition。</li>
+<li>Evidence start:</li>
+<li>GDC 2013 — Designing DayZ: Lessons from Cherno: https://www.gdcvault.com/play/1019027/Designing-DayZ-Lessons-from</li>
+<li>Use: compare with Brendan Greene / Tripwire to separate “mod success” from what happens after organization / IP / live-service obligations arrive.</li>
+</ul>
+<h3 id="d6-case-044-current-pressure-layer-sbox-garry-newman">D6. CASE-044 current pressure layer — s&amp;box / Garry Newman</h3>
+<ul>
+<li>Status: FORMAL CURRENT LIVE PRESSURE LAYER, not failure verdict.</li>
+<li>Verified window: 2026-04 → 2026-09.</li>
+<li>Why: the creator of Garry&rsquo;s Mod explicitly records multi-year false starts, then immediately after release reports mixed reviews, discovery problems, AI-slop moderation, performance problems and confusion over “this isn&rsquo;t Garry&rsquo;s Mod.”</li>
+<li>Primary sources:</li>
+<li>2026-04-28 release: https://sbox.game/news/release-26-04-28</li>
+<li>2026-04-29 post-release: https://sbox.game/news/post-release/9qtcxbc94hvf.jsp</li>
+<li>2026-05-13 review analysis / discovery: https://sbox.game/news/update-26-05-13</li>
+<li>2026-09-01 discovery redesign: https://sbox.game/news/update-26-09-01</li>
+<li>Research value:<blockquote>
+<p>成功过的 modder / platform creator 并不会自动拥有下一代 creator-platform 的正确 product model。</p>
+</blockquote>
+</li>
+<li>2026 status: CURRENT — direct contemporaneous source set.</li>
+</ul>
+<hr />
+<h2 id="e-commercial-aaa-authorial-project">E. Commercial / AAA → authorial project</h2>
+<p>这条线研究的不是“大厂人出来就更强”，而是：</p>
+<blockquote>
+<p><strong>哪些 capability 真能迁移？哪些只是原组织 objective function？离开组织后谁拥有 decision rights？</strong></p>
+</blockquote>
+<h3 id="e1-case-003-papers-please-lucas-pope">E1. CASE-003 — Papers, Please / Lucas Pope</h3>
+<ul>
+<li>Mature professional capability → solo-author scope / representation redefinition。</li>
+<li>Strong positive anchor.</li>
+</ul>
+<h3 id="e2-case-038-sultans-game-double-cross">E2. CASE-038 — Sultan&rsquo;s Game / Double Cross</h3>
+<ul>
+<li>China commercial-mobile veterans → small premium team。</li>
+<li>Important because positive capability transfer and wrong-world-model carryover can coexist.</li>
+</ul>
+<h3 id="e3-case-041-next-portfolio-synced">E3. CASE-041 — NExT portfolio → SYNCED</h3>
+<ul>
+<li>Corporate comparator：同一组织不同 production regime。</li>
+<li>Use: high capability does not remove error-persistence costs.</li>
+</ul>
+<h3 id="e4-case-046-sandfall-interactive-clair-obscur-expedition-33">E4. CASE-046 — Sandfall Interactive / Clair Obscur: Expedition 33</h3>
+<ul>
+<li>Status: FORMAL CASE / RESEARCHING.</li>
+<li>Observed: personal after-work prototype → studio founded 2020 → release 2025 → post-success interviews 2025–2026.</li>
+<li>Evidence starts:</li>
+<li>2021 founder interview: Guillaume Broche says he had worked at Ubisoft for 4+ years and founded Sandfall with another Ubisoft developer; team then 8: https://magazine.reallusion.com/2021/06/09/pitch-produce-project-w-sandfall-interactive-studios-develops-ambitious-rpg-game-with-real-time-tools/</li>
+<li>GDC 2026 speaker bio: Tom Guillermin joined Ubisoft in 2016, worked on The Division / Ghost Recon / Beyond Good &amp; Evil, then co-founded Sandfall: https://schedule.gdconf.com/speaker/guillermin-tom/80849</li>
+<li>Unreal 2025 production interview: core team &lt;30; UE5 / MetaHuman / Nanite / Lumen used as production leverage: https://www.unrealengine.com/developer-interviews/inside-the-development-journey-of-clair-obscur-expedition-33</li>
+<li>Research questions:</li>
+<li>former AAA capability actually transferred in which disciplines?</li>
+<li>what came from tools / contractors / publisher rather than “30-person miracle”?</li>
+<li>how much of project shape existed before studio funding?</li>
+<li>is <code>small core + industrial periphery</code> the real structure?</li>
+<li>2026: CURRENT / CONDITIONAL；formalized as a comparator, not a “30-person miracle” hero story. Credits currently show a much larger industrial periphery than the &lt;30 core.</li>
+<li>Case: <a href="/heroes-portal/cases/CASE-046-sandfall-expedition33.html">CASE-046</a></li>
+</ul>
+<h3 id="e5-case-047-the-witness-jonathan-blow">E5. CASE-047 — The Witness / Jonathan Blow</h3>
+<ul>
+<li>Status: FORMAL CASE / RESEARCHING.</li>
+<li>Observed: Braid retained earnings → 2009–2016 production → strong first-week release signal.</li>
+<li>Why: first formal <code>CAPABILITY-EXPANDED</code> comparator. Blow kept the larger project thesis and used founder-owned capital to add core art, architecture, landscape and other specialist capability instead of deleting those obligations.</li>
+<li>Use:</li>
+<li>C015 boundary: capability-shaped formation is not the only authorial route;</li>
+<li>C014 counterpressure: high upfront commitment can still work under unusual prior capital / reputation / thesis stability;</li>
+<li>decision-rights audit: retained earnings can buy missing capability without publisher control.</li>
+<li>Boundary: first-week gross success does not equal audited lifetime profit; this is not “spend millions” advice.</li>
+<li>Case: <a href="/heroes-portal/cases/CASE-047-the-witness.html">CASE-047</a></li>
+</ul>
+<h3 id="e6-jonathan-blow-braid">E6. Jonathan Blow / Braid</h3>
+<ul>
+<li>Status: HISTORICAL PREHISTORY / CASE-047 feeder, not separately numbered yet.</li>
+<li>Observed: prototype 2004 → XBLA 2008.</li>
+<li>Why: contract programmer / designer and industry critic becomes author-controlled indie developer; hires David Hellman for art rather than internalizing every discipline.</li>
+<li>Evidence start:</li>
+<li>Game Developer 2008 — The Path to Braid: https://www.gamedeveloper.com/design/jonathan-blow-the-path-to-i-braid-i-</li>
+<li>Use: explains how CASE-047 acquired prior-hit capital and authorial decision rights.</li>
+<li>2026: platform tactics HISTORICAL；specialist periphery / authorial decision rights DURABLE.</li>
+</ul>
+<h3 id="e7-case-049-outer-wilds-mobius-digital">E7. CASE-049 — Outer Wilds / Mobius Digital</h3>
+<ul>
+<li>Status: FORMAL CASE / RESEARCHING.</li>
+<li>Observed: USC thesis/student prototype → IGF validation → Mobius adoption → Fig → publisher/platform partnerships → 2019 release.</li>
+<li>Why: first formal <code>CAPABILITY-EXPANDED / EXTERNAL-CAPITAL</code> comparator. Product thesis/playable evidence existed before commercial-scale expansion; external capital then bought hiring, production runway, publisher/platform support and a larger production perimeter.</li>
+<li>Compare with CASE-047: The Witness spends founder-owned retained earnings; Outer Wilds uses a multi-stakeholder capital stack.</li>
+<li>Research value: audit what capital buys, who supplies it, what stakeholder surface appears, and which control rights remain UNKNOWN.</li>
+<li>Boundary: do not infer that Annapurna/Xbox/Epic forced any specific design or exclusivity decision without contract evidence.</li>
+<li>Case: <a href="/heroes-portal/cases/CASE-049-outer-wilds.html">CASE-049</a></li>
+</ul>
+<hr />
+<h2 id="f-solo-generalist">F. Solo / generalist</h2>
+<p>Formal anchors already sufficient for first comparative pass:</p>
+<ul>
+<li>CASE-012 Kenshi；</li>
+<li>CASE-004 Stardew Valley；</li>
+<li>CASE-019 Schedule I；</li>
+<li>CASE-036 Manor Lords；</li>
+<li>CASE-042 The First Tree。</li>
+</ul>
+<p>下一步不是继续找“又一个 solo hit”，而是把这些案例按两轴重编码：</p>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Labor Compression 有多少？</td>
+<td>一个人是否只是承担多人岗位</td>
+</tr>
+<tr>
+<td>Problem Redefinition 有多少？</td>
+<td>昂贵问题是否真正消失 / 被抽象</td>
+</tr>
+<tr>
+<td>Specialist Periphery 多大？</td>
+<td>音乐、QA、移植、发行、资产、contractors</td>
+</tr>
+<tr>
+<td>Capability Prehistory 多长？</td>
+<td>“开发 X 年”之前其实积累了多久</td>
+</tr>
+<tr>
+<td>Time-to-Player-Truth 多短？</td>
+<td>solo 是否反而导致长时间闭门</td>
+</tr>
+<tr>
+<td>Temporal regime 是什么？</td>
+<td>2010s solo economics 不等于 2026</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="g-business-operations-producer-first">G. Business / operations / producer-first</h2>
+<p>已有正式样本：
+- CASE-002 Psyonix — work-for-hire buys organizational time；
+- CASE-014 Minecraft — public development + payment + feedback；
+- CASE-035 Factorio — crowdfunding misfit → paid-alpha system；
+- CASE-025 Bills Must Be Paid — market-model correction；
+- CASE-034 Landfall — studio-level portfolio / short-cycle system。
+- CASE-052 House House / Untitled Goose Game → Big Walk — public grant + publisher periphery + retained-earnings optionality；同一纵向里比较 grant、publisher、hit revenue 分别购买什么能力。</p>
+<p>这条线下一步需要找的不是“营销高手”，而是：</p>
+<ol>
+<li>创始人 / producer 的强项如何让创作者不必 internalize 商务；</li>
+<li>publisher / platform / community interface 是否被设计成 production system；</li>
+<li>commercial skill 何时变成 wrong-world-model liability；</li>
+<li>哪些 producer-led teams 在产品 thesis 不强时仍能高效执行错误方向。</li>
+</ol>
+<hr />
+<h1 id="_1">下一轮正式化优先级</h1>
+<p>按“新增解释维度 / 一手证据成熟 / 对照价值”排序：</p>
+<ol>
+<li><strong>CAPABILITY-COMPOSED 压力样本</strong> — CASE-050 Nomada 已建立正例；下一步找 complementary-founder 结构最终失败、解体或 authorship/control 冲突的样本。</li>
+<li><strong>FIT-LOCK-IN 第二锚点</strong> — CASE-051 Zachtronics 已建立第一份长期路径依赖；下一步找另一工作室检验成功 fit 是否真的提高转型成本。</li>
+<li><strong>VC / equity-financed capability expansion</strong> — CASE-047/049/052 已覆盖 self-financed、external-stack、grant+publisher；下一步只缺真正 equity/VC 路径及 decision-rights 证据。</li>
+<li><strong>FIT-TRAP</strong> — 仍缺一个证据足够强、最好来自真正独立小团队内部的“强项诱发不必要复杂度”失败样本。</li>
+<li><strong>Failure decomposition</strong> — Brigador + The Magic Circle 已足够作为第一轮两种 strong-fit 商业失败；后续改做 failure type coding，而不是继续凑名字。</li>
+</ol>
+<p>暂不为每类强行凑到同样数量。</p>
+<p>真正的目标是：</p>
+<blockquote>
+<p><strong>每种能力类型至少有两个结构不同的正例，一个边界例，一个失败/压力对照。</strong></p>
+</blockquote>
+<p>达到这个密度以后，才讨论新的正式 Claim，例如“Capability–Project Fit 是否在不同 creator archetype 中具有跨案例解释力”。</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / book/research-notes/creator-capability-archetype-expansion-001.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Codex 交接任务｜《独立／斯拉夫游戏英雄传说》叙事与阅读体验试验（2026-10-09） · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl class="on"" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0-codex" class="t2">0. Codex 接班先读、先核</a><a href="#2026-10-09-blob-sha-main" class="t3">原稿定位（2026-10-09 交接时的 blob SHA；开始时重新核当前 main）</a><a href="#1" class="t2">1. 问题诊断：不要把写作问题误诊为禁词问题</a><a href="#2-structural-cut-gate" class="t2">2. 工作法：新增一次 Structural Cut，但不要新建第二套 Gate</a><a href="#3" class="t2">3. 依次执行的三个样章试验（不要并行大规模覆盖）</a><a href="#pilot-1-gunpoint" class="t3">Pilot 1 — Gunpoint：第一个重点交付</a><a href="#pilot-2-early-id-doom" class="t3">Pilot 2 — early id / DOOM：先完成群像结构审稿</a><a href="#pilot-3" class="t3">Pilot 3 — 第六篇：跨人物主题与决策工具分流</a><a href="#4" class="t2">4. 对照、验收与编辑边界</a><a href="#pr" class="t3">每份样章 PR 必须交付</a><a href="#5" class="t2">5. 与《人生性价比指南》借鉴的正确范围</a><a href="#6-codex" class="t2">6. Codex 建议的实际接班次序</a></aside><article class="doc"><div class="col"><h1 id="codex-2026-10-09">Codex 交接任务｜《独立／斯拉夫游戏英雄传说》叙事与阅读体验试验（2026-10-09）</h1>
+<blockquote>
+<p class="dc"><strong>状态：READY FOR CODEX / NOT STARTED。</strong> 本文件是任务交接，不是已批准的正文、事实源、第二套 Editorial Gate 或已完成的改写。</p>
+<p><strong>目标仓库：</strong> <code>TrojanFighter/IndieGameLegendaryHeroes</code>（只处理该公开研究／书稿仓库）。</p>
+<p><strong>Owner / 实施 Lane：</strong> Lane C — Editorial / Book Layer。任务文档本身与索引属于 Lane A；如确需修改流程规则，另开 Lane A PR。史料缺口走 Lane B。</p>
+<p><strong>主要目标：</strong> 把大量已经整理的 Case / Evidence / Claim 转化为读者愿意连续阅读的人物传记和专题，而不牺牲历史忠实性、作者的有锋芒的观点与决策应用价值。</p>
+<p><strong>交接边界：</strong> 仅供 Codex 在用户发起执行时接班。不要把本计划的存在视为授权自动合并任何新稿；必须遵守主分支保护、PR 检查与作者最终验收。</p>
+</blockquote>
+<h2 id="0-codex">0. Codex 接班先读、先核</h2>
+<p>按顺序读：</p>
+<ol>
+<li><a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes/blob/main/AGENTS.md">AGENTS.md</a> → <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes/blob/main/docs/project-routing-gate.md">Project Routing Gate</a> → <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes/blob/main/WORKFLOW.md">WORKFLOW.md</a> → <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes/blob/main/schemas/workflow-lanes.md">workflow lanes</a> 与 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes/blob/main/docs/public-research-boundary.md">公开／私人边界</a>。</li>
+<li><a href="/heroes-portal/book/EDITORIAL-MISSION.html">Editorial Mission</a>、<a href="/heroes-portal/book/BOOK-ARCHITECTURE.html">Book Architecture</a>、<a href="/heroes-portal/book/EDITORIAL-GATE.html">Editorial Gate</a>、<a href="/heroes-portal/book/EDITORIAL-REWRITE-PROTOCOL.html">Editorial Rewrite Protocol</a>、<a href="/heroes-portal/book/TEMPORAL-VALIDITY.html">Temporal Validity</a>。</li>
+<li><a href="/heroes-portal/book/README.html">书稿首页</a>、<a href="/heroes-portal/book/START-HERE.html">读者入口</a>、<a href="/heroes-portal/book/profiles/README.html">人物目录</a>、<a href="/heroes-portal/book/chapters/README.html">Chapter 目录</a>、<a href="/heroes-portal/book/life-routes/README.html">Life Routes</a>。</li>
+<li>本任务指定的三份正文、其各自的 Case / Evidence / Claim 来源，以及作为风格对照的 <a href="/heroes-portal/book/profiles/josh-parnell-limit-theory.html">Limit Theory</a>。</li>
+</ol>
+<p><strong>写入前预检：</strong> 精确 repo、主分支最新状态、事实 Owner、允许更改的路径、PR 可回退方案、是否夹带任何私人项目的资料。只消费该公开库已有可追溯材料；聊天中产生的改写示范不可充当一手史料。</p>
+<h3 id="2026-10-09-blob-sha-main">原稿定位（2026-10-09 交接时的 blob SHA；开始时重新核当前 main）</h3>
+<table>
+<thead>
+<tr>
+<th>对象</th>
+<th>原文路径</th>
+<th>交接时 blob SHA</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单人传记</td>
+<td><code>book/profiles/gunpoint.md</code></td>
+<td><code>8d473f8de08c2a98d246c5f9e9f0103c41fcd5b5</code></td>
+</tr>
+<tr>
+<td>群像</td>
+<td><code>book/profiles/early-id-doom.md</code></td>
+<td>开工前重新读取并保存</td>
+</tr>
+<tr>
+<td>跨人物专题</td>
+<td><code>book/chapters/06-you-do-not-need-a-standard-studio.md</code></td>
+<td><code>436914e480d542b9d6db999abe36ba627da359ef</code></td>
+</tr>
+<tr>
+<td>不主动改写的负对照</td>
+<td><code>book/profiles/josh-parnell-limit-theory.md</code></td>
+<td>开工前保存</td>
+</tr>
+</tbody>
+</table>
+<p>若正文已被其他 PR 更新，先分析差异，不能在旧版上盲目整篇覆盖。原有版本由 Git 历史与 PR baseline 可恢复。</p>
+<h2 id="1">1. 问题诊断：不要把写作问题误诊为禁词问题</h2>
+<p>研究底层已相对成熟，阅读层的典型故障是：</p>
+<ul>
+<li><strong>命题优先于人物：</strong> 当事人刚登场，作者就连续给出理论解释、方法标签、证据警告，故事难以展开。</li>
+<li><strong>结构剪辑不足：</strong> 叙事时间线被频繁打断，关键行动被事后总结代替。以 Gunpoint 为例，GameMaker 进入制作的经历在辞职故事之后才讲，不利于连贯理解形成过程。</li>
+<li><strong>功能混排：</strong> Profile / Chapter 中插入可单独成立的教学清单、假设性咨询场景、证据口径复述；这些并非无价值，但常应移至 Life Routes、脚注或 research backend。</li>
+<li><strong>单一写法泛滥：</strong> 不同人生都被套进“神话→反转→机制→不可复制条件→今天如何做”的类似节奏，结尾频繁再次总结全书主题。</li>
+<li><strong>导读与正文体验脱节：</strong> 读者已能按人生处境找到文章，但找到以后读到的仍像研究说明，而非人物与命运。</li>
+</ul>
+<p>禁止以“AI 味下降了”、字数减少、禁止词命中率、AI 自评分数来替代编辑审稿。</p>
+<h2 id="2-structural-cut-gate">2. 工作法：新增一次 Structural Cut，但不要新建第二套 Gate</h2>
+<p>每一篇开始时，在 PR 工作记录中（而非 reader 正文里）给现有段落标记用途：</p>
+<ul>
+<li><strong>N / Narrative：</strong> 人物、真实事件、行动、即时反馈及后果；</li>
+<li><strong>A / Analysis：</strong> 作者判断、必要的时代解释、产业比较；</li>
+<li><strong>D / Decision：</strong> 面向读者的建议、操作清单、假设性项目诊断；</li>
+<li><strong>R / Research：</strong> 来源等级、研究缺口、重复的证据免责声明。</li>
+</ul>
+<p><strong>标记用来查找断点，不是硬性的内容比例或统一写作模板。</strong> 先给出段落顺序的剪辑图：保留、移位、合并、删重复或链接下沉。必要的时效、来源争议与认识边界仍留在读者可找到的地方；不得因下沉而消失。</p>
+<p>执行顺序为：</p>
+<p><code>Fact Lock + baseline SHA → Narrative Packet → Structural Cut → Delete → Restore Person → Rhythm / Authorial Voice → Fidelity Readback → A/B → Author Acceptance</code>。</p>
+<p><strong>优先改变信息揭露顺序、叙事焦点、行动与后果关系；最后才润色句子。</strong> 不允许为追求悬念虚构未经证明的对话、心理、场景细节，也不允许通过倒叙暗示当事人在当时已经知道未来。必要时在段内明确“多年后回忆”。</p>
+<h2 id="3">3. 依次执行的三个样章试验（不要并行大规模覆盖）</h2>
+<h3 id="pilot-1-gunpoint">Pilot 1 — Gunpoint：第一个重点交付</h3>
+<p><strong>原文：</strong> <a href="/heroes-portal/book/profiles/gunpoint.html"><code>profiles/gunpoint.md</code></a>。
+<strong>主要来源：</strong> <a href="/heroes-portal/cases/CASE-007-gunpoint.html">CASE-007</a>、<a href="/heroes-portal/evidence/CASE-007-gunpoint-source-ledger.html">CASE-007 Evidence Ledger</a>，尤其 E008（2010-10-25 开发日志：<code>Gunpoint And The Other Game</code>）。</p>
+<p><strong>候选叙事弧：</strong>
+1. 从 2010 年重新审查 roadmap、发现预设剧情演出成本过高的真实决策开篇；
+2. 倒回 PC Gamer 评论职业、长期游戏阅历、喜欢的玩家体验与差异判断；
+3. 发现 GameMaker、做出可供外部反馈的原型；
+4. 用 Crosslink 等可组合规则留下希望保留的体验，并交代路线图删改；回到开头而不伪造直接因果；
+5. 公开开发、测试者、美术／音乐协作者与分工、媒体／网络可见性；
+6. 2013 年首发周销售跨过本人辞职阈值，此后才退出 PC Gamer；
+7. 可用极短尾声展示后续作品中的判断方法，但故事结尾应落回 Francis 个人，而非“普通人应该做的十件事”。</p>
+<p><strong>编辑操作：</strong> 先做 2–3 个相连小节的匿名 A/B 候选；在审读基础上再扩成完整候选稿。将“什么可以学／不能直接抄”的操作型材料优先链接到合适的既有 Life Route；不删除有价值的原创判断，也不把它重复宣讲三次。保留艺术、音乐、工资、行业网络、市场接入的参与，避免“一个有品味的人自己做出爆款”的神话。</p>
+<p><strong>必须核对：</strong> GameMaker 与 roadmap 的真实时序、2010 当事人同期表述与 2014 方法总结不可混同、辞职发生在何时及触发条件、协作者署名／权益、作者未公开的收入或家庭成本 UNKNOWN。E008 的来源等级如与总规则不一致，只提出 Lane B 核对问题，不在 Lane C 顺手修改 Ledger。</p>
+<p><strong>产物：</strong> 一篇 Gunpoint 结构改造候选稿 + 结构差异说明 + 原稿—新稿—证据三方忠实性回读。文风无需与其他 Profile 同构。</p>
+<h3 id="pilot-2-early-id-doom">Pilot 2 — early id / DOOM：先完成群像结构审稿</h3>
+<p><strong>原文：</strong> <a href="/heroes-portal/book/profiles/early-id-doom.html"><code>profiles/early-id-doom.md</code></a>。
+<strong>范围：</strong> 第一轮优先交付分幕大纲与 2–3 节连续叙事试改；不要在未核证整部时间线前自动把它扩成几万字。</p>
+<p>建议检验的四条人物／故事线：</p>
+<ul>
+<li><strong>少年们：</strong> Romero、Carmack、Hall、Adrian Carmack 等不同前史；家庭许可与伤害、计算机接触、制作技能形成、真实可用的 1980 年代美国环境；</li>
+<li><strong>Softdisk 与创业：</strong> 团队相遇、工资与交付训练、Keen、职业义务、外部发行合作、独立决定；</li>
+<li><strong>造出窗口：</strong> Wolfenstein、DOOM，Carmack 推动的工程技术突破与 Romero 等人的玩法／工具／商业协作；技术发明不是单独产生商业成功的充分原因；</li>
+<li><strong>成功后的分歧与人生：</strong> Quake、Ion Storm 对照、职业取向分歧、技术—制作协同问题，以及经证据支持的长期家庭／代际后续。</li>
+</ul>
+<p>参考已有 research notes（按必要性选择）：
+<a href="/heroes-portal/book/research-notes/masters-of-doom-longitudinal-master-study-001.html"><code>masters-of-doom-longitudinal-master-study-001.md</code></a>、
+<a href="/heroes-portal/book/research-notes/family-gates-game-creator-us-china-029.html"><code>family-gates-game-creator-us-china-029.md</code></a>、
+<a href="/heroes-portal/book/research-notes/doom-intergenerational-reconciliation-032.html"><code>doom-intergenerational-reconciliation-032.md</code></a>、
+<a href="/heroes-portal/book/research-notes/carmack-romero-complementary-error-correction-network-042.html"><code>carmack-romero-complementary-error-correction-network-042.md</code></a>。</p>
+<p>避免把群像拆成研究主题的机械清单；不能为了“连贯”抹掉家庭伤害、真实劳动义务、资助者、第三方工作和历史细节。把“所以这本书该教普通年轻人什么”等教学式总结标为迁移候选；保留相关作者立场，但不强迫传记以课堂讲义结束。</p>
+<h3 id="pilot-3">Pilot 3 — 第六篇：跨人物主题与决策工具分流</h3>
+<p><strong>原文：</strong> <a href="/heroes-portal/book/chapters/06-you-do-not-need-a-standard-studio.html"><code>chapters/06-you-do-not-need-a-standard-studio.md</code></a>。
+<strong>互补目标：</strong> <a href="/heroes-portal/book/life-routes/project-thesis-capability-gap-004.html"><code>life-routes/project-thesis-capability-gap-004.md</code></a>。</p>
+<p>让案例<strong>彼此冲突／比较</strong>，而不是机械轮流举例：</p>
+<ul>
+<li>Roset / Nomada：为何核心视觉意图需要其他共同作者；</li>
+<li>Francis：为何优先改变产品制作义务，再补外围协作者；</li>
+<li>Wehle：已有能力如何借用外部服务而塑造短篇作品；</li>
+<li>Playdead：互补合伙的治理与长期退出矛盾；</li>
+<li>Question / The Magic Circle：能力匹配、产品完成，仍不保证市场可持续。可按叙事必要性引用 Croteam、The Witness、thatgamecompany、Brigador，但不要求一次讲完每种融资与招聘类型。</li>
+</ul>
+<p><strong>特别处理：</strong> 当前“最容易犯错的时刻，是你第一次看到自己的原型不够漂亮”这一假设性小团队诊断及“怎样判断缺口需要哪种合作”等偏 D 类内容，优先检查 LR-004 是否已有对应判断。已存在则删重并链接；缺少的通用决策判断可以作为<strong>另一个独立的 Lane C 文本任务</strong>加入 LR-004，不可不核对就重复拷贝。同一 PR 应保持范围紧凑，避免同时大改 Chapter 与 Route。Chapter 不替 Route 当招聘教程；Route 不复制所有传记。</p>
+<p><strong>产物：</strong> 可连续阅读、真正产生多人生交锋的专题候选稿，附“保留／搬离／链接”差异表。</p>
+<h2 id="4">4. 对照、验收与编辑边界</h2>
+<ol>
+<li><strong>负对照：</strong> <a href="/heroes-portal/book/profiles/josh-parnell-limit-theory.html">Limit Theory</a> 首轮只读审校，不主动全文重写。用它检验新流程有没有把已具连续叙事能力的旧稿改得更像模板。</li>
+<li><strong>A/B：</strong> 原版与候选版匿名比较。第一轮可由编辑做明示为“编辑内测”的定性对照；如未组织真实读者盲测，必须写 <strong>NOT TESTED</strong>，不得伪称已有读者反馈。</li>
+<li><strong>可选外部读者检验：</strong> 经作者安排后，找不同背景读者回答“记住了什么人、哪两个决定、哪段想跳过、还想知道什么”，避免只问“是不是更像人写的”。人类读者数量和结果必须真实记录，不设造假的既成门槛。</li>
+<li><strong>Fidelity Readback 为不可补偿门槛：</strong> 至少核人物归责、年代、回忆时点、被删除的限定、因果、金额/分母、UNKNOWN、引用版权与今天的适用条件。发现 REGRESSION 即回滚或交 Lane B。</li>
+<li><strong>作者声音：</strong> 保留有证据支撑、真正属于作者的批判与论点；不要为了“中性”全部磨平，也不要让每位传记人物都替同一套理论代言。允许人物没有可转移的成功学启示。</li>
+<li><strong>高质量的短篇不必强制加长；史料丰富者不必被模板截短。</strong> 先看真实行动／关系／冲突能否承载篇幅；不以已收集多少研究 Case 决定叙事长度。</li>
+<li><strong>不得批量覆盖整个 <code>book/</code>；不得改 <code>cases/</code>、<code>evidence/</code>、<code>claims/</code> 或姊妹篇 canonical corpus</strong>。必要的历史新问题交 Lane B；纯方法规范变更交 Lane A。</li>
+</ol>
+<h3 id="pr">每份样章 PR 必须交付</h3>
+<ul>
+<li>明确 baseline commit/blob SHA、该次修改的路径与范围；</li>
+<li>Structural Cut 标记摘要与新的故事动线（无需写进正文）；</li>
+<li>可直接连续阅读的<strong>完整候选片段或候选章</strong>；</li>
+<li>重排、剪切、合并、迁移、删除内容的差异记录，特别说明重要作者判断是否保留；</li>
+<li>独立的 Fidelity Readback：<code>PRESERVED / NEEDS_VERIFY / REGRESSION</code> 与证据回链；</li>
+<li>A/B 结果，或明示未做真实盲测；</li>
+<li>私人信息／跨仓库写入预检、运行的 lint 与未能运行的检查；</li>
+<li>明确的状态：<code>KEEP_ORIGINAL / REVISE_AGAIN / AUTHOR_REVIEW_PENDING</code>。只有作者批准后才能 <code>ACCEPT_REVISION</code> 并合并。</li>
+</ul>
+<h2 id="5">5. 与《人生性价比指南》借鉴的正确范围</h2>
+<p>可以学习<strong>阅读产品层</strong>的“直接问题入口、由当下处境寻人、证据与适用范围可查、同一材料支持不同阅读路径”。现有 <a href="/heroes-portal/book/START-HERE.html">START-HERE</a>、<a href="/heroes-portal/book/DECISION-ROUTER.html">DECISION-ROUTER</a>、<a href="/heroes-portal/book/life-routes/README.html">Life Routes</a> 已具基础，无须另造 taxonomy。</p>
+<p><strong>必须区分两个消费界面：</strong></p>
+<ul>
+<li><strong>故事模式：</strong> 传记／跨人物专题，人物关系、冲突、行动、后果与命运优先；</li>
+<li><strong>决策模式：</strong> 现实问题、能力与风险、边界、历史年份、具体动作、正反案例与证据。</li>
+</ul>
+<p>它们链接相通，但不可将所有 Profile 生硬写成“背景—成本—收益—建议”的同一套六段模板。</p>
+<p>优秀人物非虚构与开发纪实可用于学习编辑技法（如 <code>Masters of Doom</code>、<code>Blood, Sweat, and Pixels</code>、<code>The Making of Prince of Persia</code>），不得照抄受版权保护的文字，更不能把文学叙述中未经核验的情绪／对话编入本库。</p>
+<p><strong>后续事项而非本轮任务：</strong> 等上述三篇样章验证后，再讨论出版级书稿编排、网页书／EPUB／PDF、人物年表与合法配图。不要用网站装修掩盖正文结构问题，不要提前创建独立阅读应用。</p>
+<h2 id="6-codex">6. Codex 建议的实际接班次序</h2>
+<ol>
+<li><strong>先选 Gunpoint</strong>：读全原稿和 E008、锁事实、交 2–3 节小样 + Structural Cut 清单，再扩到完整候选稿，单独 Lane C PR。</li>
+<li><strong>再做 DOOM</strong>：先提交群像人物线／分幕蓝图；视源材料与作者意见继续样段，不与 Gunpoint 同 PR。</li>
+<li><strong>然后做 Chapter 06</strong>：检查 LR-004 去重范围，制作专题阅读稿，单独 PR。</li>
+<li><strong>最后汇总小样效果</strong>：是否值得更新现有 Gate 或 Book Architecture，由 Lane A 另 PR 处理，不能反向把实验模板固定成新的全书强制写法。</li>
+<li>斯拉夫线 <a href="/heroes-portal/sister-projects/slavic/book/README.html">书稿入口</a> 目前尚无正式 Profile/Chapter；本轮不把研究矩阵批量改成“人物传记”，以后挑史料真正成熟的人物另立案。</li>
+</ol>
+<p><strong>本任务的成功定义：</strong> 至少让 Gunpoint 候选稿在事实不倒退的前提下呈现一条可读的个人命运线，且提供可审核的 A/B 和编辑差异。整个项目的目标不是“降低 AI 味指标”，而是让读者能记住人物、追随他的关键决定，并愿意继续阅读，同时能在需要时方便查验事实和使用独立的决策工具。</p>
+<hr />
+<p><strong>给 Codex 的一句话指令：</strong> 请读取本文件与仓库治理规则，从最新 <code>main</code> 新建单独的 Lane C 分支，先完成 Gunpoint 的事实锁、结构剪辑、2–3 节叙事候选及可审计对照，再继续完整样章；不要提前改写全库，不要跳过史实回读或作者批准。</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / book/EDITORIAL-CODEX-HANDOFF-2026-10-09.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

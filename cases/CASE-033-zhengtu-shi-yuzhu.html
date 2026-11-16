@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CASE-033 — 《征途》 / 史玉柱：当一个游戏不再按“旧游戏行业”的题目作答 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl class="on"" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#why-this-case" class="t2">Why this case</a><a href="#myth" class="t2">Myth</a><a href="#myth-a" class="t3">Myth A — “史玉柱发明了免费网游”</a><a href="#myth-b" class="t3">Myth B — “这只是营销厉害，产品不重要”</a><a href="#myth-c-p2w" class="t3">Myth C — “《征途》证明只要研究人性、狠狠干 P2W 就能赢”</a><a href="#2-contextsituationaction-snapshot" class="t2">2. Context–Situation–Action Snapshot</a><a href="#era-production-regime" class="t3">Era / Production Regime</a><a href="#actor-situation" class="t3">Actor Situation</a><a href="#action-maneuver" class="t3">Action / Maneuver</a><a href="#anachronism-check" class="t3">Anachronism Check</a><a href="#origin-life-crossroads" class="t2">Origin / Life Crossroads</a><a href="#crossroad-1" class="t3">Crossroad 1 — 软件创业 → 大规模企业扩张</a><a href="#crossroad-2" class="t3">Crossroad 2 — 企业失败 → 保健品与地面营销</a><a href="#crossroad-3-it" class="t3">Crossroad 3 — 有资本以后没有只做投资，而重新进入 IT / 游戏</a><a href="#crossroad-4" class="t3">Crossroad 4 — 不按“核心玩家品味”定义中国市场</a><a href="#crossroad-5" class="t3">Crossroad 5 — 免费用户不是“无价值用户”</a><a href="#capability" class="t2">Capability</a><a href="#_1" class="t3">史玉柱可确认的高杠杆能力</a><a href="#_2" class="t3">组织能力</a><a href="#runway-capital" class="t2">Runway / Capital</a><a href="#production-product-economics" class="t2">Production / Product Economics</a><a href="#_3" class="t3">不是“免费”，而是把收费位置从入口搬到系统内部</a><a href="#monetization-infrastructure" class="t3">社会密度本身变成 monetization infrastructure</a><a href="#_4" class="t3">地推不是产品完成后的营销</a><a href="#financial-outcome" class="t2">Financial Outcome</a><a href="#2006" class="t3">2006</a><a href="#2007-h1" class="t3">2007 H1</a><a href="#2007-full-year" class="t3">2007 full year</a><a href="#market-distribution" class="t2">Market / Distribution</a><a href="#innovation-dimensions-and-reward-selection" class="t2">Innovation Dimensions and Reward Selection</a><a href="#ethics-player-experience-boundary" class="t2">Ethics / Player Experience Boundary</a><a href="#failure-friction" class="t2">Failure / Friction</a><a href="#luck-historical-window" class="t2">Luck / Historical Window</a><a href="#verdict" class="t2">Verdict</a><a href="#_5" class="t3">强成立</a><a href="#myth_1" class="t3">最重要的 Myth 修正</a><a href="#transfer" class="t2">Transfer</a><a href="#non-transfer" class="t2">Non-transfer</a><a href="#evidence-index" class="t2">Evidence Index</a><a href="#creator-life-decision-audit" class="t2">Creator Life / Decision Audit</a></aside><article class="doc"><div class="col"><h1 id="case-033">CASE-033 — 《征途》 / 史玉柱：当一个游戏不再按“旧游戏行业”的题目作答</h1>
+<ul>
+<li>Case ID: CASE-033</li>
+<li>Subject: 史玉柱 / 征途网络 / Giant Interactive / 《征途》（ZT Online）</li>
+<li>Period covered: 1990s 前史 → 2004–2008 主阶段</li>
+<li>Research status: RESEARCHING</li>
+<li>Last verified: 2026-10-05</li>
+<li>Related Claims: []</li>
+<li>Evidence Ledger: <a href="/heroes-portal/evidence/CASE-033-zhengtu-shi-yuzhu-source-ledger.html"><code>../evidence/CASE-033-zhengtu-shi-yuzhu-source-ledger.md</code></a></li>
+<li>Corpus role: <strong>CHINA INDUSTRY TRANSITION / BUSINESS-MODEL COMPARATOR</strong>。本案不是 core indie，也不把《征途》包装成“独立游戏”；它进入本书是因为它解释了中国游戏产业为什么会沿一条与欧美 premium/indie 不同的商业能力树高度特化，以及后来独立开发者究竟继承了怎样的产业环境。</li>
+</ul>
+<h2 id="why-this-case">Why this case</h2>
+<p class="dc">《征途》值得研究，不是因为它“发明了氪金”，也不是因为史玉柱是一个值得模仿的道德榜样。</p>
+<p>它的重要性在于：</p>
+<blockquote>
+<p><strong>一个游戏行业外部/边缘进入者，把自己在统计调查、软件创业、保健品营销、县乡地推、用户心理和个人网游体验中积累的能力，重新组合成了一个围绕中国当时真实人口、支付能力、网吧分发和玩家阶层结构设计的产品—商业系统。</strong></p>
+</blockquote>
+<p>在这个系统里：</p>
+<ul>
+<li>进入门槛被免费制压到最低；</li>
+<li>大量不付费玩家仍被视为有价值的社会人口；</li>
+<li>少数高消费玩家承担更高货币化深度；</li>
+<li>游戏内虚拟物品/服务成为主要收入来源；</li>
+<li>县、乡、镇网吧和线下地推成为分发基础设施；</li>
+<li>玩家反馈被高速吸收到周更/季更；</li>
+<li>营销、游戏规则、经济系统和社会结构不再被当成四个独立部门的问题。</li>
+</ul>
+<p>它是理解中国游戏产业从“卖时间/卖盒装内容”转向“免费人口 + 虚拟商品 + 运营 + 渠道 + 高付费深度”这一制度变化的关键显微镜。</p>
+<h2 id="myth">Myth</h2>
+<h3 id="myth-a">Myth A — “史玉柱发明了免费网游”</h3>
+<p>错误。</p>
+<p>巨人 2007 年 F-1 明确写明，free-to-play MMO 早在 2003 年已经进入中国市场；到 2006 年，IDC 统计的中国网络游戏收入中，F2P 已约占 51.6%，pay-to-play 约占 47.9%。盛大等公司也在同时期转向免费制。</p>
+<p>《征途》的独特价值不是“第一个 F2P”，而是：</p>
+<blockquote>
+<p><strong>把 F2P 的用户规模、虚拟道具、阶层化消费、县乡地推、玩家调研、快速运营和高强度营销整合成了一套极具复制诱惑的中国商业系统。</strong></p>
+</blockquote>
+<h3 id="myth-b">Myth B — “这只是营销厉害，产品不重要”</h3>
+<p>也不成立。</p>
+<p>巨人招股书把竞争优势之一直接定义为 <code>player first</code>、根据玩家偏好快速改游戏，并称产品团队超过 140 人、通常做 weekly 和 quarterly updates。史玉柱本人在同期采访里也反复谈到升级节奏、玩家需求、免费用户与高消费用户的不同作用。</p>
+<p>更准确的说法是：</p>
+<blockquote>
+<p><strong>营销不是给一个固定产品买流量，而是产品设计、经济设计、运营反馈与线下获客的一部分。</strong></p>
+</blockquote>
+<h3 id="myth-c-p2w">Myth C — “《征途》证明只要研究人性、狠狠干 P2W 就能赢”</h3>
+<p>错误且不可迁移。</p>
+<p>《征途》的成立依赖 2005–2007 年非常特殊的中国网吧、人口、支付、网游竞争和线上娱乐供给结构；今天复制表面机制并不能复制结果。其强数值/高付费结构也带来公平性、声誉和玩家体验上的真实代价。</p>
+<hr />
+<h2 id="2-contextsituationaction-snapshot">2. Context–Situation–Action Snapshot</h2>
+<h3 id="era-production-regime">Era / Production Regime</h3>
+<p>2004–2007 年，中国游戏市场正在经历几条同时发生的变化：</p>
+<ul>
+<li>premium 单机正版回款长期脆弱；</li>
+<li>网吧仍是大量玩家的重要接入点；</li>
+<li>点卡/按时间付费仍然重要，但 F2P 已快速增长；</li>
+<li>虚拟道具交易与代练等灰/半灰市场已经显示出巨大付费需求；</li>
+<li>中小城市、县乡与农村用户构成远大于一线城市的潜在人口；</li>
+<li>游戏公司开始从“卖游戏时间”转向“运营玩家社会与虚拟经济”。</li>
+</ul>
+<p>巨人 F-1 引用 IDC 数据：2006 年中国网络游戏收入里，F2P 模式约 US$420.4m、51.6%，pay-to-play 约 US$390.4m、47.9%；这说明《征途》踩中的不是一片真空，而是一个正在发生制度切换的窗口。</p>
+<h3 id="actor-situation">Actor Situation</h3>
+<p>史玉柱并非传统“游戏制作人”路径。</p>
+<p>公开资料能确认的前史包括：</p>
+<ul>
+<li>早期 IT / 软件创业经历；</li>
+<li>巨人集团房地产扩张失败，企业停摆并留下大量债务/索赔；</li>
+<li>后续在保健品业务中重新获得资本与全国营销能力；</li>
+<li>曾在统计系统农村调查岗位工作过的经历被同期媒体反复提及；</li>
+<li>本人是长期网游玩家，并自述会直接和大量玩家聊天。</li>
+</ul>
+<p>2004 年前后，他已经不处于“没有资本、第一次创业”的位置。相反，他带着：</p>
+<blockquote>
+<p><strong>资金 + 市场研究习惯 + 地推组织经验 + 对下沉市场的熟悉 + 个人玩家体验</strong></p>
+</blockquote>
+<p>进入游戏行业。</p>
+<p>因此不能把《征途》写成 garage-indie 神话。</p>
+<h3 id="action-maneuver">Action / Maneuver</h3>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>Binding constraint</th>
+<th>行动</th>
+<th>结果</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>进入网游</td>
+<td>自己没有完整 MMO 技术团队</td>
+<td>投资、吸收有软件/网游经验的人才，组建研发组织</td>
+<td>形成可自研/自营的本地团队</td>
+<td>E001/E004/E006</td>
+</tr>
+<tr>
+<td>用户理解</td>
+<td>传统游戏行业的“一线城市核心玩家”样本可能错误</td>
+<td>本人长期玩、直接与约 500–600 名玩家交流，并关注县乡/农村网吧</td>
+<td>把非一线、高数量低付费人口纳入核心市场模型</td>
+<td>E003/E004</td>
+</tr>
+<tr>
+<td>收费模式</td>
+<td>点卡会对低收入/低消费玩家形成进入门槛</td>
+<td>F2P + 虚拟商品/服务；免费人口被视为社会密度和付费者体验的一部分</td>
+<td>低门槛拉大人口池</td>
+<td>E001/E003/E007</td>
+</tr>
+<tr>
+<td>高付费需求</td>
+<td>玩家间装备/代练/虚拟物交易已存在大量非官方价值交换</td>
+<td>把部分现实货币需求重新内化为官方虚拟商品/服务</td>
+<td>公司获得更深 monetization surface</td>
+<td>E006/E007</td>
+</tr>
+<tr>
+<td>Distribution</td>
+<td>中国用户并不只集中于一线城市/门户网站</td>
+<td>250+ liaison offices、2000+ liaison personnel；县乡网吧、线下推广、线上门户/电视同时覆盖</td>
+<td>建立极强的全国获客外围</td>
+<td>E001/E004/E005</td>
+</tr>
+<tr>
+<td>Retention / social density</td>
+<td>大量免费玩家可能只贡献服务器成本</td>
+<td>“工资”等福利/回流机制，把部分收入重新用于维持低消费人口与社区活跃</td>
+<td>用付费者收入补贴社会密度</td>
+<td>E008</td>
+</tr>
+<tr>
+<td>Live product</td>
+<td>固定版本无法快速适应玩家行为</td>
+<td>周更/季更、快速增加/修改玩法和虚拟商品</td>
+<td>运营本身成为研发能力</td>
+<td>E001</td>
+</tr>
+</tbody>
+</table>
+<h3 id="anachronism-check">Anachronism Check</h3>
+<p>不能用 2026 年的 Steam、移动支付、全球社媒和 creator economy 去评价 2005 年《征途》的渠道选择；也不能反过来拿 2006 年县乡地推、网吧包机、重虚拟商品设计当成今天 PC premium 项目的标准答案。</p>
+<p>真正可迁移的是：</p>
+<blockquote>
+<p><strong>先识别当时真正的交易基础设施、用户支付结构和发现渠道，再设计产品商业系统，而不是把另一个时代/市场的“正确游戏”直接搬过来。</strong></p>
+</blockquote>
+<hr />
+<h2 id="origin-life-crossroads">Origin / Life Crossroads</h2>
+<p>本案的人物价值在于，史玉柱的能力不是从“进入游戏公司那一天”开始形成。</p>
+<h3 id="crossroad-1">Crossroad 1 — 软件创业 → 大规模企业扩张</h3>
+<p>早期 IT/软件经验让他熟悉技术产品，但巨人集团后来的房地产扩张失败说明：技术创业成功并不自动转化为资本配置与组织扩张永远正确。</p>
+<p>这段失败很重要，因为不能把后来的《征途》只写成“商业天才一直正确”。</p>
+<h3 id="crossroad-2">Crossroad 2 — 企业失败 → 保健品与地面营销</h3>
+<p>重建阶段形成的真正高杠杆能力不是游戏设计，而是：</p>
+<ul>
+<li>消费者调研；</li>
+<li>极强广告记忆点；</li>
+<li>县乡渠道；</li>
+<li>地推执行；</li>
+<li>对非一线消费者支付心理的理解。</li>
+</ul>
+<p>这些能力后来被直接带入《征途》。</p>
+<h3 id="crossroad-3-it">Crossroad 3 — 有资本以后没有只做投资，而重新进入 IT / 游戏</h3>
+<p>公开采访中史玉柱把自己描述为“最早是程序员”“特别爱玩游戏”，并把进入网游称为回到 IT。这不能证明技术能力仍然由他亲自承担，但解释了为什么他不是一个纯金融投资人：他会直接参与产品讨论、玩家观察和商业模型判断。</p>
+<h3 id="crossroad-4">Crossroad 4 — 不按“核心玩家品味”定义中国市场</h3>
+<p>史玉柱把最大市场理解为中小城市、县乡与农村，而非只盯北京上海等一线人群；无论具体人口比例估计是否精确，这个判断直接塑造了推广网络和低门槛收费策略。</p>
+<h3 id="crossroad-5">Crossroad 5 — 免费用户不是“无价值用户”</h3>
+<p>这是本案最重要的系统判断之一。</p>
+<p>史玉柱在 2006 年采访中明确把免费玩家当成付费者愿意消费的社会环境的一部分：没有大量人口，付费者的装备、身份、组织和权力也失去展示对象。</p>
+<p>这实际上把：</p>
+<p><code>monetization</code></p>
+<p>从单个用户的“每人多少钱”，改成：</p>
+<p><code>population structure × social density × spender motivation</code>。</p>
+<hr />
+<h2 id="capability">Capability</h2>
+<p>《征途》需要区分史玉柱个人能力与组织能力。</p>
+<h3 id="_1">史玉柱可确认的高杠杆能力</h3>
+<ul>
+<li>用户/市场调研；</li>
+<li>consumer psychology；</li>
+<li>nationwide ground marketing；</li>
+<li>产品定位；</li>
+<li>商业模式设计；</li>
+<li>作为玩家的长期体验知识；</li>
+<li>资本与组织资源动员。</li>
+</ul>
+<h3 id="_2">组织能力</h3>
+<p>巨人招股书显示，公司拥有：</p>
+<ul>
+<li>140+ product-development software/platform/media staff；</li>
+<li>2000+ liaison personnel；</li>
+<li>250+ liaison offices；</li>
+<li>全国 prepaid game-card / direct web payment 网络；</li>
+<li>weekly / quarterly content-update 能力。</li>
+</ul>
+<p>所以：</p>
+<blockquote>
+<p><strong>《征途》绝不是史玉柱一个人的作品。</strong></p>
+</blockquote>
+<p>其技术、服务器、内容、运营、市场和支付体系依赖一个已工业化的组织外围。</p>
+<hr />
+<h2 id="runway-capital">Runway / Capital</h2>
+<p>这不是 low-runway indie case。</p>
+<p>同期媒体对初期投入有不同口径：有报道说最初为团队投入约 RMB20m，也有采访称累计研发投入约 RMB40m。巨人 F-1 的会计口径又把研发支出、技术可行后资本化成本、后续产品支出分别记录，因此不能把任何一个数字直接当成“完整开发预算”。</p>
+<p>可确定的是：</p>
+<ul>
+<li>史玉柱进入游戏时已有来自此前商业活动的资本；</li>
+<li>公司可以同时承担大研发组织与大营销网络；</li>
+<li>2006 年广告费用约 RMB45.4m；</li>
+<li>2007 上半年仅 ZT Online 相关广告增长就很显著；</li>
+<li>这是一条高投入、高获客、高变现深度路线，而不是低成本独立制作路线。</li>
+</ul>
+<hr />
+<h2 id="production-product-economics">Production / Product Economics</h2>
+<h3 id="_3">不是“免费”，而是把收费位置从入口搬到系统内部</h3>
+<p>传统 pay-to-play：</p>
+<p><code>先付费 → 获得游戏时间</code></p>
+<p>ZT Online 的 free-to-play：</p>
+<p><code>免费进入 → 形成大人口 → 一部分玩家购买虚拟商品/服务</code></p>
+<p>F-1 直接描述公司收入来自玩家购买 game points，再用 game points 购买 virtual products / services。</p>
+<h3 id="monetization-infrastructure">社会密度本身变成 monetization infrastructure</h3>
+<p>如果高付费者购买的是：</p>
+<ul>
+<li>更强装备；</li>
+<li>身份；</li>
+<li>组织权力；</li>
+<li>社会比较优势；</li>
+</ul>
+<p>那么大量免费玩家不是“转化失败”，而是构成这种消费的社会背景。</p>
+<p>这解释了为什么史玉柱公开接受“很多人永远不付费”。</p>
+<h3 id="_4">地推不是产品完成后的营销</h3>
+<p>公司 F-1 记载：250+ liaison offices、2000+ liaison personnel，以及门户、电视、网吧/预付卡分发。</p>
+<p>在这种结构中，发行能力本身是固定资产式 capability，而不是一次 launch campaign。</p>
+<hr />
+<h2 id="financial-outcome">Financial Outcome</h2>
+<p>必须用审计口径而不是传奇口径。</p>
+<h3 id="2006">2006</h3>
+<p>Giant SEC 文件：</p>
+<ul>
+<li>online-game net revenue: <strong>RMB408.5m</strong>；</li>
+<li>当年在线游戏收入来自首款游戏 ZT Online。</li>
+</ul>
+<h3 id="2007-h1">2007 H1</h3>
+<p>F-1：</p>
+<ul>
+<li>online-game net revenue: <strong>RMB683.8m</strong>；</li>
+<li>该期间同样基本由 ZT Online 贡献。</li>
+</ul>
+<h3 id="2007-full-year">2007 full year</h3>
+<p>Giant 6-K：</p>
+<ul>
+<li>online-game revenue: <strong>RMB1.521bn</strong>；</li>
+<li>total net revenue: <strong>RMB1.528bn</strong>；</li>
+<li>gross profit: <strong>RMB1.353bn</strong>。</li>
+</ul>
+<p>但 2007 Q4 起公司已有其他游戏/收费版本进入口径，因此不能把全年 RMB1.521bn 全部直接归于《征途》单款。</p>
+<p>这已经足以说明：</p>
+<blockquote>
+<p><strong>《征途》不是“流量很大但商业上一般”的项目，而是验证了一套极高回报的产品—商业组合。</strong></p>
+</blockquote>
+<p>这也是为什么后续同行会强烈模仿其 monetization logic。</p>
+<hr />
+<h2 id="market-distribution">Market / Distribution</h2>
+<p>《征途》最值得研究的不是一个渠道，而是多层接口：</p>
+<ul>
+<li>门户广告；</li>
+<li>电视广告；</li>
+<li>预付卡；</li>
+<li>官方网站直接充值；</li>
+<li>网吧；</li>
+<li>县乡地推；</li>
+<li>大量 liaison personnel；</li>
+<li>玩家口碑/社会关系。</li>
+</ul>
+<p>F-1 甚至记录 UnionPay / China PnR 的直接销售服务费低于 1%，显著低于给分销商的折扣/激励。这提醒我们：中国早期网游公司同时在做两件事：</p>
+<ol>
+<li>建立全国离线分发；</li>
+<li>随着支付基础设施改善，把交易逐渐直接化。</li>
+</ol>
+<p>它和我们此前《七夜》“连激活码/结算都困难”的案例形成非常强的历史对照。</p>
+<hr />
+<h2 id="innovation-dimensions-and-reward-selection">Innovation Dimensions and Reward Selection</h2>
+<p>《征途》的市场与商业成功不能直接推论史玉柱或团队<strong>发明了F2P、原创MMO玩法范式，或代表了全部中国策划的能力</strong>。2007年F-1已明确指出中国F2P MMO于2003年出现；本案更强的可证判断是：其将用户阶层需求、免费人口、付费地位体系、研发/运营、全国渠道重组为可规模化的商业系统。</p>
+<p>新增财务锚点（<a href="/heroes-portal/evidence/CASE-033-zhengtu-shi-yuzhu-source-ledger.html">E011</a>）：2007年巨人集团披露<strong>销售与营销费用人民币1.894亿元、研发与产品开发费用人民币2692万元</strong>，这两个年度会计科目之比约7.0:1；这既不是《征途》全周期开发/推广费用，也不等于人才人数或决策权比例。公司还披露2007年Q4因增发核心游戏架构师期权，<strong>期权费用增加人民币300万元</strong>；可见产品核心岗位同样被奖励，而非简单的“只奖营销不奖开发”。</p>
+<p>下一层需要调查的是：研发、数值经济、运营、市场与发行人才究竟按什么规则被晋升？谁持有 <code>origination / feature-kill / greenlight</code> 权？后来哪些团队能自主选择新的体验范式？这组证据本身还不能给出跨公司的答案。</p>
+<p>研究层分工：
+- <a href="/heroes-portal/book/research-notes/innovation-dimensions-zhengtu-doom-comparator-049.html">049 创新维度：征途×DOOM×Gunpoint</a>区分新体验、新技术、商业制度、市场发现、分发和组织六种创新。
+- <a href="/heroes-portal/book/research-notes/revenue-to-career-selector-audit-048.html">048 收入机制→职业奖励→下一代主创选择</a>提出岗位与立项权的可证伪比较，不以单一成功企业推整个国家发生率。</p>
+<hr />
+<h2 id="ethics-player-experience-boundary">Ethics / Player Experience Boundary</h2>
+<p>研究《征途》不能因为其产业意义而回避玩家体验代价。</p>
+<p>其商业结构高度依赖：</p>
+<ul>
+<li>虚拟商品；</li>
+<li>战力/身份差异；</li>
+<li>高频成长；</li>
+<li>社会比较；</li>
+<li>高付费者的强获得感。</li>
+</ul>
+<p>同期媒体和玩家对这种模式存在大量批评，尤其围绕 P2W、贫富差距、抽奖/开箱等。</p>
+<p>但本书的研究问题不是：</p>
+<blockquote>
+<p>“史玉柱是好人还是坏人？”</p>
+</blockquote>
+<p>而是：</p>
+<blockquote>
+<p><strong>什么样的社会、渠道和支付结构，会奖励什么样的产品设计；当某个商业函数产生远高于其他路线的资本回报时，它又会怎样重新训练整个行业。</strong></p>
+</blockquote>
+<hr />
+<h2 id="failure-friction">Failure / Friction</h2>
+<p>不要把上市结果倒推成一路正确。</p>
+<p>至少需要保留：</p>
+<ul>
+<li>史玉柱早期巨人集团扩张失败；</li>
+<li>公司内部对“给玩家发工资”等措施存在利润担忧；</li>
+<li>史本人承认部分措施可能降低单款利润；</li>
+<li>F2P / P2W 模式遭受长期玩家和媒体反弹；</li>
+<li>其产品结构对全球 premium / fairness-oriented 玩家并非自然适配；</li>
+<li>后来中国行业长期强化这种商业能力，也产生了对其他玩法生产范式的机会成本。</li>
+</ul>
+<hr />
+<h2 id="luck-historical-window">Luck / Historical Window</h2>
+<p>不可复制条件包括：</p>
+<ul>
+<li>2005–2007 F2P 正在快速取代点卡的窗口；</li>
+<li>大量县乡网吧与线下点卡分发仍有巨大价值；</li>
+<li>中国线上娱乐供给比今天稀缺；</li>
+<li>虚拟商品规则尚未高度标准化；</li>
+<li>史玉柱此前商业成功提供了极强资本/营销外围；</li>
+<li>巨人可以在全国部署数千名地推人员。</li>
+</ul>
+<p>因此，“今天照抄征途”不是本案结论。</p>
+<hr />
+<h2 id="verdict">Verdict</h2>
+<h3 id="_5">强成立</h3>
+<ol>
+<li>《征途》是中国网络游戏从 pay-to-play 向 F2P / virtual-item economy 迁移过程中的重要放大器，而不是 F2P 的唯一发明者；</li>
+<li>史玉柱把游戏行业外形成的 market research / ground marketing 能力直接转译进游戏；</li>
+<li>免费人口、高付费人口、游戏内社会结构与商业化被当成同一个系统设计；</li>
+<li>公司把全国分发网络、快速运营和研发组织一起工业化；</li>
+<li>巨大的收入回报给后来产业提供了非常强的模仿激励。</li>
+</ol>
+<h3 id="myth_1">最重要的 Myth 修正</h3>
+<p>错误版本：</p>
+<blockquote>
+<p>“一个会营销的保健品老板发明氪金网游，把中国游戏带坏了。”</p>
+</blockquote>
+<p>更准确的版本：</p>
+<blockquote>
+<p><strong>一个拥有软件、创业、失败、消费品营销、下沉市场和玩家前史的人，在中国 premium/点卡体系无法充分满足当时人口与支付结构的时期，识别并放大了一个正在出现的 F2P 制度机会；其商业成功随后又反过来改变了行业的人才、资本和产品选择。</strong></p>
+</blockquote>
+<hr />
+<h2 id="transfer">Transfer</h2>
+<p>可迁移：</p>
+<ol>
+<li>不要把你熟悉的用户当成整个市场；</li>
+<li>收费模型必须与当时真实支付能力和支付基础设施适配；</li>
+<li>用户研究要进入产品决策，不只是 launch 后做问卷；</li>
+<li>distribution 是 production system 的一部分；</li>
+<li>非付费用户也可能创造网络、社会密度、内容或传播价值；</li>
+<li>商业模式会反向塑造玩法、组织和人才能力树；</li>
+<li>高回报商业函数一旦被验证，会改变整个行业的资本配置。</li>
+</ol>
+<h2 id="non-transfer">Non-transfer</h2>
+<p>不可直接复制：</p>
+<ul>
+<li>县乡网吧地推；</li>
+<li>2006 中国 F2P 切换窗口；</li>
+<li>极重虚拟战力商品作为普适产品答案；</li>
+<li>数千人线下获客组织；</li>
+<li>史玉柱既有资本和消费品分销经验。</li>
+</ul>
+<p>尤其禁止推论：</p>
+<blockquote>
+<p>“中国玩家天然更喜欢 P2W。”</p>
+</blockquote>
+<p>本案只能证明：在特定收入、支付、平台、社会和竞争条件下，一套高付费深度的 F2P 系统获得了极强商业反馈，并因此塑造了产业路径。</p>
+<hr />
+<h2 id="evidence-index">Evidence Index</h2>
+<ul>
+<li>E001 — Giant Interactive 2007 F-1：市场结构、F2P 占比、ZT 收入、产品团队、分发/地推、支付、更新频率。</li>
+<li>E002 — Giant 2007 full-year 6-K：全年在线游戏收入与利润口径。</li>
+<li>E003 — 新浪科技 2006 史玉柱专访：免费人口、高消费玩家、下沉市场与本人调研逻辑。</li>
+<li>E004 — 新浪财经 2007/2008 人物报道：约 500–600 玩家访谈、2000 人地推、1800 县乡覆盖目标。</li>
+<li>E005 — 新浪财经《重建巨人》：团队投入、地推与网吧推广组织。</li>
+<li>E006 — 2006《21世纪》采访：研发投入口径、免费模式、外挂/代练/虚拟物交易的市场判断。</li>
+<li>E007 — 2007 新浪科技深访：史玉柱对 F2P 争议、玩家身份与商业模型的自我解释。</li>
+<li>E008 — 2006 “玩家工资”报道：收入回流、免费人口与利润权衡；来源带厂商供稿属性，低一级使用。</li>
+<li>E011 — 巨人 2007 全年财报6-K：研发与营销年度费用科目及核心游戏架构师Q4期权费用增量；不用于推行业人力分母。</li>
+</ul>
+<h2 id="creator-life-decision-audit">Creator Life / Decision Audit</h2>
+<ul>
+<li><strong>Audit status:</strong> PARTIAL / ENTREPRENEUR-ORGANIZATION COMPARATOR</li>
+<li><strong>Life stage:</strong> 史玉柱进入《征途》时已是经历过软件创业、企业失败与保健品重建的成熟企业家；不是 early-career indie founder。</li>
+<li><strong>Household:</strong> personal relationship / children / housing 不作为本 Case 当前解释对象，<code>UNKNOWN / NOT REQUIRED FOR ORGANIZATION-LEVEL COMPARISON</code>。</li>
+<li><strong>Runway:</strong> 进入游戏时已有此前商业活动形成的资本、营销网络与组织能力；研发/广告投入为千万级人民币量级，不属于 low-runway 项目。</li>
+<li><strong>Household burn:</strong> <strong>NOT APPLICABLE to primary mechanism</strong>；本案关注企业资本与市场制度，不用个人家庭支出来解释产品。</li>
+<li><strong>Exit / recovery:</strong> <strong>HIGH ENTERPRISE OPTIONALITY / personal detail partial</strong> — 当事人拥有既有商业网络、资本与跨行业经验，但不把其个人财富当普通开发者可迁移条件。</li>
+<li><strong>Capability vector:</strong> market research、consumer psychology、ground marketing、distribution、business-model design、capital mobilization；组织侧有 &gt;140 product staff、全国 liaison network 与 live-update capability。</li>
+<li><strong>Problem ownership:</strong> <strong>HIGH</strong> — 核心商业/产品 thesis 由强 founder ownership 驱动，并主动重写旧游戏行业收费、分发与用户结构假设。</li>
+<li><strong>Validation architecture:</strong> personal player observation + direct player interviews / market research → F2P / item model → nationwide distribution → live weekly/quarterly iteration → audited revenue results。</li>
+<li><strong>Reality adjudication:</strong> <strong>STRONG on commercial metrics</strong> — 玩家行为、收入、渠道与运营数据直接反馈到产品/商业系统；伦理/体验成本不能因此忽略。</li>
+<li><strong>Capability capture risk:</strong> <strong>MEDIUM / REGIME FORMATION</strong> — 强营销/monetization 能力形成巨大成功，并可能反向塑造整个行业 objective function；这里研究的是产业锁定风险，不是单项目失败。</li>
+<li><strong>Market sufficiency / legibility:</strong> <strong>STRONG for 2005–2007 China online-game regime</strong> — F2P、县乡地推、网吧、虚拟商品和社会密度与当时市场高度适配；2026 具体 tactic 属 HISTORICAL。</li>
+<li><strong>Capability scaling:</strong> very high organizational scaling；该案例不能用于小团队 runway 正例。</li>
+<li><strong>Major unknowns:</strong> 对本 Case 的主要研究目标而言，个人 household 不是优先缺口；更重要的是产品团队、地推、支付、广告与 revenue-system 的时代边界。</li>
+</ul><div class="crumbs"><a href="/heroes-portal/">书阁</a> / cases/CASE-033-zhengtu-shi-yuzhu.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

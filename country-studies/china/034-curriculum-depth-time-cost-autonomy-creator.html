@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>034 — 高投入、低迁移：数学课程结构与自主创作者的机会成本 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl class="on"" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0" class="t2">0. 命题：高投入、低迁移的认知训练</a><a href="#1-2005" class="t2">1. 姜伯驹2005年采访与课程版本审计</a><a href="#2" class="t2">2. 学习时间是一项有机会成本的稀缺资源</a><a href="#3" class="t2">3. 反对“少玩一小时就自动多学一小时”的简单替代论</a><a href="#4-66rpg" class="t2">4. 中国自己的玩家→创作者前史：66RPG不可遗漏</a><a href="#5" class="t2">5. 教材、应试与人才培养的四项可检验损耗</a><a href="#6-kpi" class="t2">6. 连接大学高中化与中小学KPI化，但不混同</a><a href="#7" class="t2">7. 春登／农民发明家：不是人群标签，而是两种学习反馈架构</a><a href="#8" class="t2">8. 防错与下一轮研究</a><a href="#9-2026-10-09" class="t2">9. 2026-10-09补图审计：教材自学可用性与知识重建责任</a></aside><article class="doc"><div class="col"><h1 id="034">034 — 高投入、低迁移：数学课程结构与自主创作者的机会成本</h1>
+<ul>
+<li>Program: C / 中国国情研究 × 教育社会化 × 独立游戏创作者形成</li>
+<li>Status: RESEARCH NOTE / EVIDENCE-BOUND MECHANISM HYPOTHESES</li>
+<li>As-of: 2026-10-08</li>
+<li>Parent: <a href="/heroes-portal/country-studies/china/031-education-east-asian-discipline-reference-repertoire.html">031 — 教育与游戏阅历</a> / <a href="/heroes-portal/country-studies/china/032-exam-overfit-routine-expertise-open-domain-transfer.html">032 — Exam Overfit</a></li>
+<li>Neighbors: <a href="/heroes-portal/country-studies/china/016-creator-route-topology-from-66rpg-to-modern-bridges.html">016 — 中国66RPG到现代maker路网</a> / <a href="/heroes-portal/country-studies/china/029-orthodoxy-inversion-chundeng-farmer-inventor.html">029 — 春登与农民发明家</a> / <a href="/heroes-portal/book/research-notes/china-creator-constraints-three-layer-map-018.html">三层约束018</a></li>
+<li>Boundary: 2005年课标批评≠2026年现行课标结论；考试成绩≠开放问题能力；案例存在≠数量级和因果。</li>
+</ul>
+<h2 id="0">0. 命题：高投入、低迁移的认知训练</h2>
+<p class="dc">作者2026-10-08提供的姜伯驹2005年采访截图、教材讨论及教师/家长评论提示一个比“刷题太多”更精确的问题：</p>
+<blockquote>
+<p>教育的有效产出不只是考了多少分，还包括学生是否形成可迁移的知识结构、能否自主定义问题，以及为此花掉的时间本来能培养什么能力。</p>
+</blockquote>
+<p>需独立测量四件事：
+1. <strong>Knowledge Coherence（知识结构）</strong>：概念、定义、推导、论证和应用是否形成可重建的依赖链；
+2. <strong>Routine Performance（套路熟练度）</strong>：给定题目、规则和评分器时的正确率与速度；
+3. <strong>Open-Domain Transfer（开放问题迁移）</strong>：没有题面和标准答案时提出问题、获取信息、设计实验与判断是否继续；
+4. <strong>Creator Opportunity Cost（创作者机会成本）</strong>：高强度训练是否挤占自由阅读、游戏深度体验、mod、原型、同伴合作与真实反馈。</p>
+<p>四者可能正相关，也可能存在边际替代关系。严格数学训练与基础知识可能帮助创作者；自由放任并不自动产生优秀作品。截图中的评论属于AUTHOR-ORIGIN / S2线索，不是教材质量全国数据。</p>
+<h2 id="1-2005">1. 姜伯驹2005年采访与课程版本审计</h2>
+<p><strong>P1 / 同期当事人访谈</strong>：2005-03-16《姜伯驹：新课标让数学课失去了什么》批评2001年义务教育数学课程标准实验稿及其实施中的知识块组织、概念/推理/证明弱化、偏怪题与题海训练。他认为“讲得少、考得刁”的组合反而可能加重负担，并非支持无上限增加教学难度。</p>
+<p>原文转载：https://news.sina.com.cn/c/2005-03-16/14375375924s.shtml</p>
+<p><strong>P0 / 2022年课程标准反压力</strong>：教育部2022年修订的数学课标明确要求推理意识、推理能力、论证与逻辑解释。因此不能将2005年批评直接写成“2026年小学没有逻辑、定义和定理”的已证事实。</p>
+<ul>
+<li>颁布文件：https://www.moe.gov.cn/srcsite/A26/s8001/202204/t20220420_619921.html</li>
+<li>数学课标：https://www.moe.gov.cn/srcsite/A26/s8001/202204/W020220510531636118932.pdf</li>
+</ul>
+<p><strong>尚未开展的实证审核</strong>：对1980s/2001/2011/2022/2026实际使用教材中同一数学主题（如三角形内角和、函数、方程）逐页比较：概念引入顺序、知识前提、推理与证明任务密度、重复练习比例、课堂时间和考试卷要求；区分课程标准、教科书、教师实际教学、校外教辅及高风险考试。螺旋式课程和间隔重复本身不等于知识碎片化。</p>
+<h2 id="2">2. 学习时间是一项有机会成本的稀缺资源</h2>
+<p><strong>S1 / OECD（2017），PISA 2015</strong>：北京—上海—江苏—广东四地15岁学生校内外合计学习时间每周至少54小时；芬兰、德国、瑞典和瑞士等少于40小时。这是旧年份、特定地区样本，不能推广成2026年全国平均，也不能仅凭学习时间判断教育成败。中国四地PISA高表现是必须保留的反例。</p>
+<p>来源：https://www.oecd.org/en/publications/do-students-spend-enough-time-learning_744d881a-en.html</p>
+<p><strong>H / Discretionary-Time Capture</strong>：新增的主要问题不是简单比较谁学得久，而是多出来的时间流向知识理解、有效练习、外部打卡还是自主创作。一个人没有进入maker领域，有时不是能力不足，而是可以第一次尝试的成长窗口未曾出现；这种“未发生的创作者前史”是反事实，必须靠纵向队列间接识别，不能自行估算人数。</p>
+<h2 id="3">3. 反对“少玩一小时就自动多学一小时”的简单替代论</h2>
+<p><strong>S1 / Zhejian Wang，Journal of Development Economics（2026）</strong>：研究利用2021年未成年人网络游戏限制，以CFPS与滨州模拟考试资料分别分析。游戏参与率下降约10.7个百分点、上网时长下降，但未检出清晰的短期学习时间增长或考试改善。研究也明确承认疫情干扰、估计精度及小效应尚不可排除。</p>
+<ul>
+<li>作者摘要：https://zhejianwang.com/research/restricting-video-games-china/</li>
+<li>期刊：https://www.sciencedirect.com/science/article/pii/S0304387826000957</li>
+<li>DOI: 10.1016/j.jdeveco.2026.103812</li>
+</ul>
+<p>只能支持“时间置换不自动实现”的有限结论；不能推出无限制打游戏有利学习，更不能证明2021年政策造成独立游戏创作者流失。游戏娱乐不等于深度体验、拆解、修改、制作。</p>
+<h2 id="4-66rpg">4. 中国自己的玩家→创作者前史：66RPG不可遗漏</h2>
+<p><strong>S1 / Sunny Jie Yang（2026）</strong>：关于2005年建立的66RPG的档案与数字民族志，重建RPG Maker教程、游戏发布、素材交换、共同创作和短篇作品竞赛等实践，证明中国确有早期业余制作者共同体。论文并不证明大规模职业转化成功。</p>
+<ul>
+<li>https://doi.org/10.1177/20594364251413750</li>
+<li>详细规模、历史、社群衰落的复合原因与当代替代路线见<a href="/heroes-portal/country-studies/china/016-creator-route-topology-from-66rpg-to-modern-bridges.html">中国016</a>，此处不重复86万累计注册、329万帖等数据，更不能把注册数当活跃作者数。</li>
+</ul>
+<p>更好的比较问题是：不同代际有多少人完成过第一件可玩作品？有多少人在6/12/36个月后继续创作？多少在作品失败后还能转行、返岗、第二次尝试？在中国与国外比较时必须对齐固定进入队列、可见性、观察窗与项目署名。</p>
+<h2 id="5">5. 教材、应试与人才培养的四项可检验损耗</h2>
+<table>
+<thead>
+<tr>
+<th>机制</th>
+<th>对应可观察指标</th>
+<th>潜在独游机会成本</th>
+<th>反例与替代解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>知识结构薄弱</td>
+<td>无模板解释、概念依赖、推理迁移</td>
+<td>难建立系统设计与自主研究能力</td>
+<td>标准课程声称重视推理，数学证明不是全部创造力</td>
+</tr>
+<tr>
+<td>时间与注意力被俘获</td>
+<td>自由小时、重复练习、打卡</td>
+<td>减少mod、工具实验、广泛阅读</td>
+<td>贫困、设备不足、地域资源同样影响</td>
+</tr>
+<tr>
+<td>评价权外置</td>
+<td>自主问题数、实验修正、外部评分依赖</td>
+<td>缺乏独立立题与持续决策练习</td>
+<td>合理纪律与及时反馈可能有正作用</td>
+</tr>
+<tr>
+<td>创作者社群难以维持</td>
+<td>原型完成率、复作率、作者→职业转换</td>
+<td>难积累早期portfolio与合作者</td>
+<td>中国已有66RPG、Jam、大学社团、企业maker扶持</td>
+</tr>
+</tbody>
+</table>
+<p><strong>S1反压力</strong>：柯政、梁灿（2023）《论应试教育与学生创造力培养之间的关系》明确反对“中国学生总体创造力低于别国”这一缺乏直接证据的概括；提出应试可能“抬底部”，但对拔尖者的知识宽深、冒险质疑、不确定性容忍与内在动机产生更显著约束。这是教育层机制依据，不是中国独游国别差异的因果估计。</p>
+<p>原文：https://xbjk.ecnu.edu.cn/CN/abstract/article/1000-5560/10939
+DOI: 10.16382/j.cnki.1000-5560.2023.04.006</p>
+<h2 id="6-kpi">6. 连接大学高中化与中小学KPI化，但不混同</h2>
+<p><strong>S1 / 半月谈2025年4月</strong>：报道部分高校早操、晚自习、查寝、请假须家长等现象，同时也记录部分教师认为学生自律不足、需要管理的反方解释。没有全国高校同口径趋势数据。
+https://www.peopleapp.com/column/30048834045-500006210929</p>
+<p><strong>P0 / 教育部2025-10-31</strong>：正式治理教师非教学事务、台账留痕、APP强制打卡签到/积分/在线时长、重复评比检查，证明管理形式主义受到政策重视；但相关整治属于反向纠偏信号，不能写作“全国KPI化一定持续恶化”。
+https://www.moe.gov.cn/srcsite/A10/s7058/202511/t20251107_1419596.html</p>
+<p><strong>H / Deferred Autonomy</strong>：学生成年后是否逐步获得时间自主权、问题定义权、评价权与犯错责任？教学纪律、风险管理与必要保障不必然等于过度控制；实证应比较学校类型、专业、时间及学生学习表现和业余作品投入。</p>
+<h2 id="7">7. 春登／农民发明家：不是人群标签，而是两种学习反馈架构</h2>
+<ul>
+<li><strong>春登（作者H层术语）</strong>：把追赶期依赖既有标准、已知题面和组织晋升所取得的高回报，误推广成所有未来问题和人生路径的通用评分器。</li>
+<li><strong>农民发明家（作者H层术语）</strong>：在尚无成熟答案时仍能发现需求、用合适规模的现成工具做原型、直接获得现实反馈，并修正甚至放弃自己的初始假说。不是反智、反数学或反专业。</li>
+<li><strong>本轮新增贡献</strong>：教育系统的代价应从“少教了多少知识”扩展到“没有发生多少独立自学、游戏比较、作品制作与社群试错”；但反事实不可直接观察，必须用代际作品队列与制度变化识别。</li>
+</ul>
+<p>这与<a href="/heroes-portal/country-studies/china/031-education-east-asian-discipline-reference-repertoire.html">031</a>的SELF-EDUCATION SOVEREIGNTY / DISCRETIONARY-TIME CAPTURE，<a href="/heroes-portal/country-studies/china/032-exam-overfit-routine-expertise-open-domain-transfer.html">032</a>的CLOSED-DOMAIN TRANSFER ERROR及<a href="/heroes-portal/country-studies/china/016-creator-route-topology-from-66rpg-to-modern-bridges.html">中国016</a>的ROUTE-DURABILITY / MAKER-TO-CAREER桥梁直接对接，<strong>不另造平行框架</strong>。</p>
+<h2 id="8">8. 防错与下一轮研究</h2>
+<p><strong>明确不可宣称</strong>：2005年批评已证明现行教材全面退化；PISA学习时间长就证明创造力差；玩得多必然会制作；有一个66RPG便说明中国maker供给充分；一批名人成功/失败便说明中国原创人才比例高/低；减少考试自动让人自驱；AI将必然解决或恶化一切。</p>
+<p><strong>需要执行</strong>：
+1. 同一数学主题跨版本课标、教材、教师教案及高风险考卷的结构化比较；
+2. 学习小时与自主活动小时的纵向同背景比较，纳入家庭收入、学校类型及设备；
+3. 中国各类maker活动固定进入队列，对齐国外game jam和学校社群数据，追踪原型→复作→职业转换→第二作，控制媒体可见性；
+4. 高校查寝/自习/签到按年份、学校层次抽样，比较学生自主项目时间，而不把规定严格程度直接当作学习损失；
+5. 若能找到课程改版或管理政策变更的准自然实验，估计影响大小；否则维持H和PARTIAL，不升全国强因果。</p>
+<p><strong>Current Verdict</strong>：
+- <strong>SUPPORTED（窄事实）</strong>：2005年姜伯驹批评旧实验课标、2022课标重申推理能力、OECD旧地区学习时间差、Wang政策效果、66RPG社区存在、行政KPI治理通知存在。
+- <strong>H / OPEN（核心）</strong>：2026教材是否整体“低劣”、高投入低迁移在人群中的分布、教育训练对中国独立游戏作者密度的因果效应，目前尚无可比的教材—学习—作品—职业完整队列。</p>
+<h2 id="9-2026-10-09">9. 2026-10-09补图审计：教材自学可用性与知识重建责任</h2>
+<p>作者再次提醒回看其提供的数学教材与评论截图。本组图片的有效增量不是“旧教材天然优秀”，而是<strong>知识系统的组装责任究竟由教材、教师、家庭还是校外辅助体系承担</strong>。</p>
+<ul>
+<li><strong>SELF-STUDY COMPLETENESS / 自学可用性（H）</strong>：一本教材在缺少高水平教师讲解和额外教辅时，是否能够独立支持从定义、论证、错误解释到例题与未见题面的连贯学习？</li>
+<li><strong>CURRICULUM-EXAM MISALIGNMENT / 课标—教学—考试错配（H）</strong>：教材如果只分散提及概念，而考试仍要求迅速识别复杂题型，知识完整性可能通过额外教辅/校外训练补充；并不自动说明每地每校都有此错配。</li>
+<li><strong>PREREQUISITE DEBT / 前提知识欠账（H）</strong>：高年级或迁移任务出现复杂要求时，是否因低年级未学会证明/结构而承担重学成本？从“见过一个概念”到“能依赖它推理”应分开测。</li>
+<li><strong>FAMILY KNOWLEDGE COMPENSATION / 家庭知识补课（H）</strong>：截图里一位家长使用1982年《数理化自学丛书》、教师回忆使用旧体系补讲，只说明存在修补行为线索；不证明1982版教材统计上优于现行教材，也不能将匿名评论当教育人口调查。</li>
+</ul>
+<p>需加入<code>UNASSISTED SELF-STUDY TASK</code>：同主题、不同年代教材的随机分组与相同外部资料限制，测试学生独立建模、解释为何、跨题迁移，控制教师质量、家庭背景、基础数学水平与题型。学校实际课本与补课材料必须一起调查。</p>
+<p>这些变量属于<a href="/heroes-portal/country-studies/china/034-curriculum-depth-time-cost-autonomy-creator.html">中国034</a>对教材投入效率的细化；相邻的职业端“技术能力越域外推/热门模板依赖”正式见<a href="/heroes-portal/country-studies/china/033-technology-proxies-experience-demand-and-commercial-feedback.html">中国033 §13</a>，不由教材问题直接推出中国技术人群性格。</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / country-studies/china/034-curriculum-depth-time-cost-autonomy-creator.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

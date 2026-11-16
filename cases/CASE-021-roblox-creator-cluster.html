@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CASE-021 — Roblox Creator Cluster / Cindering, alexnewtron, badcc + asimo3089 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl class="on"" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#why-this-case" class="t2">Why this case</a><a href="#1-myth" class="t2">1. Myth</a><a href="#2-origin" class="t2">2. Origin</a><a href="#cindering-brian-wilson" class="t3">Cindering / Brian Wilson</a><a href="#alexnewtron-alex-binello" class="t3">alexnewtron / Alex Binello</a><a href="#badcc-alex-balfanz-asimo3089" class="t3">badcc / Alex Balfanz + asimo3089</a><a href="#3-capability" class="t2">3. Capability</a><a href="#4-runway" class="t2">4. Runway</a><a href="#5-production" class="t2">5. Production</a><a href="#_1" class="t3">核心团队并不等于全部生产边界</a><a href="#_2" class="t3">平台替代了一部分传统公司职能</a><a href="#6-scope" class="t2">6. Scope</a><a href="#7-failure" class="t2">7. Failure</a><a href="#8-market" class="t2">8. Market</a><a href="#9-environment" class="t2">9. Environment</a><a href="#_3" class="t3">帮助</a><a href="#_4" class="t3">阻碍 / 依赖</a><a href="#10-luck" class="t2">10. Luck</a><a href="#11-verdict" class="t2">11. Verdict</a><a href="#_5" class="t3">成立</a><a href="#_6" class="t3">部分成立</a><a href="#_7" class="t3">夸大 / 被证伪</a><a href="#_8" class="t3">无法验证</a><a href="#12-transfer" class="t2">12. Transfer</a><a href="#13-non-transfer" class="t2">13. Non-transfer</a><a href="#14-evidence-index" class="t2">14. Evidence Index</a><a href="#15-open-questions" class="t2">15. Open Questions</a></aside><article class="doc"><div class="col"><h1 id="case-021-roblox-creator-cluster-cindering-alexnewtron-badcc-asimo3089">CASE-021 — Roblox Creator Cluster / Cindering, alexnewtron, badcc + asimo3089</h1>
+<ul>
+<li>Case ID: CASE-021</li>
+<li>Subject: Roblox Creator Cluster / Cindering (Brian Wilson), alexnewtron (Alex Binello), badcc (Alex Balfanz) + asimo3089</li>
+<li>Related games: Roblox High School / Roblox High School 2; MeepCity; Volt; Jailbreak</li>
+<li>Period covered: 2008–2021，辅以 2025–2026 平台经济数据作为幸存者偏差边界</li>
+<li>Research status: RESEARCHING</li>
+<li>Last verified: 2026-10-04</li>
+<li>Related Claims: C003, C006, C008, C010, C011</li>
+</ul>
+<h2 id="why-this-case">Why this case</h2>
+<p class="dc">这一案不是要证明“Roblox 会制造少年天才”，而是检验一种此前案例库缺失的生产结构：<strong>UGC 平台能否把学习、作品集、第一次协作、第一次收入、第一次职业机会、产品所有权、发行与创业压缩在同一套基础设施里。</strong></p>
+<p>Cindering、Alex Binello、Alex Balfanz / asimo3089 的共同点，不是“很年轻就突然做出爆款”，而是他们在 Roblox 内部经历了多年低门槛生产、反复发布、平台技能积累与市场反馈，然后才出现可被外界看见的代表作。</p>
+<h2 id="1-myth">1. Myth</h2>
+<p>流行叙事通常把 Roblox 头部开发者写成：</p>
+<blockquote>
+<p>十几岁的孩子学一点 Lua，在课余时间做一个游戏，几个月后爆红并赚到足以改变人生的钱。</p>
+</blockquote>
+<p>这个叙事遗漏了至少四层前史：</p>
+<ol>
+<li>多年玩家→创作者→反复出货的能力积累；</li>
+<li>Roblox Studio、托管、跨设备发行、支付与 DevEx 等平台基础设施；</li>
+<li>平台内部合同、实习、协作者网络与既有受众；</li>
+<li>极端右尾分布：头部案例不能代表普通 Roblox 创作者。</li>
+</ol>
+<h2 id="2-origin">2. Origin</h2>
+<h3 id="cindering-brian-wilson">Cindering / Brian Wilson</h3>
+<ul>
+<li>2009 年加入 Roblox，先把做小游戏当作 hobby；</li>
+<li>2013 年 DevEx 出现后，才开始把 Roblox 更认真地视作可持续开发路径；</li>
+<li>2014 年与两位朋友发布原版 Roblox High School；</li>
+<li>2016 年进入大学学习计算机科学，把大学当作 Roblox 路径失败时的 Plan B；</li>
+<li>2018 年在 accelerator program 中全职 scripting Roblox High School 2，其他成员远程兼职承担 building / modeling 等工作；</li>
+<li>游戏起量后退学，转为全职 Roblox 开发。</li>
+</ul>
+<h3 id="alexnewtron-alex-binello">alexnewtron / Alex Binello</h3>
+<ul>
+<li>少年时期就在 Roblox 内自学开发；</li>
+<li>在 Roblox 尚未形成可兑现的 revenue-share 路径时，一度转向智能手机游戏；</li>
+<li>自述 <code>Pears to Pairs</code> 获得约 50,000 下载，但没有形成可持续业务；</li>
+<li>一边在 GameStop 兼职维持生活，一边继续独立开发；</li>
+<li>2013 年 DevEx 出现后回到 Roblox；</li>
+<li>2015 年获 Roblox 总部实习机会，收入使其能够辞掉 GameStop；</li>
+<li>此后进入 MeepCity 阶段。</li>
+</ul>
+<h3 id="badcc-alex-balfanz-asimo3089">badcc / Alex Balfanz + asimo3089</h3>
+<ul>
+<li>Balfanz 在 Jailbreak 前已经在 Roblox 上开发多年；2017 年报道中，他 18 岁，但已在平台上活动约九年；</li>
+<li>asimo3089 在 2015 年已做大型个人项目 Port Gloom，并为 Roblox 移动端上线承担合同工作；2016 年继续做 Roblox Xbox 相关工作；</li>
+<li>两人在 Jailbreak 前已经合作过 Volt；</li>
+<li>2017 年 Jailbreak 因此不是两名新人第一次一起碰 Roblox，而是多年平台内能力、协作与职业关系的集中兑现。</li>
+</ul>
+<h2 id="3-capability">3. Capability</h2>
+<p>本 cluster 最重要的能力资本并不是单一“会 Lua”。平台把多种能力放进同一连续环境：</p>
+<ul>
+<li><strong>工程</strong>：Roblox API、客户端/服务器结构、跨设备适配、线上服务；</li>
+<li><strong>设计</strong>：持续发布、直接观察玩家行为、快速迭代；</li>
+<li><strong>资产生产</strong>：Studio、建模、UI、音频和平台内协作者分工；</li>
+<li><strong>运营</strong>：更新 cadence、社区反馈、live game 维护；</li>
+<li><strong>市场</strong>：平台推荐、已有玩家网络、社交传播、Twitter 等站外放大；</li>
+<li><strong>职业化</strong>：DevEx、平台合同、accelerator、实习、招聘与 studio formation。</li>
+</ul>
+<p>这使 Roblox 更像一个<strong>垂直整合的游戏开发学徒制 + 发布平台 + 劳动力市场</strong>，而不只是引擎。</p>
+<h2 id="4-runway">4. Runway</h2>
+<table>
+<thead>
+<tr>
+<th>时段 / 人物</th>
+<th>来源</th>
+<th>金额/口径</th>
+<th>证据</th>
+<th>置信度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cindering 2009–2013</td>
+<td>hobby / 非职业开发</td>
+<td>未知</td>
+<td>E001</td>
+<td>高</td>
+</tr>
+<tr>
+<td>Cindering 2013–2018</td>
+<td>DevEx + 学业并行</td>
+<td>无完整金额；本人明确把大学作为 Plan B</td>
+<td>E001</td>
+<td>高</td>
+</tr>
+<tr>
+<td>Cindering 2018</td>
+<td>accelerator 内全职 scripting + 团队兼职</td>
+<td>金额未知</td>
+<td>E001</td>
+<td>高</td>
+</tr>
+<tr>
+<td>Binello 早期</td>
+<td>GameStop 兼职</td>
+<td>金额未知</td>
+<td>E003</td>
+<td>中高</td>
+</tr>
+<tr>
+<td>Binello 2015</td>
+<td>Roblox 实习</td>
+<td>足以让其辞掉 GameStop；精确金额未知</td>
+<td>E003</td>
+<td>中高</td>
+</tr>
+<tr>
+<td>asimo3089 2015–2016</td>
+<td>Roblox 合同工作</td>
+<td>金额未知</td>
+<td>E004</td>
+<td>高</td>
+</tr>
+<tr>
+<td>Jailbreak 发售后</td>
+<td>平台收入</td>
+<td>足以显著改变 Balfanz 的大学资金条件；具体净收入不在本案直接推断</td>
+<td>E006</td>
+<td>中高</td>
+</tr>
+</tbody>
+</table>
+<p>这里的关键不是证明每个人都靠平台轻松养活自己，而是：<strong>平台把“继续练习”的一部分成本，通过工资、DevEx、实习、合同与产品收入逐步内部化。</strong></p>
+<h2 id="5-production">5. Production</h2>
+<h3 id="_1">核心团队并不等于全部生产边界</h3>
+<ul>
+<li>Cindering 2019 年明确说 RHS2 当时只有自己全职，其他团队成员兼职；到 2021 年公开招聘时，Cinder Studio 已有 map builder、3D modeler、UI artist、furniture builder、vehicles 等专业角色，并计划招聘 30–40 小时/周的长期全职 scripter；</li>
+<li>这说明“Roblox 少年开发者”可以沿平台内收入逐步长成真实雇佣组织；</li>
+<li>Jailbreak 的长期核心可表述为 badcc + asimo3089，但本案当前 contributor audit 尚未完成，禁止把它写成“全部工作严格由两人完成”。</li>
+</ul>
+<h3 id="_2">平台替代了一部分传统公司职能</h3>
+<p>Roblox 当前官方文档把托管、跨平台发布、支付、用户获取、翻译、合规等明确列为平台基础设施。虽然 2026 年的平台能力不能原样倒推到 2013–2017 年，但它揭示了这种生产模式的结构方向：小团队不必自行拥有全部公司职能。</p>
+<h2 id="6-scope">6. Scope</h2>
+<p>Roblox creator 路径降低的不是“做游戏本身”的所有难度，而是<strong>第一次把可玩东西交给真实用户</strong>的门槛。</p>
+<ul>
+<li>创作者可以从极小 experience 开始，不必先组建独立发行体系；</li>
+<li>平台统一技术栈和分发，使技能可以跨多个小项目累积；</li>
+<li>asimo3089 与 badcc 在 Volt 等旧项目里形成协作，再进入 Jailbreak；</li>
+<li>Cindering 从 RHS1 到 RHS2 的变化显示，当旧代码难以继续扩展时，平台内成功项目也会遭遇正常的软件重构与 live-ops 复杂度，并不会因为“UGC”而消失。</li>
+</ul>
+<p>因此 Roblox 的优势不是“没有 scope 问题”，而是允许开发者<strong>用很多次小范围出货来训练解决 scope 的能力</strong>。</p>
+<h2 id="7-failure">7. Failure</h2>
+<p>本 cluster 不是无失败直线：</p>
+<ul>
+<li>Binello 在离开 Roblox 尝试手机游戏时，虽获得约 50,000 下载，却没有形成真正业务；</li>
+<li>Cindering 在 2019 年明确强调收入波动和团队扩张风险，需要留出 safety net；</li>
+<li>Jailbreak 发售第一天的流量甚至让 badcc 自己的反馈/analytics web server 因超预期流量而失效，需要临时扩 Google Cloud；</li>
+<li>平台 creator economy 本身也存在“做出产品 ≠ 能全职”的巨大落差。</li>
+</ul>
+<h2 id="8-market">8. Market</h2>
+<p>这一案尤其反驳“没有营销，所以纯靠产品”的叙事。</p>
+<ul>
+<li>Roblox 本身就是 discovery / distribution / social graph；</li>
+<li>asimo3089 明确回忆 Jailbreak 发售前有“一堆 Twitter hype”；</li>
+<li>发售后平台内的高并发与反馈形成进一步放大；</li>
+<li>创作者在同一身份体系下长期积累玩家、同行和平台关系；</li>
+<li>当前 Roblox 甚至把 instant multi-platform publishing、user acquisition、translation 等直接定义为平台提供的能力。</li>
+</ul>
+<p>因此这里更准确的表述是：<strong>市场接入高度平台化，而不是市场不存在。</strong></p>
+<h2 id="9-environment">9. Environment</h2>
+<h3 id="_3">帮助</h3>
+<ul>
+<li>免费/低门槛工具和统一技术栈；</li>
+<li>即时发布与真实玩家反馈；</li>
+<li>内建多人、托管、支付与虚拟经济；</li>
+<li>DevEx 把虚拟收入转成现实 runway；</li>
+<li>平台可以直接成为客户、雇主或职业入口（合同 / accelerator / internship）；</li>
+<li>同一社区同时包含玩家、开发者、雇主与协作者。</li>
+</ul>
+<h3 id="_4">阻碍 / 依赖</h3>
+<ul>
+<li>DevEx 汇率、资格和“Earned Robux”认定受平台规则控制；</li>
+<li>发现与收入高度依赖单一平台生态；</li>
+<li>live-service 成功后，技术债、内容更新和招聘压力迅速上升；</li>
+<li>平台头部与普通创作者之间存在极大收入分布差异。</li>
+</ul>
+<h2 id="10-luck">10. Luck</h2>
+<p>Jailbreak 的首发爆发是明确的右尾事件：badcc 在发售当天把 40,000 CCU 称为梦想成真，随后数字继续冲到 60,000 / 75,000，连自建 analytics 服务都没有准备好。</p>
+<p>这不能反推为“他们不知道自己在做什么”。更准确的分解是：</p>
+<blockquote>
+<p>多年能力资本 + 有意选择更有市场潜力的题材 + 既有平台网络 + 上线前传播，制造了一个有竞争力的赌注；首发规模和持续放大仍包含团队无法控制的右尾结果。</p>
+</blockquote>
+<h2 id="11-verdict">11. Verdict</h2>
+<h3 id="_5">成立</h3>
+<ul>
+<li>Roblox 可以显著降低从玩家到实际出货开发者的制度摩擦；</li>
+<li>平台内多年迭代能形成真正可迁移的工程、设计、运营与组织能力；</li>
+<li>DevEx、合同、实习和平台分发可以把学习环境进一步变成职业环境。</li>
+</ul>
+<h3 id="_6">部分成立</h3>
+<ul>
+<li>“青少年也能做出商业大作”成立，但这里的“青少年”往往已经拥有多年平台经验，并非职业意义上的零经验新人。</li>
+</ul>
+<h3 id="_7">夸大 / 被证伪</h3>
+<ul>
+<li>“几个月从零做出 Jailbreak”——四个月更接近代表项目的集中开发期，不代表能力形成期；</li>
+<li>“两个人/一个人包办一切”——至少在 Cinder Studio 线已经明显不成立；Jailbreak contributor audit 仍需继续；</li>
+<li>“纯自然流量、没有营销”——平台分发、既有网络与 Twitter hype 都属于市场接入。</li>
+</ul>
+<h3 id="_8">无法验证</h3>
+<ul>
+<li>普通 Roblox 创作者采用相同路径的成功概率；</li>
+<li>若没有 DevEx / 平台合同 / 推荐体系，这些人是否会在相同时间成为职业开发者；</li>
+<li>早期各项目的精确净收入与家庭 runway。</li>
+</ul>
+<h2 id="12-transfer">12. Transfer</h2>
+<p>可迁移的不是“去做 Roblox”，而是以下生产设计：</p>
+<ol>
+<li><strong>把学习和出货合并</strong>：尽可能在真实用户环境中学习，而不是长期闭门练习；</li>
+<li><strong>用连续小项目制造能力资本</strong>：把爆款前的作品当作训练资产，而非失败污点；</li>
+<li><strong>优先选择能替代公司基础设施的平台/工具</strong>：托管、支付、跨平台、社区、分析、分发越能外包给基础设施，核心团队越能保持小；</li>
+<li><strong>把平台成功兑换成下一阶段生产条件</strong>：收入、作品集、职业关系、招聘能力和受众，比单次销量数字更重要；</li>
+<li><strong>保留退出选项</strong>：Cindering 的大学 Plan B 与 Binello 的工资工作都提醒，早期 optionality 本身就是 runway 的一部分。</li>
+</ol>
+<h2 id="13-non-transfer">13. Non-transfer</h2>
+<ul>
+<li>从少年期开始累积的多年平台熟练度不能压缩成几个月；</li>
+<li>平台头部可见度、推荐位和爆发式 CCU 不可计划复制；</li>
+<li>Roblox 的统一玩家基础和虚拟经济具有平台特异性；</li>
+<li>当前 2025–2026 creator economy 的规模不能直接倒推十年前的机会结构；</li>
+<li>本案是头部 cluster，不是 Roblox 创作者总体样本。</li>
+</ul>
+<h2 id="14-evidence-index">14. Evidence Index</h2>
+<ul>
+<li>E001 — Cindering 2019 DevEx testimony：2009 hobby → 2013 DevEx → RHS → college Plan B → accelerator / full-time。</li>
+<li>E002 — Cindering 2021 Cinder Studio 招聘：平台项目如何转化为全职远程岗位与专业分工。</li>
+<li>E003 — Alex Binello 2018 direct interview：手机游戏失败、GameStop、DevEx、Roblox internship → MeepCity。</li>
+<li>E004 — asimo3089 retrospective：Port Gloom、Roblox contract work、Volt、Jailbreak 与发售前 Twitter hype。</li>
+<li>E005 — badcc 2017 contemporaneous launch thread：40k→60k→75k CCU 与基础设施被突发需求击穿。</li>
+<li>E006 — GamesBeat 2017：Balfanz 多年 Roblox 前史、四个月代表作开发口径与大学资金。</li>
+<li>E007 — Roblox Creator Hub 2026：平台发布/基础设施与 top-vs-median creator income 分布。</li>
+<li>E008 — Roblox 2025 Form 10-K：DevEx 参与规模、资格与平台治理边界。</li>
+</ul>
+<h2 id="15-open-questions">15. Open Questions</h2>
+<ol>
+<li>Cindering / Binello / Balfanz 各自在代表作之前累计发布过多少可识别项目，哪些真正贡献了能力跃迁？</li>
+<li>Jailbreak 发售时完整 contributor boundary 是什么：音频、美术、QA、平台支持分别由谁承担？</li>
+<li>Roblox 在 2013–2018 的首页推荐 / discovery 机制如何影响 RHS、MeepCity、Jailbreak，是否可获得同期曝光记录？</li>
+<li>DevEx 2013 初始汇率、历次上调与这些开发者全职化时间点之间能否建立更精确时间线，而不是事后相关性？</li>
+<li>最需要补的是<strong>失败对照组</strong>：同年代、同样开发多年但没有进入职业化的 Roblox 创作者，其 production history 与这组头部案例差在哪里？</li>
+<li>Roblox 学徒制形成的能力有多少能迁移到 Steam / 独立引擎 / 自建后端环境？</li>
+</ol><div class="crumbs"><a href="/heroes-portal/">书阁</a> / cases/CASE-021-roblox-creator-cluster.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

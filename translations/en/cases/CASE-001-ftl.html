@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CASE-001 — FTL / Subset Games · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl class="on"" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#why-this-case" class="t2">Why this case</a><a href="#provisional-timeline" class="t2">Provisional Timeline</a><a href="#before-2009-education-and-hobby-work" class="t3">Before 2009 / education and hobby work</a><a href="#2009-2k-shanghai" class="t3">2009 — 2K Shanghai</a><a href="#2011-prototype-transition-out-of-studio-work" class="t3">2011 — prototype / transition out of studio work</a><a href="#2011-china-independent-games-festival" class="t3">2011 — China Independent Games Festival</a><a href="#early-2012-wider-validation-before-crowdfunding" class="t3">Early 2012 — wider validation before crowdfunding</a><a href="#2012-02-27-2012-04-01-kickstarter" class="t3">2012-02-27 — 2012-04-01 — Kickstarter</a><a href="#2012-release" class="t3">2012 — release</a><a href="#myth-audit" class="t2">Myth Audit</a><a href="#myth-a-two-people-made-a-game-put-it-on-kickstarter-and-became-an-overnight-success" class="t3">Myth A — “Two people made a game, put it on Kickstarter and became an overnight success”</a><a href="#myth-b-ftl-is-purely-a-two-man-game" class="t3">Myth B — “FTL is purely a two-man game”</a><a href="#myth-c-they-decided-from-the-outset-to-gamble-their-careers-on-a-startup" class="t3">Myth C — “They decided from the outset to gamble their careers on a startup”</a><a href="#origin-capability-stock" class="t2">Origin / Capability Stock</a><a href="#matthew-davis" class="t3">Matthew Davis</a><a href="#justin-ma" class="t3">Justin Ma</a><a href="#complementarity" class="t3">Complementarity</a><a href="#runway" class="t2">Runway</a><a href="#verified-supported" class="t3">VERIFIED / supported</a><a href="#unknown" class="t3">UNKNOWN</a><a href="#production-scope" class="t2">Production / Scope</a><a href="#provisional-production-interpretation-h" class="t3">Provisional production interpretation — H</a><a href="#failure-risk" class="t2">Failure / Risk</a><a href="#market-path" class="t2">Market Path</a><a href="#environment-luck" class="t2">Environment / Luck</a><a href="#environment-supported" class="t3">Environment — supported</a><a href="#environment-still-unknown" class="t3">Environment — still UNKNOWN</a><a href="#luck-right-tail-events" class="t3">Luck / right-tail events</a><a href="#provisional-verdict" class="t2">Provisional Verdict</a><a href="#transferable" class="t2">Transferable</a><a href="#non-transfer-context-specific" class="t2">Non-transfer / Context-specific</a><a href="#evidence-index" class="t2">Evidence Index</a><a href="#open-questions" class="t2">Open Questions</a></aside><article class="doc"><div class="col"><div class="lang-sw"><a href="/heroes-portal/cases/CASE-001-ftl.html">阅读中文原文 →</a></div><h1 id="case-001-ftl-subset-games">CASE-001 — FTL / Subset Games</h1>
+<p class="dc"><a href="/heroes-portal/cases/CASE-001-ftl.html">中文原文</a> · <a href="/heroes-portal/translations/en/README.html">English entry</a></p>
+<blockquote>
+<p>DRAFT translation; no human translation approval is recorded. English may lag behind the Chinese source. Check the <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes/blob/main/translations/manifest.json">registry</a> and Chinese source for the current version. Shared evidence records remain in Chinese.</p>
+</blockquote>
+<ul>
+<li>Status: RESEARCHING — FIRST EVIDENCE PASS</li>
+<li>Subject: FTL: Faster Than Light / Subset Games</li>
+<li>Related Claims: C001, C002, C003, C004, C006, C008, C010, C011</li>
+<li>Evidence Ledger: <a href="/heroes-portal/evidence/CASE-001-ftl-source-ledger.html">CASE-001 source ledger</a></li>
+<li>Evidence strength: MEDIUM; explanatory importance: HIGH; narrative value: HIGH</li>
+<li>Last verified in the source: 2026-10-03</li>
+</ul>
+<h2 id="why-this-case">Why this case</h2>
+<p>FTL is particularly useful for testing how independent developers create their production conditions. It combines:</p>
+<ul>
+<li>Professional game-development experience held by both core developers before the project.</li>
+<li>Personal savings providing runway after leaving employment.</li>
+<li>Shanghai as a distinctive development location.</li>
+<li>A small prototype → competition validation → commercialization → Kickstarter transition.</li>
+<li>A two-person core team whose members did not perform every task themselves.</li>
+<li>Deliberate constraints on representation and technical complexity.</li>
+<li>A Kickstarter outcome that can overshadow the earlier history and produce a crowdfunding myth.</li>
+</ul>
+<p>The purpose is to separate these production variables, rather than establish that cheap living in Shanghai caused FTL&rsquo;s success.</p>
+<h2 id="provisional-timeline">Provisional Timeline</h2>
+<h3 id="before-2009-education-and-hobby-work">Before 2009 / education and hobby work</h3>
+<ul>
+<li>Matthew Davis had a Computer Science education and subsequently entered professional game development.</li>
+<li>Justin Ma leaned toward art and design. In a 2013 interview he recalled spending substantial spare time at university developing game ideas and small prototypes.</li>
+</ul>
+<p>Evidence status: SUPPORTED (P1 near-contemporary interview).</p>
+<h3 id="2009-2k-shanghai">2009 — 2K Shanghai</h3>
+<ul>
+<li>Justin Ma joined 2K Shanghai in 2009 in game design.</li>
+<li>Matthew Davis also worked there as a programmer.</li>
+<li>They met in Shanghai in a large, conventional studio environment.</li>
+</ul>
+<p>Evidence status: SUPPORTED.</p>
+<h3 id="2011-prototype-transition-out-of-studio-work">2011 — prototype / transition out of studio work</h3>
+<ul>
+<li>Multiple sources agree that FTL did not begin with a definite commercial plan to quit, found a company and become the next successful indie studio.</li>
+<li>Contemporary and retrospective interviews describe a small project, hobby project or prototype, including a project between jobs to keep creating and expand their résumés.</li>
+<li>A contemporary 2012 interview explicitly states that they had worked in traditional studios and <strong>saved enough money to give themselves a few months to make a small project together</strong>.</li>
+</ul>
+<p>Retrospective accounts compress the timing of departure, brainstorming and prototyping differently. A single precise date is not yet asserted.</p>
+<h3 id="2011-china-independent-games-festival">2011 — China Independent Games Festival</h3>
+<ul>
+<li>FTL was a China Independent Games Festival 2011 finalist.</li>
+<li>This occurred before Kickstarter.</li>
+<li>Later recollections emphasize meeting other developers and receiving serious feedback at China IGF as an important signal that others were interested in the prototype.</li>
+</ul>
+<p>Evidence status: SUPPORTED.</p>
+<h3 id="early-2012-wider-validation-before-crowdfunding">Early 2012 — wider validation before crowdfunding</h3>
+<ul>
+<li>FTL received honorable mention recognition including Excellence in Design at IGF 2012.</li>
+<li>The developers also later described early media attention, such as PC Gamer, as important to recognizing potential demand.</li>
+</ul>
+<p>Kickstarter therefore must not be described as FTL&rsquo;s <strong>first</strong> market validation.</p>
+<h3 id="2012-02-27-2012-04-01-kickstarter">2012-02-27 — 2012-04-01 — Kickstarter</h3>
+<p>The original Kickstarter page records:</p>
+<ul>
+<li>Location: Shanghai, China.</li>
+<li>Goal: <strong>USD 10,000</strong>.</li>
+<li>Pledged: <strong>USD 200,542</strong>.</li>
+<li>Backers: <strong>9,818</strong>.</li>
+<li>Duration: 33 days.</li>
+</ul>
+<p>The campaign raised approximately <strong>20 times its goal</strong>.</p>
+<blockquote>
+<p>USD 200,542 is the pledged amount. It is neither the complete development budget nor net proceeds, and it does not mean FTL was financed only by this money from its first day.</p>
+</blockquote>
+<h3 id="2012-release">2012 — release</h3>
+<ul>
+<li>FTL completed its commercial release in 2012.</li>
+<li>The 2013 GDC postmortem could retrospectively describe the design path from concept through crowdfunding to release.</li>
+</ul>
+<h2 id="myth-audit">Myth Audit</h2>
+<h3 id="myth-a-two-people-made-a-game-put-it-on-kickstarter-and-became-an-overnight-success">Myth A — “Two people made a game, put it on Kickstarter and became an overnight success”</h3>
+<p><strong>PARTIALLY REFUTED / compressed narrative.</strong></p>
+<p>Current evidence shows at least five layers of prior history:</p>
+<ol>
+<li>Education and hobby prototypes.</li>
+<li>Professional development experience at 2K Shanghai.</li>
+<li>Personal savings providing a few months of initial runway.</li>
+<li>A small project / prototype.</li>
+<li>China IGF, IGF, media and peer feedback.</li>
+<li>Only then, an exceptionally successful Kickstarter campaign.</li>
+</ol>
+<p>Kickstarter matters, but it is not the beginning of the story.</p>
+<h3 id="myth-b-ftl-is-purely-a-two-man-game">Myth B — “FTL is purely a two-man game”</h3>
+<p><strong>The definition needs clarification.</strong></p>
+<p>Justin Ma and Matthew Davis clearly form the core team, but external contributions must be counted separately, including music by Ben Prunty.</p>
+<p>Prefer <strong>two-person core development team</strong>, rather than imply that two people did all creative, audio, QA and publishing work.</p>
+<h3 id="myth-c-they-decided-from-the-outset-to-gamble-their-careers-on-a-startup">Myth C — “They decided from the outset to gamble their careers on a startup”</h3>
+<p><strong>Not currently supported.</strong></p>
+<p>Davis later explicitly described the initial goal as a hobby / prototype / résumé project, with finding more interesting studio employment among the expected next steps.</p>
+<blockquote>
+<p>FTL&rsquo;s initial downside was not a binary choice between success and bankruptcy. Re-employment itself provided an implicit safety net.</p>
+</blockquote>
+<p>This matters to C001/C002/C006.</p>
+<h2 id="origin-capability-stock">Origin / Capability Stock</h2>
+<h3 id="matthew-davis">Matthew Davis</h3>
+<p>Currently established:</p>
+<ul>
+<li>Computer Science education.</li>
+<li>Programmer at 2K Shanghai.</li>
+<li>FTL&rsquo;s core programming capabilities.</li>
+</ul>
+<p>Still to verify:</p>
+<ul>
+<li>Specific school and graduation year.</li>
+<li>Projects worked on at 2K.</li>
+<li>Pre-FTL accumulation of personal prototypes, engine, networking and tooling experience.</li>
+</ul>
+<h3 id="justin-ma">Justin Ma</h3>
+<p>Currently established:</p>
+<ul>
+<li>Art/design background.</li>
+<li>Game ideas and small prototypes at university.</li>
+<li>Game designer at 2K Shanghai from 2009.</li>
+<li>Art and substantial scripting on FTL, with design shared with Davis.</li>
+</ul>
+<h3 id="complementarity">Complementarity</h3>
+<p>FTL is not simply the combination of two interchangeable all-round independent developers. The currently more plausible structure is:</p>
+<blockquote>
+<p><strong>A programming-heavy founder + an art/design/scripting-heavy founder + shared design + external specialist contributions.</strong></p>
+</blockquote>
+<p>This complementary combination may be more useful to study than the headcount of two itself.</p>
+<h2 id="runway">Runway</h2>
+<h3 id="verified-supported">VERIFIED / supported</h3>
+<ul>
+<li>The initial phase had personal savings-funded runway.</li>
+<li>A contemporary 2012 interview described enough time for “a few months” on a small project.</li>
+<li>Kickstarter provided funding far above the goal, moving a small, externally validated project toward more secure commercial completion.</li>
+</ul>
+<h3 id="unknown">UNKNOWN</h3>
+<ul>
+<li>Their specific savings amounts.</li>
+<li>Monthly burn after leaving employment.</li>
+<li>Shanghai rent and living costs.</li>
+<li>Partner, family or other income support.</li>
+<li>Net usable Kickstarter proceeds after fees, tax and project expenses.</li>
+<li>Opportunity cost.</li>
+</ul>
+<blockquote>
+<p>“FTL became possible because Shanghai had low living costs” currently remains H, not a Case fact.</p>
+</blockquote>
+<h2 id="production-scope">Production / Scope</h2>
+<p>A 2013 Game Developer interview provides concrete division-of-work and tooling clues:</p>
+<ul>
+<li>Ma: art and significant scripting.</li>
+<li>Davis: programming-heavy.</li>
+<li>Shared design.</li>
+<li>Photoshop.</li>
+<li>Game Maker for animation and small feature tests.</li>
+<li>Notepad++ scripting.</li>
+<li>SVN version control.</li>
+</ul>
+<p>FTL did not pursue the cost structure of large contemporary space games. Later production-history material also states that the team lacked both the resources and intention to undertake complex 3D representation. Pixel/2D representation better matched the art skills Ma could cover at the time.</p>
+<h3 id="provisional-production-interpretation-h">Provisional production interpretation — H</h3>
+<p>FTL&rsquo;s key innovation may have been to re-represent the fantasy of captaining a starship through rooms, systems, crew, events and resource decisions, rather than 3D piloting and cinematic presentation.</p>
+<p>That changes an expensive space-simulator problem into an information-and-systems simulation that the two developers&rsquo; capabilities could support. This interpretation still needs verification through the GDC talk and prototype evolution.</p>
+<h2 id="failure-risk">Failure / Risk</h2>
+<p>The currently important risk facts concern the initial commitment, rather than a specific near-death crisis:</p>
+<ul>
+<li>The original planned scope was small.</li>
+<li>The creators expected limited market appeal.</li>
+<li>They lacked experience in commerce and company operations.</li>
+<li>They increased commitment only as positive competition, media and player feedback accumulated.</li>
+</ul>
+<blockquote>
+<p>Rather than assemble resources around a huge initial vision, they let external evidence progressively increase their commitment.</p>
+</blockquote>
+<h2 id="market-path">Market Path</h2>
+<p>FTL is not a simple <code>zero marketing / pure organic</code> case. The known path includes:</p>
+<ol>
+<li>Competition submission.</li>
+<li>China IGF 2011 finalist status.</li>
+<li>IGF recognition.</li>
+<li>Early enthusiast and media attention.</li>
+<li>A Kickstarter page and campaign outreach.</li>
+<li>Release platforms and storefront exposure.</li>
+</ol>
+<p>The useful question is how they built credibility and market access progressively without a conventional large advertising budget.</p>
+<h2 id="environment-luck">Environment / Luck</h2>
+<h3 id="environment-supported">Environment — supported</h3>
+<ul>
+<li>They met and acquired professional experience in a large game studio in Shanghai.</li>
+<li>The public Kickstarter campaign location was Shanghai, China.</li>
+<li>China IGF provided an early external-validation point.</li>
+</ul>
+<h3 id="environment-still-unknown">Environment — still UNKNOWN</h3>
+<ul>
+<li>Shanghai&rsquo;s actual cost advantage.</li>
+<li>Residence, visa and tax conditions in China.</li>
+<li>How much these conditions extended runway compared with similar developers in the United States.</li>
+</ul>
+<h3 id="luck-right-tail-events">Luck / right-tail events</h3>
+<ul>
+<li>Kickstarter&rsquo;s exceptional result was a strong right-tail market response.</li>
+<li>Competition and media attention created successive positive feedback.</li>
+</ul>
+<p>Luck does not erase the earlier playable prototype or the decision to submit it to competitions.</p>
+<h2 id="provisional-verdict">Provisional Verdict</h2>
+<p>The first evidence pass suggests a <strong>staged commitment model</strong>:</p>
+<blockquote>
+<p>Professional capability capital → savings buying a few months of free time → a small prototype → active exposure to competitions and peers → increased commitment following external feedback → crowdfunding expanding runway and validating demand → a completed commercial product.</p>
+</blockquote>
+<p>This is a strong case for studying the creation of production conditions. It does not establish that:</p>
+<ul>
+<li>Everyone should quit employment.</li>
+<li>Large-studio experience is necessary.</li>
+<li>Low Shanghai costs were the central cause.</li>
+<li>Crowdfunding was the main cause of success.</li>
+<li>Small teams are inherently more innovative.</li>
+</ul>
+<h2 id="transferable">Transferable</h2>
+<p>First-pass candidates:</p>
+<ul>
+<li>Design a small experiment with limited runway before committing to a full startup.</li>
+<li>Preserve re-employment and career fallback paths to reduce the permanent cost of a failed experiment.</li>
+<li>Combine complementary capabilities in the core team rather than prioritize low headcount alone.</li>
+<li>Recut expensive fantasies through representation and scope choices.</li>
+<li>Seek high-quality external prototype review before formal financing.</li>
+<li>Use real feedback to decide whether to increase commitment.</li>
+</ul>
+<p>These require cross-Case validation. One FTL case cannot turn them into universal prescriptions.</p>
+<h2 id="non-transfer-context-specific">Non-transfer / Context-specific</h2>
+<ul>
+<li>The timing of the 2011–2012 Kickstarter / indie boom.</li>
+<li>Contemporary competition in roguelike-like / PC indie markets.</li>
+<li>The China IGF / IGF route.</li>
+<li>Professional skills the two developers already possessed.</li>
+<li>Kickstarter&rsquo;s unusually strong response.</li>
+</ul>
+<h2 id="evidence-index">Evidence Index</h2>
+<p>See the shared <a href="/heroes-portal/evidence/CASE-001-ftl-source-ledger.html">CASE-001 source ledger</a>. Core sources include:</p>
+<ul>
+<li>Kickstarter original campaign.</li>
+<li>GDC 2013 FTL postmortem.</li>
+<li>Game Developer / Road to the IGF 2013.</li>
+<li>Pixel Judge 2012 creator interview.</li>
+<li>SpaceSector 2012 Justin Ma interview.</li>
+<li>Game Developer creator mini-postmortem.</li>
+<li>Game Informer 2018 retrospective.</li>
+<li>Ars Technica 2022 retrospective.</li>
+</ul>
+<h2 id="open-questions">Open Questions</h2>
+<ol>
+<li>How much did they save, and how many months of actual runway did that provide?</li>
+<li>How did monthly Shanghai burn compare with developers at the same stage in the United States or Europe?</li>
+<li>Which transferable skills and tooling habits did 2K Shanghai provide?</li>
+<li>What was the precise China IGF → PC Gamer / other media → Kickstarter timeline?</li>
+<li>Which contractors, QA, testing and platform support contributed beyond Ben Prunty?</li>
+<li>Where was Kickstarter money actually spent?</li>
+<li>Which systems were cut from the prototype at each stage?</li>
+<li>Which representation decisions directly lowered asset-production costs?</li>
+<li>Would they still have released if Kickstarter had raised only USD 10,000?</li>
+<li>Were they prepared to return to studio employment if competition feedback had been unenthusiastic?</li>
+</ol><div class="crumbs"><a href="/heroes-portal/">书阁</a> / translations/en/cases/CASE-001-ftl.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

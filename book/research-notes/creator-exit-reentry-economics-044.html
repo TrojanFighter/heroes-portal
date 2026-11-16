@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>044 — 失败以后去哪里：Creator Exit &amp; Re-entry Economics 第一轮 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl class="on"" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0" class="t2">0. 为什么“第二款游戏”仍然不是我们真正想知道的答案</a><a href="#1-exit-outcome-vector" class="t2">1. Exit Outcome Vector</a><a href="#2" class="t2">2. 六条公开人生路径</a><a href="#21-gianfranco-berardi-gbgames" class="t3">2.1 Gianfranco Berardi / GBGames：回公司不是梦想死亡，而是风险阈值被家庭重写</a><a href="#22-cj-cenizal-atomic-armies" class="t3">2.2 CJ Cenizal / Atomic Armies：残值不是“学到了很多”，而是哪些能力还能被劳动力市场重新定价</a><a href="#23-poncho-delve-interactivecv" class="t3">2.3 PONCHO / Delve Interactive：产品发售之后，CV 可以比下一份设计文档更早出现</a><a href="#24-mountaincore-rocket-jump-technologyip" class="t3">2.4 Mountaincore / Rocket Jump Technology：公司死亡、人重新就业、源码/IP残值是三条不同结局</a><a href="#25-tomislav-cipcic-iron-cross-board-games-attack-at-dawn" class="t3">2.5 Tomislav Čipčić / Iron Cross → board games → Attack at Dawn：第二次机会可以跨媒介、跨很多年</a><a href="#26-drunk-shotgun" class="t3">2.6 Drunk Shotgun：保留主业可以把商业失败从“职业退出事件”降成有限实验损失</a><a href="#3" class="t2">3. 第一轮比较矩阵</a><a href="#4" class="t2">4. 从这六条路径能提炼什么，不能提炼什么</a><a href="#41" class="t3">4.1 可以暂时成立：就业回撤能力是一种真实的生产资产</a><a href="#reversibility-capital" class="t3">REVERSIBILITY CAPITAL / 可逆性资本</a><a href="#42" class="t3">4.2 家庭不是单纯“支持/反对”，而是在改变重新下注门槛</a><a href="#43" class="t3">4.3 “失败留下经验”必须接受市场折旧</a><a href="#44" class="t3">4.4 公司退出、职业退出、作者退出必须分离</a><a href="#5-oq-002-005-006" class="t2">5. 对 OQ-002 / 005 / 006 的方法修正</a><a href="#oq-002-second-attempt" class="t3">OQ-002 Second Attempt</a><a href="#oq-005-authorial-right-vs-salary" class="t3">OQ-005 Authorial Right vs Salary</a><a href="#oq-006-failure-reversibility" class="t3">OQ-006 Failure Reversibility</a><a href="#6-denominator" class="t2">6. 现在真正缺的不是更多传奇失败，而是 denominator</a><a href="#7-cohort" class="t2">7. 下一轮 cohort：第一步已完成，下一步换到职业可观察入口</a><a href="#8-reader-layer" class="t2">8. Reader-layer 可用结论</a></aside><article class="doc"><div class="col"><h1 id="044-creator-exit-re-entry-economics">044 — 失败以后去哪里：Creator Exit &amp; Re-entry Economics 第一轮</h1>
+<ul>
+<li>Status: <strong>TARGETED LIFE-OUTCOME EVIDENCE / CONVENIENCE COUNTERCASES / NOT A POPULATION RATE</strong></li>
+<li>As-of: 2026-10-08</li>
+<li>Routes: OQ-002 Second Attempt / OQ-005 Authorial Right vs Salary / OQ-006 Failure Reversibility</li>
+<li>Parent: <a href="/heroes-portal/book/research-notes/creator-life-cost-exit-comparison-2026-10-07.html">人生性价比的第一份硬账</a></li>
+<li>Sampling boundary: 本轮主动寻找公开写下“退出全职独立、回受雇、转行业、法人死亡、后来再入场”的第一人称或直接工作室记录，因此<strong>不能用来计算发生率</strong>。它解决的是 outcome taxonomy 和机制缺口，不是 denominator。</li>
+</ul>
+<h2 id="0">0. 为什么“第二款游戏”仍然不是我们真正想知道的答案</h2>
+<p class="dc">Steam 的第二次发行基线已经告诉我们：一个 developer identifier 有没有第二款产品，是有用的第一层平台观测，但它不能直接回答创作者的人生是否恢复。</p>
+<p>失败以后至少可能同时发生：</p>
+<ul>
+<li>项目停止，但人回到受雇岗位；</li>
+<li>公司死亡，但成员很快找到新工作；</li>
+<li>人继续做游戏，却从 full-time 退回 nights/weekends；</li>
+<li>人离开游戏业，把部分能力迁移到别的数字职业；</li>
+<li>多年后通过桌游、mod、小项目等旁路重新进入；</li>
+<li>作品/IP/源码留下，但个人没有时间继续；</li>
+<li>经济恢复了，但作者权没有恢复；</li>
+<li>作者性延续了，但收入仍不足以再次全职。</li>
+</ul>
+<p>因此需要把单一的 <code>SUCCESS / FAILURE</code> 改写成一个 <strong>Exit Outcome Vector</strong>。</p>
+<h2 id="1-exit-outcome-vector">1. Exit Outcome Vector</h2>
+<p>每个退出/失败样本至少拆成七项：</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>建议状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PROJECT_OUTCOME</td>
+<td>SHIPPED / CANCELLED / ABANDONED / HOBBY_CONTINUED / OPEN_SOURCED / UNKNOWN</td>
+</tr>
+<tr>
+<td>COMPANY_OUTCOME</td>
+<td>CONTINUED / DOWNSIZED / INSOLVENT / LIQUIDATED / NEVER_FORMED / UNKNOWN</td>
+</tr>
+<tr>
+<td>EMPLOYMENT_OUTCOME</td>
+<td>REMAINED_EMPLOYED / RETURNED_EMPLOYMENT / CAREER_PIVOT / STILL_FULLTIME_INDIE / UNKNOWN</td>
+</tr>
+<tr>
+<td>AUTHORIAL_OUTCOME</td>
+<td>CONTINUED_SIDE_CREATION / SECOND_ATTEMPT / MEDIA_SWITCH / PAUSED / EXIT_UNKNOWN</td>
+</tr>
+<tr>
+<td>HOUSEHOLD_PRESSURE</td>
+<td>PUBLICLY_OBSERVED / NOT_OBSERVED / UNKNOWN</td>
+</tr>
+<tr>
+<td>RESIDUAL_CAPITAL</td>
+<td>SKILL / PORTFOLIO / NETWORK / IP / SOURCE / AUDIENCE / NONE_OBSERVED / UNKNOWN</td>
+</tr>
+<tr>
+<td>REENTRY_TIME</td>
+<td>KNOWN / BOUNDED / UNKNOWN</td>
+</tr>
+</tbody>
+</table>
+<p>另外强制保留：
+- <code>SALARY_BEFORE = UNKNOWN</code>，除非本人公开；
+- <code>SALARY_AFTER = UNKNOWN</code>，除非本人公开；
+- <code>FULL_FINANCIAL_RECOVERY</code> 不得由“找到工作”自动推出；
+- <code>CAREER_EXIT</code> 不得由“项目没更新”自动推出。</p>
+<h2 id="2">2. 六条公开人生路径</h2>
+<h3 id="21-gianfranco-berardi-gbgames">2.1 Gianfranco Berardi / GBGames：回公司不是梦想死亡，而是风险阈值被家庭重写</h3>
+<p>Berardi 2022 年的年度回顾给出一条异常清楚的纵向链：</p>
+<ul>
+<li>2010 年辞职，成为 full-time indie；</li>
+<li>现金耗尽后，2012 年重新找 day job；</li>
+<li>原计划是重新积累储蓄后再辞职；</li>
+<li>结婚和家庭形成以后，他明确说自己的 risk assessment 以及家庭可接受风险改变了；</li>
+<li>此后一直保留 day job，同时极低强度继续 GBGames；</li>
+<li>2021 年他记录了约 299 小时游戏开发，但全年相关产品销量仍很低；</li>
+<li>他甚至写了一份 Full-time Indie Plan，把当前工资、家庭预算、必要开支、销售与营销门槛放在一起比较。</li>
+</ul>
+<p>这比“失败后还能不能再做一款”更有价值，因为它直接显示：</p>
+<pre><code>FULLTIME_INDIE
+→ CASH_EXHAUSTION
+→ RETURNED_EMPLOYMENT
+→ HOUSEHOLD_RISK_THRESHOLD_RISES
+→ CONTINUED_SIDE_AUTHORSHIP
+→ SECOND_FULLTIME_EXIT_NOT_YET_TRIGGERED
+</code></pre>
+<p><strong>关键机制：<code>REEMPLOYMENT ≠ AUTHORIAL_EXIT</code>；同时 <code>AUTHORIAL_CONTINUATION ≠ SECOND_FULLTIME_ATTEMPT</code>。</strong></p>
+<p>Sources:
+- Gianfranco Berardi, “A Review of My 2021, and Looking at 2022, Already In Progress”, 2022-01-17: https://www.gbgames.com/2022/01/17/a-review-of-my-2021-and-looking-at-2022-already-in-progress/
+- GBGames press/about chronology: https://www.gbgames.com/press/</p>
+<h3 id="22-cj-cenizal-atomic-armies">2.2 CJ Cenizal / Atomic Armies：残值不是“学到了很多”，而是哪些能力还能被劳动力市场重新定价</h3>
+<p>Cenizal 的自述比一般失败 postmortem 多了一段最重要的后续：</p>
+<ul>
+<li>2010 年结束 visual-effects contract，主动进入独立开发；</li>
+<li>两年里做了几个游戏、几乎没有收入；</li>
+<li>同期关系进入结婚/未来住房等更高现金责任阶段；</li>
+<li>到退出点时，他自己判断大量 social-game 知识、Flash / ActionScript 投入已经因技术和市场迁移而明显贬值；</li>
+<li>他面试过 social game 公司和 Riot，但最后不想继续游戏职业；</li>
+<li>真正幸存下来的不是“游戏开发者”这个身份，而是项目中发现并强化的 UI/UX 兴趣与能力；</li>
+<li>后续约四年，他逐步建立起 UI engineer / front-end web developer 职业，并明确写到家庭账单重新得到支付。</li>
+</ul>
+<p>因此 Residual Capital 必须进一步拆成：</p>
+<pre><code>RESIDUAL_CAPITAL =
+  transferable_skill
++ portfolio_signal
++ network
++ reusable_asset
+- obsolete_skill
+- regime_specific_knowledge
+</code></pre>
+<p>Atomic Armies 反驳两种相反神话：
+1. “失败了什么都没留下”——不成立，UI/UX 能力真实迁移；
+2. “失败就是交学费，学到的东西最终都会值钱”——同样不成立，作者自己明确识别出部分技术栈和行业知识已经贬值。</p>
+<p>Sources:
+- CJ Cenizal, <em>Atomic Armies: A Post-Mortem</em>: https://www.atomicarmies.com/
+- CJ Cenizal software portfolio: https://cjcenizal.netlify.app/</p>
+<h3 id="23-poncho-delve-interactivecv">2.3 PONCHO / Delve Interactive：产品发售之后，CV 可以比下一份设计文档更早出现</h3>
+<p>Dan Hayes 的 postmortem 给出了从 day job 到债务再回就业的完整中段：</p>
+<ul>
+<li>2011 起两位主创边上班边做 PONCHO；</li>
+<li>2014 年夏辞职全职开发，依赖储蓄并继续寻求 Kickstarter / 发行等资金；</li>
+<li>为展会和继续开发承担较大贷款；后期又贷款以完成 Steam 版本；</li>
+<li>2015-11-03 Steam / PS4 上市；</li>
+<li>销售结果出来后，他们马上开始写 CV 寻找 day job；</li>
+<li>一年后作者明确说他们已经在新的 day jobs 下继续做 Wii U / PS4 patch；</li>
+<li>债务并未因为“重新就业”自动消失。</li>
+</ul>
+<p>因此本案的正确编码不是：
+<code>SHIPPED = SUCCESS</code></p>
+<p>而是：</p>
+<pre><code>SHIPPED
++ MARKET_INSUFFICIENT
++ DEBT_REMAINS
++ RETURNED_EMPLOYMENT
++ PRODUCT_MAINTENANCE_AFTER_HOURS
+</code></pre>
+<p>它还提供 OQ-009 的旁证：作者明确说有 publisher 并没有自动带来预期中的大型媒体覆盖，因此“签发行商”不能被编码成 <code>MARKETING_PROBLEM_SOLVED</code>。</p>
+<p>Source:
+- Dan Hayes, “PONCHO — A Postmortem”, Game Developer, 2017-01-06: https://www.gamedeveloper.com/business/poncho-a-postmortem</p>
+<h3 id="24-mountaincore-rocket-jump-technologyip">2.4 Mountaincore / Rocket Jump Technology：公司死亡、人重新就业、源码/IP残值是三条不同结局</h3>
+<p>Mountaincore 是本轮最干净的组织层退出样本之一：</p>
+<ul>
+<li>前身 King under the Mountain 已长期开发；</li>
+<li>后来 publisher funding 允许项目从单人 hobby 扩成小型全职团队；</li>
+<li>publisher 退出后，团队在很短营销窗口内进入 Early Access；</li>
+<li>开发者明确说 launch revenue 远低于维持哪怕一名 full-time developer 所需水平；</li>
+<li>2023 年团队停止全职开发，成员被裁；创始人的公开更新明确写到自己重新回 full-time work，且 commute 显著挤压开发时间；</li>
+<li>Rocket Jump Technology 后来因收入不足覆盖小额债务而 insolvency / liquidation；</li>
+<li>2025 更新进一步确认剩余两位人员当时必须迅速找到新工作；</li>
+<li>Mountaincore 本体法律权属因 publisher funding 变得复杂，但前身 King under the Mountain 以及后来的 Mountaincore 最终都以开放源码形式留下。</li>
+</ul>
+<p>这里至少有四个不同 outcome：</p>
+<pre><code>COMPANY = INSOLVENT / LIQUIDATED
+EMPLOYMENT = RETURNED_EMPLOYMENT
+AUTHORIAL_TIME = COLLAPSED_TO_HOBBY, THEN EFFECTIVELY_PAUSED
+RESIDUAL_ASSET = SOURCE / CODE / COMMUNITY, PARTLY OWNERSHIP-CONSTRAINED
+</code></pre>
+<p><strong>法人死亡不等于劳动者失业多年；劳动者重新就业也不等于作品仍有可持续开发时间。</strong></p>
+<p>Source:
+- Mountaincore Steam developer announcements, 2023-05 to 2025-04: https://steamcommunity.com/app/2370310/allnews/</p>
+<h3 id="25-tomislav-cipcic-iron-cross-board-games-attack-at-dawn">2.5 Tomislav Čipčić / Iron Cross → board games → Attack at Dawn：第二次机会可以跨媒介、跨很多年</h3>
+<p>Panzer Division Games 的 founder biography 提供一种与“失败后立刻再做第二款 Steam 游戏”完全不同的 re-entry：</p>
+<ul>
+<li>第一款 Iron Cross 与朋友做了约六年，最终没有完成；</li>
+<li>此后他把重心放回家庭和 day job；</li>
+<li>创作并没有完全停止，而是转向 board games；</li>
+<li>其中 Brotherhood &amp; Unity 后来由 Compass Games 出版；</li>
+<li>这成为其自述中的 tipping point，之后他重新“fully returned” to game design，并开始制作 PC wargame Attack at Dawn: North Africa。</li>
+</ul>
+<p>所以：</p>
+<pre><code>UNFINISHED_FIRST_PROJECT
+→ FAMILY + EMPLOYMENT
+→ MEDIA_SWITCH / SIDE_AUTHORSHIP
+→ EXTERNAL_VALIDATION
+→ LATER_FULL_REENTRY
+</code></pre>
+<p>这说明 OQ-002 的 “Second Attempt” 不能把固定窗口内的 <code>SECOND_STEAM_APP</code> 当唯一结果。真正的作者性可能在桌游、mod、工具或其它媒介里保存，再晚很多年重新资本化。</p>
+<p>Source:
+- Panzer Division Games, “About Us”: https://www.panzerdivisiongames.com/about-us</p>
+<h3 id="26-drunk-shotgun">2.6 Drunk Shotgun：保留主业可以把商业失败从“职业退出事件”降成有限实验损失</h3>
+<p>Alexey Strelkov 的 Drunk Shotgun 是很好的 control：</p>
+<ul>
+<li>2019 年末开始 prototype；</li>
+<li>几周后加入 Listenable 成为 full-time CTO；</li>
+<li>游戏此后主要在 evenings / weekends / nights 完成；</li>
+<li>他估算 1.0 约 50 个工作日，现金支出约 US$4,006；</li>
+<li>截至复盘时总收入只有约 US$35.57。</li>
+</ul>
+<p>这是极端商业失败，但因为作者没有把全部工资和职业身份押进去，它与 PONCHO / Atomic Armies 的人生后果完全不是一个类型。</p>
+<p>正确比较不是：
+“Drunk Shotgun 比 PONCHO 失败得更多/更少。”</p>
+<p>而是：
+<strong>两个产品都可以商业失利，但 employment option 是否被提前行权，会改变失败的不可逆程度。</strong></p>
+<p>Source:
+- Alexey Strelkov, “How I wasted $4k+ and half a year of my life to develop a game that earned only $30”, Game Developer, 2021-01-04: https://www.gamedeveloper.com/business/how-i-wasted-4k-and-half-a-year-of-my-life-to-develop-a-game-that-earned-only-30</p>
+<h2 id="3">3. 第一轮比较矩阵</h2>
+<table>
+<thead>
+<tr>
+<th>路径</th>
+<th>离开主业</th>
+<th>项目结果</th>
+<th>失败后就业</th>
+<th>作者性是否延续</th>
+<th>可见残值</th>
+<th>仍然 UNKNOWN</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GBGames</td>
+<td>是</td>
+<td>full-time business 未达可持续</td>
+<td>2012 回 day job</td>
+<td>是，长期 part-time</td>
+<td>技能、作品、业务学习</td>
+<td>工资前后、完整净损失、何时能再全职</td>
+</tr>
+<tr>
+<td>Atomic Armies</td>
+<td>是</td>
+<td>未形成可持续业务</td>
+<td>转 UI/front-end 新职业</td>
+<td>游戏作者身份未作为主业延续</td>
+<td>UI/UX、产品开发经验、关系</td>
+<td>精确收入损失、再就业工资</td>
+</tr>
+<tr>
+<td>PONCHO</td>
+<td>是</td>
+<td>shipped / sales insufficient</td>
+<td>已回新的 day jobs</td>
+<td>至少短期继续维护</td>
+<td>shipped title、技能、publisher/platform经验</td>
+<td>各成员长期去向、债务最终清偿、工资</td>
+</tr>
+<tr>
+<td>Mountaincore</td>
+<td>从 hobby 扩为全职</td>
+<td>EA商业不足 / 后续停摆</td>
+<td>成员快速再就业</td>
+<td>full-time停止；hobby尝试后近乎暂停</td>
+<td>source、社区、部分IP/代码</td>
+<td>个体工资、长期作者重返、完整publisher合同</td>
+</tr>
+<tr>
+<td>Iron Cross</td>
+<td>未明确</td>
+<td>约6年未完成</td>
+<td>day job / family</td>
+<td>通过桌游保存并后来重返</td>
+<td>设计能力、board-game validation</td>
+<td>精确时间窗、财务、首次项目投入</td>
+</tr>
+<tr>
+<td>Drunk Shotgun</td>
+<td>否；开发期已有 CTO 主业</td>
+<td>shipped / 极低收入</td>
+<td>不需要“回归”</td>
+<td>可自由决定后续</td>
+<td>shipped artifact、学习、职业工资仍在</td>
+<td>总工时、机会成本、税后损失</td>
+</tr>
+</tbody>
+</table>
+<p>这张表仍然<strong>不是统计样本</strong>。它只证明“失败以后”至少存在多种可观测路径，足以推翻把 <code>NO SECOND_GAME</code>、<code>STUDIO_CLOSED</code>、<code>RETURNED_TO_JOB</code> 当同一个状态的做法。</p>
+<h2 id="4">4. 从这六条路径能提炼什么，不能提炼什么</h2>
+<h3 id="41">4.1 可以暂时成立：就业回撤能力是一种真实的生产资产</h3>
+<p>在独立开发前保留或积累的职业能力，不只是“机会成本”。</p>
+<p>它同时可能是一张 <strong>exit option</strong>：</p>
+<pre><code>marketable external skill
+→ lower expected downside of indie attempt
+→ easier employment return
+→ household solvency restored
+</code></pre>
+<p>但这不是“程序员失败也无所谓”。</p>
+<p>PONCHO 显示债务可以在重新就业后继续存在；Atomic Armies 显示技术栈会贬值；Mountaincore 显示新 day job 会吃掉原本打算用于作品的时间。</p>
+<p>所以更准确的概念是：</p>
+<h3 id="reversibility-capital"><code>REVERSIBILITY CAPITAL / 可逆性资本</code></h3>
+<blockquote>
+<p>在创作者项目失败、停止或商业不足后，使其能够恢复稳定现金流、重新组织职业身份、保留部分创作选择权的可迁移能力、履历、关系、就业市场需求与低债务结构。</p>
+</blockquote>
+<p>它是 <strong>bounded downside 的来源</strong>，不是失败免疫。</p>
+<h3 id="42">4.2 家庭不是单纯“支持/反对”，而是在改变重新下注门槛</h3>
+<p>GBGames 与 Atomic Armies 都显示：
+- 同一人年轻/未婚时可接受的失败概率，
+- 在婚姻、家庭预算、未来住房/育儿责任出现后，
+- 可能不再满足再次 full-time exit 的阈值。</p>
+<p>因此 OQ-004 与 OQ-005 应连接成：</p>
+<pre><code>AUTHORIAL_RIGHT_VALUE
+vs
+FOREgone salary
++ household fixed claims
++ debt
++ re-entry uncertainty
+</code></pre>
+<p>不是“父母/妻子支持不支持”二元变量。</p>
+<h3 id="43">4.3 “失败留下经验”必须接受市场折旧</h3>
+<p>Atomic Armies 是最直接的反例。</p>
+<p>经验是否是 residual capital，至少取决于：
+- 技能是否跨技术栈可迁移；
+- 新劳动力市场是否认可；
+- 是否能用作品/履历证明；
+- 该生产 regime 是否仍存在需求；
+- 作者是否愿意继续在同一行业。</p>
+<p>所以以后禁止写：</p>
+<blockquote>
+<p>“即使失败，经验也是资产。”</p>
+</blockquote>
+<p>应改为：</p>
+<blockquote>
+<p><strong>失败可能留下资产；只有后来仍可使用、可证明、可重新定价的部分，才计入 residual capital。</strong></p>
+</blockquote>
+<h3 id="44">4.4 公司退出、职业退出、作者退出必须分离</h3>
+<p>Mountaincore 给出最直观的四层拆分：</p>
+<ul>
+<li>company can die；</li>
+<li>developers can quickly re-enter employment；</li>
+<li>project can lose active labor；</li>
+<li>code can remain public and reusable。</li>
+</ul>
+<p>任何单一 “studio survived / failed” 指标都会丢失大半信息。</p>
+<h2 id="5-oq-002-005-006">5. 对 OQ-002 / 005 / 006 的方法修正</h2>
+<h3 id="oq-002-second-attempt">OQ-002 Second Attempt</h3>
+<p>新增至少四种 continuation：</p>
+<ul>
+<li><code>SECOND_COMMERCIAL_RELEASE</code></li>
+<li><code>SECOND_AUTHORIAL_ATTEMPT_NOT_SHIPPED</code></li>
+<li><code>SIDE_AUTHORSHIP_WHILE_EMPLOYED</code></li>
+<li><code>MEDIA_SWITCH_THEN_REENTRY</code></li>
+</ul>
+<p>因此“第二作率”只是 continuation 的一个子类。</p>
+<h3 id="oq-005-authorial-right-vs-salary">OQ-005 Authorial Right vs Salary</h3>
+<p>以后比较“为什么不辞职”至少同时记录：</p>
+<ul>
+<li>current employment retained?</li>
+<li>household fixed claims?</li>
+<li>debt?</li>
+<li>previous failed full-time attempt?</li>
+<li>external labor-market value?</li>
+<li>explicit threshold for quitting again?</li>
+<li>authorial work possible part-time?</li>
+</ul>
+<p>GBGames 是目前最直接的“家庭预算 + 工资 + 再辞职门槛”一手样本。</p>
+<h3 id="oq-006-failure-reversibility">OQ-006 Failure Reversibility</h3>
+<p>先不要追求一个假精确的 <code>REVERSIBILITY_SCORE</code>。</p>
+<p>先记录 outcome vector，并至少在失败后观察：
+- T+12m；
+- T+36m；
+- T+60m。</p>
+<p>最低变量：</p>
+<pre><code>employment_status
+industry_status
+authorial_activity
+company_status
+project_status
+debt_publicly_known
+household_constraint_publicly_known
+residual_asset
+second_attempt
+last_verified_date
+</code></pre>
+<p>如果 salary 没公开，就保持 UNKNOWN；不允许用地区平均薪资替个人补值。</p>
+<h2 id="6-denominator">6. 现在真正缺的不是更多传奇失败，而是 denominator</h2>
+<p>本轮故意加入较低知名度的个人/小团队，但仍然是<strong>公开写 postmortem 的人</strong>，存在强 selection effect：</p>
+<ul>
+<li>愿意写长篇失败复盘的人不是随机失败者；</li>
+<li>能在多年后写“我后来恢复了”的人天然更可见；</li>
+<li>完全退出互联网、改行后不再谈游戏的人最难观察；</li>
+<li>公司 liquidation 比个人就业状态更容易核；</li>
+<li>人的工资、家庭资产与债务最终结果通常不公开。</li>
+</ul>
+<p>因此本轮不能回答：
+- “多少失败 indie 能找到工作？”
+- “美国/欧洲失败更可逆吗？”
+- “失败后平均多久恢复工资？”
+- “家庭是否提高/降低成功率？”</p>
+<p>它只把<strong>要测什么</strong>从作品层推进到了人生层。</p>
+<h2 id="7-cohort">7. 下一轮 cohort：第一步已完成，下一步换到职业可观察入口</h2>
+<p><a href="/heroes-portal/book/research-notes/beginner-jam-public-authorial-persistence-cohort-045.html">045 Beginner Friendly Game Jam 2020 固定入口追踪</a> 已按 <a href="/heroes-portal/book/research-notes/media-selection-survivorship-and-denominator-protocol-028.html">028 媒体选择与分母协议</a> 完成第一轮 pilot：</p>
+<ul>
+<li>固定 2020-06 的完整 18 个主提交账号；</li>
+<li>不按后续成功、采访或作品数量换样本；</li>
+<li>明确保留 <code>POST_T0_UNRESOLVED</code>；</li>
+<li>只报告同一 frame 内的 public-authorial-continuation lower bound；</li>
+<li>不把空主页或未见后作编码成 career exit。</li>
+</ul>
+<p>因此“能不能把固定入口一路追到多年后”已经证明可执行。045 同时暴露出下一层限制：<strong>itch 作品平台适合观察作者性，不适合观察就业恢复、工资、债务和 household recovery。</strong></p>
+<p>下一组不再优先复制第三个 itch jam；应寻找具有职业可观察性的 2016–2021 fixed-entry frame，例如公开 accelerator/incubator cohort、学生 showcase 全体项目、完整 grant recipient roster、可追踪 credits 的工作室关闭/layoff cohort。</p>
+<p>目标仍是：
+1. 预先固定 entry frame；
+2. 预注册 T0 与 T+24/36/60m；
+3. 不因能搜到后续采访才纳入；
+4. 分开记录 <code>AUTHORIAL_CONTINUATION</code> 与 <code>EMPLOYMENT_OUTCOME</code>；
+5. 将看不见的人保持 <code>UNKNOWN</code>；
+6. 只在同一抽样框内报告比例。</p>
+<p><strong>045 推进了 OQ-002 的作者性 denominator；它没有关闭 OQ-006 的就业/工资可逆性。</strong></p>
+<h2 id="8-reader-layer">8. Reader-layer 可用结论</h2>
+<p>当前最值得写进最终书的不是“辞职还是不辞职”的口号，而是：</p>
+<blockquote>
+<p><strong>独立创作的风险不是“游戏失败概率”一个数字，而是失败后你还剩多少可行选项。</strong></p>
+</blockquote>
+<p>产品期望值相同的两个人，如果一个：
+- 没有债务；
+- 有可迁移职业技能；
+- 能兼职验证；
+- 失败后仍能回到高需求岗位；</p>
+<p>另一个：
+- 已经举债；
+- 技能高度绑定正在衰退的技术栈；
+- 家庭固定支出高；
+- 项目还附带多年交付义务；</p>
+<p>两人的“同一次独立开发”根本不是同一笔赌注。</p>
+<p>因此人生性价比模型下一步不应只问：</p>
+<p><code>P(game succeeds) × payoff</code></p>
+<p>而应至少同时看：</p>
+<pre><code>expected upside
+- irreversible downside
++ reversibility capital
++ residual authorial options
+</code></pre>
+<p>这仍然不是可直接算成单一分数的公式，而是读者必须逐项核算的决策框架。</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / book/research-notes/creator-exit-reentry-economics-044.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

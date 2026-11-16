@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>002 — “老登游戏”到底是什么？日本的组织记忆、技术前沿与《空之轨迹 the 1st》 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl class="on"" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0" class="t2">0. 从任职年限观察组织记忆</a><a href="#falcom" class="t3">Falcom是这一特征的极端案例</a><a href="#1-the-1st" class="t2">1. 《空之轨迹 the 1st》：技术底座与表现方式</a><a href="#2-legacy_grammar_lock_in" class="t2">2. 但同一套组织记忆也会变成 LEGACY_GRAMMAR_LOCK_IN</a><a href="#organizational_memory" class="t3">ORGANIZATIONAL_MEMORY</a><a href="#legacy_grammar_lock_in" class="t3">LEGACY_GRAMMAR_LOCK_IN</a><a href="#3" class="t2">3. 这比“日本设计迭代慢”更准确</a><a href="#4-capcom" class="t2">4. Capcom证明“日本=技术落后”已经不能作为整体判断</a><a href="#falcom_1" class="t3">Falcom</a><a href="#capcom" class="t3">Capcom</a><a href="#5-falcom" class="t2">5. Falcom甚至给出一个很清晰的“跨代传承生产线”</a><a href="#2024" class="t3">2024年入职游戏设计师</a><a href="#2025cg" class="t3">2025年入职CG设计师</a><a href="#2025programmer" class="t3">2025年入职programmer</a><a href="#6" class="t2">6. 这就是日本“老派游戏”难以仿制的一部分原因</a><a href="#memory-intensive-game" class="t3">MEMORY-INTENSIVE GAME</a><a href="#7" class="t2">7. 对中国研究最重要的反压力：快迭代可能同时意味着“没有形成传统”</a><a href="#h-jp-cn-01" class="t3">H-JP-CN-01</a><a href="#8" class="t2">8. 日本“制度化怪人”理论因此要增加一个维度：传统本身也是基础设施</a><a href="#institutionalized_lineage" class="t3">INSTITUTIONALIZED_LINEAGE</a><a href="#9" class="t2">9. 但这条路线的代价也很清楚</a><a href="#intergenerational_recombination" class="t3">INTERGENERATIONAL_RECOMBINATION</a><a href="#95-legacy-lock-in" class="t2">9.5 任天堂说明：高组织记忆并不必然导致legacy lock-in</a><a href="#10" class="t2">10. 以后日本线要正式用四维矩阵，而不是“先进/落后”</a><a href="#11" class="t2">11. 对当前中国比较最有价值的问题</a><a href="#12-verdict" class="t2">12. Verdict</a></aside><article class="doc"><div class="col"><h1 id="002-the-1st">002 — “老登游戏”到底是什么？日本的组织记忆、技术前沿与《空之轨迹 the 1st》</h1>
+<ul>
+<li>Program: Japan / East Asian internal counterfactual</li>
+<li>Status: <strong>CURRENT-STATE CASE / FALCOM DEEP DIVE / INDUSTRY-SURVEY CONTEXT / NOT A CLAIM THAT JAPAN IS GENERALLY OLD OR TECHNICALLY BACKWARD</strong></li>
+<li>As-of: 2026-10-08</li>
+<li>Related: <a href="/heroes-portal/country-studies/japan/001-japan-east-asian-counterexample-weird-kinship-and-game-creator-ecology.html">001 日本作为东亚内部反例</a> / <a href="/heroes-portal/country-studies/china/014-liang-wenfeng-deepseek-positive-deviant-innovation-organization.html">中国014 DeepSeek组织反例</a> / <a href="/heroes-portal/country-studies/china/012-full-cycle-authoring-team-supply-proxy-china-vs-comparators.html">中国012完整团队密度</a></li>
+<li>Core question: <strong>日本为什么既能长期保存“老派游戏”的作者性和手艺，又会周期性表现出技术/流程迟滞？这种连续性对中国有什么真正可比价值？</strong></li>
+<li>Boundary: “老登游戏”只作为讨论入口，正式分析拆成组织记忆、任职年限、职业流动、技术基础设施和作者权。不能把年龄本身当创新能力代理，也不能把Falcom外推成整个日本。</li>
+</ul>
+<h2 id="0">0. 从任职年限观察组织记忆</h2>
+<p class="dc">CESA《游戏开发者的就业与职业形成2023》是自愿网络调查，不是行业人口普查，但提供了一个比印象可靠的日本商业游戏开发者截面：
+- 有效回答 <strong>658</strong>；
+- 平均年龄 <strong>36.1岁</strong>；
+- 当前职场平均任职 <strong>7.52年</strong>；
+- <strong>10.3%</strong> 在当前职场已18年以上；
+- 游戏业内转职 <strong>0次占54.1%</strong>、1次22.3%、2次10.0%。</p>
+<p>这组数据不支持“日本游戏开发者普遍都是老人”。它呈现的是相当强的公司/团队连续性：职业流动并没有高到把组织记忆持续冲散。自愿样本的范围仍须保留。</p>
+<p>P0/P1 industry survey:
+CESA, 《ゲーム開発者の就業とキャリア形成2023》, 2024-03:
+https://www.cesa.or.jp/uploads/2024/info20240315.pdf</p>
+<h3 id="falcom">Falcom是这一特征的极端案例</h3>
+<p>Falcom 2026年6月官方招聘页：
+- 员工 <strong>74人</strong>
+- 平均年龄 <strong>39岁</strong>
+- 平均勤续 <strong>18年</strong></p>
+<p>Source:
+https://www.falcom.co.jp/recruit/culture/</p>
+<p>《轨迹》背后是一个非常小、成员长期共事的组织。本篇关注的，是这种连续性怎样承载跨代传递的隐性知识；平均年龄本身解释不了制作过程。</p>
+<h2 id="1-the-1st">1. 《空之轨迹 the 1st》：技术底座与表现方式</h2>
+<p>Falcom社长近藤季洋2025接受AUTOMATON采访时明确说：
+- 《空之轨迹 the 1st》为了Switch也能运行，技术目标并不按最高规格设计；
+- 使用自研 <strong>FDK / Falcom Developer Kit</strong>；
+- FDK基于《黎之轨迹》时期自建的图形/声音技术；
+- 本作内部没有“大版本引擎升级”，主要只是做了少量shader调整；
+- 玩家感受到的画面/动作大幅提升，更多来自<strong>表现方式改变</strong>。</p>
+<p>同一采访还谈到团队怎样改变表现：
+- 团队把20年来对原作的理解带进重制；
+- 新加入的年轻开发者与资深员工结合后，镜头和动画反而比过去更细；
+- 近藤这次对模型与动作下的详细指令比主线作品更少。</p>
+<p>Source:
+https://automaton-media.com/en/game-development/nihon-falcoms-in-house-game-engine-is-called-fdk-we-ask-ceo-toshihiro-kondo-about-the-technology-behind-trails-in-the-sky-1st-chapter/</p>
+<p>技术代差与制作知识需要分别考察。本篇据这篇访谈归纳的《空轨 the 1st》制作优势包括：
+- 已有RPG production grammar；
+- 20年角色/世界理解；
+- 长期协作形成的审美判断；
+- 跨代员工能够在同一产品语言下快速调整；
+- 足够小的组织让不同职种可直接互相纠错。</p>
+<p>本篇将这些长期积累称为<strong>组织记忆资本</strong>。</p>
+<h2 id="2-legacy_grammar_lock_in">2. 但同一套组织记忆也会变成 LEGACY_GRAMMAR_LOCK_IN</h2>
+<p>同一篇2025近藤采访里，Falcom自己承认了旧组织的副作用：
+- 《轨迹》连续制作20多年；
+- 团队疲惫；
+- 越来越习惯“为已经懂《轨迹》的人制作”；
+- 长期系列让团队默认有些设定“不解释玩家也会懂”；
+- 因此重制《空轨》的一项明确目标，就是让团队“回到初心”，重新面对第一次接触系列的玩家。</p>
+<p>近藤还说：
+- 20年里仅《轨迹》就做了14作；
+- 公司长期保持高频率出货；
+- 制作方式是少人数、高密度、很多内容直到接近master仍在反复调整；
+- 公司主动限制单作投入时间，不认为无限延期会自动让游戏变得数倍更好；
+- 即便因此经常被批评图形规格不高，他们仍把“限定时间里最大化游戏内容”作为生产哲学。</p>
+<p>Source:
+https://automaton-media.com/articles/interviewsjp/kiseki-20250901-355966/</p>
+<p>近藤的描述让同一套长期经验呈现出两种状态：</p>
+<h3 id="organizational_memory">ORGANIZATIONAL_MEMORY</h3>
+<p>知道哪些细节真正影响玩家体验，能在低成本下快速做对。</p>
+<h3 id="legacy_grammar_lock_in">LEGACY_GRAMMAR_LOCK_IN</h3>
+<p>因为长期面对同一系列/用户，默认过去的语言仍然成立，越来越难看到新玩家的问题。</p>
+<h2 id="3">3. 这比“日本设计迭代慢”更准确</h2>
+<p>日本在2009–2010左右确实出现过强烈的“技术/HD开发落后”自我批评：
+- 稻船敬二、和田洋一等公开谈过日本游戏相对欧美的落后；
+- CEDEC 2010讨论过日本开发环境、集成工具与大规模制作适应较慢；
+- 当时日本开发者内部也有人指出，差距更可能来自<strong>市场规模、雇佣形态、职务结构、预算与知识积累方向</strong>，而不是“日本程序员天生技术差”。</p>
+<p>Contemporaneous industry discussion:
+https://www.4gamer.net/games/000/G000000/20100320001/
+https://www.4gamer.net/games/105/G010549/20100831056/</p>
+<p>因此历史上确实有：</p>
+<blockquote>
+<p>console/arcade-era accumulated know-how
+→ HD/global AAA production regime shift
+→ old capability partly devalued</p>
+</blockquote>
+<p>但不能把2009年的诊断直接冻结到2026。</p>
+<h2 id="4-capcom">4. Capcom证明“日本=技术落后”已经不能作为整体判断</h2>
+<p>Capcom 2025官方资料：
+- 所有当前标题都使用 <strong>RE ENGINE</strong>；
+- 基础技术研发部门约 <strong>200名工程师</strong>；
+- 其中约 <strong>160名</strong>负责引擎开发；
+- 引擎组直接进入各产品团队收集需求并做定制；
+- 资产和工具跨项目共享；
+- 公司继续开发下一代 <strong>REX</strong>；
+- 官方明确把统一引擎视为提升技术共享和人员流动的基础。</p>
+<p>Source:
+https://www.capcom.co.jp/ir/english/data/oar/2025/re-engine.html</p>
+<p>因此日本当前至少存在两种完全不同的组织：</p>
+<h3 id="falcom_1">Falcom</h3>
+<ul>
+<li>小规模</li>
+<li>极高组织记忆</li>
+<li>中低技术规格取舍</li>
+<li>快速高密度内容生产</li>
+<li>强系列延续</li>
+</ul>
+<h3 id="capcom">Capcom</h3>
+<ul>
+<li>大规模</li>
+<li>高组织记忆</li>
+<li>高基础技术投资</li>
+<li>自研工具链</li>
+<li>全球AAA/多平台</li>
+</ul>
+<p>这两者共同说明：</p>
+<blockquote>
+<p><strong>VETERAN CONTINUITY 与 TECHNICAL FRONTIER 是两个独立维度。</strong></p>
+</blockquote>
+<p>“老员工多”不能直接推出“技术落后”。</p>
+<h2 id="5-falcom">5. Falcom甚至给出一个很清晰的“跨代传承生产线”</h2>
+<p>2026官方招聘材料里可以看到年轻员工如何被吸收：</p>
+<h3 id="2024">2024年入职游戏设计师</h3>
+<ul>
+<li>从短对话事件开始；</li>
+<li>先辈逐镜头反馈camera work；</li>
+<li>熟练后逐步承担更长、更复杂事件；</li>
+<li>员工明确说会反复看先辈作品学习。</li>
+</ul>
+<p>Source:
+https://www.falcom.co.jp/recruit/interview/03.html</p>
+<h3 id="2025cg">2025年入职CG设计师</h3>
+<ul>
+<li>不只做model；</li>
+<li>同时接monster、animation、effect、script；</li>
+<li>用内部Wiki学习人物、地图和生产方式；</li>
+<li>直接向先辈求助；</li>
+<li>强调作品很快会进入游戏、被真实玩家看到。</li>
+</ul>
+<p>Source:
+https://www.falcom.co.jp/recruit/interview/05.html</p>
+<h3 id="2025programmer">2025年入职programmer</h3>
+<ul>
+<li>新项目里从debug tooling开始；</li>
+<li>会参考旧产品中的类似功能，但重新理解其设计意图后从头实现。</li>
+</ul>
+<p>Source:
+https://www.falcom.co.jp/recruit/interview/02.html</p>
+<p>这些招聘自述呈现出一条接入路径：新人先承担可完成的任务，借助先辈反馈与内部档案学习，再逐步扩大负责范围，并从作品出货中获得反馈。这样的师徒训练和工具支持，可以帮助新人接入一个存在几十年的产品语言；材料本身仍是公司的招聘叙事。</p>
+<h2 id="6">6. 这就是日本“老派游戏”难以仿制的一部分原因</h2>
+<p>如果只看成品，《轨迹》类型产品可能显得：
+- 引擎不前沿；
+- 系统没有技术奇观；
+- 画面规格不高；
+- 很多设计语法传统；
+- 新作甚至在继承20年前的世界。</p>
+<p>于是外部年轻团队容易产生错觉：</p>
+<blockquote>
+<p>“这些东西我技术上都能做，所以应该很好复制。”</p>
+</blockquote>
+<p>但真正要复制的是：
+- 长期系列 pacing；
+- NPC与世界状态更新的生产惯例；
+- 叙事/事件演出手艺；
+- 数十作累积的scope intuition；
+- 什么地方该省、什么地方不能省的 tacit judgment；
+- 熟悉这种RPG的跨职种团队；
+- 一年左右把产品收束到ship的纪律；
+- 已经存在的稳定受众反馈。</p>
+<p>这些资产多数不会显示在“技术feature list”上。</p>
+<p>所以可以提出：</p>
+<h3 id="memory-intensive-game">MEMORY-INTENSIVE GAME</h3>
+<blockquote>
+<p>技术门槛不一定高，但成功高度依赖长期生产记忆、品类判断、内容pipeline与团队默契的游戏。</p>
+</blockquote>
+<p>这种游戏并不比技术密集型产品“容易”。</p>
+<h2 id="7">7. 对中国研究最重要的反压力：快迭代可能同时意味着“没有形成传统”</h2>
+<p>目前我们<strong>没有同口径中国开发者任职/转职普查</strong>，所以不能直接写：</p>
+<blockquote>
+<p>中国团队更年轻、流动更快，因此做不出Falcom。</p>
+</blockquote>
+<p>中国2026游戏劳动田野样本确实以年轻从业者为主，但不是代表性人口统计。</p>
+<p>因此只保留一个待证假说：</p>
+<h3 id="h-jp-cn-01">H-JP-CN-01</h3>
+<p>如果中国商业游戏工业经历：
+- 快速扩张；
+- 高频换项目；
+- 公司/工作室重组；
+- 更强的市场版本迁移；
+- 创作者决策权不稳定；</p>
+<p>则它可能同时获得：
+- 更快的新技术/新商业模式吸收；
+但损失：
+- 长周期组织记忆；
+- 品类内部师徒传承；
+- 核心团队连续；
+- “我们已经一起做过十年这种东西”的 tacit capital。</p>
+<p>这可以解释一个看似矛盾的现象：</p>
+<blockquote>
+<p><strong>中国可能更快学到新工具，却更难复制某些“技术不高但只有老团队知道怎么做”的产品。</strong></p>
+</blockquote>
+<p>这必须用中国公司任职年限、团队解散率、项目连续性和作者团队生存数据验证。</p>
+<h2 id="8">8. 日本“制度化怪人”理论因此要增加一个维度：传统本身也是基础设施</h2>
+<p><a href="/heroes-portal/country-studies/japan/001-japan-east-asian-counterexample-weird-kinship-and-game-creator-ecology.html">001</a>提出 BOUNDED_ECCENTRICITY：
+日本社会总体从众，却通过漫画家、director、同人circle、匠人等合法角色容纳强作者性。</p>
+<p>Falcom案例增加了第二层：</p>
+<h3 id="institutionalized_lineage">INSTITUTIONALIZED_LINEAGE</h3>
+<blockquote>
+<p>不只是允许怪人出现，还让一个创作语法、团队和品牌活得足够久，使下一代可以直接继承几十年已经形成的 tacit knowledge。</p>
+</blockquote>
+<p>这和美国式高职业流动、独立创业并不是同一条作者生产路线。</p>
+<h2 id="9">9. 但这条路线的代价也很清楚</h2>
+<p>长期组织记忆会带来：
+- 高语境；
+- 老用户偏见；
+- legacy technical debt；
+- 对旧产品语法过度忠诚；
+- 新人可能只能优化传统而难以重定义问题；
+- senior authority可能限制新路线；
+- 对外部前沿技术吸收速度下降。</p>
+<p>本篇要追问的是：组织怎样保留长期记忆，同时避免把新人和新用户锁在旧语法里？这里将问题记为 <strong>MEMORY WITHOUT LOCK-IN</strong>。</p>
+<p>Falcom《空轨 the 1st》本身就是一个很好的阶段性正例：
+- 老团队提供20年记忆；
+- 年轻人提供新的camera / animation sensibility；
+- 领导减少微观指令；
+- 用重制这种低世界观风险项目强迫团队重新面对新用户；
+- 技术底座基本不变，却重新组合出明显更现代的表现。</p>
+<h3 id="intergenerational_recombination">INTERGENERATIONAL_RECOMBINATION</h3>
+<p>本篇将这种组合称为跨代重组：资深员工提供长期品类资本，年轻人获得真实修改权，作品因此有机会超出对上一代答案的复刻。</p>
+<h2 id="95-legacy-lock-in">9.5 任天堂说明：高组织记忆并不必然导致legacy lock-in</h2>
+<p><a href="/heroes-portal/country-studies/japan/003-nintendo-pocketpair-two-alien-routes-originality-vs-recombination.html">003</a>提供一个重要反例。任天堂2026平均勤续14.6年，同样是长期雇佣型组织；但官方长期记录了年轻开发者获得新IP责任、程序员prototype竞争和高层主动委托authority。因而Falcom式 MEMORY 与 Nintendo式 MEMORY+RENEWAL 必须分开编码。</p>
+<p>换言之，真正目标不是降低资深员工比例，而是测：<strong>长期记忆是否同时伴随新人problem ownership。</strong></p>
+<h2 id="10">10. 以后日本线要正式用四维矩阵，而不是“先进/落后”</h2>
+<p>每个公司/项目编码：</p>
+<ol>
+<li>
+<p><strong>TECHNICAL_FRONTIER</strong>
+   - engine / tooling / rendering / networking / production scale</p>
+</li>
+<li>
+<p><strong>ORGANIZATIONAL_MEMORY</strong>
+   - tenure / core-team continuity / series experience / reusable pipeline</p>
+</li>
+<li>
+<p><strong>AUTHORIAL_RENEWAL</strong>
+   - 新人是否能改问题、带项目，而非只执行旧语法</p>
+</li>
+<li>
+<p><strong>LEGACY_LOCK_IN</strong>
+   - 是否因旧用户/旧工具/旧组织而难以进入新市场或新设计</p>
+</li>
+</ol>
+<p>第一版：
+- Falcom：TECH中 / MEMORY极高 / RENEWAL部分可见 / LOCK-IN高且正在主动修正
+- Capcom：TECH高 / MEMORY高 / RENEWAL待细查 / LOCK-IN较低但并非零
+- 日本大型保守公司：不能先填，逐案核实</p>
+<h2 id="11">11. 对当前中国比较最有价值的问题</h2>
+<p>下一轮应直接找中国对应物：</p>
+<ul>
+<li>有没有平均任职10–20年的游戏核心团队？</li>
+<li>中国有多少“一个品类连续做十年以上”的作者小组，而不仅是同一家公司/IP？</li>
+<li>大厂员工换项目但不换公司时，<strong>team memory</strong> 是否仍然被切断？</li>
+<li>新人是通过师徒/内部作品档案继承品类手艺，还是主要通过外部benchmark学习？</li>
+<li>中国哪类游戏已经形成了自己的“老登传统”？</li>
+<li>MMO？</li>
+<li>数值卡牌？</li>
+<li>二游？</li>
+<li>SLG？</li>
+<li>为什么这些领域中国能长期积累，而premium单机团队反而稀薄？</li>
+</ul>
+<p>这个问题能把“渠道为王”研究推进一步：
+<strong>商业制度不只是选择产品，也选择哪些传统能够活到下一代。</strong></p>
+<h2 id="12-verdict">12. Verdict</h2>
+<p>日本部分游戏公司长期保留了稳定的人员、品类语言与生产记忆，能够持续生产技术规格并不激进、却高度依赖隐性手艺和作者传统的作品。同一结构也会制造高语境与技术/设计锁定，不能用“日本技术差，所以只能做老东西”概括。</p>
+<p>《空之轨迹 the 1st》展示了本篇推崇的一种更新方式：让年轻人获得修改表达的实际空间，与老团队积累的记忆共同工作。保留资深员工与改变制作方式可以同时发生。这个局部案例尚不能替整个日本行业回答跨代更新的问题。</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / country-studies/japan/002-veteran-continuity-technical-frontier-falcom-2025-2026.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

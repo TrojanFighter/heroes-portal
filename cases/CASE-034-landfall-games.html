@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CASE-034 — Landfall Games：把“小工作室”变成持续试错机器，而不是缩小版大厂 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl class="on"" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#1-why-this-case" class="t2">1. Why this case</a><a href="#myth" class="t2">Myth</a><a href="#myth-a-landfall" class="t3">Myth A — Landfall 的方法就是“几周做完一个游戏”</a><a href="#myth-b" class="t3">Myth B — 他们只做成功项目，所以命中率特别高</a><a href="#myth-c-content-warning" class="t3">Myth C — 五人 Content Warning 证明小团队不需要外围</a><a href="#2-contextsituationaction-snapshot" class="t2">2. Context–Situation–Action Snapshot</a><a href="#era-production-regime" class="t3">Era / Production Regime</a><a href="#actor-situation" class="t3">Actor Situation</a><a href="#action-maneuver" class="t3">Action / Maneuver</a><a href="#anachronism-check" class="t3">Anachronism Check</a><a href="#origin-capability" class="t2">Origin / Capability</a><a href="#runway-scaling" class="t2">Runway / Scaling</a><a href="#production-contributor-boundary" class="t2">Production / Contributor Boundary</a><a href="#failure-long-project-pressure" class="t2">Failure / Long-project pressure</a><a href="#market-access" class="t2">Market Access</a><a href="#preliminary-verdict" class="t2">Preliminary Verdict</a><a href="#strongly-supported" class="t3">STRONGLY SUPPORTED</a><a href="#analytically-strong-still-testing" class="t3">ANALYTICALLY STRONG, STILL TESTING</a><a href="#not-yet-supported" class="t3">NOT YET SUPPORTED</a><a href="#transfer" class="t2">Transfer</a><a href="#non-transfer" class="t2">Non-transfer</a><a href="#next-verification" class="t2">Next verification</a><a href="#creator-life-decision-audit" class="t2">Creator Life / Decision Audit</a></aside><article class="doc"><div class="col"><h1 id="case-034-landfall-games">CASE-034 — Landfall Games：把“小工作室”变成持续试错机器，而不是缩小版大厂</h1>
+<ul>
+<li>Case ID: CASE-034</li>
+<li>Subject: Landfall Games / Wilhelm Nylund, Philip Westre, Petter Henriksson 与长期协作者</li>
+<li>Related Claims: C002, C003, C004, C007, C010, C011</li>
+<li>Related games: Air Brawl; Clustertruck; Totally Accurate Battle Simulator; ROUNDS; Content Warning; HASTE; PEAK; Landfall Archives</li>
+<li>Period covered: c. 2013–2026</li>
+<li>Research status: RESEARCHING</li>
+<li>Corpus role: <strong>LONGITUDINAL MICRO-STUDIO / PRODUCT-LED SCALING / FAILURE-CORPUS</strong></li>
+<li>Evidence Ledger: <a href="/heroes-portal/evidence/CASE-034-landfall-games-source-ledger.html"><code>../evidence/CASE-034-landfall-games-source-ledger.md</code></a></li>
+</ul>
+<h2 id="1-why-this-case">1. Why this case</h2>
+<p class="dc">Landfall 的价值不在于“瑞典小团队总能几周做爆款”，而在于它提供了少见的工作室级纵向样本：同一个组织既做过持续多年的 TABS / HASTE，也做过数月或一个月集中 jam 形成的 ROUNDS / Content Warning / PEAK；同时又把 23 个没有商业化的项目公开成 Landfall Archives。</p>
+<p>这让我们能同时观察产品验证后的扩张、低成本原型筛选、失败分母、长期项目技术债，以及“小核心 + 弹性外围”的真实边界。</p>
+<h2 id="myth">Myth</h2>
+<h3 id="myth-a-landfall">Myth A — Landfall 的方法就是“几周做完一个游戏”</h3>
+<p>不成立。Content Warning 的主体开发高度压缩，PEAK 来自一个月 game jam；但 TABS 持续多年，官方后来明确说七年以上代码库已经很难维护，HASTE 也从 2021 延续到 2025。</p>
+<h3 id="myth-b">Myth B — 他们只做成功项目，所以命中率特别高</h3>
+<p>Landfall Archives 至少让 23 个未发行/未完成项目变得可见。真正值得研究的是<strong>单次失败成本是否足够低</strong>，而不是把幸存作品当作全部样本。</p>
+<h3 id="myth-c-content-warning">Myth C — 五人 Content Warning 证明小团队不需要外围</h3>
+<p>不成立。官方 credits 同时列出 Future Friends / Popagenda 的 marketing/PR、Lockit QA 的本地化和社区测试/素材贡献。五人描述的是开发核心，不是完整 production perimeter。</p>
+<h2 id="2-contextsituationaction-snapshot">2. Context–Situation–Action Snapshot</h2>
+<h3 id="era-production-regime">Era / Production Regime</h3>
+<p>Landfall 成长于 Steam Early Access、Unity 等通用工具、YouTube/Twitch/短视频传播、全球 PC 数字发行和远程专业协作已经成熟的时代。核心约束不是传统零售渠道，而是原型筛选、fixed burn、观看可读性、长期维护成本，以及成功后是否扩大永久 payroll。</p>
+<h3 id="actor-situation">Actor Situation</h3>
+<p>早期团队由高中朋友形成，没有成熟工作室和大规模融资。Air Brawl 的 EA 收入使成员逐步转向全职；之后 Clustertruck、TABS 等项目继续累积现金流、技术、品牌和社区。到 Content Warning / HASTE / PEAK 时，Landfall 已不再是“从零创业者”，而是拥有多年 retained capability 与 market access 的小型工作室。</p>
+<h3 id="action-maneuver">Action / Maneuver</h3>
+<table>
+<thead>
+<tr>
+<th>Window</th>
+<th>Binding constraint</th>
+<th>Action</th>
+<th>Result / signal</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Air Brawl</td>
+<td>缺现金流与职业资格</td>
+<td>Wilhelm 放弃大学、住家继续做；Steam EA 后成员逐步全职</td>
+<td>产品收入先于早期组织扩张</td>
+<td>E001</td>
+</tr>
+<tr>
+<td>Clustertruck</td>
+<td>需要第二次商业验证</td>
+<td>延续极小核心与专业外围</td>
+<td>商业成功支持工作室进一步扩展</td>
+<td>E001</td>
+</tr>
+<tr>
+<td>TABS</td>
+<td>长项目技术债与支持成本</td>
+<td>EA→正式版→UGC；最终停止继续大规模扩展</td>
+<td>官方承认旧代码显著拖慢维护</td>
+<td>E002</td>
+</tr>
+<tr>
+<td>ROUNDS</td>
+<td>side project 不值得搭大组织</td>
+<td>约五个月开发，音乐/美术/声音外围协作</td>
+<td>小承诺项目也能正式商业化</td>
+<td>E003</td>
+</tr>
+<tr>
+<td>Content Warning</td>
+<td>需要低承诺快速出货</td>
+<td>五人核心、首尔月度 jam、免费首日→付费</td>
+<td>6.6m claims、204k peak CCU；同时存在 PR/本地化外围</td>
+<td>E004</td>
+</tr>
+<tr>
+<td>HASTE</td>
+<td>下一主项目方向不确定</td>
+<td>多原型；公开片段获得强信号；砍掉原 multiplayer BR 结构</td>
+<td>市场信号进入选择，但仍经历多年制作</td>
+<td>E005</td>
+</tr>
+<tr>
+<td>PEAK</td>
+<td>跨工作室低承诺实验</td>
+<td>Landfall + Aggro Crab 韩国一个月 jam</td>
+<td>jam 被组织化为正式商业项目来源</td>
+<td>E006</td>
+</tr>
+<tr>
+<td>Archives</td>
+<td>成功叙事隐藏失败分母</td>
+<td>公开 23 个未发行/未完成项目</td>
+<td>原型失败成为可观察知识资产</td>
+<td>E007</td>
+</tr>
+</tbody>
+</table>
+<h3 id="anachronism-check">Anachronism Check</h3>
+<p>不能把 2024–2025 年的 Landfall 方法倒写成 Air Brawl 时就拥有的成熟能力：品牌、Steam 历史、社区、发行外围、retained earnings 与合作网络均是后续积累。也不能把 Content Warning / PEAK 的短周期窗口外推为所有类型游戏都适用的开发周期。</p>
+<h2 id="origin-capability">Origin / Capability</h2>
+<p>官方历史写明 Wilhelm Nylund 与 Philip Westre 高中时期开始 Air Brawl；Wilhelm 没有去大学，而是住家完成项目。Air Brawl 进入 Steam EA 后，Philip、随后 Petter 才得以进一步投入。</p>
+<p>可观察的长期能力资本包括物理与 emergent comedy、观看可读性、Steam/社区运营、快速原型筛选，以及调用外部营销、QA、本地化、声音与合作工作室的能力。</p>
+<h2 id="runway-scaling">Runway / Scaling</h2>
+<p>现有公开材料不足以重建逐作预算或利润，因此不写审计利润。可支持的顺序是：</p>
+<pre><code class="language-text">可玩物 / EA
+→ 玩家付款与验证
+→ 核心成员进一步投入
+→ 商业成功扩大选择权
+→ 多项目与大量原型
+→ 仍刻意维持相对小的永久组织
+</code></pre>
+<p>这支持 <code>product-led scaling</code>，但不支持“永远不要扩团队”。</p>
+<h2 id="production-contributor-boundary">Production / Contributor Boundary</h2>
+<p>ROUNDS、Content Warning 和 PEAK 都说明 Landfall 更接近<strong>小核心 + 弹性专业外围 / 跨工作室协作</strong>，而不是全职员工人数等于全部劳动人数。后续需要继续做逐作 credits audit。</p>
+<h2 id="failure-long-project-pressure">Failure / Long-project pressure</h2>
+<p>Landfall Archives 提供失败分母；TABS 提供另一类反例：商业成功项目也会累积旧架构、支持义务与注意力占用。成功本身不能消除技术债，反而可能把维护成本锁得更久。</p>
+<h2 id="market-access">Market Access</h2>
+<p>可观察的市场接入包括 Steam EA、社交平台原型曝光、UGC/Workshop、Landfall Day / April Fools 传统、外部 PR、社区测试与跨工作室品牌联动。Content Warning 的免费首日是明确的 launch-distribution maneuver，不能写成“自然爆红、没有营销”。</p>
+<h2 id="preliminary-verdict">Preliminary Verdict</h2>
+<h3 id="strongly-supported">STRONGLY SUPPORTED</h3>
+<ul>
+<li>Air Brawl 的产品验证/现金流先于早期成员扩张；</li>
+<li>Landfall 同时有多年项目和短周期项目，不能用单一开发周期概括；</li>
+<li>TABS 产生显著长期技术债；</li>
+<li>HASTE 经历多原型和重大方向删除；</li>
+<li>Landfall Archives 暴露大量未商业化原型；</li>
+<li>“五人 Content Warning”不等于完整 production 只有五人。</li>
+</ul>
+<h3 id="analytically-strong-still-testing">ANALYTICALLY STRONG, STILL TESTING</h3>
+<ul>
+<li>Landfall 已形成 <code>physics/comedy/social legibility + prototype selection + flexible perimeter</code> 的 studio-level capability；</li>
+<li>更短承诺的项目可能部分是对多年项目成本的组织性修正；</li>
+<li>观看可读性可能同时降低产品教育与市场传播成本。</li>
+</ul>
+<h3 id="not-yet-supported">NOT YET SUPPORTED</h3>
+<ul>
+<li>各项目精确预算、利润率和 retained earnings；</li>
+<li>瑞典福利是决定性成功原因；</li>
+<li>“一个月 jam”可普遍复制；</li>
+<li>社交媒体走红对 HASTE 最终销量的精确因果份额。</li>
+</ul>
+<h2 id="transfer">Transfer</h2>
+<ul>
+<li>把<strong>失败原型成本</strong>纳入组织 KPI；</li>
+<li>产品验证后再增加永久能力，避免先搭组织再找项目；</li>
+<li>长项目设置技术债与退出边界；</li>
+<li>把观看可读性和传播面纳入产品设计；</li>
+<li>小核心可以通过 PR、QA、本地化、声音和合作工作室形成弹性外围。</li>
+</ul>
+<h2 id="non-transfer">Non-transfer</h2>
+<p>Landfall 多年积累的品牌、Steam 历史、社区、合作网络、核心成员关系、retained earnings 与 right-tail virality 都不能直接复制。</p>
+<h2 id="next-verification">Next verification</h2>
+<ol>
+<li>重建 Air Brawl / Clustertruck 的现金流与 runway；</li>
+<li>核全时期 headcount / contractor perimeter；</li>
+<li>对 23 个 Archives 项目做 prototype taxonomy 与能力复用分析；</li>
+<li>核 Evil Landfall 的投资/自发行结构；</li>
+<li>继续找失败复盘，避免只从成功后的官方叙事推因果。</li>
+</ol>
+<h2 id="creator-life-decision-audit">Creator Life / Decision Audit</h2>
+<ul>
+<li><strong>Audit status:</strong> SUBSTANTIAL / STUDIO-LEVEL</li>
+<li><strong>Life stage:</strong> early friends/hobby team → Air Brawl EA cashflow → gradually full-time studio → retained-earnings micro-studio with repeated prototypes and hits.</li>
+<li><strong>Household:</strong> founders’ personal relationship / children / housing / family transfers mostly <code>UNKNOWN</code>; early “lived at home” condition is relevant but incomplete.</li>
+<li><strong>Runway:</strong> Air Brawl EA → Clustertruck / TABS / later retained earnings → repeated low-cost prototypes / jams; external PR/QA/localization and cross-studio collaboration extend perimeter without large permanent payroll.</li>
+<li><strong>Household burn:</strong> <code>UNKNOWN</code>；company retained earnings now matter more than founder personal savings, but early personal risk remains underdocumented.</li>
+<li><strong>Exit / recovery:</strong> <strong>HIGH ORGANIZATIONAL OPTIONALITY by later phase</strong> — multiple shipped products, brand, community and retained earnings make project failure survivable; early-phase personal fallback less clear.</li>
+<li><strong>Capability vector:</strong> physics/emergent comedy、rapid prototyping、watchability、Steam/community operation、small-core coordination、external PR/QA/localization collaboration.</li>
+<li><strong>Problem ownership:</strong> <strong>HIGH</strong> — studio repeatedly selects, kills and reshapes internal ideas rather than following one fixed genre roadmap.</li>
+<li><strong>Validation architecture:</strong> Air Brawl EA → successive commercial titles → prototype archives / jams → social/public signal → selectively escalate ROUNDS / Content Warning / HASTE / PEAK。</li>
+<li><strong>Reality adjudication:</strong> <strong>STRONG</strong> — archives expose failed prototypes; HASTE changed direction after public signal; TABS technical debt later changed maintenance choices.</li>
+<li><strong>Capability capture risk:</strong> <strong>MEDIUM / STUDIO-LEVEL</strong> — physics/comedy/watchability is a durable strength but long projects can still accumulate tech debt; team counters this with shorter experiments and archives.</li>
+<li><strong>Market sufficiency / legibility:</strong> <strong>STRONG on successful social games</strong>, but virality/right-tail is non-repeatable; creator-facing visibility is part of product design.</li>
+<li><strong>Capability scaling:</strong> product-led scaling + flexible external perimeter; organization intentionally remains smaller than total production network.</li>
+<li><strong>Major unknowns:</strong> budgets/profits per title、early household runway、Evil Landfall investment structure、full contractor perimeter。</li>
+</ul><div class="crumbs"><a href="/heroes-portal/">书阁</a> / cases/CASE-034-landfall-games.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>040 — “只忠于下一阶段”：early id 的战略性不忠诚、美国个人主义与 Sierra 未收购 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl class="on"" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0-strategic-disloyalty" class="t2">0. 核心概念：STRATEGIC DISLOYALTY / 战略性不忠诚</a><a href="#1-sierra-1992" class="t2">1. Sierra 1992：这不是“独立主义者拒绝资本”，而是未来估值冲突</a><a href="#romerosierra" class="t3">为什么Romero会觉得Sierra“没看见未来”</a><a href="#2-shareware" class="t2">2. shareware为什么让“不忠于巨头”从性格变成可执行策略</a><a href="#3-early-id" class="t2">3. “美国个人主义”与early id：有关系，但必须拆成四种不同层次</a><a href="#a-weird-individual-autonomy" class="t3">A. WEIRD / individual autonomy：关系和身份不是永恒命令</a><a href="#b-rugged-individualism-frontier-legacy" class="t3">B. Rugged individualism / frontier legacy：自立、退出与“我自己做”</a><a href="#c-american-exceptionalism" class="t3">C. American exceptionalism / “神国定位”：更像国家级的反旧世界叙事，不是直接创业因果</a><a href="#d-liberal-marketinstitutional-individualismearly-id" class="t3">D. Liberal market/institutional individualism：最接近early id可观察的直接机制</a><a href="#4" class="t2">4. 你的“个人主义神国”直觉：对一半，而且应拆成两条传统</a><a href="#1" class="t3">传统1：个人必须有权离开旧秩序</a><a href="#2" class="t3">传统2：美国本身是一次要向世界证明的新秩序实验</a><a href="#5" class="t2">5. “战略性不忠诚”需要和判断质量组成二维矩阵</a><a href="#6-early-id" class="t2">6. early id真正罕见的是连续多次“未来权重 &amp;gt; 过去权重”</a><a href="#7" class="t2">7. 美国不是必要条件：日本直接反证“个人主义才能有强作者”</a><a href="#8" class="t2">8. 与中国“教育／行业版本／社会版本意识”连接</a><a href="#9" class="t2">9. 对《独立游戏英雄传说》值得新增的三个概念</a><a href="#91-optionality-protection" class="t3">9.1 OPTIONALITY PROTECTION / 未来选择权保护</a><a href="#92-authority-discounting" class="t3">9.2 AUTHORITY DISCOUNTING / 权威折价</a><a href="#93-reversible-loyalty" class="t3">9.3 REVERSIBLE LOYALTY / 可撤销忠诚</a><a href="#95-ion-storm" class="t2">9.5 后续压力测试：战略性不忠诚为什么到Ion Storm可能反噬</a><a href="#10" class="t2">10. 待验证 / 防止把美国浪漫化</a><a href="#sources-evidence-class" class="t2">Sources / evidence class</a></aside><article class="doc"><div class="col"><h1 id="040-early-id-sierra">040 — “只忠于下一阶段”：early id 的战略性不忠诚、美国个人主义与 Sierra 未收购</h1>
+<ul>
+<li><strong>Status:</strong> RESEARCH NOTE / CULTURE × INSTITUTION × DECISION / PRE-CLAIM / 2026-10-08</li>
+<li><strong>Primary historical anchor:</strong> early id 1990–1993, Softdisk → Apogee/shareware → Wolfenstein 3D → Sierra acquisition offer → DOOM.</li>
+<li><strong>Question:</strong> early id 为什么能够反复离开稳定雇主、砍掉成熟产品方向、拒绝/抬价既有巨头给出的安全退出机会，并把未来选择权置于关系和稳定之上？这种行为与美国个人主义、frontier/rugged individualism、American exceptionalism / civil religion 有多少关系？</li>
+<li><strong>Scope rule:</strong> 不把 Romero/Carmack 诊断为“美国民族性”；不把美国个人主义写成 DOOM 的充分原因。这里建立的是<strong>概率性文化许可 + 具体产业制度 + 个体判断</strong>三层模型。</li>
+<li><strong>Counterexample:</strong> 日本 <a href="/heroes-portal/country-studies/japan/001-japan-east-asian-counterexample-weird-kinship-and-game-creator-ecology.html">001</a> 已表明高度从众社会也能通过公司作者角色/同人生态制造大量“制度化怪人”；故“高总体个人主义”不是创新作者性的必要条件。</li>
+<li><strong>Related:</strong> <a href="/heroes-portal/book/research-notes/early-id-1980s-america-life-decisions-001.html">early-id 1980s US life decisions 001</a> · <a href="/heroes-portal/book/research-notes/masters-of-doom-longitudinal-master-study-001.html">Masters of Doom longitudinal 001</a> · <a href="/heroes-portal/book/research-notes/family-gates-game-creator-us-china-029.html">family gate 029</a> · <a href="/heroes-portal/book/research-notes/doom-intergenerational-reconciliation-032.html">DOOM family reconciliation 032</a>.</li>
+</ul>
+<h2 id="0-strategic-disloyalty">0. 核心概念：STRATEGIC DISLOYALTY / 战略性不忠诚</h2>
+<p class="dc">定义不是“不讲义气”，而是：</p>
+<blockquote>
+<p><strong>不把已经建立的雇佣、合作、技术、发行、品牌与成功经验视为对未来的永久产权；当它们与更高置信的下一阶段判断冲突时，允许退出、替换、重谈或砍掉。</strong></p>
+</blockquote>
+<p>更接近 <code>LOYALTY TO FUTURE OPTION VALUE &gt; LOYALTY TO HISTORICAL ARRANGEMENT</code>。</p>
+<p>early id 在1990–1993反复表现出五种不同对象的“可撤销性”：</p>
+<ol>
+<li><strong>Employer loyalty is revocable</strong>：Softdisk 提供工资、机器、训练和真实出版入口，但一旦 Apogee/shareware 显示更高的产品与收入自由，核心团队选择离开；这不抹掉 Softdisk 的训练与设备贡献，也不自动证明雇主邪恶。</li>
+<li><strong>Successful product grammar is revocable</strong>：Commander Keen 已成功，1992仍放弃继续做Keen 7，转向更激进的3D action。Romero 2022回顾称其在完成一周Keen 7 demo后提出不再继续，Adrian Carmack亦赞成，John Carmack评估后转向texture-mapped 3D。来源：Ars/GDC 2022：https://arstechnica.com/gaming/2022/03/achtung-john-romero-exposes-wolfenstein-3ds-history-in-gdc-post-mortem/</li>
+<li><strong>Technology sunk cost is revocable</strong>：Carmack多次重写/替换技术路线，而不是把已投入代码本身当成必须继续的理由；具体逐代引擎返工需继续按项目证据核，不能泛化为“所有重写都对”。</li>
+<li><strong>Publisher/institution prestige is revocable</strong>：Sierra是当时PC游戏业真正的成功巨头；id没有因为“Ken Williams比我们成功”就把对方判断当作市场真理。</li>
+<li><strong>Founder/friend compatibility is revocable</strong>：后来Tom Hall、Romero的离开证明这种生产逻辑会继续作用在人身关系上。这里既有组织适配收益，也有真实关系/治理成本；不能将所有离开者降格为“拖累”。</li>
+</ol>
+<p><strong>伦理边界：</strong> “一个人不再适合当前生产系统” ≠ “这个人价值较低”；“某关系可以结束” ≠ “过去贡献不存在”。研究的是 decision right / option value，而不是为残酷提供人格许可。</p>
+<h2 id="1-sierra-1992">1. Sierra 1992：这不是“独立主义者拒绝资本”，而是未来估值冲突</h2>
+<p><strong>事实核验：</strong> Romero在GDC 2022回顾，Ken Williams同期接受Ars确认基本经过：
+- id已经通过shareware约能获得 <strong>US$50,000/月</strong>；
+- Sierra看过Wolfenstein 3D demo后，提出以 <strong>US$2.5m Sierra股票</strong>收购整个id；
+- id讨论一天后并未原则拒绝出售，而是要求交易额外包含<strong>US$100,000立即现金 + letter of intent</strong>；
+- Williams拒绝并祝好运；2022他说自己后来认为应当成交。
+来源：https://arstechnica.com/gaming/2022/03/achtung-john-romero-exposes-wolfenstein-3ds-history-in-gdc-post-mortem/</p>
+<p>因此禁写：</p>
+<blockquote>
+<p>“id信奉独立，所以任何巨头来都不卖。”</p>
+</blockquote>
+<p>可以写：</p>
+<blockquote>
+<p><strong>他们愿意出售，但不愿按照一个他们认为没有真正理解新技术/新市场价值的旧巨头所给出的条件出售未来。</strong></p>
+</blockquote>
+<p>这是一种 <strong>OPTIONALITY PRICING</strong>：
+[
+    ext{Accept acquisition if certainty value} ge   ext{future upside + decision-right value surrendered}
+]</p>
+<p>具体数字不能拿今天市值倒算“合理报价”；真正可观察的是团队认为股票报价不足以覆盖对方未承认/未理解的未来，以及要求一笔现实现金commitment作为信号。</p>
+<h3 id="romerosierra">为什么Romero会觉得Sierra“没看见未来”</h3>
+<p>据2022回顾，Romero展示Wolfenstein 3D，Ken Williams看了约半分钟便转而展示Sierra自己的《Red Baron》。Romero多年后将其解释为对方没有意识到实时第一人称动作游戏的范式价值。<strong>这是Romero的P1解释</strong>，不能自动证明1992任何理性投资人都应该精确预测FPS全球规模。</p>
+<p>Ken Williams本人2022承认“应该成交”，是事后判断，不应倒写成1992他明知DOOM未来仍故意低估。</p>
+<h2 id="2-shareware">2. shareware为什么让“不忠于巨头”从性格变成可执行策略</h2>
+<p>如果没有替代市场接口，反权威只能是一种态度。</p>
+<p>Scott Miller/Apogee官方回顾称，1987年 <code>Kroz</code> 将第一集免费经CompuServe、AOL、GEnie与大量BBS传播，付费后续直接变现；Miller 1990联系Softdisk开发者并共同出资Commander Keen。来源：
+- https://www.apogeeent.com/devblog/apogeeisback
+- https://www.apogeeent.com/devblog/apogee-history</p>
+<p>2009 Game Developer对Miller的长访谈亦记其通过邮件接触Romero、以shareware收入说服团队，并指出Apogee早期办公室主要承担直接订单/发货。https://www.gamedeveloper.com/programming/20-years-of-evolution-scott-miller-and-3d-realms</p>
+<p>因此更精确的因果链是：</p>
+<p>[
+    ext{nonconformity}
+    imes
+    ext{credible outside option}
+    imes
+    ext{direct market feedback}
+Rightarrow
+    ext{executable exit}
+]</p>
+<p>没有shareware和PC开放分发，Carmack/Romero即使同样个人主义，也更可能只能：
+- 留在雇主内部说服上级；
+- 找另一个传统publisher；
+- 承担无收入离职；
+- 或停止产品化。</p>
+<p><strong>产业接口把个人主义的心理倾向转换成真实 bargaining power。</strong></p>
+<p>同一生态还孵化了Tim Sweeney：他回忆ZZT每天可卖约3–4份、约US$100/day，足以令其决定全职做游戏，并明确以Apogee作为竞争/商业模型参照。来源：https://www.gamedeveloper.com/design/from-the-past-to-the-future-tim-sweeney-talks 。因此early id不是美国唯一的“神奇四人”，而是一个新分发制度中异常成功的一支。</p>
+<h2 id="3-early-id">3. “美国个人主义”与early id：有关系，但必须拆成四种不同层次</h2>
+<h3 id="a-weird-individual-autonomy">A. WEIRD / individual autonomy：关系和身份不是永恒命令</h3>
+<p>Henrich式WEIRD框架主要解释较弱亲族绑定、个人选择、自主与陌生人制度合作的长历史心理差异。它可以为“离开雇主/家族职业期待/自己组新公司”的<strong>文化可想象性</strong>提供背景，但不能由宏观心理直接推Romero/Carmack个人决策。</p>
+<p>已有社会学传统也长期将美国与Protestant-based individualism联系；Bellah的《Habits of the Heart》恰恰同时研究美国个人主义及其对社会整合的代价。Berkeley对Bellah研究的概述：https://newsarchive.berkeley.edu/news/media/releases/2000/12/15_bellah.html</p>
+<h3 id="b-rugged-individualism-frontier-legacy">B. Rugged individualism / frontier legacy：自立、退出与“我自己做”</h3>
+<p>Bazzi、Fiszbein、Gebresilasse 2020《Econometrica》以1790–1890 frontier exposure构造县级指标，发现更长期 frontier exposure 与后世更强个人主义/反再分配相关，并提供“个人主义者选择迁入边疆 + 边疆环境进一步奖励自立”的证据。NBER版本：https://www.nber.org/papers/w23997</p>
+<p>更近的企业研究用美国CEO出生县frontier exposure作为文化背景代理，发现更高frontier exposure与更多/更高价值专利以及更多breakthrough innovation相关，但作者也明确指出：<strong>同一美国内部个人主义差异很大；跨国研究无法轻易分离文化、制度、教育与法律。</strong> Research Policy 2023：https://www.sciencedirect.com/science/article/pii/S0048733323001361</p>
+<p>这可以支持：</p>
+<blockquote>
+<p>个人主义文化可能提高挑战同行智慧、承担突破创新的概率。</p>
+</blockquote>
+<p>不能支持：</p>
+<blockquote>
+<p>Carmack因为“frontier血统”所以做出DOOM。</p>
+</blockquote>
+<p>人物层没有这种测量。</p>
+<h3 id="c-american-exceptionalism">C. American exceptionalism / “神国定位”：更像国家级的反旧世界叙事，不是直接创业因果</h3>
+<p>Robert Bellah 1967将美国的 <code>civil religion</code>概括为一套区别于具体教会却带宗教结构的国家叙事；其核心符号包括Exodus、Chosen People、Promised Land、New Jerusalem、牺牲/重生以及“美国作为给世界看的共和实验”。原文：https://www.amacad.org/publication/daedalus/civil-religion-america-1967</p>
+<p>这与美国长期的：
+- 摆脱旧大陆权威；
+- 自己重新建制；
+- 个人/集体有使命改变世界；
+- 现实成功可被道德化为“实验的证明”
+存在<strong>叙事结构同构</strong>。</p>
+<p>但必须明确：</p>
+<blockquote>
+<p><strong>没有证据表明Romero、Carmack在离开Softdisk或拒绝Sierra条件时在脑内调用“美国是上帝选民”叙事。</strong></p>
+</blockquote>
+<p>所以 <code>AMERICAN_CIVIL_RELIGION → ID DECISION</code> 当前只能是 <strong>H / distal cultural background</strong>，不能成为人物因果。</p>
+<p>而且Bellah本人正是为了反对把“美国特殊使命”变成无条件自我崇拜：他的civil religion要求国家接受更高标准审判，也明确提醒这种宗教语言可被狭隘利益滥用。不能把Bellah引用成“美国神选论科学证明”。</p>
+<h3 id="d-liberal-marketinstitutional-individualismearly-id">D. Liberal market/institutional individualism：最接近early id可观察的直接机制</h3>
+<p>真正离人物近的是：
+- 软件/游戏职业的跨组织流动；
+- 小公司可以成立、签合同、持有IP；
+- PC平台没有主机式单一绿灯；
+- BBS/shareware构成低成本公开分发；
+- 用户可直接用现金验证产品；
+- publisher不是唯一market gate；
+- 员工退出后能够在一定法律/合同清算下继续组新公司；
+- 技术人才有别的就业outside option。</p>
+<p>美国历史上较高的职业/地理流动并非神话一项：Ferrie对75,000+人的历史纵向数据发现1850–1880美国比英国有更高地理和职业流动，但20世纪后这种“美国例外”明显下降。JEP 2005：https://www.aeaweb.org/articles?id=10.1257/089533005774357824</p>
+<p><strong>所以“美国个人主义”最有用的解释不是一句文化标签，而是：一个退出旧关系的人通常有更可信的新关系可以进入。</strong></p>
+<h2 id="4">4. 你的“个人主义神国”直觉：对一半，而且应拆成两条传统</h2>
+<h3 id="1">传统1：个人必须有权离开旧秩序</h3>
+<p>更接近：
+- Protestant/WEIRD individual autonomy；
+- Lockean/liberal rights；
+- frontier self-reliance；
+- anti-ascription / occupational mobility。</p>
+<p>这是early id的<strong>战略不忠诚</strong>最直接的文化背景。</p>
+<h3 id="2">传统2：美国本身是一次要向世界证明的新秩序实验</h3>
+<p>更接近：
+- Puritan covenant；
+- Revolution / Exodus；
+- chosen people / city upon a hill；
+- American civil religion / exceptionalism。</p>
+<p>它强化的是一种<strong>“我们有权重做旧世界，而且新实验成功本身就是合法性”</strong>的宏大叙事。</p>
+<p>两者结合以后，形成一种非常美国式的创业神话：</p>
+<blockquote>
+<p><strong>旧权威没有天然资格统治我的未来；我可以另起炉灶，而如果新东西在现实里赢了，它反过来证明我当初有权背叛旧答案。</strong></p>
+</blockquote>
+<p>这与early id的故事高度相容，但仍是<strong>解释性文化框架，不是人物本人动机证词</strong>。</p>
+<h2 id="5">5. “战略性不忠诚”需要和判断质量组成二维矩阵</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>低切割能力：舍不得旧关系/旧资产</th>
+<th>高切割能力：敢退出、敢砍</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>高判断质量</strong></td>
+<td><strong>被困的先知</strong>：知道下一步是什么，但不断向旧组织妥协</td>
+<td><strong>范式破坏者</strong>：early id 1990–93的理想型</td>
+</tr>
+<tr>
+<td><strong>低判断质量</strong></td>
+<td><strong>稳定执行者</strong>：未必创新，但损失可控</td>
+<td><strong>自毁型反叛者</strong>：把不合群误认成正确，把关系资本全部烧光</td>
+</tr>
+</tbody>
+</table>
+<p>这一矩阵是 <strong>H / reader framework</strong>，不是心理测量工具。</p>
+<p>它解决一个此前争论：
+- “怪人不一定正确”没错；
+- “如果正确的异端不敢切割，也活不到验证日”也没错。</p>
+<p>因此可以写成：</p>
+<blockquote>
+<p><strong>Nonconformity is not a source of truth; it can be a survival mechanism for a true minority judgment.</strong></p>
+</blockquote>
+<h2 id="6-early-id">6. early id真正罕见的是连续多次“未来权重 &gt; 过去权重”</h2>
+<p>可以按时间列成：
+1. <strong>Softdisk工资/设备/身份</strong> vs Apogee直接市场；
+2. <strong>Keen成功系列</strong> vs texture-mapped 3D；
+3. <strong>传统publisher地位</strong> vs shareware直达用户；
+4. <strong>Sierra 250万美元股票安全退出</strong> vs 保留公司decision rights与future upside；
+5. <strong>成熟引擎/旧代码</strong> vs 新技术；
+6. <strong>过去共同创始人的贡献</strong> vs 当前产品/组织适配；
+7. <strong>DOOM成功公式</strong> vs Quake新技术/新生产方法。</p>
+<p>不是每一次都“历史证明绝对正确”。尤其第6–7点进入Quake以后，<strong>切割本身开始制造巨大组织成本</strong>；Romero/Ion Storm后来又显示一个人可以把曾经有效的“相信自己、放大自由、拒绝旧约束”转化为另一种过度自信与治理失灵。</p>
+<p>所以真正值得书写的是一条<strong>倒U曲线假说</strong>：
+[
+    ext{strategic disloyalty} 
+ightarrow   ext{optionality and paradigm escape}
+]
+在判断/反馈强时是优势；
+[
+    ext{strategic disloyalty without correction} 
+ightarrow   ext{coordination loss / overreach}
+]
+在治理与判断失效时会反噬。</p>
+<h2 id="7">7. 美国不是必要条件：日本直接反证“个人主义才能有强作者”</h2>
+<p>现有日本研究 <a href="/heroes-portal/country-studies/japan/001-japan-east-asian-counterexample-weird-kinship-and-game-creator-ecology.html">001</a> 已提出 <code>BOUNDED_ECCENTRICITY</code>：</p>
+<p>一个高规范、低关系流动、强公司/圈子协调社会，仍可以通过：
+- director/producer作者角色；
+- 公司内小团队prototype；
+- 同人circle；
+- Comiket/doujin storefront；
+- “某个生态位允许你怪”
+来保护非共识创作。</p>
+<p>这意味着：</p>
+<blockquote>
+<p><strong>America&rsquo;s high individualism can reduce the social price of strategic disloyalty; Japan can instead institutionalize protected eccentric slots.</strong></p>
+</blockquote>
+<p>所以中国研究不能只问“怎样让中国人更美国式个人主义”，还要问：</p>
+<blockquote>
+<p>能否建立<strong>不要求全社会个人主义化</strong>，也能让不同答案存活到真实市场验证的制度生态？</p>
+</blockquote>
+<h2 id="8">8. 与中国“教育／行业版本／社会版本意识”连接</h2>
+<p><strong>教育：</strong> 是否训练学生“权威答案可能失效”，以及自己提出/验证问题，而不是只在答案已知后执行。</p>
+<p><strong>行业版本：</strong> 是否存在替代market interface。early id有shareware；如果创作者只有一个渠道/老板/版号/发行商/平台的单一绿灯，个性再独立也难形成真实exit。</p>
+<p><strong>社会版本意识：</strong> 成功前的偏离有多大成本？家长、同侪、老板是否把<code>不同意</code>升级为“不成熟/不忠/不懂规矩”；以及失败后能否回就业而不被永久性身份处罚。</p>
+<p>比“老中缺个人主义”更可证伪的命题：</p>
+<blockquote>
+<p><strong>创新生态需要降低“正确但尚未被证明的少数判断”存活到现实验证的成本。美国early PC/shareware以退出权与直接市场做到一部分；日本用组织/同人生态做到另一部分；中国要研究自己的等价接口。</strong></p>
+</blockquote>
+<h2 id="9">9. 对《独立游戏英雄传说》值得新增的三个概念</h2>
+<h3 id="91-optionality-protection">9.1 OPTIONALITY PROTECTION / 未来选择权保护</h3>
+<p>收购、融资、publisher、平台独占、扩团队都不能只按今天给多少钱看；还要算：
+- future upside；
+- decision rights；
+- ability to pivot；
+- obligation / milestone；
+- opportunity cost of irreversible commitment。</p>
+<p>Sierra是历史故事，不是2026估值模板。</p>
+<h3 id="92-authority-discounting">9.2 AUTHORITY DISCOUNTING / 权威折价</h3>
+<p>大公司、成功前辈、父母、学校、publisher的经验是evidence，不是oracle。越有旧范式成绩的权威，越可能精确理解旧版问题、却低估新范式。<strong>但年轻人也不因反权威自动正确。</strong>解决办法是产品/技术/市场证据，而不是年龄或职位反转。</p>
+<h3 id="93-reversible-loyalty">9.3 REVERSIBLE LOYALTY / 可撤销忠诚</h3>
+<p>对公司、项目、代码、合作者保持真实承诺，但承诺有条件、有期限、可重谈。历史贡献值得尊重，不构成未来永久decision right。</p>
+<p>这是比“抛弃拖累”更适合全书的概念：它保留你原书评中真实存在的残酷决断，同时避免将离开者的人格降级。</p>
+<h2 id="95-ion-storm">9.5 后续压力测试：战略性不忠诚为什么到Ion Storm可能反噬</h2>
+<p>新增 <a href="/heroes-portal/book/research-notes/truth-shield-to-narcissism-shield-ion-storm-governance-041.html">041 — 真理之盾什么时候变成自恋之盾</a>。</p>
+<p>本轮不做人格诊断，而把风险拆成：
+- <code>FEEDBACK_INTEGRITY</code>：反对证据是否还能到达决策者；
+- <code>COMPLEMENT_DEPENDENCE</code>：过去成功到底属于个人方法还是能力组合；
+- <code>SCALE_DISCONTINUITY</code>：小队非正式治理是否被错误放大到80+人多项目组织；
+- <code>DECISION_RIGHT_ACCOUNTABILITY</code>：自治权是否绑定最终负责人、kill/rescope权和交付责任；
+- <code>SUCCESS_FORMULA_TRANSFER_ERROR</code>：把旧环境成功规则当成新环境通用公式。</p>
+<p>Ion Storm内部Deus Ex构成强反例：同样获得巨大创作自由，Austin仍通过Warren Spector清晰项目责任、后期范围收敛和Eidos时间buffer完成作品。因此“自由/设计师主导”不是Dallas失败的充分条件。真正问题是<strong>自由是否被封装在能纠错的治理单元里</strong>。</p>
+<h2 id="10">10. 待验证 / 防止把美国浪漫化</h2>
+<ol>
+<li><strong>美国失败者分母：</strong> 同样个人主义、同样离职/反老板，但判断错误而消失的人数；现有038/039只能给公开attempt及几个失败者，仍不能估战略不忠诚的收益率。</li>
+<li><strong>Softdisk第二方：</strong> 离开过程中真实IP/合同/设备争议、雇主损失及后续协议；不写成天才从愚蠢官僚手里夺回自由。</li>
+<li><strong>Sierra反事实：</strong> 250万美元股票报价在1992的风险、Sierra股票后续路径、id成员现金/税务情况；不能以DOOM后见市值证明拒绝报价当时是无风险的。</li>
+<li><strong>英国/北欧 PC对照：</strong> 高作者性电脑文化同样出现于英国bedroom coding、芬兰demo scene等，但各自分发与社会结构不同，可检验“美国独有”。</li>
+<li><strong>美国文化内部差异：</strong> Frontier/rugged individualism与New England/urban professional individualism不是一回事；Romero/Carmack具体成长地不能用全国均值代替。</li>
+<li><strong>个人主义的负作用：</strong> Bazzi等研究也显示rugged individualism可能损害集体行动；对游戏团队对应的潜在代价是coordination/governance risk，需用Quake/Ion Storm等项目材料独立检验，不能简单类比公共卫生研究。</li>
+<li><strong>American civil religion H级关系：</strong> 没有Romero/Carmack本人把公司选择解释为“美国神选/山巅之城”的直接记录前，保留为文化背景而非人物动机。</li>
+</ol>
+<h2 id="sources-evidence-class">Sources / evidence class</h2>
+<ul>
+<li>John Romero + Ken Williams, GDC/Ars, 2022-03-24, P1双侧回顾，Wolf3D/Keen/Sierra offer：https://arstechnica.com/gaming/2022/03/achtung-john-romero-exposes-wolfenstein-3ds-history-in-gdc-post-mortem/</li>
+<li>Scott Miller, Apogee official retrospective, shareware/Kroz/Commander Keen, H1 institution-self-history：https://www.apogeeent.com/devblog/apogeeisback ; https://www.apogeeent.com/devblog/apogee-history</li>
+<li>Scott Miller direct retrospective interview, Game Developer, 2009, P1：https://www.gamedeveloper.com/programming/20-years-of-evolution-scott-miller-and-3d-realms</li>
+<li>Tim Sweeney direct interview, Game Developer, 2009, P1：https://www.gamedeveloper.com/design/from-the-past-to-the-future-tim-sweeney-talks</li>
+<li>Robert N. Bellah, <code>Civil Religion in America</code>, Dædalus 1967, S1 theoretical/historical：https://www.amacad.org/publication/daedalus/civil-religion-america-1967</li>
+<li>Bellah research summary / <code>Habits of the Heart</code>, Berkeley 2000：https://newsarchive.berkeley.edu/news/media/releases/2000/12/15_bellah.html</li>
+<li>Bazzi, Fiszbein &amp; Gebresilasse, <code>Frontier Culture: The Roots and Persistence of "Rugged Individualism" in the United States</code>, Econometrica 2020 / NBER：https://www.nber.org/papers/w23997</li>
+<li>Gao et al., <code>Individualistic CEO and corporate innovation: Evidence from U.S. frontier culture</code>, Research Policy 2023, S1 empirical：https://www.sciencedirect.com/science/article/pii/S0048733323001361</li>
+<li>Ferrie, <code>History Lessons: The End of American Exceptionalism? Mobility in the United States Since 1850</code>, JEP 2005：https://www.aeaweb.org/articles?id=10.1257/089533005774357824</li>
+</ul>
+<p><strong>Transfer 2026:</strong> <code>DURABLE mechanism / HISTORICAL tactics</code>. 保留：optionality pricing、权威折价、可撤销忠诚、外部市场作为异端判断验证器。过期：1990 shareware/BBS具体分发、1992 Sierra估值和当时的PC竞争结构。</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / book/research-notes/early-id-strategic-disloyalty-american-individualism-040.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

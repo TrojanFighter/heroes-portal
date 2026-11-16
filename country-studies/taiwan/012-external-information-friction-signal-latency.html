@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>012 — 台湾游戏业的外部资讯摩擦：不是单纯“新闻更快”，而是弱信号更直接 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl class="on"" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0" class="t2">0. 第一轮结论</a><a href="#tw-infofric-e01" class="t2">TW-INFOFRIC-E01｜台湾与大陆的公开互联网环境不是同一个等级</a><a href="#mainland-high-intent-model" class="t3">Mainland high-intent model</a><a href="#taiwan-ambient-model" class="t3">Taiwan ambient model</a><a href="#tw-infofric-e02tgdf" class="t2">TW-INFOFRIC-E02｜TGDF已经连续多年把海外一线开发者直接带入本地社群</a><a href="#tw-infofric-e03taipei-game-show" class="t2">TW-INFOFRIC-E03｜Taipei Game Show本身是跨国商务节点</a><a href="#tw-infofric-e04" class="t2">TW-INFOFRIC-E04｜官方调查直接说台湾独立游戏押国内市场“十分危险”</a><a href="#tw-infofric-e05" class="t2">TW-INFOFRIC-E05｜当前台湾游戏企业也确实有高海外暴露</a><a href="#2000-tgl" class="t3">2000 TGL台湾</a><a href="#_1" class="t3">姚壮宪</a><a href="#pilot-aunity-runtime-fee2023-09" class="t2">Pilot A｜Unity Runtime Fee（2023-09）</a><a href="#pilot-bsteam2025-07" class="t2">Pilot B｜Steam支付商成人内容规则（2025-07）</a><a href="#h1reference_set_breadth" class="t2">H1｜REFERENCE_SET_BREADTH：参考系更宽</a><a href="#h2weak_signal_capture" class="t2">H2｜WEAK_SIGNAL_CAPTURE：更早看到“小趋势”而不只是大新闻</a><a href="#h3global-first-productization" class="t2">H3｜GLOBAL-FIRST PRODUCTIZATION：国际发行思维更早进入项目</a><a href="#h4intermediary-advantage" class="t2">H4｜INTERMEDIARY ADVANTAGE：形成翻译/发行/中介能力</a><a href="#h5fast-follower-biasreference" class="t2">H5｜FAST FOLLOWER BIAS：副作用是更容易跟随外部reference</a><a href="#h6external-platform-dependence" class="t2">H6｜EXTERNAL PLATFORM DEPENDENCE：全球资讯越直接，全球平台冲击也越直接</a><a href="#taiwan" class="t2">Taiwan</a><a href="#mainland-china" class="t2">Mainland China</a><a href="#external-signal-latency-audit" class="t2">EXTERNAL SIGNAL LATENCY AUDIT</a><a href="#a-major-shock" class="t3">A. Major shock</a><a href="#b-weak-professional-signal" class="t3">B. Weak professional signal</a><a href="#c-creator-social-signal" class="t3">C. Creator social signal</a><a href="#source-directness-score" class="t2">SOURCE DIRECTNESS SCORE</a><a href="#information-action" class="t2">INFORMATION → ACTION</a></aside><article class="doc"><div class="col"><h1 id="012">012 — 台湾游戏业的外部资讯摩擦：不是单纯“新闻更快”，而是弱信号更直接</h1>
+<ul>
+<li>Status: SOURCE-AUDIT / INFORMATION-ENVIRONMENT HYPOTHESIS / PRE-CLAIM</li>
+<li>Program: C Taiwan comparator</li>
+<li>As of: 2026-10-08</li>
+<li>Open Question: <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes/blob/main/OPEN-QUESTIONS.md">OQ-013｜外部资讯摩擦是否改变创新速度？</a></li>
+<li>Core question: 台湾游戏开发者是否比大陆开发者更快、更直接接触日本/欧美游戏行业信息？如果是，真正起作用的是breaking-news latency，还是长期ambient exposure / source directness / reference breadth？</li>
+<li>Restriction:</li>
+<li>不把“互联网自由度”直接等同“创新能力”；</li>
+<li>不把台湾人写成天生国际化、大陆人写成天生闭塞；</li>
+<li>大陆头部公司、翻墙用户、海外团队和专业媒体明显能跨越部分信息边界；</li>
+<li>新闻报道速度、原始资料接触、行业网络与实际吸收能力必须分开。</li>
+</ul>
+<h2 id="0">0. 第一轮结论</h2>
+<p class="dc">用户观察“台湾对西方、日本游戏与行业资讯更敏感、时效更高”有相当强的结构基础，但需要修正为：</p>
+<blockquote>
+<p><strong>台湾游戏业的主要优势不是所有重大新闻都比大陆早看到几天，而是开发者、媒体和中介机构日常接触全球原始信息的摩擦更低；因此reference set更宽、弱信号更容易直接进入本地讨论和生产决策。</strong></p>
+</blockquote>
+<p>一个小型新闻延迟pilot甚至说明：
+- 重大行业冲击在大陆也能非常快传播；
+- 真正差异更可能发生在“没有成为中文头条的小信号”、开发者本人社交媒体、论坛讨论、GDC/TGDF演讲、Steamworks英文文档、海外publisher/network等持续输入。</p>
+<p>建议正式变量：</p>
+<p>INFORMATION_FRICTION<br />
+EXTERNAL_SIGNAL_LATENCY<br />
+SOURCE_DIRECTNESS<br />
+REFERENCE_SET_BREADTH<br />
+WEAK_SIGNAL_CAPTURE<br />
+INFORMATION_TO_ACTION_CONVERSION</p>
+<hr />
+<h1 id="1">1. 互联网结构差异极大：这是资讯摩擦的底层条件</h1>
+<h2 id="tw-infofric-e01">TW-INFOFRIC-E01｜台湾与大陆的公开互联网环境不是同一个等级</h2>
+<p>Freedom House Freedom on the Net 2025：
+- Taiwan: 79/100，Free；
+- China: 9/100，Not Free。</p>
+<p>Taiwan:
+https://freedomhouse.org/country/taiwan</p>
+<p>China:
+https://freedomhouse.org/country/china</p>
+<p>该指标是政治/网络自由度指数，<strong>不是游戏产业资讯指数</strong>；不能直接用79 vs 9证明台湾游戏设计更先进。</p>
+<p>但其具体网络环境对游戏开发者有直接含义。</p>
+<p>Freedom House中国报告记录，大陆正常网络长期屏蔽大量国际平台，包括：
+- YouTube；
+- X/Twitter；
+- Reddit；
+- Facebook；
+- Instagram；
+- Telegram；
+- Wikipedia；
+- 多项Google服务。</p>
+<p>Source:
+https://freedomhouse.org/country/china/freedom-net/2024</p>
+<p>PC Gamer 2017还记录：
+- Steam Store仍可访问；
+- Steam Community（论坛、profile等）在大陆被屏蔽。</p>
+<p>Source:
+https://www.pcgamer.com/steam-community-access-has-been-blocked-in-china/</p>
+<p>这意味着即使一个大陆开发者可以正常买Steam游戏，
+仍可能无法在默认网络环境中直接进入：
+- 全球玩家社区；
+- developer discussions；
+- mod/community pages；
+- 某些原始开发者social posts；
+- YouTube/GDC类视频生态；
+- Reddit长帖和postmortem讨论。</p>
+<p>这增加的不是“永远看不到”，而是：
+<strong>额外工具成本 + 额外主动性要求 + 由国内二次转载者筛选信息的概率。</strong></p>
+<hr />
+<h1 id="2-ambient-exposure">2. 台湾的差异更像“ambient exposure”，不是只靠专业人士翻墙找资料</h1>
+<p>台湾开发者默认可以直接处于：
+- YouTube；
+- X；
+- Reddit；
+- Steam Community；
+- Twitch；
+- 日英文官方网站；
+- 海外开发者社群</p>
+<p>构成的同一信息环境。</p>
+<p>这有一个重要行为差异：</p>
+<h3 id="mainland-high-intent-model">Mainland high-intent model</h3>
+<p>“我知道外面有一份资料”
+→ 主动寻找/翻墙/等翻译
+→ 获得信息。</p>
+<h3 id="taiwan-ambient-model">Taiwan ambient model</h3>
+<p>“我本来就在关注这些人/平台”
+→ 弱信号自然出现在feed / community / conference
+→ 不需要先知道自己该找什么。</p>
+<p>创新研究里，这两者差异很大：
+<strong>未知的未知（unknown unknowns）通常只能靠ambient exposure发现。</strong></p>
+<p>Status: HYPOTHESIS，但网络结构明确支持其可行性。</p>
+<hr />
+<h1 id="3">3. 台湾专业游戏社群长期把“国际开发经验”当日常知识源</h1>
+<h2 id="tw-infofric-e02tgdf">TW-INFOFRIC-E02｜TGDF已经连续多年把海外一线开发者直接带入本地社群</h2>
+<p>2023 TGDF：
+- Tunic音乐团队；
+- Among Us社群总监Victoria Tran；
+- Failbetter / The Wandering Village等海外开发者；
+- 实体约300+开发者；
+- Twitch线上峰值近1,400；
+- non-unique view &gt;63,000。</p>
+<p>Sources:
+https://2023.tgdf.tw/en
+https://2023.tgdf.tw/en/news/2023tgdf-ended</p>
+<p>2024 TGDF：
+- CD PROJEKT RED Associate Game Director Paweł Sasko；
+- Storyteller设计者Daniel Benmergui；
+- Viewfinder；
+- Xbox Global Expansion；
+- Unity等。</p>
+<p>Source:
+https://2024.tgdf.tw/en/speakers</p>
+<p>2025 TGDF：
+- 40+国内外讲者；
+- CDPR；
+- Frostpunk 2设计总监；
+- Monument Valley 3；
+- Subnautica 2；
+- Unity Japan技术代表；
+- NVIDIA；
+- Red Candle / Legend of Mortal等台湾团队并列分享。</p>
+<p>Source:
+https://2025.tgdf.tw/en</p>
+<p>2026 TGDF继续邀请：
+- former Helldivers 2 level designer；
+- Pocketpair platform engineer；
+- NVIDIA / AWS等。</p>
+<p>Source:
+https://2026.tgdf.tw/en</p>
+<p>这不是偶发“请一个国外明星站台”，而已经形成稳定的professional knowledge import infrastructure。</p>
+<hr />
+<h1 id="4">4. 商务网络也高度国际化：台湾小市场要求行业持续向外看</h1>
+<h2 id="tw-infofric-e03taipei-game-show">TW-INFOFRIC-E03｜Taipei Game Show本身是跨国商务节点</h2>
+<p>Taipei Game Show官方B2B资料：
+- 自2003以来累计22,500+ business matchmaking meetings；
+- 2026 B2B Zone有2,100+专业人士；
+- 来自43个国家；
+- 涵盖开发、发行、投资、营销、技术服务。</p>
+<p>Source:
+https://tgs.tca.org.tw/b2bzone_e.php</p>
+<p>这提供的是：
+<strong>publisher / platform / investor / developer direct contact</strong>，
+而不仅是媒体二次资讯。</p>
+<p>小型台湾团队有机会在本地直接进入国际industry network。</p>
+<hr />
+<h1 id="5">5. 小市场不是背景，而是“必须向外看”的经济激励</h1>
+<h2 id="tw-infofric-e04">TW-INFOFRIC-E04｜官方调查直接说台湾独立游戏押国内市场“十分危险”</h2>
+<p>TAICCA 2020游戏产业调查对台湾indie困境的总结：
+- 台湾国内市场几乎被代理游戏瓜分；
+- 将独立游戏未来押在国内市场“十分危险”；
+- 因此大多数独立游戏选择面向国际市场。</p>
+<p>Source:
+https://en.taicca.tw/uploads/userfiles/research/20231228/2020/2020%20Vol%204.pdf</p>
+<p>这是一条很强的经济机制：</p>
+<p>small / agency-heavy domestic market
+→ local-only strategy unattractive
+→ developer must understand Steam / global tastes / overseas marketing / foreign publishers
+→ external information has direct economic value.</p>
+<h2 id="tw-infofric-e05">TW-INFOFRIC-E05｜当前台湾游戏企业也确实有高海外暴露</h2>
+<p>TAICCA产业调查：
+- 某期调查中整体营收海外占比约33.2%；
+- 授权收入海外占比51.3%；
+- 主要海外经营地区依次包括港澳、中国、日本、北美、东南亚。</p>
+<p>Source:
+https://www.taicca.tw/content/book_download_file?id=18</p>
+<p>较新调查对103家样本的海外市场：
+- 港澳54.4%；
+- 中国47.6%；
+- 北美41.7%；
+- 日本40.8%。</p>
+<p>Source:
+https://taicca.tw/content/book_download_file?id=63</p>
+<p>不同年度/样本口径不能直接串成趋势，但共同说明：</p>
+<blockquote>
+<p>台湾游戏企业的reference market天然不是只看台湾岛内。</p>
+</blockquote>
+<hr />
+<h1 id="6">6. 历史连续性：台湾长期扮演“外部类型→华语产品”的转译节点</h1>
+<p>此前007已核：</p>
+<h3 id="2000-tgl">2000 TGL台湾</h3>
+<p>公司负责人明确称：
+- 台湾游戏流行口味某种程度跟随日本；
+- 日本总部第一手市场信息是台湾公司的优势。</p>
+<p>Source:
+https://www.ithome.com.tw/news/31</p>
+<h3 id="_1">姚壮宪</h3>
+<p>官方回顾：
+- 早期作品曾直接模仿R-Type，随后形成“参考但必须差异化”的意识；
+- 《仙剑》萌芽受到Final Fantasy及《轩辕剑二》影响。</p>
+<p>Source:
+https://pal5q.cubejoy.com/pal5q/2502001858e.html?mlid=5782</p>
+<p>因此台湾的高外部资讯接入不是2020年代才出现的Steam现象。</p>
+<p>长期结构更像：
+Japan / US / global genre &amp; technology
+→ Taiwan earlier exposure / localization
+→ Chinese-language recombination
+→ Taiwan / mainland Chinese market diffusion.</p>
+<p>今天只是信息渠道从：
+杂志 / 代理 / 日本总部
+变成：
+Steam / X / YouTube / Discord / conference / global publisher network。</p>
+<hr />
+<h1 id="7">7. “台湾新闻一定比大陆快”并没有得到支持</h1>
+<p>这是本轮最重要的反证。</p>
+<h2 id="pilot-aunity-runtime-fee2023-09">Pilot A｜Unity Runtime Fee（2023-09）</h2>
+<p>Unity在北美时间2023-09-12公布重大收费改革。</p>
+<p>台湾：
+- 4Gamers 2023-09-13 14:59报道；
+- GNN 2023-09-13 18:08报道。</p>
+<p>Sources:
+https://www.4gamers.com.tw/news/detail/59676/unity-runtime-fee-will-apply-to-games-that-meet-revenue-and-install-thresholds
+https://gnn.gamer.com.tw/detail.php?sn=256005</p>
+<p>大陆：
+- 游戏葡萄文章2023-09-14公开发布；
+- 正文明确写编辑在9月13日早上就看到朋友圈从业者已经刷屏讨论Unity政策。</p>
+<p>Source:
+https://www.taptap.cn/moment/451167998758093905
+Mirror:
+https://36kr.com/p/2430419547083142</p>
+<p>所以重大行业政策的中文传播：
+<strong>两岸都能在约一天内进入专业圈。</strong></p>
+<p>不能据此声称“大陆重大行业新闻慢几天”。</p>
+<hr />
+<h2 id="pilot-bsteam2025-07">Pilot B｜Steam支付商成人内容规则（2025-07）</h2>
+<p>台湾4Gamers在2025-07-16当日直接检查Steamworks英文Onboarding文档，并特别指出当时中文官方文档尚未更新。</p>
+<p>Source:
+https://www.4gamers.com.tw/news/detail/73039/steam-rules-updated-to-prohibit-content-that-violates-rules-set-forth-by-payment-processors-and-banks</p>
+<p>大陆媒体在7月16—18亦快速出现报道，部分文章同样注意到英文版Steamworks已经新增第15条，而中文/日文版尚未同步。</p>
+<p>Examples:
+https://www.gamersky.com/news/202507/1961839.shtml
+https://news.17173.com/content/07182025/100627618.shtml</p>
+<p>所以：
+<strong>breaking-news latency不是稳定、巨大的两岸差距。</strong></p>
+<p>台湾更值得研究的是：
+- 谁能默认直接看英文原文；
+- 谁平时已经follow海外讨论；
+- 哪些弱信号会被国内媒体选择性转译；
+- 哪些信号根本不会成为“值得转载的新闻”。</p>
+<hr />
+<h1 id="8">8. 真正可能导致的六个产业后果</h1>
+<h2 id="h1reference_set_breadth">H1｜REFERENCE_SET_BREADTH：参考系更宽</h2>
+<p>低信息摩擦使台湾作者更容易同时把：
+- 日本；
+- 北美/欧洲indie；
+- AAA；
+- Steam niche；
+- platform policy</p>
+<p>放进同一个reference set。</p>
+<p>可能结果：
+- 类型重组更快；
+- 更容易做跨类型项目；
+- 本土产品较少只benchmark本地爆款。</p>
+<p>证据方向：
+《文字游戏》、Red Candle、SIGONO、R18 indie等都应逐案编码其reference sources。</p>
+<hr />
+<h2 id="h2weak_signal_capture">H2｜WEAK_SIGNAL_CAPTURE：更早看到“小趋势”而不只是大新闻</h2>
+<p>真正有价值的创业信息经常不是：
+“某大公司发布了一条官方新闻”。</p>
+<p>而是：
+- 某developer tweet；
+- Steam tag开始变热；
+- 某个itch prototype；
+- Reddit / Discord社区偏好；
+- 小publisher的选品；
+- 新的festival；
+- 某种低成本工具；
+- GDC postmortem。</p>
+<p>大陆专业媒体会快速转载Unity这类大事件，
+但不可能人工转译全球无数微小信号。</p>
+<p>因此默认接入全球feed的创作者理论上拥有更大的“serendipity surface”。</p>
+<p>Status: STRONG HYPOTHESIS / NEEDS DIRECT CREATOR AUDIT.</p>
+<hr />
+<h2 id="h3global-first-productization">H3｜GLOBAL-FIRST PRODUCTIZATION：国际发行思维更早进入项目</h2>
+<p>因为台湾国内indie市场不足以承载大量作品，
+创作者较早需要考虑：
+- Steam；
+- English/Japanese localization；
+- global publisher；
+- overseas festival；
+- pricing；
+- wishlist；
+- cultural legibility。</p>
+<p>这与TAICCA“多数独立游戏面向国际市场”的调查一致。</p>
+<p>可能结果：</p>
+<blockquote>
+<p>台湾小团队虽然production budget弱，却较早学习“怎样把一个小作品包装成全球Steam商品”。</p>
+</blockquote>
+<hr />
+<h2 id="h4intermediary-advantage">H4｜INTERMEDIARY ADVANTAGE：形成翻译/发行/中介能力</h2>
+<p>长期跨语言、跨市场接触容易产生的不只是开发能力，也包括：
+- localization；
+- publisher scouting；
+- business development；
+- media translation；
+- cross-border event organization。</p>
+<p>Mango Party / PlayMeow等成人发行枢纽只是极端清晰的一例。</p>
+<p>台湾可能更适合成为：
+<strong>regional translator / broker / publishing node</strong>
+而非大型技术生产中心。</p>
+<hr />
+<h2 id="h5fast-follower-biasreference">H5｜FAST FOLLOWER BIAS：副作用是更容易跟随外部reference</h2>
+<p>高外部资讯敏感度不是纯收益。</p>
+<p>历史台湾游戏已经显示：
+- 市场口味紧跟日本；
+- 大量成熟类型快速中文化；
+- 《大富翁》《仙剑》等均存在可直接确认的海外类型输入。</p>
+<p>因此信息优势可能制造：
+<strong>fast imitation / localization competence</strong>
+而不自动产生：
+<strong>frontier problem selection / original technology</strong>。</p>
+<p>危险是：
+“世界上现在流行什么？”
+取代：
+“有哪些重要问题没人解决？”</p>
+<p>这与本书的Innovation Epistemology必须区别。</p>
+<hr />
+<h2 id="h6external-platform-dependence">H6｜EXTERNAL PLATFORM DEPENDENCE：全球资讯越直接，全球平台冲击也越直接</h2>
+<p>Steam政策、信用卡组织、Apple/Google、Unity、Epic、Nintendo等规则变化，
+会迅速改变台湾小团队的商业条件。</p>
+<p>成人indie的2025 payment-processor事件就是典型：
+台湾法律允许 ≠ Steam/payment rail一定允许。</p>
+<p>所以：
+global information integration
+同时意味着
+global platform dependence。</p>
+<hr />
+<h1 id="9">9. 为什么大陆“信息茧房”对不同开发者影响很不均匀</h1>
+<p>不能写成：
+“中国开发者不知道海外发生什么。”</p>
+<p>至少四类人可以显著跨越信息边界：
+1. 大厂国际业务/海外办公室；
+2. 能稳定使用circumvention tools的资深从业者；
+3. 直接与Unity、Sony、Valve、Epic、海外publisher合作的团队；
+4. 专门追踪国际市场的媒体/投资/发行人员。</p>
+<p>Unity Runtime Fee案例已经证明大陆专业圈可以非常快获得重大海外产业信息。</p>
+<p>真正更受影响的可能反而是：
+- 学生；
+- 普通玩家；
+- 想转开发的外行业余者；
+- 尚未进入国际商务网络的小团队；
+- 不知道“自己还不知道什么”的潜在创作者。</p>
+<p>也就是：</p>
+<blockquote>
+<p><strong>信息摩擦可能首先影响creator formation，而不是成熟大厂的情报部门。</strong></p>
+</blockquote>
+<p>这对“老中研究”比单纯比较两岸媒体速度重要得多。</p>
+<hr />
+<h1 id="10">10. 一个更精确的两岸模型</h1>
+<h2 id="taiwan">Taiwan</h2>
+<p>open global internet
++ Japanese/English cultural proximity
++ small domestic market
++ international events / publishers
++ long history of localization</p>
+<p>→ low external information friction</p>
+<p>→ broad reference stock
+→ fast niche/genre absorption
+→ international productization
+→ intermediary/publishing capability</p>
+<p>BUT ALSO</p>
+<p>→ fast-follower dependence
+→ external-platform dependence
+→ foreign trend chasing risk.</p>
+<h2 id="mainland-china">Mainland China</h2>
+<p>huge domestic market
++ domestic platforms/media/community
++ blocked global social/community sources
++ strong local commercial feedback</p>
+<p>→ higher external information friction
++ lower need to look outside for many commercial problems</p>
+<p>→ deep domestic specialization
+→ strong local monetization/operations knowledge</p>
+<p>BUT POSSIBLY</p>
+<p>→ narrower default reference set
+→ greater dependence on domestic curators
+→ weak-signal filtering
+→ slower exposure for pre-industry creators.</p>
+<p>头部企业可以通过海外组织和专业人员绕过这一限制，因此差距主要不是“聪不聪明”，而是<strong>谁必须付额外成本才能进入全球reference pool</strong>。</p>
+<hr />
+<h1 id="11">11. 下一轮如何把这个观察真正量化</h1>
+<p>不能继续只靠印象。</p>
+<h2 id="external-signal-latency-audit">EXTERNAL SIGNAL LATENCY AUDIT</h2>
+<p>抽30个全球游戏产业事件，分三类：</p>
+<h3 id="a-major-shock">A. Major shock</h3>
+<p>Unity Runtime Fee、Steam政策、平台分成、引擎重大变动。</p>
+<p>测：
+announcement → Taiwan first coverage → mainland first coverage。</p>
+<p>预期：差距可能很小。</p>
+<h3 id="b-weak-professional-signal">B. Weak professional signal</h3>
+<p>GDC postmortem、小型publisher策略、GameDiscoverCo分析、独立开发工具、海外developer thread。</p>
+<p>测：
+是否被报道；
+多久；
+是否引用原始source；
+是否只有少数专业号传播。</p>
+<p>预期：台湾差距可能更明显。</p>
+<h3 id="c-creator-social-signal">C. Creator social signal</h3>
+<p>X/Reddit/YouTube/Steam Community上的个人经验和small trend。</p>
+<p>测：
+普通开发者是否可直接访问；
+是否需要circumvention；
+是否只能通过中文转载。</p>
+<p>这里可能是最大的结构差。</p>
+<h2 id="source-directness-score">SOURCE DIRECTNESS SCORE</h2>
+<p>每篇产业报道编码：
+- official original；
+- developer social post；
+- foreign primary interview；
+- foreign media；
+- domestic secondary translation；
+- tertiary aggregation。</p>
+<p>比较4Gamers/GNN vs GameLook/游戏葡萄/游研社/机核等。</p>
+<h2 id="information-action">INFORMATION → ACTION</h2>
+<p>最重要的不是“看见了”，而是：
+- 换引擎；
+- 改发行市场；
+- 加语言；
+- 参加festival；
+- 采用新商业工具；
+- 改内容政策。</p>
+<p>最终必须追到创作者决策。</p>
+<hr />
+<h1 id="12">12. 当前结论</h1>
+<p>业余创作者“把作品放回全球公共栈”的具体比较见：<a href="/heroes-portal/country-studies/taiwan/015-amateur-public-artifact-platform-stack-taipei-vs-shenzhen.html">015 — 台北 × 深圳GGJ公共作品栈</a>。015把信息接入进一步扩展为REFERENCE RECIPROCITY：不只看见海外信号，还要比较作品是否默认进入可被海外开发者发现和反馈的公共平台。</p>
+<p>学生/业余层的creator-formation延伸见：<a href="/heroes-portal/country-studies/taiwan/013-student-amateur-indie-default-production-awareness.html">013 — 学生/业余独游的默认生产意识</a>。013不再比较重大新闻速度，而追踪global reference、Steam/product行为和作者路线是否在就业前已经显著可见。</p>
+<p>用户观察应保留，但改写为：</p>
+<blockquote>
+<p><strong>台湾游戏产业相对于大陆拥有更低的全球资讯接入摩擦和更宽的默认reference set。重大行业新闻两岸都能快速传播，真正差异更可能存在于日常弱信号、原始社区讨论与跨国专业网络。台湾的小市场又使这种外部信息具有更高经济价值，因此更容易形成“快速吸收—本土重组—全球发行”的能力；其代价则是fast-follower、外部平台依赖与对日本/欧美benchmark过度敏感。</strong></p>
+</blockquote>
+<p>Status: <strong>STRUCTURALLY SUPPORTED / CAUSAL MAGNITUDE NOT YET QUANTIFIED</strong>.</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / country-studies/taiwan/012-external-information-friction-signal-latency.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

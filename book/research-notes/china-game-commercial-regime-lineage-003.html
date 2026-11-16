@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>中国游戏商业制度谱系：从《传奇》的收钱基础设施，到《征途》、渠道为王与内容方议价回流 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl class="on"" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0" class="t2">0. 核心结论：不是一种“中国游戏模式”，而是连续几次生产函数重写</a><a href="#1-author-origin" class="t2">1. Author-Origin：保留旧命题，但拆掉两个过强历史归因</a><a href="#terminology-ruling" class="t3">Terminology ruling — “富豪阶级游戏性”</a><a href="#a" class="t3">修正 A：不能再写“史玉柱发明免费网游 / 世界第一款免费网游”</a><a href="#b-7090" class="t3">修正 B：不能再把“渠道拿 70%–90% 是常态”当成已证事实</a><a href="#2-phase-a-b" class="t2">2. Phase A → B：盛大先解决的不是“玩法创新”，而是收钱与触达</a><a href="#21" class="t3">2.1 《热血传奇》证明在线服务可以绕开零售软件的脆弱回款</a><a href="#22" class="t3">2.2 点卡 + 网吧 + 全国零售网络，是一种“支付基础设施创业”</a><a href="#23" class="t3">2.3 这一步首先改变的是商业可行性</a><a href="#sources" class="t3">Sources</a><a href="#3-20052006" class="t2">3. 2005–2006：从“卖时间”到“免费人口 + 增值服务”</a><a href="#31-f2p" class="t3">3.1 盛大已经在《征途》商业上线前做 F2P 转换</a><a href="#32" class="t3">3.2 《征途》的真正增量：把不均匀付费做成社会结构</a><a href="#4-phase-c" class="t2">4. Phase C：智能手机没有消灭渠道，反而制造了新的渠道租</a><a href="#41-google-play-android" class="t3">4.1 Google Play 缺席后的中国 Android 是多商店生态</a><a href="#42-2014" class="t3">4.2 2014：发行商需要管理上千渠道</a><a href="#43" class="t3">4.3 这里会产生一种能力筛选</a><a href="#5" class="t2">5. 《刀塔传奇》：产业特化并不等于没有创新</a><a href="#51" class="t3">5.1 创始团队本身来自成熟商业网游体系</a><a href="#52" class="t3">5.2 但它同时拥有极强的商业化与发行经济</a><a href="#53" class="t3">5.3 关键历史含义：创新与高变现第一次形成了极强示范组合</a><a href="#6" class="t2">6. 从《刀塔传奇》到“卡牌化”：应该研究的是复制了什么</a><a href="#7-phase-d-2020" class="t2">7. Phase D：内容方为什么在 2020 年突然有资格说“不”</a><a href="#71-outside-option" class="t3">7.1 不是渠道突然变善良，而是 outside option 变强</a><a href="#72" class="t3">7.2 《万国觉醒》进入中国前，已经先证明全球市场</a><a href="#73-outside-option" class="t3">7.3 《原神》则把 outside option 做成全球多平台产品</a><a href="#8-phase-d" class="t2">8. 但 Phase D 不是“渠道时代结束”</a><a href="#9" class="t2">9. 这条谱系怎样连接中国独立游戏</a><a href="#10" class="t2">10. 制度矩阵</a><a href="#11" class="t2">11. 对“渠道为王”命题的证据分层</a><a href="#strongly-supported" class="t3">STRONGLY SUPPORTED</a><a href="#supported-as-mechanism-not-yet-a-universal-law" class="t3">SUPPORTED AS MECHANISM, NOT YET A UNIVERSAL LAW</a><a href="#author-hypothesis-needs-more-evidence" class="t3">AUTHOR HYPOTHESIS / NEEDS MORE EVIDENCE</a><a href="#12" class="t2">12. 下一轮最值得核的四个缺口</a><a href="#13-2026-10-09-2006" class="t2">13. 2026-10-09 增补：2006年《征途》市场观察与需求发现的不同对象</a></aside><article class="doc"><div class="col"><h1 id="_1">中国游戏商业制度谱系：从《传奇》的收钱基础设施，到《征途》、渠道为王与内容方议价回流</h1>
+<ul>
+<li>Status: RESEARCH NOTE / STRUCTURAL HISTORY / LINEAGE</li>
+<li>Last verified: 2026-10-05</li>
+<li>Related: <code>china-game-industry-prehistory-002.md</code>, <code>china-indie-distribution-regime-001.md</code>, <code>CASE-033 《征途》 / 史玉柱</code>, <code>runestone-keeper-vs-gumballs-001.md</code></li>
+<li>Purpose: 不再把中国游戏商业史写成“点卡 → 氪金 → 渠道 → 原神”的标签年表，而是追踪每一代<strong>谁控制收钱、谁控制用户入口、谁承担研发风险、什么能力因此最值钱</strong>，以及这些制度怎样反过来训练产品与人才。</li>
+</ul>
+<h2 id="0">0. 核心结论：不是一种“中国游戏模式”，而是连续几次生产函数重写</h2>
+<p class="dc">当前证据更支持六段谱系：</p>
+<pre><code class="language-text">A. premium/零售回款弱
+↓
+B. 盛大：在线服务 + 网吧 + 点卡，把“玩的人”变成“能收钱的人”
+↓
+C. 免费制扩张；《征途》把免费人口、阶级化数值、高付费者和地推整成一套社会—商业系统
+↓
+D. 智能手机 + 碎片化 Android 商店 + 联运发行，把“入口”本身变成高租值资产
+↓
+E. 《刀塔传奇》等证明：玩法差异化 + 高数值/LTV + 发行/渠道工业可以制造极高流水，行业能力树被强力筛选
+↓
+F. 《万国觉醒》《原神》等强内容/全球化产品减少对单一本地渠道依赖，研发方议价权回流；但渠道租并未消失
+</code></pre>
+<p>这条线的关键不是“哪家公司更道德”，而是：</p>
+<blockquote>
+<p><strong>收入接口会筛选能力；能力又会筛选下一代项目。</strong></p>
+</blockquote>
+<p>所以中国游戏产业后来异常擅长 monetization、live ops、UA、渠道运营、数值成长和大规模在线服务，并不是“整个行业突然不会做玩法”，而是长期资本回报对这些技能进行了高强度正向选择。</p>
+<hr />
+<h2 id="1-author-origin">1. Author-Origin：保留旧命题，但拆掉两个过强历史归因</h2>
+<p>作者既有《正在到来的中度数值通胀率游戏设计革命》提出了两条对本项目仍有价值的母题：</p>
+<ol>
+<li><strong>高数值通胀商业体制</strong>会提供远高于传统 premium / 低数值产品的付费深度，因此会改变渠道、投资人与从业者的激励；</li>
+<li><strong>渠道为王</strong>不只是“营销很重要”，而是一套能反向塑造产品立项、商业化和人才结构的市场接口。</li>
+</ol>
+<h3 id="terminology-ruling">Terminology ruling — “富豪阶级游戏性”</h3>
+<p>作者旧稿里关于《征途》需求结构的正式术语统一为 <strong>“富豪阶级游戏性”</strong>；“资产阶级游戏性”不作为本项目正式术语。</p>
+<p>这里的“富豪阶级”不是现实人口统计阶层标签，而是需求模型：<strong>现实财富能否通过规则被持续转换为游戏内稀缺能力、地位、可见权力和相对优势。</strong></p>
+<p>详细机制拆解见：
+- <a href="/heroes-portal/country-studies/china/018-wealth-class-gameplay-player-socialization-design-attractor.html">018 — 富豪阶级游戏性、玩家社会化与 Design Attractor</a></p>
+<p>新增强制区分：
+- F2P ≠ 自动等于富豪阶级游戏性；
+- 抽卡 ≠ 自动等于富豪阶级游戏性；
+- cosmetic monetization ≠ 富豪阶级游戏性；
+- 关键变量是 <code>RESOURCE_CONVERSION_RIGHT</code> 与相对优势是否可持续购买。</p>
+<p>旧稿同时提出“类型与受众互相塑造”的母题；现统一由018中的 <code>PREFERENCE_SOCIALIZATION / GENRE↔AUDIENCE CO-EVOLUTION / DESIGN_ATTRACTOR</code> 承接。</p>
+<p>但旧稿里有两类表述需要正式修正：</p>
+<h3 id="a">修正 A：不能再写“史玉柱发明免费网游 / 世界第一款免费网游”</h3>
+<p>巨人自己的 2007 F-1 已明确写：F2P MMO 在中国至少 2003 年已经出现；到 2006 年，F2P 已约占中国网游收入 51.6%，略高于 pay-to-play 的 47.9%。</p>
+<p>此外盛大在 <strong>2005 Q4</strong> 已把《热血传奇》《梦幻国度》《传奇世界》等核心 MMORPG 转为 basic play free + in-game value-added services。</p>
+<p>因此《征途》的更准确历史位置不是“发明 F2P”，而是：</p>
+<blockquote>
+<p><strong>在已经存在的 F2P 条件上，把免费人口、高付费玩家、阶级化数值、社会关系、快速运营和全国地推进一步整合成高度一致的产品—商业系统。</strong></p>
+</blockquote>
+<p>对应正式档案：<a href="/heroes-portal/cases/CASE-033-zhengtu-shi-yuzhu.html"><code>CASE-033</code></a>。</p>
+<h3 id="b-7090">修正 B：不能再把“渠道拿 70%–90% 是常态”当成已证事实</h3>
+<p>公开行业材料确实存在极端个案与多层抽成，但当前更硬的 SEC 证据是 iDreamSky：其与第三方渠道合作时，渠道费通常为 gross billings 的 <strong>40%–70%</strong>；在其典型发行安排下，开发者通常拿 gross billings 的 <strong>15%–30%</strong>。</p>
+<p>这已经足够支持“渠道拥有很强 bargaining power”，无需把未经统一口径审计的 70%–90% 写成常态。</p>
+<hr />
+<h2 id="2-phase-a-b">2. Phase A → B：盛大先解决的不是“玩法创新”，而是收钱与触达</h2>
+<h3 id="21">2.1 《热血传奇》证明在线服务可以绕开零售软件的脆弱回款</h3>
+<p>盛大 2004/2005 SEC 申报材料给出一组非常清楚的数据：</p>
+<ul>
+<li>《热血传奇》2001 年 11 月商业上线；</li>
+<li>2002 年盛大 online game revenue 约 <strong>RMB344.4m</strong>，当年基本全部来自 Mir II；</li>
+<li>average concurrent users 从 2001 年末约 43,736 上升到 2002 年约 <strong>278,186</strong>；</li>
+<li>2002 年 operating income 约 <strong>RMB162.6m</strong>。</li>
+</ul>
+<p>这里不能把成功全部归因于产品原创——Mir II 是韩国授权产品。</p>
+<p>真正值得研究的是盛大在中国本地搭出来的 monetization/distribution perimeter。</p>
+<h3 id="22">2.2 点卡 + 网吧 + 全国零售网络，是一种“支付基础设施创业”</h3>
+<p>盛大 2004 年 SEC 文件写：</p>
+<ul>
+<li>全国 distribution/payment network 触及 <strong>317,000+ retail POS</strong>；</li>
+<li>其中 <strong>40%+ 是网吧</strong>；</li>
+<li>公司还在建设把网吧联入信息系统的管理网络；</li>
+<li>2003 年其 online-game revenue 中，预付卡给 e-sales distributors 的折扣约 23%，给 offline distributors 约 14%。</li>
+</ul>
+<p>这说明早期中国网游的关键竞争力之一不是今天意义上的“投广告”，而是：</p>
+<blockquote>
+<p><strong>让没有信用卡、没有成熟线上支付、常在网吧玩游戏的人，能持续、低摩擦地把现金变成在线服务时长。</strong></p>
+</blockquote>
+<p>盛大当前官方历史页也把当年问题总结为“没有 online payment mechanism”，并回顾其网吧和预付卡网络。官方回忆可作为 P0/P1 自述使用，但具体规模仍以同期 SEC 文件优先。</p>
+<h3 id="23">2.3 这一步首先改变的是商业可行性</h3>
+<p>因此 2000s 中国产业的第一次重大制度重写可以表达为：</p>
+<pre><code class="language-text">可复制的软件商品
+→ 盗版/零售回款脆弱
+
+在线持续服务
++
+账号/服务器控制
++
+点卡/网吧网络
+→ 可持续收费
+</code></pre>
+<p>它解释了为什么人才会大规模迁往网游：不是因为所有人突然觉得 MMO 更“高级”，而是服务型产品第一次把真实玩家规模稳定映射成现金流。</p>
+<h3 id="sources">Sources</h3>
+<ul>
+<li>Shanda Interactive Entertainment F-1 / 2004–2005 SEC filings:<br />
+  https://www.sec.gov/Archives/edgar/data/1278308/000114554904000629/u98811b4e424b4.htm<br />
+  https://www.sec.gov/Archives/edgar/data/1278308/000114554905000033/u99471fv1.htm</li>
+<li>Shanda company retrospective:<br />
+  https://www.shanda.com/shanda-games/</li>
+</ul>
+<hr />
+<h2 id="3-20052006">3. 2005–2006：从“卖时间”到“免费人口 + 增值服务”</h2>
+<h3 id="31-f2p">3.1 盛大已经在《征途》商业上线前做 F2P 转换</h3>
+<p>盛大 2005 年 Q4 的公开披露写明，公司把《热血传奇》《梦幻国度》《传奇世界》改为 free-to-play + in-game value-added services。</p>
+<p>其后年报把这个模式称为 <strong>Come-Stay-Pay (CSP)</strong>。</p>
+<p>这一步的逻辑是：</p>
+<pre><code class="language-text">先付费才进场
+→
+先让人进场
+→
+让部分用户在游戏内部为增值服务付费
+</code></pre>
+<p>这已经把“每个用户都必须贡献近似相同的时间费”改成了“用户价值可以高度不均匀”。</p>
+<p>Source:
+https://www.sec.gov/Archives/edgar/data/1278308/000130901406000154/exhibit1.htm</p>
+<h3 id="32">3.2 《征途》的真正增量：把不均匀付费做成社会结构</h3>
+<p>CASE-033 当前证据支持：</p>
+<ul>
+<li>史玉柱明确把大量免费玩家视为高付费玩家愿意消费的社会环境；</li>
+<li>团队把 lower-tier city / rural market、网吧、地推与游戏内关系结构同时考虑；</li>
+<li>巨人形成 250+ liaison offices、2,000+ liaison personnel 的全国推广外围；</li>
+<li>游戏以虚拟商品/服务而不是统一时间费作为核心收入；</li>
+<li>公司高频更新，并把 player preference adaptation 当成核心能力。</li>
+</ul>
+<p>因此从盛大到《征途》不是“点卡突然变氪金”的断裂，而是：</p>
+<blockquote>
+<p><strong>先有 service monetization 基础设施，再有 F2P 入口改革，最后才出现把异质付费能力、社会地位与数值成长高度系统化的《征途》。</strong></p>
+</blockquote>
+<p>这条顺序比“史玉柱一人发明中国氪金游戏”更接近产业史。</p>
+<hr />
+<h2 id="4-phase-c">4. Phase C：智能手机没有消灭渠道，反而制造了新的渠道租</h2>
+<h3 id="41-google-play-android">4.1 Google Play 缺席后的中国 Android 是多商店生态</h3>
+<p>学术研究对 16 个中国 Android 市场的比较明确指出：中国用户无法使用 Google Play 获取应用，于是形成手机厂商商店（Huawei / Xiaomi / OPPO 等）和互联网公司商店（Baidu / Qihoo / Tencent 等）并存的碎片化生态。</p>
+<p>Source:
+https://arxiv.org/abs/1810.07780</p>
+<p>这不是单纯“多几个下载站”。</p>
+<p>当某个 app store 同时拥有：</p>
+<ul>
+<li>预装入口；</li>
+<li>用户账号；</li>
+<li>支付；</li>
+<li>推荐位；</li>
+<li>联运能力；</li>
+<li>设备出货；</li>
+</ul>
+<p>它在游戏价值链里就不仅是 CDN，而成为<strong>用户获取与收款的地主节点</strong>。</p>
+<h3 id="42-2014">4.2 2014：发行商需要管理上千渠道</h3>
+<p>iDreamSky 的 2014 20-F 写得很直白：公司当年通过 <strong>1,000+ distribution channels</strong> 在中国分发游戏，包括应用商店、微信、手机预装、三大运营商、浏览器、广告联盟等。</p>
+<p>同一文件还披露：</p>
+<ul>
+<li>渠道费典型为 gross billings 的 <strong>40%–70%</strong>；</li>
+<li>开发商在典型 revenue-sharing arrangement 下通常拿 gross billings 的 <strong>15%–30%</strong>；</li>
+<li>渠道成本在 2013 年一度约占公司 total revenues 的 <strong>50.3%</strong>；</li>
+<li>公司明确把与 payment/distribution channels 的谈判条件写成影响 profitability 的关键因素。</li>
+</ul>
+<p>Source:
+https://www.sec.gov/Archives/edgar/data/1600527/000119312515159477/d902553d20f.htm</p>
+<p>这给“渠道为王”一个比情绪化叙述更精确的定义：</p>
+<blockquote>
+<p><strong>当内容方必须通过掌握安装入口、支付和推荐流量的第三方才能规模触达用户时，渠道条款本身成为产品单位经济的重要变量。</strong></p>
+</blockquote>
+<h3 id="43">4.3 这里会产生一种能力筛选</h3>
+<p>在这种制度下，最容易被持续奖励的能力包括：</p>
+<ul>
+<li>retention；</li>
+<li>ARPU / ARPPU / LTV；</li>
+<li>virtual-item economy；</li>
+<li>live ops；</li>
+<li>events / content cadence；</li>
+<li>UA；</li>
+<li>channel negotiation；</li>
+<li>data operations；</li>
+<li>multi-SDK / multi-channel publishing。</li>
+</ul>
+<p>这并不等于“玩法无用”。</p>
+<p>更准确的是：</p>
+<blockquote>
+<p><strong>玩法如果不能转译成足够强的留存、付费深度或获客效率，就较难与掌握流量的渠道形成同向激励。</strong></p>
+</blockquote>
+<p>这就是作者“高数值通胀率体制会训练行业能力树”命题目前最坚实的外部机制基础。</p>
+<hr />
+<h2 id="5">5. 《刀塔传奇》：产业特化并不等于没有创新</h2>
+<h3 id="51">5.1 创始团队本身来自成熟商业网游体系</h3>
+<p>王信文公开回忆：2009–2013 年在腾讯互娱做 MMO 端游运营和策划；2013 年和同事离职创业莉莉丝。</p>
+<p>其早期演讲并不是“我们找一个已经验证的卡牌模板换皮”，反而明确提出：手机上能不能出现三消、回合、ARPG、塔防之外的新主流战斗玩法？</p>
+<p>Source:
+https://m.huxiu.com/article/100622.html</p>
+<p>这点必须保留，否则会把真实产业史简化成“渠道只会奖励抄袭”。</p>
+<h3 id="52">5.2 但它同时拥有极强的商业化与发行经济</h3>
+<p>公开重组材料显示：</p>
+<ul>
+<li>2014 年《刀塔传奇》gross billings 约 <strong>RMB2.16bn</strong>；</li>
+<li>扣除渠道后，中清龙图和莉莉丝按 65% / 35% 分配；</li>
+<li>莉莉丝当年实际分成约 <strong>RMB418m</strong>；</li>
+<li>约 42% 流水来自 iOS，接近六成来自 Android；</li>
+<li>中清龙图 2014 年市场营销费用超过 RMB90m。</li>
+</ul>
+<p>Source lead / secondary reconstruction from transaction materials:
+https://games.sina.cn/cyfw/2015-05-08/detail-icpkqeaz3425722.d.html</p>
+<p>原始交易预案仍应作为最终财务引用优先来源。</p>
+<h3 id="53">5.3 关键历史含义：创新与高变现第一次形成了极强示范组合</h3>
+<p>所以《刀塔传奇》的历史位置不应写成：</p>
+<blockquote>
+<p>“中国渠道把大家逼成抄袭卡牌。”</p>
+</blockquote>
+<p>而应该写成：</p>
+<blockquote>
+<p><strong>一个有玩法差异化意识的商业游戏团队，在移动端同时证明了战斗创新、长线数值成长、留存、渠道发行和高流水可以被捏成同一套产品。</strong></p>
+</blockquote>
+<p>这种结果对后续创业者、资本和人才产生的模仿激励，远强于一个口碑很好但只卖几十万份的 premium 小品。</p>
+<p>因此 <code>industry specialization</code> 是筛选结果，而不是“所有参与者都没有创造力”。</p>
+<hr />
+<h2 id="6">6. 从《刀塔传奇》到“卡牌化”：应该研究的是复制了什么</h2>
+<p>作者旧稿把中国手游大量“卡牌化”与高数值通胀联系在一起，这个方向值得继续，但必须拆成三个可检验层：</p>
+<ol>
+<li><strong>representation layer</strong>：角色/单位被包装为可收集卡牌；</li>
+<li><strong>progression layer</strong>：等级、品质、碎片、装备、技能等多轴成长；</li>
+<li><strong>monetization layer</strong>：抽取、刷新、体力、材料、活动、竞争压力与成长加速。</li>
+</ol>
+<p>以后不能只看到 UI 是“卡牌”就判断其商业制度相同。</p>
+<p>真正值得追的是：</p>
+<blockquote>
+<p>哪些系统被复制，是因为它们提高了玩法可读性与内容复用；哪些系统被复制，是因为它们提高了付费深度、留存或渠道侧预期收入？</p>
+</blockquote>
+<p>《符石守护者》→《不思议迷宫》的比较就是一个很好的微观切片，详见 <a href="/heroes-portal/book/research-notes/runestone-keeper-vs-gumballs-001.html"><code>runestone-keeper-vs-gumballs-001.md</code></a>。</p>
+<hr />
+<h2 id="7-phase-d-2020">7. Phase D：内容方为什么在 2020 年突然有资格说“不”</h2>
+<h3 id="71-outside-option">7.1 不是渠道突然变善良，而是 outside option 变强</h3>
+<p>2020 年《万国觉醒》《原神》同时没有按传统方式进入多个主流安卓商店。</p>
+<p>同期公开报道普遍把中国 Android 游戏传统分成概括为约 <strong>5:5</strong>，而 Apple / Google 的标准模式约为平台 30%、内容方 70%。</p>
+<p>《万国觉醒》只通过 App Store、官网、TapTap、九游等接口上线；《原神》初期也缺席华为、小米等部分安卓渠道。</p>
+<p>Sources:
+https://m.thepaper.cn/newsDetail_forward_9323897
+https://m.21jingji.com/article/20201023/herald/acfd31a2c02e14a7071e1ed4b824e8d5_zaker.html</p>
+<p>关键不是“内容为王”四个字，而是 bargaining model 变了：</p>
+<pre><code class="language-text">旧模型：
+没有渠道 → 很难触达用户
+
+新模型：
+品牌预约 + 官网直装 + TapTap + 自有账号 + 社交媒体/creator + 全球商店 + 跨平台
+→ 渠道只是多个入口之一
+</code></pre>
+<p>内容方只要拥有可信的 outside option，就能要求更好的分成。</p>
+<h3 id="72">7.2 《万国觉醒》进入中国前，已经先证明全球市场</h3>
+<p>公开 Sensor Tower 数据显示，《万国觉醒》2019 年海外收入估算约 <strong>US$458m</strong>，美国、韩国、中国香港为前三市场。</p>
+<p>这意味着莉莉丝 2020 年与国内渠道谈判时，并不是一个“没有渠道就会死”的新工作室。</p>
+<p>Source:
+https://www.ithome.com/0/469/499.htm</p>
+<h3 id="73-outside-option">7.3 《原神》则把 outside option 做成全球多平台产品</h3>
+<p>《原神》2020-09-28 全球同步上线移动端，同时也有 PC / PlayStation 版本。Sensor Tower 估算其首月仅 App Store + Google Play 就产生约 <strong>US$245m</strong> 玩家支出；首周已有约 58% mobile revenue 来自中国以外。</p>
+<p>Sources:
+https://sensortower.com/blog/genshin-impact-first-month-revenue
+https://sensortower.com/blog/genshin-impact-first-week-revenue</p>
+<p>因此《原神》对渠道议价的真正底层能力不是“游戏品质好所以渠道服软”，而是：</p>
+<blockquote>
+<p><strong>它能在多个国家、多个平台、多个支付与分发接口上直接找到用户。</strong></p>
+</blockquote>
+<p>这才是研发权力回流最可迁移的制度解释。</p>
+<hr />
+<h2 id="8-phase-d">8. 但 Phase D 不是“渠道时代结束”</h2>
+<p>2024 年 Tencent 把《地下城与勇士：起源》从部分 Android app stores 移除时，Reuters 仍然把中国 Android 游戏渠道常见的 <strong>50% revenue split</strong> 描述为长期争议焦点。</p>
+<p>Source:
+https://www.reuters.com/technology/tencents-dungeon-fighter-game-pulled-some-android-app-stores-2024-06-20/</p>
+<p>这说明：</p>
+<blockquote>
+<p><strong>2020 以后发生的是议价权重平衡，而不是渠道租金消失。</strong></p>
+</blockquote>
+<p>头部内容方、自有社区强、全球发行强、可官网直装的产品能绕开；弱品牌、小团队、纯本地 mobile 产品仍可能高度依赖渠道。</p>
+<p>到 2026 年，Apple 在中国大陆也把标准 App Store commission 从 30% 下调到 25%。这属于另一个平台治理体系，但同样说明“数字分发租金”仍在持续被开发者、平台与监管重新谈判。</p>
+<p>Source:
+https://www.reuters.com/world/china/apple-cuts-china-app-store-commission-fees-after-government-pressure-2026-03-13/</p>
+<hr />
+<h2 id="9">9. 这条谱系怎样连接中国独立游戏</h2>
+<p>中国现代 premium indie 的关键，不是终于出现了一群“更有艺术追求”的人。</p>
+<p>更重要的是另一套生产函数终于变得可用：</p>
+<pre><code class="language-text">Unity / UE / middleware
++
+Steam / console / global digital stores
++
+Alipay / cards / global settlement infrastructure
++
+YouTube / TikTok / Bilibili / creator network
++
+Discord / Reddit / community tools
++
+publisher / grant / crowdfunding / Early Access
+↓
+小团队不再必须把自己塞进本地 F2P channel model 才能活
+</code></pre>
+<p>于是中国开发者第一次更大规模地拥有选择：</p>
+<ul>
+<li>留在高 LTV / live-service 体系；</li>
+<li>做全球 F2P；</li>
+<li>做 premium Steam；</li>
+<li>做小团队 niche product；</li>
+<li>做 creator-led distribution；</li>
+<li>混合使用 publisher / crowdfunding / self-publishing。</li>
+</ul>
+<p>这就是为什么本书研究 <code>indie movement</code> 必须同时写《传奇》《征途》《刀塔传奇》《原神》：它们本身未必是独立游戏，但它们改变了<strong>独立开发者所处的生产制度背景</strong>。</p>
+<hr />
+<h2 id="10">10. 制度矩阵</h2>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>核心瓶颈</th>
+<th>谁最有权力</th>
+<th>被奖励的能力</th>
+<th>典型锚点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1990s–early 2000s premium</td>
+<td>盗版、支付、零售、收入水平</td>
+<td>盗版/零售环境本身；正规内容方弱</td>
+<td>技术制作但难回款</td>
+<td>国产单机、《七夜》前史</td>
+</tr>
+<tr>
+<td>2001–2005 service/pay-time</td>
+<td>收钱与持续服务</td>
+<td>掌握服务器、点卡、网吧网络的运营商</td>
+<td>server ops、distribution、billing、community</td>
+<td>盛大 / Mir II</td>
+</tr>
+<tr>
+<td>2005–2010 F2P deepening</td>
+<td>扩用户与异质变现</td>
+<td>运营商/研发一体公司</td>
+<td>virtual economy、social status、live ops、ground marketing</td>
+<td>盛大 CSP、《征途》</td>
+</tr>
+<tr>
+<td>2010s mobile channel regime</td>
+<td>安装入口/支付/推荐位</td>
+<td>app stores、发行商、平台、手机厂商</td>
+<td>LTV、UA、渠道、活动、数值、SDK/联运</td>
+<td>iDreamSky 生态、《刀塔传奇》</td>
+</tr>
+<tr>
+<td>late 2010s global mobile</td>
+<td>全球获客和长期产品</td>
+<td>强研发 + 全球发行/买量平台</td>
+<td>global UA、localization、SLG/live ops、品牌</td>
+<td>《万国觉醒》</td>
+</tr>
+<tr>
+<td>2020s content rebalancing</td>
+<td>多接口市场接入</td>
+<td>强内容方与平台重新博弈</td>
+<td>cross-platform、brand、direct community、global publishing</td>
+<td>《原神》《万国觉醒》渠道冲突</td>
+</tr>
+<tr>
+<td>2020s premium indie</td>
+<td>selection / scope / discoverability</td>
+<td>内容方与平台共同决定；creator network 权重上升</td>
+<td>hook、demo、wishlist、creator legibility、low burn</td>
+<td>中国 Steam 新独立谱系</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="11">11. 对“渠道为王”命题的证据分层</h2>
+<h3 id="strongly-supported">STRONGLY SUPPORTED</h3>
+<ul>
+<li>2000s 中国 online service 相对 premium/retail 更容易形成可持续收费；</li>
+<li>盛大建立了巨大 prepaid card / Internet-cafe distribution network；</li>
+<li>中国 F2P 在《征途》前已存在并快速扩大；</li>
+<li>2010s 中国 Android 分发高度碎片化，发行商需要同时管理大量渠道；</li>
+<li>2014 前后渠道可拿 gross billings 的非常高比例，并拥有强 bargaining power；</li>
+<li>《刀塔传奇》证明 mobile F2P 可以产生十亿人民币级年流水；</li>
+<li>2020 《原神》《万国觉醒》公开绕开/拒绝部分传统 Android 渠道；</li>
+<li>2024 Android revenue-share conflict 仍然存在。</li>
+</ul>
+<h3 id="supported-as-mechanism-not-yet-a-universal-law">SUPPORTED AS MECHANISM, NOT YET A UNIVERSAL LAW</h3>
+<ul>
+<li>高抽成 + 推荐位稀缺会使渠道偏好高 LTV / 高变现产品；</li>
+<li>这种收入结构会提高 monetization / live ops / UA 等岗位和公司的相对价值；</li>
+<li>长期激励会造成产业能力路径依赖，使 premium indie selection/scope/creator marketing 相对薄弱。</li>
+</ul>
+<h3 id="author-hypothesis-needs-more-evidence">AUTHOR HYPOTHESIS / NEEDS MORE EVIDENCE</h3>
+<ul>
+<li>渠道在行业层面有意识地“压制更好玩的低变现产品”；</li>
+<li>高数值产品取得推荐主要是因为渠道逐利，而非同时受到留存、题材、买量效率、用户偏好等因素影响；</li>
+<li>这种机制足以单独解释中国玩家品味或全部产品形态；</li>
+<li>“70%–90% 抽成是常态”；</li>
+<li>《征途》是免费制的发明者。</li>
+</ul>
+<p>这些旧表达在 reader layer 应改成可证伪机制，不再作为事实句使用。</p>
+<hr />
+<h2 id="12">12. 下一轮最值得核的四个缺口</h2>
+<ol>
+<li><strong>盛大 → 《征途》的机制迁移</strong>：哪些具体增值服务、装备/身份/社会设计已经在 2005 盛大 CSP 中出现，哪些是《征途》真正强化的新组合？</li>
+<li><strong>《刀塔传奇》复制链</strong>：2014–2017 同类产品到底复制了战斗表示、数值成长、抽卡/碎片、运营活动还是渠道打法？需要挑 3–5 个跟进者做结构对照。</li>
+<li><strong>渠道推荐因果</strong>：寻找渠道内部招商/评级/推荐规则、CP 合同、渠道人士访谈，直接验证“高 LTV → 更多推荐资源”，避免只靠开发者侧推断。</li>
+<li><strong>内容方议价回流的单位经济</strong>：对《原神》《万国觉醒》以及 2024 DNF Mobile 比较官网直装、渠道服、iOS、全球商店的用户获取成本、抽成、账号关系与长期价值。</li>
+</ol>
+<p>若这四项核完，就有资格把“<strong>收入接口会筛选产业能力</strong>”升级为正式跨案例 Claim 候选。</p>
+<hr />
+<h2 id="13-2026-10-09-2006">13. 2026-10-09 增补：2006年《征途》市场观察与需求发现的不同对象</h2>
+<p><strong>P0（同期当事人采访，观点与数字均为采访自述，未审计）</strong>：新浪科技2006-04-13《商业狂人史玉柱：网游要向丁磊陈天桥学习》：</p>
+<ul>
+<li>史玉柱明确区分大量低支付能力的免费玩家，与为装备/社交地位高额付费的部分玩家；认为前者的存在可以增加后者的付费动机。</li>
+<li>他表示自己进入网吧与玩家交流，发现县乡与农村网游用户需求；文中声称“中国网游用户有70%来自小城市和农村”及个别高额付费案例，是<strong>受访者商业判断/数据主张</strong>，不是经本库独立验证的全国分母。</li>
+<li>他谈到《征途》内测在线人数与收支状况，同样属于经营者自述，不应把口径与上市公司经审计财务等同。</li>
+</ul>
+<p>一手来源（P0采访中的自述，不等于独立验证）：https://tech.sina.com.cn/i/2006-04-13/0913901818.shtml</p>
+<p><strong>判断（H）</strong>：史玉柱观察到的是已经存在的玩家人口、付费差异、可购买的社会地位与竞争心理，进而形成商业组织与玩法/收费联合设计能力。它确实构成一种自主问题发现，<strong>不能</strong>将其抹成照搬其他企业的产品，也<strong>不能</strong>据此推出新的底层交互范式已被发明。</p>
+<p>拆成至少三种需求发现（可并存）：</p>
+<table>
+<thead>
+<tr>
+<th>需求空间</th>
+<th>创造者必须理解什么</th>
+<th>初步产物</th>
+<th>不能直接推出</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>商业/市场需求发现（MARKET-DEMAND DISCOVERY）</td>
+<td>哪些尚未被触达的用户、需求或付费机会？</td>
+<td>市场进入、定价、渠道、分层</td>
+<td>已创造原发玩法</td>
+</tr>
+<tr>
+<td>支付/价值捕获需求发现（MONETIZATION-DEMAND DISCOVERY）</td>
+<td>为什么、何时、谁愿意为哪种利益付费？</td>
+<td>收费、虚拟经济、竞争地位商品化</td>
+<td>用户整体福利增加</td>
+</tr>
+<tr>
+<td>体验/玩法需求发现（EXPERIENCE-DEMAND DISCOVERY）</td>
+<td>哪些新行动、策略、选择与情绪愿望尚未满足？</td>
+<td>原型、玩法规则、玩家行动空间</td>
+<td>一定能够商业成功</td>
+</tr>
+</tbody>
+</table>
+<p>这三者并非道德优劣排序，也不能完全互斥：《征途》的付费机制本身会反过来改变玩家社会结构及体验。<strong>产业比较应该测各类问题发现与产品成果的比例和相互作用，不应笼统说某产业“不会找需求”。</strong></p>
+<p>研究后续需要：(a) 史玉柱口述的市场结构与支付数字的独立统计复核；(b) 《征途》2005—2007同期与其他中国网游的同口径对照；(c) 区分玩家满意度、付费强度和文化体验指标；(d) 追踪这套商业市场学习方法是否、如何影响后代游戏策划训练。理论主档见<a href="/heroes-portal/country-studies/china/033-technology-proxies-experience-demand-and-commercial-feedback.html">中国033 §12</a>；本节仅承担史料锚点。</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / book/research-notes/china-game-commercial-regime-lineage-003.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

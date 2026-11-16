@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Early id / DOOM Life Crossroads Audit 001 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl class="on"" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#core-question" class="t2">Core Question</a><a href="#historical-context-gate-1979-1984-1989" class="t2">Historical Context Gate — 1979 / 1984 / 1989 不是同一个美国</a><a href="#crossroad-1" class="t2">Crossroad 1 — 游戏不是课余噪声，而是第一次遇到“我想进去改它”的对象</a><a href="#romero" class="t3">Romero</a><a href="#carmack" class="t3">Carmack</a><a href="#reader-layer-interpretation" class="t3">Reader-layer interpretation</a><a href="#crossroad-2-softdisk" class="t2">Crossroad 2 — Softdisk：先进入一个高频出货系统，而不是先成立梦想公司</a><a href="#reader-layer-interpretation_1" class="t3">Reader-layer interpretation</a><a href="#crossroad-3-proof" class="t2">Crossroad 3 — 有技术突破以后，先偷偷做一个 proof，而不是直接辞职</a><a href="#reader-layer-interpretation_2" class="t3">Reader-layer interpretation</a><a href="#crossroad-4-apogee-shareware" class="t2">Crossroad 4 — Apogee / shareware：第一次有人为“另一种发行结构”打开门</a><a href="#reader-layer-interpretation_3" class="t3">Reader-layer interpretation</a><a href="#crossroad-5-wolfenstein" class="t2">Crossroad 5 — Wolfenstein：有第一桶金以后，没有立刻购买大组织</a><a href="#crossroad-6-doom-leverage" class="t2">Crossroad 6 — DOOM：钱多了以后，真正值得买的是 leverage</a><a href="#doomed-next" class="t3">DoomEd / NeXT</a><a href="#c-over-assembly-where-appropriate" class="t3">C over assembly where appropriate</a><a href="#strategic-control-outsourced-operations" class="t3">Strategic control + outsourced operations</a><a href="#reader-layer-interpretation_4" class="t3">Reader-layer interpretation</a><a href="#crossroad-7-carmack" class="t2">Crossroad 7 — 为什么 Carmack 愿意让玩家进去改</a><a href="#fourth-industrial-revolution-significance" class="t3">Fourth Industrial Revolution significance</a><a href="#crossroad-8-tom-hall" class="t2">Crossroad 8 — Tom Hall 离开：互补不是永恒稳定</a><a href="#crossroad-9-doom-quake" class="t2">Crossroad 9 — DOOM 成功以后，为什么 Quake 反而更难</a><a href="#reader-layer-interpretation_5" class="t3">Reader-layer interpretation</a><a href="#1-two-capability-systems" class="t2">1. Two capability systems</a><a href="#carmack_1" class="t3">Carmack</a><a href="#romero_1" class="t3">Romero</a><a href="#2-complementarity-as-temporary-capital" class="t2">2. Complementarity as temporary capital</a><a href="#3-cash-changes-the-feasible-set" class="t2">3. Cash changes the feasible set</a><a href="#4-success-creates-organization-problems" class="t2">4. Success creates organization problems</a><a href="#reader-profile-requirements" class="t2">Reader Profile Requirements</a><a href="#boundary" class="t2">Boundary</a></aside><article class="doc"><div class="col"><h1 id="early-id-doom-life-crossroads-audit-001">Early id / DOOM Life Crossroads Audit 001</h1>
+<ul>
+<li>Status: RESEARCH NOTE / READER-LAYER PREP</li>
+<li>Related Case: <a href="/heroes-portal/cases/CASE-016-early-id-software.html"><code>CASE-016</code></a></li>
+<li>Evidence Ledger: <a href="/heroes-portal/evidence/CASE-016-early-id-software-source-ledger.html"><code>CASE-016 Evidence</code></a></li>
+<li>Purpose: 把 <code>Keen → Wolfenstein 3D → DOOM → Quake</code> 从产品史改写成人物选择史，为 reader profile 提供结构；不替代 Case / Evidence。</li>
+</ul>
+<h2 id="core-question">Core Question</h2>
+<p class="dc"><code>Masters of Doom</code> 最容易被读成“两个天才改变世界”。</p>
+<p>本项目更关心：</p>
+<blockquote>
+<p><strong>John Carmack、John Romero、Tom Hall 等人在几个关键人生节点上，当时拥有什么、缺什么、可以去哪里、为什么做了这个选择？这些选择怎样逐步改变下一轮可行选择集合？</strong></p>
+</blockquote>
+<p>重点不是把成年成就倒推成童年宿命，而是恢复当时的 uncertainty。</p>
+<hr />
+<h2 id="historical-context-gate-1979-1984-1989">Historical Context Gate — 1979 / 1984 / 1989 不是同一个美国</h2>
+<p>此笔记中的每一个个人节点都受 <a href="/heroes-portal/book/research-notes/early-id-1980s-america-life-decisions-001.html">1980年代美国社会与 early id 生命史研究</a> 约束；CASE-016 Ledger E020–E026 保存 Census / 同期新闻 / 当事人访谈的出处，不能直接从 2003 年的传记写出“美国社会天然鼓励异类”之类的大判断。</p>
+<ul>
+<li><strong>1979：Romero 11岁。</strong> 可通过 Sierra College 学生接触大型机，尚无今日免费的游戏引擎或普遍家用电脑；关键决定是<strong>是否从消费转向学习程序</strong>。</li>
+<li><strong>1984：Romero 16岁，首次杂志投稿兑现。</strong> 全国有电脑家庭仅 8.2%；收入不足 $10,000 家庭电脑拥有率 1.7%，收入 $50,000 以上达 22.9%。这意味着得到软硬件和可反复占有机时本身就是选拔。</li>
+<li><strong>1988–1989：Carmack 辍学、Romero 求职、Hall 受过大学教育、Adrian 寻找更好的美术工作。</strong> 1989年全国有电脑家庭达 15.0%，但大多数家庭仍无电脑；个人的 household、工资、复学/就业退路完全不同。</li>
+<li><strong>1990：Gamer&rsquo;s Edge → Keen。</strong> 机房、工资、设备、频繁交付和 Jay / Miller 的人才/渠道网络使可玩 proof 有了付费转化可能；离职同时带来家庭、雇佣/IP 与合同义务。</li>
+</ul>
+<p><strong>当事人风险不可合并</strong>：Romero 已有婚育/前次工作失败成本（Kushner S1），Carmack 的教育家庭资源和青年阶段居住支持（S1）、Hall 的大学学位、Adrian 的非程序美术劳动，都意味着同一“辞职创业”事件对不同人有不同 opportunity cost。个人储蓄、家庭支出、分成和雇佣合同仍大多 UNKNOWN。</p>
+<p><strong>不浪漫化社会容忍度</strong>：Romero 与继父冲突、Carmack 因违法受到惩戒、Hall 求职不顺、Softdisk 原雇主与员工的权利损失，都与独立亚文化的创造自由并存。此处不是美国国民性论证，也不能借个人父母的行为对美国教育制度作整齐评价。</p>
+<hr />
+<h2 id="crossroad-1">Crossroad 1 — 游戏不是课余噪声，而是第一次遇到“我想进去改它”的对象</h2>
+<h3 id="romero">Romero</h3>
+<p>Romero 2023 年回忆，1983 年转学到英国一座美军基地学校后，学校机房使用 Apple II，并教授 BASIC。这不是“学校直接培养了 DOOM 设计师”，但它提供了一个低门槛转换点：游戏兴趣和计算机第一次进入可以亲手修改 / 编程的环境。</p>
+<p>此后 Romero 不是只做玩家。他向杂志提交游戏代码、经历拒稿，也逐渐获得实际发表和报酬。</p>
+<p>来源：
+- Shacknews, <code>Becoming Doom Guy: John Romero on his memoir and a life in games</code>, 2023: https://www.shacknews.com/article/136450/becoming-doomguy-john-romero-on-his-memoir-and-a-life-in-games</p>
+<h3 id="carmack">Carmack</h3>
+<p>Carmack 后来回忆，少年时就会直接修改 <em>Ultima II</em> 的磁盘 sector 数据。这个动作很关键：他与游戏的关系不是“消费一个封闭成品”，而是把软件视为可以拆、可以观察、可以改变的系统。</p>
+<p>来源：
+- WIRED, <code>Q&amp;A: Doom's Creator Looks Back on 20 Years of Demonic Mayhem</code>, 2013: https://www.wired.com/2013/12/john-carmack-doom/</p>
+<h3 id="reader-layer-interpretation">Reader-layer interpretation</h3>
+<p>这不是“打游戏让人变程序员”。</p>
+<p>而是：</p>
+<pre><code class="language-text">游戏兴趣
+→ 想理解规则 / 内部结构
+→ 获得机器 / 编程入口
+→ 修改 / 编写
+→ 外部反馈
+</code></pre>
+<p>真正发生能力转换的，是中间这些动作。</p>
+<hr />
+<h2 id="crossroad-2-softdisk">Crossroad 2 — Softdisk：先进入一个高频出货系统，而不是先成立梦想公司</h2>
+<p>在 Softdisk / Gamer&rsquo;s Edge，Romero、Carmack、Tom Hall、Adrian Carmack 等人首先是职业生产者。</p>
+<p>关键条件：</p>
+<ul>
+<li>有工资；</li>
+<li>有机器和工作环境；</li>
+<li>有明确交付周期；</li>
+<li>必须反复 ship；</li>
+<li>可以观察彼此工作；</li>
+<li>大量已有 Apple II / PC 技术和旧作可以复用。</li>
+</ul>
+<p>Romero 回忆 Gamer&rsquo;s Edge 的出货节奏极高；后来的 Catacomb 3-D 口述史也说明，为了满足月度生产，他们会主动重写 / 移植自己已有作品，而不是每次从零发明。</p>
+<p>来源：
+- CASE-016:E001
+- Shacknews, <code>Living the Dream: The Making of Catacomb 3-D</code>, 2025: https://www.shacknews.com/article/143288/living-the-dream-the-making-of-catacomb-3-d</p>
+<h3 id="reader-layer-interpretation_1">Reader-layer interpretation</h3>
+<p>他们的“独立能力”不是在辞职当天生成的。</p>
+<p>更接近：</p>
+<blockquote>
+<p><strong>先在有工资的生产系统里，把“我喜欢做游戏”训练成“我可以稳定完成游戏”。</strong></p>
+</blockquote>
+<p>这对目标教育很重要：职业路径不一定是梦想的反面。某些工作首先提供能力资本和安全试错空间。</p>
+<hr />
+<h2 id="crossroad-3-proof">Crossroad 3 — 有技术突破以后，先偷偷做一个 proof，而不是直接辞职</h2>
+<p>Carmack 的 PC scrolling 技术让团队意识到，PC 可以逼近当时更像主机的横版动作表现。</p>
+<p>他们没有先成立公司、融资、组几十人。</p>
+<p>而是利用夜晚 / 周末做出 proof，并最终形成 Commander Keen。</p>
+<p>这段历史最重要的不是“偷用公司电脑”的传奇感，而是 commitment level：</p>
+<pre><code class="language-text">职业工作仍在
+→ 技术 proof
+→ 游戏 prototype / shareware opportunity
+→ 市场验证
+→ 收入足以改变职业选择
+→ 才全职独立
+</code></pre>
+<p>来源：
+- CASE-016:E002 / E003 / E004</p>
+<h3 id="reader-layer-interpretation_2">Reader-layer interpretation</h3>
+<p>这不是“勇敢辞职追梦”。</p>
+<p>恰恰相反：</p>
+<blockquote>
+<p><strong>他们先把梦想做成足以改变现实约束的证据，再提高承诺等级。</strong></p>
+</blockquote>
+<hr />
+<h2 id="crossroad-4-apogee-shareware">Crossroad 4 — Apogee / shareware：第一次有人为“另一种发行结构”打开门</h2>
+<p>Scott Miller 不是普通意义上的老板。</p>
+<p>他的 shareware 模式提供了：</p>
+<ul>
+<li>免费 episode 作为获客；</li>
+<li>玩家直接体验；</li>
+<li>后续内容直接转订单；</li>
+<li>小团队不必先进入传统零售生产结构。</li>
+</ul>
+<p>Keen 的成功使 id 有资格离开 Softdisk，但离开仍伴随合同义务和 legal settlement，而不是“有灵感所以自由”。</p>
+<p>来源：
+- CASE-016:E002 / E003 / E007</p>
+<h3 id="reader-layer-interpretation_3">Reader-layer interpretation</h3>
+<p>人生岔路不仅由个人决定，也由<strong>新制度出现</strong>决定。</p>
+<p>一个人可能早几年同样有技术、同样有野心，却因为缺少合适分发机制无法走同一路。</p>
+<hr />
+<h2 id="crossroad-5-wolfenstein">Crossroad 5 — Wolfenstein：有第一桶金以后，没有立刻购买大组织</h2>
+<p>Keen 购买了独立时间。</p>
+<p>Wolfenstein 3D 又把：</p>
+<ul>
+<li>3D 技术；</li>
+<li>action design；</li>
+<li>shareware；</li>
+<li>品牌；</li>
+<li>现金流</li>
+</ul>
+<p>进一步耦合。</p>
+<p>关键问题不是“Wolfenstein 赚了多少”，而是：</p>
+<blockquote>
+<p><strong>第一次成功之后，id 首先扩大的是可选项，而不只是 headcount。</strong></p>
+</blockquote>
+<p>他们可以继续做更危险的技术 / 产品实验，同时维持小核心。</p>
+<p>来源：
+- CASE-016:E007 / E010</p>
+<hr />
+<h2 id="crossroad-6-doom-leverage">Crossroad 6 — DOOM：钱多了以后，真正值得买的是 leverage</h2>
+<p>DOOM 阶段最值得从生产史而不是技术史理解的投入：</p>
+<h3 id="doomed-next">DoomEd / NeXT</h3>
+<p>Romero 的 DoomEd 约投入五个人月，其意义是让 level designer 在编辑器里直接设计，而不是不断请求 programmer 改数据。</p>
+<h3 id="c-over-assembly-where-appropriate">C over assembly where appropriate</h3>
+<p>Carmack 并没有把“越底层越硬核”当身份。他把大部分代码放在 ANSI C，只在关键渲染 routine 使用汇编。</p>
+<h3 id="strategic-control-outsourced-operations">Strategic control + outsourced operations</h3>
+<p>DOOM 阶段 id 把分发战略控制内收，但没有因此自己做所有运营，而是把电话订单等执行外包。</p>
+<p>来源：
+- CASE-016:E007</p>
+<h3 id="reader-layer-interpretation_4">Reader-layer interpretation</h3>
+<p>成功后的成熟，不是“终于什么都自己做”。</p>
+<p>而是开始问：</p>
+<blockquote>
+<p><strong>哪些能力必须掌握，哪些工作只要有人可靠地做就行？</strong></p>
+</blockquote>
+<p>这是从个人英雄进入组织设计的第一步。</p>
+<hr />
+<h2 id="crossroad-7-carmack">Crossroad 7 — 为什么 Carmack 愿意让玩家进去改</h2>
+<p>Carmack 2013 年回忆自己少年时期修改 <em>Ultima II</em> 的经验，并明确把后来愿意公开代码 / 支持修改，与“让下一代得到自己当年想要的东西”联系起来。</p>
+<p>DOOM 的 WAD / specs / editor ecosystem 随后把产品边界打开。</p>
+<p>到 1998 年，WIRED 已经记录 Doom 圈中的专业级地图作者怎样从消费者身份进入职业 level design。</p>
+<p>来源：
+- WIRED 2013: https://www.wired.com/2013/12/john-carmack-doom/
+- CASE-016:E008
+- WIRED, <code>Legion of Doom</code>, 1998: https://www.wired.com/1998/03/doom/</p>
+<h3 id="fourth-industrial-revolution-significance">Fourth Industrial Revolution significance</h3>
+<p>这是一个非常早的数字能力生态原型：</p>
+<pre><code class="language-text">commercial software
+→ exposed structure / moddability
+→ player experiments
+→ public artifact
+→ reputation
+→ professional opportunity
+</code></pre>
+<p>平台不是学校，但它产生了一条非正式的 capability pipeline。</p>
+<hr />
+<h2 id="crossroad-8-tom-hall">Crossroad 8 — Tom Hall 离开：互补不是永恒稳定</h2>
+<p>Tom Hall 在 DOOM 早期承担创意方向，但团队对 DOOM 应该成为什么产生实质冲突，最终离开。</p>
+<p>这不能简化成“谁对谁错”。</p>
+<p>更重要的是：</p>
+<blockquote>
+<p><strong>当产品方向开始变化，原本互补的人可能不再对同一个目标函数达成一致。</strong></p>
+</blockquote>
+<p>来源：
+- CASE-016:E007
+- <em>Masters of Doom</em>（E006）作为叙事补充，不独立承担动机裁决。</p>
+<hr />
+<h2 id="crossroad-9-doom-quake">Crossroad 9 — DOOM 成功以后，为什么 Quake 反而更难</h2>
+<p>成功改变了所有人的外部选择：</p>
+<ul>
+<li>更有钱；</li>
+<li>更有名；</li>
+<li>技术野心更大；</li>
+<li>可以招到顶级人才；</li>
+<li>每个人更有能力坚持自己的目标。</li>
+</ul>
+<p>WIRED 1996 的同期现场报道已经记录 Quake 开发中的 delay、false starts、war-room 集中生产和高压冲突。</p>
+<p>来源：
+- WIRED, <code>The Egos at Id</code>, 1996: https://www.wired.com/1996/08/id/</p>
+<h3 id="reader-layer-interpretation_5">Reader-layer interpretation</h3>
+<p>小团队早期的超低协调成本，部分来自：</p>
+<ul>
+<li>人少；</li>
+<li>目标近；</li>
+<li>钱少；</li>
+<li>交付快；</li>
+<li>彼此能力高度互补。</li>
+</ul>
+<p>成功以后，这些条件同时被破坏。</p>
+<p>所以：</p>
+<blockquote>
+<p><strong>成功购买选择权，也购买分歧的能力。</strong></p>
+</blockquote>
+<p>这应该成为 <code>Masters of Doom</code> reader profile 的后半段，而不能在 DOOM 发售高潮处结束。</p>
+<hr />
+<h1 id="masters-of-doom"><em>Masters of Doom</em> 应怎样被拆，而不是怎样被膜拜</h1>
+<h2 id="1-two-capability-systems">1. Two capability systems</h2>
+<p>不要只写“两位 John”。</p>
+<p>要拆：</p>
+<h3 id="carmack_1">Carmack</h3>
+<ul>
+<li>计算机 / 图形 / engine frontier；</li>
+<li>问“现在机器刚好能做到什么”；</li>
+<li>技术约束直接塑造产品可能性；</li>
+<li>对开放代码 / hacking culture 有长期价值偏好。</li>
+</ul>
+<h3 id="romero_1">Romero</h3>
+<ul>
+<li>长期游戏玩家 / maker / shipper；</li>
+<li>game feel / level / tool / product momentum；</li>
+<li>强烈吸收游戏文化并快速试验；</li>
+<li>把技术 possibility 变成具体玩家体验。</li>
+</ul>
+<p>这是初步 reader-layer abstraction，不是人格心理诊断。</p>
+<h2 id="2-complementarity-as-temporary-capital">2. Complementarity as temporary capital</h2>
+<p>他们早期真正的 superpower 不是单个人的天赋，而是：</p>
+<blockquote>
+<p>Carmack 扩大技术可行域；Romero / Hall / artists 把它迅速翻译成可玩的产品；高频 ship 又不断给技术反馈。</p>
+</blockquote>
+<h2 id="3-cash-changes-the-feasible-set">3. Cash changes the feasible set</h2>
+<p>Keen / Wolfenstein / DOOM 的钱不能只写成财富数字。</p>
+<p>每次收入都改变：</p>
+<ul>
+<li>是否需要老板；</li>
+<li>是否需要 publisher；</li>
+<li>能买什么硬件；</li>
+<li>能花多久做 tool；</li>
+<li>能不能拒绝某个 deal；</li>
+<li>能不能承担下一次更大的实验。</li>
+</ul>
+<h2 id="4-success-creates-organization-problems">4. Success creates organization problems</h2>
+<p><code>Masters of Doom</code> 后半段最值得保留，因为它拒绝“爆款以后幸福结束”。</p>
+<p>产品成功并不能自动生成：</p>
+<ul>
+<li>governance；</li>
+<li>role clarity；</li>
+<li>founder alignment；</li>
+<li>decision rights；</li>
+<li>sustainable work culture。</li>
+</ul>
+<p>这是 early id 从“项目型英雄团队”转成“必须成为组织”时遇到的断层。</p>
+<hr />
+<h2 id="reader-profile-requirements">Reader Profile Requirements</h2>
+<p>正式 profile 至少要覆盖：</p>
+<ol>
+<li>两位 John 的游戏 / 计算机前史；</li>
+<li>Softdisk 为什么重要；</li>
+<li>为什么没有一开始辞职；</li>
+<li>Keen 如何把 proof 变成职业独立；</li>
+<li>Wolfenstein 如何把第一轮成功变成下一轮 optionality；</li>
+<li>DOOM 为什么优先买工具 / 技术 / control 而不是先买大 headcount；</li>
+<li>WAD / openness 怎样把玩家变成外围生产者与未来专业人才；</li>
+<li>Hall conflict；</li>
+<li>Quake / Romero split：成功为什么产生新的组织问题；</li>
+<li>哪些内容来自 <em>Masters of Doom</em>，哪些已经被 P0/P1 来源独立确认。</li>
+</ol>
+<h2 id="boundary">Boundary</h2>
+<ul>
+<li>不把违法 / 叛逆经历浪漫化成创业必要条件；</li>
+<li>不把极端工时当现代建议；</li>
+<li>不把 1990s shareware 直接类比 Steam；</li>
+<li>不把 Carmack / Romero 简化成“技术脑 vs 创意脑”的漫画人格；</li>
+<li>不把游戏兴趣直接等同职业能力；必须展示转换动作；</li>
+<li>不把 DOOM modding 证明成“所有玩家都能靠 mod 入行”，只能证明该 pathway 真实存在并在特定生态中形成职业入口。</li>
+</ul><div class="crumbs"><a href="/heroes-portal/">书阁</a> / book/research-notes/doom-life-crossroads-001.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

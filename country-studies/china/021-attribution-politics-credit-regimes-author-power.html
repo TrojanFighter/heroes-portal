@@ -1,0 +1,854 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>021 — Attribution Politics：创作归因、署名制度与作者权如何形成 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl class="on"" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0" class="t2">0. 核心命题</a><a href="#01-2026-10-09" class="t2">0.1 组织光环与独立作者声望：身份能否代替实际贡献？（2026-10-09专题增量）</a><a href="#a" class="t3">A. 必须拆开三种“职业声望”</a><a href="#b" class="t3">B. 美国的独立作品认可：有直接制度证据，但不是所有美国从业者的共同态度</a><a href="#c" class="t3">C. 候选机制：跨评价环境的资历溢价、身份排序及正统倒置</a><a href="#d" class="t3">D. 证伪与测量</a><a href="#02-3a2026-10-09" class="t2">0.2 跨制度声望兑换：美国学位与海外3A履历的结构同构（2026-10-09）</a><a href="#a_1" class="t3">A. 先区分生产制度与兑换制度</a><a href="#b_1" class="t3">B. 已经得到直接支持的教育场域材料</a><a href="#c_1" class="t3">C. 关键边界：海归身份并不天然带来正向工资与招聘溢价</a><a href="#d-merit" class="t3">D. “美国没有优绩主义”不准确；真正不同的是 merit 的被认证方式</a><a href="#e-3a" class="t3">E. 与海外3A员工地位的同构关系是个需要单独证明的结构命题</a><a href="#source-ledger2026-10-09" class="t3">Source ledger（2026-10-09；论文数据代表其研究时期，不自动为当下全部人口）</a><a href="#1" class="t2">1. 署名不是荣誉装饰，而是职业资本基础设施</a><a href="#11-wgacredit" class="t3">1.1 WGA：credit直接决定职业位置</a><a href="#12-dga" class="t3">1.2 DGA：导演署名被合同化、广告化</a><a href="#2-credit" class="t2">2. 游戏业的反差：credit长期更接近公司自定惯例</a><a href="#3-atari-activision" class="t2">3. Atari → Activision：现代游戏作者政治的原型冲突</a><a href="#31-atari" class="t3">3.1 Atari：匿名不是偶然</a><a href="#32-fantastic-fourcredit-royalty" class="t3">3.2 “Fantastic Four”要求的不是单纯涨薪，而是credit + royalty</a><a href="#33-activision" class="t3">3.3 Activision反过来把设计师本人变成营销资产</a><a href="#4" class="t2">4. 美国案例真正说明了什么？</a><a href="#5" class="t2">5. 日本：同一国家内部同时存在“匿名外包”与“制度化作者叙事”</a><a href="#51-tose" class="t3">5.1 TOSE：主动隐藏作者</a><a href="#52-credit" class="t3">5.2 日本旧游戏的credit缺失甚至会破坏历史记忆</a><a href="#53-nintendo-iwata-asksattribution-infrastructure" class="t3">5.3 Nintendo / Iwata Asks：公司也可以主动制造Attribution Infrastructure</a><a href="#6-f2p" class="t2">6. 中国：F2P时代形成了极特殊的“不署名均衡”</a><a href="#61-anti-poaching-attribution-suppression" class="t3">6.1 ANTI-POACHING ATTRIBUTION SUPPRESSION</a><a href="#62-responsibilityrights-mismatch" class="t3">6.2 RESPONSIBILITY–RIGHTS MISMATCH</a><a href="#63-doxxing-harassment-cost" class="t3">6.3 DOXXING / HARASSMENT COST</a><a href="#7" class="t2">7. 中国当前最关键的悖论：玩家开始想“追作者”，开发者却可能不想被追</a><a href="#71-private-reputation-public-authorship-gap" class="t2">7.1 PRIVATE REPUTATION / PUBLIC AUTHORSHIP GAP</a><a href="#industry-reputation-capital" class="t3">INDUSTRY REPUTATION CAPITAL</a><a href="#public-author-capital" class="t3">PUBLIC AUTHOR CAPITAL</a><a href="#reputation-conversion-rate" class="t3">REPUTATION CONVERSION RATE</a><a href="#reputation-compounding-rate" class="t3">REPUTATION COMPOUNDING RATE / 声誉复利率</a><a href="#persistent-pseudonym-credit" class="t3">PERSISTENT PSEUDONYM CREDIT / 持续笔名署名</a><a href="#8" class="t2">8. 中国法律提供了一个有意思的影视对照</a><a href="#9-premium-regimecredit" class="t2">9. 《黑神话：悟空》：premium regime可能重新提高credit价值</a><a href="#10-f2pcredith" class="t2">10. F2P为什么天然更容易形成弱个人credit？——机制H，不是定律</a><a href="#continuous-product-attribution-dilution" class="t3">CONTINUOUS-PRODUCT ATTRIBUTION DILUTION</a><a href="#11-attribution-regime" class="t2">11. Attribution Regime 的六个维度</a><a href="#111-credit-visibility" class="t3">11.1 CREDIT VISIBILITY</a><a href="#112-credit-persistence" class="t3">11.2 CREDIT PERSISTENCE</a><a href="#113-role-legibility" class="t3">11.3 ROLE LEGIBILITY</a><a href="#114-creditmoney-coupling" class="t3">11.4 CREDIT→MONEY COUPLING</a><a href="#115-creditrights-coupling" class="t3">11.5 CREDIT→RIGHTS COUPLING</a><a href="#116-attribution-risk" class="t3">11.6 ATTRIBUTION RISK</a><a href="#12-credit-without-power-power-without-credit" class="t2">12. CREDIT WITHOUT POWER 与 POWER WITHOUT CREDIT</a><a href="#credit-without-power" class="t3">CREDIT WITHOUT POWER</a><a href="#power-without-credit" class="t3">POWER WITHOUT CREDIT</a><a href="#13-ai" class="t2">13. AI时代：归因会更难，也更重要</a><a href="#14" class="t2">14. 对英雄传说研究方法的直接修正</a><a href="#15" class="t2">15. 当前最小结论</a><a href="#16-creditcreative-surplus-allocation" class="t2">16. 署名之后：Credit只是Creative Surplus Allocation的一层</a></aside><article class="doc"><div class="col"><h1 id="021-attribution-politics">021 — Attribution Politics：创作归因、署名制度与作者权如何形成</h1>
+<ul>
+<li>Program: C / 中国国情研究 × 英雄传说 × 劳动政治 × 作者权</li>
+<li>Status: <strong>MECHANISM FRAMEWORK / COMPARATIVE HISTORY / HYPOTHESIS-BUILDING</strong></li>
+<li>As-of: 2026-10-08</li>
+<li>Parent: <a href="/heroes-portal/country-studies/china/020-author-brand-capital-portable-demand-bargaining-power.html">020 — Author Brand Capital</a></li>
+<li>Property-chain extension: <a href="/heroes-portal/country-studies/china/022-creative-surplus-allocation-rights-customer-future-control.html">022 — Creative Surplus Allocation</a></li>
+<li>Taste institutions: <a href="/heroes-portal/country-studies/china/019-taste-institutions-player-literacy-creator-selection.html">019 — Taste Institutions</a></li>
+<li>Creator audit: <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes/blob/main/schemas/creator-life-decision-audit.md">Creator Life / Decision Audit</a></li>
+<li>Boundary: 本文研究“谁被看见、谁承担责任、谁带走声誉”的制度，不主张所有复杂游戏都应归功于单一auteur，也不把署名本身等同于公平分配。</li>
+</ul>
+<h2 id="0">0. 核心命题</h2>
+<p class="dc">作者品牌资本的上游不是“个人魅力”，而是：</p>
+<h1 id="attribution-politics"><code>ATTRIBUTION POLITICS / 创作归因政治</code></h1>
+<p>定义：</p>
+<blockquote>
+<p><strong>一项集体创作的价值最终被稳定归因给谁、谁有权决定署名、哪些贡献被记录、哪些人承担失败责任，以及成功后这份信用能否随个人迁移的制度。</strong></p>
+</blockquote>
+<p>同一款成功产品的价值可以沉淀到：
+- IP；
+- 公司；
+- 工作室；
+- 制作人 / director；
+- writer / designer / artist；
+- 外包团队；
+- “整个团队”。</p>
+<p>这些并非中性描述。它们会改变：
+- 招聘与跳槽；
+- 下一作融资；
+- outside option；
+- 玩家追随；
+- 工资与晋升；
+- 历史记忆；
+- 谁能成为“英雄传说”中的人物。</p>
+<h2 id="01-2026-10-09">0.1 组织光环与独立作者声望：身份能否代替实际贡献？（2026-10-09专题增量）</h2>
+<p>与 <a href="/heroes-portal/country-studies/china/036-virtuos-aaa-alumni-return-and-authorial-team-formation.html">036 — 维塔士、海外3A人才与原创组织形成</a>、<a href="/heroes-portal/country-studies/china/027-individualism-as-innovation-infrastructure.html">027 — 个人主义创新基础设施</a> 及 <a href="/heroes-portal/country-studies/china/029-orthodoxy-inversion-chundeng-farmer-inventor.html">029 — 正统倒置</a> 交叉。这里讨论的是 <strong>prestige allocation / 身份声望如何分配</strong>；不将私人社交观察作为公共统计证据。</p>
+<h3 id="a">A. 必须拆开三种“职业声望”</h3>
+<ol>
+<li><code>ORGANIZATIONAL PRESTIGE</code>：曾供职或参与著名3A公司/IP的身份信号。可能确有高度专业价值，但<strong>不是完整作者资格证书</strong>。</li>
+<li><code>SPECIALIST REPUTATION</code>：本人在特定岗位/技术、团队协作、3C、设计模块上的可验证贡献、peer references与具体作品记录。</li>
+<li><code>PORTABLE AUTHOR CAPITAL</code>：离开原雇主/IP后，仍能凭自主形成的游戏创作、玩家信任、原型与交付记录吸引合作者、受众、资金与发行商。其更严定义见<a href="/heroes-portal/country-studies/china/020-author-brand-capital-portable-demand-bargaining-power.html">020</a>。</li>
+</ol>
+<p>将第一类直接当第三类，定义为候选 <strong><code>ORGANIZATIONAL-HALO→AUTHORIAL-STATUS TRANSFER</code> / 组织光环的作者权误认证</strong>。它不是海外就业或技术岗位的道德缺陷，而是<strong>评价者可能犯的贡献归因错误</strong>。</p>
+<p>Cialdini等（1976）研究 <code>Basking in Reflected Glory</code>，在三项大学橄榄球场景实验中发现，集体成就能影响个体公开展示归属的倾向，即使个人未直接促成球队成功 [H01]。该研究<strong>只能为“集体声望可被个人挪用”提供一般社会心理学机制</strong>；它没有研究游戏业、中国、欧美差异，不能据此断言中国3A员工更傲慢。</p>
+<p>Jan Švelch对2016–2020年100款电子游戏的片头/片尾署名研究指出：AAA、AA、独游及服务型游戏存在不同的贡献显化与署名层级，部分实际劳动可能被忽视 [H02]。IGDA在2023年发布的开发署名规则及调查进一步表明，署名不足是国际行业问题而非中国独有 [H03]。</p>
+<h3 id="b">B. 美国的独立作品认可：有直接制度证据，但不是所有美国从业者的共同态度</h3>
+<p>NYU Game Center的2026本科招生说明要求 <strong>creative portfolio</strong>、团队贡献清单，并声明没有credits的作品不予评审；作品可以是游戏、程序、电影、文字、音乐等 [H04]。其MFA招生明确写明不要求职业游戏履历，要求个人创作愿景、作品意图、实际贡献、独立游戏分析 [H05]。MFA FAQ公开将目标设定为培养创作领导者、独立游戏艺术家及评论家，而非仅训练大规模工业分工岗位 [H06]。</p>
+<p>2026 Game Center Incubator筛选标准包括明确的产品目标、目标玩家、独特性/差异点及合作能力，并提供每团队15,000美元资助与导师资源 [H07]。</p>
+<p><strong>这些可验证材料支持：</strong> 在美国至少存在有权威且有资源的机构，会将非大厂个人作品作为严肃的专业入场凭据，也训练从判断到完整产品的作者型能力。<strong>不能推出：</strong> 所有美国大厂员工都尊重独游，所有国内从业者都轻视个人作品，或美国独游普遍比中国独游容易生存。美国游戏业署名和集体权威问题同样实际存在 [H02–H03]。</p>
+<h3 id="c">C. 候选机制：跨评价环境的资历溢价、身份排序及正统倒置</h3>
+<p><strong>H / NEEDS SAMPLING</strong>：在某些强调国际大厂/知名IP履历的职业网络里，独游作者或小团队的实际作品会被误判为“规格不足”，而承担部分模块的3A资深员工可以凭组织prestige获得超出实际作者性证据的地位。于是可能存在：</p>
+<pre><code>big-brand role → occupational signal
+→ (evaluators weak at assessing full-cycle creativity)
+→ inflated perceived authorial authority
+→ hiring/recognition/attention allocation
+→ young developers preferentially invest in pedigree
+→ fewer opportunities to train and signal independent product judgment
+</code></pre>
+<p>这与029的 <code>ANSWER-RENT / METHOD-ORTHODOXY / SELECTION INVERSION</code> 兼容，但<strong>不能把它写成中国3A职业群体的人格特征或发生率</strong>。</p>
+<p>应保留两个反方向：一些优秀3A岗位本身拥有真实原创系统/产品责任；一些独立开发者虽然自己拥有作品，也不意味着能胜任3A工程和团队管理。考核单位是 <strong><code>ROLE × ACTUAL CONTRIBUTION × DECISION RIGHTS × TRANSFERABLE WORK</code></strong>，不是“3A比indie高级”或“indie比3A高级”。</p>
+<h3 id="d">D. 证伪与测量</h3>
+<ul>
+<li><strong>访谈/作品集对照</strong>：分国内在职3A、海外在职3A、国内商业手游、国内独立团队、美国独立团队等职业群，按同年龄/职位/经验/产品类型匹配；比较其评价他人作品所问的问题、是否查项目贡献、是否看可玩原型。</li>
+<li><strong>匿名招聘材料实验</strong>：控制候选人的相同作品与贡献记录，仅变更雇主名气/3A标志与个人项目展示顺序，比较能力评价、回复和面试意愿；必须得到适当伦理许可，不能欺骗真实求职者。</li>
+<li><strong>成长与回报</strong>：记录自发jam/mod/prototype是否在招聘、晋升、内部立项、融资中获得可观察兑换；与单纯公司履历溢价分开。</li>
+<li><strong>反例</strong>：美国AAA同样存在强势公司身份/歧视独立作者的行业子群；中国本土也有明确以个人原型、独立创作判断为选拔依据的组织。必须纳入同一问题，不得只搜最符合预设的访谈。</li>
+<li><strong>沟通行为注意</strong>：个人私信未回复只表明一次未产生互动，无法单独认定对方因indie身份歧视；负面评价/拒绝与不回复应分开编码。</li>
+</ul>
+<p><strong>状态：</strong> NYU“有作者型作品认证与孵化制度”= VERIFIED AS INSTITUTIONAL PRACTICE；署名不均= SUPPORTED AS INTERNATIONAL INDUSTRY FACT；中国3A与手游人之间存在何等数量级身份等级差异= UNKNOWN；“组织光环阻碍原创人才再生产”的作用方向与规模= H。</p>
+<p><strong>外部证据（2026-10-09访问）：</strong>
+- <strong>[H01] P0/心理学同期实验</strong> Robert B. Cialdini et al., <em>Basking in Reflected Glory: Three (Football) Field Studies</em>, <em>JPSP</em> 34(3), 1976, pp. 366–375. https://doi.org/10.1037/0022-3514.34.3.366
+- <strong>[H02] S1/同行评审论文摘要</strong> Jan Švelch, <em>Developer Credit: Para-Industrial Hierarchies of In-Game Credit Attribution in the Video Game Industry</em>, <em>Games and Culture</em> 17(3), 2022（online 2021-07-29），仅核摘要，正文可能受限。https://doi.org/10.1177/15554120211034408
+- <strong>[H03] P0/协会调查报告</strong> IGDA, <em>Game Crediting Guidelines 10.1</em>, updated 2023-03，刊2023-07-15。https://igda.org/resources-archive/igda-game-crediting-guidelines-10-1-march-2023-update/
+- <strong>[H04] P0/2026官方招生标准</strong> NYU Game Center, <em>BFA Application</em>, 2026招生周期。https://gamecenter.nyu.edu/academics/game-design-bfa/apply/
+- <strong>[H05] P0/2026官方招生标准</strong> NYU Game Center, <em>MFA Application</em>, 2026招生周期。https://gamecenter.nyu.edu/academics/game-design-mfa/apply/
+- <strong>[H06] P0/官方教育理念</strong> NYU Game Center, <em>MFA Frequently Asked Questions</em>, 访问2026-10-09（页面动态）。https://gamecenter.nyu.edu/academics/game-design-mfa/faq/
+- <strong>[H07] P0/2026官方孵化政策</strong> NYU Game Center, <em>Incubator Application</em>, 2026–2027周期。https://gamecenter.nyu.edu/incubator-application/</p>
+<hr />
+<h2 id="02-3a2026-10-09">0.2 跨制度声望兑换：美国学位与海外3A履历的结构同构（2026-10-09）</h2>
+<p><strong>命题归属：</strong> 本节是公开教育/职业评价体系的比较研究，不能将私下谈话、私人教育/工作经历作为公共证据。相关游戏人才案例见<a href="/heroes-portal/country-studies/china/036-virtuos-aaa-alumni-return-and-authorial-team-formation.html">036</a>。这一节只验证<strong>不同制度给相同资格赋予不同价值</strong>的机制，并严格区分社会声望、劳动市场回报、实际技能与原创决策能力。</p>
+<h3 id="a_1">A. 先区分生产制度与兑换制度</h3>
+<p>中国学生在美国高等教育取得的东西，至少包括 <code>SKILL/CREATIVE PRACTICE</code>、<code>INSTITUTIONAL CREDENTIAL</code>、<code>NETWORK</code>、<code>LANGUAGE/CULTURAL CAPITAL</code>。美国专业游戏厂经历，也至少包括 <code>VERIFIED ROLE PERFORMANCE</code>、<code>COMPANY/IP ASSOCIATION</code>、<code>PRODUCTION NETWORK</code> 和可能的 <code>AUTHORIAL DECISION HISTORY</code>。</p>
+<pre><code>SOURCE-SYSTEM TRAINING / SELECTION
+→ institutional credential / prestigious work history
+→ MOVE ACROSS EVALUATIVE FIELDS
+→ receiving-system reinterprets credential through local hierarchy
+→ status / opportunity premium OR discount
+</code></pre>
+<p>候选名：<strong><code>CROSS-FIELD STATUS CONVERSION</code>（跨评价场域声望兑换）</strong>。只有能独立观察同一项资格在不同市场/岗位的价值，才有资格说 <code>ARBITRAGE PREMIUM</code>；“中国人更崇拜外国”不能直接当作总括因果。</p>
+<p><strong>对于游戏圈，应严守创作主体分母</strong>：受中国资本收购的外国成功团队，不构成中国培养原创主创的成功案例；海外3A雇主身份本身，也不是完整产品创作权证明。</p>
+<h3 id="b_1">B. 已经得到直接支持的教育场域材料</h3>
+<ol>
+<li><strong>[E01] 2022北大学生访谈与观察：</strong> Ye Liu、Ying Huang与Wenqin Shen的 <em>Building Halos</em> 使用36名北大学生访谈、宿舍海报文化和11次留学活动观察，记录精英资格通过国内名校、外国名校、奖学金等叠加并排除他者。这是局部精英身份生产的直接资料，不是全国留学生的态度比例。</li>
+<li><strong>[E02] 2022北大1417名毕业生调查：</strong> Shen等发现家庭经济/社会背景与海外深造、精英声望转换相联系；研究者使用“hard currency”解释国内与全球身份地位叠加；结果不能自动解释成“这些人的学习价值纯粹为零”。</li>
+<li><strong>[E03] 2026北京留学中介民族志：</strong> Zhuoru Deng在2026-03-23发表论文，对比美国综合评价与中国考试/院校等级逻辑，指出家长和中介常使用熟悉的国内等级去解读海外大学，把实习、项目、申请表达等难量化能力视作可购买包装的次级证据。这是“取得外国资格→按本土科举等级重新编码”的直接观察。</li>
+<li><strong>[E04] 中国精英高校招聘资料：</strong> Lin/Liu/Lyu 2024以约8.9万份中国985/211高校教职履历和倾向得分匹配检验，发现有海外博士经历的人更可能进入层级较高高校；在985本科背景者尤强。<strong>观察对象是已经在精英高校任教的人，存在选入样本与不可观测能力差异；不能从职位优势直接算出纯资格光环或独立研究能力高低。</strong></li>
+<li><strong>[E05] 2015 CHFS的另一种回报：</strong> Du/Sun/Zhao/Zweig发表于2021 <em>China Quarterly</em>，相似背景匹配后海归研究生年收入约高20%；作者认为主要来自海外教育形成的人力资本而非纯信号。因此并非所有海归回报都是“资格套利”，<strong>真实能力积累可以占重要比重</strong>。</li>
+</ol>
+<h3 id="c_1">C. 关键边界：海归身份并不天然带来正向工资与招聘溢价</h3>
+<p><strong>[E06] 一项特别强的反压力：</strong> Mingyu Chen（2023 online / 2024期刊）向中国商业与计算机岗位发送超过27,000份随机化美国/中国教育信息的虚构简历，发现美国大学背景<strong>收到招聘回复的概率平均低约18%（相对差异，不是下降18个百分点）</strong>。差距在高薪岗位和外资企业较小，研究者提出部分雇主担心候选人更难留任等解释。这不否认高校教职或特定高声望圈子的海外资格溢价，却否认“美国学位在中国劳动力市场处处加分”。</p>
+<p><strong>[E07] 2025年100名中国海归访谈</strong>发现海外学位已出现更强的学校、国家、行业、组织类型的声望分层；部分人认为曾经的“海归光环”减弱。不能直接把2020年前的学历溢价率复用到2026。</p>
+<h3 id="d-merit">D. “美国没有优绩主义”不准确；真正不同的是 merit 的被认证方式</h3>
+<p>美国本身存在高度激烈的名校竞争、文书和课外履历竞赛、精英合法性叙事，并非低 <code>MERITOCRACY</code> 社会。Michael Sandel《The Tyranny of Merit》（Harvard 2021节选）正是对美国精英名校成功道德化与身份焦虑的内部批评 [E08]。美国部分大学的 <code>HOLISTIC REVIEW</code> 与中国以高考/院校等级为中心的 <code>EXAM-AND-TIER</code> 更适合当作<strong>评价维度的不同组合</strong>而非道德上下级。两国制度均可以被资源与阶层优势利用。</p>
+<p>专业教育如NYU Game Center公开要求个人作品和明确贡献（前节H04-H07），说明独立作品<strong>至少在一些美国教育入口是正式能力凭据</strong>；却不能代表所有美国雇主，更不能证明中国独立创作者必然没有类似渠道。</p>
+<h3 id="e-3a">E. 与海外3A员工地位的同构关系是个需要单独证明的结构命题</h3>
+<p><code>FOREIGN DEGREE→HOME-COUNTRY RANK/PRESTIGE</code> 已有定量和民族志材料直接支持其存在但回报异质；<code>OVERSEAS AAA ROLE→DOMESTIC WHOLE-GAME-AUTHOR AUTHORITY</code> 目前只有少量访谈、行业招聘报道与社会心理理论，<strong>尚无同强度的中国游戏开发者固定队列/招聘实验</strong>。</p>
+<p>因此<strong>可以说两者潜在机制同构，不能说两者在中国发生率一样高或溢价数值相同</strong>。真正有问题的是在新市场中把 <code>NARROW VERIFIED ABILITY</code> 兑换成 <code>UNVERIFIED FULL-AUTHOR AUTHORITY</code>。对个体的评价仍应看实际原型、完整项目主导、玩家反馈与跨职能决策记录。</p>
+<p>特别关注以下两个可证伪假说：</p>
+<ul>
+<li><code>STATUS-REWARD WITHOUT AUTHORIAL-TRANSFER</code>：取得外部组织声望不一定伴随本人的开放式创作训练，但国内回报可能独立上涨，从而影响后续职业选择。</li>
+<li><code>LOCAL-MERIT RECODING</code>：部分受教育者在海外接触多元作品/独立判断，却在返回本土的就业、家庭与同行场域里，选择把这段经历包装成“学校名次/雇主厂牌”；如果其本人的实践记录不同，则应独立记为真正的人力资本改善，不得混同。</li>
+</ul>
+<p><strong>最终研究问题：</strong> 并非“出国上学/海外AAA工作能否积累能力”，而是“真实学到的能力，与归国后被赋予的地位和创意决策资格，相互之间的对应程度怎样？这种不匹配是否会反过来削弱有独立作品的创作者获得资源的能力？”</p>
+<h3 id="source-ledger2026-10-09">Source ledger（2026-10-09；论文数据代表其研究时期，不自动为当下全部人口）</h3>
+<ul>
+<li><strong>[E01] S1/同行评审论文摘要</strong> Ye Liu, Ying Huang, Wenqin Shen, <em>Building Halos: How do Chinese elites seek distinction through (mis) recognising studying abroad?</em>, <em>International Journal of Educational Development</em> 91 (2022), 102589。https://doi.org/10.1016/j.ijedudev.2022.102589</li>
+<li><strong>[E02] S1/同行评审论文摘要</strong> Wenqin Shen, Ye Liu, Yunshan Liu, Ying Huang, <em>Elite Mobility and Conversions of Different Forms of Capital: An Investigation of Patterns of Study Abroad amongst Elite Graduates from Peking University in China</em>, <em>Studies in Higher Education</em> 47(8) (2022), 1601–1612。https://doi.org/10.1080/03075079.2021.1946030</li>
+<li><strong>[E03] S1/同行评审开放研究正文</strong> Zhuoru Deng, <em>Mapping overseas education through local lens: valuation, merit, and hierarchy in Chinese students’ college applications</em>, <em>British Journal of Sociology of Education</em>, published 2026-03-23。https://doi.org/10.1080/01425692.2026.2642098</li>
+<li><strong>[E04] S1/同行评审公开全文</strong> Songyue Lin, Jin Liu, Wenjing Lyu, <em>Who is more popular in the faculty recruitment of Chinese elite universities: overseas returnees or domestic graduates?</em>, <em>Humanities and Social Sciences Communications</em> 11 (2024), 1426。https://www.nature.com/articles/s41599-024-03818-4</li>
+<li><strong>[E05] S1/同行评审论文摘要</strong> Zaichao Du, Yuting Sun, Guochang Zhao, David Zweig, <em>Do Overseas Returnees Excel in the Chinese Labour Market?</em>, <em>China Quarterly</em> 247 (2021), 875–897。https://doi.org/10.1017/S0305741021000023</li>
+<li><strong>[E06] P0/随机化招聘实验研究</strong> Mingyu Chen, <em>The Value of U.S. College Education in Global Labor Markets: Experimental Evidence from China</em>, <em>Management Science</em> 70(2) (2024), 1276–1300, published online 2023-04-07。https://doi.org/10.1287/mnsc.2023.4745</li>
+<li><strong>[E07] S1/同行评审质性研究</strong> Yinni Peng, <em>When the halo of my overseas credentials disappeared: Chinese student returnees and their domestic employability</em>, <em>British Journal of Sociology of Education</em> 46(6) (2025), 815–833，online 2025-06-23，100名海归访谈。https://doi.org/10.1080/01425692.2025.2519491</li>
+<li><strong>[E08] P1/社会哲学家著作节选</strong> Michael Sandel, <em>The Tyranny of Merit</em>, Harvard Gazette转载选文，2021-01-05。https://news.harvard.edu/gazette/story/2021/01/the-myth-of-meritocracy-according-to-michael-sandel/</li>
+</ul>
+<hr />
+<h2 id="1">1. 署名不是荣誉装饰，而是职业资本基础设施</h2>
+<p>电影/电视工会已经把这一点制度化。</p>
+<h3 id="11-wgacredit">1.1 WGA：credit直接决定职业位置</h3>
+<p>Writers Guild of America明确写道：
+- writer在影视产业中的position很大程度由其credits决定；
+- professional status依赖署名作品的数量与质量；
+- Guild负责最终credit determination与争议仲裁。</p>
+<p>Source:
+- https://www.wga.org/contracts/credits
+- https://www.wga.org/contracts/credits/manuals/screen-credits-manual</p>
+<p>因此影视writing credit不仅是“谢谢参与”，而是：</p>
+<pre><code class="language-text">credit
+→ verified authorship record
+→ reputation
+→ next job / bargaining position
+</code></pre>
+<h3 id="12-dga">1.2 DGA：导演署名被合同化、广告化</h3>
+<p>Directors Guild of America规定：
+- Guild-covered作品的directorial credit需符合Basic Agreement；
+- “Directed by”有专门格式；
+- director名字在正式宣传、广告、DVD等附属材料中受最低credit义务保护；
+- credit被DGA直接定义为compensation的重要组成部分；
+- possessory “A Film by” credit甚至与“名字是否对观众具有市场价值 / 是否形成signature style”直接相关。</p>
+<p>Sources:
+- https://www.dga.org/The-Guild/Departments/Credits
+- https://www.dga.org/Contracts/Directors-Economic-Rights/Credits</p>
+<p>这证明：</p>
+<blockquote>
+<p><strong>影视不是天然“更作者化”；它有专门组织把作者归因写进合同、广告和仲裁程序。</strong></p>
+</blockquote>
+<h2 id="2-credit">2. 游戏业的反差：credit长期更接近公司自定惯例</h2>
+<p>IGDA 2023 Game Crediting Guidelines给出一个极重要的行业分母：
+- 582名调查参与者中，51.3%称自己“从不 / 很少 / 有时”获得正式credit；
+- 83.1%对“雇主/客户是否有credit policy”回答“不确定”或“没有”；
+- IGDA指出同一公司内部不同项目的credit方法都可能不一致，员工可能被漏掉、错标或完全不列名。</p>
+<p>Sources:
+- https://igda.org/resources-archive/igda-game-crediting-guidelines-10-1-march-2023-update/
+- https://igda.org/news-archive/igda-special-interest-group-drives-games-industry-best-practices-for-credits/</p>
+<p>这形成一个关键制度差异：</p>
+<pre><code class="language-text">FILM / TV:
+credit = guild-enforced career record
+
+GAME:
+credit = often employer/project convention
+</code></pre>
+<p>这不是说欧美游戏“没有作者品牌”，而是：</p>
+<blockquote>
+<p><strong>个人作者资本更多依赖媒体、公众访谈、创业、奖项、个人品牌和公司自愿归因，而不是统一劳动制度兜底。</strong></p>
+</blockquote>
+<h2 id="3-atari-activision">3. Atari → Activision：现代游戏作者政治的原型冲突</h2>
+<h3 id="31-atari">3.1 Atari：匿名不是偶然</h3>
+<p>The Strong记载，Warren Robinett开发《Adventure》时，Atari不署个人设计师名字；他因此把“Created by Warren Robinett”藏进秘密房间，成为著名Easter Egg。</p>
+<p>Source:
+- https://www.museumofplay.org/blog/hunting-for-easter-eggs/</p>
+<p>这里的问题不是“自恋”，而是：</p>
+<blockquote>
+<p><strong>一个人完整设计产品，却没有稳定的公开归因接口。</strong></p>
+</blockquote>
+<h3 id="32-fantastic-fourcredit-royalty">3.2 “Fantastic Four”要求的不是单纯涨薪，而是credit + royalty</h3>
+<p>1979年David Crane、Alan Miller、Larry Kaplan、Bob Whitehead发现自己负责的卡带贡献了Atari极大比例销售后，向管理层提出：
+- creator/design credit；
+- 基于销量的有限royalty / profit participation。</p>
+<p>Game Developer史料记录，Crane后来回忆自己看到个人负责游戏创造了2000万美元级收入，却仍以2万美元薪资匿名工作；Alan Miller也明确说他们参考唱片与图书行业拟定credit+royalty方案。</p>
+<p>Sources:
+- https://www.gamedeveloper.com/business/atari-the-golden-years----a-history-1978-1981
+- https://www.gamedeveloper.com/game-platforms/feature-the-history-of-activision-
+- https://www.gamedeveloper.com/design/gamescape-a-look-at-development-in-north-america-s-cities</p>
+<p>被拒后四人于1979年离开Atari成立Activision。</p>
+<p>因此这一事件可以定义为：</p>
+<h1 id="attributioncompensation-coupling"><code>ATTRIBUTION–COMPENSATION COUPLING</code></h1>
+<blockquote>
+<p><strong>开发者要求的不只是“让我名字出现”，而是让可验证贡献同时转换成署名、收入与未来职业资本。</strong></p>
+</blockquote>
+<p>这比“个人主义让他们辞职”更可检验。</p>
+<h3 id="33-activision">3.3 Activision反过来把设计师本人变成营销资产</h3>
+<p>The Strong保存的Carol Shaw资料显示：
+- Activision广告、catalog和sell sheet明确突出“Carol Shaw’s River Raid”；
+- 档案馆特别指出，当时游戏公司通常不会把creator名字作为产品标题/营销重点，而Activision这么做了。</p>
+<p>Source:
+- https://www.museumofplay.org/app/uploads/2022/01/Finding-Aid-to-the-Carol-Shaw-papers_013122.pdf</p>
+<p>所以Activision不只是第三方开发商革命，也是一场：</p>
+<pre><code class="language-text">anonymous programmer
+→ named game designer
+→ marketable creator
+</code></pre>
+<p>的归因制度革命。</p>
+<h2 id="4">4. 美国案例真正说明了什么？</h2>
+<p>不能简化成：</p>
+<blockquote>
+<p>“美国人个人主义，所以有Activision。”</p>
+</blockquote>
+<p>更准确的机制是：</p>
+<ol>
+<li>Atari已经有异常高个人product ownership；</li>
+<li>销售数据让个人贡献非常容易被识别；</li>
+<li>开发者拿唱片/出版行业的creator-credit / royalty结构作比较；</li>
+<li>管理层拒绝；</li>
+<li>开放console市场和风险资本允许exit；</li>
+<li>新公司把个人署名直接变成市场差异化。</li>
+</ol>
+<p>即：</p>
+<h1 id="attribution-measurable-contribution-exit-option-portable-author-capital"><code>ATTRIBUTION + MEASURABLE CONTRIBUTION + EXIT OPTION = PORTABLE AUTHOR CAPITAL</code></h1>
+<p>若只有个人主义、没有可退出市场，这场冲突未必会产生Activision。</p>
+<h2 id="5">5. 日本：同一国家内部同时存在“匿名外包”与“制度化作者叙事”</h2>
+<p>这再次证明国民性不是充分解释。</p>
+<h3 id="51-tose">5.1 TOSE：主动隐藏作者</h3>
+<p>2006 Game Developer采访中，TOSE管理层明确表示：
+- 公司战略是跟随客户vision，不强调自己品牌；
+- 很多作品不署公司名；
+- 员工即使出现在credits，也常用假名；
+- 有人确实希望有credit作为跳槽portfolio，但TOSE低离职率使这种需求相对弱。</p>
+<p>Source:
+- https://www.gamedeveloper.com/business/interview-tose-game-development-ninjas</p>
+<p>这是一种：</p>
+<h1 id="white-label-attribution-regime"><code>WHITE-LABEL ATTRIBUTION REGIME</code></h1>
+<p>其价值目标是：
+- 客户关系；
+- 执行可靠性；
+- 隐身式产能；
+而不是：
+- 员工portable creator brand。</p>
+<p>它可以是成功商业制度，但会天然削弱个体外部可见性。</p>
+<h3 id="52-credit">5.2 日本旧游戏的credit缺失甚至会破坏历史记忆</h3>
+<p>Game Developer对游戏署名史的研究指出：
+- 一些日本公司长期存在不公开参与开发人员身份的做法；
+- 原版《Castlevania》等作品缺乏可靠公开credit，导致后来研究者甚至难以确认核心creator；
+- white-label outsourcing进一步使整个工作室可能消失在公开历史中。</p>
+<p>Source:
+- https://www.gamedeveloper.com/game-platforms/how-bad-crediting-hurts-the-game-industry-and-muddles-history</p>
+<p>因此：</p>
+<h1 id="historical-attribution-loss"><code>HISTORICAL ATTRIBUTION LOSS</code></h1>
+<blockquote>
+<p><strong>credit缺失不仅影响当事人跳槽，还会让整个行业几十年后无法准确知道创新是谁做出来的。</strong></p>
+</blockquote>
+<p>这会直接污染“英雄传说”的样本。</p>
+<h3 id="53-nintendo-iwata-asksattribution-infrastructure">5.3 Nintendo / Iwata Asks：公司也可以主动制造Attribution Infrastructure</h3>
+<p>Nintendo的“Iwata Asks”构成相反制度：
+- 公司总裁亲自长期访谈开发者；
+- 不只采访Miyamoto等明星，也系统采访年轻director、stage designer、hardware engineer、external collaborators；
+- 页面明确记录“谁负责什么”“idea从谁来”“如何修改”。</p>
+<p>Sources:
+- https://iwataasks.nintendo.com/
+- https://iwataasks.nintendo.com/interviews/wii/super_mario_galaxy/1/0/
+- https://iwataasks.nintendo.com/interviews/wii/mario25th/2/0/</p>
+<p>因此日本并不是：</p>
+<blockquote>
+<p>“公司集体主义 → 个人被隐藏”。</p>
+</blockquote>
+<p>而是至少存在：
+- TOSE型白牌匿名；
+- 旧街机/公司型假名与弱credit；
+- Nintendo型企业主动归因；
+- Kojima/Miyazaki型强个人作者品牌。</p>
+<p>真正变量仍然是：</p>
+<blockquote>
+<p><strong>公司希望把长期品牌资本存在哪里。</strong></p>
+</blockquote>
+<h2 id="6-f2p">6. 中国：F2P时代形成了极特殊的“不署名均衡”</h2>
+<p>2024触乐对玩家与从业者的采访提供当前最直接材料：
+- 文章称国内大多数游戏长期没有开发人员名单；
+- 早期常见理由之一是“担心竞争公司挖角”；
+- 久而久之“不署名”被部分行业成员视为常态；
+- 一些玩家开始要求文案署名，希望未来可以“避雷”或跨项目追随优秀writer；
+- 但受访的不少基层从业者反而拒绝署名。</p>
+<p>Source:
+- https://www.chuapp.com/article/289973.html</p>
+<p>这不能做全国统计，但非常适合作机制个案。</p>
+<h3 id="61-anti-poaching-attribution-suppression">6.1 <code>ANTI-POACHING ATTRIBUTION SUPPRESSION</code></h3>
+<p>如果公开credit提高：
+- competitor识别人才；
+- headhunter定位核心成员；
+- 员工portable reputation；</p>
+<p>那么公司存在抑制个人credit的经济动机。</p>
+<p>触乐材料至少证明：</p>
+<blockquote>
+<p><strong>“怕挖角”曾是业内公开讨论过的不署名理由之一。</strong></p>
+</blockquote>
+<p>因此credit与劳动力流动不是两件事。</p>
+<h3 id="62-responsibilityrights-mismatch">6.2 <code>RESPONSIBILITY–RIGHTS MISMATCH</code></h3>
+<p>受访基层策划反对署名的一个核心理由是：
+- 自己没有最终decision right；
+- leader可能否决其判断；
+- 玩家却可能把失败内容直接归责到具名个人。</p>
+<p>于是出现：</p>
+<pre><code class="language-text">LOW DECISION RIGHTS
++
+HIGH PUBLIC ATTRIBUTION
+=
+SCAPEGOAT RISK
+</code></pre>
+<p>如果署名只增加责任、不开启收益与权力，它对基层并非纯福利。</p>
+<p>因此正式原则：</p>
+<blockquote>
+<p><strong>credit必须和decision-right、scope-of-control一起解释。</strong></p>
+</blockquote>
+<h3 id="63-doxxing-harassment-cost">6.3 <code>DOXXING / HARASSMENT COST</code></h3>
+<p>触乐采访中，多位从业者担忧：
+- “开盒”；
+- 网络围攻；
+- 把复杂集体决策归咎于某个基层writer/designer。</p>
+<p>这意味着中国2020s的署名制度面对一个过去Atari时代没有同等强度的网络风险：</p>
+<h1 id="attribution-exposure-cost"><code>ATTRIBUTION EXPOSURE COST</code></h1>
+<p>所以健康credit制度不能只要求实名公开，还需要：
+- pseudonym continuity；
+- role/scope解释；
+- anti-harassment；
+- company responsibility；
+- 不把个人credit变成公开问责名单。</p>
+<h2 id="7">7. 中国当前最关键的悖论：玩家开始想“追作者”，开发者却可能不想被追</h2>
+<p>触乐文章中玩家提出：
+- 文案差 → 想知道是谁，未来避雷；
+- 文案好 → 即使换项目，也愿意跟着作者走。</p>
+<p>这正是020定义的：</p>
+<p><code>ATTENTION_PORTABILITY / REPUTATIONAL CARRYOVER</code></p>
+<p>第一次以玩家原生需求形式清晰出现。</p>
+<p>但开发者担忧：
+- 没有decision right；
+- 被开盒；
+- 功劳归属不清；
+- 大团队贡献不可分割；
+- credit未必增加工资/晋升。</p>
+<p>所以中国当前可能正在进入一种新冲突：</p>
+<pre><code class="language-text">players demand attribution
+because they want portable taste signals
+
+while
+
+workers reject attribution
+because portable credit is not yet coupled
+to rights / money / safety
+</code></pre>
+<p>这与1979 Atari很不一样。</p>
+<p>Atari开发者主动争署名，因为他们认为：</p>
+<blockquote>
+<p>credit能和royalty / market value一起增长。</p>
+</blockquote>
+<p>中国F2P基层员工可能认为：</p>
+<blockquote>
+<p>credit只会增加锅和风险。</p>
+</blockquote>
+<p>这可能是中美归因政治最值得比较的地方之一。</p>
+<h2 id="71-private-reputation-public-authorship-gap">7.1 <code>PRIVATE REPUTATION / PUBLIC AUTHORSHIP GAP</code></h2>
+<p>触乐采访中还有一个容易被忽略的机制：
+- 一些从业者认为自己跳槽并不依赖公开游戏credit；
+- 作品集、笔试、面试、业内背调、同事网络足以证明能力；
+- 高级岗位甚至会通过更深入的reference check判断某人到底负责过什么。</p>
+<p>这意味着一个行业可以同时存在：</p>
+<pre><code class="language-text">HIGH private labor-market reputation
++
+LOW public player-facing authorship
+</code></pre>
+<p>即：</p>
+<h1 id="private-reputation-public-authorship-gap"><code>PRIVATE REPUTATION / PUBLIC AUTHORSHIP GAP</code></h1>
+<p>这种制度对公司和成熟从业者未必低效：
+- 好人才仍可被同行识别；
+- 招聘仍能完成能力匹配；
+- 公司品牌不会过度依赖个人。</p>
+<p>但其需求侧后果完全不同：
+- 玩家不知道该跟谁走；
+- 成功credit无法直接形成portable audience；
+- 员工离职后可能带走“业内offer”，却带不走“玩家需求”；
+- 市场更容易把成功资产沉淀到IP/公司。</p>
+<p>因此要区分两种职业资本：</p>
+<h3 id="industry-reputation-capital"><code>INDUSTRY REPUTATION CAPITAL</code></h3>
+<p>业内知道你厉害，能换工作、升薪、被挖角。</p>
+<h3 id="public-author-capital"><code>PUBLIC AUTHOR CAPITAL</code></h3>
+<p>玩家知道你厉害，能跟随你跨IP/公司消费，进而提高你的融资与创作议价权。</p>
+<p>中国成熟商业游戏体系完全可能前者很强、后者较弱。</p>
+<p>这解释了一个重要表面矛盾：</p>
+<blockquote>
+<p><strong>为什么中国可以拥有大量业内公认的顶尖制作人才，却仍长期缺少数量相称的公众“游戏大师”？</strong></p>
+</blockquote>
+<p>不是因为前者不存在，而是因为两种声誉资产的转换接口不同。</p>
+<h3 id="reputation-conversion-rate"><code>REPUTATION CONVERSION RATE</code></h3>
+<p>新增研究指标：</p>
+<blockquote>
+<p><strong>业内声誉有多大概率能进一步转换成公众作者识别、portable demand和自主融资？</strong></p>
+</blockquote>
+<p>观察：
+- 离职后媒体是否继续追踪个人；
+- 新项目是否以creator history做营销；
+- 玩家是否知道前作由谁做；
+- publisher是否把个人履历作为融资/发行卖点；
+- 新IP announcement是否因作者名字获得attention。</p>
+<h3 id="reputation-compounding-rate"><code>REPUTATION COMPOUNDING RATE / 声誉复利率</code></h3>
+<p>一个更关键的结果变量是：</p>
+<blockquote>
+<p><strong>一次成功产生的credit，有多少能降低下一次项目的融资、招聘、发行和玩家获取成本？</strong></p>
+</blockquote>
+<p>可以写成：</p>
+<pre><code class="language-text">project success
+→ identifiable personal/team credit
+→ retained reputation
+→ lower next-project uncertainty
+→ cheaper financing / discovery
+→ larger decision rights
+</code></pre>
+<p>若这条链成立，则创作者职业具有复利。</p>
+<p>若成功主要沉淀到公司/IP：</p>
+<pre><code class="language-text">project success
+→ company/IP brand ↑
+→ employee salary / title ↑
+but
+exit → public demand largely resets
+</code></pre>
+<p>这产生：</p>
+<h1 id="authorship-reset-cost"><code>AUTHORSHIP RESET COST / 作者身份重置成本</code></h1>
+<blockquote>
+<p><strong>一个高级从业者离开组织后，需要从多大程度重新证明“我是谁、我能做什么、为什么玩家应该相信我”？</strong></p>
+</blockquote>
+<p>中国商业游戏体系的一个关键H是：
+- <code>INDUSTRY REPUTATION COMPOUNDING</code> 可能很强；
+- <code>PUBLIC AUTHOR REPUTATION COMPOUNDING</code> 长期较弱。</p>
+<p>这会形成：</p>
+<blockquote>
+<p><strong>强职业经理人/高级制作人才供给 + 相对薄的公开auteur创业资本。</strong></p>
+</blockquote>
+<p>它与015的 <code>EXIT_REQUIRED_FOR_AUTHORSHIP</code> 和020的 <code>AUTHOR_BRAND_CAPITAL</code> 直接连接。</p>
+<h3 id="persistent-pseudonym-credit"><code>PERSISTENT PSEUDONYM CREDIT / 持续笔名署名</code></h3>
+<p>署名并不要求暴露法定姓名。</p>
+<p>更现实的折中是：</p>
+<blockquote>
+<p><strong>同一创作者跨项目持续使用稳定职业ID / pen name，使玩家与行业能积累其reputation，同时降低真实身份暴露。</strong></p>
+</blockquote>
+<p>它必须满足：
+- 同一ID跨项目稳定；
+- role/scope说明清楚；
+- 公司不能在离职后随意删除历史credit；
+- 玩家不能从credit自动获得私人信息；
+- 公司仍承担产品级责任；
+- 基层员工可选择不公开或使用持续笔名。</p>
+<p>日本游戏史长期存在handle / pen-name传统；Capcom 1990s开发者访谈即直接以Bengus、Shoei等handle呈现成员，同时仍能形成长期职业识别。</p>
+<p>Source:
+- https://shmuplations.com/capcomdesignroom1995/</p>
+<p>因此：</p>
+<h1 id="identity-continuity-legal-name-exposure"><code>IDENTITY CONTINUITY &gt; LEGAL-NAME EXPOSURE</code></h1>
+<p>对于Author Brand Capital真正重要的，是“同一个创作者能否被历史和玩家识别为同一个人”，而非必须知道其真实姓名。</p>
+<p>这也给中国当前“玩家想追作者 / 员工怕开盒”的冲突提供一条制度解：
+- persistent pseudonym；
+- opt-in visibility；
+- scope-based attribution；
+- company-level accountability。</p>
+<p>但触乐采访也提醒：若员工每换项目就换新笔名，portable reputation仍然无法形成。所以关键是<strong>持续性</strong>，而不是“有一个临时马甲”。</p>
+<h2 id="8">8. 中国法律提供了一个有意思的影视对照</h2>
+<p>中国《著作权法》第17条规定：
+- 电影、电视剧著作权主要由制作者享有；
+- 但编剧、导演、摄影、作词、作曲等作者享有署名权，并可依合同获得报酬。</p>
+<p>第18条对部分职务作品也明确保留作者署名权。</p>
+<p>Official source:
+- https://www.ncac.gov.cn/xxfb/flfg/flfg_532/202103/t20210309_50530.html</p>
+<p>这说明：</p>
+<blockquote>
+<p><strong>“大规模投资、集体生产、公司集中持权”与“关键创作者有署名权”并非逻辑冲突。</strong></p>
+</blockquote>
+<p>至少影视已经形成：</p>
+<pre><code class="language-text">centralized ownership
++
+individual attribution
+</code></pre>
+<p>因此“游戏是大团队，所以没法署名”不是充分理由。</p>
+<p>真正缺的是：
+- game-specific contribution categories；
+- stable credit policy；
+- dispute resolution；
+- scope / responsibility mapping；
+- privacy and harassment safeguards。</p>
+<h2 id="9-premium-regimecredit">9. 《黑神话：悟空》：premium regime可能重新提高credit价值</h2>
+<p>2024触乐对《黑神话：悟空》片尾名单的分析指出：
+- 中国大量网游长期少见完整开发者名单；
+- 《黑神话》则列出大量具体贡献者与特别鸣谢；
+- 其名单甚至能让外界重建团队规模、行业协作与人员网络。</p>
+<p>Source:
+- https://www.chuapp.com/?a=index&amp;c=Article&amp;id=290161</p>
+<p>因此premium回流不仅改变：
+- 收费方式；
+- Steam交易；
+- 玩家taste；</p>
+<p>还可能改变：</p>
+<h1 id="attribution-economics"><code>ATTRIBUTION ECONOMICS</code></h1>
+<p>因为一次性买断产品更需要：
+- 在购买前证明团队品质；
+- 在发行后积累studio/creator reputation；
+- 用上一作credit帮助下一作融资与招聘。</p>
+<p>这仍只是H，但与020的Author Brand Capital高度一致。</p>
+<h2 id="10-f2pcredith">10. F2P为什么天然更容易形成弱个人credit？——机制H，不是定律</h2>
+<p>触乐受访律师提出一种值得测试的商业解释：
+- 长线F2P更依赖持续运营、留存与组织迭代；
+- 买断制更需要在购买前展示产品和开发团队质量，因此更有动力把团队/作者作为宣传资产。</p>
+<p>Source:
+- https://www.chuapp.com/article/289973.html</p>
+<p>本项目将它改写成可检验H：</p>
+<h3 id="continuous-product-attribution-dilution"><code>CONTINUOUS-PRODUCT ATTRIBUTION DILUTION</code></h3>
+<p>如果产品：
+- 多年更新；
+- 人员快速流动；
+- 模块持续替换；
+- decision chain很长；</p>
+<p>则“谁做了这款游戏”会越来越难压成固定名单。</p>
+<p>这会推动：
+- corporate brand；
+- IP brand；
+- role-based spokesperson；
+而削弱个人persistent author credit。</p>
+<p>但存在FFXIV等反例，因此不是F2P/GaaS必然结果。</p>
+<h2 id="11-attribution-regime">11. Attribution Regime 的六个维度</h2>
+<p>未来跨国/跨公司统一编码：</p>
+<h3 id="111-credit-visibility">11.1 <code>CREDIT VISIBILITY</code></h3>
+<p>名字是否公开、在哪里公开、玩家能否方便看到。</p>
+<h3 id="112-credit-persistence">11.2 <code>CREDIT PERSISTENCE</code></h3>
+<p>离职后credit是否保留；版本更新后旧贡献者是否被清除。</p>
+<h3 id="113-role-legibility">11.3 <code>ROLE LEGIBILITY</code></h3>
+<p>玩家能否知道“这个人到底负责什么”。</p>
+<h3 id="114-creditmoney-coupling">11.4 <code>CREDIT→MONEY COUPLING</code></h3>
+<p>credit是否影响：
+- royalty；
+- bonus；
+- next-job salary；
+- publisher terms；
+- financing。</p>
+<h3 id="115-creditrights-coupling">11.5 <code>CREDIT→RIGHTS COUPLING</code></h3>
+<p>成功署名是否转成：
+- next project；
+- greenlight；
+- IP ownership；
+- creative control。</p>
+<h3 id="116-attribution-risk">11.6 <code>ATTRIBUTION RISK</code></h3>
+<p>credit带来的：
+- harassment；
+- poaching；
+- scapegoating；
+- key-person risk；
+- credit appropriation。</p>
+<p>只有六项一起看，才能判断署名制度是否健康。</p>
+<h2 id="12-credit-without-power-power-without-credit">12. <code>CREDIT WITHOUT POWER</code> 与 <code>POWER WITHOUT CREDIT</code></h2>
+<p>两个危险极端：</p>
+<h3 id="credit-without-power"><code>CREDIT WITHOUT POWER</code></h3>
+<p>基层被公开点名，但没有决策权：</p>
+<blockquote>
+<p>责任个人化，权力仍集中。</p>
+</blockquote>
+<h3 id="power-without-credit"><code>POWER WITHOUT CREDIT</code></h3>
+<p>核心个人真实做出关键判断，却长期匿名：</p>
+<blockquote>
+<p>价值被组织吸收，个人portable capital无法形成。</p>
+</blockquote>
+<p>健康制度的目标不是“人人都明星化”，而是：</p>
+<blockquote>
+<p><strong>Attribution roughly tracks actual decision rights and contribution scope.</strong></p>
+</blockquote>
+<p>即：</p>
+<h1 id="attributionauthority-alignment"><code>ATTRIBUTION–AUTHORITY ALIGNMENT</code></h1>
+<h2 id="13-ai">13. AI时代：归因会更难，也更重要</h2>
+<p>AI让一个output的“作者链”变复杂：
+- prompt / direction；
+- model；
+- training data；
+- human edit；
+- technical integration；
+- producer approval。</p>
+<p>因此未来可能出现：</p>
+<blockquote>
+<p><strong>产品更容易生成，但“谁真正作出了有价值判断”更难识别。</strong></p>
+</blockquote>
+<p>所以AI时代需要的不是更长credits名单，而是更高质量的：</p>
+<h1 id="decision-provenance"><code>DECISION PROVENANCE</code></h1>
+<p>记录：
+- 谁提出核心问题；
+- 谁选择/拒绝模型输出；
+- 谁定义quality bar；
+- 谁承担最终trade-off；
+- 谁有kill right；
+- 谁对玩家结果负责。</p>
+<p>这会使020的 <code>TRUST BOTTLENECK</code> 与021合流：</p>
+<blockquote>
+<p><strong>AI越商品化execution，越需要制度准确归因judgment。</strong></p>
+</blockquote>
+<h2 id="14">14. 对英雄传说研究方法的直接修正</h2>
+<p>人物传记以后禁止：</p>
+<blockquote>
+<p>“这款伟大作品是X做的。”</p>
+</blockquote>
+<p>除非至少区分：</p>
+<ul>
+<li>product thesis origin；</li>
+<li>final decision rights；</li>
+<li>implementation leads；</li>
+<li>key collaborators；</li>
+<li>company/publisher veto；</li>
+<li>credited role；</li>
+<li>retrospective attribution；</li>
+<li>later brand narrative。</li>
+</ul>
+<p>新增研究问题：</p>
+<blockquote>
+<p><strong>我们今天把这个人当大师，是因为他真的拥有核心decision rights，还是因为媒体/公司/本人成功赢得了attribution battle？</strong></p>
+</blockquote>
+<p>以及反向问题：</p>
+<blockquote>
+<p><strong>有没有被历史忘记的人，只因为其公司/时代没有给他留下credit？</strong></p>
+</blockquote>
+<p>Atari Adventure /日本旧游戏就是重要警告。</p>
+<h2 id="15">15. 当前最小结论</h2>
+<blockquote>
+<p><strong>“大师”不是纯粹从作品中自然浮现的。个人创造性要变成可持续作者权，需要一套把贡献记录、公开、解释、保存并转换成钱与下一轮权利的Attribution Infrastructure。电影/电视通过工会和合同高度制度化这一过程；游戏业长期更依赖公司自定规则，因此同时存在Atari式匿名、Activision式作者营销、TOSE式白牌隐身、Nintendo式企业主动归因，以及中国F2P时代的弱署名均衡。中国当前玩家开始要求追踪具体作者，但基层员工又因权责不匹配与开盒风险抵制署名，这说明下一阶段需要的不是简单“强制实名”，而是credit、decision rights、经济回报与安全保护的重新耦合。</strong></p>
+</blockquote>
+<h2 id="16-creditcreative-surplus-allocation">16. 署名之后：Credit只是Creative Surplus Allocation的一层</h2>
+<p>021回答“谁被记住”，但不回答“成功产生的其他资产归谁”。</p>
+<p>因此所有 <code>ATTRIBUTION–AUTHORITY ALIGNMENT</code> 分析必须继续进入 <a href="/heroes-portal/country-studies/china/022-creative-surplus-allocation-rights-customer-future-control.html">022</a>：</p>
+<pre><code class="language-text">contribution
+→ credit
+→ cash / royalty
+→ equity
+→ IP / sequel rights
+→ publishing
+→ customer relationship
+→ brand
+→ future decision rights
+</code></pre>
+<p>关键边界：
+- 有credit ≠ 有money；
+- 有money ≠ 有IP；
+- 有IP ≠ 有customer relation；
+- 有customer relation ≠ 有final decision rights；
+- 有高工资 ≠ 高future-capture。</p>
+<p>Canonical:
+- <a href="/heroes-portal/country-studies/china/022-creative-surplus-allocation-rights-customer-future-control.html">022 — Creative Surplus Allocation</a></p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / country-studies/china/021-attribution-politics-credit-regimes-author-power.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

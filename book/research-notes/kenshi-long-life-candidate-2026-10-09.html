@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chris Hunt：他想让玩家在这个世界里自己活下去 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl class="on"" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#_1" class="t2">一个不肯把玩家捧成英雄的游戏</a><a href="#_2" class="t2">会编程以后，还要学会做游戏</a><a href="#_3" class="t2">先做出一个能运转的世界</a><a href="#_4" class="t2">有了同事，他还要学会把工作交出去</a><a href="#_5" class="t2">公开以后，休息也变了</a><a href="#2018" class="t2">2018年，他在东京谈起这些年</a><a href="#_6" class="t2">游戏做久了，技术也会老</a><a href="#_7" class="t2">发售以后，旧技术仍要处理</a><a href="#_8" class="t2">读他的访谈，也去看看游戏</a></aside><article class="doc"><div class="col"><h1 id="chris-hunt">Chris Hunt：他想让玩家在这个世界里自己活下去</h1>
+<p>© 2026 洪荒行者。All Rights Reserved.</p>
+<h2 id="_1">一个不肯把玩家捧成英雄的游戏</h2>
+<p class="dc">2015年，Chris Priestman采访Chris Hunt时，《Kenshi》已经做了约八年，还没有完成。Hunt谈起自己不喜欢的角色扮演游戏：玩家刚到世界里，就很强，受到照顾，没什么值得害怕。他想做的游戏，开头应当容得下一个弱小、无人特别关照的人。</p>
+<p>这样的玩家可能在城镇里休息时碰上袭击，可能受伤以后还得处理流血，也可以逐渐招人、建立据点。在<a href="https://www.siliconera.com/kenshis-eight-year-development-journey-from-one-man-rpg-to-a-teams-success/">Siliconera这次访谈</a>里，Hunt用这些具体情形说明他想做的世界。麻烦会来找玩家，故事不全靠预先排好的任务往下走。为了让它运转，他得先建立许多相互作用的系统。</p>
+<h2 id="_2">会编程以后，还要学会做游戏</h2>
+<p>2019年，一位网友在<a href="https://www.reddit.com/r/IAmA/comments/cnmwen/comment/ewcgr1j/">Reddit问答</a>里问Hunt，是不是自己曾经一起做游戏的老朋友。他说认错人了，随后讲起自己的起步：约十八岁才弄清怎样做游戏。此前他已经会编程，卡住的却是怎样把画面显示出来，也找不到能告诉他的材料。</p>
+<p>Hunt后来以游戏编程为职业。<a href="https://lofigames.com/press/">Lo-Fi Games自己的历史页</a>把这段经历放在他二十岁出头：他不喜欢那些以赚钱为中心的小项目，在2008年离开旧工作，转而全职制作《Kenshi》，靠夜间保安工作维持生活。机构回顾没有列出他以前参与的项目，也没有替我们说明每一项技能在哪儿学会。他换了挣钱的工作，已有的程序经验却没有从头归零。</p>
+<p>夜班收入接替了原来的程序员工作，他继续用程序经验制作那款想玩的游戏。以后许多年，这两份工作同时占着他的时间。</p>
+<h2 id="_3">先做出一个能运转的世界</h2>
+<p>在2015年的采访里，他说最初五六年基本独自开发，靠最低工资的保安夜班过活。许多时间用来打基础，让游戏达到可玩的状态。那时离庞大地图填满内容还很远；有了Steam销售以后，他才逐渐增加人手。</p>
+<p>玩家支付制作费用，早于Steam。Hunt在同一采访中明确说，自己先通过网站出售alpha版本，收入已经足够支持本人，也能聘用自由职业者。Steam Early Access随后提供了把团队组起来的钱。游戏先在自家网站供养了他和一部分协作者，再获得更大的市场入口。</p>
+<p>未完成的版本拿来卖，他也就得保持它可玩。一边继续增加系统和内容，一边修好已经卖给玩家的东西，时间不再只按自己的愿望安排。早期销售缓解了钱的问题，又带来了新的交付责任。</p>
+<p>在游戏能供养团队以前，他靠一份重复到账的工资做了多年。可持续的制作时间有时比单笔融资更重要，在这里有了具体的生活安排。但工资、住房、储蓄和总工时仍未核清，不能替年轻读者算出照着做就能坚持十年的预算。</p>
+<h2 id="_4">有了同事，他还要学会把工作交出去</h2>
+<p>2017年，ESpalding在<a href="https://www.gameskinny.com/culture/behind-the-scenes-with-the-developers-of-kenshi/">GameSkinny访谈</a>里问，从一个人到有团队，感觉怎样。Hunt回忆，程序员Sam来问下一步做什么，他总觉得那件事还是自己做比较好，只有自己知道它怎么运转。后来才逐渐放手，开始喜欢有人接走自己的工作。</p>
+<p>这时他介绍的是五人工作室。Sam可以来接工作，Hunt却还习惯亲手处理那些熟悉的程序，得逐渐改掉这份习惯。</p>
+<p>Hunt还讲了一个错误：一个佣兵要找酒馆，程序偶尔把民宅选成目的地。他进去坐下，屋主攻击闯入者，守卫卷进来，佣兵的伙伴也加入，事情最后闹成整座城的冲突。在他讲述的这个例子里，最初只是选错了目的地，居民、守卫和伙伴的反应却让错误越来越难收拾。</p>
+<h2 id="_5">公开以后，休息也变了</h2>
+<p>2018年，一條貴彰在<a href="https://business.4gamer.net/article/1810/18100201/">Business 4Gamer访谈</a>里追问，他怎样维持十年的动力。Hunt回忆，公开前偶尔会停一周，玩别的游戏；公开后就一直很忙。错误列表越来越长、修正赶不上时，他也会沮丧。</p>
+<p>他说会收到大量意见和错误报告，有些语气很重，读起来难受，但仔细看玩家为何生气，有时仍能找出可用的反馈。采访最后，他劝创作者相信自己的创作，认为钱会随后来。这是他的建议，网站销售和团队收入的事实却不能替它证明：同样坚持的人，未必得到同样结果。</p>
+<h2 id="2018">2018年，他在东京谈起这些年</h2>
+<p>东京游戏展期间，徳岡正肇采访了Hunt。<a href="https://www.4gamer.net/games/339/G033926/20180926049/">4Gamer的报道</a>记录，他喜欢《Fallout》前两作和《XCOM》这类复杂的单人游戏。《Kenshi》也受到黑泽明电影、动画和日本文化影响，不过它有自己的世界，不能当作历史日本。</p>
+<p>他回顾最初六年的生活安排：每周两天做夜警，其余五天制作。他把给自己的工资压得很低，也经历过难熬的时期。说起已经完成的开发工作，他谈到了这些年的积累。</p>
+<p>当时他列出的核心团队是四人：自己做设计和程序，Sam Gin做程序，妹妹Natalie负责剧情和商务，Oli Hatton负责美术；另外还有音乐、音效及媒体素材方面的自由职业协作者。这是2018年那次采访中的分工。与2015、2017的人员表不同，它不能被拼成一份从开工到发售始终不变的名单。</p>
+<p>日本玩家增长也是这次采访的话题。Hunt先从销售变化发现游戏在那里流行起来，后来看过日本玩家逃离食人族的视频，尽管不懂语言，仍觉得有趣。此前有玩家翻译，用户增加以后，团队又请翻译公司处理。读者、视频作者和翻译者已经在远处做了许多事，他才从销售和作品中看到他们。报道提供了这条接触过程，没有证明某一支视频独自造成了热潮。</p>
+<h2 id="_6">游戏做久了，技术也会老</h2>
+<p>2018年12月，正式发行这一周，Natalie Clayton在<a href="https://www.pcgamesinsider.biz/indie-interview/68200/surviving-steam-greenlight-and-decade-of-development-with-lo-fi-games-chris-hunt/">PC Games Insider的采访</a>里追问，团队怎样长期留住玩家。Hunt回顾，更新间隔很长时，玩家会灰心和怀疑；别的Early Access作品被放弃，也会让他们担心《Kenshi》。他认为后来不断改进和修复，让人看出团队仍在认真做。</p>
+<p>多年开发还带来技术老化。Hunt说他们升级过引擎，也绕过不少限制，到了当时，进一步改善已经需要大规模重写。早期做好的工作让项目能够往前走，也留下越来越难改动的基础。时间带来的不全是完成量，外面的技术和玩家期待也在变化。</p>
+<p>到了正式发行的时候，他仍在谈更新、玩家的信任和技术限制。游戏终于能以完成品出售，这些问题却没有随着发售一并结束。</p>
+<h2 id="_7">发售以后，旧技术仍要处理</h2>
+<p>2019年，Hunt在WePlay展会期间接受了<a href="https://www.sohu.com/a/360833121_628730">游研社采访</a>，谈起为什么要做《Kenshi 2》。他给出的主要理由是需要新的引擎和环境，在旧作上修补、追加内容已经不能满足他们的需求。</p>
+<p>按他当时的说法，人手和资金比以前充足，他估计两年内能够上线。这是2019年的预计；何时完成，仍须由后来的制作回答。</p>
+<p>《Kenshi》没有在开头缩成一款很小的游戏。它的规模由多年个人劳动、早期销售和随后增加的专业人员逐步承担。“小团队一定只能做小作品”因此显得过强，愿景也并不会替人支付成本。Hunt终于做成了别人能够购买、游玩和讲述经历的世界，接着还要决定哪些东西留在旧作、哪些必须重新做；夜班、早期协作者和玩家，仍是这段历史的一部分。</p>
+<hr />
+<h2 id="_8">读他的访谈，也去看看游戏</h2>
+<p>本篇以公开采访和机构历史为依据，尚不能写出未经核验的完整童年或家庭传记。上文链接均可直接阅读；再查资料可从<a href="https://lofigames.com/">Lo-Fi Games官方网站</a>进入。作品入口是<a href="https://store.steampowered.com/app/233860/">Kenshi的Steam页面</a>，不需要再自行辨认同名作品。</p>
+<p>事实Owner为<a href="/heroes-portal/cases/CASE-012-kenshi.html">CASE-012</a>和<a href="/heroes-portal/evidence/CASE-012-kenshi-source-ledger.html">证据账本</a>：E001承担夜班、网站alpha收入和随后团队；E002承担职业前史；新增E003–E005分别承担协作、2018访谈和发售期回顾。Lane B提交<code>c80afbd</code>与<code>e0e0a8f</code>已接入本候选分支，仍待<a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes/pull/288">PR #288</a>审阅，不等于main已接受。家庭经济、总成本、逐年人员和完整贡献边界仍UNKNOWN，不消费未核AMA。</p>
+<p>E006为一條貴彰2018-10-02访谈，承担公开前休息、公开后繁忙、错误列表和个人建议；补证提交<code>60786dd</code>已接入。该报道标题的“单人十年”、引言年份与Greenlight混写不能承担精确历史。</p>
+<p>E007/E008随补证<code>693b3de</code>接入：前者是本人早期技术障碍的回忆，AMA身份/日期另有机构日语频道佐证，证明推文本次不可读；后者是游研社账号刊出的中文采访，未获口述录音。约十八岁不是精确学年，网友的大学经历不属于Hunt。续作新引擎理由是本人解释，不能归因所有技术问题；两年估计仅为2019预测，不宣称实际兑现，也不交付未经核验的2026续作状态。</p>
+<p>核验说明：佣兵误入民宅是E003中Hunt讲述的例子，没有独立目击记录；E004所说的积累指已完成的开发工作，不是现金储蓄。E005对Greenlight年份前后表述不一，本篇不据此确定批准日期。正文保留访谈归属，不能把这些讲述升级为独立验证。</p>
+<p>本篇是独立候选，正式<a href="/heroes-portal/book/profiles/kenshi.html">原稿</a>保留。六维对照及回读见<a href="/heroes-portal/book/research-notes/three-lives-editorial-2026-10-09.html">编辑记录</a>。观察窗口包括早期回忆，延长至2019；持续现金流、承认外部贡献的机制沿用原稿判断，夜班和当年Early Access渠道保持CONDITIONAL，不能据此给出2026职业承诺。AUTHOR_REVIEW_PENDING。</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / book/research-notes/kenshi-long-life-candidate-2026-10-09.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

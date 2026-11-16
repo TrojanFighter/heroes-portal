@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>052 — 尚未获得游戏职业资格的人，在哪里把自己训练成作者？中国 × 全球开放原型与Mod生态 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl class="on"" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0" class="t2">0. 初步裁决，不要先下文化判断</a><a href="#1" class="t2">1. 严格分母账本：四类活动不是一条漏斗</a><a href="#p0-organizer-sources" class="t3">P0 / organizer sources</a><a href="#2" class="t2">2. 不能遗漏：中国社区确实诞生过国际新玩法——巨鸟多多《刀塔自走棋》</a><a href="#_1" class="t3">前史比爆款本身更重要</a><a href="#_2" class="t3">同一中国生态里的非名人价值：李远扬与当地站点</a><a href="#3-20172021" class="t2">3. 从组织规模转到真正人物：2017—2021两条中国非标准作者生命史</a><a href="#3" class="t2">3. “市场外部化”和“平台准入成本”两层同时存在</a><a href="#4" class="t2">4. 中国是“数百作品”，全球是“近万”：能比较到哪一步？</a><a href="#_3" class="t3">可以说</a><a href="#_4" class="t3">暂时不可说</a><a href="#5" class="t2">5. 比较应切成六道转化门，不再只数奖项</a><a href="#6" class="t2">6. 最值得优先补的真实分母研究</a><a href="#panel-cn-student-2025" class="t3">Panel CN-STUDENT-2025（中国学生级，首先建议）</a><a href="#panel-int-online-2025" class="t3">Panel INT-ONLINE-2025（同年全球公开平台）</a><a href="#panel-mod-2019" class="t3">Panel MOD-2019（跨平台作者训练机制）</a><a href="#7" class="t2">7. 下一层思想命题：从“读过/玩过什么”到“是否有权出题和留存成果”</a><a href="#8" class="t2">8. 读者与书稿边界</a></aside><article class="doc"><div class="col"><h1 id="052-mod">052 — 尚未获得游戏职业资格的人，在哪里把自己训练成作者？中国 × 全球开放原型与Mod生态</h1>
+<ul>
+<li>Status: <strong>RESEARCH NOTE / MULTI-FRAME DENOMINATOR &amp; PLAYER→AUTHOR MECHANISM / PRE-CLAIM</strong></li>
+<li>Date: 2026-10-08</li>
+<li>Program: 《独立游戏英雄传说》 × 创作者人物前史 × 中外原型社群 × Education / Industry / Social 三层约束</li>
+<li>Author-origin: 洪荒行者2023《正在到来的中度数值通胀率游戏设计革命》关于玩家体验资本、需求发现、产业选择；2026讨论中“游戏玩太少—不会自己出题—商业训练反训练—西方原型社区”和“春登/农民发明家”。均为<strong>A0问题来源而非外部事实</strong>。</li>
+<li>Existing layers deliberately <strong>NOT duplicated</strong>:</li>
+<li><a href="/heroes-portal/book/research-notes/ggj-2026-survey-and-archive-denominator-038.html">038 GGJ参与者/上传/调查四类分母与2027旧档案风险</a></li>
+<li><a href="/heroes-portal/book/research-notes/experience-capital-creator-conversion-gates-047.html">047 体验资本G0–G6转换关口</a></li>
+<li><a href="/heroes-portal/book/research-notes/beginner-jam-public-authorial-persistence-cohort-045.html">045 / 031 已固定的非明星itch小型jam作品队列</a>、<a href="/heroes-portal/book/research-notes/public-unfeatured-week-sauce-apr-2022-cohort-031.html">031</a></li>
+<li><a href="/heroes-portal/book/research-notes/double-fine-amnesia-public-pitch-cohorts-051.html">051 Double Fine内部公开原型提案队列</a></li>
+<li><a href="/heroes-portal/book/research-notes/creator-selection-institution-comparison-050.html">050 公司内部NExT/网易Mini/Supercell团队选拔</a></li>
+<li><a href="/heroes-portal/country-studies/china/019-taste-institutions-player-literacy-creator-selection.html">中国019 鉴赏基础设施六层</a></li>
+<li><a href="/heroes-portal/country-studies/china/002-ggj-2024-shenzhen-nanshan-public-attempt-pilot.html">中国 GGJ2024 深圳南山非明星目录pilot</a></li>
+<li><strong>This note exclusively adds</strong>: 2024–2026中国与全球<strong>公司外</strong>Game Jam、大学生作品、Mod创作的规模核点；中国Mod→国际游戏范式的具体人物反例；真正可比的追踪队列与上游未出发者框架。不能以存在中国例子便否认国别量级缺口，也不能以全球总量强称欧美国别优势。</li>
+</ul>
+<h2 id="0">0. 初步裁决，不要先下文化判断</h2>
+<p class="dc">2024–2025中国业余/高校活动已有数百作品、数千参与者/参赛者规模。不能再称“中国没有业余/学生原型池”。同时全球GMTK单届已有近万份甚至万份提交，但GMTK是<strong>面向全球的跨国入口，中国人也可能参赛</strong>。因此 <strong><code>GMTK(global) : CiGA(China) ≠ West : China</code></strong>。</p>
+<p>要论证“西方hacker生态的量级优势”，至少应把同一年同平台<strong>人员实际居住地</strong>、人口/职业潜在基数、参加频率、后续第二作、付费转化、作者IP/退出权分开测量。当前只可确认<strong>开放生态确实有规模，中国亦有真实入口；国别同口径比例与持续性仍UNKNOWN</strong>。</p>
+<h2 id="1">1. 严格分母账本：四类活动不是一条漏斗</h2>
+<table>
+<thead>
+<tr>
+<th>Year/event</th>
+<th>Platform/organizer</th>
+<th>People/frame</th>
+<th>Submitted artifacts</th>
+<th>Evidence/qualification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>2025 GMTK Game Jam</strong></td>
+<td>全球线上itch.io</td>
+<td><strong>约37,000 joined accounts</strong></td>
+<td><strong>9,515 entries</strong></td>
+<td>itch活动页；加入账号不等于有独立开发劳动，一个账号上传/一队多人，作品自报</td>
+</tr>
+<tr>
+<td><strong>2026 GMTK Game Jam</strong></td>
+<td>全球线上itch.io</td>
+<td><strong>约37,400 joined accounts</strong></td>
+<td><strong>约10,500 entries</strong></td>
+<td>itch该年页；平台注册账号与独立自然人不同</td>
+</tr>
+<tr>
+<td><strong>2025 Global Game Jam (GGJ)</strong></td>
+<td>98国、各地站点</td>
+<td><strong>35,427 jammers</strong></td>
+<td><strong>12,100 games</strong></td>
+<td>2025-03官方survey回顾; GGJ统计来自官网已交活动上传，而非GMTK</td>
+</tr>
+<tr>
+<td><strong>2026 GGJ</strong></td>
+<td>94国、824站点</td>
+<td><strong>39,197 jammers</strong></td>
+<td><strong>9,874 games</strong></td>
+<td>2026-04-13官方surveys; 3535自愿问卷另为小分母；详见038</td>
+</tr>
+<tr>
+<td><strong>2025 GGJ × CiGA中国区</strong></td>
+<td>中国大陆CiGA独立组织，含线上</td>
+<td><strong>2,300+ developers / 735 teams</strong></td>
+<td><strong>563 prototypes</strong></td>
+<td>CiGA 2025-01同期组织说明，时间提前至1月17–19（避春节），不预设与GGJ全球条目一一去重</td>
+</tr>
+<tr>
+<td><strong>2024 CiGA Game Jam</strong></td>
+<td>中国线上线下独立活动（<strong>不同于GGJ</strong>）</td>
+<td><strong>超过3,000报名参与</strong>，近600队</td>
+<td><strong>500+ demos</strong></td>
+<td>GmHub 2025下一届官方报名页对上一届回顾；前期报名vs实际参与需复核</td>
+</tr>
+<tr>
+<td><strong>2025 CiGA Game Jam</strong></td>
+<td>中国独立活动（非GGJ）</td>
+<td><strong>2,000+ participants</strong></td>
+<td><strong>450+ prototypes</strong></td>
+<td>CiGA组织2026-06报名通稿回顾；主办声明的粗略值而非公开实名队列</td>
+</tr>
+<tr>
+<td><strong>2024 CUSGA大学生创作大赛</strong></td>
+<td>UGDAP/高校跨境参赛</td>
+<td><strong>2,000+ students / 430+ universities</strong></td>
+<td><strong>500+ completed entries</strong>, 75初赛入围</td>
+<td>UGDAP 2024-05官方初赛稿；参赛高校含港澳台与境外</td>
+</tr>
+<tr>
+<td><strong>2025 CUSGA</strong></td>
+<td>UGDAP/高校跨境参赛</td>
+<td><strong>近2,000 students / 480+ universities</strong></td>
+<td><strong>528 entries</strong>, 53初赛入围、26决赛入围</td>
+<td>UGDAP 2025同期赛事公布，媒体同步；学生“参赛”与“完成商业游戏”不可等价</td>
+</tr>
+<tr>
+<td><strong>2024 mod.io</strong></td>
+<td>全球多游戏跨平台UGC/Mod服务</td>
+<td><strong>281,000 creators submitting content</strong></td>
+<td><strong>UNKNOWN unique game-like designs</strong></td>
+<td>mod.io公司2025-01-30回顾；每个creator提交的内容可能是地图、道具、外观或其它UGC，不能计入“原创游戏开发者”</td>
+</tr>
+</tbody>
+</table>
+<h3 id="p0-organizer-sources">P0 / organizer sources</h3>
+<ul>
+<li>GMTK 2025: https://itch.io/jam/gmtk-2025 ; https://itch.io/jams/past/with-participants</li>
+<li>GMTK 2026: https://itch.io/jam/gmtk-jam-2026 ; https://itch.io/jams/past/with-participants</li>
+<li>GGJ 2025官方，2025-03-25: https://globalgamejam.org/news/global-game-jam-2025-jammer-survey-data</li>
+<li>GGJ 2026官方，2026-04-13: https://globalgamejam.org/news/global-game-jam-2026-jammer-survey-data ，必须以该final口径而非历史页旧初报为主。详见038。</li>
+<li>CiGA中国区GGJ 2025: https://www.ciga.me/blog/ggj-2025-x-ciga-563</li>
+<li>CiGA Game Jam 2024：GmHub2025报名页回顾 https://www.gmhub.com/jams/cgj2025</li>
+<li>CiGA Game Jam 2025：CiGA2026通稿（VGN转载）：https://game.vgn.cn/article/news/35699</li>
+<li>2024 CUSGA UGDAP官方：https://www.bilibili.com/opus/936835803008467041</li>
+<li>2025 CUSGA主办方UGDAP：https://www.bilibili.com/video/BV11juizSE66/ ，2025年决赛名单采访回顾 https://www.gamersky.com/news/202507/1961277.shtml</li>
+<li>mod.io运营方2024年回顾，2025-01-30发布：https://blog.mod.io/2024-year-in-review-f06139966528 （其网站迁移后部分页面JavaScript才能显示；搜索官方索引保留）</li>
+<li>2026 China CGJ展望供时间核对：https://game.vgn.cn/article/news/35699</li>
+</ul>
+<p><strong>统计处理条款</strong>：</p>
+<ol>
+<li><code>registered / joined / jammers / author accounts / teams / submissions / finished pieces / shipped commercial games / financially sustaining creators</code>完全不同。</li>
+<li>学校项目可能也参加jam、玩家也可能兼任职业研发、同一作品可能在GMHub与GGJ双发；<strong>不得将中国563+500+528加成互异作者总量</strong>。</li>
+<li><code>2025 CiGA regional GGJ games / 2025 GGJ global games</code>暂时不能计算中国占比，至少要核实早举办/双上传与中国区是否全部计入全球官网。</li>
+<li>GMTK的37k是<code>joined itch accounts</code>，不能与GGJ的<code>registered jammers</code>按百分比比较个人开发成功率。</li>
+<li>mod.io的creator投稿≠原创独立游戏，外观、素材、关卡、工具等UGC分别列出；“全球平台”不是“欧美人”，公开缺国别与创作类型细分。</li>
+<li>2024/25 CUSGA允许中国境外高校参赛，不能把所有作品作为中国大陆专属分子。</li>
+</ol>
+<h2 id="2">2. 不能遗漏：中国社区确实诞生过国际新玩法——巨鸟多多《刀塔自走棋》</h2>
+<h3 id="_1">前史比爆款本身更重要</h3>
+<p><a href="https://www.gameres.com/835298.html">2019-01-18 GameLook同期直接访谈，GameRes转载</a>：</p>
+<ul>
+<li>巨鸟多多早在<strong>2015年</strong>以熟识游戏玩家小队方式成立。创始人阿虾此前是《魔兽争霸3》自定义RPG地图《宝石TD》的<strong>更新作者之一</strong>；团队第一项公开作品是Dota 2游廊的《宝石TD》，不是2019突然第一次做游戏。</li>
+<li>2019接受采访时约5人，设计者阿佳兼程序和服务器、阿羊兼地图编辑器/玩家交流、阿标兼视觉/商务/发行。它是一种<code>MULTI-ROLE GENERALIST / EDITOR-AFFORDED PRODUCTION</code>，既非大型商业策划部门，也非没有技能训练。</li>
+<li>团队自述《刀塔自走棋》打磨<strong>约两年</strong>、进行过大改；2019年一月站内订阅迅速上升（同期媒体17日记录突破百万订阅，<strong>订阅不是销量、付费用户或独立受众数量</strong>）。</li>
+<li>设计者阿佳说其底层想法借鉴麻将的有限牌池/组合，并组织成战斗过程；这应读作<strong>规则重组与新的可传播体验语法</strong>，不等于全世界此前从未存在任何自动战斗。</li>
+<li>一款<strong>中国制作的mod/custom game</strong>形成了国际可见的新自动战斗玩法市场；<a href="https://www.redbull.com/int-en/dota-auto-chess-interview-drodo-studio">2019-03国际媒体Red Bull对五人团队访谈</a>可独立核对其海外扩散与当时兴趣，正式论断应区分“开创”“重组”“跟随”“品类扩散”，见<a href="/heroes-portal/book/research-notes/innovation-dimensions-zhengtu-doom-comparator-049.html">创新维度049</a>。</li>
+<li>团队当时抱怨Dota 2游廊<strong>作者变现基础设施不成熟</strong>、需要作者自建收费方案；这是<code>MOD AFFORDANCE</code>与<code>MARKET INTERFACE</code>分离的<strong>本人同期诊断</strong>。非官方的收入传闻、淘宝售额不作为审计净收入。</li>
+</ul>
+<p><strong>研究裁决</strong>：这是“中国玩家从mod/地图生态进入国际原创玩法生产”的<strong>明确存在性反证</strong>；但这样一个全球成功项目本身不证明中国的mod→原创转化率、土壤覆盖率和职业转化人数已达到欧美/日本平均。也不可因为中国案例存在就否认中国人的教育、家庭和商业制度可能有结构性损失。</p>
+<h3 id="_2">同一中国生态里的非名人价值：李远扬与当地站点</h3>
+<p><a href="https://www.ciga.me/blog/global-game-jam">CiGA对厦门《纽扣兄弟》团队与站点组织史的同期专题</a>记述：李远扬毕业时放弃大厂录用路径、与同学创业，并有参加Ludum Dare之后反过来帮助组织国内Game Jam的经历。他不是没有中国团队/社群支持的孤立“天才”，也是<code>PARTICIPANT→LOCAL ORGANIZER</code>的一段可追踪传播链；其家庭与失败风险已有<a href="/heroes-portal/book/research-notes/family-support-after-commercial-failure-li-yuanyang-berardi-036.html">036</a>，这里不重写独立成功故事，也不把其2019报道当无偏随机样本。</p>
+<p>另见CiGA既往<a href="https://www.ciga.me/blog/global-game-jam-9a674d9d-2441-4d70-b356-be7e7c7c2467">GGJ生存指南</a>：明确教现场组队、配岗位身份牌、48小时scope、调解分歧、做简单构建和提交。其教育价值是教尚未就业者<strong>通过一次可玩劳动，获得反馈与协作机会</strong>，非只做招聘题。</p>
+<h2 id="3-20172021">3. 从组织规模转到真正人物：2017—2021两条中国非标准作者生命史</h2>
+<p><a href="/heroes-portal/book/research-notes/ciga-heero-akaba-two-creator-life-crossroads-053.html">053 — 希罗 × 亚恒：被Jam发现之前谁已经在创作？</a>完成两段有原始同期访谈+Steam商店交叉核对的入场史：</p>
+<ul>
+<li>希罗是非游戏公司国企电缆检修工，2017接触Construct 2，<strong>2017-12已经自行发行过《This Is Not A Jumping Game》</strong>，才于2018在GGJ制作《Mr Husky》原型、半年后CGJ《Kninja》，2019《Mr Husky》EA→正式Steam。Jam的新增变量不是<code>FIRST GAME EVER</code>，而是<code>PUBLIC FEEDBACK / PEER RECOGNITION / REENTRY</code>；其2020—26是否继续制作UNKNOWN。</li>
+<li>亚恒在2018广州Jam前已有嵌入式程序能力、长期游戏阅历与《拣爱》私人Idea Pocket；Jam中10人合作圈分三项目，<code>LoveChoice</code>以部分合作者完成48小时验证，2018-09-30 Steam EA、2021-11-15 1.0；2018本人自述约1.8万份累计销量，<strong>非审计净收入</strong>；随后长期职业状态UNKNOWN。</li>
+<li>亚恒2018点名Jonathan Blow及The Witness为榜样，并通过YouTube学习独立开发制作节奏与通过海外论坛请人免费帮助语言校对，是<strong>中国非商业游戏创作者实际主动获取国际信息的同期反例</strong>。不代表中国创作者中外信息敏捷程度的普遍频率。</li>
+</ul>
+<p>这使<code>Jam produces creators</code>应改成<code>Jam can expose, connect and reality-test creators who may already have ideas, skills and even shipped games</code>。只有把每位作者在Jam以前的旧项目、职业/家庭runway查清楚，才能判断此次活动真实新增了什么，不能把入场者本来拥有的能力全部归功于组织方。</p>
+<h2 id="3">3. “市场外部化”和“平台准入成本”两层同时存在</h2>
+<ul>
+<li>2025 GMTK官方规则：https://itch.io/jam/gmtk-2025 。<strong>不分国籍/年龄</strong>允许参赛；团队或个人可提交，制作者保留自己游戏的所有权，其他作者可公开试玩评分；2026继续类似规则。要核对各届AI资源、设备、技术与许可不同版本。</li>
+<li>2024 GGJ × CiGA中国区报名规则：https://www.ciga.me/blog/13-21-ggj-2024-x-ciga 。明确要求分别到GmHub和GGJ官网报名与上传，部分GGJ全球网站可能遇到验证码、登录/网络访问困难；<strong>具体某届中国本地组织提供了GmHub替代工作流</strong>，这是一项可观察的<code>PLATFORM-ACCESS FRICTION</code>，不能据此宣称全中国游戏创作者永远被墙在海外原型社区外。</li>
+<li>2025 CiGA向GGJ组织者调整活动周以避中国春节的做法：https://www.ciga.me/blog/ggj-2025-x-ciga-563 。这是<strong>制度历法与场站组织的真实障碍及协调能力</strong>，无需空谈文化性格。</li>
+<li>2025–2026 GMTK每届数千项作品直接公开供其他作者游玩，并有创意、乐趣、叙事、视听分开评分；构成<code>ARTIFACT PUBLICNESS → PEER FEEDBACK → NEXT ATTEMPT</code>的机制。是否每一人真正收到有价值反馈、是否产生职业效益，需跟踪个体cohort，不能以提交量证明。</li>
+</ul>
+<h2 id="4">4. 中国是“数百作品”，全球是“近万”：能比较到哪一步？</h2>
+<h3 id="_3">可以说</h3>
+<ul>
+<li>中国CGJ、GGJ中国区和CUSGA已经形成持续多年、跨城市和跨高校的<strong>中型规模开放原型入口</strong>；这与“只懂抄商业数据，不会自己做Demo”绝对判断矛盾。</li>
+<li>GMTK单届近万/万余原型是一项规模可核的<strong>国际开放场域</strong>，而中国多数人在本土看到的是地区或区域组织活动，不意味着中国不能参与全球比赛。</li>
+<li><strong>中国存在国际级原创机制来源的Mod反例</strong>：巨鸟多多的能力前史依托War3→Dota2地图工具、熟悉玩家和反复改版，而非成熟手游运营KPI训练。</li>
+<li><strong>中国也有自己的人才扶助中介</strong>：2024 UGDAP公告列鹰角旗下开拓芯资金/团队孵化的合作支持；“外界/厂商资金介入”未必等于强制把玩法变成熟赛道，实际发起权与赞助协议需要跟踪。</li>
+</ul>
+<h3 id="_4">暂时不可说</h3>
+<ul>
+<li>“欧美个人原创作者数量是中国X倍”；既没有GMTK地区去重与中国参赛者人数，也没有匹配国内全活动去重；</li>
+<li>“中国高校学生只会执行，外国高校学生天然会原型”；CUSGA500+作品即是存在性反证，各校必修/选修、毕业作品与持续业余作者数量不同；</li>
+<li>“中国有个刀塔自走棋，所以系统不存在结构性问题”；<strong>例子≠量级</strong>是本书必备底层规则；</li>
+<li>“GGJ 2025有12,100游戏，中国563，所以中国全球份额4.7%”；受组织边界、并集与双上传限制，这个比值目前不可识别；</li>
+<li>“mod.io281,000作者，因此西方每年28万新游戏设计者”；<code>UGC content creators</code>与<code>GAME DESIGN ORIGINATORS</code>差异巨大；</li>
+<li>“没有在线发布＝没有继续创作”；内容删除、私人创作、就业后内嵌制作、跨平台迁移可造成失访。</li>
+</ul>
+<h2 id="5">5. 比较应切成六道转化门，不再只数奖项</h2>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>可观测指标</th>
+<th>要排除的假成功／假失败</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>A ACCESS</code></td>
+<td>一批从未做过游戏的人，有多少<strong>实际可进入</strong>jam/编辑器/课程；报名国别/校内覆盖率</td>
+<td>接触过宣传≠拥有设备、时间与访问</td>
+</tr>
+<tr>
+<td><code>B FIRST ARTIFACT</code></td>
+<td>自发创意变成第一项可玩作品的人数与人时成本</td>
+<td>参加jam账号≠亲手做出作品；团队项目不按人数倍算</td>
+</tr>
+<tr>
+<td><code>C PROBLEM ORIGIN</code></td>
+<td>谁决定该试什么规则，是否不是仅执行外界指定模板</td>
+<td>职位叫策划≠独立出题；模组内容修改≠必然玩法原创</td>
+</tr>
+<tr>
+<td><code>D PEER REALITY</code></td>
+<td>跨组试玩、社区评价、据此删除/迭代的具体历史</td>
+<td>一次点赞≠产品有市场</td>
+</tr>
+<tr>
+<td><code>E RE-ENTRY</code></td>
+<td>失败/未获奖后12/24/60个月继续做<strong>不同作品</strong>的最小下界</td>
+<td>无公开更新≠永久退场；参加者非商业化也可能自愿</td>
+</tr>
+<tr>
+<td><code>F MARKET &amp; AUTHOR RIGHT</code></td>
+<td>下一作自定方向、仍保留作者署名/IP/联系玩家的接口、经济回流</td>
+<td>入职大厂≠丧失作者性；已有Steam页≠商业独立回本</td>
+</tr>
+</tbody>
+</table>
+<p>这些参数需要分为 <code>NONPRO / FIRST-ARTIFACT</code>、<code>PRO / INTERNAL-PROTOTYPE</code> 与 <code>RETURNING MODDER</code> 三种先验分层；不能拿一届GMTK的个人比例与网易Mini六周新人组直接比较。</p>
+<h2 id="6">6. 最值得优先补的真实分母研究</h2>
+<h3 id="panel-cn-student-2025">Panel CN-STUDENT-2025（中国学生级，首先建议）</h3>
+<ul>
+<li><strong>Entry frame</strong>：UGDAP公开2025 CUSGA的<strong>全部528参赛作品</strong>；只取赛事官方公开账号/作品名称、学校只在官方已经公开且属于必要识别时记粗粒度；不搜私人学生家庭资料。</li>
+<li><strong>Baseline</strong>：<code>2025 entry→可玩作品证据→至少1位公开署名主创→作品是否允许免费试玩→得到的首次公开反馈</code>，区分参赛组别/独立作者/多人团队。</li>
+<li><strong>Follow-up</strong>：2026/27/28/30仅公开层<code>NEW GAME SUBMITTED, NONCOMMERCIAL HOBBY, TEAM CONTINUED, STEAM/ITCH SHIP, CREDIT IN ANOTHER GAME, UNKNOWN</code>。不把个人真名与社交身份强行拼接；应由明确授权或公开自愿链接确认。</li>
+<li><strong>What it answers</strong>：中国学生级 <code>G2→G3→G6</code> 的公开继续创作下界（注意右删失）。若缺全量可访问作品列表，就先固定2025初赛53作品<strong>但明写selection-biased top stratum</strong>，不能偷称全队列。</li>
+</ul>
+<h3 id="panel-int-online-2025">Panel INT-ONLINE-2025（同年全球公开平台）</h3>
+<ul>
+<li><strong>Entry frame</strong>：GMTK 2025官方<strong>9515完整submission</strong>，按随机/分层固定可复现抽样；不仅查看Top-Rated。至少包括从来没有评分的作品与曾制作过游戏的账号。</li>
+<li><strong>Follow-up</strong>：和CN panel相同的内容/作者/时效字段；<strong>若不能确认地区则国籍UNKNOWN</strong>，不可把英文描述当美国人。</li>
+<li><strong>Comparison</strong>：最多比较“<strong>这两个活动来源的公开继续创作下界与不同门槛</strong>”；都不是中国和西方总体水平。要做国别比须获得自愿地理数据，或通过GGJ官方分国别站点名单，且要算学生/业余人口基数和入场概率。</li>
+</ul>
+<h3 id="panel-mod-2019">Panel MOD-2019（跨平台作者训练机制）</h3>
+<ul>
+<li><strong>Entry</strong>：Dota 2 Arcade/War3创作者同一历史时段的非明星地图项目；给巨鸟多多建立创作者前史链但<strong>不能只看巨鸟多多</strong>。要记录尝试未得反馈的作品、编辑器可用性、玩家交流、商业化、继续提交与商业作品转化。</li>
+<li><strong>International comparator</strong>：选同类editor/mod社区，而非随意用Minecraft Mod或Nexus Cosmetics全行业数字；对照同款平台的韩国、欧洲、中国创作者，至少可控制工具与目标玩家的一部分差异。</li>
+<li><strong>Risks</strong>：历史作者名册可访问性、原地图迭代/许可证、不把玩家社区ID反向和现实私人身份配对。</li>
+</ul>
+<h2 id="7">7. 下一层思想命题：从“读过/玩过什么”到“是否有权出题和留存成果”</h2>
+<p>我们把原来的“玩得少→阅历少→原创少”分解为：</p>
+<pre><code class="language-text">REFERENCE BREADTH（广泛体验）
+  × PRACTICE AFFORDANCE（工具/编辑器）
+  × LEGITIMATE TIME（家庭/学校/就业可用时间）
+  × PEER FEEDBACK（公开可玩和真实纠错）
+  × REENTRY OPTION（下一次机会）
+  × MARKET INTERFACE（对创作者有意义的回流）
+→ AUTHORIAL OPTION SET（仍能自主决定下一个问题的人数/能力）
+</code></pre>
+<p>这六项不是数学上已测量的乘数，也不能用某一项的观察值推出产品成功；它们构成<strong>可能存在瓶颈相互作用</strong>的可证伪机制假说。家庭与课堂把人的可用时间全部挤压掉，即使有海量工具也可能没有第一次实验；有实验但没有任何市场回流，则可能只保留短暂的兴趣劳动；在大厂拿到高薪却没有原型权，则可积累生产资本但原生问题能力未必被训练。</p>
+<p>中西比较应评估<strong>哪道门的实际转化更薄</strong>，以及为什么薄，而不是拿“民族性Hacker精神”一次解释六件事。</p>
+<h2 id="8">8. 读者与书稿边界</h2>
+<p>本研究属于<strong>前门社会/教育层与职业前史的横向定量档</strong>，不应在当前阶段新建只罗列“中国不行”的正式章节。下一步如果要向 reader chapter迁移，优先讲：
+- 中国《刀塔自走棋》前史中同好的长期地图编辑器劳动、2016手游试错挫折、2019世界级玩法重组；
+- 与外国mod作者在同样工具上拥有怎样不同的<code>creator royalty / exit option</code>（需合同与平台分账来源）；
+- 中国普通学生从首项CUSGA作品到第二个原创作品、再到是否进入正式就业的<strong>真实年份可观察链</strong>；
+- 反例：有人进入成熟公司仍能保持作者性，或根本没有职业游戏愿望；不给所有人强塞“你应该创业”。</p>
+<p><strong>Current verdict：</strong> 中国千人级入口、数百项年度原型、世界级mod范式创新已有证据；全球平台万项原型规模同样有证据。中国与西方同口径的<strong>创作者转化率、人口归一化密度、留存创作与作者权的数量级差距仍待取证</strong>。避免“单例反驳结构”和“全球平台统计当外国人口”两种错误。</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / book/research-notes/open-prototype-community-china-global-entry-cohorts-052.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

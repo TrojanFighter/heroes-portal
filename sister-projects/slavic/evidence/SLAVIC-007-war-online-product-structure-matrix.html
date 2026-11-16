@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SLAVIC-007 — WoT / WoWP / WoWS / War Thunder 产品结构矩阵 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl class="on"" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#_1" class="t2">研究问题</a><a href="#_2" class="t2">一、四项产品结构矩阵</a><a href="#_3" class="t2">二、关键来源与证据</a><a href="#a-world-of-tanks" class="t3">A. World of Tanks：为什么坦克交互具有低第一层门槛</a><a href="#b-world-of-warplanes" class="t3">B. World of Warplanes：同商业模板撞上不同物理对象</a><a href="#c-world-of-warships" class="t3">C. World of Warships：不是复制坦克，而是重新定义“可玩海战”</a><a href="#d-war-thunder" class="t3">D. War Thunder：通过模式分层而不是一次性压平复杂度</a><a href="#_4" class="t2">三、可以开始支持的跨产品命题</a><a href="#m1" class="t3">M1 — 商业模板比核心交互更容易迁移</a><a href="#m2" class="t3">M2 — “载具本体”是产品市场规模的重要中介变量</a><a href="#m3-war-thunder-wowp" class="t3">M3 — War Thunder 提供了 WoWP 没有采用的另一种“大众化模拟”解法</a><a href="#m4-world-of-warships" class="t3">M4 — World of Warships 证明“成功模板迁移”最重要的不是复用玩法，而是复用组织资产后重新解决问题</a><a href="#_5" class="t2">四、一个更强的“斯拉夫战争网游产业簇”工作模型</a><a href="#_6" class="t2">五、当前不能支持的强结论</a><a href="#_7" class="t2">六、下一轮最值钱的证据缺口</a></aside><article class="doc"><div class="col"><h1 id="slavic-007-wot-wowp-wows-war-thunder">SLAVIC-007 — WoT / WoWP / WoWS / War Thunder 产品结构矩阵</h1>
+<ul>
+<li>Type: Comparative Evidence Matrix</li>
+<li>Program: 《斯拉夫游戏英雄传说》</li>
+<li>Status: ACTIVE — FIRST PASS</li>
+<li>Last updated: 2026-10-03</li>
+</ul>
+<h2 id="_1">研究问题</h2>
+<blockquote>
+<p class="dc"><strong>为什么在相近的军武受众、F2P 长线运营和科技树结构下，World of Tanks、World of Warplanes、World of Warships 与 War Thunder 会形成截然不同的产品结构与市场结果？</strong></p>
+</blockquote>
+<p>本矩阵不试图用单一变量解释成败，而是把“商业模板能迁移什么、具体载具问题又迫使团队重新发明什么”拆开。</p>
+<h2 id="_2">一、四项产品结构矩阵</h2>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>World of Tanks</th>
+<th>World of Warplanes</th>
+<th>World of Warships</th>
+<th>War Thunder</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>主要生产谱系</td>
+<td>Wargaming 长期战争 / 策略产品 → WoT</td>
+<td>Wargaming 在 WoT 成功后主动扩展 <code>World of...</code></td>
+<td>Wargaming + Lesta；在 Tanks / Warplanes 后建立海战产品</td>
+<td>Gaijin + Dagor；IL-2: Birds of Prey / Apache / Birds of Steel 等军事航空能力前史</td>
+</tr>
+<tr>
+<td>基本空间</td>
+<td>地面为主；导航主要在二维平面完成</td>
+<td>完整三维空域</td>
+<td>水面导航主要在二维平面，但射击包含远距离弹道、提前量、视野 / 隐蔽</td>
+<td>按载具与模式变化；空战完整三维，陆战地面二维主导，后续扩展海战与联合载具</td>
+</tr>
+<tr>
+<td>载具运动约束</td>
+<td>可停、可倒车、可利用掩体；车体与炮塔可相对分离</td>
+<td>必须持续运动；姿态、速度、高度、转向耦合</td>
+<td>不能瞬停 / 瞬转，惯性明显，但无需持续管理完整飞行姿态</td>
+<td>模式分层；Arcade 降低操控负担，Realistic / Simulator 保留更多飞行 / 物理约束</td>
+</tr>
+<tr>
+<td>新手控制模型</td>
+<td>WASD 驾驶 + 鼠标炮塔 / 瞄准；官方提供 auto-aim、arcade/sniper 等辅助</td>
+<td>团队长期重做 flight model 与 mouse controls；甚至使用 AI 辅助飞机朝鼠标方向飞行</td>
+<td>WASD 航行 + 鼠标瞄准；难点从“控制船体姿态”转向提前量、航向预测、武器切换和视野</td>
+<td>不用一个控制深度强迫所有玩家；不同模式分别提供简化、真实和模拟层级</td>
+</tr>
+<tr>
+<td>核心认知门槛</td>
+<td>“先会开，再学战术”；驾驶直觉接近日常车辆</td>
+<td>玩家需要先学会“如何在三维空间里存在”，然后才能稳定进入战术层</td>
+<td>载具慢、转向可预测；主要学习的是未来位置、射击提前量、隐蔽和职业分工</td>
+<td>把认知门槛分层：新人可先 Arcade，深度玩家再进入 Realistic / Simulator</td>
+</tr>
+<tr>
+<td>战斗节奏</td>
+<td>中速；移动—停稳—瞄准—射击节奏清晰</td>
+<td>高速；持续运动使目标获取、瞄准和空间判断同时发生</td>
+<td>明显偏慢且更 methodical；必须提前规划转向、航线和射击窗口</td>
+<td>强烈依模式和载具变化；Arcade 快，Realistic / Simulator 更惩罚失误</td>
+</tr>
+<tr>
+<td>“真实性”处理方式</td>
+<td>大量抽象后保留装甲、穿深、模块、载具差异等军武感</td>
+<td>原计划是 arcade flyer + simulator mixture；难点在简化后仍要让“飞行本身有意义”</td>
+<td>开发者明确拒绝把它做成“水上坦克”；保留舰种、弹道、隐蔽、惯性，但重构为可读的海战动作 / 策略</td>
+<td>不在“真实性 vs 大众化”之间二选一，而是通过 Arcade / Realistic / Simulator 分层承载不同真实性</td>
+</tr>
+<tr>
+<td>成长 / 长线</td>
+<td>F2P、科技树、载具收集、长期运营</td>
+<td>明确继承 WoT 式 tech tree、统一账户 / Premium 等框架</td>
+<td>延续科技树、历史载具、长期更新、PvP / PvE 等运营能力</td>
+<td>F2P、research tree、载具研究 / modifications；2013 年已公开重构 research progression</td>
+</tr>
+<tr>
+<td>可迁移的公司能力</td>
+<td>服务器、账户、运营、历史载具内容、F2P、社区、全球市场</td>
+<td>上述能力大多可以直接继承</td>
+<td>上述能力继续继承，并由 Lesta 提供海战开发能力</td>
+<td>Dagor、军事载具建模、飞行 / 物理、主机控制、在线产品经验</td>
+</tr>
+<tr>
+<td>不可直接迁移的问题</td>
+<td>—</td>
+<td>飞机三维操控、持续运动与高速交战本身不能从坦克模板解决</td>
+<td>舰船尺度、缓慢惯性、超远距离弹道、隐蔽与舰种关系必须重新设计</td>
+<td>多真实性层、不同载具域的控制与伤害模型必须由自身传统解决</td>
+</tr>
+<tr>
+<td>当前证据支持的核心判断</td>
+<td>WoT 是 Wargaming 公司史明确转折点</td>
+<td>同公司、同商业模板并未复制 WoT 规模；Wargaming 公开承认更高学习曲线</td>
+<td>“World of”组织资产可迁，但开发者主动重新定义海战，而非复制坦克交互</td>
+<td>项目 / 能力前史早于 WoT；WoT 更像市场验证，而非起源原因</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_3">二、关键来源与证据</h2>
+<h3 id="a-world-of-tanks">A. World of Tanks：为什么坦克交互具有低第一层门槛</h3>
+<p>World of Tanks 官方控制指南显示，核心驾驶就是 WASD，炮塔 / 火炮由鼠标控制；同时提供默认 Arcade aiming、Sniper mode 和 Auto-Aim。</p>
+<p>Source:
+- World of Tanks official, <code>Controls and Firing</code>
+- https://worldoftanks.com/en/content/guide/newcomers-guide/game_controls/
+- Evidence class: P0 / OFFICIAL-LIVE-DOCUMENTATION</p>
+<p>官方 Random Battles 的标准目标仍是“占领基地或摧毁全部敌车”，15v15 是长期标准格式之一。</p>
+<p>Source:
+- World of Tanks official rules / Arcade Cabinet pages using Random Battles baseline
+- https://worldoftanks.com/en/news/general-news/arcade_cabinet/
+- Evidence class: P0 / OFFICIAL-LIVE-DOCUMENTATION</p>
+<p>Interpretation:</p>
+<blockquote>
+<p><strong>WoT 并非“简单”，而是把第一层操作建立在高度熟悉的地面驾驶直觉上；复杂度主要在之后的装甲、穿深、视野、地图、位置与载具知识中逐步展开。</strong></p>
+</blockquote>
+<p>Status: SUPPORTED</p>
+<h3 id="b-world-of-warplanes">B. World of Warplanes：同商业模板撞上不同物理对象</h3>
+<p>2011 年 Wargaming 制作人 Anton Sitnikau 已明确说，World of Warplanes 会采用 <code>arcade flyer + simulator</code> 的混合，并刻意简化控制，让玩家把注意力放在战斗而不是“操作飞机”上。</p>
+<p>Source:
+- World of Warplanes official mirror of GameSpy interview, 2011-08-18
+- https://worldofwarplanes.com/news/gamespy-world-warplanes-interview/
+- Evidence class: P0 / CONTEMPORANEOUS-DEVELOPER-INTERVIEW</p>
+<p>2013 年 Executive Producer Alex Zezulin 又说明，flight mechanics 与 mouse controls 在 beta 中经历持续重做。</p>
+<p>Source:
+- Gaming Nexus, <code>World of Warplanes Interview</code>, 2013-04-14
+- https://www.gamingnexus.com/Article/3945/World-of-Warplanes-Interview
+- Evidence class: P0/P1-adjacent / CONTEMPORANEOUS-DEVELOPER-INTERVIEW</p>
+<p>World of Warplanes 官方在 2013 年还公开说明，默认 mouse control 使用 AI 帮助预测并引导飞机运动，证明“把飞行映射到鼠标直觉”本身就是核心产品工程问题。</p>
+<p>Source:
+- World of Warplanes official, <code>Mouse Controls Explained</code>, 2013-10-17
+- https://worldofwarplanes.com/news/mouse-controls-explained
+- Evidence class: P0 / OFFICIAL-CONTEMPORANEOUS</p>
+<p>2014 年 Wargaming 方面在 PAX Australia 明确承认 WoWP <code>was not as successful as World of Tanks</code>，并把更高难度曲线直接归因于三维环境与飞机控制；同时暂停亚洲发行、继续尝试更 arcade、更易理解的设计。</p>
+<p>Sources:
+- https://futurefive.co.nz/story/tanks-for-the-memories-wargamingnet-at-paxaus-2014
+- https://vicbstard.com/wargaming-net-at-paxaus-2014/
+- Evidence class: P1 / CONTEMPORANEOUS-COMPANY-INTERVIEW</p>
+<p>Victor Kislyi 在 TGS 2014 又给出更强的内部反思：团队在 WoT 成功后以为已经掌握“成功秘诀”，但后来发现 Tanks、Warplanes、Warships 实际上是不同游戏，成功公式不能直接复制。</p>
+<p>Source:
+- Game*Spark, TGS 2014 Victor Kislyi interview
+- https://www.gamespark.jp/article/2014/09/24/51803.html
+- Evidence class: P1 / CEO-CONTEMPORANEOUS-INTERVIEW</p>
+<p>Interpretation:</p>
+<blockquote>
+<p><strong>WoWP 是最强内部反事实：账户、Premium、科技树、军武内容生产和全球运营都能迁移，但三维高速飞行这个核心交互对象不能靠旧模板消解。</strong></p>
+</blockquote>
+<p>Status: STRONGLY SUPPORTED</p>
+<h3 id="c-world-of-warships">C. World of Warships：不是复制坦克，而是重新定义“可玩海战”</h3>
+<p>Wargaming 官方设计回顾明确指出：前两作都是“close command of one vehicle”，但这一点不能直接翻译到舰船的尺度；团队把 WoWS 定义成更 strategic / methodical 的整体战场，并明确讨论舰种差异、舰船尺度与海洋空间。</p>
+<p>Source:
+- Wargaming, <code>Getting it Right: World of Warships</code>
+- https://wargaming.com/en/news/wows_getting_it_right/
+- Evidence class: P1/OFFICIAL-DESIGN-RETROSPECTIVE</p>
+<p>官方 2015 年回顾显示 WoWS PvP 使用 12v12，并已经形成 PvE、Ranked、信号旗、迷彩等长期运营内容。</p>
+<p>Source:
+- Wargaming, <code>Wargaming's Top 10 Moments of 2015</code>
+- https://wargaming.com/en/news/wargaming-top-news-2015/
+- Evidence class: P0/P1-adjacent / OFFICIAL-CONTEMPORANEOUS</p>
+<p>当前官方 / 官方 Wiki 的基础教学仍强调：舰船不能瞬间加速、停止或转向，玩家需要提前规划航向，并在远距离射击时计算移动目标的提前量。</p>
+<p>Source:
+- World of Warships Wiki, <code>Game Basics</code>
+- https://wiki.worldofwarships.com/Ship:Game_Basics
+- Evidence class: P0 / OFFICIAL-LIVE-DOCUMENTATION</p>
+<p>Interpretation:</p>
+<blockquote>
+<p><strong>WoWS 的大众化路径并不是让舰船“像坦克一样灵活”，而是接受慢速、惯性和远程弹道，再把操作难点从载具姿态控制转成预判、航线和信息管理。</strong></p>
+</blockquote>
+<p>Status: SUPPORTED</p>
+<h3 id="d-war-thunder">D. War Thunder：通过模式分层而不是一次性压平复杂度</h3>
+<p>War Thunder 官方 FAQ 明确把三个主要 PvP 层级区分为：</p>
+<ul>
+<li>Arcade：简化、适合新手；</li>
+<li>Realistic：更强调历史 / 物理真实性；</li>
+<li>Simulator：面向更高沉浸与操控复杂度。</li>
+</ul>
+<p>Source:
+- War Thunder official FAQ
+- https://warthunder.com/en/game/faq
+- Evidence class: P0 / OFFICIAL-LIVE-DOCUMENTATION</p>
+<p>官方 Wiki 对 Arcade 的描述进一步说明：它是最简化、最易学习、节奏最快的模式，并用更容易的控制、强化机动和瞄准辅助降低进入门槛；Realistic / Simulator 则逐层减少辅助、增加物理与历史约束。</p>
+<p>Sources:
+- https://wiki.warthunder.com/gamemode
+- https://wiki.warthunder.com/gamemode/realistic_battles
+- Evidence class: P0 / OFFICIAL-LIVE-DOCUMENTATION</p>
+<p>2013 年官方开发日志已经显示 War Thunder 的研究树 / progression 是长期产品结构的一部分，并按历史时期与战斗效能组织载具。</p>
+<p>Source:
+- War Thunder official, <code>Developer's Diaries: New Progression System</code>, 2013-11-26
+- https://warthunder.com/en/news/350/
+- Evidence class: P0 / CONTEMPORANEOUS-OFFICIAL</p>
+<p>结合 <code>SLAVIC-003</code> 中 Anton Yudintsev 对项目起源的回顾，可以把 War Thunder 的产品策略理解为：</p>
+<blockquote>
+<p><strong>不把真实性整体删除，而是通过不同模式让玩家选择自己承受多少真实性。</strong></p>
+</blockquote>
+<p>Status: STRONGLY SUPPORTED</p>
+<h2 id="_4">三、可以开始支持的跨产品命题</h2>
+<h3 id="m1">M1 — 商业模板比核心交互更容易迁移</h3>
+<p><strong>Status: SUPPORTED</strong></p>
+<p>Wargaming 成功迁移了：</p>
+<ul>
+<li>F2P；</li>
+<li>科技树；</li>
+<li>账户 / Premium；</li>
+<li>历史载具内容生产；</li>
+<li>全球社区 / 服务器 / 市场能力。</li>
+</ul>
+<p>但 WoWP 表明，这些并不能替代新的控制模型与空间认知设计。</p>
+<h3 id="m2">M2 — “载具本体”是产品市场规模的重要中介变量</h3>
+<p><strong>Status: SUPPORTED, NOT CAUSALLY CLOSED</strong></p>
+<p>当前证据支持：</p>
+<ul>
+<li>坦克：地面运动 + 可停 + 炮塔独立，使第一层操作最容易被日常驾驶经验映射；</li>
+<li>飞机：高速 + 持续运动 + 三维姿态，使玩家必须先解决空间存在感；</li>
+<li>舰船：也有持续运动与惯性，但主要留在二维平面，速度更慢，因而可把复杂度转移到提前量、隐蔽和职业关系。</li>
+</ul>
+<p>但不能写成：</p>
+<blockquote>
+<p>“二维一定成功，三维一定失败。”</p>
+</blockquote>
+<p>War Thunder 的存在本身就是反例。</p>
+<h3 id="m3-war-thunder-wowp">M3 — War Thunder 提供了 WoWP 没有采用的另一种“大众化模拟”解法</h3>
+<p><strong>Status: SUPPORTED / CAUSAL LINK UNVERIFIED</strong></p>
+<p>WoWP 试图在一个默认产品中同时做到“足够简单 + 足够像飞行”；War Thunder 后来更明确地把不同真实性需求拆成 Arcade / Realistic / Simulator。</p>
+<p>这可以支持“模式分层是一种有效问题重切”，但当前不能写成：</p>
+<ul>
+<li>Gaijin 是因为观察 WoWP 失败才采用分层；</li>
+<li>War Thunder 的成功主要由三模式结构单独造成。</li>
+</ul>
+<p>这些因果仍未证。</p>
+<h3 id="m4-world-of-warships">M4 — World of Warships 证明“成功模板迁移”最重要的不是复用玩法，而是复用组织资产后重新解决问题</h3>
+<p><strong>Status: SUPPORTED</strong></p>
+<p>WoWS 没有否定 Wargaming 的 World of 商业体系，而是：</p>
+<ol>
+<li>继承科技树、F2P、历史内容、运营、品牌与市场能力；</li>
+<li>放弃把坦克近身载具操控直接复制到舰船；</li>
+<li>重新围绕舰船速度、尺度、弹道、隐蔽和舰种关系设计产品。</li>
+</ol>
+<p>因此它与 WoWP 构成非常强的公司内部对照。</p>
+<h2 id="_5">四、一个更强的“斯拉夫战争网游产业簇”工作模型</h2>
+<p>现在可以把原先模糊的“这里为什么盛产战争网游”拆成至少四层：</p>
+<ol>
+<li><strong>能力资本层</strong>：长期 PC、军武、模拟、历史载具、美术 / 物理 / 引擎能力；</li>
+<li><strong>商业验证层</strong>：WoT 把军武 F2P 从小众假设推成全球大市场；</li>
+<li><strong>组织复制层</strong>：服务器、科技树、F2P、社区、历史内容生产等可跨项目迁移；</li>
+<li><strong>问题重切层</strong>：每种载具必须重新解决自身的控制、空间、节奏与真实性问题。</li>
+</ol>
+<p>因此目前最有力的工作假说不是：</p>
+<blockquote>
+<p>“斯拉夫玩家更喜欢军武，所以出了很多战争游戏。”</p>
+</blockquote>
+<p>而是：</p>
+<blockquote>
+<p><strong>俄语 / 东欧 PC 产业长期积累了军武与系统型能力；WoT 又验证了全球大众市场；随后不同团队把既有能力与新的 F2P / 在线发行条件重新组合。但真正能形成大产品的团队，仍然必须为具体载具重新定义交互问题，而不能只复制题材与商业模型。</strong></p>
+</blockquote>
+<p>Status: WORKING HYPOTHESIS</p>
+<h2 id="_6">五、当前不能支持的强结论</h2>
+<ul>
+<li><code>WoWP 弱只是因为飞机三维运动。</code></li>
+<li><code>WoWS 成功只是因为船比飞机更容易控制。</code></li>
+<li><code>War Thunder 成功主要因为有 Arcade / Realistic / Simulator。</code></li>
+<li><code>WoT 直接导致 WoWS 或 War Thunder 的全部设计。</code></li>
+<li><code>俄罗斯 / 白俄罗斯 / 乌克兰玩家天然更喜欢军武。</code></li>
+<li><code>四款游戏足以证明整个斯拉夫产业的因果结构。</code></li>
+</ul>
+<h2 id="_7">六、下一轮最值钱的证据缺口</h2>
+<ol>
+<li>WoT / WoWP / WoWS 早期留存、DAU、注册、付费率、地区结构的可比数据；</li>
+<li>WoWP 2.0 前后 onboarding / retention 的变化；</li>
+<li>Lesta 是否在开发 WoWS 时明确引用 WoWP 的失败经验；</li>
+<li>War Thunder 2012–2015 Arcade / Historical / Full Real Battles 的用户占比；</li>
+<li>玩家调查或 telemetry：不同空间维度 / 控制门槛与流失之间是否有数据联系；</li>
+<li>Wargaming 与 Gaijin 的团队配置、内容生产成本和 live-ops 组织规模对照；</li>
+<li>把本矩阵扩展为“产品结构 + 商业结果 + 团队能力资本”的三层比较，而不是只看玩法。</li>
+</ol><div class="crumbs"><a href="/heroes-portal/">书阁</a> / sister-projects/slavic/evidence/SLAVIC-007-war-online-product-structure-matrix.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

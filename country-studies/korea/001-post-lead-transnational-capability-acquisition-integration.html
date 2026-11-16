@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>001 — 韩国技术先发优势减弱后的跨国能力获取与整合 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl class="on"" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0" class="t2">0. 核心裁决与分期</a><a href="#_1" class="t3">研究主轴</a><a href="#_2" class="t3">操作化变量</a><a href="#1-pubgbr" class="t2">1. PUBG：最强机制案例，不是“韩国发明BR”</a><a href="#2" class="t2">2. 跨时代获取案例：不应将所有海外并购混作同一类</a><a href="#3" class="t2">3. 必须保留的压力反例：借外力也会失败</a><a href="#4" class="t2">4. 中韩真正的比较：必须纳入中国公司海外识别的反例</a><a href="#5" class="t2">5. 与“仿制伟大”、组织规训和后发学习的真正联系</a><a href="#6" class="t2">6. 证据层级与下一步“数量级”研究</a></aside><article class="doc"><div class="col"><h1 id="001">001 — 韩国技术先发优势减弱后的跨国能力获取与整合</h1>
+<ul>
+<li>Program: C／东亚产业比较；韩国 × 中国；桥接 PUBG、仿制伟大、商业制度谱系。</li>
+<li>Status: <strong>STRUCTURAL COMPARATOR / CASE-SUPPORTED / NATIONAL PREVALENCE UNKNOWN</strong></li>
+<li>As-of: 2026-10-08</li>
+<li>Origin: 作者纠偏命题：“韩国在网络游戏技术先发优势褪去之后，最值得比较的不是韩国本土原创更强，而是韩国企业利用国际视野向外借力、发现并整合全球既有能力的机制。”</li>
+<li>Research scope: 1990年代末韩国网络游戏先发窗口之后，韩国企业怎样取得外国人才、设计判断、平台知识与制作组织，获得下一轮竞争力；并与中国国别能力和国别外溢作有分母的比较。</li>
+<li>Boundary: 一个跨国商业成功案例不证明全国产生相同能力；海外控股不等于韩国/中国本土作者生产力；中国大型企业国际投资事实不得遗漏。</li>
+</ul>
+<blockquote>
+<p class="dc"><strong>延伸研究（2026-10-08）</strong>：<a href="/heroes-portal/country-studies/korea/002-global-information-network-and-absorptive-capacity.html">002 全球信息网络与吸收能力</a>发现韩国国际化与技术先发期并行建立，而非先发优势消失后才开始；另以Smilegate×腾讯《穿越火线》表明韩国企业同样借中国渠道/本土知识，且中国也是全球能力互补的重要贡献方。</p>
+</blockquote>
+<h2 id="0">0. 核心裁决与分期</h2>
+<h3 id="_1">研究主轴</h3>
+<blockquote>
+<p><strong>韩国的比较优势候选，不是“所有东西都由韩国人原创”，而是部分组织在本土既有MMO/移动游戏能力之外，有能力发现、鉴别、获取并给海外创作者和员工以实际决策空间，以韩国已有工程/服务器/生产资本放大其创意。</strong></p>
+</blockquote>
+<p>韩国1990年代末—2000年代通过网络游戏、宽带环境、在线服务、海外出口建立先发能力；2010年代以后，相关技术/商业模式在全球扩散，韩国不能一直只凭最初的优势占领新市场。此为研究分期，不是“2010年韩国技术彻底衰落”的统计事实。韩国本土RPG/F2P路径依赖仍然强：KOCCA发布的2025白皮书披露，2024年韩国游戏收入23.8515万亿韩元、出口85.03466亿美元、移动端占国内市场59%，并将RPG品类偏重列为产业议题。https://welcon.kocca.kr/ko/info/business/1957374</p>
+<p><strong>核心区别：</strong>全球发行 ≠ 全球信息采集 ≠ 外国人才招募 ≠ 让外国人的判断影响产品立项 ≠ 收购后的长期治理能力。</p>
+<h3 id="_2">操作化变量</h3>
+<ul>
+<li><code>GLOBAL_CAPABILITY_SCOUTING</code>：发现外国mod社区、新兴平台、新工作室/特殊人才的机制；</li>
+<li><code>PRE_BREAKOUT_EVALUATION</code>：在该能力尚未成为全球畅销成品时能否识别；</li>
+<li><code>CAPABILITY_COMPOSITION</code>：外部玩法/技术/平台知识能否与现有韩国工程组织互补；</li>
+<li><code>CROSS_BORDER_DECISION_RIGHTS</code>：外国员工能否改变发售市场/平台/产品定义，而不只是交付外包；</li>
+<li><code>CAPABILITY_RETENTION</code>：收购后的人才、治理权、团队关系、二作权利与持续生产；</li>
+<li><code>DOMESTIC_SPILLOVER</code>：海外工作室经验是否反向训练了本土作者（不能由财报合并自动推出）；</li>
+<li><code>LEAD_TIME_TO_BREAKOUT</code>：介入时间早于全球正式商业突破多久，并标记当时已有多大规模的Mod/公开玩家验证。</li>
+</ul>
+<h2 id="1-pubgbr">1. PUBG：最强机制案例，不是“韩国发明BR”</h2>
+<ul>
+<li>Brendan Greene已通过DayZ/Arma的Battle Royale Mod、H1Z1顾问工作获得规则经验和玩家/直播反馈。其作品先于传统商业履历，是<code>ARTIFACT-FIRST CREDENTIAL</code>；韩国企业不是在没有任何数据时盲赌。</li>
+<li>韩国制作人Chang-Han Kim在2016年前后主动联系Greene，邀请参与standalone商业产品；Greene承担重要创作/设计角色，韩国团队承担工程、服务器、QA、美术、营销与服务。</li>
+<li>Kim在2017-06-27 GamesBeat直接采访中坦承：原本受“韩国玩家不玩这一类”影响，要求先本土成功后出海；通过全球数字分发意识到PC也可直接面向全球后，才研究Mod作者并找到Greene。<strong>先变更目标市场假设，再寻求外部作者</strong>。</li>
+<li>2017-01的Inven Kim/Greene访谈说明发行瞄准欧美Steam买断制市场，而不是先等待韩国国内F2P数据。</li>
+<li><strong>特别重要的新增证据：</strong>蓝洞创始人Chang Byung-gyu在2017-09-10《Korea Times》直接称PUBG选择Steam的建议来自美国子公司的外国员工；该公司2008年即建立美国分支，此后多年持续面向美国市场投资。故跨国知识输入至少包括<strong>玩法知识（Greene）与发行平台知识（外国员工）</strong>，韩国组织提供既有生产/技术能力。</li>
+<li>GamesBeat同期采访给出PUBG团队约70人及约15程序、25美术、5设计/UI、5QA、20商务/社区/营销的时点口径；不得当作启动时人头或完整贡献表。</li>
+</ul>
+<p><strong>组织公式（归纳，非数学因果估计）：</strong></p>
+<pre><code class="language-text">外国mod作者/实物作品与真实社区信号
++ 海外员工的Steam/目标市场知识
++ 韩国MMO工程、服务器、资金和工业化团队
++ 允许外国知识进入真实决策的治理
+→ 独立商业产品能力
+</code></pre>
+<p>Sources:
+- P1 Kim / GamesBeat 2017-06-27: https://gamesbeat.com/inside-the-company-behind-sensation-playerunknowns-battlegrounds/
+- P1 Greene / PC Gamer 2017-06-22: https://www.pcgamer.com/from-modder-to-pro-the-making-of-playerunknowns-battleground/
+- P1 Bluehole founder / Korea Times 2017-09-10: https://www.koreatimes.co.kr/business/companies/20170910/past-failures-and-endurance-can-make-success
+- P1 Kim + Greene / Inven 2017-01: https://m.inven.co.kr/webzine/wznews.php?idx=171259&amp;site=battlegrounds
+- Full creator lineage &amp; evidence: <a href="/heroes-portal/cases/CASE-032-pubg-brendan-greene.html">CASE-032</a>, <a href="/heroes-portal/evidence/CASE-032-pubg-brendan-greene-source-ledger.html">ledger</a>.</p>
+<h2 id="2">2. 跨时代获取案例：不应将所有海外并购混作同一类</h2>
+<table>
+<thead>
+<tr>
+<th>企业/时点</th>
+<th>海外对象</th>
+<th>实际取得的能力</th>
+<th>进入阶段与注意</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NCsoft / 2002</td>
+<td>美国ArenaNet前Blizzard团队</td>
+<td>欧美在线游戏创作/技术与制作班底</td>
+<td>《Guild Wars》2005才发布；创始人Mike O&rsquo;Brien回顾NCsoft理解方向并给予创作空间</td>
+</tr>
+<tr>
+<td>Bluehole / 2016</td>
+<td>爱尔兰Modder Greene</td>
+<td>已在公开Mod验证的Battle Royale规则与用户理解</td>
+<td>全球商业爆发前；非无数据原发发明</td>
+</tr>
+<tr>
+<td>Nexon / 2018–2019</td>
+<td>瑞典Embark前DICE团队</td>
+<td>FPS/AAA制作与现代技术团队</td>
+<td>首作尚未发行即投资/控股；Nexon有韩国起源、后日本总部上市的公司结构</td>
+</tr>
+<tr>
+<td>Pearl Abyss / 2018</td>
+<td>冰岛CCP / EVE</td>
+<td>成熟全球MMO、社区与商业团队</td>
+<td>已知成熟IP与公司收购，不属于早期发现</td>
+</tr>
+<tr>
+<td>Krafton / 2021</td>
+<td>美国Unknown Worlds / Subnautica</td>
+<td>生存游戏成熟IP及开发人才</td>
+<td>已验证IP；随后的管理权冲突是重要负例</td>
+</tr>
+<tr>
+<td>Krafton / 2024</td>
+<td>日本Tango Gameworks</td>
+<td>被关闭工作室开发者与Hi-Fi RUSH权利</td>
+<td>人才/IP抢救，性质区别于创作前置投资</td>
+</tr>
+</tbody>
+</table>
+<p>Source anchors:
+- P1 ArenaNet创始人Mike O&rsquo;Brien回顾：https://www.guildwars2.com/en/news/a-message-from-mike-obrien/
+- S1 Nexon/Embark 2019：https://techcrunch.com/2019/07/01/nexon-embark/
+- P0 Pearl Abyss 2018公告：https://www.pearlabyss.com/ko-KR/Board/Detail?_boardNo=187
+- P0 Krafton Unknown Worlds 2021公告：https://blog.krafton.com/5787/
+- P0 Krafton Japan Tango 2024公告：https://prtimes.jp/main/html/rd/p/000000216.000082433.html</p>
+<p><strong>分类规则：</strong> <code>PRE_BREAKOUT_CREATOR_DISCOVERY</code> ≠ <code>PRE_RELEASE_STUDIO_INVESTMENT</code> ≠ <code>PROVEN_FRANCHISE_ACQUISITION</code> ≠ <code>STUDIO_RESCUE</code>。这些案例只能说明存在多次跨国组织行为，不能据此证明韩国整体现象频率、收益率或本土技术外溢强于中国。</p>
+<h2 id="3">3. 必须保留的压力反例：借外力也会失败</h2>
+<p><strong>Striking Distance / The Callisto Protocol：</strong> Krafton引入前《Dead Space》制作人Glen Schofield主导美国工作室，但2022产品商业表现低于预期；2023年裁员32人、2025又裁员。高声望简历不是未来产品成功保证。Sources: https://gameinformer.com/2023/08/03/the-callisto-protocol-developer-striking-distance-suffers-over-30-layoffs ; https://www.pcgamer.com/gaming-industry/the-callisto-protocol-studio-lays-off-more-employees-but-remains-operational/</p>
+<p><strong>Unknown Worlds / Subnautica 2：</strong> Krafton收购后发生管理权与附条件奖金争议。2026-03-16特拉华衡平法院第一阶段判决认为Krafton违约解职关键人员并不当夺取承诺的运营权，命令恢复相关权利；2026-06-30双方和解撤回诉讼（7月1日韩联社确认）。<strong>买到团队 ≠ 能持续尊重原作者的经营/发行决策权</strong>。判决是当时法律裁决，后有和解，不能把争议当作仍在诉讼的当下状态。
+- P0司法文书：https://law.justia.com/cases/delaware/court-of-chancery/2026/2025-0805-lww.html
+- S1韩联社：https://en.yna.co.kr/view/AEN20260701005700320</p>
+<h2 id="4">4. 中韩真正的比较：必须纳入中国公司海外识别的反例</h2>
+<ul>
+<li>腾讯于2011-02-18取得Riot控股股权。腾讯2011年披露交易前持22.34%股权，交易后92.78%，并保持创始人当地管理团队独立运营。不是“从不获取外国能力”。https://static.www.tencent.com/storage/uploads/2019/11/09/94c40e806bcaabfa16097dff0e3a7546.pdf</li>
+<li>腾讯2016年收购芬兰Supercell多数股权，属于成熟原创组织获取。https://www.tencent.com/en-us/articles/2200296.html</li>
+<li>网易2019年入股法国Quantic Dream、2022年完成收购；2022年成立日本名越稔洋工作室。属于明确提前投入全球人才，不能轻率写成“所有中国厂商只会等数据后抄袭”。https://www.neteasegames.com/news/pr/20190319/30578_798396.html ; https://www.neteasegames.com/news/Corporate/20220831/37075_1039928.html ; https://www.neteasegames.com/news/Corporate/20220329/37075_999609.html</li>
+</ul>
+<p><strong>尚未完成证明的核心差异：</strong> 韩国与中国是否在本国企业总体中有不同的海外能力搜寻覆盖率、外国员工决策权、提前入场时点、失败容忍度及本土作者能力外溢？不能用3个韩方成功故事对比3个中方晚期跟进故事，必须建立相同入口年份和全样本分母。</p>
+<h2 id="5">5. 与“仿制伟大”、组织规训和后发学习的真正联系</h2>
+<ul>
+<li><code>PRESTIGE_PURCHASE</code>：购买著名团队/IP/过往光环，可以有经济回报，却不自动获得解决新问题的能力。</li>
+<li><code>CAPABILITY_ACQUISITION</code>：先识别国外已有但本组织欠缺的真实可验证能力。</li>
+<li><code>CAPABILITY_COMPOSITION</code>：让本土工业组织与海外设计/市场知识形成新产品，而不是买个外国人站台。</li>
+<li><code>FOREIGN_JUDGMENT_UPTAKE</code>：外国同事的专业意见能否改变核心假设和商业路线——如PUBG的Steam建议。</li>
+<li><code>RETENTION_AND_GOVERNANCE</code>：尊重约定的创作者权利、处理IP/续作/盈余分配；Unknown Worlds是必须保留的反面案例。</li>
+</ul>
+<p>真正的国别研究不是“谁更聪明、更独立、更伟大”，而是<strong>组织在遇到超出自身知识边界的机会时，选择向外学习、与他人合作、在内部复制已知样板，还是放弃机会</strong>。外来者国籍本身不构成能力证书。</p>
+<h2 id="6">6. 证据层级与下一步“数量级”研究</h2>
+<p><strong>已确认（案例）</strong>：韩国跨年代出现海外人才/机构获取；PUBG同时吸收外国Mod创作者和外籍员工市场知识；并购可能产生严重权利纠纷与失败；中国公司也进行国际能力获取。</p>
+<p><strong>待验证（国别强命题）</strong>：技术先发退潮后，韩国企业“靠外力”的相对能力、频率和实际本土产业收益优于中国。当前没有跨国统一分母，不能下数量级结论。</p>
+<p>建议建立2000–2026中韩海外创作者/团队/技术投资<strong>全量而非仅成功样本</strong>，逐笔编码：
+1. 企业国别起源、上市地、资金及团队控制地、介入年份；
+2. 海外对象在被发现时是否已发行成名、是否有Mod/Prototype/DAU；
+3. 相对相关品类全球市场爆发日期的lead time；
+4. 产品<code>PROBLEM_ORIGIN</code>、<code>GREENLIGHT</code>、<code>PUBLISHING_PLATFORM</code>、<code>IP</code>、<code>KILL</code>、<code>EXIT</code>权利；
+5. 合作3/5年后作品、取消、核心作者去留、减值、关停、诉讼；
+6. 本土员工是否参与新项目、知识转移或再创业，防止把海外财务收入等于本土作者能力提升；
+7. 按投资金额、公司研发人数及当时产业结构控制总体规模。</p>
+<p>对<a href="/heroes-portal/country-studies/china/026-spinout-vs-indie-mode-conversion.html">中国国情026 spinout≠indie</a>与<a href="/heroes-portal/country-studies/china/028-imitation-of-greatness-prestige-copying-and-authorial-judgment.html">中国028仿制伟大</a>作横向引用，不重复其已有一手证据账。</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / country-studies/korea/001-post-lead-transnational-capability-acquisition-integration.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Value Network beyond Disruption：价值网络的扩展分析协议（2026-10-11） · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl class="on"" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#1" class="t2">1. 原始理论，不可偷换</a><a href="#2" class="t2">2. 扩展框架：三种不同网络，不能统成一个黑箱</a><a href="#vn-form" class="t3">VN-FORM：创新者形成网络</a><a href="#vn-product" class="t3">VN-PRODUCT：产品与客户价值网络</a><a href="#vn-surplus" class="t3">VN-SURPLUS：收益、资源与再生产网络</a><a href="#3" class="t2">3. 价值网络多样性与同质化竞争（新假说）</a><a href="#4" class="t2">4. 网络切换：进入、退出、逆向规模调整</a><a href="#5-schemalane-b" class="t2">5. 价值网络审计的通用最小字段（不修改schema；先在Lane B试行）</a><a href="#6-march-teece-burt" class="t2">6. 与March / Teece / Burt的关系</a><a href="#7" class="t2">7. 提出三个可证伪命题</a><a href="#8-2024-2025" class="t2">8. 2024吉比特 × 2025基础研究对照：在同一组织里出现两种过滤关</a><a href="#9-2025-20262026-10-14" class="t2">9. 2025健身经营者回忆 × 2026行业重配：消费者质量信号及现金流义务（2026-10-14）</a></aside><article class="doc"><div class="col"><h1 id="value-network-beyond-disruption2026-10-11">Value Network beyond Disruption：价值网络的扩展分析协议（2026-10-11）</h1>
+<ul>
+<li>Program: D（跨行业理论工具）× C（中国创新生态）× A/B（案例比较）</li>
+<li>Lane: <strong>B RESEARCH / THEORY AUDIT</strong>，不是未经验证的通用因果律，也不替现有Case/Evidence Owner立案</li>
+<li>Status: <strong>SOURCE-BOUNDED THEORETICAL EXTENSION / HYPOTHESES</strong></li>
+<li>Author-origin: 2026-10-11 作者明确要求大规模推广价值网络工具，超出Christensen原本的公司/产品应用环境。</li>
+<li>Existing interfaces: <a href="/heroes-portal/country-studies/china/023-creator-class-formation-intergenerational-reproduction.html">中国023 创作者再生产</a> · <a href="/heroes-portal/country-studies/china/028-imitation-of-greatness-prestige-copying-and-authorial-judgment.html">中国028 仿制伟大</a> · <a href="/heroes-portal/cross-industry/judgment-under-uncertainty-theory-stack-001.html">March等判断理论</a> · <a href="/heroes-portal/country-studies/new-zealand/README.html">新西兰</a></li>
+</ul>
+<h2 id="1">1. 原始理论，不可偷换</h2>
+<p class="dc">Christensen / Rosenbloom (1995)研究为什么既有磁盘公司在技术上有能力，却对不属于现有客户和利润结构的新产品机会反应不足。其价值网络指组织识别客户需求、解决问题、获取投入、应对竞争、追求盈利的经营与评价环境。不能误简化为“利益相关者名单”或“凡失败均因公司大而保守”。</p>
+<p><strong>经过作者团队自身扩展的现成先例：</strong> Christensen Institute 2022年教育研究将价值网络用于K–12学校，涉及家庭、公共出资方、教师和教育政策。因此扩展到教育不是凭空发明，但扩展到中国社会、个体声望和游戏作者成长所需的具体因果结论仍是本项目的H。</p>
+<p>P0/P1理论资料：
+- Thomas Arnett (2022-11-04), <em>Predicting innovation trajectories in K–12 education</em>, https://www.christenseninstitute.org/blog/predicting-innovation-trajectories-in-k-12-education/
+- Thomas Arnett (2022-10-04), <em>New value networks: The missing piece in the K–12 disruption equation</em>, https://www.christenseninstitute.org/blog/new-value-networks-the-missing-piece-in-the-k-12-disruption-equation/
+- Christensen Institute, <em>K–12 Value Networks</em> (2022), https://www.christenseninstitute.org/wp-content/uploads/2022/11/Value_Networks.pdf
+- Christensen Institute (2020), <em>5 insights from our research on innovation during a pandemic</em>, https://www.christenseninstitute.org/blog/5-insights-from-our-research-on-innovation-during-a-pandemic/</p>
+<h2 id="2">2. 扩展框架：三种不同网络，不能统成一个黑箱</h2>
+<h3 id="vn-form">VN-FORM：创新者形成网络</h3>
+<p>谁决定年轻人/从业者学习什么、展示什么作品、可否有私人兴趣和公开原型？家庭、学校、教师、MOD/UGC、同伴、旧工作室及导师。核心指标：作品优先于文凭的实际机会、主动目标形成、技能迁移、从玩家到生产者的转化、失败后再试权。</p>
+<h3 id="vn-product">VN-PRODUCT：产品与客户价值网络</h3>
+<p>玩家/客户、发行商/商店、品类、价格、内容规模、联网服务、监管与技术基础设施怎样定义“好产品”？指标：greenlight否决权、核心体验验证、真实需求、技术与质量约束、不同用户市场接口。</p>
+<h3 id="vn-surplus">VN-SURPLUS：收益、资源与再生产网络</h3>
+<p>谁掌握IP、客户关系、发行权、股权、营销资本、退出和第二作资源？指标：未来收益保留、议价权、补贴结构、前员工创业、跨主体受众/工具/资本转移。详见中国022/023。</p>
+<p><strong>转换变量：</strong> VN-FORM→VN-PRODUCT 的能力转移成本；VN-PRODUCT→VN-SURPLUS 的成功收益占有；VN-SURPLUS→下一代VN-FORM 的创作者再生产。这些链条每一箭头应有独立证据，不能由明星个例自动推整国发生率。</p>
+<h2 id="3">3. 价值网络多样性与同质化竞争（新假说）</h2>
+<p>不是“人口多必然内卷”。有效跟随竞争规模受：
+- 具有相近reference repertoire与同一成功标准的潜在进入者人数；
+- 既有商业机会传播速度、成功者的市场可见度；
+- 跟进者的生产/市场进入成本与IP、品牌、社群壁垒；
+- 新细分需求出现和被探索的速度；
+- 平台、资金、渠道及招聘是否使参与者集中在少数价值网络；
+- 社会与教育标准答案是否造成选择的相关性。</p>
+<p>候选机制：`NETWORK CONVERGENCE × REPLICATION VELOCITY → INCUMBENT OPPORTUNITY CROWDING`。反例：规模越大同时也可能带来更多不同小众需求、原创者和资本；国际化高度的捷克/芬兰并不证明新西兰独特；中国内部也有长期原创团队。<strong>不得从社交截图推国家数量级。</strong></p>
+<h2 id="4">4. 网络切换：进入、退出、逆向规模调整</h2>
+<p>研究 `NETWORK SWITCH COST`，包括现金安全垫、竞业与IP、工艺资产可转移性、知名度、工具、社群和分发接口。转换有多个方向：
+- hobby/MOD→全球玩家→商业组织（Depth、MOD创业）；
+- 专业商业团队→个人原型/Game Jam→小型作者公司（Sidhe→Mini Metro）；
+- 大型公司领导者→重新小型化、直接参与创作（GGG→Light Pattern，具体动机还需P1访谈）；
+- 小国创作者连接海外投资/发行/人才（DREDGE、Abiotic Factor）；
+- 失败/取消项目仍能留下工具、人才、判断经验（Wandering Monster、Magic School）。
+逆向减小规模不自动证明独立成功，也不意味着大公司必然丧失原创能力。</p>
+<h2 id="5-schemalane-b">5. 价值网络审计的通用最小字段（不修改schema；先在Lane B试行）</h2>
+<p>`NETWORK_ID, OBSERVED_YEARS, PAYMASTER, PRIMARY_CUSTOMER, GATEKEEPER, SUCCESS_METRIC, DECISION_RIGHTS, CAPABILITY_SELECTED, CAPABILITY_FORGONE, MARKET_ACCESS, ENTRY_COST, EXIT_COST, IP_CONTROL, SURPLUS_CAPTURE, FEEDBACK_LATENCY, REPLICATION_PRESSURE, SECOND_ATTEMPT_RIGHT, NETWORK_SWITCH_EVENT, COUNTERFACTUAL, SOURCE, UNKNOWN`</p>
+<p>对每案还要记录 `source-year technology regime`，与技术分代、联网/单机、团队规模配对；不能只用“是否原创”二值评分，也不能把成熟类型迭代等同造假。</p>
+<h2 id="6-march-teece-burt">6. 与March / Teece / Burt的关系</h2>
+<ul>
+<li>Christensen：为什么当前选择结构奖励某种创新；</li>
+<li>March exploration/exploitation：为什么被已经证明的目标吸走资源；</li>
+<li>Teece appropriability / complementary assets：为什么原创者无法保留收益；</li>
+<li>Burt structural holes（若用于本项目须单独索取实证）：为什么跨群体信息和合作能提高新组合发生的机会。</li>
+</ul>
+<p>四种解释可能互补，不等于经验上已证明“中国原发创新少是价值网络造成”的唯一归因。</p>
+<h2 id="7">7. 提出三个可证伪命题</h2>
+<ol>
+<li>H-VN-01：在相同品类/技术时代下，拥有多个自主原型入口、较低网络切换成本的地区，独立初作与第二作作者形成率更高。若对照不成立，机制削弱。</li>
+<li>H-VN-02：对于模仿进入快、产品差异化保护弱的赛道，原创者的风险调整后收益保留低于可比的后进者；需要真实成本/收入/归属，而不是作品好评率。</li>
+<li>H-VN-03：AI使低成本原型更可行，也同时缩短复制时间；结果取决于作者判断、玩家关系和差异化壁垒，而不是AI普及本身。</li>
+</ol>
+<p><strong>Refutation / scope:</strong> 充分反例应包括大型企业内部创新、成熟产品长期创新、社区的同质化、获资助新作者失败、没有AI时独立成功、AI降低劳动力成本同时造成规模优势的行业。</p>
+<p><strong>禁止推论</strong>：
+- 新价值网络=没有发行商或没有资本；
+- 小国=天然作者多，大国=天然模仿；
+- 价值网络定义=所有社会心理/文化都可毫无证据归因；
+- 高出口比=高原创力；
+- 增加AI=原创成功必然增加；
+- 雷军/Xiaomi等规模整合式创业从未进行商业模式创新。</p>
+<p>下一轮：链接统一国别作品/作者队列，优先检验新西兰、芬兰、捷克、中国，并保留虚假统计和未核截图的UNKNOWN。</p>
+<h2 id="8-2024-2025">8. 2024吉比特 × 2025基础研究对照：在同一组织里出现两种过滤关</h2>
+<p>新增来源审计：<a href="/heroes-portal/country-studies/china/041-g-bits-market-blindness-liveops-transfer-and-upstream-exploration-2024-2025.html">中国041 — 公司自述及反证</a>。关键源头是2024-09-05<a href="https://sns.sseinfo.com/resources/images/upload/202409/2024090916080211865914417.pdf">吉比特公司股东会正式纪要</a>（问题2/3/6/8/9/11）与2025-06-10<a href="https://finance.people.com.cn/n1/2025/0610/c1004-40497361.html">《人民日报》任正非专访</a>。</p>
+<p>在原有VN-FORM/VN-PRODUCT/VN-SURPLUS框架中增加两个<strong>待测量的决策环节</strong>，但暂不扩充repo schema：</p>
+<ol>
+<li><code>MARKET-LEGITIMACY FILTER</code>：熟悉旧客户、品类和ROI的管理者，对新价值网络的市场机会作出低估，从而在技术能力尚未真正受测试之前，先取消或拒绝方案。吉比特管理者关于2017年假想高投入单机/同团队MMO的回答是证词，但不等于实际拒绝Game Science。</li>
+<li><code>PRODUCT-GRAMMAR CONTAMINATION</code>：即使已有创作自主权，旧赛道对生命周期、留存、复杂度、变现或内容量的惯例，仍可能由团队自身迁移到新品类。吉比特对于《重装前哨》的自我复盘提供待调查样本，而非排他性因果结论。</li>
+</ol>
+<p><strong>把上游探索当作价值网络的重要边界，而不偷换成“游戏玩法=基础科学”</strong>：基础科学/技术研究生产可检验知识；探索性游戏机制原型产生设计假设、玩法证伪与真实用户线索；商业游戏研发将其整合为完整可卖的作品。三个阶段可能在同一家团队交错，但适用的成功指标及投入回收期限不同。</p>
+<p><strong>方法论约束</strong>：组织声称支持制作人原创，必须与项目的创意否决权、预算权、IP与退出权分开；研究失败需记录学到什么而不是一律算资源浪费；没有明确实验假说和可复用知识的低效行为也不能用“探索”无限豁免。不能从单一上市公司2024年纪要推演2026年全国能力结构。</p>
+<p><strong>新增比较问题</strong>：进入决策是何时被谁否决、为什么？旧玩法惯例在哪一个构建版本渗入？国家/学校/平台/公司提供何种不立即以单作ROI评价的前商业化试验场？创新者获得第一次真实需求验证后，能否保留用户关系、IP和第二次试错机会？</p>
+<h2 id="9-2025-20262026-10-14">9. 2025健身经营者回忆 × 2026行业重配：消费者质量信号及现金流义务（2026-10-14）</h2>
+<p>入口：<a href="/heroes-portal/cross-industry/fitness-club-entry-crowding-consumer-selection-and-value-network-20261014.html">健身房局部进入拥挤与价值网络切换案</a>。2025-08知乎答主回忆2013—17年本人开健身房失败过程，不能视为审计财务账或全国行业代表样本；与2025威尔仕末店关闭、2026-03公布的2025行业统计、上海市预付监管制度、乐刻月付/小型化体系进行竞争性审计。</p>
+<p>该案把本协议的 <code>VN-PRODUCT</code> 和 <code>VN-SURPLUS</code> 分别细化出<strong>五种并非一回事的局部竞争压力</strong>：</p>
+<ul>
+<li><code>LOCAL-ENTRY-CROWDING</code>：可见商机吸引相似经营者短时间内进入同一商圈；增加同质供给，不能未经证明就推成蓄意掠夺性定价。</li>
+<li><code>QUALITY-RECOGNITION-GAP</code>：客户不一定能立即识别专业服务质量，销售承诺与真实效果可能脱钩；经营者自己增加投入未必等于真实客户价值提高。</li>
+<li><code>PREPAYMENT-LIABILITY-MISMATCH</code>：预收现金与未来履约责任不一致；需区分现金流、已实现收入、利润、合约义务和违约风险。</li>
+<li><code>DISTRIBUTION-RENT-MIGRATION</code>：降低实体固定成本可能同时提高对点评/平台广告、排序和收费获客的依赖；须有CAC/获客数据，不能采信匿名口述金额为行业常态。</li>
+<li><code>NETWORK-REDESIGN</code>：以月付、可退出、社区化、小型化和24小时模式改变单位经济及消费者反馈结构，提供对“唯一出路是资本熬死对手”的真实反例；门店增长仍不等于实际每店盈利。</li>
+</ul>
+<p><strong>方法警戒</strong>：行业报告的2025广义健身场馆“较上年净减少2.3万家”并非当年关闭2.3万家；某类健身工作室数量净下降56.87%不等于该类门店当年倒闭率56.87%。原文经营者在大规模同业入场<strong>之前</strong>已发生预售与开办资金困难；不能将退出完全归于不公平竞争。两条关键对照是<code>customer feedback validity</code>（客户真的奖励了什么）和<code>unit-economics viability</code>（改善体验的方式在特定市场下是否可负担）。</p>
+<p><strong>游戏产业连接限于可检验的组织经济学类比</strong>：同赛道模仿进入、玩家与平台评价脱钩、现金流与未来服务承诺、平台获客租金、转移到另一产品/发行/定价网络。健身卡、游戏预售与F2P运营在服务义务和消费者权利上不等价；必须先用同年代同技术/商业类型的游戏案例检验对应机制，再作行业推断。</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / cross-industry/value-network-extended-audit-20261011.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

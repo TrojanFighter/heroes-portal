@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>002 — 从英雄传记转向可计数的尝试：GGJ 2024 深圳南山站 Public-Attempt Pilot · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl class="on"" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0" class="t2">0. 为什么先做这个，而不再找一个「大厂出走成功」故事</a><a href="#1-preregistered-frame-statement" class="t2">1. 抽样声明 / Preregistered frame statement</a><a href="#2" class="t2">2. 起点证据与入选规则</a><a href="#3-16-15" class="t2">3. 官方目录的 16 个标题位置（15 种不同题名；同名条目待核）</a><a href="#31-ui-2026-10-07" class="t3">3.1 页面 UI 的一个实际误归因风险（2026-10-07 抽查）</a><a href="#32-2024-ggj" class="t3">3.2 2024 GGJ 全球活动的「已参与但未投稿」反例（独立人群，非本地统计）</a><a href="#4-frame" class="t2">4. 这个 frame 能识别什么、不能识别什么</a><a href="#5" class="t2">5. 下轮操作——严格先抽样后追踪，禁止追名人</a><a href="#gate-a" class="t3">Gate A｜名册完整性（当前未通过）</a><a href="#gate-b" class="t3">Gate B｜同规则、同字段后续追踪（未执行）</a><a href="#gate-c-frame" class="t3">Gate C｜独立的雇员/毕业生 frame（仍是更高优先级问题）</a><a href="#6-reader-layer" class="t2">6. Reader-layer 出口：补进「没有写成英雄故事的人」</a><a href="#65-ggj-2027" class="t2">6.5 GGJ 2027旧档案下线对本项目的真实影响</a><a href="#7-source-ledger-review-debt" class="t2">7. Source ledger / review debt</a></aside><article class="doc"><div class="col"><h1 id="002-ggj-2024-public-attempt-pilot">002 — 从英雄传记转向可计数的尝试：GGJ 2024 深圳南山站 Public-Attempt Pilot</h1>
+<ul>
+<li>Program: C / 中国国情研究</li>
+<li>Status: <strong>PILOT INTAKE / ROSTER RECONCILIATION OPEN / NO POPULATION INFERENCE</strong></li>
+<li>As-of audit: 2026-10-07</li>
+<li>Unit: <strong>官方目录中的 submission listing（游戏项目条目）</strong>，暂非已去重的独立游戏；更不是开发者个人、雇员、报名者、团队或公司</li>
+<li>Research boundary: 只研究公开资料；不建个人隐私档案，不以姓名猜测任职、经济或家庭状况。</li>
+<li>Method gate: <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes/blob/main/schemas/creator-visibility-sampling-gate.md">Creator Visibility / Sampling Gate</a>；<a href="/heroes-portal/book/research-notes/media-selection-survivorship-and-denominator-protocol-028.html">028 Media Selection &amp; Denominator</a></li>
+<li>Hypothesis routing: <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes/blob/main/author-corpus/AC-010-prestige-pipeline-coupling-and-authorial-continuity.md">AC-010 Prestige Pipeline</a>；<a href="/heroes-portal/book/research-notes/china-creator-constraints-three-layer-map-018.html">中国三层图 018</a></li>
+</ul>
+<h2 id="0">0. 为什么先做这个，而不再找一个「大厂出走成功」故事</h2>
+<p class="dc">既有 CASE-059/061/062/046 与中国案例能够检查作者线程、工业经验、家庭与项目决策的<strong>机制</strong>，不能回答这些人在游戏产业从业者中有多常见。著名失败者同样经过媒体可见性筛选。</p>
+<p>本次换一个与成功、失败、受访、发售无关的起点：<strong>固定年份、固定场地、固定公开上传名册</strong>。选择本地小型站点，是为了审查能否完整列举和复查记录，并非声称深圳具有全国代表性，也不是事后按热门游戏挑样本。</p>
+<p>本轮的工作产物是<strong>审计得了的 sampling frame 尝试</strong>，不是新的一篇成功学，也不是中国雇员的概率样本。</p>
+<h2 id="1-preregistered-frame-statement">1. 抽样声明 / Preregistered frame statement</h2>
+<pre><code class="language-yaml">question: &quot;一个不按媒体报道选人的公开 game-jam 入口，到底能观察到多少项目与什么类型的后续痕迹？&quot;
+target_population: &quot;2024 GGJ China × CiGA 深圳南山站在官方页面保留的游戏提交记录&quot;
+unit_of_analysis: project
+counting_unit: official_directory_listing_not_deduplicated_game
+cohort_entry_event: &quot;游戏作为 2024 GGJ 深圳南山站作品提交到官方 GGJ 网站&quot;
+geography_and_year_window: &quot;深圳南山站，2024-01-26 至 2024-01-28&quot;
+sampling_frame: &quot;GGJ 官网该场地的 Games 目录；不使用媒体/GDC/Steam 畅销榜筛选&quot;
+inclusion_exclusion_rules: &quot;收录目录中的全部游戏提交；不按奖项、题材、开发者履历或后续命运删选；站外未提交和仅报名者不计入&quot;
+denominator_status: PARTIAL
+denominator_count: &quot;官网目录可读快照显示 16 条 listing；其中 BOOM CHASE 出现两次；唯一游戏数待核&quot;
+visible_entries: &quot;全部16条目录位置的标题已可读；15个不同题名；全部永久链接尚未复核&quot;
+visibility_reasons: &quot;official jam archive; official jam project pages; official site page&quot;
+missingness: &quot;官网目录访问不稳定、个别 403/500；重复题名 BOOM CHASE 的两条是否指向同一 submission 尚未核实；部分 permalink 未确认；个人履历、私人原型、学校/雇主和团队完整成员未知&quot;
+outcome_definitions: &quot;GGJ submission visible / post-jam continuation unknown / commercial release unknown / abandonment unknown / return-to-job unknown&quot;
+followup_window_and_censoring: &quot;2024 jam 至 2026-10-07；尚未系统追踪后续；网页失联/匿名身份不等于停止创作&quot;
+rival_explanations: &quot;自愿报名、场地主办网络、岗位/专业结构、团队合作、匿名程度、发布平台、社会经济支持&quot;
+permitted_inference: &quot;官方站点展示了固定时空内的一批公开参赛项目；可以核验特定项目是否留下官方提交页面&quot;
+forbidden_inference: &quot;中国独立项目或大厂员工的创业率、创新能力分布、中美差距、私人创作缺失、被家长阻挠/被绩优主义规训的个体归因&quot;
+</code></pre>
+<p><strong>分母精确语义：</strong> 官网 Games 目录显示 <code>Displaying 1 - 16 of 16</code>，表示<strong>16 条当前可见 listing</strong>；完整搜索快照中 <code>BOOM CHASE</code> 出现两次，因此为<strong>15 个不同题名</strong>。同名不必然是同一游戏、也不必然是两款游戏；独立项目数仍 UNKNOWN。16 不等于创作者、团队或报名者人数，也不证明未删除过旧页。</p>
+<h2 id="2">2. 起点证据与入选规则</h2>
+<ol>
+<li>官方站点信息：GGJ China 2024 × CiGA – Shenzhen - Nanshan；线下站点、年龄 18+、开放报名（Anyone）；开始 2024-01-26 16:30，结束 2024-01-28 21:00。</li>
+<li>官方作品目录：<code>https://globalgamejam.org/group/499/games</code>；检索快照显示 <code>Displaying 1 - 16 of 16</code>。</li>
+<li>官方站点：<code>https://globalgamejam.org/jam-sites/2024/ggj-china-2024-ciga-shenzhen-nanshan</code>。</li>
+<li>此入口只由<strong>站点+时间</strong>确定，不要求项目在 Steam 上架、被采访或后续商业成功。</li>
+</ol>
+<p>当前搜索与目录内容存在抓取不稳定：部分官方游戏页可打开，部分出现 403，目录尝试出现 500。2026-10-07 一份完整搜索快照已读出<strong>16个标题位置</strong>，但仍未取得具有逐项 URL / ID 的可重用官方导出；不能宣布“16/16 独立提交已核对”。</p>
+<h2 id="3-16-15">3. 官方目录的 16 个标题位置（15 种不同题名；同名条目待核）</h2>
+<p>下表保留第一次抽取时的稳定 ID，并给两处新发现的<strong>列表位置</strong>编新号。只记录在第一方页面或搜索快照里出现的原名与入口，不以题名判定作品唯一性。后续情况仍统一标 <code>NOT_ASSESSED</code>，不贴 <code>PUBLIC_UNFEATURED</code>、<code>FAILED</code> 或 <code>DROPPED_OUT</code>。</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>公开项目题名（保留原文拼写）</th>
+<th>来源入口</th>
+<th>2024 后续/开发者就业史</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SZ24-01</td>
+<td>:&gt;omit (Vomit)</td>
+<td>https://globalgamejam.org/games/2024/omit-vomit-4</td>
+<td>NOT_ASSESSED / UNKNOWN</td>
+</tr>
+<tr>
+<td>SZ24-02</td>
+<td>PutTogether</td>
+<td>https://globalgamejam.org/group/499/games</td>
+<td>NOT_ASSESSED / UNKNOWN</td>
+</tr>
+<tr>
+<td>SZ24-03</td>
+<td>BOOM CHASE</td>
+<td>https://globalgamejam.org/group/499/games</td>
+<td>NOT_ASSESSED / UNKNOWN</td>
+</tr>
+<tr>
+<td>SZ24-04</td>
+<td>MoMo Operater</td>
+<td>https://globalgamejam.org/group/499/games</td>
+<td>NOT_ASSESSED / UNKNOWN</td>
+</tr>
+<tr>
+<td>SZ24-05</td>
+<td>我爱摸鱼，天天摸鱼（Office Laziness Battle）</td>
+<td>https://globalgamejam.org/games/2024/woaimoyutiantianmoyuoffice-laziness-battle-9</td>
+<td>NOT_ASSESSED / UNKNOWN</td>
+</tr>
+<tr>
+<td>SZ24-06</td>
+<td>Attack on otter</td>
+<td>https://globalgamejam.org/games/2024/attack-otter-7</td>
+<td>NOT_ASSESSED / UNKNOWN</td>
+</tr>
+<tr>
+<td>SZ24-07</td>
+<td>美丽的球 BraveNewBall</td>
+<td>https://globalgamejam.org/games/2024/meilideqiu-bravenewball-8</td>
+<td>NOT_ASSESSED / UNKNOWN</td>
+</tr>
+<tr>
+<td>SZ24-08</td>
+<td>LaughMaker</td>
+<td>https://globalgamejam.org/games/2024/laughmaker-3</td>
+<td>NOT_ASSESSED / UNKNOWN</td>
+</tr>
+<tr>
+<td>SZ24-09</td>
+<td>Laugh at Life</td>
+<td>https://globalgamejam.org/games/2024/laugh-life-1</td>
+<td>NOT_ASSESSED / UNKNOWN</td>
+</tr>
+<tr>
+<td>SZ24-10</td>
+<td>口腔妙妙屋</td>
+<td>https://globalgamejam.org/games/2024/kouqiangmiaomiaowu-2</td>
+<td>NOT_ASSESSED / UNKNOWN</td>
+</tr>
+<tr>
+<td>SZ24-11</td>
+<td>赛博算命酒保行动</td>
+<td>https://globalgamejam.org/games/2024/saibosuanmingjiubaoxingdong-5</td>
+<td>NOT_ASSESSED / UNKNOWN</td>
+</tr>
+<tr>
+<td>SZ24-12</td>
+<td>笑到最后 Laugh2Die</td>
+<td>https://globalgamejam.org/games/2024/xiaodaozuihoulaugh2die-6</td>
+<td>NOT_ASSESSED / UNKNOWN</td>
+</tr>
+<tr>
+<td>SZ24-13</td>
+<td>酶你不行 Funzyme</td>
+<td>https://globalgamejam.org/games/2024/meinibuxingfunzyme-6</td>
+<td>NOT_ASSESSED / UNKNOWN</td>
+</tr>
+<tr>
+<td>SZ24-14</td>
+<td>Buy More</td>
+<td>https://globalgamejam.org/jam-sites/2024/ggj-china-2024-ciga-shenzhen-nanshan</td>
+<td>NOT_ASSESSED / UNKNOWN</td>
+</tr>
+<tr>
+<td>SZ24-15</td>
+<td>Just A Scratch</td>
+<td>https://globalgamejam.org/games/2024/just-scratch-1</td>
+<td>NOT_ASSESSED / UNKNOWN</td>
+</tr>
+<tr>
+<td>SZ24-16</td>
+<td>BOOM CHASE〔官网列表中的第二个同名位置〕</td>
+<td>https://globalgamejam.org/group/499/games</td>
+<td>NOT_ASSESSED / UNKNOWN</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Reconciliation debt</strong>：16 个列表位置已能读出，但并非 16 个已确认互异项目。<code>BOOM CHASE</code> 的两次出现还不能判断是同一个页面重复、两次提交还是同名作品；待核逐条官方 URL/ID，不能仅凭题名去重。2024 itch.io 另有 <a href="https://anyi-zerio.itch.io/boom-chase">同名作品</a>，只能作为待匹配线索，<strong>不能默认链接的是哪一个 GGJ 目录位置或证明职业延续</strong>。</p>
+<p>第一方抽查的最小观察例：<code>Attack on otter</code> 页面可直接核对 2024 / Make Me Laugh / 深圳南山站 / Windows / Unreal Engine；<code>Office Laziness Battle</code> 页面列有 Windows / Unity 及作品说明。<strong>引擎或题材不能证明开发者来自大厂/名校，也不能证明后续有商业发行。</strong></p>
+<h3 id="31-ui-2026-10-07">3.1 页面 UI 的一个实际误归因风险（2026-10-07 抽查）</h3>
+<p><code>Attack on otter</code> 与 <code>Office Laziness Battle</code> 的游戏页有 <code>Jammers</code> 标签；点击分别指向成员页面，但本轮返回 403，<strong>不能声称已核实名册中任何个人</strong>。页面下方 <code>Recently Joined</code> 是动态组件，不能误作当前游戏的参与名单或开发分工。由此，<code>16 games</code> 目前既不能转换为 <code>16 people</code>，也不能转换为“公开职业史缺失的人数”。</p>
+<h3 id="32-2024-ggj">3.2 2024 GGJ 全球活动的「已参与但未投稿」反例（独立人群，非本地统计）</h3>
+<p>GGJ 官方 2024 活动后自愿问卷共收 3,578 份（参赛者答卷回应率略高于10%；各题回答数不同）。在回答「是否至少提交一个游戏」的受访者中 <strong>8% 答 No</strong>。这证实 <strong>submission roster 按设计排除了某些参加了活动但没有提交作品的人</strong>。但全球自愿问卷不是深圳站名册，<strong>绝不能将该 8% 乘以深圳站任何条目数或当作失败率</strong>。后续应以报名/到场记录加同一人自愿确认才能处理本地未提交者。</p>
+<p>P0: Global Game Jam, <em>Global Game Jam 2024: Jammer Survey Data</em>, 2024-05-20, https://globalgamejam.org/news/global-game-jam-2024-jammer-survey-results 。详见中国研究 <a href="/heroes-portal/country-studies/china/003-nonentrants-upstream-cohort-and-survey-selection-audit.html">003 非入场者研究</a>。</p>
+<h2 id="4-frame">4. 这个 frame 能识别什么、不能识别什么</h2>
+<table>
+<thead>
+<tr>
+<th>研究对象</th>
+<th>本目录可以直接回答</th>
+<th>不能回答 / 需要另一 sampling frame</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>作品公开意愿</td>
+<td>存在官方提交页与项目说明</td>
+<td><strong>全部报名者</strong>或<strong>全部私有原型</strong>是否愿意公开</td>
+</tr>
+<tr>
+<td>自主创作实践</td>
+<td>某人在固定 48h 场合<strong>参与了公开项目</strong>，若成员页可复核</td>
+<td>他入职之前/任职期间有无持续的自发创作</td>
+</tr>
+<tr>
+<td>项目继续推进</td>
+<td>未来若有<strong>同一项目明确的后续证据</strong>，可记录公开轨迹</td>
+<td>没搜到后续 = 取消 / 商业失败 / 不再做游戏</td>
+</tr>
+<tr>
+<td>职业/教育背景</td>
+<td>只有当事人公开、可核对、且身份对应时方可记录</td>
+<td>缺 LinkedIn/校友资料就推定“非名校/非大厂”</td>
+</tr>
+<tr>
+<td>家庭/社会干预</td>
+<td>如有<strong>自愿公开、明确归因、同期证据</strong>，可研究机制</td>
+<td>没有采访时推断父母禁止、欺凌、失败耻感</td>
+</tr>
+<tr>
+<td>体制总体问题</td>
+<td>检验一个<strong>公开尝试入口是否可追踪</strong></td>
+<td>中国雇员与欧美雇员作者性留存率</td>
+</tr>
+</tbody>
+</table>
+<p>本试点最大的发现不是任何显著性或“成功者比例”，而是<strong>可观察入口与目标问题的断裂</strong>：找到“公开做过一个 game jam”的人，不等于知道“从名校走进大厂之后，有多少人不敢再自己出题”。</p>
+<h2 id="5">5. 下轮操作——严格先抽样后追踪，禁止追名人</h2>
+<p>跨海峡平台栈压力测试见：<a href="/heroes-portal/country-studies/taiwan/015-amateur-public-artifact-platform-stack-taipei-vs-shenzhen.html">台湾015 — 台北 × 深圳GGJ公共作品栈</a>。该研究已确认深圳样本中至少存在《口腔妙妙屋》的itch+B站双栈公开，以及《酶你不行 Funzyme》的itch发布和作者既往全球indie痕迹；同时CiGA官方明确说明GGJ全球站注册可能需要额外网络工具并以GmHub承担本地报名/展示。因此本文件后续必须按GGJ/GmHub/B站/TapTap/itch/GitHub/Gitee多栈检索，不能把全球搜索缺失写成未公开。</p>
+<h3 id="gate-a">Gate A｜名册完整性（当前未通过）</h3>
+<ul>
+<li>已从第一方搜索快照读齐 16 个<strong>列表位置的题名</strong>；下步核齐逐行永久 URL/ID，区分 <code>BOOM CHASE</code> 的同名/重复/二次提交，记录快照时间与网页版本。</li>
+<li>保留网站不可用证据，必要时交叉官方 Web Archive / organiser 导出；不可使用“媒体搜得到”为补齐唯一标准。</li>
+<li>16 个目录位置虽已可读，但永久 URL / 唯一项目 ID 尚未全部核对，故 <code>denominator_status=PARTIAL</code>；可展示条目存在，不能推断独立作品的存续率。</li>
+</ul>
+<h3 id="gate-b">Gate B｜同规则、同字段后续追踪（未执行）</h3>
+<p>每一个项目按一致的顺序检查：官方游戏页及 jammers → 官网链接到的公开项目账号/仓库（如有）→ 同名更新日志/发布页 → 2026-10-07 时点是否存在<strong>能证实同一项目</strong>的后续作品。必须留 <code>UNKNOWN</code>，不得根据「没有新帖子」填 <code>ABANDONED</code>。</p>
+<p>最小字段：</p>
+<pre><code class="language-yaml">entry_id: SZ24-xx
+official_project_url: &quot;url or UNKNOWN&quot;
+roster_confirmed: YES | NO
+duplicate_of: &quot;entry id or NONE or UNKNOWN&quot;
+jam_artifact_exists: VERIFIED | LINK_ONLY | UNKNOWN
+public_followup_trace: VERIFIED | NONE_FOUND_WITH_SEARCH_SCOPE | NOT_ASSESSED
+identity_match_to_followup: VERIFIED | AMBIGUOUS | UNKNOWN
+career_preentry_publicly_documented: VERIFIED | PARTIAL | UNKNOWN
+role_employer_publicly_documented: VERIFIED | PARTIAL | UNKNOWN
+family_or_household_publicly_documented: VERIFIED | UNKNOWN
+press_biography: VERIFIED | NONE_FOUND_WITH_SEARCH_SCOPE | NOT_ASSESSED
+last_observed_at: &quot;YYYY-MM-DD&quot;
+source_links: []
+</code></pre>
+<p><code>NONE_FOUND_WITH_SEARCH_SCOPE</code> 只能写在已记录查询平台、关键词、时间的字段，<strong>不是生活状态</strong>。不要抓取隐私、匿名账号实名映射、亲属资料；个人主动公开之前都写 UNKNOWN。</p>
+<h3 id="gate-c-frame">Gate C｜独立的雇员/毕业生 frame（仍是更高优先级问题）</h3>
+<p>真正检验 AC-010 必须从<strong>入职/毕业以前定义的队列</strong>切入，尽量获得组织/学校可复核的人群分母，再追作者性改变与私人作品不可观测情况。若只能找到曾参赛者，最多分析该参赛者子群，不得偷换为所有员工。</p>
+<p>三层检验必须有独立证据：
+- <strong>教育</strong>：进入制度之前是否已持续自出题、作品与反馈；不可由学校名声倒推创造力。
+- <strong>行业版本现状</strong>：项目目标、岗位 decision rights、旧 KPI 与玩家验证时序；48h jam 不能替代商业项目的 scope 审计。
+- <strong>社会版本意识</strong>：公开披露的家庭风险、社会认可与失败合法性；不强求个体披露。</p>
+<h2 id="6-reader-layer">6. Reader-layer 出口：补进「没有写成英雄故事的人」</h2>
+<p>这批记录将来只有在身份、项目与上下游证据足够时才挑选传记/机制深描。重要的不是给他们追封失败或成功，而是正视：</p>
+<blockquote>
+<p><strong>有些人在履历、收入和家庭安排之外，还留下过一个公开的48小时小游戏。这个事实值得被记录；它本身并不能说明后来为什么没有出现另一款作品。</strong></p>
+</blockquote>
+<ul>
+<li>不再由“值得讲故事”决定抽样名单；只由既定名册决定被观察的机会。</li>
+<li>不再把沉默误当放弃、把没发售误当能力不足、把进大厂误当作者性消亡。</li>
+<li>即使之后能逐项追踪全部 16 个目录条目，也只能说明<strong>这个站点的公开项目记录及其可核验的后续轨迹</strong>，不能把比例套进国民性或中美比较。</li>
+</ul>
+<h2 id="65-ggj-2027">6.5 GGJ 2027旧档案下线对本项目的真实影响</h2>
+<p>2026-07-03 GGJ官方宣布V3旧站2014–2023历史作品文件将于2027年结束在线托管，且公告正文与日期表对2027-02-28/03-31截止彼此冲突。<a href="/heroes-portal/book/research-notes/ggj-2026-survey-and-archive-denominator-038.html">研究038</a>保留来源与审计。</p>
+<p><strong>本pilot是2024深圳南山GGJ，属于官网V4，不是V3。</strong> 绝不可用旧站风险制造“本站2027年2月会被删除”的恐慌。尽管如此，现有官网目录16个listing/15个题名，重复的BOOM CHASE条目以及未完成的稳定项目ID/URL仍须先解决，以防目录版本漂移。</p>
+<p>另据GGJ2026调查，39,197名参与者与9,874作品、3,535自愿问卷是不同分析单位；这个全球活动的自选问卷<strong>不能填补深圳本地家庭门控、报名者/未投稿者、工作室生存与非报名潜在作者的未知字段</strong>。旧站公共元数据保全须保留合法引用与内容许可，不收集参与者私人家庭信息，不通过同名账号拼身份。</p>
+<h2 id="7-source-ledger-review-debt">7. Source ledger / review debt</h2>
+<ul>
+<li><strong>P0 / first-party venue:</strong> Global Game Jam, <code>GGJ China 2024 × CiGA – Shenzhen - Nanshan</code>, event page, 2024 event, accessed/search-audited 2026-10-07. https://globalgamejam.org/jam-sites/2024/ggj-china-2024-ciga-shenzhen-nanshan</li>
+<li><strong>P0 / first-party dynamic roster with partial accessibility:</strong> Global Game Jam, <code>Games — group 499</code>, current directory reports 16 items in the search cache; full page could not be fetched consistently on 2026-10-07. https://globalgamejam.org/group/499/games</li>
+<li><strong>P0 / first-party project details, partial:</strong> individual game page URLs in §3. Verified directly when accessible; search-index excerpts are <strong>DISCOVERY/REQUIRES_RECHECK</strong> until the corresponding page can be opened.</li>
+<li><strong>H / analytical limitation:</strong> why prior media case selection cannot identify national prevalence: <a href="/heroes-portal/book/research-notes/media-selection-survivorship-and-denominator-protocol-028.html">028</a>; no project outcomes or social causes inferred in this file.</li>
+</ul>
+<p><strong>Exit criteria for this WIP:</strong> match all 16 directory positions to stable URLs/IDs and resolve both <code>BOOM CHASE</code> slots; then execute uniform public-trace checks and publish missingness table. Until then <strong>no project-outcome rate, no country comparison, no creator-status labeling</strong>.</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / country-studies/china/002-ggj-2024-shenzhen-nanshan-public-attempt-pilot.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

@@ -1,0 +1,837 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>016 — 台湾独立创作者路网：为什么“自己做游戏”能长期保持可见 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl class="on"" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0-route_count-route_redundancy" class="t2">0. 第一轮结论：台湾优势候选不是 ROUTE_COUNT，而是 ROUTE_REDUNDANCY</a><a href="#tw-route-e01igda-taiwan200120082012" class="t2">TW-ROUTE-E01｜IGDA Taiwan：2001成立，2008停摆，2012年底恢复</a><a href="#tw-route-e02" class="t2">TW-ROUTE-E02｜自制游戏公会始于巴哈姆特内部，而不是商业机构</a><a href="#_1" class="t3">关键意义</a><a href="#tw-route-e03jam" class="t2">TW-ROUTE-E03｜公开开发心得说明jam被用来补“从没做完过”的经验</a><a href="#tw-route-e04" class="t2">TW-ROUTE-E04｜组织不是被动报道国外，而是以“引入海外社群资讯”为目标</a><a href="#tw-route-e052026-open-mic" class="t2">TW-ROUTE-E05｜2026 Open Mic仍然允许任何开发者分享经验、技术、找队友、推作品</a><a href="#tw-route-e06acg2012" class="t2">TW-ROUTE-E06｜巴哈姆特ACG创作大赛从2012就把“有志创作者”公开展示制度化</a><a href="#tw-route-e07202413" class="t2">TW-ROUTE-E07｜2024已是第13届</a><a href="#igdsharegame-jam" class="t3">它和IGDShare/Game Jam的功能不同</a><a href="#tw-route-e08indie-game-award2015" class="t2">TW-ROUTE-E08｜Indie Game Award自2015持续</a><a href="#tw-route-e09" class="t2">TW-ROUTE-E09｜第一届就形成大规模玩家接口</a><a href="#g-eight" class="t3">G-EIGHT补的是另一块</a><a href="#tw-route-e10indie-exhibitor-pipeline" class="t2">TW-ROUTE-E10｜学生团队被直接视为indie exhibitor pipeline</a><a href="#tw-route-e11gameworksindie" class="t2">TW-ROUTE-E11｜GameWorks自我定义为“十年indie积累+制作人+社群+创投资源”的整合</a><a href="#tw-route-e12igdshare-igda-taiwan-tgdf-manapool" class="t2">TW-ROUTE-E12｜林容生：IGDShare → IGDA Taiwan → TGDF → Manapool</a><a href="#a" class="t2">A. 组织会关闭</a><a href="#b" class="t2">B. 很多关键桥其实很新</a><a href="#c-taipei-concentration" class="t2">C. Taipei concentration</a><a href="#d" class="t2">D. 活动多不等于稳定收入</a><a href="#a_1" class="t3">A. 同一作者跨几个节点？</a><a href="#b_1" class="t3">B. 第一次失败后是否换路？</a><a href="#c" class="t3">C. 老作者是否反过来成为基础设施？</a><a href="#d-route-switch-cost" class="t3">D. ROUTE SWITCH COST</a></aside><article class="doc"><div class="col"><h1 id="016">016 — 台湾独立创作者路网：为什么“自己做游戏”能长期保持可见</h1>
+<ul>
+<li>Status: ECOLOGY / ROUTE-DENSITY AUDIT / PRE-CLAIM</li>
+<li>Program: C Taiwan comparator</li>
+<li>As of: 2026-10-08</li>
+<li>Parents:</li>
+<li><a href="/heroes-portal/country-studies/taiwan/012-external-information-friction-signal-latency.html">012 — 外部资讯摩擦与弱信号时延</a></li>
+<li><a href="/heroes-portal/country-studies/taiwan/013-student-amateur-indie-default-production-awareness.html">013 — 学生/业余独游默认生产意识</a></li>
+<li><a href="/heroes-portal/country-studies/taiwan/014-selected-student-cohort-productization-taiwan-vs-cusga.html">014 — 放视大赏 × CUSGA 决赛层商品化压力测试</a></li>
+<li><a href="/heroes-portal/country-studies/taiwan/015-amateur-public-artifact-platform-stack-taipei-vs-shenzhen.html">015 — 台北 × 深圳 GGJ 公共作品栈</a></li>
+<li>Mainland mirror:</li>
+<li><a href="/heroes-portal/country-studies/china/016-creator-route-topology-from-66rpg-to-modern-bridges.html">中国016 — 创作者路网拓扑</a></li>
+<li>Core question: 台湾“全球独立作者身份”为什么会在学生/业余层长期保持可见？关键是单个比赛、单个明星工作室，还是多条低门槛路线长期重叠、互相接驳？</li>
+<li>Restriction:</li>
+<li>路线存在 != 普通人实际可达；</li>
+<li>活动持续多年 != 同一批作者持续多年；</li>
+<li>社群人数、投稿数、参观人次、Steam发行数属于不同单位，禁止拼成“转化率”；</li>
+<li>台湾路网也存在中断、台北集中、资金桥较新和活动成本；</li>
+<li>不因为中国也有大量路线就取消台湾机制研究；比较应放在路线寿命、重叠和切换成本，而不是活动总数。</li>
+</ul>
+<h2 id="0-route_count-route_redundancy">0. 第一轮结论：台湾优势候选不是 ROUTE_COUNT，而是 ROUTE_REDUNDANCY</h2>
+<p class="dc">截至2026，台湾创作者可以观察到的公开路线至少包括：</p>
+<ul>
+<li>业余开发社群；</li>
+<li>找队友 / 技术交流；</li>
+<li>Game Jam；</li>
+<li>学校课程与毕业展；</li>
+<li>巴哈 ACG 创作大赛；</li>
+<li>放视大赏；</li>
+<li>G-EIGHT 玩家展；</li>
+<li>Taipei Game Show Indie Game Award；</li>
+<li>TGDF 开发者论坛；</li>
+<li>国际讲者 / 国际开发者 peer review；</li>
+<li>publisher / platform / investor；</li>
+<li>近年的 GameWorks 资源整合。</li>
+</ul>
+<p>单独看任何一条，都不能证明台湾普通人更容易成为独立开发者。</p>
+<p>真正有解释力的是：</p>
+<blockquote>
+<p><strong>这些入口覆盖不同成熟度，而且长期并存。一个人不必从“学生比赛→创业成功”走一条单线；他可以在社群、Jam、展会、开发者大会、全球奖项和发行接口之间多次切换。</strong></p>
+</blockquote>
+<p>新增核心变量：</p>
+<p>ROUTE_DENSITY<br />
+ROUTE_REDUNDANCY<br />
+ROUTE_CONTINUITY<br />
+ROUTE_SWITCHABILITY<br />
+BRIDGE_OVERLAP<br />
+GLOBAL_REFERENCE_INJECTION<br />
+PUBLIC_AUTHORSHIP_NORMALIZATION<br />
+PLAYER_FEEDBACK_ACCESS<br />
+COMMUNITY_TO_MARKET_BRIDGE<br />
+ROUTE_HALF_LIFE</p>
+<p>当前最强工作假说：</p>
+<blockquote>
+<p>台湾indie生态的作用，不只是制造成功者，而是反复提醒潜在创作者：“这条职业/作者路线一直存在，而且周围有人正在走。”</p>
+</blockquote>
+<p>这可能解释013中的 AUTHOR_ROUTE_SALIENCE。</p>
+<hr />
+<h1 id="1-20012012">1. 2001—2012：最早的开发者社群并非连续无断裂，但会被新的组织补位</h1>
+<h2 id="tw-route-e01igda-taiwan200120082012">TW-ROUTE-E01｜IGDA Taiwan：2001成立，2008停摆，2012年底恢复</h2>
+<p>TGDF 2026合作伙伴官方介绍：
+- IGDA Taiwan最早成立于2001；
+- 2008一度关闭；
+- 2012年底重新开始活动；
+- 主要对象是“开发者个人”；
+- 活动包含资讯分享、建立开发者社群、主办Global Game Jam；
+- 目标之一是加强“业界、社群、学校”互动。</p>
+<p>Source:
+https://2026.tgdf.tw/sponsors</p>
+<p>这是一条重要反例：</p>
+<blockquote>
+<p>台湾创作者生态不是一条从2001无缝增长至今的直线。</p>
+</blockquote>
+<p>早期组织会关闭。</p>
+<p>但它也提供一个 ROUTE_REDUNDANCY 问题：
+2008—2012 IGDA Taiwan停摆期间，是否有其他社群承担交流、组队和创作活动？</p>
+<p>后续证据显示至少2010、2011又出现两个独立组织。</p>
+<hr />
+<h1 id="2-2010">2. 2010：自制游戏公会把“想做游戏的人”组织成低门槛长期社群</h1>
+<h2 id="tw-route-e02">TW-ROUTE-E02｜自制游戏公会始于巴哈姆特内部，而不是商业机构</h2>
+<p>TGDF官方合作伙伴介绍：
+- 自制游戏公会2010起源于巴哈姆特公会讨论板；
+- 通过活动召集各地开发者；
+- 鼓励经验分享；
+- 明确说活动交流会促成开发团队组成。</p>
+<p>Source:
+https://2026.tgdf.tw/sponsors</p>
+<p>其itch主页继续保留DIY Game Jam历史：
+- 至少可见第3—11届；
+- 主题和作品持续累积。</p>
+<p>Source:
+https://diy0973.itch.io/</p>
+<p>TGDF 2020/2021介绍还称：
+- 社群约1200人规模；
+- 有KGJ、站聚、公会游戏和定期活动；
+- 直接用“找团队、招募伙伴、展示才能”作为社群功能。</p>
+<p>Sources:
+https://2020.tgdf.tw/en/sponsors
+https://2021.tgdf.tw/en/sponsors</p>
+<h3 id="_1">关键意义</h3>
+<p>这是一个比“参加全国学生比赛”更低的入口：</p>
+<p>PLAYER / HOBBYIST
+→ JOIN COMMUNITY
+→ learn/share
+→ find team
+→ make jam game
+→ public artifact.</p>
+<p>它降低的是 <strong>TEAM-FORMATION COST</strong> 和 <strong>FIRST-PROTOTYPE COST</strong>。</p>
+<hr />
+<h1 id="3-diy-game-jam">3. DIY Game Jam：重点不是比赛，而是训练“做完”</h1>
+<h2 id="tw-route-e03jam">TW-ROUTE-E03｜公开开发心得说明jam被用来补“从没做完过”的经验</h2>
+<p>2022第四届DIY Game Jam公开心得：
+- 有第一次参加者因为不敢组队而solo；
+- 有人明确说这是“第一个独立制作的游戏”；
+- 有团队称自己过去没有真正完整开发过游戏，为了获得开发实感和动力，主动选择参加Game Jam。</p>
+<p>Source:
+https://itch.io/jam/diygj20220214</p>
+<p>2023第六届继续出现：
+- 重复参加者；
+- 和学校社团同学组队；
+- 第一次真正感觉自己参与完整开发；
+- 开发者互相写作品体验心得。</p>
+<p>Source:
+https://itch.io/jam/20230305</p>
+<p>因此这条路线的主要功能不是挑赢家，而是：</p>
+<blockquote>
+<p><strong>把“想做游戏”转换成一次可结束、可展示、可被别人试玩的完整生产循环。</strong></p>
+</blockquote>
+<p>这和013里的 PUBLIC_PROTOTYPE_HABIT直接相连。</p>
+<hr />
+<h1 id="4-2011igdshareindie">4. 2011：IGDShare把“国外indie资讯输入”明确写进组织使命</h1>
+<h2 id="tw-route-e04">TW-ROUTE-E04｜组织不是被动报道国外，而是以“引入海外社群资讯”为目标</h2>
+<p>IGDShare官方About：
+- 2011成立；
+- 希望增加台湾独立开发者交流；
+- 互相鼓励与学习；
+- “尽可能地将国外独立游戏社群的资讯引入，学习他们的长处”；
+- 最终希望推动更多人“实际着手完成”手上的游戏。</p>
+<p>Sources:
+https://igdshare.org/about
+https://www.igdshare.org/about-en</p>
+<p>这个证据非常重要，因为它把012的“低外部资讯摩擦”从互联网结构推进到<strong>制度化中介</strong>：</p>
+<p>foreign indie knowledge
+→ local curator/community
+→ Chinese explanation
+→ local meetup
+→ creator completion.</p>
+<p>也就是说，即使一个台湾学生英语一般、不主动追Reddit/X，
+本地社群本身也会把海外开发方法翻译进来。</p>
+<p>新增变量：</p>
+<p><strong>GLOBAL_REFERENCE_INJECTION</strong></p>
+<hr />
+<h1 id="5-igdshare20102026">5. IGDShare并没有只活在2010年代：2026仍持续做开发者交流</h1>
+<h2 id="tw-route-e052026-open-mic">TW-ROUTE-E05｜2026 Open Mic仍然允许任何开发者分享经验、技术、找队友、推作品</h2>
+<p>IGDShare 2026-09公开活动：
+- 开放参与者自由短讲；
+- 开发经验、技术研究、徵求伙伴、推广作品均可；
+- 也安排东京电玩展出展/观展经验分享；
+- 同期还筹备新的Game Jam。</p>
+<p>Source:
+https://igda.tw/content/igdshare060906</p>
+<p>这说明至少在公开活动层：
+<strong>2011建立的creator community仍在2026运作。</strong></p>
+<p>这属于 ROUTE_CONTINUITY 的较强描述证据。</p>
+<p>不能据此推：
+- 2011参与者一直参与到2026；
+- 社群成员有稳定收入；
+- 所有新人都能进入。</p>
+<hr />
+<h1 id="6-2012">6. 2012前后：学生/业余作者开始拥有独立于学校的公开创作舞台</h1>
+<h2 id="tw-route-e06acg2012">TW-ROUTE-E06｜巴哈姆特ACG创作大赛从2012就把“有志创作者”公开展示制度化</h2>
+<p>GNN同期报道：
+- 2012首次举办跨动画、漫画、游戏三组的“巴哈姆特ACG创作大赛”；
+- 目标是为“有志从事ACG创作的玩家”提供表现舞台；
+- 承接更早“创意游戏设计大赛”传统；
+- 面向的不是已经成立的商业公司。</p>
+<p>Source:
+https://gnn.gamer.com.tw/detail.php?sn=67791</p>
+<p>013已进一步核到：
+- 2025/2026规则仍明确欢迎学生、业余作者和indie团队；
+- 接受Steam链接；
+- 英文作品可参赛；
+- 评审包含商业市场潜力。</p>
+<p>所以这不是一次性学生赛事，而是一个已经运行十余年的：</p>
+<p><strong>HOBBY / STUDENT → PUBLIC AUTHOR IDENTITY</strong></p>
+<p>入口。</p>
+<hr />
+<h1 id="7-tgdf">7. TGDF：社区里的知识路线逐渐变成专业开发者大会</h1>
+<h2 id="tw-route-e07202413">TW-ROUTE-E07｜2024已是第13届</h2>
+<p>TGDF 2024官方：
+- 2024进入第13届；
+- 两天、双轨；
+- 程序、设计、美术、音乐、制作、营销、运营、法务、AI等；
+- 国内外讲者；
+- 同时提供学生票；
+- 明确欢迎现役开发者和希望进入行业的新鲜人。</p>
+<p>Source:
+https://2024.tgdf.tw/</p>
+<p>这表明TGDF约从2012前后持续至今。</p>
+<h3 id="igdsharegame-jam">它和IGDShare/Game Jam的功能不同</h3>
+<p>Game Jam：</p>
+<blockquote>
+<p>做一次东西。</p>
+</blockquote>
+<p>IGDShare：</p>
+<blockquote>
+<p>找人、交流、分享、完成作品。</p>
+</blockquote>
+<p>TGDF：</p>
+<blockquote>
+<p>学更成熟的专业知识与行业practice。</p>
+</blockquote>
+<p>2024议程甚至包含：
+- CDPR quest design；
+- Xbox如何把台湾游戏带向全球；
+- Perforce/TeamCity生产工具；
+- marketing；
+- AI；
+- legal/publishing issues。</p>
+<p>Source:
+https://2024.tgdf.tw/agenda</p>
+<p>这构成：
+<strong>AMATEUR → PROFESSIONAL KNOWLEDGE</strong></p>
+<p>的桥，而不是只看最终发行作品。</p>
+<hr />
+<h1 id="8-2015indie-game-award">8. 2015：Indie Game Award把台湾开发者放进全球同侪比较</h1>
+<h2 id="tw-route-e08indie-game-award2015">TW-ROUTE-E08｜Indie Game Award自2015持续</h2>
+<p>Taipei Game Show官方：
+- IGA创立于2015；
+- 面向全球indie developer；
+- 2026达到51个国家地区、515组作品。</p>
+<p>Sources:
+https://tgs.tca.org.tw/indie_award.php
+https://tgs.tca.org.tw/indie_award_e.php</p>
+<p>2026官方还公开一个很特别的初选制度：</p>
+<blockquote>
+<p>所有参赛开发者会互相评价其他参赛游戏。</p>
+</blockquote>
+<p>组织者明确说，该机制让开发者跨地域直接体验全球：
+- gameplay mechanics；
+- design approaches；
+- creative ideas。</p>
+<p>Source:
+https://tgs.tca.org.tw/news.php?a=1&amp;b=2c_c&amp;n=d1359f9934ee5a75ed441ffce412a0a1</p>
+<p>因此IGA不只是奖项。</p>
+<p>它本身是：</p>
+<p>local team
+→ submit global competition
+→ play foreign indie games
+→ evaluate peers
+→ receive global benchmark exposure.</p>
+<p>这是非常直接的 <strong>GLOBAL_REFERENCE_INJECTION</strong>。</p>
+<hr />
+<h1 id="9-igataipei-game-show">9. IGA与Taipei Game Show还能把项目从比赛送进玩家/商业现场</h1>
+<p>2026官方规则/结果显示：
+- 未发售但已有playable demo的indie可以报名；
+- 获奖/入围者进入TGS现场展示；
+- 国际开发者、平台、媒体同场。</p>
+<p>Sources:
+https://tgs.tca.org.tw/indie_award_e.php
+https://tgs.tca.org.tw/news.php?a=1&amp;b=e&amp;n=dafc8e8cde5d69dafe65cb6907899656</p>
+<p>因此：
+COMPETITION
+→ PUBLIC DEMO
+→ PLAYER FEEDBACK
+→ PROFESSIONAL CONTACT</p>
+<p>可以发生在同一生态内。</p>
+<p>这比单纯“拿奖”更重要。</p>
+<hr />
+<h1 id="10-2022g-eightindie">10. 2022：G-EIGHT补上了“直接面对大量玩家”的indie专门展</h1>
+<h2 id="tw-route-e09">TW-ROUTE-E09｜第一届就形成大规模玩家接口</h2>
+<p>G-EIGHT官方2022回顾：
+- 自称台湾首届专门为indie打造的大型展；
+- 15,000+玩家；
+- 94款作品；
+- 1.5m+社交触达；
+- 40篇媒体报道。</p>
+<p>Source:
+https://geight.io/2022-g-eight-recap/</p>
+<p>GNN同期：
+- 87家游戏公司参与；
+- 82家为indie团队或publisher；
+- 93款游戏；
+- 15,000人次。</p>
+<p>Source:
+https://gnn.gamer.com.tw/detail.php?sn=242647</p>
+<p>2023第二届已扩到150+游戏并有中、美、日、韩团队/发行商。</p>
+<p>Source:
+https://geight.io/en/geight-official/2023-g-eight-indie-game-show-unveils-exhibitor-lineup-and-in-show-events/</p>
+<h3 id="g-eight">G-EIGHT补的是另一块</h3>
+<p>学生展 / jam：
+偏creator-to-creator。</p>
+<p>TGDF：
+偏developer-to-developer。</p>
+<p>G-EIGHT：
+偏creator-to-player / publisher / media。</p>
+<p>于是：</p>
+<blockquote>
+<p>一个小团队不用等到正式发售，已经能获得几千到万人规模公共试玩环境。</p>
+</blockquote>
+<hr />
+<h1 id="11-2026-g-eight">11. 2026 G-EIGHT甚至专门提供学生优先低价摊位</h1>
+<h2 id="tw-route-e10indie-exhibitor-pipeline">TW-ROUTE-E10｜学生团队被直接视为indie exhibitor pipeline</h2>
+<p>2026 G-EIGHT Creators Zone：
+- “经济展台”NT$8,000；
+- 明确“学生团队优先”；
+- 标准独立团队摊位NT$15,000。</p>
+<p>Source:
+https://geight.io/creators-zone-application/</p>
+<p>这不是免费，也仍然形成成本门槛。</p>
+<p>但它说明学生项目→专业indie展并非完全不同世界。</p>
+<p>制度设计已经明确建立：
+<strong>STUDENT PROJECT → INDIE PUBLIC SHOWCASE</strong></p>
+<p>桥。</p>
+<hr />
+<h1 id="12-2024-gameworks">12. 2024 GameWorks：老生态开始出现“二代基础设施”</h1>
+<h2 id="tw-route-e11gameworksindie">TW-ROUTE-E11｜GameWorks自我定义为“十年indie积累+制作人+社群+创投资源”的整合</h2>
+<p>TGDF官方合作伙伴资料：
+- GameWorks成立于2024；
+- 汇集“台湾独立游戏圈发展十年来”的资深游戏制作人；
+- 游戏开发社群；
+- 游戏创投资源；
+- 目标是打造可持续游戏创作生态。</p>
+<p>Sources:
+https://2025.tgdf.tw/sponsors
+https://2026.tgdf.tw/sponsors</p>
+<p>这属于一个潜在重要阶段：</p>
+<p>FIRST-GENERATION COMMUNITY
+→ EXPERIENCED DEVELOPERS
+→ INVESTMENT / PRODUCTION NETWORK
+→ SECOND-GENERATION INFRASTRUCTURE.</p>
+<p>这和中国016提出的 SECOND_GENERATION_CREATOR_PRODUCTION 可以直接对应。</p>
+<p>不过：
+GameWorks太新，当前只能确认组织意图与资源整合存在，不能声称已经显著提高创业成功率。</p>
+<hr />
+<h1 id="125">12.5. 最强的“路网”证据：同一批人真的把社群、国际知识与资本桥接起来</h1>
+<h2 id="tw-route-e12igdshare-igda-taiwan-tgdf-manapool">TW-ROUTE-E12｜林容生：IGDShare → IGDA Taiwan → TGDF → Manapool</h2>
+<p>TGDF 2017讲者页提供一条罕见的个人—机构连续记录：
+- 林容生自2011年初投入独立游戏相关活动推广；
+- 长期参与IGDShare；
+- 同时担任IGDA Taiwan联系人；
+- 是TGDF共同发起人之一。</p>
+<p>Source:
+https://2017.tgdf.tw/speakers/%E6%9E%97%E5%AE%B9%E7%94%9F/</p>
+<p>同一页面还记录了更关键的资本桥：
+- 2013 TGDF邀请美国Indie Fund发起人之一来台介绍独立游戏融资模式；
+- 当时台湾团队实际上很难直接成为Indie Fund资助对象；
+- 2015年底Muse Games创办人曹之昊提出在台湾寻找类似投资标的；
+- 数月接洽后形成“Manapool 法力池”；
+- 该模式随后与赤烛《返校》发生实际合作。</p>
+<p>这构成一条罕见的可验证路径：</p>
+<p>foreign indie-finance idea
+→ TGDF local knowledge import
+→ community connector
+→ local investor relationship
+→ Taiwan-specific funding vehicle
+→ local indie production.</p>
+<p>它直接支持：
+<strong>BRIDGE_OVERLAP并非只是活动同时存在，而可能由同一批中介者把不同资源层连起来。</strong></p>
+<p>这也是台湾小型生态的潜在优势之一：
+一个活跃社群组织者可能同时知道开发者、海外经验、会议、publisher/investor，从而降低“我知道有这条路，但不知道找谁”的中介成本。</p>
+<p>边界：
+- Manapool/《返校》是成功且媒体可见案例，不能据此推断多数台湾indie能获得投资；
+- 这里证明的是“桥可以被走通”和机构之间真实连接，不是资本可得率。</p>
+<hr />
+<h1 id="127-2014">12.7. 学生路线也不是只靠大学课程：2014已有跨校学生社群</h1>
+<p>TGDF 2017合作伙伴资料记录“学生游戏梦”：
+- 2014由学生创立；
+- 最初从校内免费授课发展；
+- 后来建立线上互动社群；
+- 举办Student Game Jam与Student Game Elite Conference；
+- 明确目标是推动学生之间游戏开发技术交流，并让独立开发者成长。</p>
+<p>Source:
+https://2017.tgdf.tw/partners/</p>
+<p>这补上016此前较弱的一层：</p>
+<p>SCHOOL COURSE
+并不是学生唯一入口；</p>
+<p>还存在：
+STUDENT PEER COMMUNITY
+→ STUDENT JAM
+→ CROSS-SCHOOL SHARING
+→ PROFESSIONAL COMMUNITY / TGDF.</p>
+<p>因此“学生毕业前就能想象作者路线”不只来自学校制度，也可能来自跨校同龄人网络。</p>
+<hr />
+<h1 id="128-game-jam">12.8. 地理集中依然成立，但Game Jam至少出现北中南冗余</h1>
+<p>IGDShare 2026 Faust Game Jam公告显示：
+- 台北、台中、台南三会场同步串联；
+- 公开邀请各地开发者参加。</p>
+<p>Source:
+https://igda.tw/</p>
+<p>这不能否定台湾主要专业活动高度集中于台北。</p>
+<p>但它说明至少在低门槛prototype层：
+<strong>ROUTE_REDUNDANCY并非完全等于TAIPEI_ONLY。</strong></p>
+<p>后续应分别编码：
+- Taipei-only professional routes；
+- multi-city jam/community routes；
+- online routes。</p>
+<h1 id="13">13. 台湾路网不是“一个漏斗”，而是多个可进入、可回退的层</h1>
+<p>当前可观察结构：</p>
+<p>PLAYER / STUDENT / ARTIST / PROGRAMMER
+↓
+巴哈社区 / 自制游戏公会 / IGDShare
+↓
+DIY Game Jam / KUSO Game Jam / GGJ
+↓
+课程作品 / 毕业专题 / 巴哈ACG / 放视大赏
+↓
+G-EIGHT / TGS / Indie Game Award
+↓
+TGDF / international talks / peer-review network
+↓
+publisher / platform / grant / investor / GameWorks
+↓
+Steam / console / global market</p>
+<p>但真实人生不一定顺序向下。</p>
+<p>可能：
+- 先上班，再回Game Jam；
+- 商业作品之后仍参加jam；
+- 毕业作不继续，几年后重做；
+- 一作失败后换publisher；
+- 成人独游作者从美术/写手旁路进入；
+- 社群成员直接组队而跳过学生赛事。</p>
+<p>因此更准确的是：</p>
+<p><strong>CREATOR ROUTE NETWORK</strong>
+而不是
+<strong>CREATOR PIPELINE</strong>。</p>
+<hr />
+<h1 id="14">14. 为什么“多条重复的路”本身可能改变意识</h1>
+<p>假设一个台湾学生：
+- 今年没进放视；
+- 仍可参加巴哈ACG；
+- 作品不够成熟，可以参加Game Jam；
+- 想找队友，可以进社群；
+- 想听专业知识，可以去TGDF；
+- 想测试玩家，可以报名G-EIGHT；
+- 成熟后可以报IGA；
+- 想找资金，可以接publisher/grant/GameWorks。</p>
+<p>那么一次失败更难被解释成：</p>
+<blockquote>
+<p>“这条人生路不存在。”</p>
+</blockquote>
+<p>而更容易解释成：</p>
+<blockquote>
+<p>“这次入口没过，换一个入口继续。”</p>
+</blockquote>
+<p>这就是：</p>
+<p><strong>ROUTE_REDUNDANCY → AUTHORSHIP LEGITIMACY</strong></p>
+<p>的工作假说。</p>
+<p>它可能通过心理/社会许可起作用，而不仅是资源数量。</p>
+<hr />
+<h1 id="15">15. 这也会制造“作者身份的社会证据”</h1>
+<p>一个潜在创作者长期看到：</p>
+<ul>
+<li>巴哈每年有人交作品；</li>
+<li>Game Jam不断有人做完；</li>
+<li>TGDF有开发者谈失败/生产；</li>
+<li>G-EIGHT现场有小团队摆摊；</li>
+<li>TGS有国际indie；</li>
+<li>本地成功团队又回来当讲者/协办者。</li>
+</ul>
+<p>那么“独立开发者”不再只是国外YouTube里的异常职业。</p>
+<p>它成为一个：</p>
+<p><strong>LOCAL, REPEATED, LEGIBLE SOCIAL ROLE</strong></p>
+<p>新增变量：</p>
+<p><strong>PUBLIC_AUTHORSHIP_NORMALIZATION</strong></p>
+<p>它不是社会整体尊重游戏开发的证据；
+而是一个年轻人在本地可以反复看到“普通人以作者身份公开存在”。</p>
+<hr />
+<h1 id="16">16. 路网也有明显断点和成本，不能浪漫化</h1>
+<h2 id="a">A. 组织会关闭</h2>
+<p>IGDA Taiwan 2008停摆、2012才恢复。</p>
+<p>所以台湾也经历route failure。</p>
+<h2 id="b">B. 很多关键桥其实很新</h2>
+<ul>
+<li>G-EIGHT：2022才开始；</li>
+<li>GameWorks：2024；</li>
+<li>资本/发行桥的成熟远晚于社群/比赛。</li>
+</ul>
+<p>不能用2026生态解释2010创业条件。</p>
+<h2 id="c-taipei-concentration">C. Taipei concentration</h2>
+<p>TGDF、TGS、G-EIGHT、许多社群都高度集中台北/北部。</p>
+<p>台湾地理小降低移动成本，但：
+- 南部学生；
+- 低收入创作者；
+- 有全职工作/家庭的人</p>
+<p>仍面临时间、交通、票价、摊位费。</p>
+<h2 id="d">D. 活动多不等于稳定收入</h2>
+<p>Jam / meetup / award / exhibition
+可以提高：
+- network；
+- knowledge；
+- feedback；
+- visibility。</p>
+<p>却不能自动解决：
+- 24个月开发现金流；
+- publisher terms；
+- rent；
+- failed-title runway。</p>
+<p>这也是005、010、011存在的原因。</p>
+<hr />
+<h1 id="17">17. 和大陆比较时，不能再说“台湾有路、中国没有路”</h1>
+<p>中国016已经明确废弃这个粗命题。</p>
+<p>大陆截至2026同样有：
+- 66RPG历史hobbyist commons；
+- GGJ；
+- CUSGA；
+- CiGA / indiePlay / WePlay；
+- GWB /腾讯创作赛事；
+- TapTap Spotlight；
+- China Hero；
+- Steam / publishers。</p>
+<p>因此真正值得比较：</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Taiwan question</th>
+<th>Mainland question</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ROUTE_COUNT</td>
+<td>many</td>
+<td>many</td>
+</tr>
+<tr>
+<td>ROUTE_AGE</td>
+<td>many indie-specific routes since 2010–15</td>
+<td>some early, many modern bridges after 2015</td>
+</tr>
+<tr>
+<td>ROUTE_CONTINUITY</td>
+<td>several 10–15y institutions, but breaks exist</td>
+<td>several historical discontinuities / platform transitions</td>
+</tr>
+<tr>
+<td>ROUTE_REDUNDANCY</td>
+<td>high candidate</td>
+<td>increasing rapidly</td>
+</tr>
+<tr>
+<td>GLOBAL_REFERENCE_INJECTION</td>
+<td>structurally low friction</td>
+<td>requires more active bridging</td>
+</tr>
+<tr>
+<td>PLAYER FEEDBACK ACCESS</td>
+<td>many public exhibitions</td>
+<td>also rapidly increasing</td>
+</tr>
+<tr>
+<td>MARKET/CAPITAL BRIDGE</td>
+<td>exists but newer / opaque</td>
+<td>broader commercial capital but high proof threshold</td>
+</tr>
+<tr>
+<td>EMPLOYMENT PULL</td>
+<td>weaker large-studio pull</td>
+<td>very strong major-company pull</td>
+</tr>
+<tr>
+<td>SECOND ATTEMPT</td>
+<td>still insufficiently measured</td>
+<td>still insufficiently measured</td>
+</tr>
+</tbody>
+</table>
+<p>这不是国别排名表，只是下一阶段比较变量。</p>
+<hr />
+<h1 id="18">18. 目前最有解释力的台湾模型</h1>
+<p>Taiwan small domestic market
++
+low external information friction
++
+long-running hobbyist/developer communities
++
+repeated public prototype events
++
+student competitions
++
+professional knowledge import
++
+player-facing indie exhibitions
++
+global awards/publisher interfaces
++
+newer capital bridges</p>
+<p>→ ROUTE DENSITY + ROUTE REDUNDANCY</p>
+<p>→ GLOBAL AUTHORSHIP IS LEGIBLE BEFORE SUCCESS</p>
+<p>→ some creators retain author identity across school/job/failure</p>
+<p>→ higher PUBLIC_AUTHORSHIP_NORMALIZATION.</p>
+<p>其中最后两条仍是因果H，需要人物纵向队列验证。</p>
+<hr />
+<h1 id="19">19. 下一步：不要再数活动，要追“跨路线的人”</h1>
+<p>当前最值钱的实证不再是证明台湾还有第17个活动。</p>
+<p>应从已有固定队列中追：</p>
+<h3 id="a_1">A. 同一作者跨几个节点？</h3>
+<p>例如：
+school project
+→ ACG / Vision
+→ jam
+→ G-EIGHT
+→ Steam
+→ TGDF speaker / publisher.</p>
+<h3 id="b_1">B. 第一次失败后是否换路？</h3>
+<p>未入围
+→ jam
+→ second project
+→ exhibition
+→ publisher.</p>
+<h3 id="c">C. 老作者是否反过来成为基础设施？</h3>
+<p>former indie
+→ organizer / mentor / publisher / investor.</p>
+<h3 id="d-route-switch-cost">D. ROUTE SWITCH COST</h3>
+<p>每次切换要不要：
+- 重新组队；
+- 重新注册公司；
+- 重新做vertical slice；
+- 交摊位费；
+- 换平台；
+- 放弃IP。</p>
+<p>只有追到这些，才能把“路网存在”升级成“路网真的提高作者存活率”。</p>
+<hr />
+<h1 id="20-verdict">20. Verdict</h1>
+<p>台湾独立创作者生态目前最值得保留的结构性解释是：</p>
+<blockquote>
+<p><strong>它不一定拥有比大陆更多的创作冲动，也没有证据证明顶尖学生明显更强；但十多年间形成了多个互相重叠的低门槛与中门槛入口，把“找人—做完—公开—被试玩—学行业—看全球—见发行/投资”分散到不同机构。因为路线不是单线，一次比赛失败或一次项目终止不必等于作者身份终止。</strong></p>
+</blockquote>
+<p>这为013的“作者路线显著度”和015的“GLOBAL AUTHORSHIP BY DEFAULT”提供了一个更具体的制度解释：</p>
+<blockquote>
+<p><strong>作者意识可能不是课堂教出来的，而是被一个长期可见、可反复进入的本地路网社会化出来的。</strong></p>
+</blockquote>
+<p>Status: ROUTE EXISTENCE / CONTINUITY STRONGLY SUPPORTED; EFFECT ON CREATOR SURVIVAL STILL OPEN.</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / country-studies/taiwan/016-amateur-creator-route-density-and-continuity.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

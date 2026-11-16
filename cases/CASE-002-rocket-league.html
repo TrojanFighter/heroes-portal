@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CASE-002 — Rocket League / Psyonix · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl class="on"" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#why-this-case" class="t2">Why this case</a><a href="#myth" class="t2">Myth</a><a href="#timeline-first-pass" class="t2">Timeline — first pass</a><a href="#origin-capability" class="t2">Origin / Capability</a><a href="#runway" class="t2">Runway</a><a href="#production-scope" class="t2">Production / Scope</a><a href="#failure-risk" class="t2">Failure / Risk</a><a href="#market" class="t2">Market</a><a href="#preliminary-verdict" class="t2">Preliminary Verdict</a><a href="#evidence-index" class="t2">Evidence Index</a><a href="#open-questions" class="t2">Open Questions</a><a href="#creator-life-decision-audit" class="t2">Creator Life / Decision Audit</a></aside><article class="doc"><div class="col"><h1 id="case-002-rocket-league-psyonix">CASE-002 — Rocket League / Psyonix</h1>
+<ul>
+<li>Status: RESEARCHING</li>
+<li>Subject: Rocket League / Psyonix</li>
+<li>Related Claims: C002, C003, C004, C005, C006, C008, C010, C011</li>
+</ul>
+<h2 id="why-this-case">Why this case</h2>
+<p class="dc">用来检验一种与 FTL 完全不同的“制造生产条件”路径：不是把组织缩到两个人，而是通过 work-for-hire 维持公司、训练团队和积累 Unreal 技术，再长期保留一小部分资源给自有 IP。</p>
+<h2 id="myth">Myth</h2>
+<p>常见压缩叙事：</p>
+<blockquote>
+<p>Psyonix 做了一个“车踢球”的简单点子，2015 年靠 PS Plus 一夜爆红。</p>
+</blockquote>
+<p>第一轮证据已经足以否定“故事从 2015 年开始”的版本。</p>
+<h2 id="timeline-first-pass">Timeline — first pass</h2>
+<ul>
+<li>2001：Psyonix 成立。</li>
+<li>2000s 初：Dave Hagewood 深入 Unreal / Epic 生态，并把 Unreal 技术训练带回公司。</li>
+<li>2000s：公司长期为其它 AAA 项目提供 contract / work-for-hire 服务。</li>
+<li>2006 前后：公司已在试验车辆、跳跃、boost 等原型方向。</li>
+<li>2008：Supersonic Acrobatic Rocket-Powered Battle-Cars (SARPBC) 发布，已包含核心“车 + 球”结构，但商业影响有限。</li>
+<li>2008–2015：团队一边靠合同工作支付账单，一边持续保留原创研发；Rocket League 是对前作长期重做与易用性改进的结果。</li>
+<li>2015：Rocket League 发布；PS Plus 成为早期扩散的重要放大器。</li>
+<li>2016：公开报道显示累计玩家超过 1200 万、收入超过 7000 万美元；报道估计 Rocket League 两年开发预算低于 200 万美元。</li>
+</ul>
+<h2 id="origin-capability">Origin / Capability</h2>
+<p>当前已支持：</p>
+<ul>
+<li>Psyonix 不是第一次做游戏的“新独立团队”；</li>
+<li>Hagewood / Psyonix 长期掌握 Unreal 技术，并通过合同项目参与多个大型制作；</li>
+<li>Hagewood 明确把合同工作称为公司的 bootstrapping 方式；</li>
+<li>合同工作不仅提供现金流，也暴露公司于 Firaxis、Epic 等团队的制作流程与质量标准。</li>
+</ul>
+<p>因此本案需要区分：</p>
+<ol>
+<li><strong>现金资本</strong>：合同业务支付账单；</li>
+<li><strong>能力资本</strong>：在真实 AAA 项目中反复训练工程、制作和质量标准；</li>
+<li><strong>组织资本</strong>：保住一个长期共同工作的团队；</li>
+<li><strong>IP 期权</strong>：始终保留一部分人做原创。</li>
+</ol>
+<h2 id="runway">Runway</h2>
+<p>第一轮证据能支持“work-for-hire 帮公司支付账单并维持原创研发”，但还不能量化：</p>
+<ul>
+<li>每年合同收入；</li>
+<li>原创项目占用团队比例；</li>
+<li>SARPBC → Rocket League 各阶段内部预算；</li>
+<li>PS Plus 具体保证金/商业条款。</li>
+</ul>
+<p>这些不能用 Rocket League 最终收入倒推。</p>
+<h2 id="production-scope">Production / Scope</h2>
+<p>目前可支持：</p>
+<ul>
+<li>Rocket League 不是从零发现“车踢球”，而是 SARPBC 后的长期迭代；</li>
+<li>前作暴露了高水平玩家可能让新手几乎碰不到球等问题；</li>
+<li>Rocket League 更强调 team play 与 accessibility；</li>
+<li>“同一个核心玩具打磨七年”比“突然想到一个好点子”更接近当前证据。</li>
+</ul>
+<h2 id="failure-risk">Failure / Risk</h2>
+<p>SARPBC 不能简单标成“失败”：
+- 它没有达到 Rocket League 的商业规模；
+- 但提供了核心玩法、玩家反馈和团队领域知识；
+- 因此应研究为 <strong>商业弱势前作 / capability prototype</strong>。</p>
+<h2 id="market">Market</h2>
+<p>需要拆分：
+- PS Plus：早期大规模试用与口碑放大；
+- Steam；
+- 主播 / YouTube；
+- 既有 SARPBC 社群；
+- Psyonix 已有行业关系；
+- 口碑、跨平台与持续运营。</p>
+<p>当前禁止把“PS Plus 造就 Rocket League”写成单因果。</p>
+<h2 id="preliminary-verdict">Preliminary Verdict</h2>
+<p>目前最强表述：</p>
+<blockquote>
+<p>Rocket League 的“低预算高产出”并不是小团队从零复制 AAA，而是 Psyonix 用十多年组织与 Unreal 能力积累、长期 work-for-hire 现金流、一个商业弱势但技术/设计上极有价值的前作，以及七年左右核心玩法迭代，最终把问题改造成自己已经非常擅长解决的问题。</p>
+</blockquote>
+<h2 id="evidence-index">Evidence Index</h2>
+<ul>
+<li>E001 — Guardian 2016：Dave Hagewood / Corey Davis 回顾 contract work、UE3、SARPBC 与七年迭代。</li>
+<li>E002 — Los Angeles Times 2016：合同制作前史、两年 Rocket League 开发、低于 200 万美元预算与早期商业规模。</li>
+<li>E003 — Game Developer / developer interview queue：用于进一步核 SARPBC→RL 设计连续性。</li>
+<li>E004 — PS Plus / platform amplification queue：待补 Sony/Psyonix 一手或同期材料。</li>
+</ul>
+<h2 id="open-questions">Open Questions</h2>
+<ol>
+<li>合同业务收入和原创投入在 2001–2015 如何变化？</li>
+<li>SARPBC 实际销量/活跃/收入是多少？</li>
+<li>Rocket League 开发各阶段核心团队、峰值团队与外包多少人？</li>
+<li>PS Plus 合同到底改变了 acquisition、收入还是两者？</li>
+<li>哪些技术/代码直接继承，哪些只是团队 tacit knowledge？</li>
+<li>“七年 refinement”里真正改变 retention / accessibility 的关键决策是什么？</li>
+</ol>
+<h2 id="creator-life-decision-audit">Creator Life / Decision Audit</h2>
+<ul>
+<li><strong>Audit status:</strong> SUBSTANTIAL / STUDIO-LEVEL</li>
+<li><strong>Life stage:</strong> Psyonix 已是长期运营的职业工作室；不是首次创业或低资本个人独立开发。</li>
+<li><strong>Household:</strong> founder / team personal household <code>UNKNOWN / NOT PRIMARY</code>；本案重点是公司级 survival 与 retained team capital。</li>
+<li><strong>Runway:</strong> 长期 AAA contract / work-for-hire 现金流支撑公司运转，同时保留部分原创研发；SARPBC 商业弱势但提供玩法与团队学习；Rocket League 在此基础上继续投入。</li>
+<li><strong>Household burn:</strong> <strong>NOT APPLICABLE at current evidence level</strong>；应分析 studio payroll / opportunity cost 而非猜个人家庭。</li>
+<li><strong>Exit / recovery:</strong> <strong>HIGH ORGANIZATIONAL OPTIONALITY</strong> — 公司有持续 contract market、Unreal 专业能力和 AAA relationships，可在原创项目未爆发时靠服务业务维持组织。</li>
+<li><strong>Capability vector:</strong> Unreal engineering / networking / multiplayer production / AAA contractor discipline / team coordination；原创侧积累车辆+球核心玩法与 accessibility 经验。</li>
+<li><strong>Problem ownership:</strong> <strong>MIXED BUT PRESERVED</strong> — work-for-hire 支付账单，但公司长期保留自有 IP / internal experiments；原创并未被服务业务完全吃掉。</li>
+<li><strong>Validation architecture:</strong> contract-funded survival → vehicle/ball prototypes → SARPBC launch / weak commercial result → years of user/design learning → Rocket League refinement → PS Plus/Steam/creator amplification。</li>
+<li><strong>Reality adjudication:</strong> <strong>STRONG</strong> — SARPBC 没有被浪漫化成成功；其 accessibility / skill-floor 问题直接进入 Rocket League 产品重做。</li>
+<li><strong>Capability capture risk:</strong> <strong>LOW / POSITIVE REUSE</strong> — Unreal/AAA capability 主要降低生产风险；没有证据显示技术本身拖走产品 closure。</li>
+<li><strong>Market sufficiency / legibility:</strong> <strong>STRONG AFTER REFINEMENT</strong> — “cars playing football” 高可读，但市场爆发建立在前作七年迭代、PS Plus 和已有生产资本上。</li>
+<li><strong>Capability scaling:</strong> <strong>WORK-FOR-HIRE-FUNDED</strong> — 用外部项目现金维持 permanent team，再将组织资本周期性投入 own-IP。</li>
+<li><strong>Major unknowns:</strong> 每年合同收入、原创资源占比、PS Plus 条款、Rocket League 逐阶段 headcount /预算、founder household。</li>
+</ul><div class="crumbs"><a href="/heroes-portal/">书阁</a> / cases/CASE-002-rocket-league.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CASE-024 — Escape from Duckov / Team Soda · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl class="on"" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#why-this-case" class="t2">Why this case</a><a href="#1-myth" class="t2">1. Myth</a><a href="#a" class="t3">神话 A：五个人从零做出三百万销量爆款</a><a href="#b-extraction" class="t3">神话 B：只是追上了 extraction 热潮</a><a href="#c-tarkov-2d" class="t3">神话 C：把 Tarkov 简化成 2D 就够了</a><a href="#d" class="t3">神话 D：小团队 + 买断单机 = 独立游戏</a><a href="#2-origin" class="t2">2. Origin</a><a href="#jeff-team-soda" class="t3">Jeff / Team Soda</a><a href="#_1" class="t3">前作</a><a href="#3-capability" class="t2">3. Capability</a><a href="#4-runway" class="t2">4. Runway</a><a href="#5-production" class="t2">5. Production</a><a href="#_2" class="t3">五人核心是真的</a><a href="#_3" class="t3">五人总生产边界不是真的</a><a href="#6-scope" class="t2">6. Scope</a><a href="#_4" class="t3">第一次方向：移动端 —— 失败</a><a href="#pc-mobile" class="t3">第二次方向：PC + mobile —— 再次收缩</a><a href="#_5" class="t3">为什么不做多人</a><a href="#tarkov" class="t3">如何重切 Tarkov</a><a href="#7-failure" class="t2">7. Failure</a><a href="#_6" class="t3">《碳酸危机》商业表现不足</a><a href="#duckov" class="t3">Duckov 的早期移动方向失败</a><a href="#8-market" class="t2">8. Market</a><a href="#_7" class="t3">需求发现</a><a href="#wishlist-launch" class="t3">Wishlist / launch 前市场基础</a><a href="#_8" class="t3">上线窗口</a><a href="#bilibili-perimeter" class="t3">Bilibili perimeter：不仅是发行商名称</a><a href="#_9" class="t3">结果</a><a href="#9-environment" class="t2">9. Environment</a><a href="#bilibili" class="t3">Bilibili 内部小团队模型</a><a href="#_10" class="t3">通用工具与平台</a><a href="#10-luck" class="t2">10. Luck</a><a href="#11-verdict" class="t2">11. Verdict</a><a href="#indie-eligibility" class="t3">INDIE ELIGIBILITY</a><a href="#strongly-supported" class="t3">STRONGLY SUPPORTED</a><a href="#supported-with-boundary" class="t3">SUPPORTED WITH BOUNDARY</a><a href="#not-supported-refuted-as-framed" class="t3">NOT SUPPORTED / REFUTED AS FRAMED</a><a href="#12-transfer" class="t2">12. Transfer</a><a href="#13-non-transfer" class="t2">13. Non-transfer</a><a href="#14-evidence-index" class="t2">14. Evidence Index</a><a href="#15-open-questions" class="t2">15. Open Questions</a><a href="#creator-life-decision-audit" class="t2">Creator Life / Decision Audit</a></aside><article class="doc"><div class="col"><h1 id="case-024-escape-from-duckov-team-soda">CASE-024 — Escape from Duckov / Team Soda</h1>
+<ul>
+<li>Case ID: CASE-024</li>
+<li>Subject: Escape from Duckov / Team Soda</li>
+<li>Related games: Snake Force; Soda Crisis; Escape from Duckov</li>
+<li>Period covered: c. 2020–2026</li>
+<li>Research status: RESEARCHING</li>
+<li>Corpus role: NON-INDIE COMPARATOR / corporate-owned small-team commercial production</li>
+<li>Last verified: 2026-10-04</li>
+<li>Related Claims: C003, C004, C007, C008, C010, C011</li>
+</ul>
+<h2 id="why-this-case">Why this case</h2>
+<p class="dc">本案需要先做一个资格修正：<strong>《逃离鸭科夫》不应再被当作“中国独立游戏英雄”本身，而应被保留为对独立生产很有参考价值的 corporate-owned small-team comparator。</strong></p>
+<p>理由不是“它不够小”或“它不够原创”，而是生产与市场边界不同：Team Soda 是 Bilibili 内部形成的研发团队，Bilibili 同时承担雇主、publisher 与更大 production / market perimeter。换言之，它具有独立游戏式的小核心、作者自主性和 scope discipline，但缺少独立工作室在所有权、工资 runway、发行与流量获取上必须承担的那一层组织独立。</p>
+<p>因此本案不再用于证明“真正独立工作室也能靠五个人完成同样的商业路径”，而用于回答另一个更窄的问题：</p>
+<blockquote>
+<p><strong>一个已经磨合过的公司内部小核心，如何借助母公司外围，把前作积累保留下来，同时主动砍掉网络、移动端和硬核模拟成本，把 Tarkov 的价值主张重新翻译成一个五人核心可承受的产品。</strong></p>
+</blockquote>
+<p>《逃离鸭科夫》很容易被压缩成一个极具传播性的神话：</p>
+<blockquote>
+<p>五个人用约两年做了一个“2D / 单机塔科夫”，上线后迅速卖出数百万份。</p>
+</blockquote>
+<p>这句话只有一半是真的。</p>
+<p><strong>五人核心研发是真的；“五个人独立承担了全部生产、发行与市场工作”不是真的。</strong> Team Soda 是 Bilibili 内部团队，核心五人主要承担研发，而发行、本地化及其他外围工作由 Bilibili 体系中的其他同事承担。更重要的是，这五个人并不是第一次一起做游戏：他们已经共同经历《蛇行武装》《碳酸危机》等前作，合作约 4–6 年。</p>
+<h2 id="1-myth">1. Myth</h2>
+<h3 id="a">神话 A：五个人从零做出三百万销量爆款</h3>
+<p>问题在于“从零”与“五个人”都把生产边界切错了：</p>
+<ul>
+<li>核心成员已长期共同开发；</li>
+<li>团队在 Duckov 前已经连续做过商业游戏；</li>
+<li>Bilibili 既是雇主也是 publisher / production perimeter；</li>
+<li>正式上线前已经积累大量 wishlist 和公开关注。</li>
+</ul>
+<h3 id="b-extraction">神话 B：只是追上了 extraction 热潮</h3>
+<p>团队自己承认后来 extraction 热度帮助了产品，但 Jeff 的回顾也显示，Duckov 的立项与核心方向早于 2024–2025 年 extraction 大爆发；团队最初寻找的是“有没有大量玩家喜欢 Tarkov 的搜集成长，却不喜欢 PvP、高惩罚和硬核操作”的空白。</p>
+<p>更准确的说法是：<strong>他们较早押中了一个需求方向，随后又幸运地撞上品类窗口放大。</strong></p>
+<h3 id="c-tarkov-2d">神话 C：把 Tarkov 简化成 2D 就够了</h3>
+<p>实际不是简单降维移植。团队删除了网络多人、移动端适配、复杂枪械状态与大量硬核机制，同时保留搜索、撤离、成长、基地、任务、战利品价值等更核心的情绪循环。这是一轮产品问题重定义。</p>
+<h3 id="d">神话 D：小团队 + 买断单机 = 独立游戏</h3>
+<p>本案恰好是这个定义失效的反例。</p>
+<ul>
+<li>小核心不等于所有权独立；</li>
+<li>项目自主性不等于 studio / capital independence；</li>
+<li>买断制不等于发行独立；</li>
+<li>Steam 上挂 <code>Indie</code> 标签也不能替代对实际雇佣、IP、publisher 和 market perimeter 的审计。</li>
+</ul>
+<p>因此本库之后必须把“生产规模”和“indie eligibility”分开判断。</p>
+<h2 id="2-origin">2. Origin</h2>
+<h3 id="jeff-team-soda">Jeff / Team Soda</h3>
+<ul>
+<li>Jeff 本科方向为数字媒体技术，研究生继续学习数字艺术；</li>
+<li>加入 Bilibili 的一个重要原因，是公司愿意让他以制作人身份尝试自己的游戏想法；</li>
+<li>Team Soda 在 Bilibili 内部形成；</li>
+<li>团队成员中既有应届毕业生，也有此前并非传统游戏行业从业者的人，随后在长期共同开发中成长。</li>
+</ul>
+<h3 id="_1">前作</h3>
+<ul>
+<li>2021：《蛇行武装》/ Snake Force，一款俯视角射击产品；</li>
+<li>2022：《碳酸危机》/ Soda Crisis，一款横版动作射击；</li>
+<li>《碳酸危机》口碑好于商业表现，Jeff 后来把它描述为“叫好不叫座”；</li>
+<li>这两次产品经历让核心团队在射击手感、卡通美术、工具、协作、迭代和上线流程上形成共同能力。</li>
+</ul>
+<p>Duckov 因此不是“第一次商业作品”，而是<strong>第三阶段产品</strong>。</p>
+<h2 id="3-capability">3. Capability</h2>
+<p>Team Soda 的优势不是单点天才，而是小组长期磨合后的复合能力：</p>
+<ul>
+<li>核心五人约三名策划 / 程序向、两名美术向；</li>
+<li>多人兼任多职，Jeff 自己同时承担制作、程序/技术美术等工作；</li>
+<li>团队成员已经共同工作约 4–6 年；</li>
+<li>前作让他们掌握射击体验、工具链和快速调参；</li>
+<li>Jeff 特别强调工具价值：前作经验让团队意识到好的工具可能带来数量级效率差异；</li>
+<li>团队还形成了争论和决策规则，减少小团队内部沟通损耗。</li>
+</ul>
+<p>这正是 C003 的典型结构：<strong>五人规模是长期能力压缩后的结果，而不是五个新手同时一人多能。</strong></p>
+<h2 id="4-runway">4. Runway</h2>
+<p>本案目前不能给出一个可审计的“开发预算”。</p>
+<p>已知的是：</p>
+<ul>
+<li>Team Soda 是 Bilibili 内部研发团队，不是五名创始人自掏积蓄的外部独立工作室；</li>
+<li>Bilibili 提供了工资、组织、发行及其他外围支持；</li>
+<li>Jeff 曾说前作《碳酸危机》团队高峰约十人，商业表现不足使成本压力变得明显；</li>
+<li>Duckov 阶段核心研发压缩到五人，并重新控制 scope；</li>
+<li>当前未发现足以审计 Duckov 月 burn、工资、市场费用、内部立项预算或利润分成的公开资料。</li>
+</ul>
+<p>因此本案不应被写成“低预算独立奇迹”；更准确的是：<strong>小核心研发降低了 fixed burn，但背后仍存在公司工资、组织容错与发行基础设施。</strong></p>
+<p>这也是它与真正 external indie 的第一道分界线：外部独立工作室必须自己解决“工资从哪里来、失败后谁承担损失、下一次融资靠什么”的问题；Team Soda 的公开材料目前显示这些问题至少有相当部分由 Bilibili corporate perimeter 承担。</p>
+<h2 id="5-production">5. Production</h2>
+<h3 id="_2">五人核心是真的</h3>
+<p>Jeff 多次确认 Duckov 的主要研发核心约五人。</p>
+<h3 id="_3">五人总生产边界不是真的</h3>
+<p>Jeff 也明确说明：作为 Bilibili 内部团队，这五人主要做设计/研发，发行、本地化以及其他工作由公司其他同事承担，并且这些同事对项目有实质贡献。</p>
+<p>因此 contributor boundary 应表示为：</p>
+<pre><code class="language-text">Team Soda：5 人核心 R&amp;D
+        +
+Bilibili：employer / publisher / localization / platform / marketing / business / production perimeter
+        +
+其他外部或共享服务（待进一步 credits audit）
+</code></pre>
+<p>这使 Duckov 成为一个非常有用的<strong>公司内部小核心商业产品</strong>比较样本：它既不是传统大团队，也不是 self-funded / externally published / self-published indie studio。</p>
+<h2 id="6-scope">6. Scope</h2>
+<h3 id="_4">第一次方向：移动端 —— 失败</h3>
+<p>Jeff 回顾，团队最初尝试过面向移动端的项目，但团队既缺少移动商业化经验，本身也不是核心手游玩家，这次尝试没有形成可行产品，团队发生调整。</p>
+<h3 id="pc-mobile">第二次方向：PC + mobile —— 再次收缩</h3>
+<p>后续曾计划同时做 PC 与 mobile，但随着制作推进，团队发现两个平台的玩家习惯、输入、节奏和产品结构差异过大。到 2024 年中期，团队主动砍掉 mobile，集中做 PC 单机。</p>
+<h3 id="_5">为什么不做多人</h3>
+<p>Jeff 在后续采访中直接给出一个非常重要的 production reason：</p>
+<blockquote>
+<p>对五人团队而言，网络多人并不是一个轻松可承担的技术与运营问题；把资源集中在单机 polish 更现实。</p>
+</blockquote>
+<p>因此“单机 extraction”不仅是市场创意，也是 scope engineering。</p>
+<h3 id="tarkov">如何重切 Tarkov</h3>
+<p>团队没有复制 EFT 的全部系统，而是做减法：</p>
+<p>保留：
+- 搜索 / 战利品价值；
+- 带出 / 死亡损失；
+- 基地成长；
+- 装备与长期 progression；
+- 任务 / 地图探索；
+- extraction 的紧张与收益判断。</p>
+<p>删除或显著弱化：
+- PvP；
+- 网络同步 / matchmaking / anti-cheat；
+- 大量硬核枪械与身体状态机制；
+- 极高信息门槛；
+- mobile 双平台适配。</p>
+<p>重新解释：
+- 俯视视角提高战场信息可读性；
+- PVE 把失败挫败从“被高手碾压”改成“系统风险”；
+- 鸭子美术把军武 extraction 的视觉距离拉远，使产品更轻、更容易传播。</p>
+<p>Jeff 把自己的策略概括为类似“<strong>一只脚站在舒适区，一只脚向外探索</strong>”：保留团队已经擅长的射击、卡通、易上手控制，同时把新的风险放在 extraction loop、成长、地图和内容结构上。</p>
+<h2 id="7-failure">7. Failure</h2>
+<p>Duckov 前至少有两层失败资本：</p>
+<h3 id="_6">《碳酸危机》商业表现不足</h3>
+<ul>
+<li>产品有口碑，但销量未达到团队希望；</li>
+<li>团队高峰约十人，成本变得更敏感；</li>
+<li>这逼迫后续项目更认真地处理团队规模、市场需求与生产效率。</li>
+</ul>
+<h3 id="duckov">Duckov 的早期移动方向失败</h3>
+<ul>
+<li>团队不熟悉 mobile commercialization；</li>
+<li>也缺少作为核心 mobile 玩家形成的产品直觉；</li>
+<li>早期方案没有走通，随后重组和改向。</li>
+</ul>
+<p>这两个失败都没有被“忘掉”，而是转成 Duckov 的设计边界：</p>
+<ul>
+<li>不再盲目扩核心团队；</li>
+<li>不再同时承担不熟悉的移动商业化；</li>
+<li>不复制网络 multiplayer 的高成本；</li>
+<li>把已有 shooter capability 作为安全底盘。</li>
+</ul>
+<p>但这里也必须保留 non-transfer boundary：<strong>公司内部项目可以由母体吸收前作失败、人员重组与下一轮工资 runway；真正独立团队若没有相同资本缓冲，失败的组织后果会更重。</strong></p>
+<h2 id="8-market">8. Market</h2>
+<h3 id="_7">需求发现</h3>
+<p>Jeff 是 Tarkov 重度玩家，团队很早就判断：存在一批喜欢“搜、带出、成长”的玩家，却被 PvP、硬核操作和高惩罚挡在 EFT 外。</p>
+<p>这不是事后营销文案，而是产品定位本身。</p>
+<h3 id="wishlist-launch">Wishlist / launch 前市场基础</h3>
+<p>Jeff 在 2025-10-14 左右的采访中披露，Steam wishlist 已约 45 万。这意味着 Duckov 上线前就不是一个“无人关注、全靠首日口碑突然爆炸”的产品。</p>
+<h3 id="_8">上线窗口</h3>
+<p>Jeff 说团队会主动观察 9–11 月大型作品档期，最终选择 10 月中旬，一个原因就是避开更拥挤的 AAA 节点。</p>
+<h3 id="bilibili-perimeter">Bilibili perimeter：不仅是发行商名称</h3>
+<p>Bilibili 是 Steam publisher，也承担更多市场、发行与本地化支持；公开报道还直接把项目描述为 Bilibili “自研自发”或“B站旗下 Team Soda”产品。Bilibili 自身同时拥有内容平台、UP 主生态、线下展会与游戏发行资源，因此 Duckov 的 go-to-market 结构与一个需要从零争取媒体/KOL/平台曝光的外部独立工作室不同。</p>
+<p>这里要避免另一个过度结论：<strong>目前没有公开审计能把 45 万 wishlist 或 300 万销量按 Bilibili 站内流量、Steam discovery、外部主播、自然口碑逐项归因。</strong> 所以可以确认的是“结构性依赖与资源可得性不同”，而不是武断宣称某个百分比销量由 B 站流量直接造成。</p>
+<p>因此“零营销五人团队”不是可接受结论；同样，“这是一个可直接复制给没有平台母公司的独立团队的发行案例”也不成立。</p>
+<h3 id="_9">结果</h3>
+<ul>
+<li>2025-10-16 正式发售；</li>
+<li>首周销量已经大幅超过制作人原先约 30 万“可以”、50 万“很好”的预期；</li>
+<li>官方账号在 2025-11-08 宣布销量突破 300 万。</li>
+</ul>
+<p>这是明确的右尾结果：团队做了需求判断、wishlist、档期选择和产品差异化，但<strong>三百万级爆发远超内部基准</strong>。</p>
+<h2 id="9-environment">9. Environment</h2>
+<h3 id="bilibili">Bilibili 内部小团队模型</h3>
+<p>本案最值得比较的是 corporate-owned small-team cell：</p>
+<ul>
+<li>团队获得公司工资和基本组织稳定性；</li>
+<li>核心 R&amp;D 可以保持五人；</li>
+<li>出版、localization、平台、商务等外围不用全部内建；</li>
+<li>同时小团队仍能保持较强产品自主性和快速决策。</li>
+</ul>
+<p>这与真正 self-funded OPC、publisher-financed external indie、self-publishing micro-studio、Roblox platform-native creator 都不同。</p>
+<h3 id="_10">通用工具与平台</h3>
+<ul>
+<li>游戏使用 Unity；</li>
+<li>Steam 提供全球数字发行、wishlist、Workshop；</li>
+<li>Workshop 在产品设计时就被考虑，后续形成大量 mods；</li>
+<li>这类基础设施让五人核心不必自行建立所有内容扩展渠道。</li>
+</ul>
+<h2 id="10-luck">10. Luck</h2>
+<p>至少有三层幸运：</p>
+<ol>
+<li><strong>品类窗口</strong>：项目启动时 extraction 尚未像 2024–2025 那样拥挤，发售时却正处于更高关注窗口；Jeff 自己承认这给了帮助。</li>
+<li><strong>视觉 identity</strong>：鸭子并非从第一天就是一份精准市场研究结果，而是在美术探索里逐渐出现，最后成为传播识别资产。</li>
+<li><strong>右尾传播</strong>：官方三百万销量远超团队内部 30–50 万级预期。</li>
+</ol>
+<p>因此不能把结果反推成“他们精确预测了三百万市场”。</p>
+<h2 id="11-verdict">11. Verdict</h2>
+<h3 id="indie-eligibility">INDIE ELIGIBILITY</h3>
+<ul>
+<li><strong>生产规模：小团队 / indie-like。</strong> 五人核心、多人多职、强 scope discipline。</li>
+<li><strong>创作自主：较高，但处于公司内部。</strong> 公开采访显示 Bilibili 给 Jeff 以制作人身份做自己项目的空间。</li>
+<li><strong>资本 / 雇佣独立：不满足。</strong> Team Soda 在 Bilibili 内部形成，工资与组织 runway 属于公司体系。</li>
+<li><strong>发行独立：不满足。</strong> Bilibili 是正式 publisher，并承担外围职能。</li>
+<li><strong>市场接入独立：不满足可比性要求。</strong> 项目能使用 Bilibili 自有内容/社区/发行生态；具体贡献比例未知，但资源结构与外部独立团队显著不同。</li>
+</ul>
+<p><strong>结论：保留 CASE 编号，但从“核心独立游戏英雄案例”降为 NON-INDIE COMPARATOR。</strong> 它对小团队生产、scope engineering 和品类翻译仍然有高研究价值；对融资、发行独立性与“如何摆脱平台地主”问题则不能作为正例。</p>
+<h3 id="strongly-supported">STRONGLY SUPPORTED</h3>
+<ul>
+<li>Duckov 的核心研发确实约五人；</li>
+<li>这五人并非新组成，已有 4–6 年合作和多个前作；</li>
+<li>Team Soda 在 Bilibili 内部形成，Bilibili 同时是正式 publisher；</li>
+<li>Bilibili 的发行、本地化及其他公司外围构成真实 production boundary；</li>
+<li>Duckov 经历过移动方向失败、PC/mobile 双平台收缩和多人复杂度主动放弃；</li>
+<li>单机/PVE/俯视角并不只是风格选择，也是把 extraction 成本函数重写到五人可承担范围；</li>
+<li>launch 前已经存在约 45 万 wishlist，不符合“零市场基础突然爆红”叙事；</li>
+<li>300 万官方销量显著超出团队预期，是右尾结果。</li>
+</ul>
+<h3 id="supported-with-boundary">SUPPORTED WITH BOUNDARY</h3>
+<ul>
+<li>《碳酸危机》的商业失利推动团队缩小核心规模和强化工具/效率意识；</li>
+<li>extraction 热潮帮助了 Duckov，但项目并非热潮成熟后才临时追风立项；</li>
+<li>Bilibili 内部小团队模式降低了固定外围成本，但公开资料不足以量化其真实 subsidy；</li>
+<li>Bilibili 内容与社区生态是可用的结构性市场资源，但其对 wishlist / sales 的精确因果贡献仍 UNKNOWN。</li>
+</ul>
+<h3 id="not-supported-refuted-as-framed">NOT SUPPORTED / REFUTED AS FRAMED</h3>
+<ul>
+<li>“五个人完成全部开发、发行、营销、本地化”——不成立；</li>
+<li>“五个新手两年突然做出三百万销量游戏”——不成立；</li>
+<li>“只是把 Tarkov 做成 2D”——过度简化，忽略 multiplayer/mobile/hardcore mechanics 的主动删除和产品重新定义；</li>
+<li>“零营销纯靠口碑”——不成立或至少严重误导，launch 前已有 45 万 wishlist 和 Bilibili publisher perimeter；</li>
+<li>“这是一个真正意义上的独立工作室发行案例”——不成立。</li>
+</ul>
+<h2 id="12-transfer">12. Transfer</h2>
+<ol>
+<li><strong>把核心团队人数和 production boundary 分开算</strong>：小核心完全可以依赖共享发行/本地化/平台职能，但预算和组织判断必须把外围算进去。</li>
+<li><strong>前作的商业失败也可以购买能力</strong>：工具、合作规则、已验证 shooter feel 和对 burn 的认识都能成为下一作资产。</li>
+<li><strong>一只脚在舒适区，一只脚做新风险</strong>：不要同时重新发明美术、控制、网络、商业模式、核心 loop 和平台。</li>
+<li><strong>用删复杂度来创造新市场，而不是只缩内容量</strong>：砍 multiplayer、mobile 和硬核模拟，反而形成“单机轻量 extraction”独立定位。</li>
+<li><strong>市场定位应直接进入设计</strong>：目标不是“做 Tarkov clone”，而是服务那些喜欢 Tarkov 的成长循环、却拒绝其 PvP / 高惩罚的人。</li>
+<li><strong>launch date 是生产决策的一部分</strong>：竞品档期、wishlist readiness 和最后内容收敛共同决定何时交付。</li>
+<li><strong>对五人团队，工具本身就是 headcount multiplier</strong>：前作形成的 editor/tooling/process 可以比继续加人更便宜。</li>
+<li><strong>把“独立生产力”与“独立发行能力”拆开</strong>：Duckov 可以证明五人 R&amp;D 能承担一个高完成度商业产品，但不能证明一个外部五人工作室能在没有公司工资、发行与平台流量外围的情况下复制同一结果。</li>
+</ol>
+<h2 id="13-non-transfer">13. Non-transfer</h2>
+<ul>
+<li>Bilibili 提供的工资、publisher、平台与本地化外围不是普通五人 garage team 自动拥有的；</li>
+<li>Bilibili 自身还是内容平台与流量入口，这一市场结构不能作为外部独立团队的默认条件；</li>
+<li>五人已有多年共同工作历史，不能把“核心五人”复制成“临时找五个通才”；</li>
+<li>Jeff 本人对 Tarkov 的深度玩家经验是产品判断资产；</li>
+<li>鸭子 identity 的传播力与 extraction 市场窗口都包含不可计划的运气；</li>
+<li>三百万销量是右尾结果，不应成为类似项目的 base-case forecast；</li>
+<li>公司内部创新 cell 的自主度、考核、IP/收益分配和失败容忍度仍不透明。</li>
+</ul>
+<h2 id="14-evidence-index">14. Evidence Index</h2>
+<ul>
+<li>E001 — Blue Whale / Jeff direct interview：Bilibili 入职与 Team Soda 起源；前作；移动方向失败；五人结构；工具/合作经验；45 万 wishlist；extracton 热潮边界。</li>
+<li>E002 — Observer / Sina / Jeff direct interview：单机 extraction 需求判断、硬核机制删减、发售档期、销量预期，以及“5 人研发 + Bilibili 其他同事外围”的 contributor boundary。</li>
+<li>E003 — Inven Global / Jeff direct interview：五人团队、多人网络成本、单机选择、鸭子视觉 identity、Workshop / mod strategy。</li>
+<li>E004 — Game That Matters / TapTap / Jeff direct interview：核心五人已合作 4–6 年、多职能结构、约 22 个月集中开发期。</li>
+<li>E005 — Epic Games Store / Jeff interview：Bilibili 内部团队、Snake Force / Soda Crisis 前史与产品连续性。</li>
+<li>E006 — Steam / SteamDB：2025-10-16 release；Team Soda developer / bilibili publisher；single-player / Workshop；Unity / platform facts。</li>
+<li>E007 — Escape from Duckov official Bilibili account：2025-11-08 官方宣布销量突破 300 万。</li>
+<li>E008 — Bilibili / Game Daily / mainstream business coverage：B站旗下、自研自发及内容—游戏—社区 ecosystem 的结构性 market-access 证据；不把它夸大成可审计的销量归因。</li>
+</ul>
+<h2 id="15-open-questions">15. Open Questions</h2>
+<ol>
+<li>Team Soda / Bilibili 的 exact internal budget、工资、奖金、IP ownership 与 revenue share 是什么？</li>
+<li>完整 credits audit：除了五人核心，Bilibili publisher/localization/QA/marketing 各投入多少人月？</li>
+<li>《碳酸危机》的真实开发成本、销量、团队高峰人数和“叫好不叫座”在内部财务上到底意味着什么？</li>
+<li>Duckov 早期 mobile prototype 与最终 PC 版本之间有多少代码、资产、系统复用？</li>
+<li>45 万 wishlist 是如何积累的：demo、Steam festivals、Bilibili 内容、KOL、自然传播各占多大作用？</li>
+<li>需要建立 2025-10-16 至 11-08 的官方销量节点，区分 50 万 / 100 万 / 200 万 / 300 万公告，而不依赖第三方估算。</li>
+<li>Steam Workshop 的 mods 对销量、留存和长尾到底贡献多少？当前只能确认团队从一开始把 modding 当成产品能力。</li>
+<li>作为 Bilibili 内部小团队，前两次失败到 Duckov 成功之间的立项治理、失败容忍与内部复盘机制是什么？</li>
+<li>Bilibili 自有流量、BW/站内内容、外部主播、Steam discovery 与海外自然传播各自对 wishlist 和销量的贡献是多少？当前没有可靠 attribution 数据。</li>
+</ol>
+<h2 id="creator-life-decision-audit">Creator Life / Decision Audit</h2>
+<ul>
+<li><strong>Audit status:</strong> PARTIAL / ORGANIZATION-LEVEL</li>
+<li><strong>Life stage:</strong> Jeff / Team Soda 的完整年龄、婚育与 household 阶段 <code>UNKNOWN</code>；成员已有 4–6 年共同开发与多款前作经验。</li>
+<li><strong>Household:</strong> <code>UNKNOWN</code>；本案核心 runway 由 Bilibili 雇佣体系提供，不能用公司工资替代个人家庭审计。</li>
+<li><strong>Runway:</strong> Bilibili employer salary + corporate production / publishing perimeter；Duckov 核心 R&amp;D 约五人，但发行、本地化、市场与商务外围由公司承担。</li>
+<li><strong>Household burn:</strong> <code>UNKNOWN</code></li>
+<li><strong>Exit / recovery:</strong> <code>UNKNOWN</code>；公司内部雇佣降低 founder 个人现金风险，但离开公司后的个人回撤能力未核。</li>
+<li><strong>Capability vector:</strong> 长期磨合 shooter team；program/design + art 多职能；前作积累射击手感、工具与小组协作；Jeff 兼 production / programming / technical art。</li>
+<li><strong>Problem ownership:</strong> <strong>HIGH at product level / LOW capital independence</strong> — 团队有较强产品自主，但工资、IP、publisher 与 market perimeter 处于 Bilibili 公司体系。</li>
+<li><strong>Validation architecture:</strong> Snake Force / Soda Crisis 前作 → mobile attempt failure → PC/mobile contraction → single-player extraction thesis → wishlist ~450k → launch → right-tail sales。</li>
+<li><strong>Reality adjudication:</strong> <strong>STRONG</strong> — 前作商业表现、移动方向失败、多人/双平台成本判断都进入下一作 scope；但公司内部 kill/greenlight 机制仍不透明。</li>
+<li><strong>Capability capture risk:</strong> <strong>LOW / POSITIVE FIT</strong> — 团队保留擅长的射击/卡通/工具，把风险集中到 extraction loop；没有证据显示最强能力吸走 product closure。</li>
+<li><strong>Market sufficiency / legibility:</strong> <strong>STRONG</strong> — “单机轻量 extraction + 鸭子视觉”可读性高，launch 前 wishlist 已形成显著需求；Bilibili perimeter 是不可忽略的 market-access 条件。</li>
+<li><strong>Capability scaling:</strong> strong through 5-person R&amp;D core + corporate publisher/localization/market periphery；不等同 external indie scaling。</li>
+<li><strong>Major unknowns:</strong> founders household economics、内部预算、利润/IP安排、Bilibili market contribution、personal exit options。</li>
+</ul><div class="crumbs"><a href="/heroes-portal/">书阁</a> / cases/CASE-024-escape-from-duckov.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>《独立游戏英雄传说》｜第一次来，先从这里读 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl class="on"" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#_2" class="t2">我现在根本不知道自己以后要做什么</a><a href="#_3" class="t2">我喜欢游戏、技术、写作或别的东西，但不知道这算不算“正事”</a><a href="#_4" class="t2">我从来没做过任何作品，甚至不知道兴趣算不算一个值得追的目标</a><a href="#_5" class="t2">我喜欢游戏，但家里不让我玩，也不相信做游戏是正经工作</a><a href="#_6" class="t2">家人后来终于认可了我的选择，过去的冲突就算结束了吗？</a><a href="#_7" class="t2">我很想辞职做自己的东西，但怕一押就是几年</a><a href="#_8" class="t2">我没有很多钱，甚至必须一边活着一边做</a><a href="#_9" class="t2">我想做的游戏已经有方向，但团队缺关键能力</a><a href="#_10" class="t2">我已经失败很多次了，是不是说明我不适合做这件事</a><a href="#_11" class="t2">我总觉得别人有了新技术就无所不能，而自己是不是已经晚了</a><a href="#_12" class="t2">我做出来的东西明明不差，但不知道什么时候让市场进来</a><a href="#_13" class="t2">我已经成功过一次，为什么事情反而越来越复杂</a><a href="#_16" class="t2">关于“能不能照着做”</a></aside><article class="doc"><div class="col"><h1 id="_1">《独立游戏英雄传说》｜第一次来，先从这里读</h1>
+<p>© 2026 洪荒行者。All Rights Reserved.</p>
+<p class="dc">这套书从一个现实的人生问题出发：</p>
+<blockquote>
+<p><strong>当你没有标准答案、资源有限、也不知道自己最后能不能成功时，一个人究竟怎样找到值得做的事，并一步步把自己变成能做成它的人？</strong></p>
+</blockquote>
+<p>通过独立游戏作者的人生，你能看见谋生、学习、试错和作品被市场拒绝后的变化，也能读到成功之前的积累，以及没有完成的项目。公开故事能呈现这些路径，却不能告诉你它们在所有开发者中有多常见。</p>
+<p>想读故事，可以从下面选一个和你现在最接近的问题；不用先熟悉研究编号。</p>
+<p>如果你更愿意像读一本书一样顺序读，目前已经有七篇跨人物章节（第六篇是跨篇章专题）：</p>
+<ol>
+<li><a href="/heroes-portal/book/chapters/01-goals-are-made-not-found.html">目标不是先想清楚的</a></li>
+<li><a href="/heroes-portal/book/chapters/02-buy-time-before-betting-your-life.html">先买几个月试错</a></li>
+<li><a href="/heroes-portal/book/chapters/03-failure-only-matters-if-something-survives.html">失败不是资产</a></li>
+<li><a href="/heroes-portal/book/chapters/04-technology-will-not-choose-for-you.html">技术时代不会替你做选择</a></li>
+<li><a href="/heroes-portal/book/chapters/05-market-interface-is-production.html">市场不是最后一步</a></li>
+<li><a href="/heroes-portal/book/chapters/06-you-do-not-need-a-standard-studio.html">你缺的真是一支团队吗？</a></li>
+<li><a href="/heroes-portal/book/chapters/07-success-buys-the-next-question.html">第一次成功以后</a></li>
+</ol>
+<p>完整章节目录见 <a href="/heroes-portal/book/chapters/README.html">Chapters</a>。</p>
+<p>如果你更关心“<strong>像我这种处境，现在下一步应该先动什么？</strong>”，优先进入：</p>
+<blockquote>
+<p><strong><a href="/heroes-portal/book/DECISION-ROUTER.html">按你的处境进入｜先判断你现在缺的到底是什么</a></strong></p>
+</blockquote>
+<p>这个入口先问三件事：
+- 你已经会做什么；
+- 生活和家庭负担允许你试多久，退出后有什么退路；
+- 这次该调整项目、补能力、找伙伴、筹资金，还是改变投入程度。</p>
+<p>如果你已经确定自己属于某种具体的人生转型处境，还可以进入 <a href="/heroes-portal/book/life-routes/README.html">Life Risk Routes</a>。例如：<a href="/heroes-portal/book/life-routes/big-company-veteran-to-author-001.html">LR-001 — 名校 / 大厂高绩效者转作者型独立</a> 专门研究能力迁移、旧评价函数、家庭与退出约束。</p>
+<p>如果你只是想找“<strong>和我能力结构相近的人先看谁</strong>”，再进入：</p>
+<blockquote>
+<p><strong><a href="/heroes-portal/book/READER-ARCHETYPES.html">按主创者能力进入｜你手里已经有什么？</a></strong></p>
+</blockquote>
+<p>技术美术、程序、策划与评论、游戏修改与服务器运营、大厂转作者、独自承担多种工作，都能找到不同的历史对照。职业相近也要继续比较实际能力与处境。</p>
+<hr />
+<h2 id="_2">我现在根本不知道自己以后要做什么</h2>
+<p>先读跨人物章节：</p>
+<ul>
+<li><a href="/heroes-portal/book/chapters/01-goals-are-made-not-found.html">目标不是先想清楚的：先做一点，现实才开始回答你是谁</a></li>
+</ul>
+<p>再读人物全文：</p>
+<ul>
+<li><a href="/heroes-portal/book/profiles/early-id-doom.html">early id / DOOM</a></li>
+<li><a href="/heroes-portal/book/profiles/gunpoint.html">Gunpoint / Tom Francis</a></li>
+</ul>
+<p>Romero、Carmack和Tom Francis走过不同的学习与职业路径。读这两篇，可以追问：玩、拆解、写作、制作、发表和外部反馈，怎样让目标逐渐具体？这些行动不构成人人必经的顺序，也不能从后来成功倒推出他们从小就知道终点。</p>
+<p>本节关心的是：人在做过一些事情、看见现实回应之后，怎样判断是否值得投入更多人生。</p>
+<hr />
+<h2 id="_3">我喜欢游戏、技术、写作或别的东西，但不知道这算不算“正事”</h2>
+<p>先读：</p>
+<ul>
+<li><a href="/heroes-portal/book/profiles/early-id-doom.html">early id / DOOM</a></li>
+<li><a href="/heroes-portal/book/profiles/gunpoint.html">Gunpoint / Tom Francis</a></li>
+</ul>
+<p><strong>兴趣怎样转成能被检验的作品？</strong> 下面是一条可能的路径：</p>
+<pre><code class="language-text">喜欢
+→ 比较
+→ 拆解
+→ 修改
+→ 做出东西
+→ 给陌生人看
+→ 被现实反馈
+→ 再修改
+</code></pre>
+<p>爱好可以只是娱乐。若开始比较、拆解和制作，再拿作品接受外部反馈，它就可能逐渐带来能力、作品集、判断力、合作者或职业入口；这条转换并不保证成功。</p>
+<hr />
+<h2 id="_4">我从来没做过任何作品，甚至不知道兴趣算不算一个值得追的目标</h2>
+<p>那不意味着你需要立刻创业，或者必须证明自己被教育耽误了。也可能是过去缺少可以自己安排的时间、设备、陪你练习的人，或者你确实更喜欢当观众而不是作者。</p>
+<p>先读<a href="/heroes-portal/book/chapters/01-goals-are-made-not-found.html">第一章：目标怎样在作品和反馈中形成</a>。这里的 Romero、梁其伟、Tom Francis 并不是规定你该模仿的成功范本；他们说明的是，兴趣如果从没获得工具、尝试和回应，便很难变成一个可以选择的方向。想看更系统的教育/家庭研究与尚未解决的分母问题，可进入<a href="/heroes-portal/country-studies/china/037-family-school-agency-risk-hero-nondeparture.html">中国037</a>。</p>
+<p>对还没开始的人，下一步可能只是一项不公开的小实验：选一个自己在乎的问题，做一点东西，看看实际结果，并允许自己决定不继续。<strong>第一次尝试不需要承担整个人生的回报义务。</strong></p>
+<hr />
+<h2 id="_5">我喜欢游戏，但家里不让我玩，也不相信做游戏是正经工作</h2>
+<p>可以从这几段经历读起：</p>
+<ul>
+<li><a href="/heroes-portal/book/profiles/early-id-doom.html">early id / DOOM：Romero 的家庭冲突、继父买电脑与职业形成</a>；</li>
+<li><a href="/heroes-portal/book/chapters/01-goals-are-made-not-found.html">第一章：目标不是先想清楚的</a>。</li>
+<li><a href="/heroes-portal/book/research-notes/family-gate-china-near-miss-liang-qiwei-030.html">梁其伟与《雨血》</a> — 母亲保存了留存的童年画稿；2007年挂科、失去保研资格后，家庭压力又使制作暂停一年，2008年重新开工。研究也保留部分早年画作被毁的经历。</li>
+</ul>
+<p>有些家庭反对的是<strong>玩游戏占用学习时间</strong>，却欢迎学习编程、画画和写作；有些家庭允许游戏和作品，但不愿让你承担无保障的职业风险；也有家庭不理解，却尊重成年人的选择。它们对应完全不同的问题，不能只归结为“家长不支持”。</p>
+<p>能否接触作品、亲自动手、公开获得反馈，以及成年后能否选择职业，需要分别看。和家人发生冲突，不能证明作品会成功；准备转行时，工资、存款、住所、照护和再就业退路仍要算清楚。成年人仍有权决定自己的生活，即使作品没有成功、家人也未认可。</p>
+<p>想进一步研究家庭控制如何让一部分潜在创作者<strong>还没入行便从样本里消失</strong>，进入 <a href="/heroes-portal/book/research-notes/family-gates-game-creator-us-china-029.html">中美代际与家庭门控研究</a>。那里也保留支持/失败的反例和历史时效限制。</p>
+<hr />
+<h2 id="_6">家人后来终于认可了我的选择，过去的冲突就算结束了吗？</h2>
+<p><a href="/heroes-portal/book/profiles/early-id-doom.html">early id人物传记</a> 保留了一条家庭变化线。按Kushner多年后写成的《DOOM启世录》，Romero的继父曾因他玩街机施暴；到1993年前后，在游戏事业已有成绩时，继父承认早年的职业判断错了，1999年又在外界争论中维护他的作品。Carmack母亲后来也会玩《Commander Keen》。这些是书中记述，不能当作同期录音。</p>
+<p><strong>职业判断的道歉，不等于过去的伤害已经获得完整道歉。</strong> Romero在2025年采访中说，自己会和孩子一起玩游戏、采用不同的养育方式；这是他的自述，也不能代替孩子对关系的评价。想沿这条线继续读，可看<a href="/heroes-portal/book/research-notes/doom-intergenerational-reconciliation-032.html">家庭代际和解研究032</a>，其中梁其伟的对照只记录已知态度变化，没有补写最终和解。</p>
+<p>另外两条路径没有这样的结尾：2011年Croshaw已有游戏评论声望，却说父母仍不认可他的工作；Keith Judge得到配偶工资与储蓄支持，独立项目仍未完成，后来回到专业就业。两例见<a href="/heroes-portal/book/research-notes/family-acceptance-non-success-countercases-035.html">研究035</a>。认可、实际出资和作品完成，会各自发生变化。</p>
+<p>李远扬2017年说，家人从管束他玩游戏，转而支持他制作游戏。到2019年，《纽扣兄弟》经历数次发行仍未回本，他说家里没有施加太大压力。这里的家庭态度由他转述，不能写成家属共同受访的结论，也没有证据说明他们承诺无限填补亏损。详见<a href="/heroes-portal/book/research-notes/family-support-after-commercial-failure-li-yuanyang-berardi-036.html">《项目没有回本，家人也没有收回尊重》036</a>。</p>
+<p>美国开发者Gianfranco Berardi则在2010年辞职，约2012年恢复受雇工作。2013年写反思时，他转述妻子对那两年尝试的肯定。到首次全职独立十五年后的2025年，他仍未能第二次全职独立，却继续兼职开发、发售小作品，每年为自己的游戏留出一天“Indie Day”。重返工作以后，创作并没有从生活里消失；2013年的配偶支持也不能自动延伸为2025年同意再次辞职。</p>
+<p>新加坡Joysteak的认可变化发生得更早。制作人2019年6月说，父母看见他与伙伴长期在家工作，逐渐支持制作；当时已有专业奖项和发行合作，游戏尚未正式发售。发售后工资仍不足的说法，目前仅见2019年9月采访的搜索索引摘录，正文尚未完整读取，不能据此判断后来的总收入。Joysteak与Berardi的后续详见<a href="/heroes-portal/book/research-notes/family-legitimacy-visible-labor-and-fifteen-year-exit-037.html">研究037</a>。这些公开经历让人看见获准创作、承担账单和继续谋生的不同安排，不能回答多少家庭会如此选择。</p>
+<hr />
+<h2 id="_7">我很想辞职做自己的东西，但怕一押就是几年</h2>
+<p>先读跨人物章节：</p>
+<ul>
+<li><a href="/heroes-portal/book/chapters/02-buy-time-before-betting-your-life.html">先买几个月试错：做自己的事之前，先解决谁替你付时间</a></li>
+</ul>
+<p>再读人物全文：</p>
+<ul>
+<li><a href="/heroes-portal/book/profiles/ftl.html">FTL</a></li>
+<li><a href="/heroes-portal/book/profiles/early-id-doom.html">early id / DOOM</a></li>
+</ul>
+<p>Kickstarter之前，FTL的两位创作者已有职业经验，先用储蓄留出几个月做小项目，再将原型送去比赛；正面反馈促使他们尝试商业产品。early id则在Softdisk工作期间利用夜晚和周末制作《Commander Keen》，收入让全职独立成为可行选择，离职后仍有履约义务。</p>
+<p>两组人承担风险的方式不同，却都让下一步承诺有了具体依据。阅读时可以继续问：哪些问题能先用较小的代价试出来？</p>
+<blockquote>
+<p><strong>不要为了证明决心，主动把一个本来可以便宜失败的问题变成昂贵失败。</strong></p>
+</blockquote>
+<hr />
+<h2 id="_8">我没有很多钱，甚至必须一边活着一边做</h2>
+<p>先读跨人物章节：</p>
+<ul>
+<li><a href="/heroes-portal/book/chapters/02-buy-time-before-betting-your-life.html">先买几个月试错</a></li>
+</ul>
+<p>再读人物全文：</p>
+<ul>
+<li><a href="/heroes-portal/book/profiles/kenshi.html">Kenshi</a></li>
+<li><a href="/heroes-portal/book/profiles/rocket-league.html">Rocket League</a></li>
+<li><a href="/heroes-portal/book/profiles/ftl.html">FTL</a></li>
+</ul>
+<p>三条路线完全不同：</p>
+<ul>
+<li>Chris Hunt 用夜班工资购买个人开发时间；</li>
+<li>Psyonix 为其他工作室承接合同，支付公司账单并保留一部分原创制作；</li>
+<li>FTL 两位创作者先用储蓄购买一个有限实验窗口。</li>
+</ul>
+<p>工资、客户合同和储蓄，给三者提供了不同的生存安排。比较这些故事时，要问清楚：<strong>谁在支付继续试错的时间，能付多久？</strong> 玩家收入也可能在后续改变这个安排，只问有没有一次融资，无法说明项目怎样持续。</p>
+<hr />
+<h2 id="_9">我想做的游戏已经有方向，但团队缺关键能力</h2>
+<p>你现在可能正在犹豫：自己学、先删内容、找外包、招一个专业负责人、给合伙人股权，还是融资？</p>
+<p><strong>先别把“有清楚的作者愿景”误当成“玩家已经验证了它”。</strong></p>
+<p>先读人物故事与代价：<a href="/heroes-portal/book/chapters/06-you-do-not-need-a-standard-studio.html">你缺的真是一支团队吗？有时应该换掉的，是游戏的做法</a>。</p>
+<p>想先跟随创始人的完整生活和职业故事，可读 <a href="/heroes-portal/book/profiles/nomada-gris-neva.html">Nomada / GRIS</a> 与 <a href="/heroes-portal/book/profiles/david-wehle-first-tree.html">David Wehle / The First Tree</a>。</p>
+<p>需要真正决定缩项目、学习、外包、合伙、招聘或融资时，再进入 <a href="/heroes-portal/book/life-routes/project-thesis-capability-gap-004.html">LR-004：作品方向已经明确，但团队做不出来</a>。</p>
+<p>这里用《Gunpoint》《The First Tree》《GRIS》《The Witness》《Outer Wilds》《The Talos Principle》与《Playdead》《The Magic Circle》《Limit Theory》等正反生产史，回答同一个问题：<strong>什么证据值得付哪一级承诺成本？</strong></p>
+<hr />
+<p>另有两段更不浪漫的制作经历：<a href="/heroes-portal/book/research-notes/ordinary-indie-household-runway-two-hits-selection-039.html">加拿大Giguère首两作昂贵学费与越南SOGA夫妻二次尝试</a>。前者有13年程序员经历与家人朋友支持，2017年两部作品发售后仍只收回相对多年制作投入很少的钱；后者据2025回忆，母亲在首作失败后鼓励继续，妻子是第二作美术、文本和社区共同作者，二作后来进入EA并获得初步销量。<strong>第二个故事因为后来成功才被我们看到，不可冒充一般失败者。</strong></p>
+<p>若想知道一个公开尝试到底能观察多少普通人、为什么大量没入场的人仍不可见，以及GGJ旧作品即将受到哪些档案政策影响，读<a href="/heroes-portal/book/research-notes/ggj-2026-survey-and-archive-denominator-038.html">038 参与者／作品／自愿调查答卷的分母审计</a>。</p>
+<h2 id="_10">我已经失败很多次了，是不是说明我不适合做这件事</h2>
+<p>先读跨人物章节：</p>
+<ul>
+<li><a href="/heroes-portal/book/chapters/03-failure-only-matters-if-something-survives.html">失败不是资产：只有留下下一次还能使用的东西，失败才开始值钱</a></li>
+</ul>
+<p>再读人物全文：</p>
+<ul>
+<li><a href="/heroes-portal/book/profiles/bills-must-be-paid.html">Bills Must Be Paid</a></li>
+<li><a href="/heroes-portal/book/profiles/rocket-league.html">Rocket League</a></li>
+<li><a href="/heroes-portal/book/profiles/josh-parnell-limit-theory.html">Josh Parnell / Limit Theory</a> — 项目取消不等于能力消失，也不能将技术残值当作交付。</li>
+<li><a href="/heroes-portal/book/profiles/question-magic-circle-blackout-club.html">Question / The Magic Circle → The Blackout Club</a> — 首作销售不够，工作室却没有消失；下一作为什么改变市场入口。</li>
+</ul>
+<p><strong>失败以后留下了什么，下一次还能不能使用？</strong> 可以检查：</p>
+<ul>
+<li>更快的制作能力；</li>
+<li>一个工具；</li>
+<li>一段代码；</li>
+<li>对某个平台的知识；</li>
+<li>对某种用户反应的判断；</li>
+<li>一个以后还能重新做的问题；</li>
+<li>也可能什么都没留下。</li>
+</ul>
+<p>据Rike团队复盘，《Bills Must Be Paid》本作制作约七个月；两人从2019年开始的约七年共同实践，还包括原型、未成功的作品、发行商合同与平台学习。把这些经历放回去，才能区分本作制作时间和能力积累时间。《Rocket League》的团队则早在2008年就发售过“汽车踢球”的前作；第一次没有得到后来的商业结果，玩法与团队学习仍进入了后续迭代。这些前史有可使用的部分，不等于每次失败都会留下资产，更不能保证下一作成功。</p>
+<p>这些毕竟都是后来被媒体看见的人物。想看没有成名、只做过小作品的公开经验，还可以阅读 <a href="/heroes-portal/book/research-notes/public-unfeatured-week-sauce-apr-2022-cohort-031.html">Week Sauce 2022.04 的18个普通参赛项目</a>，以及 <a href="/heroes-portal/book/research-notes/week-sauce-2022-public-creator-followup-033.html">2026年18个投稿账号的公开后续回访</a>：有人仅做了两天，有人因生活事务来不及改 Bug，有人明确不知道会不会继续，有人后来真的做出了更完整版本。<strong>这18个项目不是独立游戏行业成功率的统计分母。</strong></p>
+<hr />
+<h2 id="_11">我总觉得别人有了新技术就无所不能，而自己是不是已经晚了</h2>
+<p>先读跨人物章节：</p>
+<ul>
+<li><a href="/heroes-portal/book/chapters/04-technology-will-not-choose-for-you.html">技术时代不会替你做选择：有人用现成工具，有人重组平台，有人自己造出窗口</a></li>
+</ul>
+<p>再深入：</p>
+<ul>
+<li><a href="/heroes-portal/book/profiles/early-id-doom.html">early id / DOOM</a></li>
+<li><a href="/heroes-portal/book/profiles/gunpoint.html">Gunpoint / Tom Francis</a></li>
+<li><a href="/heroes-portal/cases/CASE-032-pubg-brendan-greene.html">PLAYERUNKNOWN / Brendan Greene 研究档案</a></li>
+<li><a href="/heroes-portal/cross-industry/industrial-revolutions/README.html">工业革命比较实验室</a></li>
+</ul>
+<p>回顾early id时，Carmack谈到团队一边推进渲染与引擎技术，一边围绕实际做到的能力重新设计游戏；想要的体验也会反过来推动技术。DOOM的技术窗口有他们主动创造的部分。读到这里，可以区分三种技术位置：</p>
+<ul>
+<li>有人继承已经扩散的工具；</li>
+<li>有人把已有技术重新组合成新用途；</li>
+<li>有人自己把技术边界向前推，给团队创造新窗口。</li>
+</ul>
+<p>判断自己是否错过机会时，可以问：<strong>它具体把什么变便宜了？谁真正能用？谁看见了新的可能？谁甚至亲手创造了那个可能？</strong></p>
+<hr />
+<h2 id="_12">我做出来的东西明明不差，但不知道什么时候让市场进来</h2>
+<p>先读：</p>
+<ul>
+<li><a href="/heroes-portal/book/chapters/05-market-interface-is-production.html">市场不是最后一步：有时玩家、钱和反馈在“做完之前”就已经进入生产系统</a></li>
+</ul>
+<p>再深入：
+- <a href="/heroes-portal/cases/CASE-014-minecraft.html">Minecraft</a>
+- <a href="/heroes-portal/cases/CASE-035-factorio-wube.html">Factorio</a>
+- <a href="/heroes-portal/book/profiles/bills-must-be-paid.html">Bills Must Be Paid</a>
+- <a href="/heroes-portal/cases/CASE-026-brigador.html">Brigador</a></p>
+<p>这一组还可加入 <a href="/heroes-portal/book/profiles/question-magic-circle-blackout-club.html">Question / The Magic Circle</a>：当期有行业声望与 IGF 提名，也不等于品类易于理解或收入足以支持组织。</p>
+<blockquote>
+<p><strong>有曝光，不等于市场接口有效；市场越早进入，也不等于越好。</strong></p>
+</blockquote>
+<p>带着一个具体问题去读：我现在最怕判断错什么？需要的是玩法反馈、需求规模、产品可理解性，还是继续制作的资金？</p>
+<p>而且这些方法高度依赖年份。2009 Minecraft、2013 Factorio、2016 Brigador、2026 Bills Must Be Paid 处在完全不同的平台环境里。</p>
+<hr />
+<h2 id="_13">我已经成功过一次，为什么事情反而越来越复杂</h2>
+<p>先读：<a href="/heroes-portal/book/chapters/07-success-buys-the-next-question.html">第一次成功以后：钱可以买时间，也会把新的工作交给你</a>。</p>
+<p>先看下一步需要什么：</p>
+<blockquote>
+<p><strong>我需要补足哪些能力，又希望保留哪些暂不承诺的选择？</strong></p>
+</blockquote>
+<p>补读：
+- <a href="/heroes-portal/cases/CASE-020-into-the-breach.html">Into the Breach / Subset Games</a> — FTL收入给小团队留下长期试原型和延迟公开的空间，他们选择做不同的游戏，并在后续加入专门协作者；
+- <a href="/heroes-portal/cases/CASE-057-thatgamecompany-vc-equity-expansion.html">thatgamecompany</a> — 股权融资支持扩充开发与自发行能力；投资者加入董事会，后续筹资也占用创始人的制作时间，具体条款仍需另核；
+- <a href="/heroes-portal/cases/CASE-051-zachtronics.html">Zachtronics</a> + <a href="/heroes-portal/cases/CASE-058-spiderweb-fit-lock-in.html">Spiderweb Software</a> — 工具、品牌与受众长期积累以后，改做不同游戏的成本会怎样变化。</p>
+<p>先读：</p>
+<ul>
+<li><a href="/heroes-portal/book/profiles/early-id-doom.html">early id / DOOM</a></li>
+<li><a href="/heroes-portal/book/profiles/rocket-league.html">Rocket League</a></li>
+</ul>
+<p>成功后的钱与选择权可以用来维持小规模、扩大组织，也可以为不同作品留出探索时间；扩张还可能提高固定成本和协调要求。early id从DOOM走到Quake，技术与商业成绩没有替团队解决下一阶段的协调问题。读这些后续人生，仍要问：<strong>我们以后究竟要成为什么，要为此承担哪些新的成本？</strong></p>
+<hr />
+<h1 id="_14">读过这些经历，可以留下的八个判断</h1>
+<ol>
+<li><strong>目标常常是做出来的，不是先想出来的。</strong></li>
+<li><strong>兴趣只有发生转换，才会变成能力资本。</strong></li>
+<li><strong>活下来本身是一项生产策略。</strong></li>
+<li><strong>失败值不值钱，要看它有没有留下下一次还能使用的东西。</strong></li>
+<li><strong>技术既可以被继承，也可以被重组，甚至可以被创作者自己向前推进。</strong></li>
+<li><strong>市场不是最后一步；它可能很早就开始提供钱、反馈、误导和约束。</strong></li>
+<li><strong>任何成功经验都有年份；机制可能耐久，具体平台打法会过期。</strong></li>
+<li><strong>成功不是证明你找到了终极答案，而是给你换了一套更难的问题。</strong></li>
+</ol>
+<hr />
+<h1 id="_15">想继续读什么？</h1>
+<p>想跟随一个人或团队，可以进入<a href="/heroes-portal/book/profiles/README.html">十四篇人物传记目录</a>，按兴趣形成、谋生、失败与成功后的选择找下一篇。想顺序读章节，回到<a href="/heroes-portal/book/README.html">书稿总目录</a>。</p>
+<p>想核对事实或继续研究，再进入：</p>
+<ul>
+<li><a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes/blob/main/PROGRAM-MAP.md">研究计划总图</a></li>
+<li><a href="/heroes-portal/cases/README.html">Cases</a></li>
+<li><a href="/heroes-portal/claims/README.html">Claims</a></li>
+<li><a href="/heroes-portal/cross-industry/industrial-revolutions/README.html">Industrial Revolutions Comparative Lab</a></li>
+</ul>
+<hr />
+<h2 id="_16">关于“能不能照着做”</h2>
+<p>读到一种做法时，还要分清：哪些机制可能在别处成立，哪些条件只属于当事人，哪里有运气，哪些事实仍不知道。这些经历不能保证回报；比较的用处，是让人在承担几年真实人生之前，多看见一些代价和选择：</p>
+<blockquote>
+<p><strong>别人当年到底付了什么、拥有什么、错了什么，又在哪一步获得了继续下注的资格。</strong></p>
+</blockquote><div class="crumbs"><a href="/heroes-portal/">书阁</a> / book/START-HERE.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

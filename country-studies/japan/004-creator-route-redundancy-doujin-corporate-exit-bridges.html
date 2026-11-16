@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>004 — 日本真正稀缺的可能不是“个人主义”，而是创作者路网的冗余：公司、同人、离职创业与中介桥梁 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl class="on"" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0-creator_route_redundancy" class="t2">0. 新核心变量：CREATOR_ROUTE_REDUNDANCY</a><a href="#creator_route_redundancy" class="t3">CREATOR_ROUTE_REDUNDANCY</a><a href="#1-route-a-nintendo" class="t2">1. Route A — 企业内部作者化：Nintendo</a><a href="#2-route-b-zun-taito" class="t2">2. Route B — 公司雇员 × 私人作者身份并行：ZUN / Taito</a><a href="#parallel_author_identity" class="t3">PARALLEL_AUTHOR_IDENTITY</a><a href="#3-route-c-type-moon" class="t2">3. Route C — 同人直接长成商业公司：TYPE-MOON</a><a href="#doujin_to_commercial_bridge" class="t3">DOUJIN_TO_COMMERCIAL_BRIDGE</a><a href="#4-route-d-mistwalker" class="t2">4. Route D — 大公司高位作者退出后重新获得创作主权：坂口博信 / Mistwalker</a><a href="#veteran_author_secession" class="t3">VETERAN_AUTHOR_SECESSION</a><a href="#5-route-e-pocketpair" class="t2">5. Route E — 主流训练后生产性叛离：Pocketpair</a><a href="#productive_defection" class="t3">PRODUCTIVE_DEFECTION</a><a href="#6-route-f-publishercomiket-bitsummit-publishing" class="t2">6. Route F — 社区 / 展会 / publisher把小作者接到市场：Comiket → BitSummit → publishing</a><a href="#comiket" class="t3">Comiket：旁路市场的规模</a><a href="#bitsummitindie" class="t3">BitSummit：从同人/indie旁路到产业可见性</a><a href="#visibility_and_translation_bridge" class="t3">VISIBILITY_AND_TRANSLATION_BRIDGE</a><a href="#65-route-g-enix-1982" class="t2">6.5 Route G — 作品投稿直接变商业：Enix 1982“作品先于履历”的早期入口</a><a href="#7" class="t2">7. 日本最重要的资产可能是“路线之间可以转移”，不是每条路线单独多优秀</a><a href="#route_switchability" class="t3">ROUTE_SWITCHABILITY</a><a href="#8-institutional-pluralism" class="t2">8. 从“制度化怪人”升级为 INSTITUTIONAL PLURALISM</a><a href="#institutional_pluralism" class="t3">INSTITUTIONAL_PLURALISM</a><a href="#9" class="t2">9. 为什么这对中国比“日本更宽容怪人”更有解释力</a><a href="#route-count" class="t3">ROUTE COUNT</a><a href="#route-cost" class="t3">ROUTE COST</a><a href="#route-bridge" class="t3">ROUTE BRIDGE</a><a href="#route-reversibility" class="t3">ROUTE REVERSIBILITY</a><a href="#route-rights" class="t3">ROUTE RIGHTS</a><a href="#10" class="t2">10. 这还修正一个错误直觉：大公司培养人才流失，不一定是产业失败</a><a href="#capability_spillover" class="t3">CAPABILITY_SPILLOVER</a><a href="#11" class="t2">11. 但日本路网绝不能浪漫化</a><a href="#12" class="t2">12. 下一轮最值得测的量化变量</a><a href="#125-016" class="t2">12.5 中国016反压力：日本不是“有路”而中国“无路”</a><a href="#13-verdict" class="t2">13. Verdict</a></aside><article class="doc"><div class="col"><h1 id="004">004 — 日本真正稀缺的可能不是“个人主义”，而是创作者路网的冗余：公司、同人、离职创业与中介桥梁</h1>
+<ul>
+<li>Program: Japan / East Asian internal counterfactual</li>
+<li>Status: <strong>ECOLOGY SYNTHESIS / MULTI-ROUTE MECHANISM / NO NATIONAL CAUSAL RATE</strong></li>
+<li>As-of: 2026-10-08</li>
+<li>Related: <a href="/heroes-portal/country-studies/japan/001-japan-east-asian-counterexample-weird-kinship-and-game-creator-ecology.html">001 制度化怪人</a> / <a href="/heroes-portal/country-studies/japan/002-veteran-continuity-technical-frontier-falcom-2025-2026.html">002 组织记忆</a> / <a href="/heroes-portal/country-studies/japan/003-nintendo-pocketpair-two-alien-routes-originality-vs-recombination.html">003 Nintendo × Pocketpair</a></li>
+<li>Core question: <strong>日本内容产业的韧性，会不会主要来自“作者身份有多条可切换路线”，而不是社会整体更个人主义？</strong></li>
+<li>Boundary: 本文的案例都是高度可见的成功/长寿样本，只用于证明<strong>路线存在</strong>，不证明这些路线对普通创作者同样可达。Comiket总circle数也不是游戏开发者数量。</li>
+</ul>
+<h2 id="0-creator_route_redundancy">0. 新核心变量：CREATOR_ROUTE_REDUNDANCY</h2>
+<p class="dc">定义：</p>
+<blockquote>
+<p><strong>一个创作者如果在某一组织里拿不到问题定义权，社会是否存在其他真实、可支付、可分发、可再次进入产业的生产路线？</strong></p>
+</blockquote>
+<p>这与“个人是否敢反抗”不同。</p>
+<p>一个社会即使普遍从众，只要同时存在：
+- 大公司内部原型/作者通道；
+- 下班同人/side-project通道；
+- 自出版市场；
+- 同人→商业转换；
+- 老兵离职创业；
+- 小团队→publisher/平台放大；
+- 社区玩家→职业开发者；
+- 失败后再次融资/发行；</p>
+<p>那么某一条组织路径堵住时，作者身份仍可能继续。</p>
+<p>这就是：</p>
+<h3 id="creator_route_redundancy">CREATOR_ROUTE_REDUNDANCY</h3>
+<p><strong>创作者路线冗余度</strong></p>
+<p>日本目前至少能观察到七条不同路线。</p>
+<h2 id="1-route-a-nintendo">1. Route A — 企业内部作者化：Nintendo</h2>
+<p><a href="/heroes-portal/country-studies/japan/003-nintendo-pocketpair-two-alien-routes-originality-vs-recombination.html">003</a>已经核到：
+- 长期雇佣；
+- 原型竞争；
+- 年轻人承担新IP责任；
+- 公司提供失败承受能力。</p>
+<p>这里的创新者不需要离开组织。</p>
+<p>对应变量：
+- INTERNAL_PROTOTYPE_RIGHT
+- YOUNG_PROBLEM_OWNERSHIP
+- CORPORATE_RESOURCE_SHELL</p>
+<p>限制：
+- 新IP频率并不高；
+- 普通员工获得同等机会的分母未知。</p>
+<h2 id="2-route-b-zun-taito">2. Route B — 公司雇员 × 私人作者身份并行：ZUN / Taito</h2>
+<p>2023《东方我乐多丛志》ZUN长访谈是一个非常强的“平行身份”案例。</p>
+<p>ZUN回顾：
+- 大学毕业后进入Taito；
+- 公司最初甚至告诉年轻人要打破僵化开发现场；
+- 但实际进入组织后，新人仍主要接受上级任务；
+- 他把公司工作描述为学习商业游戏制作“nuts and bolts”的地方；
+- 同时因为公司项目无法满足自己想做的游戏，重新回到Comiket；
+- 约2000年前后看到Windows同人游戏市场正在扩张，于是重新开始独立制作。</p>
+<p>Source:
+https://en.touhougarakuta.com/article/specialtaidan_zun_hiroyuki_4-en/</p>
+<p>更早/另一组ZUN访谈还显示：
+- 他在Taito约工作十年；
+- 公司里只是programmer，没有做到producer / “做自己游戏”的职位；
+- Touhou长期在业余时间制作；
+- Taito内部有人知道其同人活动，甚至有上司提出过把Touhou放到Taito旗下发行的想法。</p>
+<p>Source:
+https://en.touhouwiki.net/wiki/The_Untold_History_of_Japanese_Game_Developers_Interview
+（P1 translated interview archive；对公司政策细节只作当事人回忆使用。）</p>
+<p>这个案例最重要的不是“ZUN天才”，而是：</p>
+<h3 id="parallel_author_identity">PARALLEL_AUTHOR_IDENTITY</h3>
+<blockquote>
+<p><strong>正式工作可以提供工资、工业技能和社会身份；作者性则在另一个市场/圈层里生长。</strong></p>
+</blockquote>
+<p>公司没有给ZUN作者权，不等于日本社会只有“辞职创业”一个出口。</p>
+<p>Comiket作为旁路市场，使：
+<code>EMPLOYEE_EXECUTION_ROLE</code>
+与
+<code>PRIVATE_AUTHOR_ROLE</code>
+可以长期并存。</p>
+<h2 id="3-route-c-type-moon">3. Route C — 同人直接长成商业公司：TYPE-MOON</h2>
+<p>TYPE-MOON提供另一种更制度化的转换：</p>
+<ul>
+<li>公开出版资料将TYPE-MOON描述为奈须蘑菇、武内崇起家的doujin group；</li>
+<li>TYPE-MOON官方网站把2004-01-30的《Fate/stay night》明确称为其<strong>商业作品第一作</strong>；</li>
+<li>即，作者团体先在同人场域积累作品、用户与品牌，再进入商业法人/商业产品阶段。</li>
+</ul>
+<p>Sources:
+- https://www.simonandschuster.com/authors/Type-Moon/241115841
+- https://typemoon.com/contents/fate-stay-night/</p>
+<p>这里的关键不是TYPE-MOON后来多成功，而是存在：</p>
+<h3 id="doujin_to_commercial_bridge">DOUJIN_TO_COMMERCIAL_BRIDGE</h3>
+<blockquote>
+<p><strong>作者可以先证明作品，再决定是否公司化；不是必须先获得商业组织职位才有资格做作者。</strong></p>
+</blockquote>
+<p>这与Nintendo内部路线形成完全不同的sequence：</p>
+<p><code>MAKE FIRST -&gt; ORGANIZE COMPANY LATER</code></p>
+<p>而不是：</p>
+<p><code>JOIN COMPANY -&gt; EARN AUTHORITY -&gt; MAKE</code></p>
+<h2 id="4-route-d-mistwalker">4. Route D — 大公司高位作者退出后重新获得创作主权：坂口博信 / Mistwalker</h2>
+<p>2024 PlayStation官方采访中，坂口博信回顾创立Mistwalker：
+- 在Square Enix后期，越来越多责任从“做游戏”转成管理和经营；
+- 他意识到自己更想“活着去创造”；
+- 因而离开并成立独立工作室；
+- 20年后，他仍把Mistwalker理解为承载创作能量的“家”。</p>
+<p>Source:
+https://blog.playstation.com/2024/12/13/hironobu-sakaguchi-interview-fantasian-neo-dimension-final-fantasy-and-20-years-of-mistwalker/</p>
+<p>这是一种和Pocketpair不同的退出：</p>
+<h3 id="veteran_author_secession">VETERAN_AUTHOR_SECESSION</h3>
+<blockquote>
+<p><strong>不是新人从主流外部挑战旧组织，而是已经成功的内部作者因管理化/组织角色漂移而退出，重新建立较小的创作容器。</strong></p>
+</blockquote>
+<p>它说明“离开大公司”在日本不仅是失败/被裁，也可能是<strong>把作者权从管理职责中重新拆出来</strong>。</p>
+<p>限制：
+- 坂口具有极端声誉资本，不能代表普通资深员工；
+- Mistwalker早期依赖合作伙伴与平台资源，不能浪漫化成“一个人离职就自由”。</p>
+<h2 id="5-route-e-pocketpair">5. Route E — 主流训练后生产性叛离：Pocketpair</h2>
+<p><a href="/heroes-portal/country-studies/japan/003-nintendo-pocketpair-two-alien-routes-originality-vs-recombination.html">003</a>已核：
+- 溝部拓郎参加Nintendo Game Seminar；
+- 后进入金融、Web、crypto创业；
+- 回到游戏后明确拒绝Nintendo“独创+高品质”的正统哲学；
+- 用PC/Steam、mash-up、community、市场验证形成另一套方法。</p>
+<p>它是：</p>
+<h3 id="productive_defection">PRODUCTIVE_DEFECTION</h3>
+<blockquote>
+<p><strong>主流制度先提供能力与关系网络，创作者随后离开并建立一套反正统生产哲学。</strong></p>
+</blockquote>
+<p>这和ZUN不同：
+- ZUN是<strong>平行作者身份</strong>；
+- 溝部是<strong>离开并重新组合生态</strong>。</p>
+<h2 id="6-route-f-publishercomiket-bitsummit-publishing">6. Route F — 社区 / 展会 / publisher把小作者接到市场：Comiket → BitSummit → publishing</h2>
+<h3 id="comiket">Comiket：旁路市场的规模</h3>
+<p>日本政府2024介绍C104：
+- 两天约 <strong>260,000</strong> 人次；
+- 约 <strong>24,000 circles</strong> 参展/颁布作品。</p>
+<p>Source:
+https://www.gov-online.go.jp/hlj/en/august_2024/august_2024-06.html</p>
+<p>24,000不是游戏circle数量，而且包含漫画、音乐、各类二创；不能直接拿来和游戏公司数比较。</p>
+<p>它证明的是：</p>
+<blockquote>
+<p><strong>自出版并非边缘到不可见的小圈活动，而是一套长期、巨大、反复发生的作者市场基础设施。</strong></p>
+</blockquote>
+<h3 id="bitsummitindie">BitSummit：从同人/indie旁路到产业可见性</h3>
+<p>BitSummit官方称：
+- 2013首届只是约 <strong>200人的industry-only event</strong>；
+- 2018已超过11,000人。</p>
+<p>2026 JETRO报道：
+- 第14届3天 <strong>68,208</strong> 人次；
+- <strong>496个出展事業者</strong>；
+- business day 13,975人，同比增长40%。</p>
+<p>Sources:
+- https://bitsummit.org/en/about-2/
+- https://www.jetro.go.jp/biznews/2026/06/7af0a823d2a63cdd.html</p>
+<p>早期PLAYISM回顾则直接把BitSummit描述成让日本indie/doujin开发者集中展示、并把作品介绍到海外的场所。
+Source:
+https://playism.com/en/news/2013/0325/the-developers-of-bitsummit/</p>
+<p>BitSummit现有publisher目录还列有PLAYISM、DANGEN、Marvelous、Play Doujin、room6等多个发行/中介主体。
+Source:
+https://bitsummit.org/en/indie-publisher/</p>
+<p>这构成：</p>
+<h3 id="visibility_and_translation_bridge">VISIBILITY_AND_TRANSLATION_BRIDGE</h3>
+<blockquote>
+<p><strong>不是只提供摊位，而是把小作者与媒体、海外玩家、publisher、平台和B2B资源接起来。</strong></p>
+</blockquote>
+<h2 id="65-route-g-enix-1982">6.5 Route G — 作品投稿直接变商业：Enix 1982“作品先于履历”的早期入口</h2>
+<p>日本这种路网甚至早于现代同人/Steam。</p>
+<p>游戏保存协会整理的Enix早期资料显示：
+- 1982年第一届 Game Hobby Program Contest；
+- 第一届获奖后有 <strong>13个作品</strong>在1983年商品化；
+- 中村光一的《Door Door》、堀井雄二的《Love Match Tennis》都由此进入商业体系；
+- 竞赛持续至1984年前后，许多获奖者随后成为职业开发者；
+- Enix早期还延续了royalty/作者标记，使个人作者在当时较匿名的产业中更可见。</p>
+<p>Sources:
+- https://www.gamepres.org/media/honorary/hidaka/exhibition2015/
+- Nintendo官方访谈也把1982 Enix contest列为堀井、中村、森田等人的职业入口：https://www.nintendo.co.jp/etc/interview/platinumgames/vol1/index3.html
+- 公开历史资料给出第一届约316件投稿：https://akiba-pc.watch.impress.co.jp/docs/column/retrosoft/1356901.html</p>
+<p>这个机制和现代招聘完全不同：</p>
+<p><code>MAKE PRODUCT FIRST -&gt; AUTHOR CREDIT -&gt; PUBLISHER COMMERCIALIZES -&gt; CAREER FORMS</code></p>
+<p>而不是：</p>
+<p><code>GET CREDENTIAL -&gt; GET JOB -&gt; WAIT FOR PROJECT AUTHORITY -&gt; MAYBE MAKE PRODUCT</code></p>
+<p>这进一步支持一个历史命题：</p>
+<blockquote>
+<p><strong>日本游戏产业在早期边疆阶段，就曾把“外部作品”当作发现人才的重要凭证，而不是只通过企业内部年资筛选创作者。</strong></p>
+</blockquote>
+<p>这不能证明1980年代所有业余作者都有机会；316件投稿、13件首批商品化本身就是强筛选。但它说明日本“外部作品→商业入口”的制度根系至少可以追到FC黄金时代之前。</p>
+<h2 id="7">7. 日本最重要的资产可能是“路线之间可以转移”，不是每条路线单独多优秀</h2>
+<p>把上述案例放在一起：</p>
+<pre><code class="language-text">Nintendo internal prototype
+          ↓
+   internal auteur
+
+Taito employee ───────→ Comiket side author
+                           ↓
+                         Touhou
+
+doujin circle ───────→ commercial company
+   TYPE-MOON             Fate
+
+Square senior creator ─→ independent studio
+                           Mistwalker
+
+Nintendo seminar ─────→ cross-industry detour ─→ Pocketpair
+
+small indie/doujin ───→ BitSummit / publisher / global platforms
+</code></pre>
+<p>这更像一个<strong>网状生态</strong>，而不是单一“日本游戏公司制度”。</p>
+<h3 id="route_switchability">ROUTE_SWITCHABILITY</h3>
+<blockquote>
+<p>创作者能否在不丢失全部能力、关系与身份的情况下，从一条生产路线切换到另一条？</p>
+</blockquote>
+<p>如果Route A堵住，却存在B/C/D/E/F，系统仍可能保存异类。</p>
+<p>这可能比“社会平均个人主义”更接近内容产业韧性。</p>
+<h2 id="8-institutional-pluralism">8. 从“制度化怪人”升级为 <strong>INSTITUTIONAL PLURALISM</strong></h2>
+<p><a href="/heroes-portal/country-studies/japan/001-japan-east-asian-counterexample-weird-kinship-and-game-creator-ecology.html">001</a>提出：
+- BOUNDED_ECCENTRICITY：社会给怪人合法生态位。</p>
+<p>现在可以进一步提出：</p>
+<h3 id="institutional_pluralism">INSTITUTIONAL_PLURALISM</h3>
+<blockquote>
+<p><strong>一个产业允许多套互不兼容的“正确生产方式”长期并存，并建立路线间的切换和中介接口。</strong></p>
+</blockquote>
+<p>日本目前可见：
+- Nintendo式“新玩法结构”；
+- Falcom式长期工艺；
+- Capcom式技术工业化；
+- ZUN式个人同人作者；
+- TYPE-MOON式同人商业化；
+- Pocketpair式快速组合；
+- Mistwalker式资深作者出走；
+- publisher/event式外部桥梁。</p>
+<p>这些路线互相未必认同，但不需要先赢得一场全国性的“哪套哲学正确”的争论才有资格存在。</p>
+<h2 id="9">9. 为什么这对中国比“日本更宽容怪人”更有解释力</h2>
+<p>真正可比较的问题应该变成：</p>
+<h3 id="route-count">ROUTE COUNT</h3>
+<p>一个年轻人/雇员/失败作者有哪些现实生产路线？</p>
+<h3 id="route-cost">ROUTE COST</h3>
+<p>从公司员工→side project→独立团队→publisher，各跳一次要付出多少：
+- 收入损失；
+- IP风险；
+- 家庭风险；
+- 社会身份；
+- 作品出版合规；
+- 团队重组成本？</p>
+<h3 id="route-bridge">ROUTE BRIDGE</h3>
+<p>有没有：
+- Comiket式直接市场；
+- BitSummit式B2B可见性；
+- publisher；
+- contest；
+- game seminar；
+- community招聘；
+帮助作者跨路线？</p>
+<h3 id="route-reversibility">ROUTE REVERSIBILITY</h3>
+<p>失败以后能不能：
+- 回就业；
+- 再做同人；
+- 换publisher；
+- 重新组队；
+- 用前作声誉做下一作？</p>
+<h3 id="route-rights">ROUTE RIGHTS</h3>
+<p>进入新路线以后，作者究竟得到：
+- IP权；
+- problem ownership；
+- budget；
+- kill/continue；
+还是只换了雇主？</p>
+<p>如果中国结果是“路线数看起来不少，但跨路线成本/监管/IP/家庭/资金成本高”，那会比“老中不够个人主义”精确得多。</p>
+<h2 id="10">10. 这还修正一个错误直觉：<strong>大公司培养人才流失，不一定是产业失败</strong></h2>
+<p>Nintendo Game Seminar → 溝部；
+Taito工业训练 → ZUN私人创作；
+Square经验 → Mistwalker；</p>
+<p>这些案例提示：</p>
+<blockquote>
+<p><strong>对单家公司而言，人才离开可能是流失；对整个产业而言，能力外溢和重组可能正是生态更新机制。</strong></p>
+</blockquote>
+<p>正式新增：</p>
+<h3 id="capability_spillover">CAPABILITY_SPILLOVER</h3>
+<blockquote>
+<p>大组织培养的工艺、网络与判断能否安全流向新组织，而不被竞业/IP/身份成本完全锁死。</p>
+</blockquote>
+<p>这对中国大厂人才研究尤其重要。</p>
+<p>如果一家大厂人才极强，但：
+- 离职后难带走同事；
+- side project权利不清；
+- 作者信誉归项目/公司；
+- 市场没有小团队publisher；
+- 家庭和收入成本阻止创业；</p>
+<p>则：</p>
+<blockquote>
+<p><strong>EMPLOYEE_CAPABILITY高</strong>
+不等于
+<strong>ECOSYSTEM_CREATOR_CAPACITY高</strong></p>
+</blockquote>
+<h2 id="11">11. 但日本路网绝不能浪漫化</h2>
+<p>必须保留的反面：
+- ZUN自己回忆Taito内部僵化、年轻人最终被组织同化；
+- 同人创作长期可能依赖个人无偿/业余劳动；
+- Comiket规模大不代表普通circle能商业生存；
+- 大公司side-project政策并非天然宽松；
+- 成功同人→商业的案例高度幸存者选择；
+- 坂口、ZUN、TYPE-MOON、Pocketpair都属于异常可见赢家；
+- publisher出现不代表合同都保护作者；
+- 女性、照护者、低收入者能否承担业余创作成本需要另查。</p>
+<p>所以本轮只证明：</p>
+<blockquote>
+<p><strong>日本存在多条可观察路线和桥梁。</strong></p>
+</blockquote>
+<p>尚未证明：</p>
+<blockquote>
+<p><strong>日本普通潜在创作者获得第二次机会的概率高于中国。</strong></p>
+</blockquote>
+<h2 id="12">12. 下一轮最值得测的量化变量</h2>
+<p>以后中日比较除 FULL_CYCLE_TEAM_DENSITY 外，加入：</p>
+<ul>
+<li>CREATOR_ROUTE_COUNT</li>
+<li>ROUTE_SWITCHABILITY</li>
+<li>ROUTE_REVERSIBILITY</li>
+<li>PARALLEL_AUTHOR_IDENTITY</li>
+<li>CAPABILITY_SPILLOVER</li>
+<li>SELF_PUBLISHING_ACCESS</li>
+<li>BRIDGE_INSTITUTION_DENSITY</li>
+<li>SIDE_PROJECT_RIGHTS</li>
+<li>DOUJIN_TO_COMMERCIAL_CONVERSION</li>
+<li>AUTHOR_CREDIT_PORTABILITY</li>
+</ul>
+<p>最重要的分叉：</p>
+<blockquote>
+<p><strong>中国究竟是“缺少异类”，还是“异类一旦在第一条正规路径里卡住，就缺少第二、第三、第四条继续生产的路”？</strong></p>
+</blockquote>
+<p>如果是后者，日本比较会比《西方怪人》的广义个人主义解释更有直接政策/产业意义。</p>
+<h2 id="125-016">12.5 中国016反压力：日本不是“有路”而中国“无路”</h2>
+<p><a href="/heroes-portal/country-studies/china/016-creator-route-topology-from-66rpg-to-modern-bridges.html">China 016</a>补入66RPG、IGF China、GGJ、CiGA/indiePlay、腾讯创作赛、TapTap Spotlight与China Hero后，004的中日比较需要收紧：中国早在2005前后已经存在hobbyist route，2015后现代桥梁也明显增厚。日本当前真正可能领先的不是<code>ROUTE_COUNT</code>，而是部分路线的<strong>历史连续、跨代积累与路线之间的稳定转换</strong>。因此日本后续比较必须用<code>ROUTE_HALF_LIFE / ROUTE_SWITCHABILITY / ROUTE_REVERSIBILITY / SECOND_GENERATION_CREATOR_PRODUCTION</code>，不能再靠“日本有Comiket”本身推出结构优势。</p>
+<h2 id="13-verdict">13. Verdict</h2>
+<p>当前日本线最强的新假说：</p>
+<blockquote>
+<p><strong>日本内容产业的原创能力，不必主要来自社会整体更个人主义；它可能来自一种“高从众社会中的制度多元主义”——公司内部作者、长期工艺组织、同人自出版、side project、离职创业、跨行业叛离、publisher和展会共同组成一张有冗余的创作者路网。</strong></p>
+</blockquote>
+<p>这张网最大的功能可能不是保证每个怪人成功，而是：</p>
+<blockquote>
+<p><strong>让某一次被老板否决、某一家公司不适配、某一个职业阶段结束，不等于作者身份永久死亡。</strong></p>
+</blockquote><div class="crumbs"><a href="/heroes-portal/">书阁</a> / country-studies/japan/004-creator-route-redundancy-doujin-corporate-exit-bridges.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

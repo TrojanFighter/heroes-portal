@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Earned Scale — 用一代作品购买二代扩张的正当性：Helldivers / Risk of Rain / Lost Castle / My Time · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl class="on"" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#1" class="t2">1. 原作者命题与研究修正</a><a href="#2-arrowhead-helldivers-2015-helldivers-2-2024" class="t2">2. Arrowhead — Helldivers (2015) → Helldivers 2 (2024)</a><a href="#3-hopoo-risk-of-rain-2013-risk-of-rain-2-2019-ea-2020-v10" class="t2">3. Hopoo — Risk of Rain (2013) → Risk of Rain 2 (2019 EA; 2020 v1.0)</a><a href="#4" class="t2">4. 中国不能漏掉的同类对照</a><a href="#hunter-studio-lost-castle-1-2016-lost-castle-2-2024-ea-2026-v10" class="t3">Hunter Studio — Lost Castle 1 (2016) → Lost Castle 2 (2024 EA; 2026 v1.0)</a><a href="#pathea-my-time-at-portia-my-time-at-sandrock-my-time-at-evershine" class="t3">Pathea — My Time at Portia → My Time at Sandrock → My Time at Evershine</a><a href="#5-multi-proof-asset" class="t2">5. 原型/一代的真实经济功能：multi-proof asset</a><a href="#6-gate" class="t2">6. 可落地的 Gate 与反例</a><a href="#6a-all-in" class="t2">6a. 成功初代不是续作 ALL IN 的充分条件：反向对照</a><a href="#7" class="t2">7. 比较研究的真正分母</a><a href="#8-2026-10-09-earned-scale" class="t2">8. 第二批补充调查（2026-10-09）：不要把 EARNED SCALE 简化成两款作品之间的销量比例</a><a href="#81-larian-divinity-original-sin-1-2-baldurs-gate-3" class="t3">8.1 Larian — Divinity: Original Sin 1 → 2 → Baldur&amp;rsquo;s Gate 3（强证据：产品成功买到资本选择权）</a><a href="#82-red-hook-darkest-dungeon-1-2" class="t3">8.2 Red Hook — Darkest Dungeon 1 → 2（反机械规模扩张：续作需重定义创意）</a><a href="#83-ghost-ship-games-deep-rock-galactic-rogue-core-ea-ip" class="t3">8.3 Ghost Ship Games — Deep Rock Galactic → Rogue Core（早投资与 EA 滚动验证；谨防把知名 IP 当新玩法证明）</a><a href="#84-91act" class="t3">8.4 中国：91ACT《超限领域》（未商业发布原型）→《苍翼：混沌效应》（与既有商业团队经验组合）</a><a href="#85-ceo-2022-tgdc" class="t3">8.5 中国：帕斯亚 CEO 李岸 2022 TGDC —— 成功续作依赖失败累积，不只靠首作销量</a><a href="#86" class="t3">8.6 哪些响亮案例不能塞进“低成本首作”样本？</a><a href="#9" class="t2">9. 证据模型升级：三种彼此不可替代的证据</a><a href="#10" class="t2">10. 数量级与选择偏差：下一轮实证必须做队列而不是英雄榜</a><a href="#11" class="t2">11. 与中国正统倒置 / 春登 / 原型生态研究的新增交叉命题</a><a href="#12-evidence-register" class="t2">12. Evidence Register（本批）</a><a href="#13-third-case-pass-mod-commercial-1-selective-scale-to-22026-10-09" class="t2">13. Third case pass — Mod → Commercial 1 → selective scale to 2（2026-10-09）</a><a href="#131-torn-banner-age-of-chivalry-2007-mod-chivalry-2012-mirage-2017-fail-chivalry-2-2021" class="t3">13.1 Torn Banner: Age of Chivalry (2007 Mod) → Chivalry (2012) → Mirage (2017 fail) → Chivalry 2 (2021)</a><a href="#132-autoattack-legion-td-1-warcraft-iii-mod-legion-td-2" class="t3">13.2 AutoAttack — Legion TD 1 (Warcraft III Mod) → Legion TD 2</a><a href="#133-battlebit-remastered-scale-sequencing" class="t3">13.3 BattleBit Remastered：并非一代二代，但展示“高机械复杂度 × 低视觉规格”的另外一种 scale sequencing</a><a href="#14-ip" class="t2">14. 第四项资本风险：IP 转让后的创作知识与成果所有权断裂</a><a href="#141-squad-ksp-2015-ksp2-2023-ea" class="t3">14.1 Squad / KSP (2015) → KSP2 (2023 EA)</a><a href="#142-endnight-the-forest-sons-of-the-forest" class="t3">14.2 Endnight — The Forest → Sons of the Forest：自融资神话的一个硬反例</a><a href="#15-theory-revision-cohort-instrumentation" class="t2">15. Theory revision &amp;amp; cohort instrumentation</a></aside><article class="doc"><div class="col"><h1 id="earned-scale-helldivers-risk-of-rain-lost-castle-my-time">Earned Scale — 用一代作品购买二代扩张的正当性：Helldivers / Risk of Rain / Lost Castle / My Time</h1>
+<ul>
+<li><strong>Status:</strong> CROSS-REGION CASE STUDY / PROOF-BASED SCALE HYPOTHESIS; not population-level verdict</li>
+<li><strong>As-of:</strong> 2026-10-09</li>
+<li><strong>Parent:</strong> <a href="/heroes-portal/country-studies/china/028-hacker-spirit-scale-down-commercial-antitraining.html">中国研究 028 Hacker Spirit × Scale Down</a>；<a href="/heroes-portal/country-studies/china/029-orthodoxy-inversion-chundeng-farmer-inventor.html">029 正统倒置与春登</a></li>
+<li><strong>Research focus:</strong> 第一代的最小产品不只是销量试水，而是以可承受的成本形成 <strong>mechanic proof / paid demand proof / creator-production proof / community proof</strong>，然后决定第二代在哪些维度扩张，以及哪些维度仍应节制。</li>
+<li><strong>Central distinction:</strong> EARNED SCALE ≠ no investment; it means <strong>proof precedes irreversible cost commitments</strong>. Publisher advances, co-development, crowdfunding, retained earnings and minority equity are different mechanisms; do not merge them.</li>
+</ul>
+<h2 id="1">1. 原作者命题与研究修正</h2>
+<p class="dc">作者提出：相较于中国部分资深商业游戏人先瞄准中大型规格再寻找融资、不能融资便认为独立游戏不可行，欧美部分团队更擅长先用低成本一代证明赛道潜力，再针对已经验证的价值有根据地 ALL IN。特别提出《Helldivers 1→2》作为锚点。</p>
+<p>分析口径：
+1. <strong>初代试验了什么？</strong> 玩家为何愿意重复，最有辨识度的规则是什么，具体哪些数据支持这个判断？
+2. <strong>续作放大了什么？</strong> camera / fidelity / market reach / content / accessibility / production discipline，并且保留了哪些设计内核？
+3. <strong>资本实际在何时、以何形式进入？</strong> 发行、预付、众筹、股权、母公司注资、自有收益不能等价。
+4. <strong>团队规模是否滞后于产品证明？</strong> 对扩张有明确的瓶颈说明还是只追求抽象规格？
+5. <strong>不把个案充当国别数量级。</strong> 国内亦有正面样本，须采用同分母队列比较。</p>
+<h2 id="2-arrowhead-helldivers-2015-helldivers-2-2024">2. Arrowhead — Helldivers (2015) → Helldivers 2 (2024)</h2>
+<p><strong>证据层：</strong> 
+- Sony / PlayStation 2024-03 创作者访谈：初代是俯视角双摇杆四人合作射击；成功之后试验同一设计哲学的第一/第三人称形式；二代保留友伤、支援、脆弱士兵和超强军械、危险合作等设计核心。Pilestedt 的原话方法是 <code>don't mimic, understand deeply and go from there</code>。
+- 一代验证了系统合作中由错误与友伤产生的玩家故事，不只是“俯视角 shooter market”；二代扩大沉浸、感官、战场规模和射击精度。改变视角本身带来合作态势共享的困难，必须重新设计补给、增援与样本拾取等集合节点。
+- Sony 2024-05 公布：二代 2024-02-08 上线后 12 周销售 1,200 万份。Arrowhead 官方称当时已完成五部作品、员工逾100。2026-09 CEO 访谈：上市时约110人，希望控制在150人以下，由 Sony 与外部合作伙伴承担部分生产能力。
+- <strong>严格限制：</strong> 两代均非已证实的“纯自融资”。Sony 是发行商，Helldivers IP 商标归 Sony；未见可靠的初代真实研发全成本、精确资本负担比例。它是 <strong>lower-production-scope proof → publisher-backed high-fidelity expansion</strong>，不是“先自己挣第一桶金完全支付二代”的财务案例。
+- Grant Thornton 官方交易顾问记录：腾讯在 2024-07 完成 Arrowhead 少数股权投资，在《Helldivers 2》商业验证之后。15.75%、约 US$80m 的股权交易金额由行业媒体披露，不能当作给《Helldivers 2》研发的先期资金。</p>
+<p><strong>Sources</strong>
+- https://blog.playstation.com/2024/03/12/helldivers-2-how-arrowhead-turned-the-twin-stick-shooter-original-into-a-bombastic-ps5-sequel/
+- https://www.guinnessworldrecords.com/world-records/781365-fastest-selling-playstation-game
+- https://www.arrowheadgamestudios.com/aboutarrowhead/
+- https://gamesbeat.com/how-arrowhead-games-is-capitalizing-on-the-success-of-helldivers-2-shams-jorjani-interview/
+- https://www.grantthornton.se/en/services/advisory/deals-transaction-advisory-services-transaktionsradgivning/credentials/arrowhead/
+- https://www.playstation.com/en-us/games/helldivers-2/
+- https://investgame.net/news/tencent-acquires-15-8-of-helldivers-2-developer-arrowhead-at-530m-valuation/</p>
+<h2 id="3-hopoo-risk-of-rain-2013-risk-of-rain-2-2019-ea-2020-v10">3. Hopoo — Risk of Rain (2013) → Risk of Rain 2 (2019 EA; 2020 v1.0)</h2>
+<ul>
+<li>初代由两名华盛顿大学学生以 GameMaker 制作2D像素动作Roguelike，建立随时间增长的威胁、道具构筑与冒险撤离的独特内核；早期众筹和发行历史须另行记账，不能写成完全无外部资金。</li>
+<li>《DEADBOLT》（2016）提供额外开发履历；开发二代时 2019 年团队只有三人，第一次制作3D游戏。</li>
+<li>开发者解释：从2D跳3D是要探索新形式，并保留系列的设计体验；没有因为3D复杂就追求程序化生成全部3D地形，而是手工场景配随机布置，符合团队真实能力。</li>
+<li>二代进入抢先体验首月售逾100万，初代达到百万份约需五年；两者销售效率差距不能直接作净利润增长倍率，亦受渠道与既有粉丝推动。</li>
+<li>典型 <strong>mechanic/IP proof → form-factor expansion with controlled scope</strong>，且可见初代与二代制作团队都非常精简。</li>
+</ul>
+<p><strong>Sources</strong>
+- https://www.hopoogames.com/
+- https://www.gamedeveloper.com/design/how-moving-from-2d-to-3d-shaped-the-design-of-i-risk-of-rain-2-i-
+- https://www.gamedeveloper.com/business/-i-risk-of-rain-2-i-crosses-1-million-sales-in-first-month
+- https://www.pcgamesn.com/risk-of-rain-2/one-million-sales</p>
+<h2 id="4">4. 中国不能漏掉的同类对照</h2>
+<h3 id="hunter-studio-lost-castle-1-2016-lost-castle-2-2024-ea-2026-v10">Hunter Studio — Lost Castle 1 (2016) → Lost Castle 2 (2024 EA; 2026 v1.0)</h3>
+<ul>
+<li>2016 初代三人；2019 主创明确称第一代的玩家支持/收入使得团队扩充至8人。</li>
+<li>2024 对外披露初代PC/主机版本累计约200万销量（不含移动端）；2026访谈称工作室约40人，续作开发核心约20人，另外人员承担新项目。</li>
+<li><strong>这是真正的中国 EARNED-SCALE 样本。</strong> 不应因为研究中国整体生态缺口，便忽视符合方法论的本地团队；亦不能仅凭它就推断这种模式在中国的数量级与欧美相同。</li>
+</ul>
+<p><strong>Sources</strong>
+- https://www.gamersky.com/news/201901/1145517.shtml
+- https://www.gameres.com/906953.html
+- https://monstervine.com/2026/07/lost-castle-2-interview-hunter-studio/</p>
+<h3 id="pathea-my-time-at-portia-my-time-at-sandrock-my-time-at-evershine">Pathea — My Time at Portia → My Time at Sandrock → My Time at Evershine</h3>
+<ul>
+<li>三次 Kickstarter 名义募集额分别约 US$146,697、US$524,770、US$2,901,842（Evershine 33,933位支持者）；这是群众购买意愿和社区积累的可见证据，不是三代产品的全部研发预算，亦不代表没有其他融资/发行参与。</li>
+<li>Sandrock 开发商在 2023 正式发布说明中强调沿用 Portia 的经验并吸收反馈；Focus 于 2023 参与后期PC海外发行。</li>
+<li>更接近 <strong>series/community proof → progressively stronger crowd + publishing access</strong>；三代可能改变产品定义（工坊→城镇管理），不是单纯扩展原游戏资产体量。</li>
+<li><strong>2026-10 时点注意：</strong> Evershine 仍属在研作品，不能当成已经证明销售回报的三代商业成功。</li>
+</ul>
+<p><strong>Sources</strong>
+- https://www.backerkit.com/projects/1757963851/my-time-at-portia-an-enchanting-sandbox-simulation
+- https://www.kickstarter.com/projects/1757963851/my-time-at-sandrock-us
+- https://www.kickstarter.com/projects/mtae/my-time-at-evershine-the-next-my-time-tale
+- https://sandrock.pathea.net/my-time-at-sandrock-fully-released/
+- https://www.focus-entmt.com/en/news/focus-entertainment-partners-up-with-pathea-games-and-becomes-the-publisher-of-my-time-at-sandrock-on-pc</p>
+<h2 id="5-multi-proof-asset">5. 原型/一代的真实经济功能：multi-proof asset</h2>
+<p>小规模一代不是劣化版最终游戏。它同时积累：
+- <strong>Gameplay thesis proof:</strong> 规则循环是否导致玩家主动复玩；
+- <strong>Commercial proof:</strong> 真实陌生玩家是否愿意为之支付；
+- <strong>Team proof:</strong> 核心团队能否完整交付并迭代；
+- <strong>Audience/community proof:</strong> 玩家需求、口碑、关系与推广起点；
+- <strong>Cost-model proof:</strong> 真实人日、资产/程序复用、维护费用；
+- <strong>Publisher bargaining proof:</strong> 证明并非只靠履历/PPT 推演。</p>
+<p><code>EARNED SCALE</code> 应要求严格的 <strong>investment thesis</strong>：二代新增的每一类成本，都应该能解释“从初代获得了何种证据，为什么这一项扩张更可能提升市场价值”，而不是“二代就该全面加规格”。</p>
+<h2 id="6-gate">6. 可落地的 Gate 与反例</h2>
+<ul>
+<li><strong>Gate A — playable mechanism:</strong> 没有第一批陌生玩家可重复玩的核心循环，不应不可逆扩编。</li>
+<li><strong>Gate B — audience demand:</strong> 愿望单、付费、留存、玩家反馈与社区参与应按类型配套解读，不能把观众热闹视为买单保证。</li>
+<li><strong>Gate C — capacity justification:</strong> 二代所扩大的视角、美术、内容、多人联机及营销，每一项都要说明与原成功因子的因果路径。</li>
+<li><strong>Gate D — capital rights:</strong> 区分钱来自留存利润、平台、发行/版权、众筹、股权、债务，避免将 Sony × Arrowhead 的合作误写为“自融资”。</li>
+<li><strong>Gate E — survival control:</strong> 扩张不能破坏团队的再试错能力，保留取消/降级/延期的选择权。</li>
+</ul>
+<p><strong>Failure cases needed:</strong> 初代成功但续作失败、初代成功后扩编过快倒闭、初代成功但拒绝扩张而错失机会、初代销售不足但靠 publisher 后来成功。尤其要避免成功案例选样中把风险决策看成结果必然性。</p>
+<h2 id="6a-all-in">6a. 成功初代不是续作 ALL IN 的充分条件：反向对照</h2>
+<ul>
+<li><strong>The Culling (2016 EA) → The Culling 2 (2018):</strong> 初代以独特近战大逃杀获得受众；二代发售仅约一周后被下架和退款，开发商 Xaviant 承认新作品不符合原有玩家想要的续作，并回头恢复初代早期版本。这里失败的核心警讯不一定是扩大预算，而是<strong>续作对已验证玩家价值的错误推断/过度改变</strong>。来源：https://www.gamedeveloper.com/game-platforms/xaviant-to-delist-i-the-culling-2-i-after-rocky-launch-opts-to-support-i-the-culling-1-i-instead 以及 https://www.gamespot.com/articles/new-battle-royale-game-removed-from-sale-after-a-w/1100-6460492/</li>
+<li><strong>Cities: Skylines (2015) → Cities: Skylines II (2023):</strong> 首作系列成功与巨大既有市场需求并未自动证明技术架构、性能、编辑器和跨平台规格可被如期交付。发行商/开发商2024年公开为品质不足、DLC问题与不现实交付时间表道歉；2025-11 双方宣布分开，2026起由 Iceflake 继续开发系列。不能把它简单当成“缺乏原型文化导致失败”，但它证明<strong>市场证明不等于交付/技术规模证明</strong>。来源：https://www.paradoxinteractive.com/zh-CN/games/cities-skylines-ii/news/the-way-forward-update 以及 https://colossalorder.fi/news/future-cs2-colossal-order/</li>
+</ul>
+<p><strong>因此 EARNED SCALE 至少需要两项分别成立：MARKET PROOF（值得做大）和 DELIVERY PROOF（能做大）。</strong> 具备第一项却没有第二项的高规格续作，仍可能遭遇放大失败；偏离一代的核心价值还需要独立的 NEW-THESIS PROOF。</p>
+<h2 id="7">7. 比较研究的真正分母</h2>
+<p>“国内缺少这种方法”必须转化为队列统计，而非只靠三四个国别案例：
+1. 2010—2025 成立的中美欧日PC/主机小型工作室：首款发布、融资、人力、销量、二作发布和存活率；
+2. 首作团队中位规模、开发年数、可见资本及规模上限；
+3. 首作成功后第二作 <strong>headcount multiplier, budget multiplier, genre/genre-grammar transfer, market reach and ownership changes</strong>；
+4. 比较一代是否曾为原创最小体验、二代是否按证据有选择地投资，而非一律对标新AAA；
+5. 控制地区工资、类型、年代、受访/媒体幸存者偏差、是否有既有工业经验和市场基础。</p>
+<p><strong>禁止结论：</strong>“中国没有这种模式”；“找到《失落城堡》就证明中外规模相同”；“Helldivers是完全自融资神话”；“所有续作都应All In”。</p>
+<p><strong>Provisional conclusion:</strong> 中国游戏商业体系是否普遍缺失的，不只是 Scale Down 本领，还有更高级的 <strong>Scale Sequencing</strong>：以低成本原创产品建立可证的玩家价值，再据其证据决定扩张方向、强度与资本的角色。这是待统计验证的结构性差异假说。</p>
+<hr />
+<h2 id="8-2026-10-09-earned-scale">8. 第二批补充调查（2026-10-09）：不要把 EARNED SCALE 简化成两款作品之间的销量比例</h2>
+<h3 id="81-larian-divinity-original-sin-1-2-baldurs-gate-3">8.1 Larian — Divinity: Original Sin 1 → 2 → Baldur&rsquo;s Gate 3（强证据：产品成功买到资本选择权）</h3>
+<ul>
+<li>初代 D:OS (2014) <strong>并非低预算 / 纯自筹首作</strong>。Larian 创始人 Swen Vincke 回顾过经由以往项目收益、合同业务、投资、众筹与抢先体验不断筹资；据其早期采访预算由约€3m增至约€4.5m，公司一度面临严重现金危机。</li>
+<li>2015年9月 Eurogamer 对 Vincke 的采访：他明确说二代本已由一代收入资助，不需要 publisher / investor 才能立项；继续 Kickstarter 是为了增添种族、起源故事、对话反馈、技能和系统的 <strong>额外选择深度</strong>。这是资本参与作为<strong>范围增量选择（scope option）</strong>，不是项目是否存在的生存门槛。</li>
+<li><strong>官方项目时间线</strong>：第二次 Kickstarter (2015-08-26—09-30) 筹 US$2,032,434，42,713 支持者；2016 先 EA，再正式发售。众筹金额绝不能直接解释为二代总成本。</li>
+<li>初代用相对较低的 CRPG 制作规格验证回合制/系统互动/自由选择的付费需求；二代加大可反应的内容、多人玩法、表现与交互组合，进而培养后来制造 BG3 的组织能力。</li>
+<li><strong>边界与反例</strong>：多代并不等于公司始终微型、不融资、无版权限制或无出错可能；此例更准确类型为 <strong>MID-BUDGET FIRST PROOF → RETAINED-REVENUE SEQUEL &amp; OPTIONAL CROWDFUNDING → LATER HIGH-SCALE PROJECT</strong>。</li>
+<li><strong>一手/当事人来源</strong>：</li>
+<li>Vincke 2015-09 采访（Eurogamer 转引完整关键段落）：https://rpgcodex.net/article.php?id=10060</li>
+<li>官方续作时间线与众筹实际数据：https://divinity.com/original-sin-ii/history</li>
+<li>创始人口述十余年融资和发行关系史：https://www.pcgamer.com/how-larian-studios-skirted-bankruptcy-before-making-divinity-original-sin/</li>
+<li>自述开发原则及独立原因：https://gameinformer.com/interview/2019/11/07/a-knight-in-shining-armor-swen-vincke-talks-the-long-road-of-larian-studios</li>
+</ul>
+<h3 id="82-red-hook-darkest-dungeon-1-2">8.2 Red Hook — Darkest Dungeon 1 → 2（反机械规模扩张：续作需重定义创意）</h3>
+<ul>
+<li>二代不是简单加长地牢、多加职业。开发者在2019、2021、2023不同采访反复指出，原作获得商业成功之后，先推出扩展内容，再选择独立续作；希望避免二代取代一代，使玩家可以在不同玩法形态里各取所需。</li>
+<li>续作保留压力、英雄、战斗与黑暗氛围，宏观结构从基地经营/漫长战役改变成 4—6 小时级别公路旅程。3D 化是手段，新的玩家体验架构才是目标。</li>
+<li><strong>2026-06 两位创始人访谈</strong>：创始人回忆错误地以为有钱有名声、有能力扩编，续作就会容易；然而从约5人扩到约25人，需要 IT、HR、生产管理支撑，这种组织协调成本是额外风险。自述数字与阶段以原访谈为准，不能反推项目完整人数预算。</li>
+<li>因此 <strong>CREATIVE-TRANSFER PROOF</strong> 与 <strong>ORG-SCALE PROOF</strong> 是独立 Gate：前者验证二代更改规则后的体验，后者验证扩编后的交付能力。</li>
+<li>来源：</li>
+<li>https://www.indiegamewebsite.com/2019/03/06/red-hooks-co-founder-on-the-journey-to-darkest-dungeon-2/</li>
+<li>https://store.epicgames.com/news/darkest-dungeon-2-early-access-interview?lang=zh-CN</li>
+<li>https://www.gamedeveloper.com/production/how-darkest-dungeon-ii-s-developers-evolved-their-early-access-process</li>
+<li>https://podscan.fm/podcasts/game-dev-1-on-1/episodes/5-making-a-sequel-that-divides-fans-chris-bourassa-and-tyler-sigman-on-darkest-dungeon-ii</li>
+</ul>
+<h3 id="83-ghost-ship-games-deep-rock-galactic-rogue-core-ea-ip">8.3 Ghost Ship Games — Deep Rock Galactic → Rogue Core（早投资与 EA 滚动验证；谨防把知名 IP 当新玩法证明）</h3>
+<ul>
+<li>Ghost Ship 官网时间线：2016-04 由6位丹麦资深从业者创立；2017-02 Coffee Stain 加入发行；2018-02 EA；2019-01 已达约50万买家；2020-05 1.0 时约100万，后续玩家规模持续扩大。</li>
+<li><strong>纠错：绝非零资本首作。</strong> Embracer/THQ Nordic 2018-11 的正式收购公告披露 Coffee Stain 当时持有 Ghost Ship 约35%少数股权，并持有 DRG 发行权。它应被编码为 <strong>EARLY PUBLISHER/EQUITY PARTNERSHIP + EA MARKET LEARNING</strong>，而非 bootstrapped。</li>
+<li>与玩家结合的制作法：2023 GDC 演讲说明封闭测试、Steam 社区、Discord、Reddit、实验分支和反馈选取，用用户真实使用经验决定各开发阶段的迭代，而不是只在发布后再“做数据”。</li>
+<li>2026-05-20 其衍生独立作品《Deep Rock Galactic: Rogue Core》开启 EA，迄2026-10 Steam 英文评测截面约 69% 正面、Mixed；这是<strong>新 roguelite 结构尚未获得与原作同等认同的提示</strong>，但 EA 尚在推进，不能判定最终商业失败，也不能拿一个 Steam 截面推断利润。</li>
+<li>来源：</li>
+<li>https://ghostship.dk/about/</li>
+<li>https://www.embracer.com/releases/thq-nordic-acquires-coffee-stain/</li>
+<li>https://www.gamedeveloper.com/marketing/developing-a-live-game-that-never-truly-left-early-access-with-deep-rock-galactic</li>
+<li>https://store.steampowered.com/app/2605790/Deep_Rock_Galactic_Rogue_Core/</li>
+</ul>
+<h3 id="84-91act">8.4 中国：91ACT《超限领域》（未商业发布原型）→《苍翼：混沌效应》（与既有商业团队经验组合）</h3>
+<p>这是目前发现的最适合反驳“中国完全缺乏低成本玩法论证”的<strong>中国原生开发者自述</strong>，但不得冒称“一代公开发售获得利润支付二代”。</p>
+<ul>
+<li>2019 2D ACT+ROG 原计划因融资不足而中止，2020 基于真实能力做更小的竖屏 ACT+ROG《超限领域》，达到了<strong>可供测试</strong>状态，并取得用户对风格、机制和玩法的反馈。</li>
+<li>开发者承认小项目积累了 ACT+ROG 理解，也暴露出其内容与体验上限；此时筹到更多资金，团队选择<strong>停做小项目，把所得认识迁移到更适合长期开发的《苍翼：混沌效应》</strong>。</li>
+<li>后续 2023 EA、2024正式版、2024公司危机与团队重组、2024年5月累计 Steam 50万销量、2024年9月累计70万销量（制作人公开口径），进一步表明验证、融资和组织存活不能当作同一维度的成功。</li>
+<li><strong>编码：ABORTED LARGE IDEA → SMALL TESTABLE PROTOTYPE → REFORMULATED FUNDED PRODUCT；不是 COMMERCIAL-GEN1-TO-GEN2。</strong></li>
+<li>一手来源：</li>
+<li>2022-11 制作人自述：https://www.taptap.cn/moment/285476408426236037</li>
+<li>2024-05 Steam 50万作品里程碑：https://www.taptap.cn/moment/544218996711358729</li>
+<li>项目曲折与公司解散重组访谈：https://www.taptap.cn/moment/513805324881234967</li>
+</ul>
+<h3 id="85-ceo-2022-tgdc">8.5 中国：帕斯亚 CEO 李岸 2022 TGDC —— 成功续作依赖失败累积，不只靠首作销量</h3>
+<p><strong>2022-08 由游戏陀螺整理的完整演讲</strong>，是一份非常珍贵的跨代同一创作者、包含失败项目的实证资料：</p>
+<ul>
+<li>早期横版动作产品约卖2,000份；《星球探险家》把所有新意塞入项目，技术/内容高度复杂，维护风险极高；创始人总结<strong>创新必须匹配能力上限</strong>。</li>
+<li>《永进》：投入约10人、4—5年、约1—2万份销量（2022回顾），对玩家反馈和解谜产品定位出现严重错判；不能因为有创新态度就视为优秀立项。</li>
+<li>《波西亚时光》：2022年演讲披露全平台200余万；但首作经历了多次方向改变：送包裹 → ARPG → 飞行模拟 → 工坊经营，创始人承认流程混乱并非理想训练路线。2014开发、2018上线；不同阶段团队规模变化，不能机械把公司总人数当该项目全时人员。</li>
+<li>《沙石镇时光》：2022时公司已逾百人并有其他项目，团队有意识利用原作的付费受众和角色/工坊世界，尝试在保留熟悉核心的同时改换新地点、美术、叙事与系统。开发者认为续作是一种不小的设计和组织挑战。</li>
+<li>李岸更直接指出：面试大厂策划时常听到 ARPU/付费率提升的职业成就，但他们这种单机买断制作更关心沉浸体验与玩家如何喜欢游戏——与 [029 正统倒置] 中两套能力评价标准形成难得的<strong>中国从业者当事人交叉证据</strong>。</li>
+<li><strong>编码：MIXED SUCCESS/FAILURE STUDIO LEARNING → MARKET-ANCHORED SERIES；需区分公司连续经验与“首款低成本”</strong>。</li>
+<li>来源：https://www.youxituoluo.com/529643.html （2022-08-15，李岸 TGDC2022 演讲实录整理，作者自述一手内容经媒体编辑）。</li>
+</ul>
+<h3 id="86">8.6 哪些响亮案例不能塞进“低成本首作”样本？</h3>
+<ul>
+<li>Warhorse 的《Kingdom Come: Deliverance》并非廉价一代：创始人2026年采访回忆前期投资寻求花了约2年、对约50家发行商推介、获得投资之后仍需 Kickstarter；它适合研究 <strong>独特设计缺少传统发行商认可时的直接需求证明</strong>，而不能当作低成本独立首作。</li>
+<li>Larian 首代也达到数百万欧元研发成本；和仅数名成员的《Risk of Rain》不是同一个起步规模层级。必须分预算/创作能力类型做分层比较。</li>
+<li>未推出商业续作的项目（《戴森球计划》持续开发、原型孵化、《苍翼》前期测试）也不能假装已得到 <strong>first commercial game&rsquo;s profits fund sequel</strong> 的财务机制。</li>
+</ul>
+<p>来源：https://www.pcgamer.com/gaming-industry/game-development/for-warhorses-15th-birthday-we-chatted-with-its-co-founder-about-the-demand-for-grown-up-rpgs-ai-why-games-are-too-cheap-and-his-role-in-the-collapse-of-communism/</p>
+<h2 id="9">9. 证据模型升级：三种彼此不可替代的证据</h2>
+<p>一代的成功只能可靠支持其原有设计及商业命题：</p>
+<ol>
+<li><strong>MARKET PROOF / 有人要买</strong>：实际陌生玩家销量、退款、留存、评论、wishlist→购买转化、地区结构。适用类型各异。</li>
+<li><strong>DESIGN TRANSFER PROOF / 放大后还是同一种乐趣吗</strong>：视角从2D到3D、经营转为公路旅行、单人到联机、新 AI、短局到长局时都必须重新设计并实测；《The Culling 2》是偏离验证价值的反向证据。</li>
+<li><strong>SCALE DELIVERY PROOF / 组织能否交付</strong>：增加人手、新的管线、外包、IT/HR、平台适配、联机运维、安全与 QA。这是《Cities: Skylines II》与 Red Hook 公司扩编复盘的重要教训。</li>
+</ol>
+<p>辅助资金关口：
+4. <strong>FINANCING OPTIONALITY</strong>：一代利润能否支付二代核心路线？众筹是扩大产品选择还是填现金流断口？股权、发行权益、贷款、IP授权需要分别计算。
+5. <strong>RE-ENTRY / LEARNING OPTIONALITY</strong>：如果二代失败，是否仍保留下一轮试错的现金、人员与 IP 权利？</p>
+<p>以《Helldivers 2》的第三人称为例，最重要的不是“买到更多美术人头”，而是验证玩家在新的相机下仍能在友伤、输入支援、空投与小队压力中享受同一个系统叙事世界。Arrowhead 自述从初代俯视角实际下拉摄像机实验，正是可观察的 Design Transfer Proof。</p>
+<h2 id="10">10. 数量级与选择偏差：下一轮实证必须做队列而不是英雄榜</h2>
+<ul>
+<li>GameDiscoverCo 2025年基于第三方估计，在2024年约19,000款 Steam 新上架游戏中，有233款达到生命周期至2025-03超过100,000份（约1.2%），其中147款为非续作/非改编的原创新 IP；与收入盈利和未来续作完成率均<strong>不是同一个指标</strong>。该数据不能当国别原创者占比，也不能解释为何这147款成功。</li>
+<li>需要将“进入首作发行的团队”与“只完成原型的团队”分开；把收入在续作前已经耗尽、停业、转外包、融资失败以及完全没有二代者放回分母。</li>
+<li>可执行 cohort（待建）：2010—2025 PC/console 买断与独立 EA 工作室，中/美/加/英/法/波/捷/日/韩等；同时纳入 2D→3D、同 IP 不同玩法、原作逐年滚动 EA、Mod→独立、原型→首作类型。</li>
+<li><strong>最少字段</strong>：studio; country; founding year; commercial-first release; prior shipped games; prototype lineage; team at first release; paid units; revenue source; upfront publisher money; investor equity timing; IP rights; first game&rsquo;s dev years; budget provenance; sequel release; team at sequel; sequel genre/form change; retained core mechanic; new design proof; delivery proof; sequel outcome; source reliability; unknown reasons; censor date.</li>
+<li>禁止做国别先验填空。不能把《失落城堡》与《苍翼》当中国规模等同国际的证明，也不能因为有《Helldivers》《Larian》就断言欧美大多数独立游戏都遵循顺序增长。</li>
+</ul>
+<p>数据参考：https://newsletter.gamediscover.co/p/why-dont-we-talk-about-console-game</p>
+<h2 id="11">11. 与中国正统倒置 / 春登 / 原型生态研究的新增交叉命题</h2>
+<ul>
+<li><strong>SCALING WITHOUT DISCOVERY</strong>：组织和融资只能放大答案；如果公司职业训练未积累陌生规则的短周期实验经验，可能依赖别人的品类原创，然后把外形规格当成投资假设。</li>
+<li><strong>DISCOVERY WITHOUT OWNERSHIP</strong>：一个中国作者即使产出低成本原型，如果不拥有 IP、发行或项目决策权，也不一定能将其转化为下一代研发资金；训练人才与保留经济权益同样重要。</li>
+<li><strong>INFORMATION-TO-BARGAINING POWER</strong>：首作销量、口碑、群体反馈、交付履历不是“媒体宣传”，而是使作者在合同中争取 IP、里程碑、自主制作权的具体证据。</li>
+<li><strong>CAPABILITY ACCUMULATION BEFORE MONEY</strong>：真正弥补文明/人才培养差距，不能只看一代赚不赚钱，更要看团队是否保存了原型、复盘、可复用工具、续作定价与预算等知识。AI 增加供给之后更是如此。</li>
+</ul>
+<p>进一步的产业假说：<strong>中国游戏业的潜在结构缺口不只是 Scale Down，而是 SCALE SEQUENCING / 有顺序的创作资本配置</strong>。它必须作为待核验的跨国队列命题，而不是根据国籍贴标签。</p>
+<h2 id="12-evidence-register">12. Evidence Register（本批）</h2>
+<table>
+<thead>
+<tr>
+<th>研究对象</th>
+<th>类型</th>
+<th>证据强度 / 不能推出什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Larian DOS1→2</td>
+<td>首作产品收入资助二作并用众筹增量扩容</td>
+<td>创始人口述 + 官方 KS；不能称一代廉价/纯自筹</td>
+</tr>
+<tr>
+<td>Red Hook DD1→2</td>
+<td>续作创意改造 + 组织协同成本</td>
+<td>主创访谈；不能称二作成功证明全面扩编有效</td>
+</tr>
+<tr>
+<td>Ghost Ship DRG→Rogue Core</td>
+<td>EA 证明 + 早期发行/股权投资 + 新IP结构风险</td>
+<td>官方公司历史 + 2018披露 + Steam EA截面；不能称“系列失败”</td>
+</tr>
+<tr>
+<td>91ACT 小原型→混沌效应</td>
+<td>小原型验证后舍弃并扩大产品</td>
+<td>制作人一手自述；不能称商品第一代利润融资第二代</td>
+</tr>
+<tr>
+<td>Pathea 多代作品</td>
+<td>失败、市场试错、产品系谱与公司成长</td>
+<td>CEO 2022演讲回顾；不能把演讲时公司人数等同某一产品的全时制作人数</td>
+</tr>
+<tr>
+<td>Warhorse KCD1→2</td>
+<td>早期投资/发行商拒绝后直接玩家证明</td>
+<td>联合创始人访谈；不能当小预算首作</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Evidence policy:</strong> 本档是证据集合，直接引述须回到相应访谈与项目原页。事实、创作者回忆、媒体推算及我们自己的解释分栏；不把任何一个成功公司投射为整国制度代表。</p>
+<hr />
+<h2 id="13-third-case-pass-mod-commercial-1-selective-scale-to-22026-10-09">13. Third case pass — Mod → Commercial 1 → selective scale to 2（2026-10-09）</h2>
+<h3 id="131-torn-banner-age-of-chivalry-2007-mod-chivalry-2012-mirage-2017-fail-chivalry-2-2021">13.1 Torn Banner: Age of Chivalry (2007 Mod) → Chivalry (2012) → Mirage (2017 fail) → Chivalry 2 (2021)</h3>
+<p><strong>优先级：high。此案例覆盖原型、商业化、试错失败、制作扩编与复盘，不能简化成“续作天然暴增”。</strong></p>
+<ul>
+<li>2007：跨国业余团队基于 Half-Life 2 的 Source 制作免费 total conversion《Age of Chivalry》。旧游戏承担引擎、底层联网和既有玩家聚集成本，新团队集中验证“第一人称多人冷兵器战斗 + 重型格挡、地图目标”的玩家体验。</li>
+<li>2010：组建 Torn Banner；从 Source Mod 转到当时逐步开放的 Unreal Developer Kit（UDK）；2012：独立商业《Chivalry: Medieval Warfare》上市。官方自己记载 2013 在商业成功后才建立多伦多办公室：<strong>团队组织成熟滞后于首次产品验证</strong>。</li>
+<li>2017：团队没有直接吃初代成功红利制作续作，而选择更偏幻想法术战斗的《Mirage: Arcane Warfare》，最终商业失败。Torn Banner 2021 对 Unreal 官方访谈承认 Mirage 的目标受众识别出错：设定/美术显得偏休闲，但操作核心却极硬核，两个客群都未被照顾；团队创作方向失去一致性。自称这场失败迫使团队改进产品、沟通与内部分工。</li>
+<li>2021：《Chivalry 2》增加64人战场、跨平台/主机交叉联机、电影式攻城、改良近战交互；2021-05 品牌总监在 Unreal 访谈给出 <strong>35名雇员</strong>，与二代升级匹配，而非从2007就雇齐完整主机工业团队。合约有 Tripwire 发行方。</li>
+<li>更重要的一手细节：2020-03 至2021-04 每月约1—4天的封闭 alpha 轮次，共吸引数万名测试者；设计者说某些大型地图迭代几百次。即使有资本和既有 IP，最终二代仍须单独取得 <strong>DESIGN-TRANSFER / DELIVERY</strong> 证明。</li>
+<li>官方回顾：《Chivalry 2》发售首两个月售约100万。团队却还有一部未成功的 Mirage，所以应编码为 <strong>MOD PROOF → COMMERCIAL PROOF → FAILED NEW-IP EXPERIMENT → REFINED SEQUEL-SCALE</strong>。</li>
+<li>负面边界：官网首周畅销不等于净利、发行分成未知；不能将公司35员工等于所有外包贡献者。</li>
+</ul>
+<p><strong>一手来源：</strong>
+- 公司历史：https://tornbanner.com/
+- 2019回顾：https://chivalry2.com/2019/10/08/498/
+- 开发者 2021 详细访谈（组织、人数、专用战斗系统、alpha）：https://www.unrealengine.com/developer-interviews/chivalry-2-is-designed-to-make-you-feel-like-you-re-in-a-medieval-war
+- 2019 公告 https://chivalry2.com/2019/06/09/chivalry-2-announced/</p>
+<h3 id="132-autoattack-legion-td-1-warcraft-iii-mod-legion-td-2">13.2 AutoAttack — Legion TD 1 (Warcraft III Mod) → Legion TD 2</h3>
+<ul>
+<li>原始 Legion TD 是作者 Brent “Lisk” Batas 在 <strong>2009年高中毕业年级</strong> 于《Warcraft III》创作的免费防守地图；后成立 AutoAttack 将这一经多年玩家接触的规则转为独立商品《Legion TD 2》。</li>
+<li><strong>2016-02-22 开发者自己的公开宣言</strong> 明确表示：团队刻意保持小规模，是为了“freedom to innovate”、“minimal overhead”，并让游戏仍由最初的设计者控制。这是 <strong>作者性 / 规模纪律 / 资本模式</strong> 的同一因果陈述，不是媒体推论。</li>
+<li>2016-03 开启 Kickstarter；不等于全自筹。此案尤其适合与中国《Dota Auto Chess》（Dota2 Mod）比较：二者都在第三方游戏工具里寻找新人游戏范式，不靠先融资造完整引擎。</li>
+<li>概念上的重要增量：<strong>预产品收入的技能证明/受众证明</strong> 可以发生在 Mod 层；付费首作不必是首个公共验证节点。</li>
+<li>来源：https://beta.legiontd2.com/updates/meet-the-creator-of-legion-td/ ；https://preview.legiontd2.com/team/</li>
+</ul>
+<h3 id="133-battlebit-remastered-scale-sequencing">13.3 BattleBit Remastered：并非一代二代，但展示“高机械复杂度 × 低视觉规格”的另外一种 scale sequencing</h3>
+<ul>
+<li>3名核心开发者、约6年半的长期原型—测试—推广过程，曾在Mod圈建立初始玩家关系。</li>
+<li>前期开发偏硬核拟真、视觉却是低多边形风格。团队2018—2019决定把产品往更可亲近的射击体验调整；不是一味砍功能，而是<strong>重配美术承诺与机制难度之间的匹配</strong>。其后持续开放限时周末测试、追踪玩家行为与主播反馈。</li>
+<li>据制作人 2023-07 与 Chris Zukowski 的访谈：EA上架两周约180万份，事前约80万愿望单。作者还明确劝诫第一次独立开发不要轻易做多人项目。团队花了多年创造未来一次性放大的市场选择权。</li>
+<li>注意：三人“核心”不是完整经济生产成本；大型多人服务器、反作弊、持续服务、外包、六年人力机会成本都应计入。此作也不是“完全新范式”的例子，而是有效重组已有大战场射击的体验并降低表现成本，按 <strong>EXPERIENCE FIT-SCALE</strong> 编码。</li>
+<li>访谈转述：https://gameworldobserver.com/2023/07/04/battlebit-remastered-sales-1-8-million-copies-case</li>
+<li>制作人原采访：https://howtomarketagame.com/2023/07/03/how-to-market-a-multiplayer-the-battlebit-remastered-story/</li>
+</ul>
+<h2 id="14-ip">14. 第四项资本风险：IP 转让后的创作知识与成果所有权断裂</h2>
+<h3 id="141-squad-ksp-2015-ksp2-2023-ea">14.1 Squad / KSP (2015) → KSP2 (2023 EA)</h3>
+<ul>
+<li>Take-Two 2017-05-31 <strong>官方投资者公告</strong>：收购《Kerbal Space Program》IP（不是仅取得发行权），当时初代已售&gt;200万；原制作团队 Squad 继续维护一代。公告：https://ir.take2games.com/static-files/f86fae80-882c-4c68-b71c-07560c4b1183</li>
+<li>二代不是由最初完整创作团队续做，而是由新团队 Star Theory / Intercept 开发，Private Division 发行。2023-02 EA 上线，2024技术和规模问题长期累积。</li>
+<li>2024年 Take-Two 先否认已完成关停，后确认 Intercept 被关闭，并于 2024-11 公布出售 Private Division 及大部分项目（交易相关报道：https://www.pcgamer.com/gaming-industry/take-two-has-sold-private-division-to-an-unnamed-buyer-we-are-top-ten-hit-makers-around-here-and-private-division-wasnt-making-them/）。不能从2024年春夏不同阶段报道直接断言当时公司发言一致。</li>
+<li>截止2026-10，Steam 商店依然标 Early Access 且英文评价约25%好评，官方游戏补丁可核实至2024-06；新拥有者与项目后续发展需要独立验证，不能当成永久不可挽回的终局。</li>
+<li><strong>新增 Gate F — CREATIVE CONTINUITY PROOF：</strong>既有商业IP有购买受众，不意味着新的开发组织继承其系统代码、工程/调优 tacit knowledge、设计决策、社区信任与交付体系。IP所有权是一种 legally transferable asset，original gameplay insight 并不完全是。</li>
+<li>本例只证明这种断裂是重大需要调查的风险；<strong>不能把二代失败完整归因为资本收购</strong>，也不能假设原团队继续做就一定成功。</li>
+<li>源：https://store.steampowered.com/app/954850/Kerbal_Space_Program_2/ ，https://steamcommunity.com/app/954850/announcements/ ，https://www.gamedeveloper.com/business/take-two-confirms-kerbal-space-program-2-is-safe-despite-seattle-layoffs</li>
+</ul>
+<h3 id="142-endnight-the-forest-sons-of-the-forest">14.2 Endnight — The Forest → Sons of the Forest：自融资神话的一个硬反例</h3>
+<ul>
+<li>2014年《The Forest》以约4人内部核心团队配合 freelancer/outsourcing，从电影VFX经验迁移；采取有玩家直接支付并参与反馈的 Early Access。</li>
+<li>创始人 Ben Falcone 在2014-08由 Game Developer 采访，坦言发售付费Alpha时已经资金耗尽、私人投资者施压、账上仅剩几百美元。这是<strong>自融资/低成本 ≠ 无外部资金、无融资纠纷、无流动性风险</strong>的强一手反例。</li>
+<li>2023-02-23 续作《Sons of the Forest》EA推出，据 Endnight 2023-02-24 官方推文前24小时卖&gt;200万份，是受众被一代长期证实之后“下一代启动需求”的强证据，但并不代表原作高销售转化率或二代净利润率已核实。</li>
+<li>来源：https://www.gamedeveloper.com/business/selling-a-game-before-it-s-done-tips-and-insight-for-paid-alphas ，https://www.gamedeveloper.com/design/fine-young-cannibals-developing-early-access-hit-i-the-forest-i- ，https://www.videogameschronicle.com/news/sons-of-the-forest-sold-2-million-copies-in-first-24-hours/</li>
+</ul>
+<h2 id="15-theory-revision-cohort-instrumentation">15. Theory revision &amp; cohort instrumentation</h2>
+<p><strong>从原来三证据改为四证据，加“资本控制权/生存约束”作为贯穿条件：</strong></p>
+<ol>
+<li>MARKET PROOF — 现有首作是否真的有人付费/长期参与；</li>
+<li>DESIGN-TRANSFER PROOF — 新相机、新机制、新操作对象是否放大而非损坏原有体验；</li>
+<li>ORG DELIVERY PROOF — 扩编/外包/平台迁移能否交付；</li>
+<li>CREATIVE CONTINUITY PROOF — 二代是否继承原一代具体作者、代码/工具/玩法洞察、玩家沟通机制，以及是否控制IP/项目否决权。</li>
+</ol>
+<p>注意：一代正面市场验证不可替代其余三个 Gate。《Chivalry》2017试错失败与《KSP2》的组织/IP断裂使这一命题更具可否证性。</p>
+<p><strong>新增原型→商业→续作的 multi-generation coding</strong>：
+- PROTOTYPE_ORIGIN = mod / jam / PICO8 / paid prototype / independent game / corporate venture
+- PROTOTYPE_IP_AND_TOOL_RIGHTS = own / game-licensed / workshop / unknown
+- GEN1_IP_RIGHTS = owned / co-owned / licensed / sold before sequel / unknown
+- GEN1_COMMERCIAL_PROOF = sales / paid EA / wishlist / retained communities / qualitative only
+- TRANSFER_ORG_CONTINUITY = founders / core dev / partial / entirely new developer
+- GEN2_TEAM_FTE_PLUS_PARTNERS = employee size + hired contractors + externally financed tech
+- FAILED_EXPERIMENT_BETWEEN_GENS = yes/no/unknown (《Mirage》相当重要)
+- PROOF_RISK_SHIFT = which risks were reduced, which were new, and which remained untested
+- CENSORED_SEQUEL = announced / alpha / EA / full release / abandoned / studio closed</p>
+<p><strong>Method guardrails:</strong>
+1. 不把“作品第一天卖得快”解释成作品利润率和人效高；无全成本与净发行收入不能做ROI排名；
+2. 对中国职业生态/东亚规训相关假说，必须比较同样拥有业界资历、同类型、同年代的 cohort，不能使用全球 Jam 总量当欧美国家分母；
+3. Mod→standalone 的源平台版权、IP和分成风险不可忽略；要找同时期<strong>未成功转正的Mod团队</strong>入失败分母；
+4. 比起销售收入，还要统计 <strong>DESIGN-TRANSFER SUCCESS RATE &amp; CREATOR RIGHTS RETENTION</strong>，因为一代若卖IP失权可能无法再自行利用一代积累；
+5. 研究不把“没有卖 IP”设为道德优越；有些开发者选择出售IP，实现个人财务自由或另起炉灶，这是另一种合法成功。</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / book/research-notes/earned-scale-sequel-proof-first-20261009.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

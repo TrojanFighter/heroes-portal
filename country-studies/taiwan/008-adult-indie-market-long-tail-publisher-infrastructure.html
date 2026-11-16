@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>008 — 台湾成人独立游戏生态：从头部爆款到普通长尾、发行基础设施与平台风险 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl class="on"" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0" class="t2">0. 核心结论</a><a href="#tw-r18-e01mango-party100steam" class="t2">TW-R18-E01｜Mango Party：100+产品、数十万Steam关注</a><a href="#_1" class="t3">产业意义</a><a href="#tw-r18-e02playmeow100steam" class="t2">TW-R18-E02｜PlayMeow：100+Steam产品＋自研工具＋自有平台</a><a href="#tw-r18-e03lewdloco" class="t2">TW-R18-E03｜LewdLoco：第三个可见专业发行层</a><a href="#tw-r18-e04" class="t2">TW-R18-E04｜一人开发与绘师转开发者并非例外</a><a href="#tw-r18-e0523" class="t2">TW-R18-E05｜不仅是个人，还大量存在2—3人“用爱发电”团队</a><a href="#tw-r18-e06" class="t2">TW-R18-E06｜开发者自己开始强调“黄油必须能玩”</a><a href="#_2" class="t3">当前常见杂交方向</a><a href="#tw-r18-e07" class="t2">TW-R18-E07｜头部产品的地域收入结构显示明显出口型</a><a href="#_3" class="t3">多语言是默认生产要求</a><a href="#tw-r18-e08" class="t2">TW-R18-E08｜头部：确实存在独立游戏级“大爆款”</a><a href="#tw-r18-e09" class="t2">TW-R18-E09｜中腰部：几百评论、几十到数百并发峰值更常见</a><a href="#tw-r18-e10" class="t2">TW-R18-E10｜低尾：几十评论、个位/几十峰值并不少见</a><a href="#_4" class="t3">结论</a><a href="#tw-r18-e11" class="t2">TW-R18-E11｜社区低评样本已经明确讨论“赛道变挤”</a><a href="#_5" class="t3">市场成熟后的质量阈值</a><a href="#tw-r18-e12playmeow" class="t2">TW-R18-E12｜PlayMeow已经不是只收成品，而是在生产创作者</a><a href="#_6" class="t3">更强的产业解释</a><a href="#tw-r18-e13steam" class="t2">TW-R18-E13｜Steam新增支付处理商/卡组织规则约束</a><a href="#tw-r18-e14itchio" class="t2">TW-R18-E14｜itch.io说明支付系统可以直接摧毁成人内容发现能力</a><a href="#_7" class="t3">对台湾集群的意义</a><a href="#_8" class="t2">可支持的判断</a><a href="#a-tamr18-pcindie-niche" class="t3">A. TAM不是台湾本地，而是全球R18 PC/indie niche集合</a><a href="#b" class="t3">B. 有真实的高收益右尾</a><a href="#c" class="t3">C. 普通作者的进入门槛下降非常快</a><a href="#d" class="t3">D. 因此供给竞争也快速恶化</a><a href="#e-hook" class="t3">E. 成人hook越来越不能替代产品设计</a><a href="#creator-supply-layer" class="t2">Creator supply layer</a><a href="#publisher-selection-layer" class="t2">Publisher selection layer</a><a href="#global-demand-layer" class="t2">Global demand layer</a></aside><article class="doc"><div class="col"><h1 id="008">008 — 台湾成人独立游戏生态：从头部爆款到普通长尾、发行基础设施与平台风险</h1>
+<ul>
+<li>Status: MARKET-STRUCTURE AUDIT / LONG-TAIL CORRECTION / PRE-CLAIM</li>
+<li>Program: C Taiwan comparator</li>
+<li>As of: 2026-10-08</li>
+<li>Scope: 台湾作为R18/成人独立游戏的开发、发行、工具、展会与跨境商业枢纽；重点修正“只看最体面成功案例”的幸存者偏差</li>
+<li>Restriction:</li>
+<li>不把台湾发行商目录里的所有作品都算作“台湾开发”；</li>
+<li>不以Steam评论数直接换算销量；</li>
+<li>不把第三方销量/营收估值当财报；</li>
+<li>成人内容仅作为产业、设计与监管对象分析。</li>
+</ul>
+<h2 id="0">0. 核心结论</h2>
+<p class="dc">当前台湾成人独立游戏已经不是几款偶发成功作品，而是具备以下层次的微型产业：</p>
+<ol>
+<li><strong>大型专门发行商</strong>：Mango Party、PlayMeow、LewdLoco均已形成几十到100+产品的Steam目录；</li>
+<li><strong>中小开发社团/个人作者</strong>：一人、2—3人和兼职作者极常见，部分作者从绘师、小说作者、营销从业者等转入；</li>
+<li><strong>低代码/模板化生产工具</strong>：PlayMeow的ACG爱创作把“不会写程序的绘师/作者”也纳入生产；</li>
+<li><strong>专业外围</strong>：翻译、日本配音、营销、商店页、平台上架、QA、IP包装、投资；</li>
+<li><strong>展会与社群</strong>：G-EIGHT已经形成独立的分级游戏展示区，成人作品不再只隐藏在线上；</li>
+<li><strong>明显的长尾淘汰</strong>：同一发行商目录里既有数千同时在线峰值/数万关注的产品，也有几十条评论、个位数至几十人的峰值产品和褒贬不一作品；</li>
+<li><strong>全球平台与支付体系风险</strong>：2025以后Steam支付处理商规则、itch.io成人内容去索引说明台湾本地法律宽松并不能消除全球支付/平台的外部治理风险。</li>
+</ol>
+<p>因此更准确的定义是：</p>
+<blockquote>
+<p>台湾已经形成一个“低固定成本的小团队生产 + 成人品类差异化 + 专业发行商组合经营 + 全球数字平台变现”的R18独游集群。</p>
+</blockquote>
+<p>但其收益分布高度右偏，<strong>少数爆款不能代表普通作者的期望收益</strong>。</p>
+<hr />
+<h1 id="1-portfolio-business">1. 第一层：发行商已经形成真正的portfolio business</h1>
+<h2 id="tw-r18-e01mango-party100steam">TW-R18-E01｜Mango Party：100+产品、数十万Steam关注</h2>
+<p>Steam官方发行商页当前将Mango Party定义为adult game publisher。</p>
+<p>https://store.steampowered.com/publisher/mangoparty/about/</p>
+<p>SteamDB当前对Mango Party News目录显示：
+- 100 products match（页面达到显示上限）；
+- 头部产品包括《Summer Clover》《Train45》《Kaiju Princess》等；
+- 2026五周年促销明确宣传“100+ titles”。</p>
+<p>https://steamdb.info/publisher/Mango%20Party%20News/
+https://steamdb.info/sales/event/697642013631187451/</p>
+<p>Mango Party Steam社区自述：
+- 2021成立；
+- 已带来100+ adult games。</p>
+<p>https://steamcommunity.com/groups/MangoParty</p>
+<p>Cake企业页的公司自述口径：
+- 11—50人；
+- 全球发行近百款成人游戏；
+- 累计数百万套；
+- 服务包含营销、周边、投资、产品顾问、翻译、技术/开发支持和移植。</p>
+<p>https://www.cake.me/companies/store-steampowered-franchise-mangoparty</p>
+<p>“数百万套”属于公司自报，未审计；但100+目录和发行基础设施本身可由Steam/SteamDB独立观察。</p>
+<h3 id="_1">产业意义</h3>
+<p>这已经不是传统意义的“小发行商押一两款作品”，而更接近：</p>
+<p>many small bets
+→ cross-promotion / seasonal bundles / themed events
+→ a few breakout hits subsidize portfolio
+→ publisher accumulates audience, localization and launch know-how.</p>
+<p>其商业逻辑天然能容忍大量中低表现项目。</p>
+<hr />
+<h2 id="tw-r18-e02playmeow100steam">TW-R18-E02｜PlayMeow：100+Steam产品＋自研工具＋自有平台</h2>
+<p>SteamDB对PlayMeow发布目录：
+- 100 products match（达到页面显示上限）。</p>
+<p>https://steamdb.info/publisher/Playmeow/</p>
+<p>Steam官方发行商页当前约有17万+关注：
+https://store.steampowered.com/publisher/playmeow/about/</p>
+<p>2025 G-EIGHT官方参展介绍中，PlayMeow自述：
+- 总发行游戏超过70款；
+- Steam发行商关注超过13万；
+- 另有DLsite发行；
+- 同时投资平台、低代码编辑器ACG爱创作等技术基础设施。</p>
+<p>https://geight.io/2025-geight-exhibitors/playmeow%E7%8E%A9%E5%96%B5-%E3%80%8A%E5%A2%AE%E8%90%BD%E7%B2%BE%E9%9D%88%C2%B7%E8%8A%99%E8%95%BE%E9%9B%85%E3%80%8B/</p>
+<p>2025又推出整合移动端试玩/下载平台：
+https://www.4gamers.com.tw/news/detail/69364/r18-games-app-playmeow-review</p>
+<p>所以PlayMeow与Mango Party相比，更明显走向：</p>
+<p>publisher
++ developer tools
++ creator education
++ own distribution platform
++ investment / incubation.</p>
+<hr />
+<h2 id="tw-r18-e03lewdloco">TW-R18-E03｜LewdLoco：第三个可见专业发行层</h2>
+<p>SteamDB当前记录LewdLoco：
+- 67 products；
+- 目录内部从高表现到非常低表现都有；
+- 头部如V-LOVER!、Immoral-Bathhouse；
+- 多个产品只有数十峰值玩家或约1000—3000关注。</p>
+<p>https://steamdb.info/publisher/LewdLoco/</p>
+<p>Steam官方页当前约3万+关注，并公开宣布《Immoral-Bathhouse》销量突破100,000 copies（发行商自报）。</p>
+<p>https://store.steampowered.com/publisher/LewdLoco</p>
+<p>这说明市场已经不是Mango Party / PlayMeow双寡头，而开始出现多家专门发行商竞争和合作。</p>
+<hr />
+<h1 id="2">2. 第二层：普通创作者远比“明星团队”草根</h1>
+<h2 id="tw-r18-e04">TW-R18-E04｜一人开发与绘师转开发者并非例外</h2>
+<p>PlayMeow对ACG爱创作的2025访谈：
+https://www.4gamers.com.tw/news/detail/70918/playmeow-acg-creator-and-milf-conditioning-developer-interview</p>
+<p>记录：
+- 工具平台当时已有40—50款完成作品；
+- 典型创作者Vincent原为游戏美术；
+- 疫情期间失业后开始个人开发；
+- 自己承担剧本、角色和制作；
+- 四款产品累计销量30万套（当事人/平台口径）；
+- 收入已足以使其保持全职个人开发状态。</p>
+<p>这是头部成功者，但更重要的是生产结构：
+<strong>artist → no/low programming tool → solo author → publisher distribution</strong>。</p>
+<p>另一组2025访谈：
+https://www.4gamers.com.tw/news/detail/75067/playmeow-acg-creator-with-illustrator-interview</p>
+<p>采访三名绘师出身作者：
+- 有人最初不会程序，只能依赖外包，功能修改都会增加预算；
+- 有人尝试RPG Maker后因技术门槛放弃；
+- 通过低代码编辑器后重新完成个人游戏；
+- 最大约束从“程序不会写”转成“一个人时间不足”。</p>
+<p>因此成人独游在台湾的一个重要功能是：</p>
+<blockquote>
+<p>把原本只能卖图、写小说、接案的内容创作者转化成游戏产品作者。</p>
+</blockquote>
+<hr />
+<h2 id="tw-r18-e0523">TW-R18-E05｜不仅是个人，还大量存在2—3人“用爱发电”团队</h2>
+<p>《Take Me To The Dungeon!!》开发者访谈：
+https://news.gamebase.com.tw/news/detail/99413075</p>
+<p>开发团队风船花火自述：
+- 核心仅3人；
+- 缺乏资金，主要依靠业余/低成本投入；
+- 约一年半完成；
+- 发行为其补足音乐、配音、营销、翻译、上架等能力。</p>
+<p>其首月12万套销量为发行商/开发者公开口径。</p>
+<p>这说明R18市场对台湾小团队的价值并不只是“内容题材自由”，而是：
+<strong>一个3人团队也有机会通过专门发行商直接接上全球市场。</strong></p>
+<hr />
+<h1 id="3-vn">3. 第三层：品类已经从“看图VN”演化成玩法杂交</h1>
+<h2 id="tw-r18-e06">TW-R18-E06｜开发者自己开始强调“黄油必须能玩”</h2>
+<p>2025一人作者访谈：
+https://www.4gamers.com.tw/news/detail/74308/sex-change-contract-and-molester-girl-developer-interview</p>
+<p>作者明确说成人游戏不能只是“看图”，而要“能玩”；其项目开发近三年，并从兼职逐渐转全职。</p>
+<p>2025 G-EIGHT官方对Hide Games介绍：
+- 台湾独立成人游戏团队；
+- 一次展示6款计划于2026发布的项目；
+- 明确强调成人内容必须与roguelite、Live2D、谜题等实际玩法结合。</p>
+<p>https://geight.io/en/2025-geight-exhibitors/hide-games-%E3%80%8Aeropsychosis%E3%80%8B/</p>
+<p>其合作项目中甚至明确出现一人开发团队：
+https://geight.io/2025-geight-exhibitors/%E5%97%A8%E9%81%8A%E6%88%B2%E6%95%B8%E4%BD%8D%E5%A8%9B%E6%A8%82-%E3%80%8A%E6%80%A7%E6%84%9B%E9%99%A4%E9%AD%94-sexorcism%E3%80%8B/</p>
+<h3 id="_2">当前常见杂交方向</h3>
+<p>从Steam/G-EIGHT目录可以观察到：
+- RPG / RPG Maker；
+- time management / management sim；
+- card / deckbuilding；
+- roguelite / survivor；
+- match-3 / puzzle；
+- mahjong / tabletop；
+- 2D action；
+- 3D simulation；
+- visual novel + systems；
+- Taiwan/local urban setting；
+- cultivation / fantasy / streamer / office / cosplay等华语网络题材。</p>
+<p>因此“台式黄油”的产品形式正越来越像：</p>
+<p><strong>成熟独立游戏机制模板
++ 强性癖/成人内容hook
++ 低至中等scope
++ 多语言全球发行。</strong></p>
+<p>而不是传统日本eroge的单一路线。</p>
+<hr />
+<h1 id="4">4. 第四层：真正的市场不是台湾，而是全球小众市场集合</h1>
+<h2 id="tw-r18-e07">TW-R18-E07｜头部产品的地域收入结构显示明显出口型</h2>
+<p>《Take Me To The Dungeon!!》开发团队公开首月地域分布：
+- USA 30%
+- Japan 14%
+- Taiwan 11%
+- Korea 10%
+- Hong Kong 8%</p>
+<p>Source:
+https://news.gamebase.com.tw/news/detail/99413075</p>
+<p>这意味着至少该头部作品中，台湾本地只占约一成。</p>
+<p>2025 INSIDE使用Gamalytic第三方估算也得出类似方向：多款Mango Party头部产品可能达到数十万销量/百万美元级gross，其中某头部作品台湾玩家占比估算约10%。</p>
+<p>https://www.inside.com.tw/article/39629-taiwanes-h-games</p>
+<p>Gamalytic属于第三方模型，具体营收不能视为财报；但“全球收入远大于台湾本地”与开发者直接披露相互加强。</p>
+<h3 id="_3">多语言是默认生产要求</h3>
+<p>大量目录产品默认支持：
+- Traditional Chinese
+- Simplified Chinese
+- Japanese
+- English
+- 常见再加Korean。</p>
+<p>这使台湾发行商的实际市场更像：
+<strong>North America + Japan + Taiwan/HK + Korea + broader Steam adult niche</strong>。</p>
+<p>必须注意：
+很多Adult Only Steam产品对CN地区无价格或直接restricted，因此“支持简中”不能直接推断标准Steam中国区销量，也不能把所有简中用户算成大陆消费者。</p>
+<hr />
+<h1 id="5">5. 第五层：长尾远比媒体报道难看</h1>
+<p>头部报道造成最大幸存者偏差。</p>
+<h2 id="tw-r18-e08">TW-R18-E08｜头部：确实存在独立游戏级“大爆款”</h2>
+<p>SteamDB当前非销量指标：</p>
+<p>Mango Party:
+- Summer Clover：约45k followers，历史峰值并发约5,199；
+- Train45：约23k followers，峰值约3,277；
+- Peeping Dorm Manager：约40k followers，峰值约3,914；
+- Kaiju Princess 2：峰值约3,828。</p>
+<p>Source:
+https://steamdb.info/publisher/Mango%20Party%20News/</p>
+<p>PlayMeow:
+- The Wife Next Door：约18k followers，峰值约1,042；
+- Fallen Elf Freya：约13k followers，峰值约1,013。</p>
+<p>Source:
+https://steamdb.info/publisher/Playmeow/</p>
+<p>这些足以说明R18小团队可以达到正常成功indie的可见度量级。</p>
+<h2 id="tw-r18-e09">TW-R18-E09｜中腰部：几百评论、几十到数百并发峰值更常见</h2>
+<p>例如SteamDB当前记录：
+- NTR Office：563 reviews；
+- Kurage Life：633 reviews；
+- Homebody Hostess：约100 reviews；
+- Radiant Victorias：约200 reviews；
+- Destroy! Mosaic!：约150 reviews。</p>
+<p>这些不能直接换算销量，但已经显示：
+<strong>多数可见产品距离头部仍差一个数量级以上。</strong></p>
+<h2 id="tw-r18-e10">TW-R18-E10｜低尾：几十评论、个位/几十峰值并不少见</h2>
+<p>LewdLoco目录直接提供非常直观的长尾：
+- NTR Sexy girl with Cold-hearded：32 reviews，SteamDB rating约50%，峰值约13；
+- Futanari&rsquo;s Sex World!：约1.5k followers，峰值25；
+- Dark Lord Leona：约2.3k followers，峰值57；
+- Tower of Megami Descents：约1.1k followers，峰值27。</p>
+<p>https://steamdb.info/publisher/LewdLoco/</p>
+<p>Mango Party：
+- 30 Days of Work：约65 reviews，SteamDB rating约59%，当前0在线；
+- Lydina：约55 reviews、约70% SteamDB rating；
+- Maid Life SS：约38 reviews。</p>
+<p>https://steamdb.info/app/4065090/charts/
+https://steamdb.info/app/3192300/charts/
+https://steamdb.info/app/3192260/charts/</p>
+<p>PlayMeow目录亦有：
+- Shadow Among Nove：约373 followers、峰值14；
+- Tasty Bite：约1,248 followers、峰值27。</p>
+<p>https://steamdb.info/publisher/Playmeow/</p>
+<h3 id="_4">结论</h3>
+<p>不能再把“台湾R18独游收益”理解成：
+“做一款低成本黄油，大概率赚很多。”</p>
+<p>更接近：</p>
+<blockquote>
+<p><strong>极低门槛带来大量供给；大多数产品处于小规模长尾，少数产品依靠题材、玩法、美术、发行和口碑形成巨大右尾。</strong></p>
+</blockquote>
+<hr />
+<h1 id="6">6. 玩家并不会因为有成人内容就容忍差游戏</h1>
+<h2 id="tw-r18-e11">TW-R18-E11｜社区低评样本已经明确讨论“赛道变挤”</h2>
+<p>PTT H-GAME版2025对Mango Party发行的《Delivery Hot》讨论：
+https://www.pttweb.cc/bbs/H-GAME/M.1746534568.A.C02</p>
+<p>作者认为：
+- 项目属于新人工作室作品；
+- 核心玩法/视野/节奏设计存在明显问题；
+- 成人内容量也不足以弥补游戏性问题；
+- 开发商持续更新，但部分修改反而恶化体验；
+- 该赛道“投入制作组跟玩家增多，竞争已经颇激烈”，老玩家对产品缺点不会宽容。</p>
+<p>这是单个社区评论，不能代表市场总体；但它与SteamDB上大量50—70%评级、小评论量产品相互吻合。</p>
+<h3 id="_5">市场成熟后的质量阈值</h3>
+<p>早期：
+adult hook本身可能足够产生点击和购买。</p>
+<p>现在：
+adult hook
++ visual quality
++ sufficient content quantity
++ actual gameplay
++ localization/polish
++ publisher visibility</p>
+<p>越来越像共同门槛。</p>
+<p>这也是为什么“低代码工具让更多人能做”同时会带来更强的供给竞争。</p>
+<hr />
+<h1 id="7-creator-conversion-pipeline">7. 工具和发行商正在把成人游戏变成一条creator conversion pipeline</h1>
+<h2 id="tw-r18-e12playmeow">TW-R18-E12｜PlayMeow已经不是只收成品，而是在生产创作者</h2>
+<p>ACG爱创作：
+- 2025已有约40—50款完成作品；
+- 面向不会程序的绘师/作者；
+- R18作品可进入PlayMeow平台；
+- 被判断有商业潜力的Demo可能获得资金、翻译、配音、营销、IP包装和多平台发行支持。</p>
+<p>Source:
+https://www.4gamers.com.tw/news/detail/70918/playmeow-acg-creator-and-milf-conditioning-developer-interview
+https://www.4gamers.com.tw/news/detail/75067/playmeow-acg-creator-with-illustrator-interview</p>
+<p>PlayMeow还推出成人游戏制作课程：
+https://www.4gamers.com.tw/news/detail/73256/playmeow-r18-game-class</p>
+<p>于是形成：</p>
+<p>artist / writer / fan creator
+→ low-code prototype
+→ platform/internal screening
+→ publisher investment/support
+→ Steam/DLsite/other platform launch
+→ successful creators iterate next title.</p>
+<p>这和普通台湾indie的：
+university / jam / freelance
+→ Unity/Godot prototype
+→ grant / publisher
+路径不同。</p>
+<p>成人品类本身正在成为一条“非程序型内容创作者进入游戏业”的替代职业入口。</p>
+<hr />
+<h1 id="8">8. 台湾的真正优势可能是“发行枢纽”，而不是开发国籍</h1>
+<p>Mango Party / PlayMeow / LewdLoco目录中：
+- 有台湾开发团队；
+- 有日本团队；
+- 有无法从公开资料确认所在地的小型社团；
+- 有跨地区共同开发。</p>
+<p>所以严谨研究中必须区分：</p>
+<p>TAIWAN_DEVELOPER
+TAIWAN_PUBLISHER
+TAIWAN_LEGAL_ENTITY
+TAIWAN_EVENT_ECOSYSTEM
+TAIWAN_MARKET</p>
+<p>不能只看到“台湾发行商”就统计成“台湾开发产量”。</p>
+<h3 id="_6">更强的产业解释</h3>
+<p>台湾的比较优势可能是：</p>
+<p>legal R18 commercial space
++ Traditional/Simplified Chinese localization competence
++ Japanese ACG cultural fluency
++ Steam/DLsite/global publishing know-how
++ low-cost creator network
++ specialized marketing audience</p>
+<p>→ <strong>regional adult-indie publishing hub</strong>.</p>
+<p>这比“台湾人特别会做黄油”解释力更强。</p>
+<hr />
+<h1 id="9-2025">9. 2025以后最大的新风险不是台湾法律，而是全球支付与平台治理</h1>
+<h2 id="tw-r18-e13steam">TW-R18-E13｜Steam新增支付处理商/卡组织规则约束</h2>
+<p>Steamworks当前“禁止发布”规则第15项：</p>
+<blockquote>
+<p>不得发布可能违反Steam支付处理商、卡组织、银行或网络服务商规则的内容，尤其是某些Adult Only内容。</p>
+</blockquote>
+<p>Official:
+https://partner.steamgames.com/doc/gettingstarted/onboarding</p>
+<p>2025 Valve确认部分adult games因支付处理商/相关网络要求被移除：
+https://www.pcgamer.com/software/platforms/valve-confirms-credit-card-companies-pressured-it-to-delist-certain-adult-games-from-steam/</p>
+<h2 id="tw-r18-e14itchio">TW-R18-E14｜itch.io说明支付系统可以直接摧毁成人内容发现能力</h2>
+<p>itch.io 2025官方说明：
+- 一度将所有adult NSFW项目从browse/search中deindex；
+- 原因是支付处理商审查；
+- Stripe无法继续支持“designed for sexual gratification”的内容支付；
+- 平台只能逐步恢复部分免费内容索引并寻找替代支付商。</p>
+<p>Official:
+https://itch.io/updates/update-on-nsfw-content.amp
+https://itch.io/t/5149036/reindexing-adult-nsfw-content</p>
+<h3 id="_7">对台湾集群的意义</h3>
+<p>台湾法律优势只能解决：
+“能不能在台湾合法成立公司/制作/发行”。</p>
+<p>但真正全球商业化还受：
+- Steam content review；
+- card networks；
+- acquiring banks；
+- PayPal/Stripe；
+- regional age verification；
+- country restrictions</p>
+<p>约束。</p>
+<p>成人独游因此属于<strong>高平台依赖型出口产业</strong>。</p>
+<p>Mango Party / PlayMeow自建社群、PlayMeow自有平台、多平台DLsite策略，很可能也是对这种平台集中风险的战略响应；后半句属于机制推断，仍需公司直接访谈验证。</p>
+<hr />
+<h1 id="10">10. 当前市场空间：大，但不是“蓝海”</h1>
+<h2 id="_8">可支持的判断</h2>
+<h3 id="a-tamr18-pcindie-niche">A. TAM不是台湾本地，而是全球R18 PC/indie niche集合</h3>
+<p>头部作品地域结构、四语/五语标配和发行商数十万Steam关注证明：
+台湾团队不需要台湾本地玩家养活。</p>
+<h3 id="b">B. 有真实的高收益右尾</h3>
+<p>开发者公开12万首月、2.2万首周、10万销量公告以及SteamDB数千峰值说明：
+小团队确实可能产生很高的人均产值。</p>
+<p>这些均为个案，不是平均值。</p>
+<h3 id="c">C. 普通作者的进入门槛下降非常快</h3>
+<p>RPG Maker / Unity / Godot / ACG爱创作
++ publisher services
++ Steam
+使不会程序的绘师/小说作者也能做商业游戏。</p>
+<h3 id="d">D. 因此供给竞争也快速恶化</h3>
+<p>发行商已经100+产品；
+第三家/第四家专业发行体系出现；
+G-EIGHT分级区出现大量项目；
+低尾Steam页面只有几十评论与几十峰值。</p>
+<p>所以2026更像：
+<strong>large niche + low-cost supply boom + winner-take-most discoverability</strong>，
+而不是无人竞争的监管套利蓝海。</p>
+<h3 id="e-hook">E. 成人hook越来越不能替代产品设计</h3>
+<p>真正有扩张空间的产品更可能是：
+- adult content + recognizable gameplay loop；
+- strong art/IP creator audience；
+- local/cultural specificity；
+- high replayability；
+- niche fetish with low direct competition；
+- publisher-supported multilingual global launch。</p>
+<p>单纯低成本VN/RPG Maker套皮的边际空间正在下降。</p>
+<hr />
+<h1 id="11">11. 一个比“台湾黄油很强”更准确的产业模型</h1>
+<p>台湾R18独游生态可以理解为三层漏斗：</p>
+<h2 id="creator-supply-layer">Creator supply layer</h2>
+<p>绘师 / 小说作者 / 同人作者 / 小团队 / 兼职者
+↓
+低代码、RPG Maker、Unity、Godot
+↓
+大量低成本prototype</p>
+<h2 id="publisher-selection-layer">Publisher selection layer</h2>
+<p>Mango Party / PlayMeow / LewdLoco / Hide Games等
+↓
+筛选、资金、翻译、配音、营销、QA、商店页
+↓
+portfolio launch</p>
+<h2 id="global-demand-layer">Global demand layer</h2>
+<p>Steam / DLsite / own platforms
+↓
+global fetish niches
+↓
+高度右偏收益分布</p>
+<p>少数项目成为10万+甚至更高量级案例；
+相当部分项目停留在几十—数百reviews、低并发、小规模收入；
+还有大量没有形成公开可观察商业结果的项目。</p>
+<p>所以成人游戏的真正作用不只是“色情内容赚钱”，而是：</p>
+<blockquote>
+<p><strong>用一个需求明确、可全球直销、内容差异化强的niche，为台湾的小型作者团队提供一条比普通premium indie更短的市场验证路径。</strong></p>
+</blockquote>
+<p>而它的代价是：
+- 品类声誉限制；
+- 平台/支付高风险；
+- 题材同质化；
+- 发行商议价权上升；
+- 低门槛导致供给拥挤；
+- 创作者收入极度不稳定。</p>
+<hr />
+<h1 id="12">12. 下一轮最值得补的分母</h1>
+<ol>
+<li>从Mango Party / PlayMeow / LewdLoco各抽固定年份完整发行队列，统计：
+   - reviews
+   - follower count
+   - peak CCU
+   - price
+   - engine
+   - languages
+   - developer country/status
+   - one-person/team/company
+   - publisher overlap</li>
+<li>不只抽top seller，按发行顺序做2024/2025/2026全部项目。</li>
+<li>建“作者第二作存活率”：
+   - 首作发行后是否继续做第二款；
+   - 是否变全职；
+   - 是否换发行商；
+   - 是否消失。</li>
+<li>尽量访谈/找条款：
+   - publisher advance
+   - revenue split
+   - localization/voice costs
+   - IP ownership
+   - recoup</li>
+<li>对2025 Steam支付规则变化前后比较：
+   - 上架量
+   - 成人内容拒审/下架
+   - 自有平台与DLsite占比变化。</li>
+<li>单独建立失败/低评样本，不再只围绕30万套、12万套、10万套等头部案例。</li>
+</ol><div class="crumbs"><a href="/heroes-portal/">书阁</a> / country-studies/taiwan/008-adult-indie-market-long-tail-publisher-infrastructure.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

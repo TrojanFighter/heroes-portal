@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CASE-047 — The Witness / Jonathan Blow：资本如何让作者扩张，而不是绕开自己的能力边界 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl class="on"" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#1-why-this-case" class="t2">1. Why this case</a><a href="#2-contextsituationaction-snapshot" class="t2">2. Context–Situation–Action Snapshot</a><a href="#era-production-regime" class="t3">Era / Production Regime</a><a href="#actor-situation" class="t3">Actor Situation</a><a href="#action-maneuver" class="t3">Action / Maneuver</a><a href="#anachronism-check" class="t3">Anachronism Check</a><a href="#3-capability-topology" class="t2">3. Capability Topology</a><a href="#jonathan-blow" class="t3">Jonathan Blow 的核心强项</a><a href="#founder" class="t3">项目主动要求的非 founder 能力</a><a href="#4-capital-and-decision-rights" class="t2">4. Capital and Decision Rights</a><a href="#5-production-perimeter" class="t2">5. Production Perimeter</a><a href="#small-core" class="t3">Small core</a><a href="#core-art-team" class="t3">Core art team</a><a href="#specialist-expansion" class="t3">Specialist expansion</a><a href="#6-why-this-is-a-c015-boundary-not-a-refutation" class="t2">6. Why This Is a C015 Boundary, Not a Refutation</a><a href="#7-c014-counterpressure-high-commitment-can-still-work" class="t2">7. C014 Counterpressure — High Commitment Can Still Work</a><a href="#8-commercial-boundary" class="t2">8. Commercial Boundary</a><a href="#9-provisional-verdict" class="t2">9. Provisional Verdict</a><a href="#mode-a-capability-shaped" class="t3">Mode A — Capability-Shaped</a><a href="#mode-b-capability-expanded" class="t3">Mode B — Capability-Expanded</a><a href="#10-transfer" class="t2">10. Transfer</a><a href="#11-evidence-index" class="t2">11. Evidence Index</a><a href="#12-open-questions" class="t2">12. Open Questions</a></aside><article class="doc"><div class="col"><h1 id="case-047-the-witness-jonathan-blow">CASE-047 — The Witness / Jonathan Blow：资本如何让作者扩张，而不是绕开自己的能力边界</h1>
+<ul>
+<li>Case ID: CASE-047</li>
+<li>Subject: The Witness / Jonathan Blow / Thekla</li>
+<li>Period covered: Braid success → 2008/2009 concept formation → 2010–2016 production → first-week commercial signal</li>
+<li>Research status: RESEARCHING</li>
+<li>Corpus role: CAPABILITY-EXPANDED / HIGH-CAPITAL AUTHORIAL COMPARATOR / C015 BOUNDARY / C014 COUNTERPRESSURE</li>
+<li>Related Claims: C002, C003, C004, C007, C011, C014, C015</li>
+<li>Evidence Ledger: <a href="/heroes-portal/evidence/CASE-047-the-witness-source-ledger.html">来源账本</a></li>
+</ul>
+<h2 id="1-why-this-case">1. Why this case</h2>
+<p class="dc">The Witness 是 C015 必须有的另一类边界。</p>
+<p>如果 Gunpoint / The First Tree 展示的是：</p>
+<blockquote>
+<p><strong>根据现有能力向量改写项目，让弱项不成为昂贵刚需。</strong></p>
+</blockquote>
+<p>那么 The Witness 展示的是另一条可行路径：</p>
+<blockquote>
+<p><strong>保留超出 founder 当前能力边界的产品愿景，再用既有成功产生的资本、招聘和专业外围把能力集合扩张到项目所需。</strong></p>
+</blockquote>
+<p>这里项目并没有被缩到“Jonathan Blow 一个人最便宜能做什么”。</p>
+<p>相反，它逐步要求：
+- 大规模 3D island；
+- 独立视觉语言；
+- architecture；
+- landscape design；
+- sound / voice；
+- console / platform work；
+- 多年 production。</p>
+<p>因此本案不是 C015 的反例，而是 C015 的<strong>边界条件</strong>：</p>
+<blockquote>
+<p><strong>当 capital / hiring / specialist periphery 足够强时，project shape 可以不再被 founder capability vector 强约束。</strong></p>
+</blockquote>
+<h2 id="2-contextsituationaction-snapshot">2. Context–Situation–Action Snapshot</h2>
+<h3 id="era-production-regime">Era / Production Regime</h3>
+<p>The Witness 核心生产发生在 2009–2016：</p>
+<ul>
+<li>digital distribution 已让高价独立 PC/console 项目存在；</li>
+<li>Braid 的成功给 Blow 提供了异常大的 retained-earnings runway；</li>
+<li>小团队仍可自建技术并直接面向 Steam / PSN；</li>
+<li>但高规格 3D art、architecture、landscape、audio 与 platform work 仍需要专业劳动；</li>
+<li>2010s early-indie market 的 attention structure 与今天不同，不能把 Braid→The Witness 的 audience carryover 直接当成 2026 常规条件。</li>
+</ul>
+<h3 id="actor-situation">Actor Situation</h3>
+<p>Blow 开始 The Witness 时并不是第一次独立开发者：</p>
+<ul>
+<li>已经完成并成功发行 Braid；</li>
+<li>核心强项高度集中在 programming / puzzle design / systems / authorial control；</li>
+<li>Braid 成功带来数百万美元量级的可支配 retained earnings；</li>
+<li>他明确不愿接受会削弱 control 的 publisher deal；</li>
+<li>因而拥有一个非常少见的选择权：<strong>用自己的钱购买缺失能力，而不是为了融资重写愿景。</strong></li>
+</ul>
+<h3 id="action-maneuver">Action / Maneuver</h3>
+<table>
+<thead>
+<tr>
+<th>需求</th>
+<th>Founder 现有能力是否足够</th>
+<th>采取的动作</th>
+<th>结果</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>puzzle / rules / game thesis</td>
+<td>强</td>
+<td>Blow 继续直接主导 prototype / puzzle design</td>
+<td>保留高度 authorial core</td>
+<td>E001/E006</td>
+</tr>
+<tr>
+<td>large 3D island</td>
+<td>不足以单人完成</td>
+<td>建立 core art team</td>
+<td>三位核心美术长期共建 island / style</td>
+<td>E003/E004</td>
+</tr>
+<tr>
+<td>architecture</td>
+<td>非 game-programming 专长</td>
+<td>聘请 FOURM architecture</td>
+<td>建筑逻辑进入空间设计</td>
+<td>E004/E005</td>
+</tr>
+<tr>
+<td>landscape ecology / wayfinding</td>
+<td>非 founder 专长</td>
+<td>引入 Fletcher Studio</td>
+<td>地貌、植物、空间组织参与 gameplay readability</td>
+<td>E004/E005</td>
+</tr>
+<tr>
+<td>sound / specialist tasks</td>
+<td>非 core capability</td>
+<td>按需引入 sound designers / extra help</td>
+<td>保留小 core，同时扩张完整 production perimeter</td>
+<td>E002</td>
+</tr>
+<tr>
+<td>high production cost</td>
+<td>单靠一般 indie financing 难承担</td>
+<td>把 Braid 收益重新投入项目</td>
+<td>约七年、约 $5–6m 级生产得以持续</td>
+<td>E001/E002/E007</td>
+</tr>
+<tr>
+<td>authorial decision rights</td>
+<td>publisher financing 可能改变</td>
+<td>放弃不合适 publisher 条款，自筹</td>
+<td>保留强控制权</td>
+<td>E001</td>
+</tr>
+</tbody>
+</table>
+<h3 id="anachronism-check">Anachronism Check</h3>
+<p>The Witness 不是：</p>
+<blockquote>
+<p>“现在做独立游戏就应该自己烧六百万美元。”</p>
+</blockquote>
+<p>它真正提供的 durable mechanism 是：</p>
+<blockquote>
+<p><strong>Capital can purchase capability expansion without surrendering project thesis.</strong></p>
+</blockquote>
+<p>但它依赖极不普通的前置条件：
+- 已有 hit；
+- 大额 retained earnings；
+- 极强 re-employability / reputation；
+- 长周期心理与财务承受力；
+- 可招聘到高水平 specialist。</p>
+<p>这些条件不能从成品成功倒推为一般独立开发建议。</p>
+<h2 id="3-capability-topology">3. Capability Topology</h2>
+<h3 id="jonathan-blow">Jonathan Blow 的核心强项</h3>
+<p>可观察到：
+- programming；
+- puzzle / systems design；
+- abstract rule thinking；
+- long-form authorial control；
+- product thesis persistence。</p>
+<h3 id="founder">项目主动要求的非 founder 能力</h3>
+<p>The Witness 并没有删除：
+- high-quality 3D environment art；
+- spatial composition；
+- architecture；
+- landscape design；
+- audio / voice；
+- platform-specific production。</p>
+<p>而是建立了一个更宽的 team capability set。</p>
+<p>这使它与 Gunpoint / The First Tree 的逻辑不同：</p>
+<ul>
+<li>Gunpoint：<code>project adapts downward/sideways to creator constraints</code>；</li>
+<li>The First Tree：<code>strength loading + weakness deletion/externalization</code>；</li>
+<li>The Witness：<code>project ambition preserved + missing capabilities acquired</code>。</li>
+</ul>
+<p>这里暂定模式：</p>
+<blockquote>
+<p><strong>CAPABILITY-EXPANDED</strong></p>
+</blockquote>
+<p>定义：</p>
+<blockquote>
+<p>项目核心愿景先于完整能力集合存在；founder 不通过删除关键 obligation 来贴合自身，而是用 capital / hiring / collaborators 扩张可执行能力边界。</p>
+</blockquote>
+<h2 id="4-capital-and-decision-rights">4. Capital and Decision Rights</h2>
+<p>2016 直接采访显示：</p>
+<ul>
+<li>Braid 成功让 Blow 获得足够财富；</li>
+<li>他曾考虑 publisher；</li>
+<li>但认为所见 deal 会损害其需要的 control；</li>
+<li>因而选择 self-finance；</li>
+<li>七年开发消耗了绝大部分 / 全部 Braid 资金。</li>
+</ul>
+<p>这对 C002/C004 很重要：</p>
+<blockquote>
+<p>runway 不只是“活多久”，还决定<strong>你是否有资格不改题</strong>。</p>
+</blockquote>
+<p>如果没有 Braid retained earnings，The Witness 很可能必须：
+- 缩 scope；
+- 更早 ship；
+- 接受 external capital/control；
+- 或换一个 product thesis。</p>
+<p>所以资本不是外部背景变量，而是 project-formation variable。</p>
+<h2 id="5-production-perimeter">5. Production Perimeter</h2>
+<p>公开材料至少确认：</p>
+<h3 id="small-core">Small core</h3>
+<p>2016 报道将日常核心描述为大约六人工作室。</p>
+<h3 id="core-art-team">Core art team</h3>
+<p>Eric A. Anderson 与 Luis Antonio 的一手材料都确认主要 art crew 包括：
+- Eric Anderson；
+- Luis Antonio；
+- Orsolya / Orsi Spanyol。</p>
+<h3 id="specialist-expansion">Specialist expansion</h3>
+<p>另有：
+- FOURM architecture；
+- Fletcher Studio landscape architecture；
+- extra architects / sound designers；
+- later platform / optimization work。</p>
+<p>这意味着：</p>
+<blockquote>
+<p>“Jonathan Blow 做 The Witness”是 authorship shorthand，不是 labor accounting。</p>
+</blockquote>
+<h2 id="6-why-this-is-a-c015-boundary-not-a-refutation">6. Why This Is a C015 Boundary, Not a Refutation</h2>
+<p>C015 的窄命题只是：</p>
+<blockquote>
+<p>能力自知可以用于项目定义。</p>
+</blockquote>
+<p>The Witness 并不反驳这一点。</p>
+<p>它反驳的是一个更强、但我们不应该偷换进去的版本：</p>
+<blockquote>
+<p>“高效率作者项目应该始终让 project shape 服从 founder 当前能力。”</p>
+</blockquote>
+<p>The Witness 证明至少存在第二种 production strategy：</p>
+<blockquote>
+<p><strong>如果你拥有足够 capital / decision rights，可以让 capability set 追赶 project thesis。</strong></p>
+</blockquote>
+<p>因此以后 Capability–Project Fit Audit 不能只问：
+- 项目是否围绕现有能力塑形？</p>
+<p>还要问：
+- 缺失能力是被删除，还是被购买？
+- 谁为能力扩张付钱？
+- 能力扩张是否改变 ownership / control？
+- founder 的 authorial density 是否在团队扩张后保留？
+- 对应 capital 是否来自 prior success、publisher、VC、grant、服务业务或个人资产？</p>
+<h2 id="7-c014-counterpressure-high-commitment-can-still-work">7. C014 Counterpressure — High Commitment Can Still Work</h2>
+<p>The Witness 也是 C014 需要的成功反压力。</p>
+<p>它不是典型：</p>
+<blockquote>
+<p>cheap prototype → public truth → evidence-led scaling。</p>
+</blockquote>
+<p>相反：
+- 开发约七年；
+- 总成本超过 $5m，公开采访常见口径接近 $6m；
+- small core + specialist labor 长期持续；
+- 大量 commitment 在完整市场结果出来前已经 sunk。</p>
+<p>但它首周：
+- substantially &gt;100,000 copies；
+- &gt;$5m gross；
+- launch signal 强于 Braid first-year comparison；
+- 当时仍未完全 recoup，但 Blow 公开判断项目有望 break even 并继续同等级项目。</p>
+<p>因此它说明：</p>
+<blockquote>
+<p><strong>High upfront commitment is not automatically irrational when founder has strong prior signal, retained earnings, decision rights and a coherent thesis.</strong></p>
+</blockquote>
+<p>C014 不能退化成：</p>
+<blockquote>
+<p>“越早公开、越小越好”。</p>
+</blockquote>
+<p>更精确的变量应包括：
+- prior creator reputation；
+- reusable audience / market trust；
+- founder capital；
+- thesis stability；
+- internal validation quality；
+- reversibility；
+- residual technical / artistic value。</p>
+<h2 id="8-commercial-boundary">8. Commercial Boundary</h2>
+<p>本案可以称为：</p>
+<blockquote>
+<p><strong>strong launch success / commercially validated release</strong></p>
+</blockquote>
+<p>但当前不能写成：</p>
+<blockquote>
+<p>“已审计净利润巨大”。</p>
+</blockquote>
+<p>已知：
+- 首周 gross &gt;$5m；
+- units substantially &gt;100k；
+- 由于 storefront share、税费和高开发成本，当时尚未完全 break even；
+- Blow 判断趋势足以支持后续项目 / ports。</p>
+<p>未知：
+- lifetime audited net revenue；
+- exact break-even date；
+- PS4 vs PC exact split；
+- total external specialist cost。</p>
+<h2 id="9-provisional-verdict">9. Provisional Verdict</h2>
+<p>The Witness 说明作者型独立生产至少存在两种不同的项目—能力关系：</p>
+<h3 id="mode-a-capability-shaped">Mode A — Capability-Shaped</h3>
+<blockquote>
+<p>让项目适合现有的人。</p>
+</blockquote>
+<p>Gunpoint / The First Tree 是强锚点。</p>
+<h3 id="mode-b-capability-expanded">Mode B — Capability-Expanded</h3>
+<blockquote>
+<p>让人和组织扩张到足以实现项目。</p>
+</blockquote>
+<p>The Witness 是强锚点。</p>
+<p>二者真正的共同变量不是“小团队”。</p>
+<p>而是：</p>
+<blockquote>
+<p><strong>founder 是否拥有足够 decision rights，能主动决定“删能力需求”还是“买能力供给”。</strong></p>
+</blockquote>
+<p>这比“solo vs team”更接近真实 production function。</p>
+<h2 id="10-transfer">10. Transfer</h2>
+<p>可迁移：
+- 把 retained earnings 理解为 authorial option value，而不是单纯现金；
+- 缺能力时，不只有“自己学”与“砍功能”两条路；
+- specialist hiring 可以直接进入 game design；
+- architecture / art / landscape 等外围不是 cosmetics，可能成为核心 gameplay language；
+- team size 与 authorial control 可以部分解耦。</p>
+<p>不可直接迁移：
+- Braid 级别 prior hit；
+- 数百万美元 founder-owned capital；
+- 2009–2016 市场窗口；
+- Jonathan Blow 的 reputation / recruiting power；
+- 七年开发容忍度。</p>
+<h2 id="11-evidence-index">11. Evidence Index</h2>
+<ul>
+<li>E001 — Guardian 2016 direct interview：Braid retained earnings、自筹、publisher/control boundary、七年。</li>
+<li>E002 — Guardian 2016 production profile：small core + architects/sound designers；首周商业信号。</li>
+<li>E003 — Eric A. Anderson first-person portfolio：三人 core art crew、architect/landscape collaboration、无传统 Art Director。</li>
+<li>E004 — Luis Antonio first-person art retrospective：四年 art work、core art team、FOURM + Fletcher。</li>
+<li>E005 — Deanna Van Buren / Game Developer：2010 起 architecture / landscape collaboration 与 iterative workflow。</li>
+<li>E006 — GDC / Game Developer art talk：visual language 与 gameplay 的共同设计。</li>
+<li>E007 — pre-release cost / sales reporting：&gt;$5m development scale、首周 &gt;$5m gross / &gt;100k units。</li>
+<li>E008 — official The Witness blog / later contractor posts：post-launch platform optimization 继续调用 specialist labor。</li>
+</ul>
+<h2 id="12-open-questions">12. Open Questions</h2>
+<ol>
+<li>The Witness 最终 audited total development cost 到底是 $5m、$6m 还是更高？</li>
+<li>Braid retained earnings 实际投入比例与中途现金流如何？</li>
+<li>core team 的历史 headcount chronology？</li>
+<li>architects / landscape / sound / contractors 的总 person-months 与合同成本？</li>
+<li>exact break-even date 与 lifetime net revenue？</li>
+<li>internal playtesting / external playtesting 结构如何，是否存在比目前记录更强的 pre-launch player-truth channel？</li>
+<li>如果没有 Braid capital，Blow 自己是否明确说过会如何重写 The Witness scope？</li>
+<li>CAPABILITY-EXPANDED 模式在其他 authorial projects 中是否可复现，还是高度依赖 prior-hit capital？</li>
+</ol><div class="crumbs"><a href="/heroes-portal/">书阁</a> / cases/CASE-047-the-witness.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

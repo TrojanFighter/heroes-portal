@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>011 — 台湾成人独游的钱如何流动：平台抽成、发行组合估值与合同黑箱 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl class="on"" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0" class="t2">0. 为什么“销量×价格”不是创作者收入</a><a href="#_1" class="t3">产业含义</a><a href="#lewdloco" class="t3">LewdLoco公开的是“服务”，不是经济条款</a><a href="#playmeowbusiness-contact" class="t3">PlayMeow公开同样是business contact</a><a href="#mango-party" class="t3">Mango Party</a><a href="#contract-opacity" class="t3">新变量：CONTRACT OPACITY</a><a href="#mango-party_1" class="t2">Mango Party</a><a href="#lewdloco_1" class="t2">LewdLoco</a><a href="#_2" class="t2">更小成人发行标签</a><a href="#_3" class="t3">如何读这些数</a><a href="#employee" class="t3">Employee</a><a href="#author" class="t3">Author</a><a href="#value-capture" class="t2">VALUE CAPTURE</a><a href="#bargaining-power" class="t2">BARGAINING POWER</a><a href="#failure-finance" class="t2">FAILURE FINANCE</a><a href="#_4" class="t2">当前结论</a></aside><article class="doc"><div class="col"><h1 id="011">011 — 台湾成人独游的钱如何流动：平台抽成、发行组合估值与合同黑箱</h1>
+<ul>
+<li>Status: REVENUE-WATERFALL AUDIT / CONTRACT-OPAQUE / PRE-CLAIM</li>
+<li>Program: C Taiwan comparator</li>
+<li>As of: 2026-10-08</li>
+<li>Scope: Steam / DLsite成人独游从消费者支付到开发者可支配现金之间的层层扣减；专业发行商的portfolio economics；公开合同缺失</li>
+<li>Predecessors:</li>
+<li><a href="/heroes-portal/country-studies/taiwan/008-adult-indie-market-long-tail-publisher-infrastructure.html">008 — 成人独游市场长尾与发行基础设施</a></li>
+<li><a href="/heroes-portal/country-studies/taiwan/009-adult-indie-2025-visible-cohort-author-persistence.html">009 — 2025可见发行队列与作者存活</a></li>
+<li><a href="/heroes-portal/country-studies/taiwan/010-adult-indie-creator-economics-wage-vs-author-risk.html">010 — 工资制 vs 作者押注</a></li>
+<li>Restriction:</li>
+<li>VGI/SensorTower等模型估算不是财报；</li>
+<li>publisher gross不是developer net；</li>
+<li>Steam/DLsite平台条款不能替代发行商合同；</li>
+<li>不假设所有作品使用相同publisher split、advance、recoup或IP条款。</li>
+</ul>
+<h2 id="0">0. 为什么“销量×价格”不是创作者收入</h2>
+<p class="dc">公开媒体常把10万套、标价US$10的游戏称为“百万美元游戏”。即使这个乘法反映了实际销售额，也不能据此认定开发者拿到了接近百万美元。</p>
+<p>一个成人独游的现金流至少可能经过：</p>
+<p>consumer gross
+→ VAT / sales tax / refunds / regional pricing
+→ storefront platform share
+→ publisher recoup / revenue share
+→ localization / voice / QA / marketing / porting cost allocation
+→ contractors / core-team splits
+→ company / personal tax
+→ developer disposable cash.</p>
+<p>本篇沿这条 <strong>REVENUE WATERFALL</strong> 核查已知扣减与未知合同条款。</p>
+<hr />
+<h1 id="1-steam30">1. Steam：绝大多数小成人游戏仍处30%平台抽成档</h1>
+<p>Steam公开财务文档说明，支付给合作伙伴的金额基于net revenue再乘约定revenue share，具体以Steam Distribution Agreement为准。</p>
+<p>Official:
+https://partner.steamgames.com/doc/finance/taxfaq</p>
+<p>Valve 2018以后公开的阶梯结构为：
+- 单款累计收入前US$10m：Steam 30%；
+- US$10m—50m以上部分：25%；
+- US$50m以上部分：20%。</p>
+<p>Public record / Valve announcement reference:
+https://techcrunch.com/2018/12/03/valve-changes-revenue-sharing-tiers-on-steam/
+https://steamcommunity.com/groups/steamworks/announcements/detail/1697191267930157838</p>
+<p>对本研究中的台湾R18小团队，几乎所有公开可见项目都远低于US$10m阈值，因此可以把“约30% storefront share”当作大多数项目的合理平台层级假设。</p>
+<p>但：
+- 仍需扣VAT/销售税、退款等才能到net revenue；
+- Steam keys、bundles、不同地区价格会改变实际实现价格；
+- 不能简单用标价×销量×0.7当开发者收入。</p>
+<hr />
+<h1 id="2-dlsite100">2. DLsite：公开批发价表显示创作者侧也不是接近100%售价</h1>
+<p>DLsite台湾版公开“作品登录销售服务条款”：
+https://www.dlsite.com.tw/circle_regulations</p>
+<p>台湾版示例：
+- 售价NT$500 → 社团批发价NT$300；
+- NT$400 → NT$220；
+- NT$300 → NT$150；
+- NT$200 → NT$100；
+- 售价NT$500以上，批发价为售价60%。</p>
+<p>DLsite台湾社团指南也明确说：
+- 500元以上时，社团收入为售价60%。</p>
+<p>https://www.dlsite.com.tw/guide/circle/</p>
+<p>日本DLsite公开表也显示不同价格点的批发价比例不同，并非固定“平台只抽一小部分”。</p>
+<p>因此成人创作者即使绕开Steam，数字商店层仍可能吃掉售价的显著比例。</p>
+<h3 id="_1">产业含义</h3>
+<p>平台费仍然存在，多平台发行的价值需要从其他方面考察：
+- 多市场；
+- 不同成人内容政策；
+- 不同发现机制；
+- 风险分散；
+- 不同价格与用户群。</p>
+<hr />
+<h1 id="3">3. 专业发行商条款是目前最大的公开黑箱</h1>
+<p>本轮针对：
+- Mango Party；
+- PlayMeow；
+- LewdLoco</p>
+<p>搜索了：
+- revenue split；
+- advance；
+- minimum guarantee；
+- recoup；
+- IP ownership；
+- sequel option；
+- exclusivity；
+- localization / voice cost allocation。</p>
+<p>没有找到公开标准term sheet。</p>
+<h3 id="lewdloco">LewdLoco公开的是“服务”，不是经济条款</h3>
+<p>官方网站：
+https://www.lewdloco.com/
+https://www.lewdloco.com/%E5%90%88%E4%BD%9C%E6%9F%A5%E8%A9%A2</p>
+<p>公开承诺：
+- 开发到销售的技术支持；
+- 翻译/配音；
+- 测试/优化；
+- Steam/DLsite上架；
+- 数据监测；
+- 精准流量；
+- 活动促销；
+- 媒体/Vtuber；
+- 团队配对。</p>
+<p>合作方式是：
+developer提交Demo / proposal / portfolio
+→ internal review
+→ publisher contact.</p>
+<p>没有公开：
+- 预付款；
+- 分成百分比；
+- 回收顺序；
+- 谁拥有Steam app；
+- IP归属；
+- 续作优先权。</p>
+<h3 id="playmeowbusiness-contact">PlayMeow公开同样是business contact</h3>
+<p>Steam：
+https://store.steampowered.com/publisher/playmeow/about/</p>
+<p>明确公开商务合作联络，但不公开合同模板。</p>
+<h3 id="mango-party">Mango Party</h3>
+<p>公开公司/发行资料强调：
+- publishing；
+- marketing；
+- localization；
+- investment；
+- product consulting；
+- technical support；
+- porting。</p>
+<p>但同样未发现标准合同。</p>
+<h3 id="contract-opacity">新变量：CONTRACT OPACITY</h3>
+<p>专业发行商已经成为行业关键基础设施，但开发者在签约前外部很难比较真实“资本价格”。</p>
+<p>这可能造成：
+- 信息不对称；
+- 新作者议价能力弱；
+- 熟悉行业的serial developers更容易判断条款；
+- 爆款后的第二作作者可能拥有显著更高谈判权。</p>
+<p>Status: STRUCTURAL HYPOTHESIS.</p>
+<hr />
+<h1 id="4-portfolio">4. 第三方portfolio估算显示：成人发行商之间本身也有巨大质量差</h1>
+<p>Video Game Insights / SensorTower模型当前估算：</p>
+<h2 id="mango-party_1">Mango Party</h2>
+<p>https://app.sensortower.com/vgi/publisher/47475/mango-party</p>
+<p>模型：
+- 96已发行；
+- lifetime gross estimate ~US$26.2m；
+- average ~US$275k/game；
+- median ~US$115k/game。</p>
+<p>Mango Party News另一个Steam publisher label：
+https://app.sensortower.com/vgi/publisher/6553150/mango-party-news</p>
+<p>模型：
+- 92 titles；
+- lifetime ~US$21.7m；
+- median ~US$106k。</p>
+<p>这两个label有大量重叠，绝对不能相加。</p>
+<h2 id="lewdloco_1">LewdLoco</h2>
+<p>https://app.sensortower.com/vgi/publisher/4088265/lewdloco</p>
+<p>模型：
+- 30已发行；
+- lifetime ~US$4.1m；
+- average ~US$137k；
+- median ~US$80k。</p>
+<h2 id="_2">更小成人发行标签</h2>
+<p>Lewd Formosa：
+https://app.sensortower.com/vgi/publisher/33043/lewd-formosa
+- 9 games；
+- estimated lifetime ~US$948k；
+- median ~US$15.7k。</p>
+<p>Dark Light Studio：
+https://app.sensortower.com/vgi/publisher/4236/dark-light-studio
+- 10 games；
+- lifetime ~US$58k；
+- median ~US$1.8k。</p>
+<h3 id="_3">如何读这些数</h3>
+<p>这些模型可以帮助判断：
+<strong>发行组合之间可能存在一个甚至两个数量级的商业质量差。</strong></p>
+<p>不能用来：
+- 当公司财报；
+- 推开发者净收入；
+- 做精确市场规模；
+- 比较同名publisher label而不去重；
+- 推台湾总市场。</p>
+<p>但它们对“不是所有成人发行商都一样赚钱”这一点非常有用。</p>
+<hr />
+<h1 id="5">5. 发行商为什么值得分成：它们购买的是“共享能力”</h1>
+<p>008/009/010已看到：
+- 小团队经常没有程序、营销、本地化、QA、配音能力；
+- 发行商有Steam follower池；
+- 可做日/英/韩/简繁中本地化；
+- 组织配音；
+- 管理商店页；
+- 参加G-EIGHT；
+- 投放媒体/Vtuber；
+- 做促销；
+- 提供技术/测试；
+- 甚至提供资金或人才。</p>
+<p>发行商分成可能支付了小团队无力独立承担的市场接入、专业劳动和执行成本，也可能扩大作品的发售机会与规模。要判断这笔交换是否值得，需要知道：作者每让渡1%的收入，究竟换来了多少额外销量、开发时间、风险转移和专业服务？</p>
+<p>没有合同，也没有不使用这些服务的可比结果，当前无法回答。</p>
+<hr />
+<h1 id="6-gross-author">6. 一个非常重要的“gross → author”示意</h1>
+<p>假设某游戏在Steam产生US$100k consumer gross。</p>
+<p>这不是收入预测，只做结构示意：</p>
+<p>US$100k consumer gross
+→ taxes/refunds/regional realization
+→ Steam share（大多数小作约30%平台层）
+→ remaining partner pool
+→ publisher recoup / split UNKNOWN
+→ external production cost UNKNOWN
+→ developer/company tax
+→ creator take-home.</p>
+<p>因此：</p>
+<blockquote>
+<p>VGI估算某publisher median gross US$80k或115k，不意味着普通开发者可以拿US$56k或80k。</p>
+</blockquote>
+<p>发行合同很可能比平台费更决定作者最终收入。</p>
+<hr />
+<h1 id="7">7. 与工资制轨道结合后，作者的真正决策问题变成“所有权期权值”</h1>
+<p>010显示：
+- PlayMeow内容企划/写手当前公开NT$30k–40k/月；
+- 侍达成人剧本企划NT$29.5k–50k/月；
+- 低端非常接近台湾法定最低工资。</p>
+<p>于是同一个有写作/美术能力的人可以选择：</p>
+<h3 id="employee">Employee</h3>
+<p>每月获得可预测工资
+→ 公司承担项目失败风险
+→ 自己不一定拥有IP/长期分成。</p>
+<h3 id="author">Author</h3>
+<p>前1—3年可能低收入/靠接案
+→ 承担项目失败风险
+→ 如果作品成功，保留某种IP/分成上行空间（具体取决于publisher contract）。</p>
+<p>工资提供确定现金流，自有作品则保留成功后的上行空间，代价是前期风险。台湾R18生态对原本只能接案或拿工资的美术与作者，可能开放了拥有一款全球销售数字产品的机会；平均工资并不足以衡量这种吸引力。</p>
+<hr />
+<h1 id="8">8. 市场收入最终由谁获得？</h1>
+<p>市场存在已经很清楚：
+- 100+产品publisher；
+- 数千CCU头部；
+- serial authors；
+- 全球多语言；
+- 专门展区；
+- 多家发行商。</p>
+<p>上述市场迹象还没有回答收入如何分配。下一步核查：</p>
+<h2 id="value-capture">VALUE CAPTURE</h2>
+<p>消费者付的100元最终：
+- Steam/DLsite拿多少；
+- publisher拿多少；
+- 开发工作室拿多少；
+- 主创拿多少；
+- 外包人员拿多少；
+- 税拿多少。</p>
+<h2 id="bargaining-power">BARGAINING POWER</h2>
+<p>哪些作者能获得：
+- advance；
+- MG；
+- 更高split；
+- IP保留；
+- sequel control；
+- publisher bidding。</p>
+<h2 id="failure-finance">FAILURE FINANCE</h2>
+<p>一个peak 30、50、100的游戏：
+- 是否已经回本；
+- 是否靠publisher portfolio补贴；
+- 作者为什么还做下一款；
+- 是否靠本职工作/接案/FANBOX维持。</p>
+<p>只有回答这些，才能知道：</p>
+<blockquote>
+<p>台湾成人indie是“作者经济”，还是“发行商掌握价值捕获、作者提供低成本供给”的平台型产业。</p>
+</blockquote>
+<p>当前证据不足以偏向任何一边。</p>
+<hr />
+<h1 id="9">9. 下一轮取证优先级</h1>
+<ol>
+<li>找开发者公开复盘中的publisher split / advance / recoup。</li>
+<li>找招聘/离职者访谈，核员工是否有项目奖金或分红。</li>
+<li>找台湾成人开发社群匿名调查，询问：
+   - 开发月数；
+   - 核心人数；
+   - 总成本；
+   - gross；
+   - publisher take；
+   - creator take-home。</li>
+<li>用固定发行队列联系/追踪低尾作者，而不是只问爆款作者。</li>
+<li>对Steam与DLsite同一作品比较：
+   - 定价；
+   - review；
+   - 排名；
+   - 版本；
+   - 是否能推断渠道组合。</li>
+<li>不拿VGI gross估算直接做“作者收入排行榜”。</li>
+</ol>
+<h2 id="_4">当前结论</h2>
+<p>台湾成人独游的市场已经可见。要判断这个市场是否能持续供养创作者，仍须追到平台扣减、发行合同与作者可支配收入。总销量回答不了这些分配问题；价值分配应成为008—011之后的研究主轴。</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / country-studies/taiwan/011-adult-indie-revenue-waterfall-publisher-contract-opacity.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

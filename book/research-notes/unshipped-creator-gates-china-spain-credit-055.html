@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>055 — 没有完成第一款游戏的人：工程完成、市场完成、合作者连续性与创作者信用 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl class="on"" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0" class="t2">0. 四道不同的关，避免把“失败”写成一种人格</a><a href="#1-alex-restart2022" class="t2">1. 中国反例一：呼兰Alex /《RESTART》2022，已任项目主程却未完成私人游戏</a><a href="#_1" class="t3">可确证的事实</a><a href="#_2" class="t3">与商业游戏技能和应试教育的竞争性解释</a><a href="#2-lzy-szhshp-project-kunlun2024" class="t2">2. 中国反例二：LZY / szhshp /《昆仑工程 Project Kunlun》，2024正式上市但市场纠错过晚</a><a href="#_3" class="t3">创作者不是首试首次开发</a><a href="#_4" class="t3">完成≠回本，持续迭代≠可靠验证</a><a href="#_5" class="t3">本案的新机制</a><a href="#3-the-swarm2016scope" class="t2">3. 西班牙队伍《The Swarm》2016：团队越改越好，却因scope与人力断裂取消</a><a href="#4" class="t2">4. 美国/加拿大占较多的开发者行业问卷：署名流失风险既不等于制作能力，也不等于项目已经失败</a><a href="#5-055" class="t2">5. 对055的“做题家/技术崇拜/创新神学”命题做更精确的判定</a><a href="#h055-1" class="t3">H055-1：有了执行能力仍不具备“交给外部世界裁决”习惯</a><a href="#h055-2" class="t3">H055-2：更多人手也不能替代项目可持续性</a><a href="#h055-3" class="t3">H055-3：作者性可能在进入商业公司之后被“看不见地中断”</a><a href="#competing-evidence" class="t3">Competing evidence</a><a href="#6" class="t2">6. 下一步必须是匹配的无名者分母，而不是第三十篇漂亮失败文章</a><a href="#7" class="t2">7. 书稿的实际人生问题</a></aside><article class="doc"><div class="col"><h1 id="055">055 — 没有完成第一款游戏的人：工程完成、市场完成、合作者连续性与创作者信用</h1>
+<ul>
+<li><strong>Status:</strong> RESEARCH NOTE / CONTEMPORANEOUS FAILED ATTEMPT + SHIPPED-UNDERPERFORMER + TEAM DISSOLUTION + INSTITUTIONAL SURVEY / PRE-CLAIM</li>
+<li><strong>Date:</strong> 2026-10-08</li>
+<li><strong>Question:</strong> 在一个人已有作品构想、职业代码能力、投入时间甚至团队支持后，为什么仍可能不完成首个自主游戏或无法再做第二部？与“不想创作”不同的约束究竟在哪里？</li>
+<li><strong>Research predecessors:</strong> <a href="/heroes-portal/book/research-notes/creator-exit-scope-five-biographies-china-us-054.html">054 希罗、亚恒、Gunpoint、First Tree、early id 五条成功跨门的人生</a>；<a href="/heroes-portal/book/research-notes/creator-exit-reentry-economics-044.html">044 失败、回就业与第二次机会</a>；<a href="/heroes-portal/book/research-notes/beginner-jam-public-authorial-persistence-cohort-045.html">045 2020 beginner jam 18/18公开账户队列</a>；<a href="/heroes-portal/book/research-notes/revenue-to-career-selector-audit-048.html">048 市场→职业权利选择</a>；<a href="/heroes-portal/book/research-notes/industry-triangle-decision-rights-audit-046.html">046 创作决策权账本</a>；<a href="/heroes-portal/book/research-notes/china-commercial-game-training-role-origin-audit-005.html">005 中国商业训练角色来源审计</a>；<a href="/heroes-portal/book/research-notes/media-selection-survivorship-and-denominator-protocol-028.html">028 幸存者与分母</a>。</li>
+<li><strong>Distinct contribution:</strong> 中国有经验但未完成首个自主项目的<strong>同事/作者自述</strong>、中国完成了Steam作品但产品验证落后的<strong>带钱/劳动成本复盘</strong>、西班牙首个较大型独游开发中<strong>4人→2人团队崩解并主动取消</strong>，以及IGDA带样本结构与当事人离职署名权的问卷。不能把这些独立抽取的失败故事计成跨国“失败率”。</li>
+<li><strong>Author-origin A0:</strong> 洪荒行者“应试教育过拟合”“作品比答题更要求不完美验证”“大厂培养执行技术未必培养自主出题权”“先成品再职业与再入场option”。系问题来源，不能替代P0观察。</li>
+</ul>
+<h2 id="0">0. 四道不同的关，避免把“失败”写成一种人格</h2>
+<table>
+<thead>
+<tr>
+<th>Gate</th>
+<th>真实观察单位</th>
+<th>失败可能意味着</th>
+<th>明确不能推断</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AUTHOR ACCEPTANCE / VALIDATE IMPERFECT</strong></td>
+<td>人/作品与本人公开反馈</td>
+<td>写好了框架，无法接受不完美的可试玩原型，迟迟不公开</td>
+<td>当事人不够努力、不自信由中国教育/所在公司造成</td>
+</tr>
+<tr>
+<td><strong>PRODUCT FIT / PAID SHIP</strong></td>
+<td>已上市作品+成本/退款/下一作</td>
+<td>技术出货成立、用户体验或客群/渠道未达计划</td>
+<td>完成的游戏“不算有原创性”，Steam评论数=销量或净收入</td>
+</tr>
+<tr>
+<td><strong>TEAM CONTINUITY / RESCOPE</strong></td>
+<td>项目团队/成员流失+所需人月</td>
+<td>项目越改越好却超出可支付人力，协作者离开触发取消</td>
+<td>被取消者全部失业、成员离开代表不忠、团队没有第二次能力</td>
+</tr>
+<tr>
+<td><strong>CREDIT / PORTABLE AUTHORSHIP</strong></td>
+<td>受雇专业人员对署名/IP/真实决策的权利</td>
+<td>做出了劳动或设计，但离职失去完整作品归责/可转移信用</td>
+<td>署名信心=实际署名执行率，或有credit就有立项权/IP</td>
+</tr>
+</tbody>
+</table>
+<p class="dc">另有第五个上游门：<strong>从未参加过任何活动/没有公开原型</strong>的潜在作者（家庭许可、设备、空闲和经济负担）。本轮四种资料均已选择“敢于留下公开记录的人”，无法直接测量真正不可见的<code>FRAME D NEVER_ENTERED</code>；参见<a href="/heroes-portal/book/research-notes/ggj-2026-survey-and-archive-denominator-038.html">038的Frame D设计</a>。</p>
+<h2 id="1-alex-restart2022">1. 中国反例一：呼兰Alex /《RESTART》2022，已任项目主程却未完成私人游戏</h2>
+<p><strong>Original author trace:</strong> 2022-01-06 B站开发者本人《记录一次失败的独立游戏制作》：
+https://www.bilibili.com/video/BV1om4y1S7qU/</p>
+<p>公开信息来自作者<strong>上传视频的描述正文</strong>，而不是我们观看/逐帧分析完整视频；署名/岗位/职业时间由本人自述，未由雇主核实。</p>
+<h3 id="_1">可确证的事实</h3>
+<ul>
+<li>作者称幼时游戏经验丰富，为进入游戏行业改变了大学原专业方向；正式接触编程/Unity大约一年半，当时已在一个较老项目担任主程，能从本职项目安排出一些私人时间。<strong>“主程”是本人岗位表述，不代表从事该职位多年、更不等于被工作室授权做私人项目</strong>。</li>
+<li>独立想制作有明确人生主题的2D作品<code>RESTART</code>，但截至2022视频时<strong>没有成功做完并公开上市</strong>；并非缺少“题目想象”的纯执行人员。</li>
+<li>他本人列明自主搭过缓存池、资源加载、配置表、存档、FSM、AB资源框架等，并发现自己事前设计的大框架并非2D小项目都用得上。<strong>可观察对技术基础设施的劳动，不等于完成了一次向陌生玩家展示的游戏闭环</strong>。</li>
+<li>作者明确将中断的重要原因归为<strong>越做越感到作品不能达到自己期望、担心被玩家拒绝或自己羞于拿出来</strong>。这是第一人称自我解释，不代表心理疾病诊断，也不能把其归因为学校或中国人的“本质”。</li>
+<li>作者感谢合作的美术同学与GF社群成员，所以不是毫无他人支持的绝对solo；目前没有证据证明<code>COLLABORATOR_EXIT</code>造成中断。</li>
+<li>作者明确称希望以后再制作、未来继续；因此只允许编码<code>PROJECT_UNFINISHED_AS_OF_2022 + AUTHOR_RETURNS_INTENDED</code>，<strong>不能</strong>编码<code>CREATOR_RETIRED_AFTER_2022</code>。2023–26是否有其它作品/同名账号仍UNKNOWN。</li>
+</ul>
+<h3 id="_2">与商业游戏技能和应试教育的<strong>竞争性解释</strong></h3>
+<p><strong>可提出的H:</strong> 一个已有相当局部技术执行能力的从业者，如果对自己作品不够满意、不能容许公共试玩，则<code>TECHNICAL_CAPITAL→PUBLIC_ARTIFACT</code>的门槛未跨越；把写完工程模块当为作品建好了“主干”可能产生<code>INFRASTRUCTURE-FINISH ILLUSION</code>。</p>
+<p><strong>必须保留其它解释:</strong> 作者当时Unity年资并不久、对场景和美术有不同专业欠账；技术体系是其主动学习方案；商业岗位、家庭和学校<strong>没有被证据证明</strong>直接造成对外发布焦虑。没发表不等于没有积累可迁移编程技能或应受到羞辱。</p>
+<p><strong>Direct comparison:</strong> 亚恒2018在10章仅做出6章时把写好的剧本削减、公开可玩的Jam原型；呼兰Alex的2022文字则说明<strong>没有同样越过公开不完美的门</strong>。两人职业/时代/支援不同，不能把个体结果当国别教育差别。</p>
+<h2 id="2-lzy-szhshp-project-kunlun2024">2. 中国反例二：LZY / szhshp /《昆仑工程 Project Kunlun》，2024正式上市但市场纠错过晚</h2>
+<p><strong>2024-08-12 开发者本人公开详尽复盘：</strong> https://szhshp.org/post/indiegamedevreview
+<strong>同作者官网作品页：</strong> https://szhshp.org/games
+<strong>P0 Steam商店作品与署名：</strong> https://store.steampowered.com/app/2546720/Project_Kunlun/</p>
+<h3 id="_3">创作者不是首试首次开发</h3>
+<ul>
+<li>作者自述少年做过RPG Maker小说改编但烂尾；大学期间用C做俄罗斯方块，用Java制作Android小游戏，广告收入总计不足10元；工作后再次尝试GameMaker又中止，长期没有新的游戏项目。</li>
+<li>本职行业<strong>不在游戏行业</strong>，自主游戏在业余完成；持有较大量主机与单机游戏阅历，官网明确称截至2021年收集并评价了约470款游戏。<strong>“玩得少”不能自动解释其失败</strong>。</li>
+<li>2022年底—2024中开始学Rust并设计原型，2023年2月浏览器小程序、2023年3月POC、6月买Steam槽位、2024年5月整体测试，Steam商店按时区呈现<strong>2024-06-27</strong>发售，作者博客记<strong>2024-06-28</strong>发售；应分别注明时区/展示日，不指为事实冲突。</li>
+</ul>
+<h3 id="_4">完成≠回本，持续迭代≠可靠验证</h3>
+<ul>
+<li>大量模块和关卡开发后才发现敌方子弹逻辑、音乐同步、难度分层的结构问题，作者说明<code>Stage 4</code>以后曾反复从第一关重构，增加了已经完成段落的返工。</li>
+<li>他自述关卡亲自反复调试上千次，导致熟悉敌人位置和行为；作者认为退款意见主要涉及<code>too hard</code>，即使自己已降低难度。<strong>这是作者自己对退款留言的总结，未读到Steam后台退款数量与理由分布，不得当客观高难度投诉比例</strong>。</li>
+<li>作品由最初STG逐步变为带节奏游戏/故事的混合型，他自述当时没有充分理解目标受众/营销，并认为发售前应做Demo以验证而非一年全部做完。</li>
+<li>自报<strong>约人民币2000元部分现金支出</strong>（但还列单独电脑购置、Copilot、时间、约400元音轨授权等）。这并非项目所有现金成本或经济成本；<strong>绝不可写2000元项目完整投资</strong>。</li>
+<li>其中AI素材自述上千次图片试生成只有极少符合期待，仍大量手工PS；机器生成初稿没有消灭审美判断、风格一致性、人工校验与返工成本。首次发行日期、Steam现时2条评论不代表销量/退款总量；没有收入后台与净利润。</li>
+<li>作者文章中段有“可能暂停独立游戏”，文章<strong>结尾又反转说自己已经在设计下一个游戏</strong>。正确编码：<code>2024_UNSATISFACTORY_MARKET_OUTCOME + NEXT_PROJECT_DESIGN_INTENT</code>，并非2024决定永久退出。官网截至观察时仅一款Steam明确列出、2026后续产品未知。</li>
+<li>当事人同时反思“一名资深玩家也不自动懂游戏设计”；这与Gunpoint Francis通过十来位陌生测试者主动改跳跃按键的2010史实有明显<code>FEEDBACK TIMING</code>差别。但作者不会玩不够游戏的结论在这个样本显然站不住。</li>
+</ul>
+<h3 id="_5">本案的新机制</h3>
+<p><code>TECHNICAL COMPLETION ≠ AUDIENCE LEGIBILITY ≠ FINANCIAL SUSTAINABILITY</code>。</p>
+<p>某人甚至可以完成<code>G3 playable</code>与<code>G5 ship</code>，但在<code>G4 stranger correction</code>上太晚，导致自己成为测试熟练度严重偏高的“假普通用户”。这是一种<strong>非常适合教育和能力反训练的真实相反证据</strong>：能力积累不等于能及时否定自己为之努力的判断。</p>
+<h2 id="3-the-swarm2016scope">3. 西班牙队伍《The Swarm》2016：团队越改越好，却因scope与人力断裂取消</h2>
+<p><strong>2016-11-09 Javier Ansoleaga代表Evolve Games原创公开 postmortem</strong>：
+https://www.gamedeveloper.com/business/learning-from-failure-post-mortem-of-an-unborn</p>
+<ul>
+<li>开发《The Swarm》前约三个月preproduction，原计划约<strong>一年</strong>内完成；开发约<strong>六个月后</strong>取消本作，说明不是见面只写构想就失败。</li>
+<li>几个月持续修改机制，使团队认为游戏越来越完整且有价值，但范围不自觉增长；作者复盘称新的内容至少需要约<strong>两倍原团队及两倍生产时间</strong>，属其当时估算非独立审计。</li>
+<li><strong>4位团队成员有2位因个人或经济问题离开</strong>，剩余两人感到难以维持原有项目；当事人没有将离开者写成“背叛”或没有创新信仰。其公开说法属于<strong>团队成员离开带来的能力缺口＋人月约束</strong>，并未公开个人诊断/家庭收入，不要继续推。</li>
+<li>两位留下的成员在危机会议后决定<strong>取消项目、重组团队、选择新方向</strong>；截至2016文稿，他们声称新团队、新项目已经启动，而<strong>2017以后是否盈利/成功、两名离开者人生状态未知</strong>。</li>
+<li>这里不能把<code>CURRENT_PROJECT_CANCELLED</code>写成<code>EVERYONE QUIT GAME DEVELOPMENT</code>。与中国亚恒10章→6章的设计收敛对照，Evolve选择<code>PROJECT_KILL / AUTHOR_REENTRY</code>（至少本人表示计划），也不意味着他们“更会经营”或更有钱。</li>
+<li>此案例还构成<code>CAPABILITY_COMPOSED</code>长期可靠性负控制：<strong>人才初始互补≠项目在财务、生活和团队生命周期上稳定</strong>。</li>
+</ul>
+<h2 id="4">4. 美国/加拿大占较多的开发者行业问卷：署名流失风险既不等于制作能力，也不等于项目已经失败</h2>
+<p><strong>P0 IGDA + Western University，2024-05-02发布2023 DSS</strong>：
+https://igda.org/news-archive/press-release-the-igda-and-western-university-release-2023-developer-satisfaction-survey/</p>
+<ul>
+<li><strong>777自愿回答</strong>（2023-05-17至2023-10-20），其中<strong>58%工作在美国或加拿大</strong>；并非中国/美国可比抽样、不能将IGDA数值推全球/美国全部从业者分布。</li>
+<li><strong>48%</strong>认为其工作室有游戏署名政策；<strong>71%</strong>有信心会在在研游戏的正式credit里署名；设想<strong>在游戏发售前离职/合同结束</strong>时仍有信心署名的比例降到<strong>41%</strong>。这测的是<strong>主观信心在假设环境中下降</strong>，不代表全世界59%实际离职员工没有署名。</li>
+<li><strong>28%</strong>称工作包含crunch；<strong>25%</strong>称有不归类为crunch的延长工作时间。这些问题可能与个人业余时间形成竞争，但<strong>没有独立估计出“多少人的业余游戏因此永远没做完”</strong>。</li>
+<li><strong>80%</strong>受访者取得过某种college/vocational/university文凭（网站原文）；它说明该受访人群不是“没有正规训练”的对照样本。</li>
+<li>署名≠IP、作品所有权、能否引用公共作品集、能否聘人/独立发题；而且在前公司工作有保密合约，不能因抽象“作者信用”鼓励泄露项目或去猜受访者的就业合同。</li>
+</ul>
+<p><strong>关键新增<code>CREDIT_PORTABILITY</code>机制：</strong></p>
+<pre><code class="language-text">EMPLOYED PRODUCER SKILL ACQUIRED
+  ├── CREDIT FOR SHIPPED GAME (officially portable)
+  ├── PROJECT CANCELLED BEFORE LAUNCH (no official work credit visible)
+  ├── EXIT BEFORE SHIP (credit uncertain)
+  └── NDA / IP constraints (cannot freely show original assets/prototype)
+</code></pre>
+<p>这不是已经测量出来的四状态人数，而是下一轮<code>EMPLOYED→AUTHOR</code>研究须区别的权利边界。一个非常会做业务的人，也许几年来没有以合法公开材料向个人作品赋权的机会；但不能从“受雇工作没署名”直接认定本人已经有被抹除的原创构思。</p>
+<h2 id="5-055">5. 对055的“做题家/技术崇拜/创新神学”命题做更精确的判定</h2>
+<h3 id="h055-1">H055-1：有了执行能力仍不具备“交给外部世界裁决”习惯</h3>
+<p>2022《RESTART》作者能写框架却不愿发表不满意的作品；2024《Project Kunlun》作者完成工程却晚发现市场与难度失配。两者机制<strong>不同</strong>：前者提前被自己的质量门槛阻断，后者在发售以后才遭遇外部评价。</p>
+<p>这足以说明<code>EXECUTION_CAPABILITY</code>、<code>SHIPPING_CAPABILITY</code>、<code>UNCERTAIN_RESEARCH_DECISIONS</code>与<code>PUBLIC_FEEDBACK_TOLERANCE</code>是不同能力。<strong>不足以证明“中国高学历做题家普遍如此”</strong>，当事人也没有明确说其困难由应试教育造成。应当把该成因留为可由其他样本、学校课程对照、时间序列验证的 H。</p>
+<h3 id="h055-2">H055-2：更多人手也不能替代项目可持续性</h3>
+<p>《The Swarm》实际经历<code>4→2</code>与scope翻倍，“找一个能力互补共同创始人”不是稳定制作权的充分条件。成员离开可能是无法支付劳动力、家庭关系、职业机会成本、角色冲突或自然人生变更；本例公开仅称经济/个人困难，<strong>不授权我们给离开者建立心理/伦理罪责</strong>。</p>
+<h3 id="h055-3">H055-3：作者性可能在进入商业公司之后被“看不见地中断”</h3>
+<p>IGDA署名政策与离职假设显示一种<strong>可能</strong>的制约：参与产品不保证形成可公开转移的个人作品信用，尤其项目未上市/早期离职。但这<strong>不能等于</strong>证明公司限制原创就一定降低全国创新人数。需要相同职位、相同年份对照<code>ownership_span / after-hours right / authorship_credit / post-exit project</code>。</p>
+<h3 id="competing-evidence">Competing evidence</h3>
+<ul>
+<li>NExT/网易内部可以真实扶助员工原型立项（见<a href="/heroes-portal/book/research-notes/creator-selection-institution-comparison-050.html">050</a>），不能把“公司”写成必然掐死作者。</li>
+<li>《The Swarm》作者保留新项目转型能力；《RESTART》作者表示会继续；LZY结尾也说在构思下一作，不能把当事人<strong>意图</strong>等同已产出或永久离开。</li>
+<li>先验玩家经验丰富未必保证产品更好，但缺乏玩家经验也可能确实限制原创；二者并不矛盾，区别在<code>REFERENCE BREADTH</code>与<code>PLAYER MODEL CALIBRATION</code>。</li>
+</ul>
+<h2 id="6">6. 下一步必须是匹配的无名者分母，而不是第三十篇漂亮失败文章</h2>
+<p><strong>Panel-UNFINISHED-2022-CN:</strong> 在<strong>2022年游戏开发社区一段固定日期范围内</strong>，先登记全部公开宣布“开始制作第一款游戏”的创作者，跟踪12/24/48月是否<code>PUBLIC_PROTOTYPE</code>, <code>PUBLIC_SHIP</code>, <code>COLLABORATOR_CHANGE</code>, <code>AUTHORIAL_REENTRY</code>, <code>UNKNOWN</code>。基于他人公开视频只能观察<strong>有公开表态者</strong>，不能推潜在未表态者的失败率；未见后作不可当事人退出。</p>
+<p><strong>Panel-WORKER-ROLE:</strong> 受访者自愿提供<code>WORKPLACE YEAR/ROLE</code>, <code>ACTUAL_PROTOTYPE_RIGHT</code>, <code>CREDIT_IF_EXIT</code>, <code>SIDE_PROJECT_PERMISSION</code>, <code>PLAYER_FEEDBACK_CLOSENESS</code>, <code>REENTRY</code>；按<code>雇佣专业游戏岗位/非游戏程序员/学生</code>分层，不问私有NDA细节、不借外部资料推私人家庭史。</p>
+<p><strong>Panel-TEAM:</strong> 记录2022/2023公开Jam中全体署名至少2人的团队，统一观察24/48月<code>TEAM_SAME</code>, <code>FRAGMENTED_CONTINUED</code>, <code>NO_PUBLIC_TRACE</code>, <code>FORMAL_SHIP</code>; 不把后两者合并，合同权利由本人有权公开的资料决定。</p>
+<p><strong>Stop condition:</strong> 不能获得至少一个完整入口分母与公开作品/当事人访谈时，055结论只停在<strong>机制证实/人数效应UNKNOWN</strong>，不写“社会因教育使大多数作者未出生”的数字主张。</p>
+<h2 id="7">7. 书稿的实际人生问题</h2>
+<p>读者章节候选：《一位游戏主程从未发售自己的游戏；另一人发售之后才听见玩家反对》。</p>
+<p>中心不是“他们没有成功，所以应该复盘”，而是三个具体抉择：
+- 当你知道作品不完善时，能否在保住生计的条件下给陌生人展示小范围试玩？
+- 当你发现项目太大或同伴必须离开时，你能否保留以更小范围继续的权利？什么时候<code>STOP THE GAME</code>反而是<code>SAVE THE MAKER</code>？
+- 当你进入商业组织，如果未来要成为作品作者，你实际拥有哪些合法公开、可迁移的劳动信用、原型或再次选题资格？</p>
+<p>正式reader profile要求补同时期原始设计进展/多次作品并经本人公开许可，不能用2016/2022某篇单独的开发日志编造人物十年生活史。本文件目前用于理论/资料归档与提出下一个可抽样研究，不因有故事性就冒进出版成熟层。</p>
+<p><strong>Current verdict:</strong> 我们能用具名、2022/2024中国开发者本人反思及2016西班牙团队完整取消日志，证实<code>技术产出</code>、<code>第一件正式作品</code>、<code>真实市场反馈</code>、<code>团队连续生产</code>与<code>雇佣信用可移植</code>是五种不同的门槛。不存在从3名案例得出的国别比例或应试教育强因果；这组样本恰好构成接下来对失败前史的反向调查结构。</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / book/research-notes/unshipped-creator-gates-china-spain-credit-055.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

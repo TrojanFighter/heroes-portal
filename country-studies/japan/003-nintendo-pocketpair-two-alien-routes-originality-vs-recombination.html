@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>003 — 任天堂不是“普通日本公司”，Pocketpair也不是：两条“宇宙人”路线与日本创新生态的内部差异 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl class="on"" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0" class="t2">0. 日本至少存在两条完全不同但都能制造怪东西的路线</a><a href="#1" class="t2">1. 任天堂的特殊性：不是年轻，而是“高记忆 + 主动代际授权”</a><a href="#splatoon70ip" class="t3">Splatoon：70个方案、程序员原型、年轻人承担新IP责任</a><a href="#2-pocketpair" class="t2">2. Pocketpair：任天堂训练体系培养出来、随后叛出其正统哲学的异类</a><a href="#21-nintendo-game-seminar" class="t3">2.1 更重要的是：Nintendo Game Seminar本身就是“向社会外溢生产能力”的制度</a><a href="#3" class="t2">3. 溝部对任天堂的分歧不是技术，而是“原创性哲学”</a><a href="#4-pocketpair" class="t2">4. Pocketpair自己承认：它和一般日本游戏公司不是同一条文化谱系</a><a href="#5-pocketpair" class="t2">5. Pocketpair的“宇宙人”并不只体现在老板人格，而体现在人才入口</a><a href="#6-palworld" class="t2">6. Palworld证明这条路线不是永远小作坊：市场证据一旦成立就迅速放大</a><a href="#7-vs" class="t2">7. 对梁文锋“原创 vs 模仿”的必要修正</a><a href="#8-20252026pocketpair" class="t2">8. 2025–2026：Pocketpair开始把“异类保护壳”外部化</a><a href="#9" class="t2">9. 日本内部至少拆成四种组织，不再使用“日本公司”单数</a><a href="#10-cross-ecology-alien" class="t2">10. 把“宇宙人”操作化：CROSS-ECOLOGY ALIEN</a><a href="#11" class="t2">11. 对中国研究最直接的问题</a><a href="#115-pocketpair" class="t2">11.5 Pocketpair不应被单独解释：它依赖一张更大的路线网络</a><a href="#12-verdict" class="t2">12. Verdict</a></aside><article class="doc"><div class="col"><h1 id="003-pocketpair">003 — 任天堂不是“普通日本公司”，Pocketpair也不是：两条“宇宙人”路线与日本创新生态的内部差异</h1>
+<ul>
+<li>Program: Japan / East Asian internal counterfactual</li>
+<li>Status: TWO-ORGANIZATION COMPARATOR / FOUNDER-INTERVIEW + NINTENDO OFFICIAL DEVELOPMENT EVIDENCE / NO NATIONAL RATE</li>
+<li>As-of: 2026-10-08</li>
+<li>Related: <a href="/heroes-portal/country-studies/japan/001-japan-east-asian-counterexample-weird-kinship-and-game-creator-ecology.html">001 制度化怪人</a> / <a href="/heroes-portal/country-studies/japan/002-veteran-continuity-technical-frontier-falcom-2025-2026.html">002 Falcom组织记忆</a> / <a href="/heroes-portal/country-studies/china/014-liang-wenfeng-deepseek-positive-deviant-innovation-organization.html">China 014 DeepSeek</a></li>
+<li>Boundary: 两家公司都是成功可见样本；本文比较创新认识论与组织入口，不把任何一家升级为日本平均值，也不把“混搭”自动等同抄袭或法律结论。</li>
+</ul>
+<h2 id="0">0. 日本至少存在两条完全不同但都能制造怪东西的路线</h2>
+<p class="dc"><strong>Nintendo route</strong>：长期组织记忆 + 强资源壳 + 可玩原型 + 独创性要求 + 有意给年轻人问题权。</p>
+<p><strong>Pocketpair route</strong>：跨行业异类 + PC/Steam文化 + 组合既有玩法 + 快速做市场证据 + 社区反馈 + 边做边扩团队。</p>
+<p>这两条路线甚至对“创新”的理解直接冲突。任天堂强调新的play structure与独创性；Pocketpair社长溝部拓郎则公开说，不必执着于每个组件都原创，文化本来就在模仿和mash-up中发展。</p>
+<p>因此以后“创新”至少拆成四项：COMPONENT_NOVELTY、COMBINATION_NOVELTY、PROBLEM_SELECTION_NOVELTY、PRODUCTION_NOVELTY。Pocketpair可能第一项不高，但后三项很高。</p>
+<h2 id="1">1. 任天堂的特殊性：不是年轻，而是“高记忆 + 主动代际授权”</h2>
+<p>任天堂2026官方招聘数据：正社员3,084人，平均年龄40.5岁，平均勤续14.6年，平均年薪约982万日元。</p>
+<p>Source: https://www.nintendo.co.jp/jobs/environment/index.html</p>
+<p>这说明任天堂不是靠高流动和年轻化获得创意。它与Falcom一样有很强组织连续性，但内部更新机制不同。</p>
+<h3 id="splatoon70ip">Splatoon：70个方案、程序员原型、年轻人承担新IP责任</h3>
+<p>Nintendo官方 Iwata Asks 记录：Wii U开发告一段落后，一组开发者被要求先不要套既有genre，半年提出至少70个idea。最终胜出的不是高层指定IP，而是program director Sato做出的黑白“豆腐喷墨”可玩prototype；原型一开始就能4v4。角色和世界观是在核心玩法之后发展出来的。</p>
+<p>Sources:
+- https://iwataasks.nintendo.com/interviews/wiiu/splatoon/0/0/
+- https://iwataasks.nintendo.com/interviews/wiiu/splatoon/0/1/
+- https://iwataasks.nintendo.com/interviews/wiiu/splatoon/0/2/</p>
+<p>2015任天堂IR由高桥伸也明确说，Splatoon是“集结年轻力量”的新IP，并让年轻世代在新IP各环节承担责任。</p>
+<p>Source: https://www.nintendo.co.jp/ir/events/151029qa/04.html</p>
+<p>2019宫本茂又公开说，持续把更多authority交给年轻人，并希望培养能创造“core components of play”的人；同时强调公司有能力承担大胆尝试的失败风险，而不是只做保守小球。</p>
+<p>Source: https://www.nintendo.co.jp/ir/pdf/2019/190208e.pdf</p>
+<p>所以任天堂更接近：<strong>MEMORY + DELIBERATE RENEWAL</strong>。</p>
+<p>但它不是创意乌托邦。同一套Splatoon材料也说明：EAD长期承担Mario、Zelda等既有系列，从Pikmin到Splatoon相隔约14年才出现新的角色型IP；新IP还需要自己在公司内部争取销售与宣传支持。可穿透路径存在，但分母和频率未知。</p>
+<h2 id="2-pocketpair">2. Pocketpair：任天堂训练体系培养出来、随后叛出其正统哲学的异类</h2>
+<p>Pocketpair官方履历显示，溝部拓郎2010参加Nintendo Game Seminar做DS游戏，2012东京工业大学毕业后进入J.P. Morgan，之后又参与Web/加密资产创业，2015创立Pocketpair。</p>
+<p>Source: https://www.pocketpair.jp/about-us/</p>
+<p>2021 AUTOMATON采访中，溝部还说《Craftopia》开发成员里有Nintendo Game Seminar时期同伴。</p>
+<p>Source: https://automaton-media.com/articles/interviewsjp/20210123-149862/</p>
+<p>因此Pocketpair不是完全未经日本游戏工业训练的野路子，而是：Nintendo训练/同伴网络 → 拒绝Nintendo doctrine → web/startup/crypto经验 → 以新生产语法回到游戏。</p>
+<p>这可以称为 <strong>PRODUCTIVE DEFECTION / 生产性叛离</strong>：成熟制度不仅培养留下来的优秀员工，也可能培养出拿走能力和伙伴网络、却拒绝其价值观的人。</p>
+<h3 id="21-nintendo-game-seminar">2.1 更重要的是：Nintendo Game Seminar本身就是“向社会外溢生产能力”的制度</h3>
+<p>任天堂2010官方页面把Game Seminar定义为约10个月的实践项目：现役开发者讲授企划、direction、programming、design、sound，并提供专业制作环境，让不同专长的学生组队完成作品。也就是说，溝部后来离开Nintendo路线，并不是“制度失败”；从产业生态角度，它反而说明一个成熟组织可以<strong>训练出以后不认同自己的创作者</strong>。</p>
+<p>Source: https://www.nintendo.co.jp/etc/seminar2010/what/index.html</p>
+<p>这使“生产性叛离”更加具体：</p>
+<blockquote>
+<p><strong>好的创作生态不只看公司留住多少人，也要看它是否能向社会输出有能力、有人脉、敢于另立哲学的人。</strong></p>
+</blockquote>
+<h2 id="3">3. 溝部对任天堂的分歧不是技术，而是“原创性哲学”</h2>
+<p>2022 WIRED采访中，溝部明确说：他仍非常尊敬任天堂，但Nintendo Game Seminar强调新的、独创的、高质量作品；他个人不认为一定要执着独创，如果世上已有好idea就可以拿来组合，流行东西也可以快速尝试，并认为文化本来就是通过模仿和mash-up发展。</p>
+<p>Source: https://wired.jp/article/why-stay-independent-5-pocketpair-takuro-mizobe/</p>
+<p>两套认识论可以这样区别：</p>
+<ul>
+<li><strong>Nintendo</strong>：先找新的play structure → prototype证明 → 高质量收束 → 再长出IP。</li>
+<li><strong>Pocketpair</strong>：大量消费现有游戏 → 拆出有趣机制 → 非标准组合 → 快速做 → 市场和社区验证 → 保留有效部分。</li>
+</ul>
+<p>这两者都可能产生“以前不存在的产品”，只是原创发生在不同层。</p>
+<h2 id="4-pocketpair">4. Pocketpair自己承认：它和一般日本游戏公司不是同一条文化谱系</h2>
+<p>Pocketpair当前招聘页直接写：公司“和一般日本游戏公司不同”，传统日本游戏业围绕主机发展，而Pocketpair以PC game culture为轴，把streaming、community、MOD视为现代游戏不可分割部分；成员日常接触全球indie game，判断标准强调“玩家觉得有不有趣”，而非职位高低。</p>
+<p>Source: https://www.pocketpair.jp/recruit/</p>
+<p>G-STAR 2024溝部演讲则把开发原则概括为：genre选择与组合、诱发chaos、内部popular vote、把游戏送到fans面前。最关键的是，他明确说Pocketpair偏好仍在发展的新genre，因为日本成熟大公司在这些genre里也没有深厚know-how，小公司因此能接近同一起跑线。</p>
+<p>Source: https://www.4gamer.net/games/574/G057444/20241117003/</p>
+<p>这可以定义为 <strong>FRONTIER_BY_CATEGORY_SHIFT / 换题获得边疆</strong>：不在日本老厂已经积累几十年工艺的传统主机品类正面对打，而去survival craft、automation、PC multiplayer、streaming/community等相对新空间。</p>
+<h2 id="5-pocketpair">5. Pocketpair的“宇宙人”并不只体现在老板人格，而体现在人才入口</h2>
+<p>《Craftopia》2021采访显示：公司大量使用现成assets、主动允许Early Access阶段存在不完整balance，甚至会故意保留玩家喜欢的bug。用户有人会自己解析游戏、指出bug乃至给修法；其中一名“野生开发者”后来直接被招进团队。</p>
+<p>Source: https://automaton-media.com/articles/interviewsjp/20210123-149862/</p>
+<p>这是一条非常清楚的：PLAYER → MODDER/REVERSE_ENGINEER → EMPLOYEE。</p>
+<p>它和传统学校→新卒→大厂路径完全不同，也说明“异类生态”需要真正的旁路入口，而不只是老板嘴上欢迎怪人。</p>
+<h2 id="6-palworld">6. Palworld证明这条路线不是永远小作坊：市场证据一旦成立就迅速放大</h2>
+<p>2024 AUTOMATON采访：Craftopia EA时公司不到10名员工；Palworld最初只有3–4人，且几乎是新招成员；一年后约10人，两年后20–30人，第三年又增加10–20人。溝部本人既做producer，也参与direction，后期还承担optimization工程。</p>
+<p>Source: https://automaton-media.com/articles/interviewsjp/20240119-279536/</p>
+<p>因此Pocketpair与Nintendo反而出现结构同构：</p>
+<ul>
+<li>Nintendo：内部原型竞争 → core fun成立 → 公司放大资源。</li>
+<li>Pocketpair：小团队快速组合 → Steam/社媒/愿望单等外部信号成立 → 招人放大资源。</li>
+</ul>
+<p>主要差异是验证场域：任天堂更多依赖内部play judgment；Pocketpair更早把Demand Discovery外包给真实市场和社区。</p>
+<h2 id="7-vs">7. 对梁文锋“原创 vs 模仿”的必要修正</h2>
+<p>China 014记录梁文锋把中国AI真正差距描述为“原创和模仿之差”。Pocketpair提醒：这个判断不能机械迁移到所有创意产业。</p>
+<p>一个产品可以大量使用已知技术、借鉴成熟genre、几乎不追求mechanic component逐个原创，却通过新的组合、市场定位、用户关系和生产方式形成高度差异化产品。</p>
+<p>以后正式区分：
+- FRONTIER_SCIENTIFIC_ORIGINALITY
+- MECHANIC_COMPONENT_ORIGINALITY
+- RECOMBINATIVE_ORIGINALITY
+- MARKET_FORMAT_ORIGINALITY</p>
+<p>DeepSeek更强调第一类；Nintendo偏第二/第三类中的“new play structure”；Pocketpair显著偏第三/第四类。</p>
+<p>creative recombination与legal IP boundary必须分开研究。</p>
+<h2 id="8-20252026pocketpair">8. 2025–2026：Pocketpair开始把“异类保护壳”外部化</h2>
+<p>Pocketpair 2025启动Pocketpair Publishing，官方公开宣称：提供funding、development support和publishing，但不想夺走开发者控制权，不想把他们改成某种指定类型，而是帮助他们“your game, your way”。</p>
+<p>Sources:
+- https://www.pocketpair.jp/en/publishing/
+- https://www.pocketpair.jp/news/20250123/</p>
+<p>2025 WePlay采访中，publishing负责人进一步称：已公开项目里除1个外几乎都提供资金；资金用途基本由开发者决定；publisher给feedback但不告诉开发者必须怎么改；很多团队只有1–2人，而且常是第一/第二作；首要目标是让小团队把作品完成、积累经验，而不是预设每个项目卖千万。</p>
+<p>Source: https://www.4gamer.net/games/870/G087066/20251128031/</p>
+<p>这非常接近此前定义的 RESOURCE_ACCESS_BEFORE_GREENLIGHT、AFFORDABLE_FAILURE_CAPACITY 和 SECOND_ATTEMPT_CAPACITY。</p>
+<p>如果能持续兑现，Pocketpair就从“一个成功异类公司”开始变成<strong>给别的异类提供保护壳的基础设施</strong>。但截至2026体系历史仍短，项目回报、失败处理和第二轮支持都缺长期数据。</p>
+<h2 id="9">9. 日本内部至少拆成四种组织，不再使用“日本公司”单数</h2>
+<table>
+<thead>
+<tr>
+<th>Regime</th>
+<th>Example</th>
+<th style="text-align: right;">Memory</th>
+<th style="text-align: right;">Technical frontier</th>
+<th>Renewal mechanism</th>
+<th>Core risk</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Long-memory craft</td>
+<td>Falcom</td>
+<td style="text-align: right;">极高</td>
+<td style="text-align: right;">中</td>
+<td>apprenticeship + intergenerational recombination</td>
+<td>legacy lock-in</td>
+</tr>
+<tr>
+<td>Long-memory renewal machine</td>
+<td>Nintendo</td>
+<td style="text-align: right;">高</td>
+<td style="text-align: right;">中高/选择性</td>
+<td>prototype + young authority + resource shell</td>
+<td>new-IP friction</td>
+</tr>
+<tr>
+<td>High-tech industrial renewal</td>
+<td>Capcom</td>
+<td style="text-align: right;">高</td>
+<td style="text-align: right;">高</td>
+<td>shared engine + large tech org</td>
+<td>AAA scale / IP inertia</td>
+</tr>
+<tr>
+<td>Startup recombinant outsider</td>
+<td>Pocketpair</td>
+<td style="text-align: right;">低起点→快速积累</td>
+<td style="text-align: right;">选择性</td>
+<td>mash-up + Steam demand + community + rapid hiring</td>
+<td>scaling / chaos / IP boundary</td>
+</tr>
+</tbody>
+</table>
+<p>日本的特殊性可能不在于拥有一种“正确公司文化”，而在于<strong>同一社会里同时保留多种互相不认同的作者生产路线</strong>。</p>
+<h2 id="10-cross-ecology-alien">10. 把“宇宙人”操作化：CROSS-ECOLOGY ALIEN</h2>
+<p>不写成日本人天生怪，而定义为：</p>
+<blockquote>
+<p>一个人的reference system、关系网络和职业经历明显横跨本行业主流生态，因此带进主流组织不熟悉的判断函数。</p>
+</blockquote>
+<p>溝部的履历尤其典型：日本主机游戏、Nintendo seminar、韩国MMORPG、PC freeware、pixiv、全球金融、Web创业、crypto startup、Steam indie、全球streaming/community。</p>
+<p>以后日本人物研究应专门寻找：跨行业、跨平台、主流公司训练后退出、同人/PC/arcade/console交叉、用户社区直接进入职业生产的人，并和“学校→同一大厂→同一品类20年”的纯内部路径比较。</p>
+<h2 id="11">11. 对中国研究最直接的问题</h2>
+<p>Pocketpair比“为什么中国没有任天堂”更容易成为可比对象。真正应问：
+- 中国有没有足够多CROSS-ECOLOGY ALIEN？
+- 他们能否从大学/大厂带走能力与伙伴后合法重组？
+- Steam/海外社区能否给他们真实Demand Discovery？
+- 有没有publisher愿意给1–2人团队资金而不接管产品定义？
+- 强借鉴能力是否最终总被ROI/渠道模型拉回成熟模板，而不能形成非标准组合？
+- 失败以后这些异类有没有第二次机会？</p>
+<h2 id="115-pocketpair">11.5 Pocketpair不应被单独解释：它依赖一张更大的路线网络</h2>
+<p><a href="/heroes-portal/country-studies/japan/004-creator-route-redundancy-doujin-corporate-exit-bridges.html">004</a>补充：Pocketpair的<code>PRODUCTIVE_DEFECTION</code>只是日本多路径生态的一条。平行还有ZUN式<code>PARALLEL_AUTHOR_IDENTITY</code>、TYPE-MOON式<code>DOUJIN_TO_COMMERCIAL_BRIDGE</code>、坂口博信式<code>VETERAN_AUTHOR_SECESSION</code>以及BitSummit/publisher式<code>VISIBILITY_AND_TRANSLATION_BRIDGE</code>。真正需要比较的不是“有没有一个Pocketpair”，而是<strong>这些出口和入口是否同时存在、能否相互切换</strong>。</p>
+<h2 id="12-verdict">12. Verdict</h2>
+<p>错误叙事A：日本公司都保守老化、靠老人做老游戏。Nintendo/Capcom反驳。</p>
+<p>错误叙事B：日本创新来自整个社会特别尊重原创。Pocketpair创始人本人反驳：他就是因为不认同Nintendo那套“独创+高品质”正统，才走出另一条路线。</p>
+<p>更准确的解释是：</p>
+<blockquote>
+<p><strong>日本长期保存了多个相互竞争的创作生态位：传统工艺公司、内部原型型巨头、高技术工业公司、同人圈子、PC独立创业者。异类可以留在组织里，也可以叛出组织后重新组合。</strong></p>
+</blockquote>
+<p>对中国最值得比较的不是“日本更个人主义”，而是：</p>
+<blockquote>
+<p><strong>一个产业能否容纳多种互相不认同的产品哲学，并让每一种都拥有真实资源、市场和再尝试入口。</strong></p>
+</blockquote><div class="crumbs"><a href="/heroes-portal/">书阁</a> / country-studies/japan/003-nintendo-pocketpair-two-alien-routes-originality-vs-recombination.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

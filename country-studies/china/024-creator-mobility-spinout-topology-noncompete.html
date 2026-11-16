@@ -1,0 +1,802 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>024 — Creator Mobility &amp; Spinout Topology：人才流动、竞业限制与“树能不能长出去” · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl class="on"" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0" class="t2">0. 核心命题</a><a href="#1" class="t2">1. 创作者阶层需要的不只是资本循环，还需要人才循环</a><a href="#2-silicon-valley-route-128" class="t2">2. Silicon Valley / Route 128：文化解释之外的制度变量</a><a href="#3-californiahigh-mobility-legal-default" class="t2">3. California：HIGH-MOBILITY LEGAL DEFAULT</a><a href="#4-2025" class="t2">4. 中国：竞业限制合法存在，但2025规则明显强调必要性和比例性</a><a href="#5" class="t2">5. 游戏业为什么对流动特别敏感？</a><a href="#6-atarispinoutspinout" class="t2">6. Atari：一个成功spinout会降低下一代spinout的心理与资本门槛</a><a href="#7-looking-glass" class="t2">7. Looking Glass：公司失败不等于能力消失，人才网络可以继续繁殖</a><a href="#8-blizzard-alumni" class="t2">8. Blizzard alumni：成熟大厂也可以变成创业学校</a><a href="#9-alumni-network-capital" class="t2">9. ALUMNI NETWORK CAPITAL</a><a href="#10-spinout-topology" class="t2">10. SPINOUT TOPOLOGY：不要只数“前员工创业”</a><a href="#11" class="t2">11. 创作者流动的四种制度</a><a href="#type-a-locked-incumbent" class="t3">Type A — LOCKED INCUMBENT</a><a href="#type-b-mobile-employee-market" class="t3">Type B — MOBILE EMPLOYEE MARKET</a><a href="#type-c-spinout-friendly-creator-market" class="t3">Type C — SPINOUT-FRIENDLY CREATOR MARKET</a><a href="#type-d-internal-entrepreneurship-substitute" class="t3">Type D — INTERNAL ENTREPRENEURSHIP SUBSTITUTE</a><a href="#12" class="t2">12. 流动不是纯收益：公司为何合理担心？</a><a href="#13-mobility-friction" class="t2">13. 中国游戏业需要测的不是法律文本，而是实际MOBILITY FRICTION</a><a href="#131" class="t2">13.1 中国游戏行业已存在可观察的竞业摩擦</a><a href="#_1" class="t3">腾讯 → 米哈游</a><a href="#_2" class="t3">米哈游 → 腾讯</a><a href="#2025" class="t3">2025规则变化的研究意义</a><a href="#14-h" class="t2">14. 中国的关键H：高端人才流动可能很强，但“流动→作者创业”的转换未必同样强</a><a href="#15-spinout-conversion-rate" class="t2">15. SPINOUT CONVERSION RATE</a><a href="#16-aispinout-economics" class="t2">16. 与第四次工业革命：AI可能显著改变spinout economics</a><a href="#17" class="t2">17. 与“个人主义传统”的新连接</a><a href="#culture-mobility" class="t3">Culture → Mobility</a><a href="#institution-mobility" class="t3">Institution → Mobility</a><a href="#mobility-culture" class="t3">Mobility → Culture</a><a href="#18-forest-testmobility" class="t2">18. Forest Test的mobility版本</a><a href="#19" class="t2">19. 下一步证据任务</a><a href="#p0" class="t3">P0 — 中国游戏竞业实态</a><a href="#p0-alumni-graph" class="t3">P0 — Alumni graph</a><a href="#p0-quantity" class="t3">P0 — Quantity</a><a href="#p1-parent-behavior" class="t3">P1 — Parent behavior</a><a href="#p1-china-comparator" class="t3">P1 — China comparator</a><a href="#20" class="t2">20. 当前最小结论</a><a href="#21-quantification-handoff" class="t2">21. Quantification handoff</a><a href="#22-mobility-to-ownership-indie-mode" class="t2">22. Mobility-to-Ownership 之后仍需再问一次：有没有进入Indie Mode？</a></aside><article class="doc"><div class="col"><h1 id="024-creator-mobility-spinout-topology">024 — Creator Mobility &amp; Spinout Topology：人才流动、竞业限制与“树能不能长出去”</h1>
+<ul>
+<li>Program: C / 中国国情研究 × 创作者阶层 × 劳动流动</li>
+<li>Status: <strong>MECHANISM FRAMEWORK / COMPARATIVE INSTITUTION / DENOMINATOR REQUIRED</strong></li>
+<li>As-of: 2026-10-08</li>
+<li>Parent: <a href="/heroes-portal/country-studies/china/023-creator-class-formation-intergenerational-reproduction.html">023 — Creator Class Formation</a></li>
+<li>Quantification ledger: <a href="/heroes-portal/country-studies/china/025-alumni-spinout-quantification-ledger-v01.html">025 — Alumni → Spinout Quantification v0.1</a></li>
+<li>Indie-mode correction: <a href="/heroes-portal/country-studies/china/026-spinout-vs-indie-mode-conversion.html">026 — Spinout ≠ Indie</a></li>
+<li>Creative surplus: <a href="/heroes-portal/country-studies/china/022-creative-surplus-allocation-rights-customer-future-control.html">022 — Creative Surplus Allocation</a></li>
+<li>Attribution: <a href="/heroes-portal/country-studies/china/021-attribution-politics-credit-regimes-author-power.html">021 — Attribution Politics</a></li>
+<li>Boundary: 本文研究人才流动如何影响创新扩散，不主张“流动越高越好”，也不把California非竞业制度单独当成Silicon Valley成功的充分原因。</li>
+</ul>
+<h2 id="0">0. 核心命题</h2>
+<p class="dc">一个社会即使能培养很多顶尖员工，也不等于会形成很多新工作室。</p>
+<p>真正的问题是：</p>
+<blockquote>
+<p><strong>能力、关系、taste和经验能否从旧组织流向新组织，并重新组合成新的创作主体？</strong></p>
+</blockquote>
+<p>因此新增：</p>
+<h1 id="creator-mobility"><code>CREATOR MOBILITY / 创作者流动性</code></h1>
+<p>以及：</p>
+<h1 id="spinout-topology"><code>SPINOUT TOPOLOGY / 分拆创业拓扑</code></h1>
+<p>关注：
+- 谁从哪里离开；
+- 带走什么能力；
+- 能否创业；
+- 能否带同事；
+- 是否受竞业/保密/诉讼约束；
+- 旧公司是否允许合作；
+- 新公司是否获得第一单；
+- 成功后是否继续产生下一代spinout。</p>
+<h2 id="1">1. 创作者阶层需要的不只是资本循环，还需要人才循环</h2>
+<p>023研究：</p>
+<pre><code class="language-text">successful creator
+→ future transfer
+→ next generation
+</code></pre>
+<p>但如果人才不能离开组织，future transfer会被截断。</p>
+<p>于是新增：</p>
+<h1 id="mobility-bottleneck"><code>MOBILITY BOTTLENECK</code></h1>
+<pre><code class="language-text">high skill formation
++
+low exit / spinout mobility
+=
+strong incumbent firms
+but weak new-studio reproduction
+</code></pre>
+<p>反过来：</p>
+<pre><code class="language-text">high skill formation
++
+high mobility
++
+market entry
+=
+knowledge recombination
++
+spinout formation
+</code></pre>
+<p>这并不保证成功；
+它只是提高“树能长出去”的概率。</p>
+<h2 id="2-silicon-valley-route-128">2. Silicon Valley / Route 128：文化解释之外的制度变量</h2>
+<p>Ronald Gilson 1999对Silicon Valley和Route 128的经典比较明确提出：
+- 两地员工流动模式不同；
+- California不执行典型post-employment noncompete；
+- 高流动促进知识在企业间扩散与startup形成；
+- 法律基础设施可能帮助形成networked industrial district，而非封闭垂直公司。</p>
+<p>Sources:
+- https://nyulawreview.org/issues/volume-74-number-3/the-legal-infrastructure-of-high-technology-industrial-districts-silicon-valley-route-128-and-covenants-not-to-compete/
+- https://scholarship.law.columbia.edu/faculty_scholarship/1159/</p>
+<p>NBER对Silicon Valley job-hopping的实证研究也发现：
+- California computer industry的高学历男性job-hopping高于州外computer clusters；
+- 作者把California noncompete制度作为可能机制之一；
+- 并提出高流动可加速资源流向更强innovation。</p>
+<p>Source:
+- https://www.nber.org/papers/w11710</p>
+<p>2023/2024另一项NBER研究利用州法变化发现：
+- noncompete更易执行时，inventor mobility和new business formation下降；
+- patent output下降；
+- 机制与知识扩散受阻一致。</p>
+<p>Source:
+- https://www.nber.org/papers/w31487</p>
+<p>但必须保留反方研究：
+- 有学者认为“California noncompete解释Silicon Valley胜Route 128”被过度简化；
+- 技术、资本、产业结构等因素同样重要；
+- California历史上也存在其他可替代约束。</p>
+<p>Source:
+- https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2758854</p>
+<p>因此正式结论只是：</p>
+<blockquote>
+<p><strong>人才流动是创新集群的重要候选机制；竞业制度是其中一个影响变量，但不能单因果解释Silicon Valley。</strong></p>
+</blockquote>
+<h2 id="3-californiahigh-mobility-legal-default">3. California：<code>HIGH-MOBILITY LEGAL DEFAULT</code></h2>
+<p>California Business &amp; Professions Code `16600长期确立：</p>
+<blockquote>
+<p>除法定例外，限制任何人从事合法职业、行业或业务的合同无效。</p>
+</blockquote>
+<p>2023 AB1076进一步强化/澄清该规则，2024生效；California官方预算材料明确把该政策与job mobility、wages和创业联系起来。</p>
+<p>Sources:
+- https://law.justia.com/codes/california/code-bpc/division-7/part-2/chapter-1/section-16600/
+- https://bcp.dof.ca.gov/2425/FY2425_ORG0820_BCP7564.pdf</p>
+<p>因此在California，典型员工离职后竞业禁止的可执行空间很窄。</p>
+<p>这不等于：
+- 可以带走商业秘密；
+- 可以侵犯版权/IP；
+- 可以违反保密义务。</p>
+<p>真正制度含义是：</p>
+<blockquote>
+<p><strong>“你掌握的通用能力与职业生涯”与“前雇主的商业秘密/IP”更容易被法律上拆开。</strong></p>
+</blockquote>
+<h2 id="4-2025">4. 中国：竞业限制合法存在，但2025规则明显强调必要性和比例性</h2>
+<p>《劳动合同法》第23、24条：
+- 对负有保密义务的劳动者可以约定竞业限制；
+- 人员限于高级管理、高级技术和其他负有保密义务者；
+- 需按月支付经济补偿；
+- 最长期限不超过2年。</p>
+<p>Official:
+- https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2023/art_0abfdd261c03417b949df19d869add8d.html</p>
+<p>2025人社部《企业实施竞业限制合规指引》进一步要求：
+- 必要、合理；
+- 不随意扩大人员范围；
+- 未接触商业秘密者不得纳入；
+- 仅掌握行业通用知识技能不属于应竞业人员；
+- 全国/全球限制通常需充分理由；
+- 期限与涉密程度/秘密时效匹配，最长2年；
+- 需支付补偿；
+- 超过1年时补偿比例指引更高。</p>
+<p>Official:
+- https://app.www.gov.cn/govdata/gov/202509/13/536638/article.html</p>
+<p>因此中国不能写成：</p>
+<blockquote>
+<p>“法律允许公司随便锁人两年。”</p>
+</blockquote>
+<p>更准确是：</p>
+<h1 id="negotiated-compensated-noncompete-regime"><code>NEGOTIATED / COMPENSATED NONCOMPETE REGIME</code></h1>
+<blockquote>
+<p><strong>法律允许对特定涉密核心人员实施有偿竞业，但正在强化必要性、比例性与范围约束。</strong></p>
+</blockquote>
+<h2 id="5">5. 游戏业为什么对流动特别敏感？</h2>
+<p>游戏项目拥有大量：
+- tacit design knowledge；
+- pipeline经验；
+- engine/tool chain；
+- market intuition；
+- community understanding；
+- production heuristics。</p>
+<p>这些很难完全写成文档。</p>
+<p>所以员工流动会带来：</p>
+<h1 id="tacit-design-diffusion"><code>TACIT DESIGN DIFFUSION</code></h1>
+<p>而不是简单“偷代码”。</p>
+<p>例如一个combat designer换公司后不能带走：
+- 源代码；
+- 未公开数据；
+- 机密文档。</p>
+<p>但他仍会带走：
+- “这种boss telegraph为何失败”；
+- “某种animation cancel怎样影响手感”；
+- “怎样组织playtest”；
+- “什么production scope最危险”。</p>
+<p>这些是创新扩散的重要载体。</p>
+<h2 id="6-atarispinoutspinout">6. Atari：一个成功spinout会降低下一代spinout的心理与资本门槛</h2>
+<p>1979 Activision成立后，Atari更多员工看到：
+- 前同事可以离开；
+- 可以融资；
+- 可以做第三方产品；
+- 可以获得署名和更高收益。</p>
+<p>1981 Rob Fulop等又离开Atari参与创办Imagic。</p>
+<p>Game Developer的历史访谈直接记录Fulop看到Activision成功后选择离开；Atari历史也记录多位设计师随后外流。</p>
+<p>Sources:
+- https://www.gamedeveloper.com/business/atari-the-golden-years----a-history-1978-1981
+- https://www.gamedeveloper.com/business/the-replay-interviews-rob-fulop
+- https://www.gamedeveloper.com/business/obituary-bob-smith-atari-2600-programmer-has-passed-away</p>
+<p>因此新增：</p>
+<h1 id="spinout-legitimation-cascade"><code>SPINOUT LEGITIMATION CASCADE</code></h1>
+<blockquote>
+<p><strong>第一家spinout成功后，会把“离开大公司创业”从异常行为变成可想象职业路径。</strong></p>
+</blockquote>
+<p>这也是creator class形成的重要心理基础设施。</p>
+<h2 id="7-looking-glass">7. Looking Glass：公司失败不等于能力消失，人才网络可以继续繁殖</h2>
+<p>Irrational Games由三位Looking Glass前员工Ken Levine、Jonathan Chey、Robert Fermier于1997成立；其第一次publisher项目很快取消后，Looking Glass创始人Paul Neurath仍给他们小预算和办公室，并让其参与System Shock 2。</p>
+<p>Source:
+- https://www.pcgamer.com/the-story-of-irrational-the-studio-that-shut-down-to-rediscover-its-roots/</p>
+<p>这个案例很重要，因为它同时包含：</p>
+<pre><code class="language-text">employee exit
++
+founder tolerance
++
+fallback relationship
++
+first contract / incubation
+</code></pre>
+<p>所以：</p>
+<h1 id="benevolent-spinout-support"><code>BENEVOLENT SPINOUT SUPPORT</code></h1>
+<blockquote>
+<p><strong>旧组织/旧老板并不一定把离职创业者视为叛徒；旧网络可以成为新公司的第一层failure shelter。</strong></p>
+</blockquote>
+<p>Looking Glass后来关闭，但其人才与设计思想继续进入Irrational等多个组织。</p>
+<p>这里要避免把所有后继工作室都机械算作Looking Glass“直系”，需逐人取证。</p>
+<h2 id="8-blizzard-alumni">8. Blizzard alumni：成熟大厂也可以变成创业学校</h2>
+<p>Dreamhaven 2020由Blizzard联合创始人/前CEO Mike Morhaime与大量industry veterans创立，直接设立Moonshot、Secret Door并同时承担create + publish角色。</p>
+<p>Official:
+- https://www.dreamhaven.com/news/announcement
+- https://www.dreamhaven.com/about</p>
+<p>这代表：</p>
+<pre><code class="language-text">large successful incumbent
+→ veterans accumulate capability/network/capital
+→ exit
+→ new multi-studio organization
+</code></pre>
+<p>它说明“大公司培养人”与“独立创作者生态”并非对立：</p>
+<blockquote>
+<p><strong>关键是成熟人才最后能不能带着能力重新组合。</strong></p>
+</blockquote>
+<p>ArenaNet、Second Dinner等Blizzard alumni案例还应逐案建立数量级网络，不能只靠知名名字推断整个Blizzard都具有高spinout率。</p>
+<h2 id="9-alumni-network-capital">9. <code>ALUMNI NETWORK CAPITAL</code></h2>
+<p>离职以后真正可带走的，不只是个人能力。</p>
+<p>还包括：
+- former coworkers；
+- trusted collaborators；
+- recruiter network；
+- publisher contacts；
+- investor references；
+- media reputation；
+- shared production language。</p>
+<p>定义：</p>
+<h1 id="alumni-network-capital"><code>ALUMNI NETWORK CAPITAL</code></h1>
+<blockquote>
+<p><strong>一段共同工作经历形成的高信任关系，在离职后仍能降低组队、融资和协作成本。</strong></p>
+</blockquote>
+<p>这解释为什么：
+- 某些公司反复产生新studio；
+- 新studio founders常来自同一旧公司；
+- 创业团队并非临时陌生人拼装。</p>
+<h2 id="10-spinout-topology">10. <code>SPINOUT TOPOLOGY</code>：不要只数“前员工创业”</h2>
+<p>真正要画网络：</p>
+<pre><code class="language-text">Parent Studio A
+├─ Spinout B
+│  ├─ Spinout D
+│  └─ Publisher E
+├─ Spinout C
+└─ Alumni join F
+   └─ later found G
+</code></pre>
+<p>记录：
+- founder人数；
+- parent tenure；
+- whether left together；
+- first funding；
+- first publisher；
+- parent support/conflict；
+- legal disputes；
+- talent transfer；
+- genre/technology transfer；
+- later second-generation spinout。</p>
+<p>这样才能看出：</p>
+<h1 id="reproductive-depth"><code>REPRODUCTIVE DEPTH</code></h1>
+<p>一家公司到底只是：</p>
+<blockquote>
+<p>“偶尔有人创业”</p>
+</blockquote>
+<p>还是：</p>
+<blockquote>
+<p>“持续生产新的creator organizations”。</p>
+</blockquote>
+<h2 id="11">11. 创作者流动的四种制度</h2>
+<h3 id="type-a-locked-incumbent">Type A — <code>LOCKED INCUMBENT</code></h3>
+<ul>
+<li>强竞业；</li>
+<li>credit弱；</li>
+<li>customer/IP全归公司；</li>
+<li>exit代价高。</li>
+</ul>
+<p>优点：
+- knowledge retention；
+-长期大项目稳定。</p>
+<p>风险：
+- spinout少；
+-外部创新扩散慢。</p>
+<h3 id="type-b-mobile-employee-market">Type B — <code>MOBILE EMPLOYEE MARKET</code></h3>
+<ul>
+<li>跳槽容易；</li>
+<li>同城cluster；</li>
+<li>高private reputation。</li>
+</ul>
+<p>结果：
+- 技能扩散强；
+- 不一定产生公开作者。</p>
+<h3 id="type-c-spinout-friendly-creator-market">Type C — <code>SPINOUT-FRIENDLY CREATOR MARKET</code></h3>
+<ul>
+<li>mobility高；</li>
+<li>credit/brand可迁移；</li>
+<li>founder financing可得；</li>
+<li>old network可继续合作。</li>
+</ul>
+<p>最容易形成creator class。</p>
+<h3 id="type-d-internal-entrepreneurship-substitute">Type D — <code>INTERNAL ENTREPRENEURSHIP SUBSTITUTE</code></h3>
+<p>公司内部给：
+- autonomous cell；
+- prototype fund；
+- profit/equity-like incentives；
+- author rights。</p>
+<p>即使员工不离开，也可部分实现新组织试验。</p>
+<p>Nintendo某些frontier-team、NExT式机制可在这里比较。</p>
+<h2 id="12">12. 流动不是纯收益：公司为何合理担心？</h2>
+<p>必须保留反方。</p>
+<p>高流动可能造成：
+- 商业秘密泄露；
+- R&amp;D投资回收降低；
+-团队连续性下降；
+- key-person loss；
+- 员工被集体挖走；
+- 项目中断。</p>
+<p>NBER理论本身也承认：</p>
+<blockquote>
+<p>job-hopping一边创造knowledge externality，一边可能削弱企业投资human capital的激励。</p>
+</blockquote>
+<p>Source:
+- https://www.nber.org/papers/w11710</p>
+<p>所以最优问题不是：</p>
+<blockquote>
+<p>“彻底禁止竞业 vs 完全自由。”</p>
+</blockquote>
+<p>而是：</p>
+<h1 id="knowledge-protection-mobility-balance"><code>KNOWLEDGE-PROTECTION / MOBILITY BALANCE</code></h1>
+<p>怎样区分：
+- protectable secrets；
+- general skill；
+- personal reputation；
+- portable know-how；
+- copied assets/code。</p>
+<p>中国2025竞业合规指引强调“行业通用知识和技能不属于商业秘密”，就是在试图划这条线。</p>
+<h2 id="13-mobility-friction">13. 中国游戏业需要测的不是法律文本，而是实际<code>MOBILITY FRICTION</code></h2>
+<p>正式法条只是一层。</p>
+<p>真正要测：</p>
+<ul>
+<li>核心游戏岗位竞业实际签署率；</li>
+<li>启动率；</li>
+<li>补偿率；</li>
+<li>争议率；</li>
+<li>实际限制范围；</li>
+<li>是否影响同品类创业；</li>
+<li>“花园假期”/脱密期；</li>
+<li>前雇主诉讼威慑；</li>
+<li>行业内黑名单/关系成本；</li>
+<li>家庭对创业的风险约束。</li>
+</ul>
+<p>新增：</p>
+<h1 id="effective-mobility-friction"><code>EFFECTIVE MOBILITY FRICTION</code></h1>
+<blockquote>
+<p><strong>员工从“我想走”到“我真的能在合理时间内进入新团队或创办竞品”的综合摩擦。</strong></p>
+</blockquote>
+<p>它不等于法律允许/禁止。</p>
+<h2 id="131">13.1 中国游戏行业已存在可观察的竞业摩擦</h2>
+<p>公开裁判材料证明，竞业限制并非中国游戏业的纸面制度。</p>
+<h3 id="_1">腾讯 → 米哈游</h3>
+<p>上海徐汇法院公开判决显示：
+- 腾讯前员工孙鑫曾参与《刀锋铁骑》《欢乐球吃球》《无限法则》等游戏后台开发；
+- 离职后通过第三方人力公司实际到米哈游工作，参与《崩坏3》内部信息系统优化；
+- 法院认定腾讯与米哈游在游戏开发上存在竞争关系；
+- 判令返还部分竞业补偿并支付约108万元竞业违约金。</p>
+<p>Official court source:
+- https://www.hshfy.sh.cn/shfy/web/flws2pdf.jsp?pa=adGFoPaOoMjAyMKOpu6YwMTA0w%2FGz9TE0OTM5usUmd3N4aD0zJndzbGI9bnVsbAPdcssPdcssz</p>
+<h3 id="_2">米哈游 → 腾讯</h3>
+<p>上海法院公开判决显示：
+- 米哈游《原神》运营相关负责人陈彤蓬离职后受到1年竞业限制；
+- 月补偿为28,100元；
+- 法院根据其多次进入腾讯游戏办公地点等证据认定其违反竞业；
+- 最终支持约232.9万元违约金。</p>
+<p>Official court source:
+- https://www.hshfy.sh.cn/shfy/web/flws_view.jsp?pa=adGFoPaOoMjAyMqOpu6YwMTA0w%2FGz9TY4NTS6xSZ3c3hoPTMPdcssz</p>
+<p>另有米哈游数据运营人员离职去腾讯、腾讯员工去米哈游等公开案件，说明：</p>
+<blockquote>
+<p><strong>在中国头部游戏公司之间，竞业限制至少对部分核心/涉密员工形成真实、可执行的流动摩擦。</strong></p>
+</blockquote>
+<p>但禁止外推：
+- 几个判例 ≠ 全行业竞业签署率；
+- 被判员工 ≠ 所有高级人才；
+- 法院支持个案 ≠ 所有竞业条款都会被支持；
+- 2025合规指引已进一步强调必要性、比例性与不得泛化。</p>
+<p>因此这些案例用于证明§EFFECTIVE MOBILITY FRICTION存在§，而不是证明其平均强度。</p>
+<h3 id="2025">2025规则变化的研究意义</h3>
+<p>2025人社部指引要求：
+- 先确认真实商业秘密；
+- 未接触商业秘密者不得纳入；
+- 行业通用知识技能不属于商业秘密；
+- 不随意扩大人员、企业、地域；
+- 竞业需必要性评估。</p>
+<p>这意味着未来应该做一个非常具体的前后比较：</p>
+<h1 id="prepost-2025-noncompete-practice">§PRE/POST-2025 NONCOMPETE PRACTICE§</h1>
+<p>观察：
+- 启动比例是否下降；
+- 范围是否收窄；
+- 违约金是否变化；
+- 大厂→startup流动是否增加；
+- 争议焦点是否从“有没有竞业”转向“商业秘密具体是什么”。</p>
+<p>如果2025后practice显著变化，这会成为中国creator mobility的一次自然实验。</p>
+<h2 id="14-h">14. 中国的关键H：高端人才流动可能很强，但“流动→作者创业”的转换未必同样强</h2>
+<p>中国商业游戏本身存在高频挖角、跳槽和private reputation市场。</p>
+<p>因此不能写：</p>
+<blockquote>
+<p>“中国人才不流动。”</p>
+</blockquote>
+<p>更值得检验：</p>
+<pre><code class="language-text">high inter-firm mobility
+but
+mobility mostly:
+big firm → big firm
+rather than
+big firm → creator-owned startup
+</code></pre>
+<p>如果成立，则真正缺口是：</p>
+<h1 id="mobility-to-ownership-conversion"><code>MOBILITY-TO-OWNERSHIP CONVERSION</code></h1>
+<p>也就是：</p>
+<blockquote>
+<p><strong>跳槽能力能不能进一步转成股权、IP、customer和residual judgment rights？</strong></p>
+</blockquote>
+<p>一个高级制作人：
+- 从腾讯跳网易；
+- 再跳字节；</p>
+<p>虽然流动很高，
+但仍可能始终处于employee model。</p>
+<p>这与creator class formation不是一回事。</p>
+<h2 id="15-spinout-conversion-rate">15. <code>SPINOUT CONVERSION RATE</code></h2>
+<p>新增核心指标：</p>
+<blockquote>
+<p><strong>每100名达到director/lead/高级技术层级的人，多少会在5–10年内成为founder/cofounder或核心creator-owner？</strong></p>
+</blockquote>
+<p>再分：
+- survival 3y；
+- ship rate；
+- second-title rate；
+- employee count；
+- follow-on spinouts。</p>
+<p>这是比较中美日俄数量级的比“能举出谁”更好的指标。</p>
+<h2 id="16-aispinout-economics">16. 与第四次工业革命：AI可能显著改变spinout economics</h2>
+<p>AI降低：
+- prototype headcount；
+- art/code support；
+- localization；
+- QA；
+- production coordination。</p>
+<p>因此大厂高级员工离职创业所需的：
+- cofounder人数；
+- upfront capital；
+- runway；</p>
+<p>可能下降。</p>
+<p>这会提高：</p>
+<h1 id="mobility-to-ownership-elasticity"><code>MOBILITY-TO-OWNERSHIP ELASTICITY</code></h1>
+<blockquote>
+<p><strong>人才流动增加一点，能产生多少新增creator-owned organizations？</strong></p>
+</blockquote>
+<p>过去一个lead离职可能只是换工作。</p>
+<p>AI时代同一个lead可能：
+- 2–5人；
+- 6个月；
+-做出可验证demo；
+-直接Steam test。</p>
+<p>所以AI真正放大的不只是个人生产力，而是：</p>
+<blockquote>
+<p><strong>员工→owner的转换概率。</strong></p>
+</blockquote>
+<p>但如果：
+- noncompete；
+- IP assignment；
+- platform discovery；
+- financing；
+-家庭风险；</p>
+<p>仍高，则生产成本下降未必自动形成更多spinout。</p>
+<h2 id="17">17. 与“个人主义传统”的新连接</h2>
+<p>这条线再次支持双向因果：</p>
+<h3 id="culture-mobility">Culture → Mobility</h3>
+<p>社会是否把：
+- 跳槽；
+- 离开师门；
+- 自立门户；
+视为正常。</p>
+<h3 id="institution-mobility">Institution → Mobility</h3>
+<p>法律、资本、cluster是否允许。</p>
+<h3 id="mobility-culture">Mobility → Culture</h3>
+<p>若大量前辈成功spinout：</p>
+<blockquote>
+<p>“出去做自己的”会变成正常职业脚本。</p>
+</blockquote>
+<p>因此新增：</p>
+<h1 id="spinout-normalization"><code>SPINOUT NORMALIZATION</code></h1>
+<blockquote>
+<p><strong>个人主义创业文化可以被连续成功的离职/创业案例社会化出来，而不一定是先验民族性。</strong></p>
+</blockquote>
+<p>Atari→Activision→Imagic正是一个微型例子。</p>
+<h2 id="18-forest-testmobility">18. Forest Test的mobility版本</h2>
+<p>一个成熟creator forest至少应看到：</p>
+<ol>
+<li>大公司持续训练高水平人才；</li>
+<li>核心人才可以离开；</li>
+<li>离开者能找到第一笔钱/第一单；</li>
+<li>parent network不是全面敌对；</li>
+<li>spinout能ship；</li>
+<li>一代spinout再产生二代spinout；</li>
+<li>知识跨公司扩散而非单向流失；</li>
+<li>incumbent仍愿意继续训练新人。</li>
+</ol>
+<p>只有1–2：</p>
+<blockquote>
+<p>人才市场。</p>
+</blockquote>
+<p>1–5：</p>
+<blockquote>
+<p>创业生态。</p>
+</blockquote>
+<p>1–8：</p>
+<blockquote>
+<p>可持续creator forest。</p>
+</blockquote>
+<h2 id="19">19. 下一步证据任务</h2>
+<h3 id="p0">P0 — 中国游戏竞业实态</h3>
+<p>找：
+- 腾讯/网易/米哈游/字节等公开判例、招聘/离职争议；
+- 只做真实样本，不从法律条文直接推断实践。</p>
+<h3 id="p0-alumni-graph">P0 — Alumni graph</h3>
+<p>建立：
+- Atari；
+- Looking Glass；
+- Blizzard；
+- id；
+- Valve；
+-中国大厂；
+的founder/spinout网络。</p>
+<h3 id="p0-quantity">P0 — Quantity</h3>
+<p>每个parent studio统计：
+- senior alumni数；
+- founder数；
+- shipped studios；
+- second title；
+- 10年存活。</p>
+<h3 id="p1-parent-behavior">P1 — Parent behavior</h3>
+<p>区分：
+- lawsuit；
+- investor；
+- first contract；
+- informal mentor；
+- neutral。</p>
+<h3 id="p1-china-comparator">P1 — China comparator</h3>
+<p>重点比较：
+- 大厂→大厂；
+- 大厂→startup；
+- startup→publisher；
+三种流量比例。</p>
+<h2 id="20">20. 当前最小结论</h2>
+<blockquote>
+<p><strong>创作者阶层不能只靠成功者“扶新人”，还需要高水平人才能够离开、重组并建立新的产权容器。Silicon Valley研究提示employee mobility与知识扩散、startup formation存在重要联系，但noncompete不是唯一解释。California长期采用极强的反竞业默认，中国则允许针对涉密核心人员的有偿竞业，并在2025规则中强化必要性与比例性。对游戏业真正要测的是Effective Mobility Friction与Mobility-to-Ownership Conversion：人才是否只是从一个大厂流向另一个大厂，还是能把能力进一步转成股权、IP、玩家关系和剩余判断权。真正的森林需要的不只是树长得高，还要种子能离开母树并在别处生根。</strong></p>
+</blockquote>
+<h2 id="21-quantification-handoff">21. Quantification handoff</h2>
+<p>024定义了 <code>SPINOUT CONVERSION RATE</code>，但当前多数公司缺少可信的senior-alumni分母，因此禁止在此直接给百分比。</p>
+<p>第一版实证账本见：
+- <a href="/heroes-portal/country-studies/china/025-alumni-spinout-quantification-ledger-v01.html">025 — Alumni → Spinout Quantification Ledger v0.1</a></p>
+<p>025强制区分：
+- direct spinout；
+- serial founder；
+- alumni landing；
+- design/cultural descendant。</p>
+<p>尤其保留三个防错原则：</p>
+<ol>
+<li><strong>spinout density ≠ influence density</strong>；</li>
+<li><strong>serial founder intensity ≠ broad creator class</strong>；</li>
+<li><strong>case existence ≠ same quantity / same rate</strong>。</li>
+</ol>
+<p>后续真正比较中美日俄时，必须先补：
+- senior-alumni denominator；
+- unique-founder de-duplication；
+- 3/5/10年outcome cohort。</p>
+<h2 id="22-mobility-to-ownership-indie-mode">22. Mobility-to-Ownership 之后仍需再问一次：有没有进入Indie Mode？</h2>
+<p>024研究：</p>
+<pre><code class="language-text">employee
+→ exit
+→ founder / owner
+</code></pre>
+<p>但026强制继续拆：</p>
+<pre><code class="language-text">founder / owner
+→ new product?
+→ new objective function?
+→ new production mode?
+→ authorial small-team route?
+</code></pre>
+<p>因此：</p>
+<blockquote>
+<p><strong>高Mobility-to-Ownership Conversion不等于高Indie-Mode Conversion。</strong></p>
+</blockquote>
+<p>一个市场完全可能：
+- 高跳槽；
+- 高创业；
+- 高融资；
+- 高新公司形成；</p>
+<p>但新公司主要继续：
+- F2P；
+- MMO；
+- live service；
+- AAA/AA；
+- licensed IP；
+- large-team production。</p>
+<p>这仍然是强创业生态，却不是同一个“独立游戏运动”问题。</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / country-studies/china/024-creator-mobility-spinout-topology-noncompete.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

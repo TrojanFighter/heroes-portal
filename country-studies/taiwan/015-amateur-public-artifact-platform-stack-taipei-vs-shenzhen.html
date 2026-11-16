@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>015 — 台北 × 深圳 GGJ：业余创作者的公共作品栈、全球可发现性与平台分流 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl class="on"" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0" class="t2">0. 第一轮结论</a><a href="#tw-ggjstack-e011011listing" class="t2">TW-GGJSTACK-E01｜固定分母仍是10个实际组，不是11个目录listing</a><a href="#tw-ggjstack-e02710" class="t2">TW-GGJSTACK-E02｜至少7/10实际项目留下直接公共代码/仓库链接</a><a href="#a" class="t3">A — 猜猜我是誰</a><a href="#e" class="t3">E — 神說，讓我笑</a><a href="#f-make-me-laugh" class="t3">F — Make Me Laugh</a><a href="#g-the-slap" class="t3">G — The Slap</a><a href="#h" class="t3">H — 笑到終點：迷因三寶之路</a><a href="#i-win87" class="t3">I — Win87</a><a href="#j-letmelaugh" class="t3">J — LetMeLaugh</a><a href="#cn-ggjstack-e01gmhub" class="t2">CN-GGJSTACK-E01｜中国区官方主动构建GmHub替代/并行层</a><a href="#cn-ggjstack-e02ggj" class="t2">CN-GGJSTACK-E02｜全球GGJ注册本身存在明确额外网络摩擦</a><a href="#cn-ggjstack-e03itchb" class="t2">CN-GGJSTACK-E03｜《口腔妙妙屋》同时进入itch与B站</a><a href="#cn-ggjstack-e04-funzymeindie" class="t2">CN-GGJSTACK-E04｜《酶你不行 Funzyme》作者本身已有长期全球indie痕迹</a><a href="#public-creation" class="t3">PUBLIC CREATION</a><a href="#domestic-discoverability" class="t3">DOMESTIC DISCOVERABILITY</a><a href="#global-discoverability" class="t3">GLOBAL DISCOVERABILITY</a><a href="#source-reusability" class="t3">SOURCE REUSABILITY</a><a href="#h1cross-border-serendipity" class="t2">H1｜CROSS-BORDER SERENDIPITY</a><a href="#h2reference-reciprocity" class="t2">H2｜REFERENCE RECIPROCITY</a><a href="#h3local-platform-advantage" class="t2">H3｜LOCAL PLATFORM ADVANTAGE</a><a href="#_1" class="t3">强筛选学生决赛层</a><a href="#jam" class="t3">较低选择强度jam层</a><a href="#local_only" class="t3">LOCAL_ONLY</a><a href="#global_only" class="t3">GLOBAL_ONLY</a><a href="#dual_posted" class="t3">DUAL_POSTED</a><a href="#source_open" class="t3">SOURCE_OPEN</a><a href="#playable_global" class="t3">PLAYABLE_GLOBAL</a><a href="#longitudinal_identity" class="t3">LONGITUDINAL_IDENTITY</a></aside><article class="doc"><div class="col"><h1 id="015-ggj">015 — 台北 × 深圳 GGJ：业余创作者的公共作品栈、全球可发现性与平台分流</h1>
+<ul>
+<li>Status: PUBLIC-ATTEMPT PLATFORM-STACK AUDIT / OBSERVABILITY-CORRECTION / NO CREATOR-RATE CLAIM</li>
+<li>Program: C Taiwan comparator</li>
+<li>As of: 2026-10-08</li>
+<li>Parents:</li>
+<li><a href="/heroes-portal/country-studies/taiwan/004-ggj2024-taipei-public-attempt-cohort.html">004 — GGJ 2024台北第一会场 Public-Attempt Cohort</a></li>
+<li><a href="/heroes-portal/country-studies/taiwan/012-external-information-friction-signal-latency.html">012 — 外部资讯摩擦与弱信号时延</a></li>
+<li><a href="/heroes-portal/country-studies/taiwan/013-student-amateur-indie-default-production-awareness.html">013 — 学生/业余独游默认生产意识</a></li>
+<li><a href="/heroes-portal/country-studies/taiwan/014-selected-student-cohort-productization-taiwan-vs-cusga.html">014 — 放视大赏 × CUSGA 决赛层商品化压力测试</a></li>
+<li>Mainland comparator:</li>
+<li><a href="/heroes-portal/country-studies/china/002-ggj-2024-shenzhen-nanshan-public-attempt-pilot.html">中国002 — GGJ 2024深圳南山 Public-Attempt Pilot</a></li>
+<li>Core question: 在比学生决赛更低选择强度的48小时game-jam层，两岸业余创作者是否真的表现出“公共作者意识”差距，还是首先存在不同的发布平台栈与可观察性？</li>
+<li>Restriction:</li>
+<li>不以Google/全球搜索结果数量直接当“创作者公开意愿”；</li>
+<li>GitHub/itch缺失不能证明大陆项目未公开，因为中国区并行使用GmHub、B站等本地基础设施；</li>
+<li>深圳分母仍为16个目录位置 / 15个不同题名，唯一项目ID reconciliation未完成，因此本文件不计算深圳artifact比例；</li>
+<li>台北“至少7/10有公开源码/仓库链接”是当前可确认下限，不等于台湾所有jam平均水平；</li>
+<li>同名项目跨平台匹配必须依赖题名、描述、作者或链接链条，不凭模糊搜索猜身份。</li>
+</ul>
+<h2 id="0">0. 第一轮结论</h2>
+<p class="dc">在014中，台湾放视大赏与大陆CUSGA的强筛选学生决赛层已经出现明显收敛：Steam商品化比例、Demo与publisher接口没有显示台湾压倒性领先。</p>
+<p>把观察层下移到2024 GGJ普通公开尝试者后，出现的第一个强差异并不是：</p>
+<blockquote>
+<p>台湾人会公开作品，大陆人不会。</p>
+</blockquote>
+<p>而是：</p>
+<blockquote>
+<p>两岸参加同一个Global Game Jam，却默认生活在不同的public-artifact stack里。</p>
+</blockquote>
+<p>台湾台北第一会场的作品页大量直接连接：
+- Global Game Jam全球站；
+- GitHub；
+- itch.io；
+- GitHub Pages；
+- YouTube / Twitch；
+- 英文或双语项目说明。</p>
+<p>大陆CiGA则主动构建：
+- GmHub本地报名 / 组队 / 展示；
+- GGJ全球站作为第二层全球归档；
+- B站等本地公开视频；
+- 部分作者再主动跨发itch/GitHub等全球平台。</p>
+<p>更关键的是，CiGA官方从2019到2024多次明确提醒：</p>
+<blockquote>
+<p>注册Global Game Jam官网时，验证码步骤“可能需要科学上网”。</p>
+</blockquote>
+<p>2024官方报名说明同时明确：
+- GmHub负责中国区报名、组队、作品展示和直播；
+- GGJ全球官网用于让作品进入全球展示和交流；
+- 参与者最好两个体系都注册。</p>
+<p>Sources:
+https://www.ciga.me/blog/13-21-ggj-2024-x-ciga
+https://www.ciga.me/blog/global-game-jam-9a674d9d-2441-4d70-b356-be7e7c7c2467</p>
+<p>这意味着：</p>
+<p>GLOBAL PUBLICATION ROUTE在大陆不是不存在，而是多了一层额外操作与平台切换成本。</p>
+<p>建议新增变量：</p>
+<p>PUBLIC_ARTIFACT_STACK
+GLOBAL_DISCOVERABILITY
+PLATFORM_SUBSTITUTION
+OBSERVABILITY_FRICTION
+CROSS_BORDER_SERENDIPITY
+DUAL_POSTING_COST
+ARCHIVE_CONTINUITY</p>
+<hr />
+<h1 id="1">1. 台北第一会场：全球公共栈几乎是活动默认界面</h1>
+<h2 id="tw-ggjstack-e011011listing">TW-GGJSTACK-E01｜固定分母仍是10个实际组，不是11个目录listing</h2>
+<p>主办方IGDSHARE活动复盘明确列A—J十组：
+https://igdshare.org/content/mitjam12-ggj2024-archives</p>
+<p>GGJ目录则有11条，其中 test-taipei-2024 是测试条目：
+https://globalgamejam.org/group/639/games</p>
+<p>因此：
+- actual teams = 10；
+- directory listings = 11；
+- artifact test entry = 1。</p>
+<p>这一点沿用004，不重新计算人口比例。</p>
+<h2 id="tw-ggjstack-e02710">TW-GGJSTACK-E02｜至少7/10实际项目留下直接公共代码/仓库链接</h2>
+<p>当前可由GGJ第一方页面或GGJ个人页直接确认：</p>
+<h3 id="a">A — 猜猜我是誰</h3>
+<ul>
+<li>GGJ source files；</li>
+<li>GitHub repository。</li>
+</ul>
+<p>Source:
+https://globalgamejam.org/games/2024/caicaiwoshishui-2</p>
+<h3 id="e">E — 神說，讓我笑</h3>
+<ul>
+<li>itch playable；</li>
+<li>source files；</li>
+<li>GitHub repository；</li>
+<li>中英双语项目说明。</li>
+</ul>
+<p>Source:
+https://globalgamejam.org/games/2024/jizhiwenda-8</p>
+<h3 id="f-make-me-laugh">F — Make Me Laugh</h3>
+<ul>
+<li>GGJ用户页直接记录源码 GitHub；</li>
+<li>同一参与者后来继续参加2025、2026 jam；</li>
+<li>其GGJ profile还公开列有2023 Steam商业作品。</li>
+</ul>
+<p>Source:
+https://globalgamejam.org/users/guminghong</p>
+<h3 id="g-the-slap">G — The Slap</h3>
+<ul>
+<li>source files；</li>
+<li>GitHub repository；</li>
+<li>明确程序/美术/设计音效分工；</li>
+<li>英文项目说明。</li>
+</ul>
+<p>Source:
+https://globalgamejam.org/games/2024/slap-3</p>
+<h3 id="h">H — 笑到終點：迷因三寶之路</h3>
+<ul>
+<li>source files；</li>
+<li>GitHub repository。</li>
+</ul>
+<p>Source:
+https://globalgamejam.org/games/2024/xiaodaozhongdianmiyinsanbaozhilu-5</p>
+<h3 id="i-win87">I — Win87</h3>
+<ul>
+<li>itch playable；</li>
+<li>website；</li>
+<li>source files；</li>
+<li>GitHub repository。</li>
+</ul>
+<p>Source:
+https://globalgamejam.org/games/2024/teami-6</p>
+<h3 id="j-letmelaugh">J — LetMeLaugh</h3>
+<ul>
+<li>GitHub Pages playable；</li>
+<li>source files；</li>
+<li>GitHub repository；</li>
+<li>中英双语；</li>
+<li>Mac / Windows。</li>
+</ul>
+<p>Source:
+https://globalgamejam.org/games/2024/letmelaugh-5</p>
+<p>因此当前可以写：</p>
+<blockquote>
+<p>在这个固定台北会场里，至少70%的实际团队在GGJ全球页上或由GGJ个人页直接暴露了可复查的代码仓库/源码链路。</p>
+</blockquote>
+<p>但不能写：
+“台湾70%的业余游戏开发者都公开源码。”</p>
+<p>这是单会场、18+、有一定制作熟悉度的自选样本。</p>
+<hr />
+<h1 id="2">2. 台湾活动组织层本身就在“全球公开栈”里</h1>
+<p>台北第一会场GGJ官方页直接包含：
+- KKTIX本地报名；
+- Twitch live stream；
+- 中英文活动说明；
+- 国际参与者欢迎说明；
+- Photon Engine现场支持；
+- GGJ全球作品页。</p>
+<p>Source:
+https://globalgamejam.org/jam-sites/2024/mit-game-jam-12-x-global-game-jam-2024</p>
+<p>这里的关键不是“台湾人比较爱GitHub”，而是：</p>
+<blockquote>
+<p>本地报名、全球身份、全球作品归档、GitHub/itch/Twitch可以在默认网络环境里同时工作。</p>
+</blockquote>
+<p>因此一个普通参与者完成作品后，把它留在全球开发者可搜索的位置几乎不需要切换网络制度。</p>
+<hr />
+<h1 id="3-github">3. 深圳南山：不能拿“搜不到GitHub”证明公共意识弱</h1>
+<h2 id="cn-ggjstack-e01gmhub">CN-GGJSTACK-E01｜中国区官方主动构建GmHub替代/并行层</h2>
+<p>CiGA 2024官方GGJ说明：
+- GmHub用于报名、开发者身份设置、组队、线上参与；
+- 成品上传中国区线上展示；
+- 作品可进入直播展示；
+- 线下站点另有本地展示；
+- 同时要求注册GGJ全球官网，以便作品进入全球展示和交流。</p>
+<p>Source:
+https://www.ciga.me/blog/13-21-ggj-2024-x-ciga</p>
+<p>这是一种典型的：</p>
+<p>LOCAL INFRASTRUCTURE
++
+GLOBAL ARCHIVE BRIDGE</p>
+<p>而不是完全封闭的本地活动。</p>
+<h2 id="cn-ggjstack-e02ggj">CN-GGJSTACK-E02｜全球GGJ注册本身存在明确额外网络摩擦</h2>
+<p>同一2024官方说明写明：
+- GGJ全球站注册时验证码可能需要“科学上网”。</p>
+<p>CiGA 2019生存指南也使用同样提醒：
+https://www.ciga.me/blog/global-game-jam-9a674d9d-2441-4d70-b356-be7e7c7c2467</p>
+<p>2022、2023等组织说明继续出现类似提醒。</p>
+<p>这说明该摩擦不是一次偶发故障。</p>
+<p>研究含义不是：
+“大陆参与者无法参加GGJ。”</p>
+<p>恰好相反，CiGA建立GmHub和组织流程成功绕过了很多摩擦。</p>
+<p>真正含义是：</p>
+<blockquote>
+<p>大陆创作者要进入同一个全球公共作品栈，需要比台湾创作者多完成至少一层平台/网络切换。</p>
+</blockquote>
+<hr />
+<h1 id="4">4. 深圳也存在主动全球公开的普通作者，不能被“信息茧房”总论吞掉</h1>
+<h2 id="cn-ggjstack-e03itchb">CN-GGJSTACK-E03｜《口腔妙妙屋》同时进入itch与B站</h2>
+<p>GGJ深圳南山官方目录包含《口腔妙妙屋》：
+https://globalgamejam.org/group/499/games</p>
+<p>itch页面：
+- downloadable Windows game；
+- 中英双语说明；
+- 标记为Released。</p>
+<p>Source:
+https://fuju233.itch.io/mouthful-challenge</p>
+<p>B站在GGJ结束当日即有：
+“〖48小时独立游戏〗口腔妙妙屋（操纵你的舌头牙齿）GGJ2024”
+公开视频。</p>
+<p>这展示了一种大陆常见的双栈行为：</p>
+<p>global playable artifact on itch
++
+domestic video/social visibility on Bilibili.</p>
+<p>因此只查GitHub会漏掉一部分真实公开行为。</p>
+<h2 id="cn-ggjstack-e04-funzymeindie">CN-GGJSTACK-E04｜《酶你不行 Funzyme》作者本身已有长期全球indie痕迹</h2>
+<p>深圳南山GGJ目录包含《酶你不行 Funzyme》：
+https://globalgamejam.org/group/499/games</p>
+<p>对应itch项目由 warlinestudio 发布：
+- downloadable；
+- 48小时Game Jam说明；
+- 两人本地合作；
+- Name your own price。</p>
+<p>Source:
+https://warlinestudio.itch.io/funzyme</p>
+<p>同一itch账号在2022已经发布《You are second to none》：
+- 作者自述项目花费整个高中三年；
+- 单人开发；
+- 中英文；
+- Name your own price；
+- GameMaker制作。</p>
+<p>Source:
+https://warlinestudio.itch.io/you-are-second-to-none</p>
+<p>更值得注意的是，同一账号还直接在Mega Crit的itch作品评论区以英文交流，并主动表示愿意免费把新作翻译给中国玩家。</p>
+<p>Source:
+https://megacrit.itch.io/dancing-duelists/comments</p>
+<p>这不是“大陆普通作者都很国际化”的比例证据。</p>
+<p>它的作用恰好相反：</p>
+<blockquote>
+<p>在一个非媒体明星、固定GGJ目录抽出的普通公开项目中，也能发现已经长期使用全球独游平台、英文沟通和跨境本地化思维的作者。</p>
+</blockquote>
+<p>因此“大陆业余层整体没有全球作者意识”不能由信息环境直接推出。</p>
+<hr />
+<h1 id="5-global-discoverability-public-creation">5. 真正的新差异：GLOBAL DISCOVERABILITY ≠ PUBLIC CREATION</h1>
+<p>现在必须区分四个概念：</p>
+<h3 id="public-creation">PUBLIC CREATION</h3>
+<p>有没有公开做出可玩的东西。</p>
+<h3 id="domestic-discoverability">DOMESTIC DISCOVERABILITY</h3>
+<p>国内玩家/开发者是否能在B站、GmHub、TapTap等看到。</p>
+<h3 id="global-discoverability">GLOBAL DISCOVERABILITY</h3>
+<p>海外开发者/玩家是否能从itch、GitHub、GGJ、Steam等直接找到。</p>
+<h3 id="source-reusability">SOURCE REUSABILITY</h3>
+<p>是否公开源码/仓库，方便他人fork、学习、issue、贡献或长期追踪。</p>
+<p>台湾第一会场当前的强项主要体现在：
+GLOBAL DISCOVERABILITY + SOURCE REUSABILITY。</p>
+<p>深圳现有材料至少证明：
+PUBLIC CREATION存在；
+DOMESTIC + GLOBAL双栈个案存在；
+但完整比例尚无法计算。</p>
+<p>因此不要把：
+“Google没搜到”
+翻译成：
+“作者没有公开”。</p>
+<hr />
+<h1 id="6-observability-asymmetry">6. 一个研究者自己的偏差：OBSERVABILITY ASYMMETRY</h1>
+<p>这条尤其重要，因为它会直接制造错误国别结论。</p>
+<p>台北：
+- GGJ group页搜索稳定；
+- 单项目页大量被索引；
+- GitHub/itch链接直接暴露；
+- organiser还保存A—J活动录像目录。</p>
+<p>深圳：
+- GGJ group 499页面在实际抓取中时常403；
+- 16 listing / 15 unique-title仍需稳定ID reconciliation；
+- 中国区另有GmHub内容层；
+- 部分作品痕迹分散于B站/itch等；
+- GGJ全球站注册还存在官方承认的网络摩擦。</p>
+<p>所以如果研究方法写成：</p>
+<blockquote>
+<p>“Google项目名 + GitHub，没搜到就记0”</p>
+</blockquote>
+<p>一定会系统性低估大陆公开创作。</p>
+<p>新增：</p>
+<p>OBSERVABILITY_FRICTION</p>
+<p>定义：</p>
+<blockquote>
+<p>一个真实存在的公开作品，被外部研究者用统一搜索工具发现、唯一匹配和长期复查所需的额外成本。</p>
+</blockquote>
+<p>它与creator awareness相关，但不是同一个变量。</p>
+<hr />
+<h1 id="7">7. 平台分流本身仍然会产生真实后果</h1>
+<p>虽然不能把它当“创作者不行”，但平台栈差异不是无关紧要。</p>
+<h2 id="h1cross-border-serendipity">H1｜CROSS-BORDER SERENDIPITY</h2>
+<p>GitHub / itch / GGJ全球页上的作品：
+- 更容易被海外作者偶然撞见；
+- 更容易进入全球搜索；
+- 更容易直接收到英文反馈；
+- 更容易产生fork / issue / collaboration。</p>
+<p>GmHub / B站上的作品：
+- 在中国本地可能拥有更强曝光；
+- 但海外随机开发者发现它们的概率可能更低。</p>
+<p>需要流量/推荐系统证据进一步验证。</p>
+<h2 id="h2reference-reciprocity">H2｜REFERENCE RECIPROCITY</h2>
+<p>一个人不仅“看国外”，还把自己的东西放到国外可以回应的平台，才形成：</p>
+<p>foreign signal
+→ local creator
+→ artifact
+→ global feedback
+→ next iteration</p>
+<p>的闭环。</p>
+<p>台湾公共栈让这个闭环默认更短。</p>
+<p>大陆高主动性创作者可以通过dual-posting达到同样效果，
+但需要额外操作。</p>
+<h2 id="h3local-platform-advantage">H3｜LOCAL PLATFORM ADVANTAGE</h2>
+<p>不能只看损失。</p>
+<p>GmHub / B站也可能提供：
+- 更低语言门槛；
+- 更强本地玩家反馈；
+- CiGA活动聚合；
+- 直播与赛事曝光；
+- 更适合中国社交传播。</p>
+<p>因此平台分流可能提高国内conversion，同时降低国际serendipity。</p>
+<p>这需要真实访问/互动数据而不是价值判断。</p>
+<hr />
+<h1 id="8">8. 台北“仓库多”还有一个竞争解释：活动规范本身</h1>
+<p>多个台北项目勾选GGJ diversifier：
+Sharing is caring - (Sponsored by Github)。</p>
+<p>这意味着GitHub公开行为可能部分受到活动diversifier激励，而不是台湾社会自然产生。</p>
+<p>因此不能将7/10仓库下限全部归因于：
+- 台湾网络自由；
+- 台湾学生意识；
+- 台湾开源文化。</p>
+<p>真正需要比较：
+- 同一GGJ全球活动中深圳项目是否也参加此diversifier；
+- organisers是否主动教学/推荐GitHub；
+- participant prehistory。</p>
+<p>这也是为什么015不报告“台湾比深圳高X倍”。</p>
+<hr />
+<h1 id="9">9. 这怎样修正“意识差距巨大”命题</h1>
+<p>014已经发现：</p>
+<h3 id="_1">强筛选学生决赛层</h3>
+<p>两岸Steam productization高度收敛。</p>
+<p>015现在进一步发现：</p>
+<h3 id="jam">较低选择强度jam层</h3>
+<p>大陆也能抽到：
+- itch作者；
+- 长期个人indie开发；
+- 英文全球社区互动；
+- 双语作品；
+- B站+itch双栈发布。</p>
+<p>因此：</p>
+<blockquote>
+<p>“大陆普通业余作者没有独立作者意识”仍然过强。</p>
+</blockquote>
+<p>但台湾依然存在一个更结构性的优势候选：</p>
+<blockquote>
+<p>GLOBAL AUTHORSHIP BY DEFAULT。</p>
+</blockquote>
+<p>即：
+不用先解决网络工具、平台替代、国内/国际双重发布，就可以从报名、开发、源码、试玩到社群反馈一直留在同一全球公共栈里。</p>
+<p>大陆更像：</p>
+<blockquote>
+<p>GLOBAL AUTHORSHIP BY ACTIVE BRIDGING。</p>
+</blockquote>
+<p>有能力、有主动性的人完全可以做到；
+CiGA也在制度化帮助他们做到；
+但默认路径多了一层friction。</p>
+<p>这可能是“中位数意识差距”形成的机制之一，而不是能力本身的差距。</p>
+<hr />
+<h1 id="10-dual-postinggithub">10. 下一步应该比较dual-posting，不是比较“有没有GitHub”</h1>
+<p>深圳下一轮固定15个不同题名，逐项建立：</p>
+<ul>
+<li>GGJ page；</li>
+<li>GmHub page；</li>
+<li>Bilibili；</li>
+<li>TapTap；</li>
+<li>itch；</li>
+<li>GitHub；</li>
+<li>Gitee；</li>
+<li>playable build；</li>
+<li>source repository；</li>
+<li>bilingual description；</li>
+<li>post-2024 followup。</li>
+</ul>
+<p>台北10组则同字段编码：
+- GGJ；
+- KKTIX/IGDSHARE；
+- YouTube/Twitch；
+- itch；
+- GitHub；
+- Steam；
+- post-2024 followup。</p>
+<p>真正值得比较的指标：</p>
+<h3 id="local_only">LOCAL_ONLY</h3>
+<p>只存在本地区域平台。</p>
+<h3 id="global_only">GLOBAL_ONLY</h3>
+<p>只存在全球平台。</p>
+<h3 id="dual_posted">DUAL_POSTED</h3>
+<p>国内/本地与全球平台均有。</p>
+<h3 id="source_open">SOURCE_OPEN</h3>
+<p>源码/仓库可复用。</p>
+<h3 id="playable_global">PLAYABLE_GLOBAL</h3>
+<p>无需本地账号即可全球试玩/下载。</p>
+<h3 id="longitudinal_identity">LONGITUDINAL_IDENTITY</h3>
+<p>作者账号可连续追踪到下一次公开创作。</p>
+<p>这比“搜到几个GitHub”更接近我们真正研究的：
+一个普通创作者能否进入全球创作者共同体。</p>
+<hr />
+<h1 id="11-verdict">11. 当前 Verdict</h1>
+<p>本轮不支持：</p>
+<blockquote>
+<p>台湾普通jam作者会公开、大陆普通jam作者不会。</p>
+</blockquote>
+<p>当前支持：</p>
+<blockquote>
+<p>台湾与大陆业余创作者都存在很强的公开创作与全球化个体；差异首先体现在默认公共平台栈和进入全球创作者共同体的摩擦。台湾可以把GGJ、GitHub、itch、Twitch等全球基础设施当默认连续环境；大陆CiGA则不得不建立GmHub等本地替代/桥接层，并明确处理GGJ全球网站的网络访问摩擦。高主动性的大陆作者可以通过dual-posting跨过这一层，但普通创作者是否因此更少进入全球弱信号—反馈循环，仍待完整固定队列验证。</p>
+</blockquote>
+<p>这比“台湾人意识先进、大陆人意识落后”更具体，也更可证伪。</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / country-studies/taiwan/015-amateur-public-artifact-platform-stack-taipei-vs-shenzhen.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

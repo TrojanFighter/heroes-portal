@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>《植物大战僵尸杂交版》：UGC 如何从长期玩家创作变成公共作品、传播网络与职业入口 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl class="on"" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#_1" class="t2">为什么值得研究</a><a href="#1-2024" class="t2">1. 创作者前史：不是 2024 年突然出现</a><a href="#_2" class="t3">教育 / 人生路径</a><a href="#2" class="t2">2. 立项不是“从零想一个塔防游戏”，而是重组共享语法</a><a href="#a-representation-borrowing" class="t3">A. Representation Borrowing / 表现借力</a><a href="#b-combinatorial-design" class="t3">B. Combinatorial Design / 组合式设计</a><a href="#c-meme-legibility" class="t3">C. Meme Legibility / 梗式可读性</a><a href="#d-fan-ip-leverage-ip" class="t3">D. Fan-IP Leverage / 粉丝 IP 杠杆</a><a href="#3-up" class="t2">3. 协作者边界：不能再写成“一个 UP 主独立开发全部”</a><a href="#4" class="t2">4. 视频不是“开发完成后的营销”，而是生产系统的一部分</a><a href="#5-community-co-production" class="t2">5. Community Co-production / 玩家并不只是流量</a><a href="#6" class="t2">6. 传播链：不是一个视频凭空爆</a><a href="#phase-a" class="t3">Phase A — 长期同好积累</a><a href="#phase-b" class="t3">Phase B — 完整可玩版本 + 高频可视化内容</a><a href="#phase-c-2024" class="t3">Phase C — 2024 春夏右尾爆发</a><a href="#phase-d" class="t3">Phase D — 平台/媒体再放大</a><a href="#phase-e-official-absorption" class="t3">Phase E — Official Absorption / 官方吸纳</a><a href="#phase-f-team-infrastructure-original-ip-transition" class="t3">Phase F — Team / Infrastructure / Original-IP Transition</a><a href="#7" class="t2">7. 和“中国好学生综合征”的关系：只能作为对照，不得写成功因果</a><a href="#8" class="t2">8. 与独立游戏运动的关系</a><a href="#9" class="t2">9. 当前可提炼的概念</a><a href="#remix-leverage" class="t3">Remix Leverage / 重组杠杆</a><a href="#representation-borrowing" class="t3">Representation Borrowing / 表现借力</a><a href="#distribution-through-demonstration" class="t3">Distribution-through-Demonstration / 演示即分发</a><a href="#audience-co-production" class="t3">Audience Co-production / 受众共同生产</a><a href="#official-absorption" class="t3">Official Absorption / 官方吸纳</a><a href="#fan-capital-original-ip-test-ip" class="t3">Fan-capital → Original-IP test / 粉丝资本向原创 IP 的迁移测试</a><a href="#10-evidence-anchors" class="t2">10. Evidence anchors</a><a href="#p0-creator-current-official" class="t3">P0 / creator / current official</a><a href="#p1-high-value-interview" class="t3">P1 / high-value interview</a><a href="#s1-official-relationship-reporting" class="t3">S1 / official-relationship reporting</a><a href="#s1-life-background-reporting" class="t3">S1 / life-background reporting</a><a href="#11-open-questions-before-formal-case-promotion" class="t2">11. Open Questions before formal Case promotion</a><a href="#preliminary-verdict" class="t2">Preliminary Verdict</a></aside><article class="doc"><div class="col"><h1 id="ugc">《植物大战僵尸杂交版》：UGC 如何从长期玩家创作变成公共作品、传播网络与职业入口</h1>
+<ul>
+<li>Status: RESEARCH INTAKE / HIGH PRIORITY CHINA UGC CASE</li>
+<li>Subject: 潜艇伟伟迷 / 《植物大战僵尸杂交版》</li>
+<li>Period: 早期 PVZ 改版实践 → 2024 爆发 → 官方创意模式吸收 → 2025–2026 重制/原创转型</li>
+<li>Current case status: <strong>尚未编号</strong>。先补协作者、技术实现、IP/授权和版本时间线，再决定是否升正式 Case。</li>
+<li>Related themes: <code>player → producer</code>, UGC/mod ecosystems, goal formation, capability-project fit, community co-production, market access, China good-student syndrome（仅作为待检验对照，禁止因果化）</li>
+</ul>
+<h2 id="_1">为什么值得研究</h2>
+<p class="dc">《植物大战僵尸杂交版》不是一个“国产独立买断游戏爆款”。</p>
+<p>它更适合被研究为：</p>
+<blockquote>
+<p><strong>一个长期围绕同一商业游戏做视频、改版和规则想象的玩家作者，怎样把多年非正式能力积累压进一个可玩 fan game；作品又怎样通过 Bilibili/抖音/贴吧/粉丝群的内容循环爆发，继而被原 IP 的本土官方运营吸收到创意模式，并进一步催生团队化重制和原创项目。</strong></p>
+</blockquote>
+<p>它和 CASE-021 Roblox creator cluster、CASE-032 PUBG lineage、CASE-016 DOOM mod ecology 一起，可以帮助本书回答：</p>
+<blockquote>
+<p>游戏生态是否能形成一套“先做作品，再获得资格”的替代学习/职业系统？</p>
+</blockquote>
+<p>但这里必须保留一个更强边界：</p>
+<blockquote>
+<p><strong>《杂交版》的巨大认知基础来自《Plants vs. Zombies》现成 IP、资产语言与玩家共同记忆；它不能直接被当作“原创 IP 的低成本市场成功”迁移。</strong></p>
+</blockquote>
+<hr />
+<h2 id="1-2024">1. 创作者前史：不是 2024 年突然出现</h2>
+<p>2024 年游研社对“潜艇伟伟迷”的采访提供了一条目前最有价值的 creator-side 生产史。</p>
+<p>作者自己把《杂交版》描述成“以前所有作品的一个大集成”：多年围绕 PVZ 做设计、改动与视频后，过去积累的植物点子终于可以装进一个完整改版。</p>
+<p>这意味着正式可玩版本的开发期不能等同于能力形成期。</p>
+<p>需要继续重建：</p>
+<ul>
+<li>最早开始玩 PVZ 的时间；</li>
+<li>最早公开视频 / 自制植物设计；</li>
+<li>各阶段 Bilibili 账号和粉丝增长；</li>
+<li>哪些玩法先以视频概念存在，哪些先进入可玩改版；</li>
+<li>何时开始和程序协作者合作；</li>
+<li>2024-03 左右“完整杂交版”首发的准确 P0 时间线。</li>
+</ul>
+<h3 id="_2">教育 / 人生路径</h3>
+<p>2024 年公开报道转述创作者本人经历：来自湖北咸宁，00 后，约 15 岁后因身体与心理健康原因离开标准学校路径，长期在家创作。</p>
+<p>这个信息对本书的“目标形成”主题很重要，但<strong>必须禁止浪漫化</strong>：</p>
+<ul>
+<li>辍学不是成功原因；</li>
+<li>健康困境不是创作优势；</li>
+<li>不能写成“学校无用”；</li>
+<li>不能把一个幸存者案例当成教育建议。</li>
+</ul>
+<p>真正值得问的是：</p>
+<blockquote>
+<p><strong>当标准教育/职业路径中断以后，他通过什么活动重新形成了学习 agenda、作品反馈、身份和未来预期？</strong></p>
+</blockquote>
+<p>公开回答是：围绕自己真正长期感兴趣的 PVZ，持续设计、改版、视频化、测试和吸收玩家反馈。</p>
+<p>这可以作为 <code>AC-008 中国好学生综合征</code> 的反压力/对照对象，但不是其因果证明。</p>
+<hr />
+<h2 id="2">2. 立项不是“从零想一个塔防游戏”，而是重组共享语法</h2>
+<p>《杂交版》最强的机制发明非常容易解释：</p>
+<blockquote>
+<p><strong>把两个或更多玩家已经熟悉的植物能力组合在一个新单位里。</strong></p>
+</blockquote>
+<p>例如：</p>
+<ul>
+<li>豌豆 + 向日葵；</li>
+<li>阳光 + 土豆雷；</li>
+<li>经典单位的视觉、名字、能力互相组合；</li>
+<li>熟悉僵尸被重新命名、强化或混搭。</li>
+</ul>
+<p>官方站点 2026 仍然把产品定义为：在经典 PVZ 核心体验上，通过“杂交”机制重新组合植物能力，让熟悉阵容产生新战术。</p>
+<p>这里出现了至少四层生产杠杆。</p>
+<h3 id="a-representation-borrowing">A. Representation Borrowing / 表现借力</h3>
+<p>玩家已经知道：</p>
+<ul>
+<li>豌豆射手是什么；</li>
+<li>向日葵是什么；</li>
+<li>土豆雷是什么；</li>
+<li>铁桶、撑杆、冰车等视觉语法是什么。</li>
+</ul>
+<p>所以一个新单位不需要从零教育。</p>
+<h3 id="b-combinatorial-design">B. Combinatorial Design / 组合式设计</h3>
+<p>作者不需要为每个新植物创造全新的系统范式，只需要问：</p>
+<blockquote>
+<p><strong>两个熟悉能力放在一起，会产生什么新的资源/空间/节奏问题？</strong></p>
+</blockquote>
+<p>这让有限设计与程序能力获得很高内容增殖率。</p>
+<h3 id="c-meme-legibility">C. Meme Legibility / 梗式可读性</h3>
+<p>“豌豆向日葵”“冰车二爷”这类东西在一张图、一句标题或几秒视频中就能被老玩家理解。</p>
+<p>这是典型的：</p>
+<blockquote>
+<p><strong>production shortcut + marketing hook = double dividend</strong></p>
+</blockquote>
+<h3 id="d-fan-ip-leverage-ip">D. Fan-IP Leverage / 粉丝 IP 杠杆</h3>
+<p>这也是最不可迁移的部分。</p>
+<p>它节省的不是普通资产成本，而是借用了十五年玩家共同记忆、角色认知和原作传播资本。</p>
+<p>所以它必须和原创独立游戏分开归类。</p>
+<hr />
+<h2 id="3-up">3. 协作者边界：不能再写成“一个 UP 主独立开发全部”</h2>
+<p>游研社 2024 采访明确指出：</p>
+<ul>
+<li>早期朋友“小小咩MS”承担杂交版代码工作，让潜艇伟伟迷可以集中于植物设计与数值；</li>
+<li>关卡平衡和视频录制由伟伟迷大量亲自完成，他回忆一个视频常需录几十遍，有时超过 200 遍；</li>
+<li>爆火后团队又增加至少两个人：一人承担画图/素材，一人承担测试以及玩家反馈接收/管理。</li>
+</ul>
+<p>因此，早期 production model 更接近：</p>
+<pre><code class="language-text">潜艇伟伟迷：创意 / 植物设计 / 数值 / 关卡 / 视频 / community-facing
+        +
+小小咩MS：早期程序实现
+        +
+后续美术 / 测试 / feedback management
+</code></pre>
+<p>而不是单纯 solo dev。</p>
+<p>到 2026 年，全新引擎重制版官方站点已直接列出三名主要角色：</p>
+<ul>
+<li>潜艇伟伟迷 — 总策划；</li>
+<li>虚无今天摸鱼 — 开发者；</li>
+<li>一只吴铭仕哒 — 美术。</li>
+</ul>
+<p>这说明项目后来进一步从“作者 + 朋友”演化成小型明确分工团队。</p>
+<p>仍需补：</p>
+<ul>
+<li>小小咩MS 参与的准确版本区间；</li>
+<li>原始版本使用何种技术/框架/改版工具；</li>
+<li>新引擎重制何时开始、具体引擎与代码重写范围；</li>
+<li>QA、网站、服务器、移动端、社区系统的完整 contributor perimeter。</li>
+</ul>
+<hr />
+<h2 id="4">4. 视频不是“开发完成后的营销”，而是生产系统的一部分</h2>
+<p>这是本案最值得和普通游戏营销区分的地方。</p>
+<p>潜艇伟伟迷长期把：</p>
+<blockquote>
+<p><strong>设计一个新植物 / 新机制 → 录成视频 → 玩家评论 → 再修改 / 再选择新点子</strong></p>
+</blockquote>
+<p>本身当作日常创作循环。</p>
+<p>游研社采访明确写到：制作改版的过程本身就是其视频素材。</p>
+<p>这意味着：</p>
+<ul>
+<li>prototype 是内容；</li>
+<li>devlog 是娱乐视频；</li>
+<li>娱乐视频又是用户测试入口；</li>
+<li>用户评论再成为设计资料。</li>
+</ul>
+<p>形成：</p>
+<pre><code class="language-text">idea
+↓
+playable implementation
+↓
+video demonstration
+↓
+Bilibili audience
+↓
+comments / fan groups / memes
+↓
+selection + balancing + new ideas
+↓
+next playable artifact
+</code></pre>
+<p>这是一种很强的 <strong>Distribution-through-Demonstration / 演示即分发</strong>。</p>
+<p>传统营销常要求玩家先理解：“这个游戏是什么？”</p>
+<p>而杂交植物只要出现在缩略图或几秒 GIF/视频里，已有 PVZ 玩家就能立即完成理解。</p>
+<hr />
+<h2 id="5-community-co-production">5. Community Co-production / 玩家并不只是流量</h2>
+<p>游研社采访还记录：</p>
+<ul>
+<li>玩家长期呼吁某些早已设计的植物进入正式杂交版；</li>
+<li>图鉴里的搞怪描述会从评论区、粉丝群收集和筛选；</li>
+<li>爆火后团队专门增加成员管理测试与玩家反馈。</li>
+</ul>
+<p>因此社区至少承担四种生产功能：</p>
+<ol>
+<li>idea pool；</li>
+<li>demand signal；</li>
+<li>QA / balance feedback；</li>
+<li>meme / copy / cultural elaboration。</li>
+</ol>
+<p>这不是“完全由玩家设计游戏”。</p>
+<p>更准确是：</p>
+<blockquote>
+<p><strong>作者保持 selection authority，但把社区转成一个高频、低成本的外围研发网络。</strong></p>
+</blockquote>
+<p>这一点可以和 DOOM WAD、Roblox、Landfall community interaction、Jonas public prototyping 等案例比较。</p>
+<hr />
+<h2 id="6">6. 传播链：不是一个视频凭空爆</h2>
+<p>截至目前，可重建的 2024 爆发链大致是：</p>
+<h3 id="phase-a">Phase A — 长期同好积累</h3>
+<ul>
+<li>PVZ 老游戏拥有巨大中文玩家记忆；</li>
+<li>贴吧/民间改版长期存在；</li>
+<li>创作者自己多年做植物点子、视频和改版；</li>
+<li>粉丝逐渐要求把零散点子整合成完整改版。</li>
+</ul>
+<h3 id="phase-b">Phase B — 完整可玩版本 + 高频可视化内容</h3>
+<p>杂交机制极适合：</p>
+<ul>
+<li>Bilibili thumbnail；</li>
+<li>短视频；</li>
+<li>“这个离谱组合会发生什么”的 click curiosity；</li>
+<li>主播挑战；</li>
+<li>玩家二次传播。</li>
+</ul>
+<h3 id="phase-c-2024">Phase C — 2024 春夏右尾爆发</h3>
+<p>游研社 2024-06 报道给出的时点数据：</p>
+<ul>
+<li>Bilibili 粉丝约 373 万，其中 300 多万约在此前三个月新增；</li>
+<li>2024-06-01《感谢大家对植物大战僵尸杂交版的支持》当时约 1,625 万播放；</li>
+<li>抖音 <code>#植物大战僵尸杂交版#</code> 相关视频播放量当时超过 44 亿。</li>
+</ul>
+<p>到 2026 年，Bilibili 页面上该 6 月 1 日视频已经超过 2,290 万播放，作者账号约 500 万级关注。</p>
+<p>这里必须记录<strong>时间口径</strong>，不能把后来的累计量倒写成 2024 爆发当天已有。</p>
+<h3 id="phase-d">Phase D — 平台/媒体再放大</h3>
+<ul>
+<li>大量主播和二创作者继续做挑战、攻略和恶搞内容；</li>
+<li>微博、小红书、虎扑、贴吧等扩散；</li>
+<li>大量媒体/纪录片式采访把“作者人生故事”也变成内容；</li>
+<li>传播从“游戏机制很离谱”扩展到“一个非标准年轻创作者突然找到人生路径”的人物叙事。</li>
+</ul>
+<h3 id="phase-e-official-absorption">Phase E — Official Absorption / 官方吸纳</h3>
+<p>2024-06，《植物大战僵尸》官方 Bilibili 账号宣布第三方《杂交版》内容进入小程序版本创意模式，并表示后续会继续收集玩家意见，与杂交版团队更新更多玩法。</p>
+<p>这不是“EA 把整个同人项目收购”或“杂交版变成官方正统续作”。</p>
+<p>必须精确写成：</p>
+<blockquote>
+<p><strong>原 IP 的本土官方运营把部分第三方杂交玩法吸收到官方创意模式，并与作者团队发生合作。</strong></p>
+</blockquote>
+<p>2026 年杂交版自己的网站仍明确声明：本站与 Electronic Arts 无隶属关系。</p>
+<h3 id="phase-f-team-infrastructure-original-ip-transition">Phase F — Team / Infrastructure / Original-IP Transition</h3>
+<p>2025–2026，项目出现：</p>
+<ul>
+<li>新引擎重制；</li>
+<li>自有官网；</li>
+<li>玩家关卡社区；</li>
+<li>更明确团队分工；</li>
+<li>作者进一步尝试原创游戏。</li>
+</ul>
+<p>这最后一段尤其值得持续跟踪：</p>
+<blockquote>
+<p><strong>一个依附商业 IP 的超级同人作者，能否把 fan-IP audience、制作能力和社区资本迁移到自己拥有权利的原创作品？</strong></p>
+</blockquote>
+<p>这是整个案例未来最有价值的“第二幕”。</p>
+<hr />
+<h2 id="7">7. 和“中国好学生综合征”的关系：只能作为对照，不得写成功因果</h2>
+<p>潜艇伟伟迷的人生经历很容易被写成反教育传奇：</p>
+<blockquote>
+<p>“没继续读书 → 在家打游戏 → 爆火 → 所以学校没用。”</p>
+</blockquote>
+<p>本项目必须拒绝这种写法。</p>
+<p>真正值得研究的是另一条链：</p>
+<pre><code class="language-text">标准教育路径中断
+↓
+长期稳定兴趣对象
+↓
+反复做具体东西
+↓
+学习被具体问题牵引
+↓
+公开发布
+↓
+真实玩家反馈
+↓
+能力与声誉积累
+↓
+作品 / 团队 / 职业机会
+</code></pre>
+<p>它与 AC-008 的关系是：</p>
+<blockquote>
+<p><strong>这里出现了一种没有考试大纲的学习制度。</strong></p>
+</blockquote>
+<p>作者必须自己决定：</p>
+<ul>
+<li>今天设计什么；</li>
+<li>哪个点子值得做；</li>
+<li>怎样平衡；</li>
+<li>视频怎样展示；</li>
+<li>玩家到底喜欢什么；</li>
+<li>什么时候需要找程序、美术、测试协作者。</li>
+</ul>
+<p>但这只证明“非正式作品反馈可以形成能力”，不证明“退出学校更优”。</p>
+<hr />
+<h2 id="8">8. 与独立游戏运动的关系</h2>
+<p>《杂交版》不适合被简单收编成“国产 indie hero”。</p>
+<p>原因：</p>
+<ul>
+<li>使用商业 IP；</li>
+<li>大量依赖原作视觉/规则/认知资本；</li>
+<li>免费同人作品的经济结构与原创 premium game 不同；</li>
+<li>官方授权/容忍/合作边界需要持续核实。</li>
+</ul>
+<p>但它非常适合进入本书更宽的：</p>
+<blockquote>
+<p><strong>independent-production / player-to-producer lineage</strong></p>
+</blockquote>
+<p>因为它展示：</p>
+<ul>
+<li>一个玩家如何通过 fan work 获得生产能力；</li>
+<li>如何在正式公司职位之外获得巨大真实用户；</li>
+<li>creator platforms 如何让游戏制作、视频传播、用户反馈和职业声誉合并；</li>
+<li>商业 IP 公司如何反向吸收民间创新。</li>
+</ul>
+<p>所以未来若升正式 Case，应显式标记为：</p>
+<p><code>UGC / FAN-PRODUCTION LINEAGE CASE</code></p>
+<p>而不是 core independent original-IP case。</p>
+<hr />
+<h2 id="9">9. 当前可提炼的概念</h2>
+<h3 id="remix-leverage">Remix Leverage / 重组杠杆</h3>
+<p>用已知对象的组合制造新体验，而不是从零生产全部语法。</p>
+<h3 id="representation-borrowing">Representation Borrowing / 表现借力</h3>
+<p>借用原 IP 已完成的角色认知、视觉词汇和玩家教育。</p>
+<h3 id="distribution-through-demonstration">Distribution-through-Demonstration / 演示即分发</h3>
+<p>游戏机制天然适合被短视频展示，开发演示本身就是传播产品。</p>
+<h3 id="audience-co-production">Audience Co-production / 受众共同生产</h3>
+<p>社区承担 idea/demand/QA/copy/meme 等外围功能，但 selection authority 仍在核心作者。</p>
+<h3 id="official-absorption">Official Absorption / 官方吸纳</h3>
+<p>商业 IP 持有/运营体系看到社区创新后，把部分玩法或作者吸进官方生态。</p>
+<h3 id="fan-capital-original-ip-test-ip">Fan-capital → Original-IP test / 粉丝资本向原创 IP 的迁移测试</h3>
+<p>作者能否把“喜欢 PVZ 的 500 万人”中的一部分，转化为“愿意跟随这个作者做原创作品的人”？</p>
+<p>这将决定杂交版是一次巨大 fan-work right-tail，还是长期作者/工作室形成的前身。</p>
+<hr />
+<h2 id="10-evidence-anchors">10. Evidence anchors</h2>
+<h3 id="p0-creator-current-official">P0 / creator / current official</h3>
+<ul>
+<li>潜艇伟伟迷 Bilibili，2024-06-01，《感谢大家对植物大战僵尸杂交版的支持！》：
+  https://www.bilibili.com/list/97213827?bvid=BV1ay411h74i&amp;oid=1955288088</li>
+<li>杂交版当前官方站：
+  https://www.pvzhe.com/home</li>
+</ul>
+<h3 id="p1-high-value-interview">P1 / high-value interview</h3>
+<ul>
+<li>游研社，2024-06-23，《同人变官方，杂交版〈植物大战僵尸〉改变了作者的人生》；可见转载：
+  https://www.sohu.com/a/787945349_628730
+  https://m.huxiu.com/article/3167273.html</li>
+</ul>
+<p>关键支持：长期前史、程序协作者、爆火后团队分工、关卡/视频录制、玩家反馈、传播时点数据、作者未预料爆发。</p>
+<h3 id="s1-official-relationship-reporting">S1 / official-relationship reporting</h3>
+<ul>
+<li>IT之家，2024-06-21，《喜提官方认可：“魔改”作品〈植物大战僵尸杂交版〉入驻原作创意模式》：
+  https://www.ithome.com/0/776/732.htm</li>
+<li>游民星空，2024-06-21，《官方扶正！〈植物大战僵尸杂交版〉现已入驻原作》：
+  https://www.gamersky.com/news/202406/1777648.shtml</li>
+</ul>
+<h3 id="s1-life-background-reporting">S1 / life-background reporting</h3>
+<ul>
+<li>游民星空，2024-07-10，《〈PVZ杂交版〉作者是00后：靠做游戏找到人生第二条路》：
+  https://www.gamersky.com/news/202407/1785576.shtml</li>
+</ul>
+<p>Boundary：健康/教育经历必须谨慎使用，不得浪漫化或医学化推断。</p>
+<hr />
+<h2 id="11-open-questions-before-formal-case-promotion">11. Open Questions before formal Case promotion</h2>
+<ol>
+<li>2024 完整版首发的 P0 日期与版本归档；</li>
+<li>更早期公开视频、概念植物和改版时间线；</li>
+<li>小小咩MS 的准确 contributor role、代码范围和参与时间；</li>
+<li>原版本实际技术栈、工具与对原作代码/资产的依赖方式；</li>
+<li>新引擎重制的工程重写范围、团队规模和时间；</li>
+<li>下载量、活跃用户和地域分布有无可信平台数据；</li>
+<li>Bilibili 推荐、UP 主互推、抖音搬运/二创、媒体采访各自在传播中的先后与作用；</li>
+<li>与 PVZ 官方/PopCap/EA 的授权、许可、合作主体和边界；</li>
+<li>免费同人项目的收入来源：商单、平台激励、直播、赞助、团队成本如何运作；</li>
+<li>2026 原创项目是否能迁移 fan-IP audience；</li>
+<li>玩家创作社区是否形成“作者→玩家作者”的二级生产链；</li>
+<li>爆火后团队扩张是否改变了最初高频视频—反馈 loop。</li>
+</ol>
+<h2 id="preliminary-verdict">Preliminary Verdict</h2>
+<blockquote>
+<p>《植物大战僵尸杂交版》最值得研究的，不是“一个辍学少年靠魔改爆火”，而是<strong>长期玩家知识、已有 IP 语法、低门槛改版、视频内容生产、社区共同创作和 creator-platform 分发怎样形成一个完整的非正式研发系统；当它取得巨大 public proof 后，官方组织与更正式的小团队结构才开始跟上。</strong></p>
+</blockquote>
+<p>这使它成为中国语境下极强的 <code>player → producer → public creator → team / official ecosystem</code> 候选案例，同时也迫使本书保留一个边界：<strong>独立生产能力可以在商业 IP 内生长，但 IP ownership 与原创商业可迁移性必须另外审计。</strong></p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / book/research-notes/pvz-hybrid-ugc-production-and-spread-001.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

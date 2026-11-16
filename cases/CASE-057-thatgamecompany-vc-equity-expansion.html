@@ -1,0 +1,735 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CASE-057 — thatgamecompany：股权资本买来的不只是 runway，而是另一种公司 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl class="on"" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#why-this-case" class="t2">Why this case</a><a href="#1-myth" class="t2">1. Myth</a><a href="#myth-a-vc" class="t3">Myth A — “不要发行商，拿 VC 就自由了”</a><a href="#myth-b-board-seat" class="t3">Myth B — “有 board seat 就代表投资人会干涉游戏设计”</a><a href="#2-contextsituationaction-snapshot" class="t2">2. Context–Situation–Action Snapshot</a><a href="#era-production-regime" class="t3">Era / Production Regime</a><a href="#actor-situation" class="t3">Actor Situation</a><a href="#action-maneuver" class="t3">Action / Maneuver</a><a href="#anachronism-check" class="t3">Anachronism Check</a><a href="#3-sony-capital" class="t2">3. Sony Capital：项目能力被外部平台提供</a><a href="#4-2012-series-a-capability" class="t2">4. 2012 Series A：把 capability 从项目层移到公司层</a><a href="#5-board-rights-creative-direction" class="t2">5. Board Rights ≠ Creative Direction</a><a href="#company-governance" class="t3">Company governance</a><a href="#product-creative-rights" class="t3">Product creative rights</a><a href="#6-2014equity-capital" class="t2">6. 2014：equity capital 开始购买“发行商能力”</a><a href="#7-2024-retrospectivecapability-expansion" class="t2">7. 2024 Retrospective：capability expansion 的真实组织代价</a><a href="#8-capital-source-comparison" class="t2">8. Capital-source Comparison</a><a href="#9-control-surface-migration" class="t2">9. Control Surface Migration</a><a href="#sony-model" class="t3">Sony model</a><a href="#vc-model" class="t3">VC model</a><a href="#10-capabilityproject-fit-audit" class="t2">10. Capability–Project Fit Audit</a><a href="#formation-direction" class="t3">Formation direction</a><a href="#strength" class="t3">Strength</a><a href="#pressure" class="t3">Pressure</a><a href="#11-decision-rights-audit" class="t2">11. Decision-Rights Audit</a><a href="#known" class="t3">Known</a><a href="#unknown" class="t3">Unknown</a><a href="#12-transfer" class="t2">12. Transfer</a><a href="#13-non-transfer-forbidden-inference" class="t2">13. Non-transfer / Forbidden Inference</a><a href="#14-temporal-validity" class="t2">14. Temporal Validity</a><a href="#15-verdict" class="t2">15. Verdict</a><a href="#strongly-supported" class="t3">Strongly supported</a><a href="#supported-interpretation" class="t3">Supported interpretation</a><a href="#remaining-unknown" class="t3">Remaining UNKNOWN</a><a href="#creator-life-decision-audit" class="t2">Creator Life / Decision Audit</a></aside><article class="doc"><div class="col"><h1 id="case-057-thatgamecompany-runway">CASE-057 — thatgamecompany：股权资本买来的不只是 runway，而是另一种公司</h1>
+<ul>
+<li>Case ID: CASE-057</li>
+<li>Subject: thatgamecompany / Sony era → Benchmark Series A → Capital Today round → Sky</li>
+<li>Period covered: 2006 founding → 2007–2012 Sony three-game partnership → 2012 Benchmark $5.5M Series A → 2014 additional $7M → 2019 Sky launch → 2024 retrospective</li>
+<li>Research status: RESEARCHING</li>
+<li>Corpus role: <code>CAPABILITY-EXPANDED / VC-EQUITY / COMPANY-LEVEL CAPABILITY EXPANSION / CONTROL-SURFACE COMPARATOR</code></li>
+<li>Related Claims: C015</li>
+<li>Evidence Ledger: <a href="/heroes-portal/evidence/CASE-057-thatgamecompany-vc-equity-expansion-source-ledger.html">来源账本</a></li>
+</ul>
+<h2 id="why-this-case">Why this case</h2>
+<p class="dc">C015 已经有几种“让 capability set 追上 project thesis”的资本路线：</p>
+<ul>
+<li>CASE-047 The Witness：prior-hit retained earnings；</li>
+<li>CASE-049 Outer Wilds：studio + crowdfunding + publisher/platform external stack；</li>
+<li>CASE-052 House House：grant + publisher；</li>
+<li>CASE-050/056：共同创始人组成能力，而不是纯买能力。</li>
+</ul>
+<p>真正缺的一块一直是：</p>
+<blockquote>
+<p><strong>VC / equity-financed capability expansion，而且必须能看见真实 governance cost。</strong></p>
+</blockquote>
+<p>thatgamecompany 是目前最干净的锚点之一，因为 2012 年融资同时留下四类直接证据：</p>
+<ol>
+<li><strong>金额</strong>：Benchmark 投资 550 万美元；</li>
+<li><strong>股权/治理表面</strong>：Benchmark GP Mitch Lasky 进入董事会；</li>
+<li><strong>能力购买方向</strong>：从 Sony 单平台发行关系转向多平台、自主发行；</li>
+<li><strong>创意边界</strong>：Jenova Chen 次年明确说 VC 是押注他们 pitch 的 vision，而不是日常给 creative input。</li>
+</ol>
+<p>2014 年追加 700 万美元后，官方又明确写：</p>
+<blockquote>
+<p>扩大开发能力，并建立 self-publishing / marketing / distribution infrastructure。</p>
+</blockquote>
+<p>2024 年 Chen 的回顾再把组织变化具体化：</p>
+<ul>
+<li>首笔 550 万美元后约三年，团队逐步长到约 15 人；</li>
+<li>因为这次自己做 publisher，又必须建立 customer service、marketing、PR 内部团队；</li>
+<li>Sky 发售时约 40 人；</li>
+<li>产品方向迟迟未定又迫使团队追加三轮融资；</li>
+<li>每次 CEO 去融资，开发都会受到干扰。</li>
+</ul>
+<p>所以本案研究的不是“VC 有钱”。</p>
+<p>而是：</p>
+<blockquote>
+<p><strong>equity capital 可以把一家作者型开发工作室改造成拥有开发、发行、营销、分发、客服能力的公司；与此同时，它把治理义务从 project/publisher contract 部分转移到 company/board/investor/fundraising 层。</strong></p>
+</blockquote>
+<h2 id="1-myth">1. Myth</h2>
+<h3 id="myth-a-vc">Myth A — “不要发行商，拿 VC 就自由了”</h3>
+<p>过度简化。</p>
+<p>thatgamecompany 确实把 Sony era 的：
+- 平台独占；
+- Sony ownership；
+- publisher-funded project economics；</p>
+<p>替换为：
+- 自己融资；
+- 自己决定新项目平台方向；
+- 自发行；
+- 自建市场与分发能力。</p>
+<p>但这不是“没有 stakeholder”。</p>
+<p>Benchmark 投资的同时，Mitch Lasky 进入董事会。</p>
+<p>所以更准确的是：</p>
+<blockquote>
+<p><strong>控制面被重构，而不是消失。</strong></p>
+</blockquote>
+<h3 id="myth-b-board-seat">Myth B — “有 board seat 就代表投资人会干涉游戏设计”</h3>
+<p>同样错误。</p>
+<p>Chen 2013 年直接说：
+- 他们向 VC pitch project / vision；
+- 投资人相信这个 vision；
+- 创意层面他没有从 VC 那里获得指令。</p>
+<p>因此必须区分：</p>
+<ul>
+<li><strong>company governance rights</strong>；</li>
+<li><strong>project creative approval</strong>。</li>
+</ul>
+<p>它们可能相关，但不能混成一件事。</p>
+<h2 id="2-contextsituationaction-snapshot">2. Context–Situation–Action Snapshot</h2>
+<h3 id="era-production-regime">Era / Production Regime</h3>
+<p>2012–2014 是一个特殊窗口：</p>
+<ul>
+<li>console digital distribution 已证明小型高品质下载游戏可成立；</li>
+<li>app/mobile/social 平台快速扩张；</li>
+<li>auteur indie 开始能获得传统科技 VC 关注；</li>
+<li>self-publishing infrastructure 比 2026 更昂贵、更不标准化；</li>
+<li>platform holder / publisher 仍拥有远强于今天的分发控制力；</li>
+<li>live-service 全球运营体系尚未被大量中小工作室制度化。</li>
+</ul>
+<p>因此不能从 TGC 推出：</p>
+<blockquote>
+<p>“2026 作者工作室应该优先 VC。”</p>
+</blockquote>
+<p>真正可迁移的是资本结构审计。</p>
+<h3 id="actor-situation">Actor Situation</h3>
+<p>Journey 结束时，TGC 面临一个非常具体的问题：</p>
+<ul>
+<li>Sony 三作合同结束；</li>
+<li>Journey 开发已把工作室现金耗尽；</li>
+<li>Sony 的 royalty 要在 recoup 之后才开始进入 TGC；</li>
+<li>公司甚至一度无法持续支付员工薪资；</li>
+<li>TGC 想把下一作带到更广平台，而不是继续受一个平台合同约束。</li>
+</ul>
+<p>这时的选择不是单纯：</p>
+<blockquote>
+<p>“要不要多拿点钱？”</p>
+</blockquote>
+<p>而是：</p>
+<blockquote>
+<p><strong>下一阶段 capability set 是继续依赖 publisher/platform，还是把 publishing capability 内化？</strong></p>
+</blockquote>
+<h3 id="action-maneuver">Action / Maneuver</h3>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>资本 / 约束</th>
+<th>组织动作</th>
+<th>capability gain</th>
+<th>governance / obligation cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sony era</td>
+<td>three-game publisher/platform relationship</td>
+<td>Sony 出资，TGC 为 PlayStation 制作 flOw / Flower / Journey</td>
+<td>project finance + platform + distribution</td>
+<td>Sony ownership / exclusivity / recoup-before-royalty</td>
+</tr>
+<tr>
+<td>2012 Benchmark</td>
+<td>$5.5M equity financing</td>
+<td>独立发展下一项目；Lasky 进入 board</td>
+<td>runway + multiplatform optionality + company autonomy from single publisher</td>
+<td>equity + board governance + investor-return expectation</td>
+</tr>
+<tr>
+<td>2012–2014</td>
+<td>first equity runway</td>
+<td>团队重建并逐渐扩大</td>
+<td>development capability</td>
+<td>runway begins burning before product direction fully stabilizes</td>
+</tr>
+<tr>
+<td>2014 Capital Today + others</td>
+<td>additional $7M</td>
+<td>scale development + build self-publishing/marketing/distribution infrastructure</td>
+<td>publisher capability is internalized</td>
+<td>more equity investors / fundraising surface</td>
+</tr>
+<tr>
+<td>Sky development</td>
+<td>additional fundraising rounds</td>
+<td>team expands into customer service, marketing, PR, publishing functions</td>
+<td>development studio → development + publishing organization</td>
+<td>CEO fundraising interrupts development; organization and burn grow</td>
+</tr>
+<tr>
+<td>2019 Sky launch</td>
+<td>~40-person organization by Chen&rsquo;s later account</td>
+<td>self-published/live-operated global game</td>
+<td>release + community/support + live-service capability</td>
+<td>ongoing service organization / investor-return pressure</td>
+</tr>
+<tr>
+<td>2022 onward</td>
+<td>later large equity rounds</td>
+<td>continue development/org/community expansion</td>
+<td>large-scale service + infrastructure</td>
+<td>growth-stage obligations beyond this case&rsquo;s core period</td>
+</tr>
+</tbody>
+</table>
+<h3 id="anachronism-check">Anachronism Check</h3>
+<ul>
+<li>2012 的 mobile/social/console platform landscape 与 2026 不同，不能照抄融资时机。</li>
+<li>Benchmark 进入董事会不等于 Benchmark 拥有日常 creative veto。</li>
+<li>Chen 所说“VC 没有 creative input”也不等于 investors 没有任何公司治理权。</li>
+<li>550 万美元、700 万美元不能按今天名义金额直接比较 production purchasing power。</li>
+<li>TGC 自建 publishing / PR / customer support 的成本结构不能直接套用到今天已有成熟 publisher-service、creator-platform、outsourcing 与 AI tool 的环境。</li>
+<li>Sony 时代的 ownership/recoup 条款只用于说明资本结构差异，不代表所有 publisher deal 都如此。</li>
+<li>2022 年 1.6 亿美元融资属于 Sky 已成功后的 growth-stage regime，本案不把它混进 2012–2019 的 0→1 能力扩张因果链。</li>
+</ul>
+<h2 id="3-sony-capital">3. Sony Capital：项目能力被外部平台提供</h2>
+<p>TGC 与 Sony 的三作关系不是纯 distribution deal。</p>
+<p>Chen 2013 年直接说明：</p>
+<ul>
+<li>Sony owns rights to the games；</li>
+<li>游戏收入先回收 Sony 的投入；</li>
+<li>recoup 后 TGC 才取得 royalty；</li>
+<li>Journey 花费数百万美元；</li>
+<li>Journey 完成时 TGC 的现金流已经极其紧张。</li>
+</ul>
+<p>这意味着 Sony 在 2007–2012 为 TGC 提供了：</p>
+<ul>
+<li>development financing；</li>
+<li>platform distribution；</li>
+<li>market access；</li>
+<li>institutional support。</li>
+</ul>
+<p>但代价包括：</p>
+<ul>
+<li>platform exclusivity；</li>
+<li>IP / rights ownership；</li>
+<li>recoup waterfall；</li>
+<li>dependence on one external company for the next production cycle。</li>
+</ul>
+<p>所以 Sony era 其实是一个重要基线：</p>
+<blockquote>
+<p><strong>project-level external capability + project-level control/economics。</strong></p>
+</blockquote>
+<h2 id="4-2012-series-a-capability">4. 2012 Series A：把 capability 从项目层移到公司层</h2>
+<p>2012 年 6 月，Benchmark Capital 投资 550 万美元。</p>
+<p>可观察 governance：
+- Mitch Lasky 进入 TGC board of directors。</p>
+<p>可观察战略目的：
+- 不再只服务 PlayStation；
+- 独立开发和发行未来游戏；
+- reach broader audience / multiple platforms；
+- 控制整个 player experience，而不是只控制 game executable。</p>
+<p>Chen 公开说：</p>
+<blockquote>
+<p>“By raising the money ourselves, we have the control to do what we want.”</p>
+</blockquote>
+<p>这个句子不能被断章取义成“VC 没有控制权”。</p>
+<p>更准确是：</p>
+<blockquote>
+<p><strong>相对于 Sony publisher/platform contract，company-level equity financing 给 TGC 更大的 project/platform optionality。</strong></p>
+</blockquote>
+<p>它用另一种治理成本换掉了原来的项目层约束。</p>
+<h2 id="5-board-rights-creative-direction">5. Board Rights ≠ Creative Direction</h2>
+<p>2013 年 Engadget 的直接访谈对本案非常关键。</p>
+<p>Chen 区分了两种关系：</p>
+<p>Sony era：
+- 因为游戏类型新，Sony 本来也很难在具体 creative direction 上当专家；
+- Chen 认为自己创意上一直拥有很大空间。</p>
+<p>VC era：
+- TGC 先 pitch project vision；
+- VC 买的是对这个 vision 和团队的信念；
+- Chen 说创意上没有收到 VC 的 input。</p>
+<p>所以一个更精确的资本审计必须分开问：</p>
+<h3 id="company-governance">Company governance</h3>
+<ul>
+<li>board seat；</li>
+<li>equity ownership；</li>
+<li>financing rights；</li>
+<li>future-round participation；</li>
+<li>strategic influence；</li>
+<li>investor return expectations。</li>
+</ul>
+<h3 id="product-creative-rights">Product creative rights</h3>
+<ul>
+<li>concept approval；</li>
+<li>milestone approval；</li>
+<li>scope approval；</li>
+<li>launch approval；</li>
+<li>platform approval；</li>
+<li>direct design veto。</li>
+</ul>
+<p>CASE-057 只强证前一类中的 board/equity 存在。</p>
+<p>它反而明确提醒：</p>
+<blockquote>
+<p><strong>不能看到 board seat 就自动推断 creative meddling。</strong></p>
+</blockquote>
+<h2 id="6-2014equity-capital">6. 2014：equity capital 开始购买“发行商能力”</h2>
+<p>2014 年，TGC 官方宣布追加 700 万美元融资，Capital Today 与其他投资者参与。</p>
+<p>官方用途不是只写“继续做游戏”。</p>
+<p>而是两层：</p>
+<ol>
+<li><strong>scale up development efforts</strong>；</li>
+<li><strong>lay infrastructure to self-publish, market, and distribute on our own terms</strong>。</li>
+</ol>
+<p>这使本案从“融资给 runway”升级为真正的 capability expansion：</p>
+<p><code>equity capital</code>
+→ development headcount
++ publishing infrastructure
++ marketing
++ distribution
+→ broader organizational capability set</p>
+<p>也就是说：</p>
+<blockquote>
+<p><strong>不是项目适配现有公司，而是资本把公司改造成能承担项目 thesis 的新组织。</strong></p>
+</blockquote>
+<h2 id="7-2024-retrospectivecapability-expansion">7. 2024 Retrospective：capability expansion 的真实组织代价</h2>
+<p>Chen 在 2024 年回顾 Sky 开发时给出了罕见的组织数字。</p>
+<p>他称：
+- 最初融资 550 万美元；
+- 前三年团队逐步增长到约 15 人；
+- 因为 TGC 自己是 publisher，需要建立 customer service、marketing、PR 内部团队；
+- Sky 发售时公司约 40 人；
+- 由于 Sky 的方向长期不明确，资金不够，后来又做了三轮追加融资；
+- 他每次作为 CEO 去融资，development 都会停滞或偏离。</p>
+<p>这条证据非常重要，因为它显示：</p>
+<blockquote>
+<p><strong>能力扩张也会反过来制造新的生产负担。</strong></p>
+</blockquote>
+<p>equity capital 买来了：
+- 更多人；
+- publishing；
+- marketing；
+- PR；
+- customer service。</p>
+<p>但它同时制造：
+- 更高 burn；
+- 需要下一轮融资的资本依赖；
+- CEO time diverted from development；
+- larger organizational coordination surface。</p>
+<p>所以：</p>
+<p><code>capital → capability expansion</code></p>
+<p>不是单向正反馈。</p>
+<p>它可能继续变成：</p>
+<p><code>capability expansion → higher fixed burn → next financing need → fundraising overhead → development interruption</code></p>
+<h2 id="8-capital-source-comparison">8. Capital-source Comparison</h2>
+<table>
+<thead>
+<tr>
+<th>Route</th>
+<th>Case</th>
+<th>Capability bought</th>
+<th>Main observable cost surface</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>retained earnings</td>
+<td>The Witness</td>
+<td>art / architecture / landscape / specialists</td>
+<td>founder burn / opportunity cost</td>
+</tr>
+<tr>
+<td>external stack</td>
+<td>Outer Wilds</td>
+<td>team + publisher/platform support</td>
+<td>backers + platform/publisher stakeholder surface; exact rights UNKNOWN</td>
+</tr>
+<tr>
+<td>grant + publisher</td>
+<td>House House</td>
+<td>completion/accessibility + release/audio/platform/market</td>
+<td>grant conditions + commercial publisher perimeter</td>
+</tr>
+<tr>
+<td>complementary founders</td>
+<td>Nomada / Playdead</td>
+<td>missing founding capability</td>
+<td>equity/authorship/governance/exit</td>
+</tr>
+<tr>
+<td><strong>VC/equity</strong></td>
+<td><strong>thatgamecompany</strong></td>
+<td><strong>development + self-publishing + marketing + distribution + support organization</strong></td>
+<td><strong>equity + board + investor-return + fundraising overhead</strong></td>
+</tr>
+</tbody>
+</table>
+<p>所以“外部钱”至少不能再当一个变量。</p>
+<p>真正要记的是：</p>
+<blockquote>
+<p><strong>source × capability purchased × decision-rights surface × future financing obligation</strong></p>
+</blockquote>
+<h2 id="9-control-surface-migration">9. Control Surface Migration</h2>
+<p>thatgamecompany 还给出一个很少见的对照：</p>
+<h3 id="sony-model">Sony model</h3>
+<p><code>publisher/platform money</code>
+→ project finance
+→ platform exclusivity
+→ publisher-owned rights
+→ recoup waterfall
+→ external publishing infrastructure</p>
+<h3 id="vc-model">VC model</h3>
+<p><code>company equity money</code>
+→ internal runway
+→ company hires / infrastructure
+→ board / shareholder governance
+→ internal publishing capability
+→ multiplatform optionality</p>
+<p>这不是：</p>
+<blockquote>
+<p>bad control → no control</p>
+</blockquote>
+<p>而是：</p>
+<blockquote>
+<p><strong>project-level control/economics → company-level governance/ownership</strong></p>
+</blockquote>
+<p>换句话说：</p>
+<blockquote>
+<p><strong>独立发行并不等于独立资本。</strong></p>
+</blockquote>
+<h2 id="10-capabilityproject-fit-audit">10. Capability–Project Fit Audit</h2>
+<h3 id="formation-direction">Formation direction</h3>
+<p><code>CAPABILITY-EXPANDED / VC-EQUITY</code></p>
+<p>TGC 并没有把下一项目缩成：</p>
+<blockquote>
+<p>“Journey 团队当前现有能力能做什么。”</p>
+</blockquote>
+<p>而是：
+- 保留更广 audience / emotional multiplayer thesis；
+- 通过 equity capital 扩 development；
+- 再把 publisher functions 内化。</p>
+<h3 id="strength">Strength</h3>
+<p>强：
+- authorial/creative thesis 已存在；
+- equity finance purpose 清晰；
+- board seat 可观察；
+- capability expansion 有官方明确用途；
+- 后期 headcount / function expansion 有 creator retrospective。</p>
+<h3 id="pressure">Pressure</h3>
+<p>同样强：
+- product direction 未稳定时 burn 已经增长；
+- 追加融资变成必要；
+- CEO fundraising 直接干扰 development。</p>
+<p>所以本案并不是“VC 让作者摆脱发行商”的英雄故事。</p>
+<p>更准确是：</p>
+<blockquote>
+<p><strong>VC 让 TGC 有机会把发行商能力吸收到公司内部；代价是公司本身必须承担资本与治理机器。</strong></p>
+</blockquote>
+<h2 id="11-decision-rights-audit">11. Decision-Rights Audit</h2>
+<h3 id="known">Known</h3>
+<ul>
+<li>Benchmark invested $5.5M；</li>
+<li>Mitch Lasky joined board；</li>
+<li>later investors added at least $7M；</li>
+<li>company planned independent publishing / distribution；</li>
+<li>Chen says VC did not direct creative content；</li>
+<li>more fundraising occurred during Sky development。</li>
+</ul>
+<h3 id="unknown">Unknown</h3>
+<ul>
+<li>equity percentages；</li>
+<li>liquidation preferences；</li>
+<li>protective provisions；</li>
+<li>preferred/common structure；</li>
+<li>investor veto rights；</li>
+<li>exact board composition after later rounds；</li>
+<li>milestone rights；</li>
+<li>budget approval rights；</li>
+<li>founder removal rights；</li>
+<li>pro-rata / participation terms；</li>
+<li>exact return horizon expected by each investor；</li>
+<li>whether specific product/platform decisions required board approval。</li>
+</ul>
+<p>因此本案已经足够补“VC/equity capability expansion”这个空白，但<strong>不能伪造一份 cap table 或 term sheet</strong>。</p>
+<h2 id="12-transfer">12. Transfer</h2>
+<p>对任何“拿股权融资扩能力”的作者工作室，至少问：</p>
+<ol>
+<li><strong>Why equity?</strong> 为什么不是 retained earnings、publisher advance、grant、loan 或 contractor？</li>
+<li><strong>Capability purchase:</strong> 这笔钱具体买什么能力？</li>
+<li><strong>Company vs project:</strong> 钱是在扩一个项目，还是在改变公司永久能力？</li>
+<li><strong>Board rights:</strong> 谁进入董事会？谁能任免/否决什么？</li>
+<li><strong>Creative rights:</strong> board governance 与具体 product approval 是否分离？</li>
+<li><strong>Burn step-up:</strong> 新能力让固定 burn 上升多少？</li>
+<li><strong>Next-round dependency:</strong> 这轮钱结束前能否产生可持续现金流？</li>
+<li><strong>Founder time:</strong> CEO/creative founder 融资花多少时间，谁补其 production role？</li>
+<li><strong>Publishing internalization:</strong> 自发行到底要新增 marketing / PR / distribution / support 哪些岗位？</li>
+<li><strong>Exit/return horizon:</strong> 投资人需要何种资本回报，时间尺度是否与作者型项目匹配？</li>
+<li><strong>Down-round / failure:</strong> 项目方向迟迟未定时，谁承担下一轮融资风险？</li>
+<li><strong>Control migration:</strong> 你是在减少 publisher control，还是把 obligation 移到 board/shareholder 层？</li>
+</ol>
+<h2 id="13-non-transfer-forbidden-inference">13. Non-transfer / Forbidden Inference</h2>
+<p>本案不能证明：</p>
+<ul>
+<li>VC 比 publisher 更自由；</li>
+<li>VC 一定不干涉创意；</li>
+<li>board seat 没有实际权力；</li>
+<li>self-publishing 一定值得内建；</li>
+<li>TGC 2012 的融资结构适合 2026 小团队；</li>
+<li>只要有强愿景就能拿 Benchmark；</li>
+<li>Sky 七年开发主要是融资导致；</li>
+<li>Sony 模式一定更差；</li>
+<li>equity capital 没有 milestone / veto；</li>
+<li>550 万美元是做作者型游戏的合理预算；</li>
+<li>独立发行等于真正“没有外部控制”。</li>
+</ul>
+<p>本案真正支持的是：</p>
+<blockquote>
+<p><strong>股权资本可以把缺失能力永久内化到公司，但其价格不是 project recoup，而是 ownership / board / investor-return / future-financing governance；资本来源改变的是控制面的结构与位置。</strong></p>
+</blockquote>
+<h2 id="14-temporal-validity">14. Temporal Validity</h2>
+<ul>
+<li>2012 Benchmark round：<code>HISTORICAL</code>；</li>
+<li>2014 Capital Today round：<code>HISTORICAL</code>；</li>
+<li>2012–2019 self-publishing buildout：<code>PARTIALLY TRANSFERABLE</code>；</li>
+<li>board/equity vs creative-right distinction：<code>DURABLE</code>；</li>
+<li>capability-purchase accounting：<code>DURABLE</code>；</li>
+<li>fundraising overhead / burn escalation：<code>DURABLE</code>；</li>
+<li>exact platform economics：<code>HISTORICAL / NON-TRANSFERABLE</code>；</li>
+<li>exact US venture legal structure：<code>JURISDICTION / DEAL SPECIFIC</code>。</li>
+</ul>
+<h2 id="15-verdict">15. Verdict</h2>
+<h3 id="strongly-supported">Strongly supported</h3>
+<ul>
+<li>TGC had a three-game Sony partnership before 2012；</li>
+<li>Sony owned the rights to the three games and recouped investment before TGC royalties, according to Chen；</li>
+<li>2012 Benchmark investment was $5.5M；</li>
+<li>Mitch Lasky joined the board；</li>
+<li>funding explicitly supported independent development/release beyond one platform；</li>
+<li>Chen publicly distinguished VC governance from creative direction and said VC did not give creative input；</li>
+<li>2014 additional $7M was explicitly for scaling development plus self-publishing / marketing / distribution infrastructure；</li>
+<li>2024 Chen says the team grew to ~15 after the first financing and ~40 by Sky launch with new customer-service / marketing / PR functions；</li>
+<li>Chen says three additional fundraises were needed and fundraising repeatedly disrupted development.</li>
+</ul>
+<h3 id="supported-interpretation">Supported interpretation</h3>
+<blockquote>
+<p><strong>thatgamecompany is the first strong VC/equity capability-expansion anchor in this corpus: external equity let the studio internalize publisher capabilities and escape single-publisher dependence, while shifting obligation into board/shareholder/fundraising governance.</strong></p>
+</blockquote>
+<h3 id="remaining-unknown">Remaining UNKNOWN</h3>
+<ul>
+<li>cap table；</li>
+<li>exact investor ownership；</li>
+<li>board voting rules；</li>
+<li>liquidation preferences；</li>
+<li>protective provisions；</li>
+<li>specific product vetoes；</li>
+<li>later-round exact terms；</li>
+<li>audited use-of-proceeds by category。</li>
+</ul>
+<h2 id="creator-life-decision-audit">Creator Life / Decision Audit</h2>
+<ul>
+<li><strong>Audit status:</strong> PARTIAL / ORGANIZATION-LEVEL</li>
+<li><strong>Life stage:</strong> Jenova Chen 与 TGC 已完成三款 Sony-funded commercial games，Journey 后处于“已有作品信誉但公司现金枯竭、旧发行合同结束”的 founder/CEO 转折点；本案研究的是公司资本结构决策，不把它等同于 Chen 的 household 人生风险。</li>
+<li><strong>Household:</strong> Chen 及其他创始人的婚育、住房、家庭资产、配偶收入等在本案来源中均为 <code>UNKNOWN</code>，不得推断。</li>
+<li><strong>Runway:</strong> Sony project funding / delayed royalties → 2012 Benchmark $5.5M company equity → 2014 additional $7M equity → Sky 期间后续多轮融资。公司 runway 与 founder household runway 必须分开。</li>
+<li><strong>Household burn:</strong> <code>UNKNOWN</code>。</li>
+<li><strong>Exit / recovery:</strong> Chen 当时已有 USC / commercial-game / acclaimed-title track record，职业退出能力显然不同于首次创业者，但没有足够证据把个人 reemployment / household downside 量化为 HIGH/MEDIUM/LOW。</li>
+<li><strong>Capability vector:</strong> authorial game direction / emotional-experience thesis + established small-studio production；2012 后通过资本新增 multiplatform development、self-publishing、marketing、distribution、PR、customer-service capability。</li>
+<li><strong>Problem ownership:</strong> <strong>HIGH CREATIVE / MIXED COMPANY GOVERNANCE</strong> — Chen 直接称 VC 没有给予 creative input；同时 Benchmark 获 board seat，说明 company-level governance 不能写成“完全自主”。具体 veto / budget / founder-removal rights <code>UNKNOWN</code>。</li>
+<li><strong>Validation architecture:</strong> Sony-era shipped trilogy / Journey market proof → post-contract strategic reset → Benchmark equity round → expanding next-project experimentation → 2014 follow-on capital / publishing infrastructure → prolonged Sky development → launch / live-service validation。</li>
+<li><strong>Reality adjudication:</strong> <strong>PARTIAL</strong> — Journey success validated the studio thesis and enabled financing；Sky 长期方向不明确又持续消耗资本，迫使额外融资。现有证据能看到资本现实否决 runway，但不足以重建每次产品 pivot 的玩家验证链。</li>
+<li><strong>Capability capture risk:</strong> <strong>MEDIUM / CAPITAL-AMPLIFIED</strong> — 融资确实买到缺失组织能力，但扩大 fixed burn，并形成 next-round dependency；不能把更大团队和自发行基础设施自动记成净收益。</li>
+<li><strong>Market sufficiency / legibility:</strong> <strong>STRONG PRIOR CREDENTIAL / UNCERTAIN NEXT-PRODUCT EARLY</strong> — Journey 提供极强信誉与融资信号，但 Sky 的新平台、社交/live-service thesis 在早期并未因此自动成立。</li>
+<li><strong>Capability scaling:</strong> <strong>VC-EQUITY CAPABILITY-EXPANDED</strong> — development studio 逐步内建 publishing / marketing / PR / customer support；这是本案最核心的可观察扩张。</li>
+<li><strong>Major unknowns:</strong> founder household；2012/2014 cap table；valuation；liquidation preference；protective provisions；board voting；product milestone/veto；later-round exact terms；各轮融资对 founder ownership 的稀释。</li>
+</ul><div class="crumbs"><a href="/heroes-portal/">书阁</a> / cases/CASE-057-thatgamecompany-vc-equity-expansion.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

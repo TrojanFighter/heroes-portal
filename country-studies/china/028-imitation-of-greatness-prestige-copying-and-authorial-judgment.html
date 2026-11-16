@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>028 — 仿制伟大：成功声望、判断外包与尚未成名的创造者 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl class="on"" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0" class="t2">0. 核心概念：模仿什么，决定其性质</a><a href="#1" class="t2">1. 三个候选机制：可观察，不预设已经普遍成立</a><a href="#h1-achievement-to-epistemic-authority-transfer" class="t3">H1. ACHIEVEMENT-TO-EPISTEMIC-AUTHORITY TRANSFER / 成就倒灌</a><a href="#h2-judgment-outsourcing" class="t3">H2. JUDGMENT OUTSOURCING / 鉴别外包</a><a href="#h3-self-authored-ends-substitution" class="t3">H3. SELF-AUTHORED-ENDS SUBSTITUTION / 目标主体性替代</a><a href="#2" class="t2">2. 理论边界：声望学习是正常认知捷径，不是某国特产</a><a href="#3" class="t2">3. 训练体系与市场接口：为何模仿有时通向原创，有时困在认证体系</a><a href="#31-66rpg" class="t3">3.1 66RPG：学习性模仿可以积累独立创作能力</a><a href="#32-game-jam" class="t3">3.2 当代中国并非“没有 Game Jam”</a><a href="#33-dota" class="t3">3.3 《Dota自走棋》：继承不妨碍重新定义价值</a><a href="#34-doom" class="t3">3.4 《征途》、DOOM与创新维度</a><a href="#4" class="t2">4. 仿制伟大究竟有多普遍？必须先做分母审计</a><a href="#h" class="t3">可证伪命题（暂为 H）</a><a href="#5" class="t2">5. 两个关键反事实：不要浪漫化他国，也不要神话中国异类</a><a href="#6" class="t2">6. 对全书的用途：研究价值而非立即写成伟人传/成功学</a><a href="#7" class="t2">7. 证据缺口与下一步</a><a href="#8" class="t2">8. 时间有效性与引用</a><a href="#9-2026-10-09" class="t2">9. 2026-10-09｜补充边界：从“仿制伟大”到高能力同质化竞争</a><a href="#10-2026-10-09" class="t2">10. 2026-10-09｜事前发现的价值，不等于事后证明的成功</a></aside><article class="doc"><div class="col"><h1 id="028">028 — 仿制伟大：成功声望、判断外包与尚未成名的创造者</h1>
+<ul>
+<li>Program: C / 中国国情研究；连接 A 独立英雄、D 创新者形成、中国教育/组织社会化与跨国创作者生态</li>
+<li>Status: <strong>CONCEPTUAL SYNTHESIS / HYPOTHESIS-LED / PREVALENCE UNKNOWN</strong></li>
+<li>As-of: 2026-10-08</li>
+<li>Origin: 作者关于“仿制伟大”的研究命题；本篇将其操作化，<strong>不是</strong>把作者评论直接认定为社会科学事实</li>
+<li>Core question: 社会是否容易把<strong>已经验证的伟大结果</strong>、<strong>可复制的伟大表征</strong>和<strong>产生伟大的问题定义/实验机制</strong>混为一谈，从而过度奖励可辨认的成功模板，而降低未获承认者的独立判断机会？</li>
+<li>Korean information-network extension (2026-10-08): <a href="/heroes-portal/country-studies/korea/002-global-information-network-and-absorptive-capacity.html">韩国002 Born Global、Cohen–Levinthal吸收能力与《穿越火线》中韩能力互补</a>。跨国借力并非民族原创性标签；学习已被验证的作品/伙伴也可能是真正的能力建设，必要条件是鉴别其适用知识并让外来判断进入产品决策。</li>
+<li>Korea counterexample (2026-10-08): <a href="/heroes-portal/country-studies/korea/001-post-lead-transnational-capability-acquisition-integration.html">跨国能力获取并不等于仿制伟大：PUBG、ArenaNet、Embark 与 Unknown Worlds 反例</a>。必须把“向外国已成名大师采购声望”和“在全球发现尚未放大的特殊能力并给予真实决策权”区分开；同时保留腾讯Riot/网易Quantic Dream等反例，不推国别数量级。</li>
+<li>Principal anchors:</li>
+<li><a href="/heroes-portal/country-studies/china/027-individualism-as-innovation-infrastructure.html">027 — 个人主义作为创新基础设施</a></li>
+<li><a href="/heroes-portal/country-studies/china/016-creator-route-topology-from-66rpg-to-modern-bridges.html">016 — 中国创作者路网拓扑：66RPG 至现代创作接口</a></li>
+<li><a href="/heroes-portal/book/research-notes/innovation-dimensions-zhengtu-doom-comparator-049.html">中国商业游戏能力与创新维度比较</a></li>
+<li><a href="/heroes-portal/book/research-notes/capability-reproduction-trap-horizontal-discovery-048.html">能力再生产陷阱与横向能力发现</a></li>
+<li><a href="/heroes-portal/country-studies/japan/001-japan-east-asian-counterexample-weird-kinship-and-game-creator-ecology.html">日本异类创作者与同人制度</a></li>
+<li>Boundary: <strong>不以民族性解释个人行为，不将市场成功等同于原创，不将模仿等同于缺乏能力。不能用成功的中国异类或海外明星案例推算社会数量级。</strong></li>
+</ul>
+<h2 id="0">0. 核心概念：模仿什么，决定其性质</h2>
+<p class="dc"><strong>“仿制伟大”</strong>不是通常意义的技术学习或游戏品类继承。它指的是一种待操作化的行为/社会评价模式：</p>
+<blockquote>
+<p>行动者把社会已经认证的伟大人物、伟大作品及其可见形式当成目标函数；先选择具有社会合法性的成功形象或范式，再倒推自己应当解决的问题，因而将“为什么值得创造”的判断权部分或全部移交给外部声望。</p>
+</blockquote>
+<p>必须分成三种不同的模仿：</p>
+<table>
+<thead>
+<tr>
+<th>模仿对象</th>
+<th>合理作用</th>
+<th>值得警惕的转变</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>技术/工艺模仿</strong></td>
+<td>学会代码、技术栈、制作工艺、可复用工具</td>
+<td>仅复刻步骤而不检验适用前提</td>
+</tr>
+<tr>
+<td><strong>范式/产品模仿</strong></td>
+<td>借用成熟交互语言、产品结构与商业知识，完成迭代、改良、同构异性创新</td>
+<td>以“赛道已证实”代替自己定义玩家问题</td>
+</tr>
+<tr>
+<td><strong>声望/身份模仿（仿制伟大核心）</strong></td>
+<td>可作为传播标签、行业术语或职业参照</td>
+<td>把创始人形象、头衔、融资语言、成功故事当成创新能力的替代证书</td>
+</tr>
+</tbody>
+</table>
+<p>因此：
+- <code>IMITATION ≠ LACK_OF_ORIGINALITY</code>；
+- <code>COMMERCIAL_SUCCESS ≠ FRONTIER_PROBLEM_DISCOVERY</code>；
+- <code>COMPLEX_EXECUTION ≠ AUTHORIAL_QUESTION_OWNERSHIP</code>；
+- <code>IDENTITY_PERFORMANCE ≠ PRODUCT_CAPABILITY</code>；
+- <code>NO_IMMEDIATELY_VISIBLE_PRECEDENT ≠ HIGH_QUALITY_INNOVATION</code>。</p>
+<p><strong>关键判据：模仿之后，独立提出问题、纠错和形成自己可检验判断的能力，是增强了还是被替代了？</strong></p>
+<h2 id="1">1. 三个候选机制：可观察，不预设已经普遍成立</h2>
+<h3 id="h1-achievement-to-epistemic-authority-transfer">H1. <code>ACHIEVEMENT-TO-EPISTEMIC-AUTHORITY TRANSFER / 成就倒灌</code></h3>
+<p>一个人在商业、考试、资本或某一领域获得成就后，该成就是否被社会不成比例地转换为对其他问题的思想权威？</p>
+<p>研究区分：
+1. <strong>与本领域直接相关的能力信号</strong>（例如经营者对组织、供应链有真实经验）；
+2. <strong>跨领域外推</strong>（例如财富 → 对艺术、技术路线或人生价值拥有必然正确的判断）；
+3. <strong>主动借用成功者身份表征</strong>（例如创始人发布会风格、创业神话、标志性措辞）。</p>
+<p>上述三者可能同处一人身上，不能因为其形象借鉴而否定其真实工程/商业能力，亦不能凭真实营收反过来证明其所有观点都正确。</p>
+<p><strong>可检验性：</strong>对相同设计方案/观点进行声望标签随机化实验；观察评委是否因为作者的财富/公司头衔变化而改变与方案质量无关的评价。需控制领域专业性。</p>
+<h3 id="h2-judgment-outsourcing">H2. <code>JUDGMENT OUTSOURCING / 鉴别外包</code></h3>
+<p>当资方、上级、评审或媒体无法直接低成本判断一项未验证的创造，它可能借助已有成功竞品、可比公司、融资额、获奖和学历等代理信号。</p>
+<p>这种做法在高不确定性下不必然非理性；问题在于：
+- 代理是否比真实产品反馈得到更高的决定权；
+- 未出现“公认模板”时是否系统性难获实验机会；
+- 评审是否能识别已知类型以外的生产与设计能力。</p>
+<p><strong>假说链：</strong></p>
+<pre><code class="language-text">直接评价原创价值成本高
+→ 使用成功者/竞品/资历作为代理信号
+→ 项目向可识别模板收敛
+→ 人才训练更偏向既有范式内优化
+→ 新问题/异端候选缺少继续验证机会
+</code></pre>
+<p>其中每个箭头都必须单独检验，不能因存在“对标”就推断原创项目被淘汰。</p>
+<p>与 <a href="/heroes-portal/book/research-notes/capability-reproduction-trap-horizontal-discovery-048.html">048 能力再生产陷阱</a> 相连：<code>TRAINING_WITHHOLDING</code>、<code>INCUMBENT_CAPABILITY_CEILING</code>、<code>EVALUATOR_CAPABILITY_GAP</code> 是不同障碍。老一代不培养新类型人才，也可能因为自己不具备新范式的评判和教学能力，并非故意压制。</p>
+<h3 id="h3-self-authored-ends-substitution">H3. <code>SELF-AUTHORED-ENDS SUBSTITUTION / 目标主体性替代</code></h3>
+<p>一个行动者具有很高的竞争能力和个人行动力，却把“应该追求什么”设为获得外部社会已经认可的伟大身份。</p>
+<p>对照 <a href="/heroes-portal/country-studies/china/027-individualism-as-innovation-infrastructure.html">027 个人主义研究</a>：
+- <code>AGENCY</code>：谁行动、竞争、承担风险？
+- <code>TELOS</code>：谁规定什么值得做？
+- <code>SELF-AUTHORED ENDS</code>：个人能否在尚无市场或地位背书前提出目标？</p>
+<p>所以“努力、创业、财富增加”既不自动证明主体性，也不自动证明缺乏主体性。照顾家庭完全可能是自主选择；相反，追逐所谓创始人光环也可能只是他律。</p>
+<p><strong>待验证观察：</strong>在市场数据与本人长期审美判断发生冲突时，创作者做了何种决策？有没有先于成功的日志、废案、原型、同行反馈可以回溯？</p>
+<h2 id="2">2. 理论边界：声望学习是正常认知捷径，不是某国特产</h2>
+<p>Jiménez &amp; Mesoudi (2019)综述了 <code>PRESTIGE-BIASED SOCIAL LEARNING</code>：当学习成本高且难以直接鉴定能力时，人倾向于借助声望选择学习对象；它同时讨论 <code>SUCCESS BIAS</code> 与 <code>PRESTIGE BIAS</code> 的差别，以及过度模仿无关动作的实验与反证边界。</p>
+<p>Source (S1 / peer-reviewed review):
+- Ángel V. Jiménez &amp; Alex Mesoudi, 2019, <em>Prestige-biased social learning: current evidence and outstanding questions</em>. https://doi.org/10.1057/s41599-019-0228-7</p>
+<p>这只能支持“存在可研究的心理机制”，<strong>不能证明中国人的发生率更高</strong>。</p>
+<p>“创新货物崇拜”“结果反向推导原因”“把反叛也做成规范化成功模板”等，可作为作者的概念类比；不作为已证实的机制或直接证据。应额外警惕 <code>POST-HOC CAUSAL STORY</code>（事后因果补写）：成功者回忆可能重新编排其探索、偶然性、失败与资源前提。</p>
+<h2 id="3">3. 训练体系与市场接口：为何模仿有时通向原创，有时困在认证体系</h2>
+<h3 id="31-66rpg">3.1 66RPG：学习性模仿可以积累独立创作能力</h3>
+<p>Sunny Jie Yang（2026）对66RPG的档案、核心成员与创办者材料的研究确认，2005—2017年中国曾存在规模可观的爱好者游戏创作网络：RPG Maker工具、共享教程/素材、相互答疑、短篇竞赛与公开作品，使此前不具备职业资格的人能够参与生产。论文提及关闭前 <strong>86万+ 注册用户、329万帖子</strong>。这两个数字<strong>都不是活跃创作者分母</strong>。</p>
+<ul>
+<li>Source (S1): Sunny Jie Yang, 2026, <em>Collective Creational Play: 66RPG and the Hobbyist Game-Making Cultures in Early Chinese Indie Game Community</em>, https://doi.org/10.1177/20594364251413750</li>
+<li>Existing archive + competing explanations of platform evolution: <a href="/heroes-portal/country-studies/china/016-creator-route-topology-from-66rpg-to-modern-bridges.html">016</a></li>
+</ul>
+<p>66RPG既提示“复制素材/重做别人游戏”可以是入门的生产性学习，又提示审美标准商业化、共享产权冲突、平台化及合规成本可能影响这种训练环境的持久性。<strong>不能将其关闭单因归于监管，也不能据梁其伟等成功者估计整体转化率。</strong></p>
+<h3 id="32-game-jam">3.2 当代中国并非“没有 Game Jam”</h3>
+<p>CiGA官方记录，2025年GGJ中国区有<strong>2300多人、735支队伍、563款48小时Demo</strong>（含线上参与）。数字证明公开限时原型生产确实存在，但无法直接回答同一批开发者的连续创作率、二次作品率与职业去向。</p>
+<ul>
+<li>Source (P0 / organizer): CiGA, 2025, <em>GGJ 2025 x CiGA中国区共诞生563款游戏！</em>, https://www.ciga.me/blog/ggj-2025-x-ciga-563</li>
+</ul>
+<p>不得直接用中国CiGA站点与全球itch.io或GMTK单场提交总数计算“中外创作能力差距”：地理覆盖、参与者重复、作品类型、统计口径不同。</p>
+<p>应建立：</p>
+<pre><code class="language-text">兴趣/学习 → 首次公开原型 → 六个月后仍创作
+→ 第二款公开作品 → 首次商业项目 → 失败/再入场
+</code></pre>
+<p>每层独立定义 cohort、观察窗、平台可见性和 <code>UNKNOWN</code>；无公开痕迹不等于退出。</p>
+<h3 id="33-dota">3.3 《Dota自走棋》：继承不妨碍重新定义价值</h3>
+<p>2019年，巨鸟多多在《Dota 2》的Mod/自定义游戏生态中重组已有玩法机制，推动了自走棋的全球传播，Valve随后公开讨论双方开发各自的独立版本。这能说明<strong>中国小团队可能通过开放工具和直接玩家反馈，反向影响全球大厂的产品选择</strong>；却不能证明所有自走棋机制由其凭空发明，更不能推算中国Mod作者的成功概率。</p>
+<ul>
+<li>Source (P0 / Valve statement through Steam feed, 2019-05): https://store.steampowered.com/news/posts/?appgroupname=Valve&amp;appids=570</li>
+<li>See also <a href="/heroes-portal/country-studies/china/016-creator-route-topology-from-66rpg-to-modern-bridges.html">016 中国创作者路网</a></li>
+</ul>
+<p>这里最值得调查的是<code>AUTHORIAL DECISION</code>是否由自身的玩家问题和可玩实验推进，而不是著名团队是否成功。</p>
+<h3 id="34-doom">3.4 《征途》、DOOM与创新维度</h3>
+<p>按 <a href="/heroes-portal/book/research-notes/innovation-dimensions-zhengtu-doom-comparator-049.html">049</a> 的分类：
+- 《征途》的付费与社会消费机制重组是一种真实、可能很强的商业/需求侧创新，不自动等于玩法原发突破；
+- DOOM的技术图形学与设计新范式相互成就，也不能误讲为“只复制已有成功FPS”；
+- 同一款游戏可以在技术、交互、叙事、组织、分发、变现等不同维度出现完全不同的创新水平。</p>
+<p>在比较中不得把<code>REVENUE / MARKET SHARE / ENGINEERING COMPLEXITY</code>直接折算成<code>ORIGINAL PROBLEM-FORMATION</code>。也不得把道德反感（如反P2W）冒充“对方完全没有创新能力”的事实判断。</p>
+<h2 id="4">4. 仿制伟大究竟有多普遍？必须先做分母审计</h2>
+<p>最需要的不是再找几位“看起来像乔布斯”的人物，而是用一致口径观察：
+- 项目立项文档里，<code>BENCHMARK AS VOCABULARY</code>（便于解释）与<code>BENCHMARK AS OBJECTIVE FUNCTION</code>（竞品直接决定为什么做）各占多少；
+- 允许自行定义问题/启动原型的内部绿灯权比例；
+- 不满足成熟赛道可比性、但质量类似的原型是否更易遭拒；
+- 开发者自发原型的长期追踪率、公开署名率、第二作品率和再入场率；
+- 原型社区对“未完成、不商业化、不高保真”的容忍条件；
+- 中日美俄台类似组织和职业阶段的具体比较；
+- 对失败者/普通人从预先定义的入口跟踪，而非成功后媒体追踪。</p>
+<p><strong>不得比较全国活跃人数与海外全球平台累计作品，不能把几个中国正向异类当数量级结论。</strong></p>
+<h3 id="h">可证伪命题（暂为 H）</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>精确假说</th>
+<th>直接支持所需证据</th>
+<th>有力反例/反驳</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>H-GREAT-01</td>
+<td>对相同创意，成功者标签的评价加成跨越其真实相关专业能力</td>
+<td>标准化盲评/随机标注及评价结果</td>
+<td>控制专业能力与信息质量后标签无额外作用</td>
+</tr>
+<tr>
+<td>H-GREAT-02</td>
+<td>高依赖benchmark的组织更少支持无可比成功样本的原型</td>
+<td>立项候选全集、拒绝原因、团队/预算/年份控制</td>
+<td>同等条件下非共识项目获得等量试验机会</td>
+</tr>
+<tr>
+<td>H-GREAT-03</td>
+<td>有公开低成本原型通道的创作者，能更频繁获得独立判断的现实反馈</td>
+<td>固定起点长期队列与高质量行为指标</td>
+<td>经控制能力/选择偏差后不呈相关或反向</td>
+</tr>
+<tr>
+<td>H-GREAT-04</td>
+<td>社会成就指标比实际创作证据更显著地影响创作者的合法性评价</td>
+<td>声望、作品质量、职业身份分别操纵</td>
+<td>用户/评审主要依赖独立质量判断</td>
+</tr>
+<tr>
+<td>H-GREAT-05</td>
+<td>中国与其他生态在以上机制的<strong>频率/强度</strong>上存在差异</td>
+<td>同构抽样、同阶段组织对照、失败队列及置信区间</td>
+<td>差异不显著，或由产业结构/平台覆盖解释</td>
+</tr>
+</tbody>
+</table>
+<p>这五项不能因为分别存在一例支持材料，就升级为 <code>SUPPORTED</code>、更不能合并成“民族性定律”。</p>
+<h2 id="5">5. 两个关键反事实：不要浪漫化他国，也不要神话中国异类</h2>
+<p><strong>反事实 A：</strong>如果一个创作者学习的伟大作品没有商业成功，他是否仍能从玩家行为、交互逻辑、技艺/审美上解释所学之处？若能，倾向于独立判断；若只有销量这个理由，倾向于成功结果依赖。但个人访谈的回答不能替代其同期行动记录。</p>
+<p><strong>反事实 B：</strong>如果同样的创造想法来自没有头衔、财务成功、学历和社交声望的新人，原组织/资方是否愿意提供相似条件下的prototype机会？这比问他是不是“喜欢乔布斯”更能测量筛选机制。</p>
+<p><strong>中国内部反例：</strong>66RPG、Game Jam、Mod生态及个别作者型商业作品说明旁路存在，但路线存在 <code>≠</code> 路线普遍可达、稳定、可失败后重试。中国很强的工程/商业创新指标也不能直接替换为<code>作者型范式创新占比</code>。</p>
+<p><strong>日本反例：</strong>高群体规范社会也能通过同人/circle和公司内部作者岗位提供<code>BOUNDED ECCENTRICITY</code>（见 Japan 001）；不能用“东亚集体主义”统一解释中国与日本差异。</p>
+<p><strong>欧美/斯拉夫反例：</strong>同样存在prestige copying、VC可比性偏好、成功学和组织保守；不能由DOOM、SUPERHOT等成功者推断整个国家的探索者获益概率。跨国比较归属于同口径的制度/队列，不归于民族性性格。</p>
+<h2 id="6">6. 对全书的用途：研究价值而非立即写成伟人传/成功学</h2>
+<p>本项与作者此前“创新神学”讨论存在一条<strong>候选</strong>逻辑链：</p>
+<pre><code class="language-text">价值目标外置 / 自我提问不足
+→ benchmark/声望鉴别外包
+→ 仿制已认证的伟大形式
+→ 把创新转换成资格、仪式与可展示指标
+→ 可能削弱非共识问题生成与廉价探索
+</code></pre>
+<p>它是一个有待分箭头核验的解释模型，不是闭合的强因果链。</p>
+<p>对读者最重要的分辨是：</p>
+<blockquote>
+<p><strong>追赶已出现的伟大，与生产尚未出现的伟大，是两类都可能有价值、但能力结构与组织条件不同的活动。</strong></p>
+</blockquote>
+<p>前者可能需要成熟技术、资本、供应链、运营和组织纪律；后者尤其需要可自定问题、可低成本验证、容忍未成名、及时同行反馈、署名/退出/第二次机会。二者可以组合，不能把“原创”自动等同于个人单干、零继承或零商业性。</p>
+<p>与 <a href="/heroes-portal/country-studies/china/027-individualism-as-innovation-infrastructure.html">027</a> 的<code>SELF-AUTHORED ENDS</code>、<a href="/heroes-portal/country-studies/china/016-creator-route-topology-from-66rpg-to-modern-bridges.html">016</a> 的创作者路网，以及 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes/blob/main/OPEN-QUESTIONS.md">OQ-001/003/014</a> 的队列/失败者/制度化怪人问题交叉；新增 <code>OQ-017</code> 追踪声望评判与立项代理信号，而不是复制既有 evidence ledger。</p>
+<h2 id="7">7. 证据缺口与下一步</h2>
+<ol>
+<li><strong>P0 / 同期完整绿灯候选库</strong>：同组织的通过与拒绝原型、评分意见、明确被对标的竞品（非只看最终成功项目）。</li>
+<li><strong>P0 / 非名人原型史</strong>：Game Jam、RPG Maker、Mod和学生项目的固定入口队列，至少24/36/60个月追踪公开作者活动；将职业去向UNKNOWN保留。</li>
+<li><strong>实验或准实验</strong>：当作者头衔改变、作品不变时，投资人/评委评价如何变化；不可拿访谈意见当因果。</li>
+<li><strong>跨国可比口径</strong>：每国商业从业者总数、业余公开制作者总数、活跃原型数、原创迭代与再入场率按年份匹配，不把一国国内数据与全球平台总和相比。</li>
+<li><strong>创作动机的行为证据</strong>：先于成功的作品日志、明确放弃模仿的设计分叉、失败后的第二原型，比事后精神叙述更重要。</li>
+</ol>
+<p><strong>当前裁决：<code>CONCEPTUAL-SUPPORTED / COUNTRY-PREVALENCE-UNKNOWN / CAUSAL-STRENGTH-UNVERIFIED</code>。</strong> 已确认的是理论与生态案例可支撑机制的可研究性；尚未确认“中国社会比国外更常仿制伟大”以及这种倾向造成多少原发性创新损失。</p>
+<h2 id="8">8. 时间有效性与引用</h2>
+<ul>
+<li>Observed historical periods: 66RPG 2005–2017；《Dota自走棋》2019；CiGA GGJ 2025；本文讨论截至2026-10-08。</li>
+<li>2026 transfer status: <code>DURABLE</code>（区分模仿对象与判断权、建立反事实/固定队列）；<code>CONDITIONAL</code>（当代平台/社区是否仍具可达性与连续性）；<code>UNKNOWN</code>（对国别差距的效应量）。</li>
+<li>Related existing notes: <a href="/heroes-portal/country-studies/china/README.html">中国017–027研究索引</a>；<a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes/blob/main/OPEN-QUESTIONS.md">OQ状态池</a>；<a href="/heroes-portal/book/research-notes/prestige-pipeline-authorial-continuity-026.html">Prestige Pipeline</a>；<a href="/heroes-portal/book/research-notes/media-selection-survivorship-and-denominator-protocol-028.html">Media Survivorship Protocol</a>。</li>
+</ul>
+<p>本文件仅研究公开行业/学术材料和抽象制度机制，不转写任何私人项目的产品决策、设计或竞争信息。</p>
+<h2 id="9-2026-10-09">9. 2026-10-09｜补充边界：从“仿制伟大”到高能力同质化竞争</h2>
+<p><a href="/heroes-portal/country-studies/china/033-technology-proxies-experience-demand-and-commercial-feedback.html#11-2026-10-09高能力同质化陷阱技术追赶成功如何与内部竞争失序并存">中国033 §11：高能力同质化陷阱</a>新增一个不同层次的<strong>可证伪命题</strong>：当公开知识与工程能力使大量企业能迅速进入已经验证的产品方向时，资本、政策或认知层面的共同选择，可能让技术能力越强、同一产品的后发竞争越激烈，企业利润与差异化空间越受挤压。</p>
+<p>这不是“学习、模仿一定有害”，也<strong>不是“竞争激烈证明国民缺乏原创能力”</strong>。必须分开 <code>COGNITIVE_CONVERGENCE</code>（认知评价趋同）、<code>INCENTIVE_CONVERGENCE</code>（投资/政策/渠道诱导趋同）、<code>CAPABILITY_REPLICATION</code>（工程复现能力扩散）、<code>EXIT_FRICTION</code>（退出与需求约束）。这四者即使产生相似的价格战结果，也需要不同证据；消费者低价收益与企业利润损失也不能混为同一福利方向。</p>
+<p>IMF 2026中国第四条磋商支持“某些制造业领域技术进步与过度投资/供给并存”的宏观事实，但<strong>不直接证明中国游戏产业存在同等机制</strong>；WIPO专利资料也说明合法公开知识学习与盗取商业秘密须分开。完整来源、反对意见及指标请使用中国033 §11，不在此复制第二份证据主档；经验效果量仍未知，见<a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes/blob/main/OPEN-QUESTIONS.md">OQ-021</a>。</p>
+<hr />
+<h2 id="10-2026-10-09">10. 2026-10-09｜事前发现的价值，不等于事后证明的成功</h2>
+<p>继<a href="/heroes-portal/country-studies/china/033-technology-proxies-experience-demand-and-commercial-feedback.html">中国033 §12</a>的三种需求发现和研发实物期权区分，“仿制伟大”研究增补一项机制：<strong>如果评价者只肯在产品取得成功之后承认其设计判断，那么尚未出现同类成功先例的原创目标，便可能在事前被系统性低估。</strong></p>
+<p>不能把三个东西相互替代：EX_ANTE_DESIGN_JUDGMENT（事前、带预测的方案判断）；AUTHOR_EXECUTION_CAPABILITY（组织生产和完成作品）；EX_POST_MARKET_OUTCOME（事后玩家认可、销量和利润）。商业结果是有效现实反馈，但不是对所有先验决策质量的万能考试答案；未获商业验证的想法也不因此自动优秀。</p>
+<p>另须警惕三种不同的原创性被混为一个排名：文化/叙事表达、交互规则、产品范式。现成技术、玩法语法的继承可以帮助创造真正不同的产品，文化表达的独特性也不自动等于发明新玩法。</p>
+<p><strong>需要检验的行为</strong>：在可玩物料、市场假设和成本相同的前提下，随机改变方案的作者身份/既有成功声望，评审是否改变推荐；事前记录其对玩家体验和需求的预测，并与实际测试和商业结果对照。必须包含未通过与后来成功的反例；不从几位著名成功者推总体频率。这是OQ-017和OQ-018的交叉，而不是新的国别定论。</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / country-studies/china/028-imitation-of-greatness-prestige-copying-and-authorial-judgment.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

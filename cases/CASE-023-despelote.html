@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CASE-023 — despelote / Julián Cordero + Sebastián Valbuena · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl class="on"" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#why-this-case" class="t2">Why this case</a><a href="#1-myth" class="t2">1. Myth</a><a href="#2-origin" class="t2">2. Origin</a><a href="#julian-cordero" class="t3">Julián Cordero</a><a href="#sebastian-valbuena" class="t3">Sebastián Valbuena</a><a href="#3-capability" class="t2">3. Capability</a><a href="#4-runway" class="t2">4. Runway</a><a href="#5-production" class="t2">5. Production</a><a href="#6-scope" class="t2">6. Scope</a><a href="#_1" class="t3">原本预计约一年，最终约七年</a><a href="#7-failure-near-death-points" class="t2">7. Failure / Near-death points</a><a href="#_2" class="t3">资金耗尽</a><a href="#_3" class="t3">早期正反馈反而诱发过度野心</a><a href="#_4" class="t3">设计反复</a><a href="#8-market" class="t2">8. Market</a><a href="#9-environment" class="t2">9. Environment</a><a href="#_5" class="t3">有利条件</a><a href="#_6" class="t3">约束</a><a href="#10-luck" class="t2">10. Luck</a><a href="#11-verdict" class="t2">11. Verdict</a><a href="#strongly-supported" class="t3">STRONGLY SUPPORTED</a><a href="#supported-with-boundary" class="t3">SUPPORTED WITH BOUNDARY</a><a href="#unknown" class="t3">UNKNOWN</a><a href="#12-transfer" class="t2">12. Transfer</a><a href="#13-non-transfer" class="t2">13. Non-transfer</a><a href="#14-evidence-index" class="t2">14. Evidence Index</a><a href="#15-open-questions" class="t2">15. Open Questions</a></aside><article class="doc"><div class="col"><h1 id="case-023-despelote-julian-cordero-sebastian-valbuena">CASE-023 — despelote / Julián Cordero + Sebastián Valbuena</h1>
+<ul>
+<li>Case ID: CASE-023</li>
+<li>Subject: despelote / Julián Cordero + Sebastián Valbuena</li>
+<li>Period covered: 2018–2025</li>
+<li>Research status: RESEARCHING</li>
+<li>Last verified: 2026-10-04</li>
+<li>Related Claims: C002, C004, C010, C011</li>
+</ul>
+<h2 id="why-this-case">Why this case</h2>
+<p class="dc"><code>despelote</code> 的价值不在于证明“grant 能做出好游戏”，而在于它提供了一条少见、可逐段核验的<strong>资金阶梯</strong>：</p>
+<blockquote>
+<p>学生 thesis / 小规模原型 → NYU Incubator 的时间、行业接触与 advisor network → 资金耗尽 / freelance 生存 → Microsoft DAP grant 恢复全职 → vertical slice → publisher pitch → Panic 融资与发行外围 → 完成七年项目。</p>
+</blockquote>
+<p>开发者本人明确说，DAP grant 来在开发资金耗尽、团队已经需要接 freelance 付账单的节点；grant 让他们重新全职，并完成最终成功的 publisher-pitch vertical slice。因此本案允许把“non-dilutive funding 的价值”从抽象补助金额，推进到<strong>它购买了哪一段生产状态、制造了什么下一阶段资产</strong>。</p>
+<h2 id="1-myth">1. Myth</h2>
+<p>最容易出现的简化叙事有两种：</p>
+<ol>
+<li><strong>“两个厄瓜多尔年轻人做了七年个人作品，然后被 Panic 看中。”</strong></li>
+<li><strong>“拿到政府 / Microsoft grant，所以把游戏做完。”</strong></li>
+</ol>
+<p>两者都把真实资金链压扁了。</p>
+<p>实际过程更接近多次 runway bridge：早期教育/孵化环境帮助原型获得行业接触；项目数次获得外部小额或阶段性支持；钱仍然会用完；团队需要 freelance；随后新的 grant 购买一段全职时间，这段时间不是直接“完成游戏”，而是生产一个可融资的 vertical slice；Panic 才成为把项目真正推进到长期全职制作与多平台发行的关键下一层。</p>
+<h2 id="2-origin">2. Origin</h2>
+<h3 id="julian-cordero">Julián Cordero</h3>
+<ul>
+<li>出生、成长于 Quito，18 岁后前往纽约学习 game design；</li>
+<li>NYU Game Center BFA ’19；</li>
+<li><code>despelote</code> 起源于其大学 thesis / capstone 时期；</li>
+<li>在此之前，他已有学生作品 <code>levedad</code>，并获得 2019 IGF Best Student Game finalist / Nuovo honorable mention，说明正式做 <code>despelote</code> 时并非第一次完成和公开展示交互作品。</li>
+</ul>
+<h3 id="sebastian-valbuena">Sebastián Valbuena</h3>
+<ul>
+<li>Cordero 在 Quito 成长时期就熟悉 Valbuena 的视觉与音乐创作；</li>
+<li>Valbuena 加入 <code>despelote</code> 时没有 videogame production 经验，但已有动画、插画和音乐能力；</li>
+<li>因此这不是“两名相同技能的游戏开发者”，而是<strong>已有游戏设计/编程训练 + 已有独立视觉/音乐作者能力</strong>的互补组合。</li>
+</ul>
+<h2 id="3-capability">3. Capability</h2>
+<p>本案的 capability formation 有三层：</p>
+<ol>
+<li><strong>学校与旧作</strong>：Cordero 在 NYU 的游戏设计教育、prototype / thesis 训练与 <code>levedad</code> 前作；</li>
+<li><strong>互补作者能力</strong>：Valbuena 的 2D animation / illustration / music 并非游戏行业履历，却成为项目最难替代的视觉与声音 identity；</li>
+<li><strong>外围专业能力逐步加入</strong>：Ian Berman（sound design）、Gabe Cuzzillo（production / level design）、Niall Tessier-Lavigne（additional design/programming）等把“两人核心”包围在更宽的专业 contributor network 中。</li>
+</ol>
+<p>Unity 对开发过程的回顾还显示：团队没有简单追求传统 3D realism，而是把 Quito 实地照片/扫描、Valbuena 的 2D 画风和 shader 结合，形成与小团队能力结构匹配的表现方案。</p>
+<h2 id="4-runway">4. Runway</h2>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>Runway / support</th>
+<th>已知口径</th>
+<th>证据</th>
+<th>当前判断</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>学生 / thesis 阶段</td>
+<td>NYU 教育环境</td>
+<td>tuition / personal living support 未核</td>
+<td>E002, E005</td>
+<td>能力与初始制作环境，不视为“免费开发”</td>
+</tr>
+<tr>
+<td>2019</td>
+<td>NYU Game Center Incubator</td>
+<td>program 明确提供 support / industry advisors；当届具体现金口径待核</td>
+<td>E002</td>
+<td>时间、行业接触、pitch/商业能力入口</td>
+</tr>
+<tr>
+<td>2021</td>
+<td>Ecuador IFCI “Producción de Videojuegos”</td>
+<td>官方：每个获奖项目 USD 10,000；决议列 Julián Cordero Dávalos / Despelote 为受益项目</td>
+<td>E003</td>
+<td>小额 non-dilutive runway</td>
+</tr>
+<tr>
+<td>DAP 阶段</td>
+<td>ID@Xbox Developer Acceleration Program</td>
+<td>金额未公开</td>
+<td>E001</td>
+<td>资金耗尽后的关键 bridge；恢复 full-time，并制作 publisher-pitch vertical slice</td>
+</tr>
+<tr>
+<td>Panic 阶段</td>
+<td>publisher financing + publishing perimeter</td>
+<td>合同金额/recoup/分成未公开</td>
+<td>E004, E006</td>
+<td>使团队进入稳定 full-time，并承担 marketing / ports / distribution 外围</td>
+</tr>
+</tbody>
+</table>
+<p>Sebastián Valbuena 2026 年回顾说，厄瓜多尔公共资金约 USD 10,000，甚至不到总投入的 10%；这与官方 IFCI 每项目 10,000 美元额度吻合。但<strong>不能据此精确反推总预算</strong>，因为“不到 10%”只是范围性自述，且总投入可能包含 publisher spend、labor valuation、ports 等不同口径。</p>
+<h2 id="5-production">5. Production</h2>
+<p>“Julián + Sebastián 两个人做了游戏”只能描述作者核心，不能描述完整 production boundary。</p>
+<p>官方 presskit / credits 至少明确：</p>
+<ul>
+<li>Julián Cordero — design / programming；</li>
+<li>Sebastián Valbuena — art / music；</li>
+<li>Gabe Cuzzillo — production / therapy / level design；</li>
+<li>Ian Berman — sound design；</li>
+<li>Niall Tessier-Lavigne — additional design / programming；</li>
+<li>还有 additional programming、casting、Quito production、recording、3D cleanup、localization / QA / ports / publisher staff 等更外围角色。</li>
+</ul>
+<p>因此本案应描述为：<strong>双作者核心 + 数个关键专业协作者 + publisher / porting / marketing perimeter</strong>。</p>
+<h2 id="6-scope">6. Scope</h2>
+<h3 id="_1">原本预计约一年，最终约七年</h3>
+<p>Cordero 回顾说项目 2018 年开始，早期预期不会超过一年；最终开发约七年，其中大约后面三年更接近 full-time。</p>
+<p>这里不是简单的“scope creep = 多做内容”。团队很早就找到：</p>
+<ul>
+<li>球的 physical interaction；</li>
+<li>Quito 的视觉语言；</li>
+<li>人物与空间 atmosphere。</li>
+</ul>
+<p>真正长期未解决的是<strong>“这到底如何成为一个完整游戏”</strong>：叙事弧、世界如何推进、玩家自由游荡和结构如何共存。Cordero 说理解 narrative / arc / mechanics-world integration 花了大约五年。</p>
+<p>Unity 的 postmortem 给出一个具体结构突破：传统 objective / task list 破坏他们想要的童年自由感，后来用手表 / 时间推进规则让世界无论玩家在哪里都会继续，这才让 playtest 出现明显“before / after”。</p>
+<p>所以七年不是七年线性 content production，而是大量时间花在<strong>找到正确的产品问题定义</strong>。</p>
+<h2 id="7-failure-near-death-points">7. Failure / Near-death points</h2>
+<h3 id="_2">资金耗尽</h3>
+<p>最明确的 near-death point 来自 Cordero 自述：开发资金用完后，他们必须接 freelance 来支付账单，意味着项目事实上从 full-time 状态退回到碎片化制作。</p>
+<p>Microsoft DAP grant 的作用因此非常具体：</p>
+<blockquote>
+<p>不是“让他们富起来”，而是把项目从 freelance-survival 状态重新切回 full-time search / production 状态。</p>
+</blockquote>
+<h3 id="_3">早期正反馈反而诱发过度野心</h3>
+<p>Cordero 也指出，早期 prototype 很快得到积极反馈，使团队在并不知道完整制作代价时变得非常 ambitious。换言之，早期 validation 既是资产，也可能让团队错误估计 scope。</p>
+<h3 id="_4">设计反复</h3>
+<ul>
+<li>一度设想几乎没有 dialogue；</li>
+<li>尝试过 documentary interviews；</li>
+<li>后来才找到环境式、重叠式生活对话；</li>
+<li>narrative structure 长期不稳定。</li>
+</ul>
+<p>这使本案成为一个反例：<strong>prototype hook 很强，并不代表“剩下只是 execution”。</strong></p>
+<h2 id="8-market">8. Market</h2>
+<p>市场接入从很早就嵌进制作过程：</p>
+<ul>
+<li>NYU student showcases / IGF / Game Devs of Color 等提供早期公开展示；</li>
+<li>2019 NYU Incubator 提供 industry advisor network；</li>
+<li>Cordero 明确说，正是在 Incubator 认识当时 ID@Xbox 的 Sarah Conde，后者告知团队 DAP；</li>
+<li>DAP grant 被用于制作 publisher pitch vertical slice；</li>
+<li>Panic 表示从第一次 pitch 就被项目吸引，之后成为正式 publisher；</li>
+<li>Panic 后续承担/协助宣传、marketing、platform ports 与多平台发行；</li>
+<li>2023 Tribeca、Day of the Devs 等进一步形成 release 前市场接入；</li>
+<li>2025 正式多平台发行。</li>
+</ul>
+<p>因此“Panic 偶然发现了一个成品”是不准确的。更像是：<strong>学校/孵化器网络 → grant relationship → pitch asset → publisher → festival / platform release</strong> 的连续 market-production pipeline。</p>
+<h2 id="9-environment">9. Environment</h2>
+<p>本案同时跨两个环境：Quito 的文化/生产来源与 New York 的教育/产业接入。</p>
+<h3 id="_5">有利条件</h3>
+<ul>
+<li>NYU Game Center 提供训练、同行、展示、Incubator 与 industry advisors；</li>
+<li>Microsoft DAP 为 underrepresented / emerging-market creators 提供 non-dilutive support；</li>
+<li>Ecuador IFCI 提供本国公共文化资金；</li>
+<li>Panic 提供成熟国际发行外围；</li>
+<li>Unity / photogrammetry / shader workflow 让小团队把高度具体的 Quito 记忆转换成可承担的 production style。</li>
+</ul>
+<h3 id="_6">约束</h3>
+<ul>
+<li>Valbuena 认为 Ecuador 本土 game industry 几乎不存在，难以依赖成熟本地产业链；</li>
+<li>跨国协作与实地采集增加协调成本；</li>
+<li>小额 grant 可以桥接阶段，却不能替代长期完整预算；</li>
+<li>项目对具体文化的坚持反而同时构成融资风险与 differentiation asset。</li>
+</ul>
+<h2 id="10-luck">10. Luck</h2>
+<p>幸运因素包括：</p>
+<ul>
+<li>prototype 很早得到强反馈；</li>
+<li>在 Incubator 恰好遇到能把项目导向 DAP 的行业 advisor；</li>
+<li>grant 在资金耗尽节点出现；</li>
+<li>publisher 对高度地方性的作品有兴趣；</li>
+<li>2020s publisher / platform 生态对 underrepresented / culturally specific work 存在明确支持窗口。</li>
+</ul>
+<p>但这些并非纯随机“中奖”：团队已经有可玩的 prototype、公开展示历史和足以让 funding / publisher 判断的具体作品资产。</p>
+<h2 id="11-verdict">11. Verdict</h2>
+<h3 id="strongly-supported">STRONGLY SUPPORTED</h3>
+<ul>
+<li><code>despelote</code> 不是“一次融资完成开发”，而是多阶段 runway bridge；</li>
+<li>DAP grant 的直接作用是把开发者从 freelance survival 拉回 full-time，并购买制作 publisher-pitch vertical slice 的时间；</li>
+<li>这个 vertical slice 后续 publisher pitch 成功，因此 grant → publisher 之间存在可观察的中间生产机制；</li>
+<li>Panic 是完成长期 production 与国际发行的重要条件，而非仅在成品完成后负责宣传；</li>
+<li>“七年开发”里包含长期 design search，不是七年稳定执行既定 specification。</li>
+</ul>
+<h3 id="supported-with-boundary">SUPPORTED WITH BOUNDARY</h3>
+<ul>
+<li>NYU Incubator 的 advisor network 对后续 DAP access 有直接连接；</li>
+<li>Ecuador IFCI USD 10,000 是真实 non-dilutive support，但只是整个资金结构的一小部分；</li>
+<li>highly specific cultural identity 似乎帮助 pitch / funding differentiation，但无法从单案证明“越地方越容易融资”。</li>
+</ul>
+<h3 id="unknown">UNKNOWN</h3>
+<ul>
+<li>Microsoft DAP grant 精确金额与支付时间；</li>
+<li>Panic 签约日期、advance、milestone、recoup、revenue share；</li>
+<li>NYU Incubator 2019 对本队的精确现金 stipend；</li>
+<li>七年期间个人储蓄、家庭支持与 freelance 收入；</li>
+<li>总 budget 的统一会计口径。</li>
+</ul>
+<h2 id="12-transfer">12. Transfer</h2>
+<p>本案可迁移的不是“去申请某个 grant”，而是一条融资资产链：</p>
+<ol>
+<li><strong>让每一笔小钱生产下一阶段可融资资产</strong>：DAP grant 最重要的产物不是最终游戏，而是能通过 publisher due diligence 的 vertical slice；</li>
+<li><strong>把 incubator 当 network infrastructure，不只当现金来源</strong>：advisor introduction 可能比 stipend 本身更具长期价值；</li>
+<li><strong>资金耗尽时降低 burn，而不是把项目死亡和兼职混为一谈</strong>：freelance 是 bridge，但会降低项目 search bandwidth；</li>
+<li><strong>pitch 前先把作品的不可替代性做成可体验证据</strong>：Panic 的公开说法强调第一次 pitch 就能感受到项目的具体时间、地点与 universal resonance；</li>
+<li><strong>publisher 的价值应按外围职能计价</strong>：finance、marketing、ports、platform relations、distribution 都是 production capacity，不只是 logo 和曝光；</li>
+<li><strong>强 prototype ≠ execution solved</strong>：最难的问题可能是结构、叙事、scope convergence，而不是核心 interaction。</li>
+</ol>
+<h2 id="13-non-transfer">13. Non-transfer</h2>
+<ul>
+<li>NYU 教育/Incubator 网络是具体制度资产，不是任何团队自动拥有；</li>
+<li>DAP 有 eligibility / cohort / platform policy，不是无限可复制资金；</li>
+<li>Panic 的审美、portfolio strategy 与当期资金能力无法复制；</li>
+<li><code>despelote</code> 的文化差异化与作者生活史是高度特异资产；</li>
+<li>七年开发本身不是成功策略，长期未收敛同样可以导致项目死亡；</li>
+<li>grant→publisher 的这条成功链存在幸存者偏差，需要补“拿 grant 但没签 publisher / 没完成”的失败对照。</li>
+</ul>
+<h2 id="14-evidence-index">14. Evidence Index</h2>
+<ul>
+<li>E001 — Microsoft DAP Spotlight / Cordero direct interview：资金耗尽→freelance→grant→full-time→publisher-pitch vertical slice→successful pitch。</li>
+<li>E002 — NYU Game Center 2019 Incubator：despelote 入选；Incubator 的 support / advisor network。</li>
+<li>E003 — Ecuador IFCI 2021 official resolution + program announcement：Julián Cordero Dávalos / Despelote 获 Production of Video Games funding；每项目 USD 10,000。</li>
+<li>E004 — Panic / PlayStation 2023 announcement：publisher 明确称从 first pitch 就被项目吸引；正式公开 publisher relationship。</li>
+<li>E005 — NYU / IGF records：Cordero BFA ’19；前作 levedad 已有公开完成与 award history。</li>
+<li>E006 — official despelote presskit / credits：core team、professional collaborators、Panic perimeter。</li>
+<li>E007 — Unity 2025 Cordero interview：长期 design search、visual production method、watch/time structural breakthrough。</li>
+<li>E008 — 2025/2026 Ecuador/CNN interviews：2018 起步、约七年、仅后约三年 full-time；Microsoft→Ecuador fund→Panic 资金阶梯与 USD 10k 公共资金边界。</li>
+</ul>
+<h2 id="15-open-questions">15. Open Questions</h2>
+<ol>
+<li>DAP grant 到底是多少？其 award / payment date 能否从 Microsoft / Xbox 记录中确定？</li>
+<li>Panic 何时第一次收到 pitch、何时签 term sheet / publishing agreement？公开 announcement（2023-05）显然晚于内部谈判。</li>
+<li>vertical slice 的具体内容、制作周期、成本、与此前 public prototype 有什么差异？</li>
+<li>Panic 提供的 advance 与 ports / marketing / QA / localization 等 in-kind support 应如何拆开？</li>
+<li>2019 NYU Incubator 对 despelote 团队的 exact stipend 与其他资源能否核到当届协议？</li>
+<li>2021 IFCI 的 USD 10,000 在实际时间线上支付于何时，具体支付了哪些 milestone？</li>
+<li>最重要的失败对照：同届 NYU Incubator / DAP / IFCI 获资助但没有签 publisher 或没有发售的项目，发生了什么？</li>
+</ol><div class="crumbs"><a href="/heroes-portal/">书阁</a> / cases/CASE-023-despelote.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

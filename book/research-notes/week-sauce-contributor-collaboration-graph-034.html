@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>034 — 谁和谁真的又合作过？Week Sauce 2022 人物—作品—团队证据图 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl class="on"" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#_1" class="t2">一、先确认观察单位：作品、账号、贡献者、工作室不能互换</a><a href="#2022snails-in-peril2023the-sip-of-life2024-jam" class="t2">二、链一：2022《Snails in Peril》→2023《The Sip of Life》→2024 Jam</a><a href="#2022the-cure2023dyscophus" class="t2">三、链二：2022《THE CURE》→2023《Dyscophus》，至少四位同名合作者重聚</a><a href="#_2" class="t2">四、两个必要的反对照：同一团队品牌未必是同一批人；同一作者可以更换同伴</a><a href="#_3" class="t2">五、不能偷换成团队成活率，下一轮该做什么</a><a href="#_4" class="t2">核心原始材料</a></aside><article class="doc"><div class="col"><h1 id="034-week-sauce-2022">034 — 谁和谁真的又合作过？Week Sauce 2022 人物—作品—团队证据图</h1>
+<ul>
+<li>Status: PUBLIC-CREDIT GRAPH / BOUNDED LONGITUDINAL STUDY / NOT A TEAM-SURVIVAL RATE</li>
+<li>核查日期：2026-10-07</li>
+<li>上游：<a href="/heroes-portal/book/research-notes/public-unfeatured-week-sauce-apr-2022-cohort-031.html">031：18 项公开提交的完整名册</a>；<a href="/heroes-portal/book/research-notes/week-sauce-2022-public-creator-followup-033.html">033：18 个主提交账号的公开后续</a></li>
+<li>范围：独立游戏公开作品，不改中国与斯拉夫研究；不新增 Case / Claim。</li>
+<li>选择说明：原始样本仍是 18 个投稿。本轮只深核其中署名足够明确、后续作品可找到 dated credits 的四条链。它们是 <strong>evidence-rich qualitative subsample</strong>，不是随机抽取，更不是 4/18 团队延续率的分子。</li>
+</ul>
+<h2 id="_1">一、先确认观察单位：作品、账号、贡献者、工作室不能互换</h2>
+<p class="dc">一个 Jam 页面至少有四种不同关系：一部作品被某账号提交；页面列出多个作者账号；正文 credits 记录具有特定岗位的人或别名；数年后另一作品又有账号与岗位署名。</p>
+<p>前两项只能证明<strong>账号关联</strong>，不自动证明实名身份、劳动角色和雇佣关系。两部独立作品里直接列出同一批人名和岗位，才有资格谈他们再次共同创作。一个品牌账号仍然发作品，不意味着原来的程序、美术、测试员仍在。</p>
+<p>采用下列可复用关系边：</p>
+<table>
+<thead>
+<tr>
+<th>Edge</th>
+<th>需要的证据</th>
+<th>可说什么</th>
+<th>不可说什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A — SAME NAMED CONTRIBUTORS / DATED REPEAT</strong></td>
+<td>两部独立作品的原始 credits 明确重复人名，后作有年份或日期</td>
+<td>特定具名贡献者再合作、岗位如实变化</td>
+<td>全时雇佣、连续多年未中断、分享收入</td>
+</tr>
+<tr>
+<td><strong>B — SAME PUBLIC COAUTHOR ACCOUNTS</strong></td>
+<td>两作 Authors 栏复现原作者账号，后作有年份</td>
+<td>相同公开作者账号又共同署名</td>
+<td>仅靠位置顺序给每个账号绑定具体自然人</td>
+</tr>
+<tr>
+<td><strong>C — SAME PUBLISHER ACCOUNT</strong></td>
+<td>原发布账号后来有日期明确的新作</td>
+<td>发布账号后续仍有作品</td>
+<td>2022 全部成员都做了2025新作</td>
+</tr>
+<tr>
+<td><strong>D — PRODUCT-LINEAGE CANDIDATE</strong></td>
+<td>名称、机制、关联发布网络相似，但欠缺开发者原型谱系声明</td>
+<td>值得核实的产品谱系假设</td>
+<td>宣布 Jam 原型已经商业化且获利</td>
+</tr>
+<tr>
+<td><strong>UNKNOWN</strong></td>
+<td>后续 credits 缺失、网页失效、未发现直接关系</td>
+<td>当前未核实</td>
+<td>已散伙、退出行业、从未再做游戏</td>
+</tr>
+</tbody>
+</table>
+<p>评分对象是<em>公开的关系证据</em>，不是对人的能力评判。除非有直接披露，所有路径的家庭支出、薪酬、合同、法人关系、持续就业均 UNKNOWN。</p>
+<h2 id="2022snails-in-peril2023the-sip-of-life2024-jam">二、链一：2022《Snails in Peril》→2023《The Sip of Life》→2024 Jam</h2>
+<p><strong>2022 具名团队。</strong> <a href="https://zeyt8.itch.io/snails-in-peril">Snails in Peril</a> 原始 credits 为：Bogdan Foca（gameplay programmer、level design），Jonte Herben（3D artist），Cosmin Anton（level design）。Authors 栏另列 Zeyt8、TheDarkVoice、blueTimber 三个公开账号；<strong>不靠列表顺序</strong>将账号逐一猜配到三个实名。</p>
+<p><strong>2023 三人再次具名。</strong> <a href="https://zeyt8.itch.io/the-sip-of-life">The Sip of Life</a> 署名为 Bogdan Foca（gameplay programmer）、Jonte Herben（tech artist、level design）、Cosmin Anton（gameplay programmer），另有 Cristina Ciocaru（2D artist）。页面保留 <strong>2023-04-04</strong> 的 Finished release / map background rework 开发日志。这是三位具名合作者跨两款作品的 <strong>A级重复合作证据</strong>，不是仅仅共用品牌。职务写法改变不等于确定他们在这一年才学会另一项技能。</p>
+<p><strong>2024 账号复合。</strong> <a href="https://zeyt8.itch.io/dont-shake-the-babies">Don&rsquo;t shake the babies</a> 的 Authors 再次出现 Zeyt8、blueTimber、TheDarkVoice，并直接链接 Global Game Jam 2024。这是 <strong>B级同组账号又共同署名</strong>；作品页没有像2022、2023那样逐一给出真人职责，因此不得向上升级为三名具名作者在2024必然以相同岗位开发。</p>
+<p><strong>2025 制作谱系现已获开发者本人确认。</strong> 先前 034 只能看到2024《Don&rsquo;t shake the babies》与2025《Shake the Baby!》名字、捡取/合并/投掷机制高度吻合，以及 Zeyt8 主页主动链接 Ivories Studios Steam。那时将其归为未核假说是正确的。</p>
+<p>新增的一手材料改变了结论：<a href="https://steamraw.com/app/1637520/the-handbook/">2024-12-06 Zeyt8 官方 Steam 开发者公告（带作者/日期的记录）</a>明确回顾，团队参加 GGJ 时开始制作后来成为第二款正式游戏的原型，后来拿到当地开发者社群获得反馈并继续开发；<a href="https://www.reddit.com/r/Games/comments/1jnjxt1/shake_the_baby_ivories_studios_old_school_first/">2025 发售周开发成员一人称复盘</a>进一步明确2024 GGJ 的原型就是该商业作品的前身，提到可组合模块、带到本地 indie meetups、约一年扩充和正式发售。正式 <a href="https://store.steampowered.com/app/3182600/Shake_the_Baby/">Steam 游戏页</a>确认<strong>2025-03-27</strong>发售，由 Ivories Studios 开发发行。</p>
+<p>故原型到正式版的<strong>产品制作谱系</strong>已从相似性假说升级为 <strong>CREATOR-CONFIRMED PRODUCT LINEAGE</strong>，正式权威材料见<a href="/heroes-portal/cases/CASE-063-ivories-ggj-to-steam.html">CASE-063</a> 与其 <a href="/heroes-portal/evidence/CASE-063-ivories-ggj-to-steam-source-ledger.html">E001–E007 Evidence Ledger</a>。但开发者没有在这些记录中提供2025版逐人 credits、开发预算、工时与利润；<strong>2022那三名署名者是否逐一获得2025收益仍然完全未知</strong>。少量 Steam 评论不能换算销量或回本。</p>
+<p>从这一链能看到的是：2022 的三人作者性不是只能由一个小项目证明；2023 的确有重复具名合作；2024 延续为重复账号关联；2025 的同一生产谱系已由开发者直接确认商业发售；2022各人是否参加2025、项目回本与否仍未核实。每段证据强度不同。</p>
+<h2 id="2022the-cure2023dyscophus">三、链二：2022《THE CURE》→2023《Dyscophus》，至少四位同名合作者重聚</h2>
+<p>2022 <a href="https://juliehirt.itch.io/the-cure-peculiar-pestilence">THE CURE: Peculiar Pestilence</a> 的制作 credits 同时列出设计、编程、制作、美术、音乐、SFX、音频集成；团队约定每人按照自己的生活安排投入至多七个工作日，另有 weekly stand-up。<strong>七天日历活动不是整个项目七个人日</strong>。</p>
+<p>2023 年 7 月同一 Week Sauce 系列的 <a href="https://azurecoffin.itch.io/dyscophus">Dyscophus</a> 明确列出15位贡献者；与2022原作有以下<strong>四位完全相同的具名署名</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>原作 2022 credits</th>
+<th>2023 新作 credits</th>
+<th>可证实结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SJ Singh — Character Artist</td>
+<td>SJ Singh — Art and Production</td>
+<td>再次具名，同一人名承担不同范围署名</td>
+</tr>
+<tr>
+<td>Shane Bergeron — Programmer</td>
+<td>Shane Bergeron — Programming</td>
+<td>同名同类专业贡献再现</td>
+</tr>
+<tr>
+<td>Angela Geiss — SFX Design</td>
+<td>Angela Geiss — Audio Design and Implementation</td>
+<td>音频领域具名贡献再现</td>
+</tr>
+<tr>
+<td>Will Edmisten — SFX Integration</td>
+<td>Will Edmisten — Audio</td>
+<td>音频领域具名贡献再现</td>
+</tr>
+</tbody>
+</table>
+<p>此外 2022 发布者账号 JulieHirt 也出现在 2023 Dyscophus Authors 中；但2022作品正文把对应程序员写成 <strong>Julie Bodette</strong>，2023署名为 <strong>Julie Hirt</strong>。只确认账号层连续性；<strong>未获本人直接身份说明前，不自行将不同姓名强行视为同一真实身份证明</strong>。即使名字的确发生更动，也不需要挖掘原因。</p>
+<p>这里至少有四位直接同名成员的 <strong>A级合作重现</strong>，另有一个公开账号级别的重复关系。这没有证明二十来位原作所有贡献者继续留在同一工作室，更不能推算“合作稳定率”。</p>
+<p><strong>2025 是不同合作者继续加入的下一层证据。</strong> JulieHirt 又发布 <a href="https://juliehirt.itch.io/youre-cooked">You&rsquo;re Cooked</a>，清楚列出 Julie Hirt（programmer）、CurlPixel（art）、Jon Dare（music/SFX）、Aurii 和 Astor the Dev（programmers）；并发布 2025 Global Game Jam 六人作品 <a href="https://globalgamejam.org/games/2025/superbubble-parkour-5">SuperBubble Parkour</a>。它显示同一公开作者账户在不同年份与不同合作网络制作作品，不能替2022所有成员证明存续。</p>
+<p><strong>与“独立游戏通常只有最初的合伙人”不同，Jam 的流动社群可以让旧同伴重聚，又允许新伙伴进入；公开记录能识别合作边，不能识别利润和治理边。</strong></p>
+<h2 id="_2">四、两个必要的反对照：同一团队品牌未必是同一批人；同一作者可以更换同伴</h2>
+<p><strong>Lake Monster Games：C级。</strong> <a href="https://lake-monster-games.itch.io/guns-n-roses">2022 Guns N’ Roses</a> credits：Mike 做程序、部分美术与音频，Diana 做美术，Sheila 测试。2025 <a href="https://lake-monster-games.itch.io/cat-fish">Cat Fish</a> 是同一 Lake Monster Games 账号发表、公开关联 Secret Santa Jam 2025，正文却没有列出这三位的对应职责，仅有音乐贡献者 EC/MZ/DZ/NB 缩写。<strong>账号活跃已核，原班成员是否共同做新作 UNKNOWN。</strong></p>
+<p><strong>Alex Garbus：同一贡献者、不同伙伴。</strong> <a href="https://alexgarbus.itch.io/pop-idol-fight">2022 Pop Idol Fight</a> 直接写 Alex Garbus 做编程、Jake Jackman 做美术。2024 <a href="https://xanthus.itch.io/extinguwitch">Extinguwitch</a> 为 Louisville Alt-Ctrl Jam 作品，credits 列 Scott Nalley（特制控制器与玩法程序）、Alex Garbus（模型与 UI 编程）、Edward “EJ” Curtis（玩法程序），其文件有 <strong>2025-01-16</strong> 上传日期。可以证实 Alex 在不同作品中的实际贡献变化，却没有证据表明 Jake 同样参加了后作，更不能推断个人现金回报。</p>
+<p>这两条链说明，<strong>团队延续与个人能力的可复用可以分开发生。</strong></p>
+<h2 id="_3">五、不能偷换成团队成活率，下一轮该做什么</h2>
+<p>18 个 Jam 提交是 project denominator；18 个主投稿账号是 account frame；每个项目可能有多个具名成员、多平台署名和协作者。我们本轮选择 4 个<strong>有足够公开署名与可核后续</strong>的原项目深描，属于定性取样：其它14个仍是 UNKNOWN 的地方不能自动编码为终止。</p>
+<p>建议以后每条关系边至少记：</p>
+<ul>
+<li>原项目与目标项目的两个原始 URL、明确时间锚与取证日期；</li>
+<li>原作者公开使用的姓名/账号和双方具体署名职责；</li>
+<li><strong>A具名重复 / B作者账号重复 / C发布账号重复 / D机制相似假说</strong>，不可混在一个“继续做”布尔值；</li>
+<li>同名冲突、改名可能性、多人同品牌、外部协作者均单独 UNKNOWN；</li>
+<li>项目成果、团队合作、雇佣经济、个人回撤，四项独立编码；</li>
+<li>不以失效页面推断失踪，不为了个人传记填补私人信息。</li>
+</ul>
+<p><strong>2024 GGJ 到2025 Steam 的产品谱系已由 CASE-063 的直接开发者证据确认。</strong> 后续真正未解决的是2024→2025的人手投入、个体 credits、工作室现金流与商业成果；不能以谱系已核反推赚钱。</p>
+<p>对读者有用的实际判断不是“经常做 Jam 就能商业成功”，而是：</p>
+<blockquote>
+<p>一次小型作品留下的人际协作语言与彼此了解，也许可以在下一次创作中重新发挥作用，而<strong>不一定需要提前组建一家长期雇佣、承担固定工资的公司</strong>。</p>
+</blockquote>
+<p>这只是已观察到的可能机制；其发生频率、合同安排、个人时间/工资和商业结果仍然未知。</p>
+<h2 id="_4">核心原始材料</h2>
+<ul>
+<li><a href="https://zeyt8.itch.io/snails-in-peril">2022 Snails in Peril</a> · <a href="https://zeyt8.itch.io/the-sip-of-life">2023 The Sip of Life</a> · <a href="https://zeyt8.itch.io/dont-shake-the-babies">2024 Don&rsquo;t shake the babies</a> · <a href="https://store.steampowered.com/app/3182600/Shake_the_Baby/">2025 Ivories Studios Steam</a> · <a href="/heroes-portal/evidence/CASE-063-ivories-ggj-to-steam-source-ledger.html">正式 E001–E007 来源账本</a></li>
+<li><a href="https://juliehirt.itch.io/the-cure-peculiar-pestilence">2022 THE CURE</a> · <a href="https://azurecoffin.itch.io/dyscophus">2023 Dyscophus</a> · <a href="https://juliehirt.itch.io/youre-cooked">2025 You&rsquo;re Cooked</a></li>
+<li><a href="https://lake-monster-games.itch.io/guns-n-roses">2022 Guns N&rsquo; Roses</a> · <a href="https://lake-monster-games.itch.io/cat-fish">2025 Cat Fish</a></li>
+<li><a href="https://alexgarbus.itch.io/pop-idol-fight">2022 Pop Idol Fight</a> · <a href="https://xanthus.itch.io/extinguwitch">2024/2025 Extinguwitch</a></li>
+</ul>
+<p>研究只使用公开作品 credits 和平台数据，不查私人财务、住址、医疗或家庭关系。</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / book/research-notes/week-sauce-contributor-collaboration-graph-034.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

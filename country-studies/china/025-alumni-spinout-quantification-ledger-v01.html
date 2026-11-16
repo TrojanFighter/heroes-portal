@@ -1,0 +1,954 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>025 — Alumni → Spinout Quantification Ledger v0.1 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl class="on"" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0" class="t2">0. 这份表解决什么</a><a href="#1" class="t2">1. 统一字段</a><a href="#11-spinoutindie" class="t2">1.1 Spinout账本不再承担Indie判断</a><a href="#21-g1-direct-spinouts" class="t2">2.1 已验证G1 direct spinouts</a><a href="#activision-1979" class="t3">Activision — 1979</a><a href="#imagic-1981" class="t3">Imagic — 1981</a><a href="#videa-sente-198182" class="t3">Videa → Sente — 1981/82</a><a href="#22-g2-serial-founder" class="t2">2.2 G2 / serial-founder</a><a href="#accolade-1984" class="t3">Accolade — 1984</a><a href="#sterling-silver-polygames" class="t3">Sterling Silver / Polygames</a><a href="#23-v01-lower-bound" class="t2">2.3 v0.1 lower bound</a><a href="#_1" class="t3">解释</a><a href="#31-direct-spinout" class="t2">3.1 已验证direct spinout</a><a href="#irrational-games-1997" class="t3">Irrational Games — 1997</a><a href="#floodgate-entertainment-2000" class="t3">Floodgate Entertainment — 2000</a><a href="#32-direct-spinout" class="t2">3.2 不计入direct-spinout但必须记录的扩散</a><a href="#harmonix" class="t3">Harmonix</a><a href="#otherside-entertainment" class="t3">OtherSide Entertainment</a><a href="#33-v01-lower-bound" class="t2">3.3 v0.1 lower bound</a><a href="#_2" class="t3">重要修正</a><a href="#41-g1-lower-bound" class="t2">4.1 已验证G1节点 lower bound</a><a href="#arenanet-2000" class="t3">ArenaNet — 2000</a><a href="#flagship-studios-2003" class="t3">Flagship Studios — 2003</a><a href="#carbine-studios-2005" class="t3">Carbine Studios — 2005</a><a href="#bonfire-studios-2016" class="t3">Bonfire Studios — 2016</a><a href="#second-dinner-2018" class="t3">Second Dinner — 2018</a><a href="#dreamhaven-2020" class="t3">Dreamhaven — 2020</a><a href="#frost-giant-2020" class="t3">Frost Giant — 2020</a><a href="#notorious-studios-2021" class="t3">Notorious Studios — 2021</a><a href="#magic-soup-games-2023" class="t3">Magic Soup Games — 2023</a><a href="#42-g2-deeper-descendants" class="t2">4.2 G2 / deeper descendants</a><a href="#arenanet-undead-labs" class="t3">ArenaNet → Undead Labs</a><a href="#arenanet-undead-labs-possibility-space" class="t3">ArenaNet / Undead Labs → Possibility Space</a><a href="#blizzard-north-flagship-runic" class="t3">Blizzard North → Flagship → Runic</a><a href="#43-v01-lower-bound" class="t2">4.3 v0.1 lower bound</a><a href="#_3" class="t3">当前结论</a><a href="#51-g1" class="t2">5.1 已验证G1</a><a href="#ion-storm-1996" class="t3">Ion Storm — 1996</a><a href="#crack-dot-com" class="t3">Crack dot Com</a><a href="#52-serial-founder" class="t2">5.2 serial-founder网络</a><a href="#53-v01-lower-bound" class="t2">5.3 v0.1 lower bound</a><a href="#61-direct-spinout" class="t2">6.1 严格direct-spinout已验证</a><a href="#stray-bombay-2019" class="t3">Stray Bombay — 2019</a><a href="#62-valve" class="t2">6.2 但Valve的主要再生产模式不同</a><a href="#63-v01-lower-bound" class="t2">6.3 v0.1 lower bound</a><a href="#_4" class="t3">方法论价值</a><a href="#71-2013" class="t2">7.1 莉莉丝 — 2013</a><a href="#_5" class="t3">反向外部性</a><a href="#72-2014" class="t2">7.2 游戏科学 — 2014</a><a href="#73-2023" class="t2">7.3 身梦科技 — 2023</a><a href="#74-autogame-2023" class="t2">7.4 AutoGame — 2023</a><a href="#75-2025" class="t2">7.5 沈黎新孵化/投资结构 — 2025</a><a href="#76-v01-lower-bound" class="t2">7.6 v0.1 lower bound</a><a href="#_6" class="t3">当前不能说</a><a href="#_7" class="t3">当前可以说</a><a href="#81-2011" class="t2">8.1 简悦 — 2011</a><a href="#82-seed-games-2025" class="t2">8.2 芥子游戏 / Seed Games — 2025</a><a href="#83-2026" class="t2">8.3 李凯明新公司 — 2026</a><a href="#84-greaterthan-group-2026" class="t2">8.4 GreaterThan Group — 2026</a><a href="#85-v01-lower-bound" class="t2">8.5 v0.1 lower bound</a><a href="#h" class="t3">重要新H</a><a href="#91" class="t2">9.1 “踢踢” / 《微光之镜》</a><a href="#92-haku" class="t2">9.2 鸟鸣啾唧 / HAKU</a><a href="#93" class="t2">9.3 梦熵科技 / 贺甲</a><a href="#94-2026" class="t2">9.4 余洋新团队 — 2026</a><a href="#95-krene-2025" class="t2">9.5 “恶少” / Krene — 2025</a><a href="#96-v01-lower-bound" class="t2">9.6 v0.1 lower bound</a><a href="#_8" class="t3">解释</a><a href="#111-spinout-density-influence-density" class="t2">11.1 SPINOUT DENSITY ≠ INFLUENCE DENSITY</a><a href="#112-serial-founder-intensity-broad-creator-class" class="t2">11.2 SERIAL FOUNDER INTENSITY ≠ BROAD CREATOR CLASS</a><a href="#113-owner-conversion-wave" class="t2">11.3 中国当前真正可能发生结构变化的是OWNER CONVERSION WAVE</a><a href="#p0-senior-alumni-denominator" class="t2">P0 — Senior Alumni Denominator</a><a href="#p0-unique-founder-de-duplication" class="t2">P0 — Unique Founder De-duplication</a><a href="#p0-outcome-cohort" class="t2">P0 — Outcome Cohort</a><a href="#authorial-divergence-rate" class="t3">AUTHORIAL-DIVERGENCE RATE</a><a href="#indie-mode-conversion-rate" class="t3">INDIE-MODE CONVERSION RATE</a></aside><article class="doc"><div class="col"><h1 id="025-alumni-spinout-quantification-ledger-v01">025 — Alumni → Spinout Quantification Ledger v0.1</h1>
+<ul>
+<li>Program: C / 中国国情研究 × Creator Mobility × Creator Class</li>
+<li>Status: <strong>PRELIMINARY LOWER-BOUND LEDGER / DENOMINATOR NOT YET COMPLETE</strong></li>
+<li>As-of: 2026-10-08</li>
+<li>Parent: <a href="/heroes-portal/country-studies/china/024-creator-mobility-spinout-topology-noncompete.html">024 — Creator Mobility &amp; Spinout Topology</a></li>
+<li>Related: <a href="/heroes-portal/country-studies/china/023-creator-class-formation-intergenerational-reproduction.html">023 — Creator Class Formation</a></li>
+<li>Rule: <strong>个案存在不等于数量级相同；无法获得senior-alumni分母时，只报已验证下限，不伪造“创业率”。</strong></li>
+</ul>
+<h2 id="0">0. 这份表解决什么</h2>
+<p class="dc">此前常见叙述会混淆四种完全不同的“后代”：</p>
+<ol>
+<li><code>DIRECT SPINOUT</code>：核心前员工离开母公司，直接创办新工作室；</li>
+<li><code>SERIAL FOUNDER DESCENDANT</code>：同一个前员工在之后继续创办第二/第三家公司；</li>
+<li><code>ALUMNI LANDING</code>：前员工进入已有公司并带去知识，但不是创始人；</li>
+<li><code>DESIGN / CULTURAL DESCENDANT</code>：作品理念受母公司影响，但人员没有直接谱系。</li>
+</ol>
+<p>本表只在第1类上做“spinout node”计数；其余单独记录。</p>
+<p>因此：</p>
+<blockquote>
+<p>Looking Glass影响Arkane ≠ Arkane就是Looking Glass spinout。<br />
+Valve雇佣modder ≠ Valve alumni spinout。<br />
+同一个Romero连续开三家公司 ≠ 三个独立“新创始人”样本。</p>
+</blockquote>
+<h2 id="1">1. 统一字段</h2>
+<p>每个母公司记录：</p>
+<ul>
+<li><code>verified_direct_spinout_nodes_lower_bound</code></li>
+<li><code>unique_alumni_founders_lower_bound</code></li>
+<li><code>serial_founder_nodes</code></li>
+<li><code>shipped_first_title</code></li>
+<li><code>second_title</code></li>
+<li><code>3y_survival</code></li>
+<li><code>second_generation_spinout</code></li>
+<li><code>parent_support</code>: hostile / neutral / supportive / investor / first-client</li>
+<li><code>dominant_reproduction_mode</code>:</li>
+<li>spinout</li>
+<li>alumni landing</li>
+<li>community→professional</li>
+<li>publisher/incubator</li>
+<li>internal entrepreneurship</li>
+<li><code>denominator_quality</code>: none / weak / medium / strong</li>
+</ul>
+<p>当前版本不计算：
+<code>spinout_conversion_rate = founders / senior alumni</code>
+因为绝大多数公司尚无可信senior-alumni总数。</p>
+<h2 id="11-spinoutindie">1.1 Spinout账本不再承担Indie判断</h2>
+<p>025只回答：</p>
+<blockquote>
+<p><strong>母公司是否产生新的产权/创业节点？</strong></p>
+</blockquote>
+<p>它不再从“founder”直接推导“indie creator”。</p>
+<p>详细拆分见：
+- <a href="/heroes-portal/country-studies/china/026-spinout-vs-indie-mode-conversion.html">026 — Spinout ≠ Indie</a></p>
+<p>新增可选字段：
+- <code>spinout_mode</code>: SCALE-CONTINUITY / AUTHORIAL-STUDIO / INDIE-MODE / INFRASTRUCTURE-CAPITAL-TOOL / UNKNOWN；
+- <code>authorial_divergence</code>: HIGH / MEDIUM / LOW / UNKNOWN；
+- <code>indie_mode_affinity</code>: HIGH / MEDIUM / LOW / UNKNOWN；
+- <code>mode_by_phase</code>: 若工作室随年份/项目改变生产方式，必须按阶段记录。</p>
+<p>强制规则：
+- founder-owned ≠ indie；
+- new genre ≠ new objective function；
+- small team ≠ indie；
+- premium ≠ indie；
+- venture-backed ≠ automatically non-indie；
+- 同一studio不可被永久贴一种production-mode标签。</p>
+<hr />
+<h1 id="2-atari-spinout">2. Atari — 高直接spinout、早期级联非常清楚</h1>
+<h2 id="21-g1-direct-spinouts">2.1 已验证G1 direct spinouts</h2>
+<h3 id="activision-1979">Activision — 1979</h3>
+<ul>
+<li>David Crane</li>
+<li>Alan Miller</li>
+<li>Bob Whitehead</li>
+<li>Larry Kaplan
+均为Atari程序员/设计人员出走创办。</li>
+</ul>
+<p>机制：
+- credit + royalty争议；
+- 第三方软件公司；
+- 首批产品成功。</p>
+<p>Sources:
+- https://www.gamedeveloper.com/business/atari-the-golden-years----a-history-1978-1981
+- https://www.atarimagazines.com/v3n2/levy.php</p>
+<h3 id="imagic-1981">Imagic — 1981</h3>
+<p>Atari contingent至少包括：
+- Bill Grubb
+- Dennis Koble
+- Rob Fulop
+- Bob Smith
+及其他成员，与Mattel人员共同创办。</p>
+<p>Source:
+- https://www.atarihq.com/othersec/library/imagic.html</p>
+<h3 id="videa-sente-198182">Videa → Sente — 1981/82</h3>
+<ul>
+<li>Howard Delman</li>
+<li>Roger Hector</li>
+<li>Ed Rotberg
+均直接从Atari离开后创办Videa。</li>
+</ul>
+<p>Sources:
+- https://www.gamedeveloper.com/business/atari-the-golden-years----a-history-1978-1981
+- https://www.ataricompendium.com/archives/interviews/howard_delman/interview_howard_delman.html</p>
+<h2 id="22-g2-serial-founder">2.2 G2 / serial-founder</h2>
+<h3 id="accolade-1984">Accolade — 1984</h3>
+<p>Alan Miller、Bob Whitehead：
+Atari → Activision → Accolade。</p>
+<p>这应算：
+- Atari lineage的第二个创业节点；
+- 但不是新的unique alumni founders。</p>
+<p>Source:
+- https://www.ataricompendium.com/archives/interviews/alan_miller/interview_alan_miller.html</p>
+<h3 id="sterling-silver-polygames">Sterling Silver / Polygames</h3>
+<p>Dennis Koble等人在Imagic/Sente后继续建立独立开发公司。</p>
+<p>Source:
+- https://www.ataricompendium.com/archives/interviews/lee_actor/interview_lee_actor.html</p>
+<h2 id="23-v01-lower-bound">2.3 v0.1 lower bound</h2>
+<ul>
+<li>direct G1 studio nodes: <strong>≥3</strong></li>
+<li>unique direct alumni founders: <strong>≥11</strong></li>
+<li>second/serial organizational nodes: <strong>≥2</strong></li>
+<li>reproductive depth: <strong>≥2 generations</strong></li>
+<li>dominant mode: <strong>spinout cascade</strong></li>
+<li>denominator quality: <strong>weak</strong></li>
+</ul>
+<h3 id="_1">解释</h3>
+<p>Atari不是“一个Activision神话”。
+在1979–82短时间内至少出现Activision、Imagic、Videa三条直接外生枝条；Activision成功本身又成为后来者可见的职业脚本。</p>
+<hr />
+<h1 id="3-looking-glass-direct-spinout">3. Looking Glass — 思想影响远大于严格direct-spinout数量</h1>
+<h2 id="31-direct-spinout">3.1 已验证direct spinout</h2>
+<h3 id="irrational-games-1997">Irrational Games — 1997</h3>
+<ul>
+<li>Ken Levine</li>
+<li>Jonathan Chey</li>
+<li>Robert Fermier
+均为Looking Glass员工。</li>
+</ul>
+<p>Looking Glass在Irrational首个publisher项目失败后又给：
+- 小预算；
+- 办公空间；
+- System Shock 2机会。</p>
+<p>Sources:
+- https://www.pcgamer.com/the-story-of-irrational-the-studio-that-shut-down-to-rediscover-its-roots/
+- https://irrationalgames.ghoststorygames.com/insider/from-the-vault-15-year-anniversary-edition/</p>
+<h3 id="floodgate-entertainment-2000">Floodgate Entertainment — 2000</h3>
+<p>Looking Glass创始人Paul Neurath在LGS关闭后创办；
+团队包含多位前Looking Glass员工。</p>
+<p>Source:
+- https://techcrunch.com/2011/03/18/zynga-buys-mobile-and-video-game-developer-floodgate-entertainment/</p>
+<h2 id="32-direct-spinout">3.2 不计入direct-spinout但必须记录的扩散</h2>
+<h3 id="harmonix">Harmonix</h3>
+<p>Harmonix并非由Looking Glass alumni创办；
+但Greg LoPiccolo等LGS员工加入后，对Harmonix转向游戏开发和早期设计有显著作用。</p>
+<p>Source:
+- https://www.vice.com/en/article/the-oral-history-of-guitar-hero/</p>
+<h3 id="otherside-entertainment">OtherSide Entertainment</h3>
+<p>Paul Neurath在Floodgate / Zynga之后再次创办；
+并重新聚集多个Looking Glass alumni。</p>
+<p>Source:
+- https://en.wikipedia.org/wiki/OtherSide_Entertainment</p>
+<p>这属于：
+<code>serial founder / alumni recombination</code>
+而不是新的独立“第二代创始人”样本。</p>
+<h2 id="33-v01-lower-bound">3.3 v0.1 lower bound</h2>
+<ul>
+<li>direct G1 studio nodes: <strong>≥2</strong></li>
+<li>unique direct alumni founders: <strong>≥4</strong></li>
+<li>serial founder nodes: <strong>≥1</strong></li>
+<li>second-generation spinout: <strong>未充分验证</strong></li>
+<li>dominant mode: <strong>alumni landing + design diffusion + selective spinout</strong></li>
+<li>denominator quality: <strong>weak</strong></li>
+</ul>
+<h3 id="_2">重要修正</h3>
+<p>“Looking Glass家谱”常把：
+- Irrational
+- Arkane
+- Harmonix
+- Ion Storm
+等都画在一棵树上。</p>
+<p>严格人员创业谱系却没有这么简单。</p>
+<p>因此新增：</p>
+<h1 id="genealogy-inflation-risk"><code>GENEALOGY INFLATION RISK</code></h1>
+<blockquote>
+<p><strong>媒体把设计影响、合作、人才流入和真正spinout都画成“后代”，会夸大组织再生产率。</strong></p>
+</blockquote>
+<hr />
+<h1 id="4-blizzard-spinout">4. Blizzard — 当前样本中最明显的高密度spinout机器之一</h1>
+<h2 id="41-g1-lower-bound">4.1 已验证G1节点 lower bound</h2>
+<h3 id="arenanet-2000">ArenaNet — 2000</h3>
+<ul>
+<li>Mike O&rsquo;Brien</li>
+<li>Patrick Wyatt</li>
+<li>Jeff Strain
+均来自Blizzard。</li>
+</ul>
+<p>Source:
+- https://www.gamedeveloper.com/game-platforms/ncsoft-acquires-arenanet</p>
+<h3 id="flagship-studios-2003">Flagship Studios — 2003</h3>
+<p>由多位Blizzard North核心人员创立，包括：
+- Bill Roper
+- David Brevik
+- Max Schaefer
+- Erich Schaefer
+等。</p>
+<p>Source:
+- https://www.mobygames.com/company/4165/flagship-studios/</p>
+<h3 id="carbine-studios-2005">Carbine Studios — 2005</h3>
+<p>由一批前Blizzard员工创建。</p>
+<p>Source:
+- https://www.gamedeveloper.com/business/-i-wildstar-i-developer-carbine-studios-is-no-more</p>
+<h3 id="bonfire-studios-2016">Bonfire Studios — 2016</h3>
+<p>前Blizzard CCO / WoW lead designer Rob Pardo创办。</p>
+<p>Source:
+- https://www.bonfirestudios.com/</p>
+<h3 id="second-dinner-2018">Second Dinner — 2018</h3>
+<p>Ben Brode、Hamilton Chu等前Hearthstone领导层创办。</p>
+<p>Source:
+- https://ir.netease.com/static-files/310863ab-3c0a-4bea-a933-6890c6f234be</p>
+<h3 id="dreamhaven-2020">Dreamhaven — 2020</h3>
+<p>Blizzard联合创始人/前CEO Mike Morhaime与大量前Blizzard veteran创办；
+下设Moonshot、Secret Door。</p>
+<p>Source:
+- https://www.dreamhaven.com/news/announcement</p>
+<h3 id="frost-giant-2020">Frost Giant — 2020</h3>
+<p>Tim Morten、Tim Campbell等Blizzard RTS veteran创办。</p>
+<p>Source:
+- https://www.windowscentral.com/frost-giant-studios-rts-team-blizzard-entertainment-veterans</p>
+<h3 id="notorious-studios-2021">Notorious Studios — 2021</h3>
+<p>Chris Kaleiki、Doug Frazer等前Blizzard成员创办。</p>
+<p>Source:
+- https://www.washingtonpost.com/video-games/2022/06/08/asmongold-wow-notorious-blizzard/</p>
+<h3 id="magic-soup-games-2023">Magic Soup Games — 2023</h3>
+<p>Jen Oneal、J. Allen Brack、John Donham创办。</p>
+<p>Source:
+- https://www.gamesradar.com/former-blizzard-co-head-and-president-form-new-inclusive-studio-in-aftermath-of-activision-lawsuit/</p>
+<h2 id="42-g2-deeper-descendants">4.2 G2 / deeper descendants</h2>
+<h3 id="arenanet-undead-labs">ArenaNet → Undead Labs</h3>
+<p>Jeff Strain：
+Blizzard → ArenaNet → Undead Labs。</p>
+<h3 id="arenanet-undead-labs-possibility-space">ArenaNet / Undead Labs → Possibility Space</h3>
+<p>Jeff Strain继续创建Possibility Space。</p>
+<p>Source:
+- https://gameinformer.com/2021/10/13/arenanet-undead-labs-founder-jeff-strain-opens-new-studio</p>
+<h3 id="blizzard-north-flagship-runic">Blizzard North → Flagship → Runic</h3>
+<p>Flagship之后，Max/Erich Schaefer等又进入Runic体系。</p>
+<p>这显示：
+- serial founder depth；
+- organizational lineage depth；
+都超过一代。</p>
+<h2 id="43-v01-lower-bound">4.3 v0.1 lower bound</h2>
+<ul>
+<li>verified direct G1 studio nodes: <strong>≥9</strong></li>
+<li>unique alumni founders: <strong>明显&gt;10，尚未完整去重</strong></li>
+<li>reproductive depth: <strong>≥3 organizational steps in some lineages</strong></li>
+<li>shipped-first-title rate: <strong>混合；有Guild Wars / WildStar / Marvel Snap / Stormgate等，也有未发布或失败</strong></li>
+<li>dominant mode: <strong>spinout + alumni network + founder recombination</strong></li>
+<li>denominator quality: <strong>weak</strong></li>
+</ul>
+<h3 id="_3">当前结论</h3>
+<p>Blizzard是本轮最需要做正式分母的公司。
+因为“能举出9个以上直接节点”已经不是孤例，但仍不能在没有senior-alumni总数时写：</p>
+<blockquote>
+<p>“Blizzard创业率是X%”。</p>
+</blockquote>
+<hr />
+<h1 id="5-id-software-serial-founder">5. id Software — 少量核心人物产生高serial-founder密度</h1>
+<h2 id="51-g1">5.1 已验证G1</h2>
+<h3 id="ion-storm-1996">Ion Storm — 1996</h3>
+<p>John Romero、Tom Hall等创办。</p>
+<p>Source:
+- https://www.pcgamer.com/the-history-of-ion-storm/</p>
+<h3 id="crack-dot-com">Crack dot Com</h3>
+<p>前id程序员Dave Taylor离开后共同创办。</p>
+<p>Source anchor:
+- https://en.wikipedia.org/wiki/Id_Software</p>
+<h2 id="52-serial-founder">5.2 serial-founder网络</h2>
+<p>Romero / Hall:
+- id
+→ Ion Storm
+→ Monkeystone</p>
+<p>Romero later:
+→ Romero Games</p>
+<p>Mike Wilson:
+- id marketing
+→ Ion Storm
+→ Gathering of Developers
+→ later Devolver Digital</p>
+<p>因此id lineage特点不是：</p>
+<blockquote>
+<p>“大量不同员工各自创业”。</p>
+</blockquote>
+<p>更像：</p>
+<blockquote>
+<p><strong>少量核心高可见人才反复创业、出版、建新组织。</strong></p>
+</blockquote>
+<h2 id="53-v01-lower-bound">5.3 v0.1 lower bound</h2>
+<ul>
+<li>direct G1 studio nodes: <strong>≥2</strong></li>
+<li>unique alumni founders: <strong>≥4</strong></li>
+<li>serial organizational nodes: <strong>≥4</strong></li>
+<li>dominant mode: <strong>high serial-founder intensity</strong></li>
+<li>denominator quality: <strong>weak</strong></li>
+</ul>
+<hr />
+<h1 id="6-valve-spinoutcommunityprofessional">6. Valve — 外向spinout不突出，community→professional非常强</h1>
+<h2 id="61-direct-spinout">6.1 严格direct-spinout已验证</h2>
+<h3 id="stray-bombay-2019">Stray Bombay — 2019</h3>
+<p>前Valve writer/designer Chet Faliszek与Kimberly Voll创办。</p>
+<p>Sources:
+- https://arstechnica.com/gaming/2019/03/former-valve-designer-writer-dishes-on-his-new-co-op-game-studio/
+- https://www.gamedeveloper.com/business/chet-faliszek-and-kimberly-voll-form-co-op-game-studio-stray-bombay</p>
+<p>目前按严格口径，本轮未验证出与Blizzard同量级的Valve direct game-studio spinout密度。</p>
+<h2 id="62-valve">6.2 但Valve的主要再生产模式不同</h2>
+<p>Valve长期将：
+- Counter-Strike
+- Dota
+- Team Fortress
+- Portal等
+社区/mod人才吸收到专业生产体系。</p>
+<p>因此Valve更适合编码：</p>
+<h1 id="inbound-creator-absorption"><code>INBOUND CREATOR ABSORPTION</code></h1>
+<p>而非：</p>
+<h1 id="outbound-spinout-factory"><code>OUTBOUND SPINOUT FACTORY</code></h1>
+<h2 id="63-v01-lower-bound">6.3 v0.1 lower bound</h2>
+<ul>
+<li>verified direct game-studio spinout nodes: <strong>≥1</strong></li>
+<li>dominant reproduction mode: <strong>community→professional absorption</strong></li>
+<li>denominator quality: <strong>weak</strong></li>
+</ul>
+<h3 id="_4">方法论价值</h3>
+<p>若只比较spinout数量，会低估Valve对creator-class reproduction的贡献。
+所以Forest Test必须同时保留：
+- outward ownership formation；
+- inward professionalization。</p>
+<hr />
+<h1 id="7-tencent-g1">7. Tencent — 已有多条强G1，但当前不能计算转化率</h1>
+<h2 id="71-2013">7.1 莉莉丝 — 2013</h2>
+<p>王信文、袁帅、张昊：
+- 南京大学同学；
+- 均曾在腾讯游戏工作；
+- 2013离职共同创办莉莉丝。</p>
+<p>Sources:
+- https://software.nju.edu.cn/yyzj/yyfc/2005j/20200127/i69440.html
+- https://ancient.lilith.com/cn/dt_detail_20170103.html</p>
+<p>结果：
+- shipped；
+- 多作持续；
+- 公司扩大；
+- 后续具备投资/发行能力。</p>
+<h3 id="_5">反向外部性</h3>
+<p>公开报道指出《刀塔传奇》成功后，腾讯内部手游组织也受到刺激并调整。</p>
+<p>Source:
+- https://m.thepaper.cn/newsDetail_forward_30424409</p>
+<p>这属于：</p>
+<h1 id="spinout-incumbent-learning"><code>SPINOUT → INCUMBENT LEARNING</code></h1>
+<p>不仅是新人从大厂学习；
+大厂也会从成功spinout反向学习。</p>
+<h2 id="72-2014">7.2 游戏科学 — 2014</h2>
+<p>7名《斗战神》相关腾讯员工离开后成立。</p>
+<p>Sources:
+- https://www.scmp.com/tech/big-tech/article/3275526/black-myth-wukongs-popularity-brings-unexpected-windfall-fame-low-profile-developer
+- https://m.thepaper.cn/newsDetail_forward_30424409</p>
+<p>结果：
+- 多个手游项目；
+- Black Myth: Wukong；
+- 形成强studio brand。</p>
+<h2 id="73-2023">7.3 身梦科技 — 2023</h2>
+<p>张哲川带NExT创意工坊部分成员离开后创业。</p>
+<p>Source:
+- https://www.sohu.com/a/719659296_204824</p>
+<p>它是很重要的：
+<code>internal frontier → external spinout</code>
+案例。</p>
+<h2 id="74-autogame-2023">7.4 AutoGame — 2023</h2>
+<p>前《和平精英》技术策划张昊阳创业；
+已有多轮融资。</p>
+<p>Source:
+- https://www.taptap.cn/moment/748355307826054818</p>
+<h2 id="75-2025">7.5 沈黎新孵化/投资结构 — 2025</h2>
+<p>前NExT Studios总经理沈黎离开腾讯后做新的游戏投资与孵化机构，
+目标包括降低创业者早期风险、在公司盈利后保障创业者控制权。</p>
+<p>Source:
+- https://www.sohu.com/a/852766962_204824</p>
+<p>该节点不是纯studio，
+应编码：
+<code>alumni → creator-capital infrastructure</code>。</p>
+<h2 id="76-v01-lower-bound">7.6 v0.1 lower bound</h2>
+<ul>
+<li>verified direct creator-owned studio nodes: <strong>≥4</strong></li>
+<li>verified creator-capital/infrastructure nodes: <strong>≥1</strong></li>
+<li>unique founder alumni: <strong>≥12</strong>（Game Science 7 + Lilith 3 + others；仍需严格去重）</li>
+<li>reproductive depth: <strong>主要仍是G1，G2待追</strong></li>
+<li>denominator quality: <strong>none</strong></li>
+</ul>
+<h3 id="_6">当前不能说</h3>
+<ul>
+<li>“腾讯创业率低/高”</li>
+<li>“腾讯比Blizzard少X倍”</li>
+</ul>
+<p>因为腾讯senior game alumni分母巨大且公开不足。</p>
+<h3 id="_7">当前可以说</h3>
+<blockquote>
+<p><strong>腾讯已经明确是中国重要的creator-founder训练母体之一；真正未知的是其spinout密度相对于员工规模，以及这些spinout是否继续产生第二代。</strong></p>
+</blockquote>
+<hr />
+<h1 id="8-netease-202526">8. NetEase — 2025–26出现明显“资深制作人出走创业波”</h1>
+<h2 id="81-2011">8.1 简悦 — 2011</h2>
+<p>前网易COO詹钟晖（叮当）离职后创办简悦；
+之后被大厂收购，2025再次创业做内容驱动买断制游戏。</p>
+<p>Source:
+- https://www.36kr.com/p/3286565715272581</p>
+<p>这说明网易早期已有高层spinout，
+且存在：
+<code>serial founder re-entry</code>。</p>
+<h2 id="82-seed-games-2025">8.2 芥子游戏 / Seed Games — 2025</h2>
+<p>前《阴阳师》《哈利波特：魔法觉醒》制作人金韬
++ 前网易艺术设计中心负责人易修钦创业；
+2026已获数千万美元融资，团队&gt;60人。</p>
+<p>Source:
+- https://finance.sina.cn/2026-03-17/detail-inhrhpmq5406347.d.html</p>
+<h2 id="83-2026">8.3 李凯明新公司 — 2026</h2>
+<p>前《率土之滨》《无尽的拉格朗日》核心负责人李凯明离开网易创业；
+公开报道显示获得米哈游、IDG等投资。</p>
+<p>Source:
+- https://www.sohu.com/a/1000168387_204728</p>
+<h2 id="84-greaterthan-group-2026">8.4 GreaterThan Group — 2026</h2>
+<p>前网易游戏全球投资与合作负责人朱原创业建立游戏控股/投资机构，
+并吸收部分网易裁撤团队。</p>
+<p>Source:
+- https://finance.sina.com.cn/stock/aigcy/2026-06-04/doc-iniafrtu9377059.shtml</p>
+<p>该节点应编码：
+<code>alumni → capital allocator / studio holding infrastructure</code>。</p>
+<h2 id="85-v01-lower-bound">8.5 v0.1 lower bound</h2>
+<ul>
+<li>verified creator-studio / founder nodes: <strong>≥3</strong></li>
+<li>creator-capital infrastructure: <strong>≥1</strong></li>
+<li>2025–26 cohort age: <strong>太新，无法评估ship/second-title</strong></li>
+<li>dominant current signal: <strong>late-career senior producer spinout wave</strong></li>
+<li>denominator quality: <strong>none</strong></li>
+</ul>
+<h3 id="h">重要新H</h3>
+<p>网易可能正进入：</p>
+<h1 id="late-incumbent-spinout-wave"><code>LATE INCUMBENT SPINOUT WAVE</code></h1>
+<p>即成熟工业培养十年以上的制作人，
+在2025–26开始集中转成owner/founder。</p>
+<p>若未来3–5年ship率高，
+中国的Mobility-to-Ownership Conversion可能正在发生结构变化。</p>
+<hr />
+<h1 id="9-mihoyo-alumni">9. miHoYo — 公司年轻，但第一批alumni创业节点已经出现</h1>
+<p>miHoYo 2012才成立，
+因此不能与Atari/Blizzard几十年窗口直接比较。</p>
+<h2 id="91">9.1 “踢踢” / 《微光之镜》</h2>
+<p>前miHoYo员工离职后独立开发约4年，
+作品进入2022首批恢复发放版号名单，并进行众筹。</p>
+<p>Source:
+- https://news.yxrb.net/202205/10229660.html</p>
+<p>这是：
+<code>employee → solo creator</code>
+而非传统大团队spinout。</p>
+<h2 id="92-haku">9.2 鸟鸣啾唧 / HAKU</h2>
+<p>前《崩坏学园2》制作人曹霞创业，
+2025推出《黄金四目》；
+产品上线数月后停止服务/团队遇到严重经营困难。</p>
+<p>Sources:
+- https://www.taptap.cn/moment/648384987548092630
+- https://www.taptap.cn/moment/705078054069731958</p>
+<p>这是极有价值的失败样本：</p>
+<blockquote>
+<p>高履历creator spinout ≠ 市场成功。</p>
+</blockquote>
+<h2 id="93">9.3 梦熵科技 / 贺甲</h2>
+<p>前miHoYo技术总监贺甲后经腾讯/艺画开天等经历，
+2025成立创业公司，
+方向包括AI游戏/AI虚拟伴侣。</p>
+<p>Source:
+- https://www.36kr.com/p/3646227562106759</p>
+<p>严格来说它是：
+<code>former-miHoYo lineage startup</code>，
+不是直接离开miHoYo即创业。</p>
+<h2 id="94-2026">9.4 余洋新团队 — 2026</h2>
+<p>前《崩坏：星穹铁道》技术负责人余洋离开后创业，
+公开招聘指向UE多人合作PvE英雄射击项目。</p>
+<p>Source:
+- https://www.sohu.com/a/1025571267_204824</p>
+<p>目前尚未ship。</p>
+<h2 id="95-krene-2025">9.5 “恶少” / Krene — 2025</h2>
+<p>前《原神》早期主创离开后做AI游戏创作工具创业，
+目标之一是帮助更多小团队/个人创作。</p>
+<p>Source:
+- https://podcasts.apple.com/cn/podcast/id1729552193?i=1000738998838</p>
+<p>应编码：
+<code>alumni → creator-tool infrastructure</code>，
+而非纯游戏studio。</p>
+<h2 id="96-v01-lower-bound">9.6 v0.1 lower bound</h2>
+<ul>
+<li>verified creator/spinout nodes: <strong>≥4</strong></li>
+<li>creator-tool infrastructure: <strong>≥1</strong></li>
+<li>shipped nodes: <strong>至少2</strong></li>
+<li>failure node: <strong>至少1明确</strong></li>
+<li>observation window: <strong>短</strong></li>
+<li>denominator quality: <strong>none</strong></li>
+</ul>
+<h3 id="_8">解释</h3>
+<p>miHoYo现在最大的研究价值不是“创业率”，
+而是：</p>
+<blockquote>
+<p><strong>第一代Genshin/Honkai核心人员正在从employee reputation向owner/tool-builder转换；未来5年正好可以做前瞻追踪。</strong></p>
+</blockquote>
+<hr />
+<h1 id="10-preliminary-matrix">10. Preliminary Matrix</h1>
+<table>
+<thead>
+<tr>
+<th>Parent</th>
+<th style="text-align: right;">Verified direct/creator spinout lower bound</th>
+<th style="text-align: right;">Reproductive depth</th>
+<th>Dominant mode</th>
+<th>Current read</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Atari</td>
+<td style="text-align: right;">≥3 G1</td>
+<td style="text-align: right;">≥2</td>
+<td>direct spinout cascade</td>
+<td>very early high outward reproduction</td>
+</tr>
+<tr>
+<td>Looking Glass</td>
+<td style="text-align: right;">≥2 G1</td>
+<td style="text-align: right;">unclear</td>
+<td>selective spinout + alumni/design diffusion</td>
+<td>cultural influence &gt; strict spinout count</td>
+</tr>
+<tr>
+<td>Blizzard</td>
+<td style="text-align: right;">≥9 G1</td>
+<td style="text-align: right;">≥3 in some lineages</td>
+<td>dense spinout + alumni network</td>
+<td>strongest apparent spinout machine in current sample</td>
+</tr>
+<tr>
+<td>id</td>
+<td style="text-align: right;">≥2 G1; several serial nodes</td>
+<td style="text-align: right;">≥2</td>
+<td>serial-founder entrepreneurship</td>
+<td>concentrated in few highly mobile founders</td>
+</tr>
+<tr>
+<td>Valve</td>
+<td style="text-align: right;">≥1 strict G1</td>
+<td style="text-align: right;">unclear</td>
+<td>community→professional absorption</td>
+<td>inward reproduction stronger than outward spinout</td>
+</tr>
+<tr>
+<td>Tencent</td>
+<td style="text-align: right;">≥4 creator studios + ≥1 infrastructure</td>
+<td style="text-align: right;">mostly G1</td>
+<td>large-incumbent → founder</td>
+<td>clearly important parent; denominator missing</td>
+</tr>
+<tr>
+<td>NetEase</td>
+<td style="text-align: right;">≥3 creator founders + ≥1 infrastructure</td>
+<td style="text-align: right;">mostly G1</td>
+<td>senior producer late spinout</td>
+<td>visible 2025–26 wave, too early for outcomes</td>
+</tr>
+<tr>
+<td>miHoYo</td>
+<td style="text-align: right;">≥4 lineage nodes + ≥1 tool node</td>
+<td style="text-align: right;">G1</td>
+<td>creator/solo/tool spinout</td>
+<td>young parent; excellent prospective cohort</td>
+</tr>
+</tbody>
+</table>
+<p><strong>禁止把这张表当排名。</strong>
+时间窗口、员工规模、公司年龄、地区和“direct”定义差异极大。</p>
+<hr />
+<h1 id="101-spinoutindie-school">10.1 Spinout数量不能回答“Indie School”</h1>
+<p>025当前样本经026修正后，应这样读：</p>
+<table>
+<thead>
+<tr>
+<th>Parent</th>
+<th>Founder/ownership reproduction</th>
+<th>Indie-mode inference</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Atari</td>
+<td>strong early spinout cascade</td>
+<td>independent-production ancestor；不能套现代indie标签</td>
+</tr>
+<tr>
+<td>Looking Glass</td>
+<td>selective direct spinout + broad influence</td>
+<td>authorial exits存在；逐案判断</td>
+</tr>
+<tr>
+<td>Blizzard</td>
+<td>strong alumni-founder ecology</td>
+<td><strong>不能据此推断高indie conversion</strong></td>
+</tr>
+<tr>
+<td>id</td>
+<td>serial-founder strong</td>
+<td>early independent lineage较强；后续混合</td>
+</tr>
+<tr>
+<td>Valve</td>
+<td>outward spinout较少</td>
+<td>community→professional强；不是同一指标</td>
+</tr>
+<tr>
+<td>Tencent</td>
+<td>clear founder school</td>
+<td>Lilith等商业创业≠indie；Game Science是阶段性/延迟作者转型</td>
+</tr>
+<tr>
+<td>NetEase</td>
+<td>visible owner-conversion wave</td>
+<td>indie-mode affinity当前大多UNKNOWN</td>
+</tr>
+<tr>
+<td>miHoYo</td>
+<td>heterogeneous exit routes</td>
+<td>solo / commercial / tool / creator routes需分开</td>
+</tr>
+</tbody>
+</table>
+<p>所以：</p>
+<blockquote>
+<p><strong>Founder School 和 Indie School 是两个正交问题。</strong></p>
+</blockquote>
+<p>Blizzard的≥9 G1节点首先证明：
+- ownership exit；
+- alumni network；
+- entrepreneurial recombination。</p>
+<p>它不能单独证明：
+- small-team authorial production；
+- low-burn experimentation；
+- capability-shaped projects；
+- direct-player market logic。</p>
+<p>同理，腾讯出现莉莉丝、游戏科学等高质量spinout，不能合并成“腾讯独游生态”。</p>
+<h1 id="11">11. 当前最重要的三个结论</h1>
+<h2 id="111-spinout-density-influence-density">11.1 <code>SPINOUT DENSITY ≠ INFLUENCE DENSITY</code></h2>
+<p>Looking Glass / Valve提示：
+- 设计影响可以极大；
+- 但direct founder count未必高。</p>
+<p>因此“创新扩散”至少有：
+- ownership reproduction；
+- employment diffusion；
+- community professionalization；
+- idea diffusion
+四条不同路径。</p>
+<h2 id="112-serial-founder-intensity-broad-creator-class">11.2 <code>SERIAL FOUNDER INTENSITY ≠ BROAD CREATOR CLASS</code></h2>
+<p>id / Romero类型提示：
+- 同一批极强个人反复开公司，
+可以制造很多“公司节点”。</p>
+<p>但真正Creator Class更关心：</p>
+<blockquote>
+<p><strong>有多少不同的人从employee变owner。</strong></p>
+</blockquote>
+<p>所以正式比较必须同时报：
+- studio nodes；
+- unique alumni founders。</p>
+<h2 id="113-owner-conversion-wave">11.3 中国当前真正可能发生结构变化的是<code>OWNER CONVERSION WAVE</code></h2>
+<p>腾讯2013–14：
+- Lilith
+- Game Science</p>
+<p>已经证明一轮。</p>
+<p>2025–26又出现：
+- NExT alumni创业；
+- NetEase senior producer集中创业；
+- miHoYo第一代核心/技术人员外溢；
+- 老制作人转publisher/incubator/capital allocator。</p>
+<p>因此现在不能再用2015年的“中国大厂人只会跳槽”静态描述2026。</p>
+<p>更准确的研究问题变成：</p>
+<blockquote>
+<p><strong>这波owner conversion能否ship、活三年、做第二作，并在2030前产生自己的spinout？</strong></p>
+</blockquote>
+<hr />
+<h1 id="12">12. 下一步：真正计算率之前必须补三类分母</h1>
+<h2 id="p0-senior-alumni-denominator">P0 — Senior Alumni Denominator</h2>
+<p>对每家公司建立：
+- director / lead / principal / senior producer历史名单；
+- 离职人数；
+- 可观察职业去向。</p>
+<p>可能来源：
+- credits database；
+- LinkedIn/公开简历；
+- MobyGames；
+-公司开发者档案；
+-工商创始人履历。</p>
+<h2 id="p0-unique-founder-de-duplication">P0 — Unique Founder De-duplication</h2>
+<p>同一人反复创业：
+- 算1个unique founder；
+- 多个organizational nodes。</p>
+<p>否则Romero / Jeff Strain会把“阶层厚度”虚增。</p>
+<h2 id="p0-outcome-cohort">P0 — Outcome Cohort</h2>
+<p>每个spinout按成立年份做：
+- ship within 5y；
+- second title within 10y；
+- survive 3y / 5y / 10y；
+- acquired / closed；
+- second-generation founder count。</p>
+<p>只有这样才能把：
+<code>startup formation</code>
+和
+<code>creator-class reproduction</code>
+分开。</p>
+<hr />
+<h1 id="131">13.1 下一版必须新增两组分母</h1>
+<p>025原本只准备补：</p>
+<pre><code class="language-text">Spinout Conversion
+= founder outcomes / senior-alumni cohort
+</code></pre>
+<p>026之后必须再增加：</p>
+<h3 id="authorial-divergence-rate"><code>AUTHORIAL-DIVERGENCE RATE</code></h3>
+<p>creator-owned spinout中，有多少真正脱离母公司的objective function？</p>
+<h3 id="indie-mode-conversion-rate"><code>INDIE-MODE CONVERSION RATE</code></h3>
+<p>senior-alumni founder中，有多少进入：
+- bounded small-core；
+- low fixed burn；
+- hands-on creator density；
+- capability-shaped project；
+- direct player truth；
+- governance optionality</p>
+<p>的independent-production route？</p>
+<p>这样才可能出现真正有意义的对比：</p>
+<pre><code class="language-text">Company A:
+high spinout
+low indie conversion
+
+Company B:
+lower spinout
+high indie conversion among exits
+</code></pre>
+<p>前者是强创业学校；
+后者可能是强作者转换学校。</p>
+<p>二者都值得研究，但不是同一种生态。</p>
+<h1 id="13">13. 当前最小结论</h1>
+<blockquote>
+<p><strong>第一版硬账已经足以否定两种偷懒叙述：第一，不能把“某公司思想影响很大”直接当成“它很会生创业公司”；第二，也不能因为中国存在莉莉丝、游戏科学等明星spinout，就默认数量级已经与Blizzard式alumni ecology相当。当前最显著的对照是：Blizzard拥有大量跨二十余年的直接alumni studio节点和多代serial/recombination谱系；Tencent已经明确产生多条高质量G1 spinout，但分母与G2深度仍缺；NetEase和miHoYo则在2025–26出现新的owner-conversion波。下一阶段应从“列公司”转为构建senior-alumni denominator和cohort outcome，从而第一次真正计算Mobility-to-Ownership与Spinout Conversion。</strong></p>
+</blockquote><div class="crumbs"><a href="/heroes-portal/">书阁</a> / country-studies/china/025-alumni-spinout-quantification-ledger-v01.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

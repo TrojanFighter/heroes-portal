@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>048 — 老兵未必能教未来：能力复制陷阱与横向能力发现网络 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl class="on"" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0-training-withholding" class="t2">0. 关键纠偏：Training Withholding 只是三种机制之一</a><a href="#a-training-withholding" class="t3">A. TRAINING WITHHOLDING｜会，但不愿承担培养成本</a><a href="#b-incumbent-capability-ceiling" class="t3">B. INCUMBENT CAPABILITY CEILING｜组织自己也不会目标新实践</a><a href="#c-defensive-conservatism-evaluator-capability-gap" class="t3">C. DEFENSIVE CONSERVATISM / EVALUATOR CAPABILITY GAP｜因为不会，所以也可能不会评价</a><a href="#1-corporate-apprenticeship-frontier-discovery" class="t2">1. Corporate Apprenticeship 与 Frontier Discovery 不是同一种学习</a><a href="#2-horizontal-capability-discovery-network" class="t2">2. HORIZONTAL CAPABILITY DISCOVERY NETWORK｜横向能力发现网络</a><a href="#3-capability-reproduction-trap" class="t2">3. CAPABILITY REPRODUCTION TRAP｜能力复制陷阱</a><a href="#4-experience-years-frontier-teaching-capacity" class="t2">4. EXPERIENCE YEARS ≠ FRONTIER TEACHING CAPACITY</a><a href="#5" class="t2">5. 与中国商业游戏研究线怎样连接</a><a href="#exploration-capital" class="t3">EXPLORATION CAPITAL｜探索资本</a><a href="#execution-production-capital" class="t3">EXECUTION / PRODUCTION CAPITAL｜执行 / 生产资本</a><a href="#6-doom-early-id" class="t2">6. 与 DOOM / early id 的连接：不是“年轻人天然正确”，而是旧链条里没有现成答案</a><a href="#7" class="t2">7. “不教”与“不会”必须在证据上分开</a><a href="#8-hacker-prototype-culture" class="t2">8. 对 Hacker / prototype culture 的进一步修正</a><a href="#81" class="t3">8.1 横向网络不是天然真理机器</a><a href="#82" class="t3">8.2 大公司也可以内部制造横向探索空间</a><a href="#9-first-credit-junior" class="t2">9. 对 First-Credit / junior 问题的修正</a><a href="#10" class="t2">10. 当前最强可保留命题</a><a href="#h1-capability-reproduction-trap" class="t3">H1 — Capability Reproduction Trap</a><a href="#h2-horizontal-discovery-complement" class="t3">H2 — Horizontal Discovery Complement</a><a href="#h3-evaluator-capability-constraint" class="t3">H3 — Evaluator Capability Constraint</a><a href="#11" class="t2">11. 明确拒绝的强说法</a><a href="#12" class="t2">12. 下一轮取证</a></aside><article class="doc"><div class="col"><h1 id="048">048 — 老兵未必能教未来：能力复制陷阱与横向能力发现网络</h1>
+<ul>
+<li>Status: <strong>RESEARCH NOTE / CROSS-CUTTING HYPOTHESIS / PRE-CLAIM</strong></li>
+<li>Date: 2026-10-08</li>
+<li>Program: A 独立游戏英雄传说 × C 中国国情研究 × 跨行业创新</li>
+<li>Author-origin correction: 本篇起点来自作者对“游戏公司不训练新人”解释的纠偏：很多时候并不是资深从业者已经掌握新做法却拒绝传授，而是旧生产制度中的资深者自己并未掌握正在形成的新范式；保守招聘和培训可能是能力缺口的结果，而不只是成本转嫁。</li>
+<li>Adjacent canonical work: <a href="/heroes-portal/book/research-notes/china-commercial-game-training-role-origin-audit-005.html">005 中国商业游戏训练反转</a>、<a href="/heroes-portal/book/research-notes/china-commercial-game-training-role-origin-audit-006-tencent-producer-pressure-test.html">006 腾讯制作人压力测试</a>、<a href="/heroes-portal/book/research-notes/china-catch-up-success-pre-paradigm-creator-016.html">016 追赶成功与前范式创作者</a>、<a href="/heroes-portal/book/research-notes/doom-organizational-aging-rejuvenation-043.html">043 DOOM组织老化与再年轻</a>、<a href="/heroes-portal/book/research-notes/masters-of-doom-longitudinal-master-study-001.html">DOOM纵向母研究</a></li>
+<li>Boundary: 本篇不把年龄、资历或“大厂出身”当成能力劣势；也不预设年轻人、独立团队、Jam 社群天然掌握真理。研究对象是<strong>某种实践知识是否已经存在于组织内，以及谁有能力评价尚未制度化的新实践</strong>。</li>
+</ul>
+<h2 id="0-training-withholding">0. 关键纠偏：Training Withholding 只是三种机制之一</h2>
+<p class="dc">“企业不招 junior / 不培养新人”至少要拆成三种不同机制。</p>
+<h3 id="a-training-withholding">A. TRAINING WITHHOLDING｜会，但不愿承担培养成本</h3>
+<p>组织已经拥有成熟知识，例如既有引擎、认证、QA、网络、性能、live-ops 或 production pipeline，但因为短期成本、岗位风险或绩效压力，希望直接购买有经验的人。</p>
+<p>这是传统 apprenticeship externalization：</p>
+<pre><code class="language-text">known practice exists inside firm
+→ junior needs time to acquire it
+→ firm prefers ready-made worker
+→ training cost shifts toward worker / school / household
+</code></pre>
+<h3 id="b-incumbent-capability-ceiling">B. INCUMBENT CAPABILITY CEILING｜组织自己也不会目标新实践</h3>
+<p>如果一个组织长期在成熟赛道、既定商业模型和稳定 production grammar 内优化，资深者可能极擅长：</p>
+<ul>
+<li>已知系统的大规模实现；</li>
+<li>线上数据与稳定运营；</li>
+<li>成熟品类的 benchmark adaptation；</li>
+<li>大组织中的跨部门交付。</li>
+</ul>
+<p>但并没有亲自经历过：</p>
+<ul>
+<li>从零发现一个未知玩法；</li>
+<li>两三个人快速 scale down；</li>
+<li>在没有历史数据时定义问题；</li>
+<li>用 Jam / mod / prototype 反复失败；</li>
+<li>利用新工具链重新组合生产函数。</li>
+</ul>
+<p>此时“让 senior 带 junior”不能自动产生 frontier capability，因为要传授的知识尚未存在于这条垂直传承链里。</p>
+<h3 id="c-defensive-conservatism-evaluator-capability-gap">C. DEFENSIVE CONSERVATISM / EVALUATOR CAPABILITY GAP｜因为不会，所以也可能不会评价</h3>
+<p>能力缺口未必以“我不知道”呈现。它可能被包装成组织已有的专业标准：</p>
+<ul>
+<li>“这不专业”；</li>
+<li>“没有商业验证”；</li>
+<li>“不是正规流程”；</li>
+<li>“没有大项目经验”；</li>
+<li>“这种小原型说明不了什么”。</li>
+</ul>
+<p>问题不必来自恶意。更一般的机制是：</p>
+<blockquote>
+<p><strong>评价者使用自己能够识别的旧能力作为质量代理，因此尚未制度化的新能力即使真实存在，也可能无法被正确计价。</strong></p>
+</blockquote>
+<p>这与单纯的劳资冲突不同：不是“有知识的人故意不传”，而可能是“旧知识持有者同时掌握了新知识的评价权”。</p>
+<hr />
+<h2 id="1-corporate-apprenticeship-frontier-discovery">1. Corporate Apprenticeship 与 Frontier Discovery 不是同一种学习</h2>
+<p>传统师徒关系的隐含假设是：</p>
+<blockquote>
+<p>大师知道正确答案，徒弟需要复制这套已知实践。</p>
+</blockquote>
+<p>但创新问题经常不存在现成答案。</p>
+<p>因此应分开：</p>
+<table>
+<thead>
+<tr>
+<th>机制</th>
+<th>主要回答</th>
+<th>最适合传什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Vertical Apprenticeship / 垂直学徒制</strong></td>
+<td>怎样把已知 production 做好？</td>
+<td>成熟工具、流程、质量标准、工程诀窍、组织协作</td>
+</tr>
+<tr>
+<td><strong>Horizontal Capability Discovery / 横向能力发现</strong></td>
+<td>哪一种新 practice 可能成立？</td>
+<td>原型方法、新工具组合、新交互、新分发、新团队形态</td>
+</tr>
+<tr>
+<td><strong>Reality Arbitration / 现实裁决</strong></td>
+<td>新做法是真的有效，还是圈内自嗨？</td>
+<td>玩家测试、可玩结果、收入、技术可行性、可重复生产</td>
+</tr>
+</tbody>
+</table>
+<p>两者不能互相替代。</p>
+<p>公司内部 apprenticeship 可以非常强，同时 frontier discovery 很弱；反过来，Jam / mod / indie 网络可以非常会探索，却在工程、ship、商业化或规模化上很弱。</p>
+<hr />
+<h2 id="2-horizontal-capability-discovery-network">2. HORIZONTAL CAPABILITY DISCOVERY NETWORK｜横向能力发现网络</h2>
+<p>当没有人知道标准答案时，知识更可能从同侪网络中生长：</p>
+<pre><code class="language-text">peer ↔ peer
+mod scene
+game jam
+demo / prototype community
+open source
+small-team indie
+tool / creator communities
+</code></pre>
+<p>核心不是“年轻人互相鼓励”，而是：</p>
+<ol>
+<li>大量低成本尝试；</li>
+<li>可公开观察 artifact；</li>
+<li>别人能够复制、修改、反驳；</li>
+<li>不需要先获得旧组织完整授权；</li>
+<li>新做法在重复实践中获得可见性。</li>
+</ol>
+<p>因此 itch / mod / Jam 生态的制度价值不能只写成“新人培训”。</p>
+<p>更准确地说，它们可能提供：</p>
+<blockquote>
+<p><strong>组织外的 capability search space。</strong></p>
+</blockquote>
+<p>这里产生的是尚未被大公司课程化、岗位化、绩效化的 practice。</p>
+<hr />
+<h2 id="3-capability-reproduction-trap">3. CAPABILITY REPRODUCTION TRAP｜能力复制陷阱</h2>
+<p>如果组织只用既有成功标准招聘、培训和晋升，就可能出现：</p>
+<pre><code class="language-text">legacy success
+→ legacy capability becomes professionalism
+→ hire people who already display it
+→ senior mentors reproduce it
+→ promotion rewards it
+→ fewer frontier experiments survive internally
+→ next generation of senior staff becomes even better at legacy capability
+→ organization has even less first-hand knowledge of the new practice
+</code></pre>
+<p>这是能力复制陷阱。</p>
+<p>它不要求组织“愚蠢”。恰恰相反：</p>
+<blockquote>
+<p><strong>一个组织可能非常有效率地复制昨天最赚钱的能力，因此更难产生明天尚未被证明的能力。</strong></p>
+</blockquote>
+<p>这与 competency trap / exploitation–exploration 文献相邻，但本项目需要继续用具体人物和生产史审计，而不是仅靠理论标签。</p>
+<hr />
+<h2 id="4-experience-years-frontier-teaching-capacity">4. EXPERIENCE YEARS ≠ FRONTIER TEACHING CAPACITY</h2>
+<p>以后研究“老兵能不能培养新人”时，不得再用从业年限直接代理 mentor quality。</p>
+<p>至少拆成：</p>
+<ul>
+<li><code>TENURE</code>：从业年份；</li>
+<li><code>KNOWN-PRACTICE DEPTH</code>：对成熟 production 的深度；</li>
+<li><code>ZERO-TO-ONE RECENCY</code>：最近一次亲自从未知问题做出 playable / shipped solution 是何时；</li>
+<li><code>PROTOTYPE FREQUENCY</code>：是否仍持续做低成本实验；</li>
+<li><code>EXTERNAL LEARNING CHANNEL</code>：是否持续从组织外摄取新工具、新社区、新范式；</li>
+<li><code>UNLEARNING EVIDENCE</code>：是否曾主动否定自己过去成功的做法；</li>
+<li><code>EVALUATOR CAPABILITY</code>：能否识别自己不会、但别人已经做出可玩证据的新 practice。</li>
+</ul>
+<p>于是：</p>
+<pre><code class="language-text">15 years experience
+</code></pre>
+<p>只能说明积累时间，不能自动推出：</p>
+<pre><code class="language-text">15 years of frontier-relevant exploration
+</code></pre>
+<p>更不能推出：</p>
+<pre><code class="language-text">can teach the next paradigm
+</code></pre>
+<hr />
+<h2 id="5">5. 与中国商业游戏研究线怎样连接</h2>
+<p><a href="/heroes-portal/book/research-notes/china-commercial-game-training-role-origin-audit-005.html">005</a> 已经证明“程序 / 策划”职位标签太粗，真正值得看的是 prototype authority、design-loop proximity、ownership span、cost visibility 与 creative reserve。</p>
+<p>本篇再补一层：</p>
+<blockquote>
+<p><strong>即使组织内部存在资深 mentor，也必须先问 mentor 掌握的是哪一种 production regime 的知识。</strong></p>
+</blockquote>
+<p>因此“中国商业游戏有大量十年以上老兵”不能直接推出：</p>
+<blockquote>
+<p>中国拥有同等规模的下一代原创玩法导师。</p>
+</blockquote>
+<p>两者之间缺少一个变量：</p>
+<h3 id="exploration-capital">EXPLORATION CAPITAL｜探索资本</h3>
+<p>可先定义为：</p>
+<blockquote>
+<p>在未知问题、低承诺实验、外部现实反馈和反复重定义中形成的能力存量。</p>
+</blockquote>
+<p>与之相对，成熟商业工业可能积累极强的：</p>
+<h3 id="execution-production-capital">EXECUTION / PRODUCTION CAPITAL｜执行 / 生产资本</h3>
+<p>两者可以同时很高，也可以严重不对称。</p>
+<p>这与 <a href="/heroes-portal/book/research-notes/china-catch-up-success-pre-paradigm-creator-016.html">016</a> 的 <code>Production Capital vs Problem-Framing Capital</code> 相接，但本篇把重点放在<strong>代际复制和教学</strong>：一个产业积累什么能力，会决定它最容易复制给下一代什么能力。</p>
+<hr />
+<h2 id="6-doom-early-id">6. 与 DOOM / early id 的连接：不是“年轻人天然正确”，而是旧链条里没有现成答案</h2>
+<p><a href="/heroes-portal/cases/CASE-016-early-id-software.html">CASE-016</a>、<a href="/heroes-portal/book/research-notes/masters-of-doom-longitudinal-master-study-001.html">DOOM纵向母研究</a> 与 <a href="/heroes-portal/book/research-notes/doom-organizational-aging-rejuvenation-043.html">043</a> 的意义，不应简化成“年轻人反抗老人”。</p>
+<p>更有研究价值的问题是：</p>
+<ul>
+<li>id 的关键技术、设计与分发组合是否能从当时成熟游戏组织的标准 apprenticeship 中直接学到？</li>
+<li>哪些能力来自 peer complementarity、快速 shared build、技术窗口与组织外市场接口？</li>
+<li>当 id 后来自身老化时，曾经的 frontier capability 是否也变成新的 incumbent grammar？</li>
+</ul>
+<p>这使 DOOM 成为双向压力测试：</p>
+<blockquote>
+<p><strong>边缘团队可能发现旧组织不知道的东西；但今天的异端一旦成功制度化，明天也可能变成新的能力复制者。</strong></p>
+</blockquote>
+<hr />
+<h2 id="7">7. “不教”与“不会”必须在证据上分开</h2>
+<p>以后所有相关个案至少编码：</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Question</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>KNOWN_PRACTICE_INSIDE_ORG</code></td>
+<td>目标技能在组织内是否已有成熟持有人？</td>
+</tr>
+<tr>
+<td><code>TRAINING_AVAILABLE</code></td>
+<td>是否存在真实 mentoring / junior ladder？</td>
+</tr>
+<tr>
+<td><code>FRONTIER_PRACTICE_GAP</code></td>
+<td>新做法是否超出组织既有知识？</td>
+</tr>
+<tr>
+<td><code>MENTOR_GENERATION_MATCH</code></td>
+<td>mentor 的 formative regime 与当前目标 practice 是否同构？</td>
+</tr>
+<tr>
+<td><code>EVALUATOR_CAPABILITY</code></td>
+<td>谁有资格判断新做法，是否亲自做过相似实践？</td>
+</tr>
+<tr>
+<td><code>HORIZONTAL_DISCOVERY_CHANNEL</code></td>
+<td>新能力来自同侪、Jam、mod、开源还是公司内部？</td>
+</tr>
+<tr>
+<td><code>UNLEARNING_REQUIRED</code></td>
+<td>是否必须主动丢弃旧成功经验？</td>
+</tr>
+<tr>
+<td><code>REALITY_ARBITRATION</code></td>
+<td>最终由什么现实信号裁决新 practice？</td>
+</tr>
+</tbody>
+</table>
+<p>没有这些字段，不应把“junior 不被招”统一解释成：</p>
+<pre><code class="language-text">firm knows how → refuses to teach
+</code></pre>
+<hr />
+<h2 id="8-hacker-prototype-culture">8. 对 Hacker / prototype culture 的进一步修正</h2>
+<p>前序研究强调中国缺乏大型公开原型池、Jam / itch 式横向交流和 scale-down 基本功。这个方向仍值得研究，但必须加两个边界。</p>
+<h3 id="81">8.1 横向网络不是天然真理机器</h3>
+<p>它也可能复制：</p>
+<ul>
+<li>同温层审美；</li>
+<li>工具潮流；</li>
+<li>模因；</li>
+<li>低商业可行性；</li>
+<li>对工程和长期维护的忽视。</li>
+</ul>
+<p>所以必须保留现实裁决。</p>
+<h3 id="82">8.2 大公司也可以内部制造横向探索空间</h3>
+<p>NExT 类原型制度、内部孵化、小型 autonomous cell 等都可能在 incumbent 内部创造 exploration。</p>
+<p>研究问题不是：</p>
+<blockquote>
+<p>大公司 vs indie 谁更创新？</p>
+</blockquote>
+<p>而是：</p>
+<blockquote>
+<p><strong>谁真正拥有低成本试错权、跨岗位组合权、快速可玩反馈，以及否决旧 benchmark 的权力？</strong></p>
+</blockquote>
+<hr />
+<h2 id="9-first-credit-junior">9. 对 First-Credit / junior 问题的修正</h2>
+<p>“企业减少 junior → 训练成本转嫁给个人家庭”仍可能成立，但不能作为唯一解释。</p>
+<p>更完整的模型是：</p>
+<pre><code class="language-text">A. Apprenticeship Externalization
+known practice exists
+but firm underinvests in teaching it
+
+B. Exploration Deficit
+target new practice does not yet exist inside firm
+so there is nothing mature to transmit
+
+C. Evaluator Capture
+firm evaluates frontier candidates
+with legacy capability proxies
+</code></pre>
+<p>A 是成本分配问题。</p>
+<p>B 是知识生产问题。</p>
+<p>C 是选择与权力问题。</p>
+<p>三者必须分别取证。</p>
+<hr />
+<h2 id="10">10. 当前最强可保留命题</h2>
+<h3 id="h1-capability-reproduction-trap">H1 — Capability Reproduction Trap</h3>
+<blockquote>
+<p>一个组织越围绕已验证成功范式招聘、培训与晋升，越可能高效复制既有能力；如果缺少独立的 exploration channel，这种成功本身可能降低新能力被发现、识别和获得 agency 的概率。</p>
+</blockquote>
+<p><strong>Status: HYPOTHESIS / MULTIPLE INTERNAL ANCHORS / NO POPULATION EFFECT SIZE.</strong></p>
+<h3 id="h2-horizontal-discovery-complement">H2 — Horizontal Discovery Complement</h3>
+<blockquote>
+<p>对尚未制度化的新实践，peer / mod / jam / prototype 网络可以补充传统垂直 apprenticeship，因为参与者不是在学习标准答案，而是在共同搜索答案。</p>
+</blockquote>
+<p><strong>Status: PLAUSIBLE / NEEDS CROSS-ECOLOGY COMPARISON.</strong></p>
+<h3 id="h3-evaluator-capability-constraint">H3 — Evaluator Capability Constraint</h3>
+<blockquote>
+<p>frontier talent 的选择质量不仅取决于候选人能力，也取决于评价者是否拥有识别目标新 practice 的能力；旧范式资历可能是必要背景，也可能只是错误代理变量。</p>
+</blockquote>
+<p><strong>Status: PROMISING / NEEDS DIRECT HIRING OR GREENLIGHT EVIDENCE.</strong></p>
+<hr />
+<h2 id="11">11. 明确拒绝的强说法</h2>
+<p>当前不得写成：</p>
+<ul>
+<li>“老一代游戏人不会创新”；</li>
+<li>“年轻人一定比老兵懂新范式”；</li>
+<li>“大厂经验越多越保守”；</li>
+<li>“公司培训没有价值”；</li>
+<li>“Jam / itch 一定比商业公司更会培养人才”；</li>
+<li>“中国缺乏原创只因为老兵把持评价权”。</li>
+</ul>
+<p>这些都需要分母和反例。</p>
+<p>本篇只要求以后研究时首先问：</p>
+<blockquote>
+<p><strong>这条知识真的已经存在于 mentor 所在组织里吗？</strong></p>
+</blockquote>
+<p>以及：</p>
+<blockquote>
+<p><strong>评价 frontier practice 的人，是否真的有能力识别它？</strong></p>
+</blockquote>
+<hr />
+<h2 id="12">12. 下一轮取证</h2>
+<ol>
+<li>对中国 Role-Origin Dataset 新增 <code>ZERO-TO-ONE RECENCY / PROTOTYPE FREQUENCY / EVALUATOR CAPABILITY / EXTERNAL LEARNING CHANNEL</code>；</li>
+<li>找“大厂内部成功产生 frontier practice”的反例，防止把 incumbent 写成静态保守机器；</li>
+<li>找“横向 indie / Jam 社群集体追错方向”的失败样本，测试 Horizontal Discovery 的边界；</li>
+<li>比较同一组织内 exploitation 团队与 exploration cell 的人才晋升和项目裁决；</li>
+<li>对 DOOM 2016、NExT、Nintendo / Pocketpair 等已有研究，仅在有直接证据时判断“谁教谁、谁不会什么”，不得从年龄或组织规模倒推。</li>
+</ol>
+<p><strong>Current verdict:</strong> “不训练新人”至少包含成本外包、组织能力上限和评价能力错配三种机制。对新范式而言，垂直 mentorship 可能没有知识可传；横向原型网络的重要性之一，就是在旧组织知识边界之外生产新的 practice。但这一机制目前仍是跨案例研究假说，不得替代数量级和因果检验。</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / book/research-notes/capability-reproduction-trap-horizontal-discovery-048.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

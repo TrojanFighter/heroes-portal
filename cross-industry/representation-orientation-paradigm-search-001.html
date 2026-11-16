@@ -1,0 +1,1234 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Representation / Orientation / Paradigm：Alan Kay、Boyd、Kuhn 与前范式搜索 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl class="on"" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0" class="t2">0. 核心问题</a><a href="#1-alan-kaypoint-of-view" class="t2">1. Alan Kay：Point of View 不是修辞，而是问题难度本身的一部分</a><a href="#representation-leverage" class="t3">Representation Leverage</a><a href="#2-kay-1997point-of-view" class="t2">2. Kay 1997：真正危险的是把一个Point of View变成宗教</a><a href="#3-kay-medium-masquerade" class="t2">3. Kay 的“Medium Masquerade”：新媒介常先伪装成更好的旧东西</a><a href="#ai-llm" class="t3">对生成式AI / LLM游戏的研究意义</a><a href="#4-kuhnparadigm" class="t2">4. Kuhn：Paradigm 不只是理论，而是“什么题值得做”的生成器</a><a href="#benchmark-as-exemplar" class="t3">Benchmark as Exemplar</a><a href="#5-normal-science-puzzle-solving-competence" class="t2">5. Normal Science ≈ Puzzle-Solving Competence：高能力不等于前范式能力</a><a href="#6-kuhnanomaly" class="t2">6. Kuhn最值得本项目吸收的是“anomaly不是自动革命”</a><a href="#_1" class="t3">两种错误</a><a href="#7-patch-burden" class="t2">7. Patch Burden：范式衰退可以表现为“补丁税”</a><a href="#8-incommensurability" class="t2">8. Incommensurability：真正的新答案可能先在旧指标上显得更差</a><a href="#9-john-boydoodaorientation" class="t2">9. John Boyd：真正的OODA核心不是“快”，而是Orientation</a><a href="#10-boyd-1976destruction-and-creation" class="t2">10. Boyd 1976《Destruction and Creation》：成熟判断必须能拆毁自己的概念</a><a href="#11-orientation-updating" class="t2">11. Orientation Updating：不是简单“接受新信息”</a><a href="#12-kay-kuhn-boydrepresentation-escape" class="t2">12. Kay × Kuhn × Boyd：三层Representation Escape</a><a href="#kay-micro-design-reframing" class="t3">Kay — Micro / Design Reframing</a><a href="#kuhn-community-paradigm-structure" class="t3">Kuhn — Community / Paradigm Structure</a><a href="#boyd-dynamic-continuous-reorientation" class="t3">Boyd — Dynamic / Continuous Reorientation</a><a href="#13-polanyiparadigm" class="t2">13. 与Polanyi的连接：Paradigm本身也通过隐性范例学习</a><a href="#14-benchmark" class="t2">14. 与中国“做题能力 / benchmark”研究的严格接口</a><a href="#puzzle-solving-formation-hypothesis" class="t3">Puzzle-Solving Formation Hypothesis</a><a href="#15-airepresentation" class="t2">15. AI：最大的风险可能不是平均化答案，而是加速既有Representation</a><a href="#16-aireorientation" class="t2">16. AI也可以成为Reorientation工具，但必须被刻意使用</a><a href="#17-problem-difficulty-decomposition" class="t2">17. 新增：Problem Difficulty Decomposition</a><a href="#compute-difficulty" class="t3">Compute Difficulty</a><a href="#search-difficulty" class="t3">Search Difficulty</a><a href="#evidence-difficulty" class="t3">Evidence Difficulty</a><a href="#representation-difficulty" class="t3">Representation Difficulty</a><a href="#18-paradigm-shift" class="t2">18. Paradigm Shift不应成为烂项目免死金牌</a><a href="#181-anomaly-revolution" class="t3">18.1 Anomaly ≠ Revolution</a><a href="#182-incommensurability-no-evaluation" class="t3">18.2 Incommensurability ≠ No Evaluation</a><a href="#183-new-language-new-capability" class="t3">18.3 New Language ≠ New Capability</a><a href="#184-paradigm-claim-needs-superior-puzzle-power" class="t3">18.4 Paradigm Claim Needs Superior Puzzle Power</a><a href="#19-reader-facing-debugger" class="t2">19. Reader-facing Debugger</a><a href="#20" class="t2">20. 当前最值得继续验证的问题</a><a href="#21-lakatos" class="t2">21. Lakatos：不要用“一次反例”杀死整个研究纲领</a><a href="#22-product-research-programme" class="t2">22. Product Research Programme：产品不是一个假设，而是一串逐步变强或逐步退化的假设</a><a href="#progressive-product-programme" class="t3">Progressive Product Programme</a><a href="#degenerating-product-programme" class="t3">Degenerating Product Programme</a><a href="#23-progressive-patch-vs-degenerative-patch" class="t2">23. Progressive Patch vs Degenerative Patch：不是所有补丁都坏</a><a href="#progressive-patch" class="t3">Progressive Patch / 进步性补丁</a><a href="#degenerative-patch" class="t3">Degenerative Patch / 退化性补丁</a><a href="#24-prediction-before-outcome-test" class="t2">24. Prediction-Before-Outcome Test：最便宜的反自欺工具</a><a href="#_2" class="t3">事后叙事越来越漂亮，模型却没变准。</a><a href="#25-hard-core" class="t2">25. Hard Core：什么时候应该保护核心假设，什么时候应该连核心一起杀？</a><a href="#hard-core" class="t3">Hard Core</a><a href="#protective-belt" class="t3">Protective Belt</a><a href="#26-hard-core-immunity-risk" class="t2">26. Hard-Core Immunity Risk：核心保护也会变成宗教</a><a href="#27-competing-programmes" class="t2">27. Competing Programmes：不要只问“这个项目有没有进步”</a><a href="#programme-a" class="t3">Programme A</a><a href="#programme-b" class="t3">Programme B</a><a href="#28-progressive-research-programme" class="t2">28. Progressive Research Programme 与“同构异性创新”的边界</a><a href="#29-lakatos-kuhn-boyd-kay" class="t2">29. Lakatos × Kuhn × Boyd × Kay：现在可以形成一个更完整的更新循环</a><a href="#kay" class="t3">Kay</a><a href="#kuhn" class="t3">Kuhn</a><a href="#boyd" class="t3">Boyd</a><a href="#lakatos" class="t3">Lakatos</a><a href="#30-reversible-bets" class="t2">30. 与Reversible Bets连接：早期要允许“研究纲领”活，而不是允许大项目无限烧钱</a><a href="#31" class="t2">31. 与个人主义主线连接：独立判断不是“死守我的观点”</a><a href="#32-reader-facing" class="t2">32. Reader-facing：项目正在进步，还是只是在变得更会解释自己？</a><a href="#33-lakatos" class="t2">33. 边界：不能把Lakatos直接当商业评分公式</a><a href="#sources" class="t2">Sources</a></aside><article class="doc"><div class="col"><h1 id="representation-orientation-paradigmalan-kayboydkuhn">Representation / Orientation / Paradigm：Alan Kay、Boyd、Kuhn 与前范式搜索</h1>
+<ul>
+<li>Status: <strong>CROSS-INDUSTRY SYNTHESIS / THEORY NODE / PRE-CLAIM</strong></li>
+<li>As-of: 2026-10-08</li>
+<li>Purpose: 解释为什么同样聪明的人面对同一事实，可能因为表征、定向与范式不同而看到完全不同的问题；并把“换视角”从格言升级成可审计的创新机制。</li>
+<li>Related:</li>
+<li><a href="/heroes-portal/cross-industry/judgment-under-uncertainty-theory-stack-001.html">Judgment Under Uncertainty</a></li>
+<li><a href="/heroes-portal/cross-industry/tacit-judgment-selection-apprenticeship-ai-001.html">Tacit Judgment / Selection Apprenticeship</a></li>
+<li><a href="/heroes-portal/cross-industry/self-obsolescence-second-answer-test-001.html">Self-Obsolescence / Second-Answer Test</a></li>
+<li><a href="/heroes-portal/cross-industry/innovation-constitutionalism-exit-voice-loyalty-001.html">Innovation Constitutionalism</a></li>
+<li><a href="/heroes-portal/cross-industry/reversible-bets-irreversibility-gradient-001.html">Reversible Bets / Irreversibility Gradient</a></li>
+</ul>
+<h2 id="0">0. 核心问题</h2>
+<p class="dc">很多创新失败被描述成：
+- 信息不够；
+- 人不够聪明；
+- 执行不够强；
+- 数据不够多。</p>
+<p>Alan Kay、John Boyd、Thomas Kuhn共同提示另一类失败：</p>
+<blockquote>
+<p><strong>真正的问题可能不是“缺少答案”，而是现有表征 / orientation / paradigm 已经预先规定了什么算问题、什么算证据、什么值得注意。</strong></p>
+</blockquote>
+<p>因此：</p>
+<pre><code class="language-text">more intelligence
++ more data
++ more execution
+inside a bad representation
+→ faster optimization of the wrong problem
+</code></pre>
+<p>本节点提出：</p>
+<h1 id="representation-sovereignty"><code>REPRESENTATION SOVEREIGNTY / 表征主权</code></h1>
+<blockquote>
+<p><strong>在已有问题定义、行业分类、指标和解释框架之外，保留重新描述对象、重新划定问题边界、重新选择比较维度的合法性。</strong></p>
+</blockquote>
+<p>它不是“随便换说法”，而是：</p>
+<blockquote>
+<p>当旧表征持续制造异常、局部补丁与解释困难时，允许新的表征与旧表征共同接受现实检验。</p>
+</blockquote>
+<hr />
+<h2 id="1-alan-kaypoint-of-view">1. Alan Kay：Point of View 不是修辞，而是问题难度本身的一部分</h2>
+<p>Alan Kay 1982年演讲留下了后来被广泛引用的：</p>
+<blockquote>
+<p>“Point of view is worth 80 IQ points.”</p>
+</blockquote>
+<p>现有最早可查材料来自Andy Hertzfeld当年的讲座笔记；1984年的同期采访也再次记录Kay用相近表述强调：新的看问题方式有时比单纯增加智力更有效。</p>
+<p>Source:
+- Quote Investigator 对早期资料的追踪：
+  https://quoteinvestigator.com/2018/05/29/pov/</p>
+<p>这里“80 IQ”显然不是心理测量结论，而是工程启发：</p>
+<blockquote>
+<p><strong>困难程度不是只由问题客观复杂度决定，也由你用什么representation描述它决定。</strong></p>
+</blockquote>
+<h3 id="representation-leverage">Representation Leverage</h3>
+<p>新增：</p>
+<h1 id="representation-leverage_1"><code>REPRESENTATION LEVERAGE / 表征杠杆</code></h1>
+<blockquote>
+<p><strong>通过改变对象的表示方式，使原本需要大量搜索、补丁或计算的问题，转化为更容易被看见、组合和解决的问题。</strong></p>
+</blockquote>
+<p>例如：
+- 新数学记号改变可操作问题空间；
+- 新编程抽象改变系统复杂度的可见边界；
+- 新产品概念改变用户真正需要比较的对象。</p>
+<p>Kay的价值不在“换角度很重要”这句常识，
+而在于他的技术生涯长期把：</p>
+<blockquote>
+<p><strong>新的representation</strong>
+当成真正的能力创造。</p>
+</blockquote>
+<hr />
+<h2 id="2-kay-1997point-of-view">2. Kay 1997：真正危险的是把一个Point of View变成宗教</h2>
+<p>Kay在1997年OOPSLA演讲里直接批评把单一观点固定成宗教式真理，并讨论Smalltalk商业化后不再继续自我重写的问题；他反而强调系统应该保留通向下一层抽象和下一版本自己的能力。</p>
+<p>Sources:
+- OOPSLA 1997 transcript:
+  https://tinlizzie.org/IA/index.php/Alan_Kay_at_OOPSLA_1997%3A_The_Computer_Revolution_has_not_Happened_yet
+- Stanford 1997 talk abstract:
+  https://web.stanford.edu/class/ee380/9697spr/node10.html</p>
+<p>这与本项目已有Self-Obsolescence高度一致：</p>
+<h1 id="a-good-representation-must-not-become-immune-to-re-representation"><code>A GOOD REPRESENTATION MUST NOT BECOME IMMUNE TO RE-REPRESENTATION</code></h1>
+<p>即：</p>
+<blockquote>
+<p>一个强抽象最大的风险，就是它成功以后把自己的边界伪装成世界本身的边界。</p>
+</blockquote>
+<p>因此新增：</p>
+<h1 id="representation-lock-in"><code>REPRESENTATION LOCK-IN / 表征锁定</code></h1>
+<p>不是“坚持某个方案”，而是：</p>
+<blockquote>
+<p><strong>整个组织已经只能用某一套概念语言看问题，以至于不符合该语言的现象很难获得问题资格。</strong></p>
+</blockquote>
+<hr />
+<h2 id="3-kay-medium-masquerade">3. Kay 的“Medium Masquerade”：新媒介常先伪装成更好的旧东西</h2>
+<p>Kay 1997 Stanford演讲摘要提出一个极重要的历史判断：</p>
+<blockquote>
+<p>世界改变型发明刚出现时往往难以被理解，只能先伪装成“better old things”，而不是立刻被当成“completely new things”。</p>
+</blockquote>
+<p>他把印刷、汽车、电影、电视与数字计算都放进这一模式。</p>
+<p>Source:
+- Stanford EE380 1997:
+  https://web.stanford.edu/class/ee380/9697spr/node10.html</p>
+<p>新增：</p>
+<h1 id="medium-masquerade"><code>MEDIUM MASQUERADE / 新媒介伪装</code></h1>
+<pre><code class="language-text">new capability appears
+→ users / investors / designers interpret it using old category
+→ product is optimized as &quot;better old thing&quot;
+→ genuinely new affordance remains underused
+</code></pre>
+<h3 id="ai-llm">对生成式AI / LLM游戏的研究意义</h3>
+<p>当前很多“AI游戏”仍可能处于：
+- better dialogue system；
+- more NPC text；
+- more quests；
+- cheaper content production；</p>
+<p>这不等于已经找到：</p>
+<h1 id="llm-native-product-grammar"><code>LLM-NATIVE PRODUCT GRAMMAR</code></h1>
+<p>真正的“computer revolution hasn&rsquo;t happened yet”式问题应是：</p>
+<blockquote>
+<p><strong>如果不假设传统NPC、任务、对话树和作者内容生产方式必须保留，这种能力到底允许什么以前不存在的完整体验？</strong></p>
+</blockquote>
+<p>这不是断言现有LLM游戏一定失败，
+而是建立一个压力测试：</p>
+<h1 id="old-medium-improvement-new-medium-discovery"><code>OLD-MEDIUM IMPROVEMENT ≠ NEW-MEDIUM DISCOVERY</code></h1>
+<hr />
+<h2 id="4-kuhnparadigm">4. Kuhn：Paradigm 不只是理论，而是“什么题值得做”的生成器</h2>
+<p>Kuhn的“paradigm”常被商业写作滥用成：</p>
+<blockquote>
+<p>大趋势 / 新时代 / 颠覆。</p>
+</blockquote>
+<p>更严格的Kuhn框架要复杂得多。</p>
+<p>Stanford Encyclopedia的总结强调：</p>
+<ul>
+<li>normal science依赖稳定的disciplinary matrix；</li>
+<li>paradigm提供可解的puzzles以及解题工具；
+-更窄意义的paradigm是<code>exemplar</code>：公认的经典问题—解法样本；</li>
+<li>exemplar会告诉共同体：
+  1. 以后哪些问题像“正经问题”；
+  2. 应该用什么办法解决；
+  3. 什么样的结果算高质量答案。</li>
+</ul>
+<p>Source:
+- Stanford Encyclopedia of Philosophy, Thomas Kuhn:
+  https://plato.stanford.edu/entries/thomas-kuhn/</p>
+<p>这与我们游戏行业的benchmark研究存在非常强的结构相似。</p>
+<h3 id="benchmark-as-exemplar">Benchmark as Exemplar</h3>
+<p>工作类比：</p>
+<pre><code class="language-text">successful game / product
+→ becomes exemplar
+→ defines legitimate problem family
+→ defines accepted solution techniques
+→ defines evaluation standards
+→ trains next generation to perceive similarity
+</code></pre>
+<p>因此benchmark最深的影响并不是：</p>
+<blockquote>
+<p>大家抄feature。</p>
+</blockquote>
+<p>而可能是：</p>
+<blockquote>
+<p><strong>大家逐渐只会看见那些能被成功benchmark语言描述的问题。</strong></p>
+</blockquote>
+<p>新增：</p>
+<h1 id="exemplar-capture"><code>EXEMPLAR CAPTURE / 范例俘获</code></h1>
+<p>这比Feature Copy更深一层。</p>
+<hr />
+<h2 id="5-normal-science-puzzle-solving-competence">5. Normal Science ≈ Puzzle-Solving Competence：高能力不等于前范式能力</h2>
+<p>Kuhn把正常科学描述为puzzle-solving：
+- 基本框架已接受；
+- 问题大致可解；
+- 方法家族相对熟悉；
+- 成功主要依赖专业能力。</p>
+<p>这不是贬义。</p>
+<p>正常科学之所以强，是因为共同范式让大量人不必每天重新争论基础，可以：
+- 深挖细节；
+- 提高精度；
+- 累积专业能力。</p>
+<p>所以对应产业研究必须避免：</p>
+<blockquote>
+<p>“范式内工作 = 低级模仿。”</p>
+</blockquote>
+<p>成熟产业绝大多数高质量进步本来就是：</p>
+<h1 id="high-skill-normal-production"><code>HIGH-SKILL NORMAL PRODUCTION</code></h1>
+<p>但它与：</p>
+<h1 id="paradigm-formation-pre-paradigm-search"><code>PARADIGM FORMATION / PRE-PARADIGM SEARCH</code></h1>
+<p>不是同一种能力。</p>
+<p>因此此前：
+- Production Capital；
+- Problem-Framing Capital；
+- 同构异性创新；
+- 前范式创新</p>
+<p>可以获得Kuhn式补充：</p>
+<pre><code class="language-text">Puzzle-Solving Excellence
+≠
+Paradigm-Formation Capacity
+</code></pre>
+<p>一个人可以在既定语言里极其聪明，
+却几乎没有训练：</p>
+<blockquote>
+<p>重新决定什么才值得成为问题。</p>
+</blockquote>
+<hr />
+<h2 id="6-kuhnanomaly">6. Kuhn最值得本项目吸收的是“anomaly不是自动革命”</h2>
+<p>Kuhn并不主张：</p>
+<blockquote>
+<p>看到一个反例就推翻整个范式。</p>
+</blockquote>
+<p>恰恰相反，normal science通常会：
+- 忽略异常；
+- 归因实验误差；
+- 建立局部补丁；
+- 继续解决其他puzzles。</p>
+<p>只有当某些异常变得：
+- 持续；
+- 重要；
+- 破坏正常研究实践；
+- 无法通过既有补丁吸收，</p>
+<p>才可能形成crisis。</p>
+<p>因此新增：</p>
+<h1 id="anomaly-promotion-threshold"><code>ANOMALY PROMOTION THRESHOLD / 异常升级阈值</code></h1>
+<blockquote>
+<p><strong>一个反常结果需要达到什么程度，才有资格从“局部bug”升级为“可能是整个representation出了问题”？</strong></p>
+</blockquote>
+<h3 id="_1">两种错误</h3>
+<h4 id="overreaction">Overreaction</h4>
+<p>每一个坏数据都宣布：</p>
+<blockquote>
+<p>范式革命。</p>
+</blockquote>
+<p>结果无法积累任何稳定能力。</p>
+<h4 id="underreaction">Underreaction</h4>
+<p>所有反例都被解释成：</p>
+<blockquote>
+<p>特例 / 用户问题 / 执行不到位。</p>
+</blockquote>
+<p>结果范式永远免疫。</p>
+<p>健康系统需要：</p>
+<h1 id="anomaly-accounting"><code>ANOMALY ACCOUNTING</code></h1>
+<p>记录：
+- anomaly是否重复；
+- 是否跨项目出现；
+- 需要多少ad hoc patch才能维持旧解释；
+- 是否开始破坏旧模型的预测能力。</p>
+<hr />
+<h2 id="7-patch-burden">7. Patch Burden：范式衰退可以表现为“补丁税”</h2>
+<p>新增：</p>
+<h1 id="paradigm-patch-burden"><code>PARADIGM PATCH BURDEN / 范式补丁负担</code></h1>
+<p>当一个旧模型仍然能勉强解释现实，但需要越来越多：
+- 特例；
+- 例外规则；
+- 额外KPI；
+- 用户细分；
+- 特殊流程；
+- “这次情况不同”的解释；</p>
+<p>组织可能仍感到：</p>
+<blockquote>
+<p>模型是对的，只是现实越来越复杂。</p>
+</blockquote>
+<p>另一个解释是：</p>
+<blockquote>
+<p><strong>representation已经开始失配。</strong></p>
+</blockquote>
+<p>这与软件里的technical debt相似：</p>
+<pre><code class="language-text">old paradigm
++ accumulating exceptions
+→ explanatory maintenance cost ↑
+</code></pre>
+<p>该指标目前是H级机制，不应机械用“规则多”判定范式错误。</p>
+<hr />
+<h2 id="8-incommensurability">8. Incommensurability：真正的新答案可能先在旧指标上显得更差</h2>
+<p>Kuhn的incommensurability并不等于：</p>
+<blockquote>
+<p>新旧范式完全无法比较。</p>
+</blockquote>
+<p>更准确的是：
+- 比较标准本身可能部分改变；
+- 不同范式对“什么问题重要”权重不同；
+- 相同观察也可能被不同理论结构解释。</p>
+<p>SEP明确强调：</p>
+<blockquote>
+<p>incommensurability不是non-comparability，
+但会让比较远比使用一套永久中立指标复杂。</p>
+</blockquote>
+<p>这对产品创新尤其重要。</p>
+<p>新增：</p>
+<h1 id="metric-regime-dependence"><code>METRIC REGIME DEPENDENCE / 指标制度依赖</code></h1>
+<p>一个新产品若改变：
+- 用户任务；
+-使用频率；
+-消费方式；
+-交互单位；
+-产品边界；</p>
+<p>那么旧产品最重要的指标未必仍是最重要指标。</p>
+<p>这与Christensen高度相邻：</p>
+<blockquote>
+<p>disruptive trajectory早期可以在主流客户重视的旧性能指标上更差。</p>
+</blockquote>
+<p>但必须保留边界：</p>
+<h1 id="kuhn-christensen">Kuhn ≠ Christensen</h1>
+<ul>
+<li>Kuhn研究科学共同体中的理论、方法、标准与范例；</li>
+<li>Christensen研究产业、客户价值网络和资源分配。</li>
+</ul>
+<p>二者只能作结构比较，不能互相证明。</p>
+<hr />
+<h2 id="9-john-boydoodaorientation">9. John Boyd：真正的OODA核心不是“快”，而是Orientation</h2>
+<p>商业管理常把OODA简化为：</p>
+<blockquote>
+<p>Observe → Orient → Decide → Act，谁循环更快谁赢。</p>
+</blockquote>
+<p>Boyd最终版本比这复杂得多。</p>
+<p>Air University保存/整理的Boyd材料显示，Orientation内部包含：
+- cultural traditions；
+- genetic heritage；
+- previous experience；
+- new information；
+- analysis &amp; synthesis。</p>
+<p>Boyd把Orientation称为最重要部分，因为它会塑造：
+- how we observe；
+- how we decide；
+- how we act。</p>
+<p>Sources:
+- Air University, <em>A Discourse on Winning and Losing</em>:
+  https://www.airuniversity.af.edu/Portals/10/AUPress/Books/B_0151_Boyd_Discourse_Winning_Losing.pdf
+- Air University summary:
+  https://www.airuniversity.af.edu/News/Display/Article/420819/ooda-loop-makes-its-mark-on-maxwell/</p>
+<p>所以：</p>
+<h1 id="observation-is-not-raw-input"><code>OBSERVATION IS NOT RAW INPUT</code></h1>
+<p>同样的市场、玩家反馈、战场或技术变化，
+会因为不同orientation而被分类成不同问题。</p>
+<p>这与Kuhn的：</p>
+<blockquote>
+<p>paradigm shapes observation</p>
+</blockquote>
+<p>形成很强的结构相似。</p>
+<hr />
+<h2 id="10-boyd-1976destruction-and-creation">10. Boyd 1976《Destruction and Creation》：成熟判断必须能拆毁自己的概念</h2>
+<p>Boyd在《Destruction and Creation》中直接提出：</p>
+<blockquote>
+<p>人为了理解和应对环境，会构建mental patterns / concepts of meaning；而为了适应不断变化的环境，又必须不断destroy and create这些pattern。</p>
+</blockquote>
+<p>Source:
+- John Boyd, <em>Destruction and Creation</em>, 1976:
+  https://en.wikisource.org/wiki/File:Destruction_%26_Creation.pdf</p>
+<p>这意味着学习不只是：</p>
+<h1 id="add-new-information"><code>ADD NEW INFORMATION</code></h1>
+<p>而还包括：</p>
+<h1 id="destroy-old-coherence"><code>DESTROY OLD COHERENCE</code></h1>
+<p>新增：</p>
+<h1 id="orientation-debt"><code>ORIENTATION DEBT / 定向债务</code></h1>
+<blockquote>
+<p><strong>过去经验构成的orientation曾经很有用，但环境改变后，它开始系统性过滤、扭曲或低估新信息。</strong></p>
+</blockquote>
+<p>它和Self-Obsolescence不同：</p>
+<ul>
+<li>Self-Obsolescence主要研究旧成功公式和资源配置；</li>
+<li>Orientation Debt研究更上游的“你如何解释观察”。</li>
+</ul>
+<p>一个组织可能已经换了产品，
+却仍用同一套：
+- category；
+- customer theory；
+- talent model；
+- risk language；
+解释世界。</p>
+<p>那只是：</p>
+<blockquote>
+<p>solution changed, orientation unchanged.</p>
+</blockquote>
+<hr />
+<h2 id="11-orientation-updating">11. Orientation Updating：不是简单“接受新信息”</h2>
+<p>Boyd框架真正困难的一点是：</p>
+<pre><code class="language-text">new information
+→ enters orientation
+→ orientation also filters interpretation of new information
+</code></pre>
+<p>因此存在反馈锁：</p>
+<pre><code class="language-text">old model
+→ classify new evidence
+→ evidence appears to support old model
+→ old model strengthens
+</code></pre>
+<p>新增：</p>
+<h1 id="self-sealing-orientation"><code>SELF-SEALING ORIENTATION / 自封闭定向</code></h1>
+<p>典型表现：
+- 新品成功 → “它其实还是旧品类，只是包装不同”；
+- 新玩法失败 → “证明创新没市场”；
+- competitor成功 → “他们只是运气/买量/市场特殊”；
+- junior提出异常 → “经验不够”。</p>
+<p>如果任何结果都能被旧模型重新解释，
+那么该模型已经失去现实可证伪性。</p>
+<hr />
+<h2 id="12-kay-kuhn-boydrepresentation-escape">12. Kay × Kuhn × Boyd：三层Representation Escape</h2>
+<p>三人并非思想师承，
+但可形成结构互补：</p>
+<h3 id="kay-micro-design-reframing">Kay — Micro / Design Reframing</h3>
+<p>问：</p>
+<blockquote>
+<p><strong>能不能换一种representation，让问题本身变简单或变成另一个问题？</strong></p>
+</blockquote>
+<p>核心：
+- Point of View；
+- abstraction；
+- medium discovery；
+- self-obsoleting system。</p>
+<h3 id="kuhn-community-paradigm-structure">Kuhn — Community / Paradigm Structure</h3>
+<p>问：</p>
+<blockquote>
+<p><strong>为什么整个专业共同体会长期共享同一套问题、范例和评价标准？什么时候异常积累到必须换框架？</strong></p>
+</blockquote>
+<p>核心：
+- normal science；
+- exemplar；
+- anomaly；
+- crisis；
+- paradigm change。</p>
+<h3 id="boyd-dynamic-continuous-reorientation">Boyd — Dynamic / Continuous Reorientation</h3>
+<p>问：</p>
+<blockquote>
+<p><strong>在环境持续变化时，个体和组织如何不断拆解、重组自己的mental pattern？</strong></p>
+</blockquote>
+<p>核心：
+- Orientation；
+- analysis/synthesis；
+- destruction/creation；
+- feedback。</p>
+<p>合并：</p>
+<pre><code class="language-text">Representation
+→ determines salience
+
+Shared representation
+→ becomes paradigm / exemplar system
+
+Accumulated paradigm
+→ becomes orientation
+
+Changing reality
+→ generates anomalies
+
+Adaptive actor
+→ destroys / recombines orientation
+
+New representation
+→ reveals new action space
+</code></pre>
+<hr />
+<h2 id="13-polanyiparadigm">13. 与Polanyi的连接：Paradigm本身也通过隐性范例学习</h2>
+<p>Kuhn后期特别强调：</p>
+<blockquote>
+<p>paradigm-as-exemplar。</p>
+</blockquote>
+<p>研究者并不是先背完一套完整rules，
+而是通过典型题解、训练和实践，
+学会“这个新问题像哪种经典问题”。</p>
+<p>这与Polanyi高度兼容：</p>
+<pre><code class="language-text">exemplar exposure
+→ perceived similarity
+→ tacit classification
+→ normal problem solving
+</code></pre>
+<p>因此师承既能生产：</p>
+<h1 id="taste"><code>TASTE</code></h1>
+<p>也能生产：</p>
+<h1 id="paradigm-blindness"><code>PARADIGM BLINDNESS</code></h1>
+<p>同一个训练机制既让新人快速学会看，
+也让某些东西从此变得：</p>
+<blockquote>
+<p>看不见。</p>
+</blockquote>
+<p>所以Selection Apprenticeship必须加入一个新目标：</p>
+<h1 id="representation-plurality"><code>REPRESENTATION PLURALITY / 表征复数性</code></h1>
+<p>导师不只教：</p>
+<blockquote>
+<p>“怎样正确看。”</p>
+</blockquote>
+<p>还应在适当阶段问：</p>
+<blockquote>
+<p><strong>如果我们现在的看法就是问题的一部分呢？</strong></p>
+</blockquote>
+<hr />
+<h2 id="14-benchmark">14. 与中国“做题能力 / benchmark”研究的严格接口</h2>
+<p>不能简单写：</p>
+<blockquote>
+<p>中国教育 = Kuhnian normal science。</p>
+</blockquote>
+<p>Kuhn研究的是科学史，不是教育社会学。</p>
+<p>但可以提出待证机制类比：</p>
+<h3 id="puzzle-solving-formation-hypothesis">Puzzle-Solving Formation Hypothesis</h3>
+<p>如果一个训练系统长期奖励：
+- 问题由上游定义；
+- 评价标准明确；
+- 解题方法有成熟范例；
+- 高分来自在固定representation中快速识别和执行；</p>
+<p>那么它很可能强化：</p>
+<h1 id="paradigm-internal-competence"><code>PARADIGM-INTERNAL COMPETENCE</code></h1>
+<p>但未必同强度训练：</p>
+<h1 id="problem-representation-sovereignty"><code>PROBLEM / REPRESENTATION SOVEREIGNTY</code></h1>
+<p>同样，在商业游戏行业：</p>
+<pre><code class="language-text">successful benchmark
+→ feature grammar
+→ hiring vocabulary
+→ pitch template
+→ KPI
+→ new projects perceived through old exemplar
+</code></pre>
+<p>可能形成：</p>
+<h1 id="industrial-normal-science"><code>INDUSTRIAL NORMAL SCIENCE</code></h1>
+<p>这个命题必须继续用：
+- 原型历史；
+- pitch；
+-立项材料；
+-人员职业路径；
+-失败项目；
+跨国比较验证。</p>
+<p>它不是“中国人天生范式内思考”的文化论。</p>
+<hr />
+<h2 id="15-airepresentation">15. AI：最大的风险可能不是平均化答案，而是加速既有Representation</h2>
+<p>AI常被描述成：</p>
+<blockquote>
+<p>generation machine。</p>
+</blockquote>
+<p>但它同样是：</p>
+<h1 id="representation-amplifier"><code>REPRESENTATION AMPLIFIER</code></h1>
+<p>如果prompt已经默认：
+- 当前品类；
+- 当前feature vocabulary；
+- 当前benchmark；
+- 当前metric；</p>
+<p>AI可以极快生成大量：</p>
+<blockquote>
+<p><strong>within-paradigm alternatives。</strong></p>
+</blockquote>
+<p>于是：</p>
+<pre><code class="language-text">variation count ↑↑
+representation diversity ↔ / ↓
+</code></pre>
+<p>这就是为什么：</p>
+<blockquote>
+<p>多agent ≠ 多范式。</p>
+</blockquote>
+<p>如果所有agent共享：
+-相似训练语料；
+-相似prompt；
+-相似评价器；</p>
+<p>它们可能只是：</p>
+<blockquote>
+<p>一群在同一世界模型里高效争论的人。</p>
+</blockquote>
+<p>新增：</p>
+<h1 id="representational-diversity"><code>REPRESENTATIONAL DIVERSITY / 表征多样性</code></h1>
+<p>和：</p>
+<h1 id="output-diversity"><code>OUTPUT DIVERSITY</code></h1>
+<p>必须分开。</p>
+<hr />
+<h2 id="16-aireorientation">16. AI也可以成为Reorientation工具，但必须被刻意使用</h2>
+<p>更高价值的AI工作流不是：</p>
+<blockquote>
+<p>给我10个玩法方案。</p>
+</blockquote>
+<p>而是：</p>
+<ol>
+<li>用现有行业语言描述问题；</li>
+<li>要求列出该描述隐含的分类、假设和比较维度；</li>
+<li>用另一学科 / 另一产品范式重新表述同一现象；</li>
+<li>生成互不兼容的三种causal representation；</li>
+<li>分别预测哪些现实证据会被各模型视为关键；</li>
+<li>找到能区分这些模型的低成本实验。</li>
+</ol>
+<p>即：</p>
+<h1 id="representation-prototyping"><code>REPRESENTATION PROTOTYPING / 表征原型</code></h1>
+<p>在做产品prototype之前，
+先prototype：</p>
+<blockquote>
+<p><strong>我们到底如何描述这个问题。</strong></p>
+</blockquote>
+<p>这可能是AI时代非常便宜却高价值的新能力。</p>
+<hr />
+<h2 id="17-problem-difficulty-decomposition">17. 新增：Problem Difficulty Decomposition</h2>
+<p>当团队觉得：</p>
+<blockquote>
+<p>“这个问题很难。”</p>
+</blockquote>
+<p>先区分四种不同困难：</p>
+<h3 id="compute-difficulty">Compute Difficulty</h3>
+<p>答案存在，但计算量大。</p>
+<h3 id="search-difficulty">Search Difficulty</h3>
+<p>候选很多，不知道哪个最好。</p>
+<h3 id="evidence-difficulty">Evidence Difficulty</h3>
+<p>无法低成本获得真实反馈。</p>
+<h3 id="representation-difficulty">Representation Difficulty</h3>
+<p>当前描述方式让真正结构不可见。</p>
+<p>前3种通常靠：
+- 更多算力；
+- 更强搜索；
+- 更好实验。</p>
+<p>第4种如果不解决，
+前三种投入可能全部放大浪费。</p>
+<p>所以新增：</p>
+<h1 id="representation-first-diagnosis"><code>REPRESENTATION-FIRST DIAGNOSIS</code></h1>
+<blockquote>
+<p><strong>在投入更多人力、数据或AI以前，先确认问题是不是被错误表示。</strong></p>
+</blockquote>
+<hr />
+<h2 id="18-paradigm-shift">18. Paradigm Shift不应成为烂项目免死金牌</h2>
+<p>Kuhn在商业语境最常见的滥用是：</p>
+<blockquote>
+<p>“大家看不懂我，因为我是新范式。”</p>
+</blockquote>
+<p>这在逻辑上没有任何证明力。</p>
+<p>因此强制边界：</p>
+<h3 id="181-anomaly-revolution">18.1 Anomaly ≠ Revolution</h3>
+<p>旧模型出现异常不代表你的替代模型正确。</p>
+<h3 id="182-incommensurability-no-evaluation">18.2 Incommensurability ≠ No Evaluation</h3>
+<p>比较困难不等于不需要现实检验。</p>
+<h3 id="183-new-language-new-capability">18.3 New Language ≠ New Capability</h3>
+<p>改一套术语并不创造新产品价值。</p>
+<h3 id="184-paradigm-claim-needs-superior-puzzle-power">18.4 Paradigm Claim Needs Superior Puzzle Power</h3>
+<p>替代框架至少应：
+- 解释重要旧问题；
+- 解释旧框架解释不了的异常；
+- 产生新的可验证预测或产品可能性。</p>
+<p>否则只是：</p>
+<h1 id="rhetorical-reframing"><code>RHETORICAL REFRAMING</code></h1>
+<hr />
+<h2 id="19-reader-facing-debugger">19. Reader-facing Debugger</h2>
+<p>遇到一个“行业共识”：</p>
+<p>问：
+1. 它最初解决了什么真实问题？
+2. 哪些成功案例成为exemplar？
+3. 现在大家是不是通过与这些exemplar的相似性评价新项目？
+4. 有哪些异常正在被持续解释成“执行问题”？
+5. 维持旧模型需要多少例外和补丁？</p>
+<p>遇到一个“技术革命”：</p>
+<p>问：
+1. 它现在是不是只被做成更好的旧产品？
+2. 哪种能力只有新技术才出现？
+3. 如果旧品类名称不存在，会怎样重新描述用户体验？
+4. 哪些旧metrics可能不再是主要价值指标？</p>
+<p>遇到一个“聪明但做不出来”的团队：</p>
+<p>问：</p>
+<blockquote>
+<p>是能力不够，还是representation让他们一直在解错题？</p>
+</blockquote>
+<p>遇到一个AI工作流：</p>
+<p>问：</p>
+<blockquote>
+<p>它增加的是output diversity，还是representation diversity？</p>
+</blockquote>
+<hr />
+<h2 id="20">20. 当前最值得继续验证的问题</h2>
+<ol>
+<li>游戏史上有哪些新范式在早期主要被理解成“更好的旧品类”，之后才形成独立语言；</li>
+<li>哪些游戏公司公开记录过“我们原来连问题都问错了”的representation shift；</li>
+<li>benchmark在pitch/hiring/design review里究竟怎样从参考案例变成exemplar；</li>
+<li>LLM /生成式AI游戏目前哪些项目真正改变了product grammar，哪些主要是medium masquerade；</li>
+<li>AI是否能通过representation-prototyping显著提高前范式搜索质量；</li>
+<li>中国/美国/日本设计教育分别训练多少“解给定题”与“重写问题”的能力；</li>
+<li>Anomaly Promotion Threshold能否从真实项目复盘中操作化；
+8.组织的Paradigm Patch Burden与后续大转向之间是否存在可观察关系。</li>
+</ol>
+<h2 id="21-lakatos">21. Lakatos：不要用“一次反例”杀死整个研究纲领</h2>
+<p>Lakatos的研究纲领方法，可以看成是在Popper与Kuhn之间搭桥：</p>
+<ul>
+<li>反对“一个反例出现，理论立刻死亡”的朴素证伪观；</li>
+<li>也反对“范式只能等社会共同体整体转换，无法比较进步性”的过度相对主义读法；</li>
+<li>评价单位不是孤立命题，而是一串不断修改的理论——一个 <strong>research programme</strong>。</li>
+</ul>
+<p>Stanford Encyclopedia 对其成熟框架的概括是：
+- programme存在相对稳定的 <strong>hard core</strong>；
+- 外围有可修改的 <strong>protective belt</strong>；
+- 面对异常时，通常先调整外围，而不是每次都立即抛弃核心；
+- 关键不是“有没有被反驳”，而是后续修改是否产生更丰富、可独立检验的新内容；
+- 如果新内容后来得到经验支持，则形成empirically progressive shift；
+- 如果修改只是为了事后容纳已经知道的失败，没有产生新的成功预测，则进入degenerating shift。</p>
+<p>Sources:
+- Lakatos, “Falsification and the Methodology of Scientific Research Programmes”:
+  https://personal.lse.ac.uk/robert49/teaching/ph201/week05_xtra_lakatos.pdf
+- Stanford Encyclopedia of Philosophy, Imre Lakatos:
+  https://plato.stanford.edu/entries/lakatos/</p>
+<p>这对产品创新非常重要，因为：</p>
+<blockquote>
+<p><strong>一个真正新东西早期出现反例，本来就不应该自动意味着整个方向错误。</strong></p>
+</blockquote>
+<p>否则任何需要多轮整合才能显值的新范式，
+都会被第一次粗糙prototype提前杀死。</p>
+<hr />
+<h2 id="22-product-research-programme">22. Product Research Programme：产品不是一个假设，而是一串逐步变强或逐步退化的假设</h2>
+<p>作为跨域类比，本项目引入：</p>
+<h1 id="product-research-programme"><code>PRODUCT RESEARCH PROGRAMME / 产品研究纲领</code></h1>
+<p>不是说游戏开发等同科学研究，
+而是借Lakatos区分两种完全不同的项目演化：</p>
+<h3 id="progressive-product-programme">Progressive Product Programme</h3>
+<pre><code class="language-text">core thesis
+→ prototype reveals anomaly
+→ model revised
+→ revised model predicts new player behavior / production result
+→ experiment run
+→ prediction partially confirmed
+→ product thesis gains explanatory + predictive power
+</code></pre>
+<h3 id="degenerating-product-programme">Degenerating Product Programme</h3>
+<pre><code class="language-text">core thesis
+→ prototype fails
+→ post-hoc excuse added
+→ next prototype fails differently
+→ another exception added
+→ every outcome can be explained after the fact
+→ no new prediction becomes easier to make
+</code></pre>
+<p>这里最重要的是：</p>
+<h1 id="post-hoc-explanation-progress"><code>POST-HOC EXPLANATION ≠ PROGRESS</code></h1>
+<p>一个团队“总能解释为什么失败”
+不代表它正在学习。</p>
+<p>真正更强的证据是：</p>
+<blockquote>
+<p><strong>新解释有没有改变下一次下注，并在结果出现前就提出可失败的预测？</strong></p>
+</blockquote>
+<hr />
+<h2 id="23-progressive-patch-vs-degenerative-patch">23. Progressive Patch vs Degenerative Patch：不是所有补丁都坏</h2>
+<p>前面提出：</p>
+<h1 id="paradigm-patch-burden_1"><code>PARADIGM PATCH BURDEN</code></h1>
+<p>Lakatos给这个概念一个必要修正。</p>
+<p>不能机械认为：</p>
+<blockquote>
+<p>patch越多，范式越坏。</p>
+</blockquote>
+<p>科学史上强理论同样需要大量辅助假设、边界条件和测量修正。</p>
+<p>真正该区分：</p>
+<h3 id="progressive-patch">Progressive Patch / 进步性补丁</h3>
+<p>补丁加入以后：
+- 不只解释旧失败；
+- 还暴露新的可测变量；
+- 预测此前没有专门针对的新结果；
+- 帮助团队设计新的区分性实验；
+- 后续至少一部分预测被现实支持。</p>
+<h3 id="degenerative-patch">Degenerative Patch / 退化性补丁</h3>
+<p>补丁加入以后：
+- 主要目的只是保存原结论；
+- 没有新的风险性预测；
+- 任何结果都能兼容；
+- 解释越来越依赖特殊情况；
+- 判断力没有变强，只是叙事能力变强。</p>
+<p>因此：</p>
+<h1 id="patch-count-predictive-yield-per-patch"><code>PATCH COUNT</code> 不如 <code>PREDICTIVE YIELD PER PATCH</code></h1>
+<p>重要。</p>
+<hr />
+<h2 id="24-prediction-before-outcome-test">24. Prediction-Before-Outcome Test：最便宜的反自欺工具</h2>
+<p>为把Lakatos转成项目审计，新增：</p>
+<h1 id="prediction-before-outcome-test"><code>PREDICTION-BEFORE-OUTCOME TEST / 结果前预测测试</code></h1>
+<p>每次重大修改前必须记录：</p>
+<ol>
+<li>我们现在认为前一版为什么失败？</li>
+<li>新模型与旧模型真正不同在哪里？</li>
+<li>如果新模型正确，下一轮应出现哪些新现象？</li>
+<li>哪些现象若出现，会削弱新模型？</li>
+<li>这些预测必须在测试结果出现<strong>之前</strong>写下。</li>
+</ol>
+<p>之后再比较：</p>
+<pre><code class="language-text">predicted result
+vs
+observed result
+</code></pre>
+<p>如果每次复盘都是：</p>
+<blockquote>
+<p>“结果出来以后，我们当然知道为什么。”</p>
+</blockquote>
+<p>但事前预测长期不改善，</p>
+<p>那极可能是：</p>
+<h1 id="retrospective-coherence-without-model-improvement"><code>RETROSPECTIVE COHERENCE WITHOUT MODEL IMPROVEMENT</code></h1>
+<h3 id="_2">事后叙事越来越漂亮，模型却没变准。</h3>
+<p>这也直接连接已有：
+- pre-registration；
+- Judgment Trace；
+- Experimental Taste；
+- Taste Calibration。</p>
+<hr />
+<h2 id="25-hard-core">25. Hard Core：什么时候应该保护核心假设，什么时候应该连核心一起杀？</h2>
+<p>Lakatos允许research programme暂时保护hard core，不把每一个反例都直接归咎核心。</p>
+<p>对应产品开发，可以把：</p>
+<h3 id="hard-core">Hard Core</h3>
+<p>暂时定义为：</p>
+<blockquote>
+<p><strong>项目最值得保护、最需要多轮现实检验的核心价值假设。</strong></p>
+</blockquote>
+<p>例如不是：</p>
+<blockquote>
+<p>“UI必须这样。”</p>
+</blockquote>
+<p>而可能是：</p>
+<blockquote>
+<p>“玩家会享受在有限信息下建立长期角色关系并承担后果。”</p>
+</blockquote>
+<h3 id="protective-belt">Protective Belt</h3>
+<p>则可能包含：
+- 当前UI；
+- 控制方式；
+-经济参数；
+-叙事节奏；
+-技术实现；
+-onboarding；
+-具体feature组合。</p>
+<p>这给Vision项目一个更严谨的保护方法：</p>
+<blockquote>
+<p><strong>可以保护核心，但必须允许外围大量死亡。</strong></p>
+</blockquote>
+<p>而不是：</p>
+<blockquote>
+<p>“为了愿景，所有实现都不能动。”</p>
+</blockquote>
+<hr />
+<h2 id="26-hard-core-immunity-risk">26. Hard-Core Immunity Risk：核心保护也会变成宗教</h2>
+<p>Lakatos框架同样有危险的管理学滥用：</p>
+<blockquote>
+<p>“这个是hard core，所以不能挑战。”</p>
+</blockquote>
+<p>一旦这样，就回到Kay批评的religion。</p>
+<p>因此产品hard core只能获得：</p>
+<h1 id="temporary-protected-status"><code>TEMPORARY PROTECTED STATUS</code></h1>
+<p>而不是永久免责。</p>
+<p>应该定期问：</p>
+<ol>
+<li>Protective belt已经换了多少轮？</li>
+<li>核心是否仍能产生新的成功预测？</li>
+<li>是否存在竞争programme用更少补丁解释更多现象？</li>
+<li>核心还能指导新行动，还是只剩身份功能？</li>
+</ol>
+<p>如果：</p>
+<pre><code class="language-text">belt rewrites ↑
+novel predictive success ↓
+competitor explanatory power ↑
+</code></pre>
+<p>则应该触发：</p>
+<h1 id="hard-core-revalidation"><code>HARD-CORE REVALIDATION</code></h1>
+<p>这与Self-Obsolescence直接兼容。</p>
+<hr />
+<h2 id="27-competing-programmes">27. Competing Programmes：不要只问“这个项目有没有进步”</h2>
+<p>Lakatos相对Kuhn更强调：</p>
+<blockquote>
+<p>历史中往往存在多个竞争research programmes，而不是永远只有一个统治范式。</p>
+</blockquote>
+<p>这对产品决策非常重要。</p>
+<p>项目不能只问：</p>
+<blockquote>
+<p>“我们比三个月前好了吗？”</p>
+</blockquote>
+<p>还要问：</p>
+<blockquote>
+<p><strong>与另一套完全不同的问题表示法相比，我们的学习速度和解释力如何？</strong></p>
+</blockquote>
+<p>例如两个候选方向：</p>
+<h3 id="programme-a">Programme A</h3>
+<p>“LLM的价值是让NPC无限对话。”</p>
+<h3 id="programme-b">Programme B</h3>
+<p>“LLM的价值是让玩家提出作者未预写的行动，并让系统维持长期因果后果。”</p>
+<p>双方都可以不断prototype。</p>
+<p>真正要比较的不是：</p>
+<blockquote>
+<p>谁demo更炫。</p>
+</blockquote>
+<p>而是：
+- 谁不断发现新的可验证机制；
+- 谁更稳定预测玩家行为；
+- 谁用更少ad hoc规则维持一致体验；
+- 谁产生更多此前旧游戏难以产生的体验事实。</p>
+<p>这叫：</p>
+<h1 id="programme-level-comparison"><code>PROGRAMME-LEVEL COMPARISON</code></h1>
+<hr />
+<h2 id="28-progressive-research-programme">28. Progressive Research Programme 与“同构异性创新”的边界</h2>
+<p>一个成熟赛道完全可以形成progressive programme。</p>
+<p>例如：
+- 每一代持续产生新的机制预测；
+- 技术改进创造新的行为可能性；
+- 用户研究揭示新的交互规律；
+- 不只是把原feature做得更大。</p>
+<p>所以不能写：</p>
+<blockquote>
+<p>只有原发性范式革命才叫progressive。</p>
+</blockquote>
+<p>反过来，一个号称“全新品类”的项目也可能是degenerating：
+- 每次失败都说“用户还没准备好”；
+- 没有新可证伪预测；
+- 没有提高因果理解；
+- 只不断修改故事。</p>
+<p>因此：</p>
+<h1 id="novelty-claim-progressive-programme"><code>NOVELTY CLAIM ≠ PROGRESSIVE PROGRAMME</code></h1>
+<p>这是防“创新神学”非常重要的边界。</p>
+<hr />
+<h2 id="29-lakatos-kuhn-boyd-kay">29. Lakatos × Kuhn × Boyd × Kay：现在可以形成一个更完整的更新循环</h2>
+<h3 id="kay">Kay</h3>
+<blockquote>
+<p>换representation可能让问题发生质变。</p>
+</blockquote>
+<h3 id="kuhn">Kuhn</h3>
+<blockquote>
+<p>成功representation会形成exemplar、正常解题与共同标准。</p>
+</blockquote>
+<h3 id="boyd">Boyd</h3>
+<blockquote>
+<p>这些传统和经验进入orientation，持续过滤新信息。</p>
+</blockquote>
+<h3 id="lakatos">Lakatos</h3>
+<blockquote>
+<p>当异常出现，不要看单次输赢；看整条programme是产生新的成功预测，还是只会事后补洞。</p>
+</blockquote>
+<p>合并：</p>
+<pre><code class="language-text">representation
+→ exemplar / paradigm
+→ orientation
+→ action
+→ anomaly
+
+anomaly
+→ progressive revision
+   → novel prediction
+   → corroboration
+   → programme strengthens
+
+or
+
+anomaly
+→ degenerative patch
+   → post-hoc accommodation
+   → no predictive gain
+   → programme decays
+
+sustained degeneration
+→ representation revalidation
+→ possible paradigm / product reframing
+</code></pre>
+<p>这给“什么时候该坚持，什么时候该pivot”一个比情绪和KPI更强的判断基础。</p>
+<hr />
+<h2 id="30-reversible-bets">30. 与Reversible Bets连接：早期要允许“研究纲领”活，而不是允许大项目无限烧钱</h2>
+<p>Lakatos最容易被错误应用为：</p>
+<blockquote>
+<p>“真正创新需要时间，所以继续投。”</p>
+</blockquote>
+<p>不成立。</p>
+<p>正确组合是：</p>
+<pre><code class="language-text">protect programme
+≠
+protect budget
+</code></pre>
+<p>可以保护：
+- 核心问题；
+- 小团队；
+- 多轮实验权；
+- 再尝试资格。</p>
+<p>同时不断限制：
+- 单轮投入；
+- 不可逆承诺；
+- production scope。</p>
+<p>即：</p>
+<h1 id="cheap-programme-persistence"><code>CHEAP PROGRAMME PERSISTENCE / 廉价纲领持续性</code></h1>
+<blockquote>
+<p><strong>允许同一核心假说经历多轮便宜现实检验，而不是因为一次失败被杀，也不是因为愿景尚未证伪就获得无限预算。</strong></p>
+</blockquote>
+<p>这正好把：
+- Reversible Bets；
+- Innovation Optionality；
+- Failure Harvesting；
+- Lakatos</p>
+<p>接起来。</p>
+<hr />
+<h2 id="31">31. 与个人主义主线连接：独立判断不是“死守我的观点”</h2>
+<p>Lakatos又给个人主义一个非常重要的反鸡汤边界。</p>
+<p>低质量个人主义：</p>
+<pre><code class="language-text">this is my vision
+→ criticism arrives
+→ reinterpret criticism
+→ vision remains unchanged forever
+</code></pre>
+<p>高质量独立判断：</p>
+<pre><code class="language-text">choose thesis independently
+→ expose it to risky tests
+→ improve predictions
+→ compare rival programmes
+→ abandon it when it persistently degenerates
+</code></pre>
+<p>所以：</p>
+<h1 id="judgment-sovereignty"><code>JUDGMENT SOVEREIGNTY</code></h1>
+<p>必须配：</p>
+<h1 id="programme-accountability"><code>PROGRAMME ACCOUNTABILITY</code></h1>
+<p>你有权选择自己的问题，
+不等于你的问题免于现实审判。</p>
+<hr />
+<h2 id="32-reader-facing">32. Reader-facing：项目正在进步，还是只是在变得更会解释自己？</h2>
+<p>每隔若干轮prototype，问：</p>
+<ol>
+<li>我们三个月前不能预测、现在可以预测什么？</li>
+<li>哪个新预测在结果出现前被记录，并后来成立？</li>
+<li>最近的修改创造了新能力，还是只修复已知失败？</li>
+<li>同样失败如果再出现，我们是不是还会发明一个新例外？</li>
+<li>是否存在一个竞争模型，用更少假设解释更多现象？</li>
+<li>核心thesis最近一次真正冒被证伪风险是什么时候？</li>
+<li>我们是在保护研究纲领，还是保护团队身份和沉没成本？</li>
+</ol>
+<p>如果答案持续是：</p>
+<blockquote>
+<p>“我们每次都能解释失败，但预测没有改善。”</p>
+</blockquote>
+<p>那么这不是韧性。</p>
+<p>很可能是：</p>
+<h1 id="degenerating-programme"><code>DEGENERATING PROGRAMME</code></h1>
+<hr />
+<h2 id="33-lakatos">33. 边界：不能把Lakatos直接当商业评分公式</h2>
+<p>强制保留：</p>
+<ol>
+<li>科学理论的“novel facts”与产品的玩家价值、市场结果不是同一种对象；</li>
+<li>产品开发受审美、协调、品牌、资本与时机影响，不能只用预测准确率评价；</li>
+<li>某个programme短期退化不意味着应立即退出——Lakatos本人也不支持简单即时处决；</li>
+<li>竞争programme可能后来复兴；</li>
+<li>商业项目还有runway约束，不能等待无限历史裁决。</li>
+</ol>
+<p>所以Lakatos在本项目中的用途是：</p>
+<blockquote>
+<p><strong>区分“学习性坚持”与“解释性坚持”。</strong></p>
+</blockquote>
+<p>而不是提供一个机械的kill rule。</p>
+<h2 id="sources">Sources</h2>
+<ul>
+<li>Alan Kay, 1982 “Point of view is worth 80 IQ points” source tracing:
+  https://quoteinvestigator.com/2018/05/29/pov/</li>
+<li>Alan Kay, Stanford EE380, 1997, <em>The Computer Revolution Hasn&rsquo;t Happened Yet</em>:
+  https://web.stanford.edu/class/ee380/9697spr/node10.html</li>
+<li>Alan Kay, OOPSLA 1997 transcript:
+  https://tinlizzie.org/IA/index.php/Alan_Kay_at_OOPSLA_1997%3A_The_Computer_Revolution_has_not_Happened_yet</li>
+<li>Thomas Kuhn overview / paradigm, normal science, anomaly, incommensurability:
+  https://plato.stanford.edu/entries/thomas-kuhn/</li>
+<li>John Boyd, <em>A Discourse on Winning and Losing</em>:
+  https://www.airuniversity.af.edu/Portals/10/AUPress/Books/B_0151_Boyd_Discourse_Winning_Losing.pdf</li>
+<li>John Boyd, <em>Destruction and Creation</em> (1976):
+  https://en.wikisource.org/wiki/File:Destruction_%26_Creation.pdf</li>
+<li>Air University on Orientation:
+  https://www.airuniversity.af.edu/News/Display/Article/420819/ooda-loop-makes-its-mark-on-maxwell/</li>
+</ul><div class="crumbs"><a href="/heroes-portal/">书阁</a> / cross-industry/representation-orientation-paradigm-search-001.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

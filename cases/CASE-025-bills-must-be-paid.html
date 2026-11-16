@@ -1,0 +1,700 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CASE-025 — Bills Must Be Paid / Rike Games · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl class="on"" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#why-this-case" class="t2">Why this case</a><a href="#1-myth" class="t2">1. Myth</a><a href="#a-steam" class="t3">神话 A：两个人七个月从零做出十万销量 Steam 爆款</a><a href="#b-publisher-external-funding" class="t3">神话 B：没有 publisher / external funding，所以是“零资源”成功</a><a href="#cdemo-steam" class="t3">神话 C：Demo 一发，Steam 算法就把游戏抬起来了</a><a href="#d" class="t3">神话 D：坚持就会成功</a><a href="#2-origin" class="t2">2. Origin</a><a href="#3-capability" class="t2">3. Capability</a><a href="#mobile-prototype" class="t3">高频 mobile prototype 是能力学校</a><a href="#mobile-web-steam" class="t3">从 mobile / web 到 Steam 的平台迁移能力</a><a href="#4-runway" class="t2">4. Runway</a><a href="#5-production" class="t2">5. Production</a><a href="#_1" class="t3">核心团队</a><a href="#contributor-boundary" class="t3">当前 contributor boundary</a><a href="#_2" class="t3">工具链</a><a href="#6-scope" class="t2">6. Scope</a><a href="#7-failure" class="t2">7. Failure</a><a href="#2019-mobile-game" class="t3">2019：第一款 mobile game 失败</a><a href="#prototype-game-hit" class="t3">之后多年：大量 prototype / game 没成为 hit</a><a href="#2023publisher" class="t3">2023：publisher 关系终止</a><a href="#2026-mobile" class="t3">2026：险些用 mobile 世界模型过早发售</a><a href="#8-market" class="t2">8. Market</a><a href="#steam-page-traction" class="t3">Steam page：尽早上线，但最初几乎没有 traction</a><a href="#bilibili-organic-pickup" class="t3">早期 Bilibili organic pickup</a><a href="#demo" class="t3">Demo：既是市场物料，也是生产工具</a><a href="#creator-outreach" class="t3">Creator outreach</a><a href="#browser-portals" class="t3">Browser portals</a><a href="#china" class="t3">China：重要但高度不可复制的右尾链条</a><a href="#steam-next-fest" class="t3">Steam Next Fest</a><a href="#paid-ads" class="t3">Paid ads</a><a href="#pre-launch-ramp" class="t3">最终 pre-launch ramp</a><a href="#launch" class="t3">Launch</a><a href="#9-environment" class="t2">9. Environment</a><a href="#frankfurt" class="t3">德国 / Frankfurt</a><a href="#_3" class="t3">夫妻两人团队</a><a href="#_4" class="t3">全球平台环境</a><a href="#10-luck" class="t2">10. Luck</a><a href="#11-verdict" class="t2">11. Verdict</a><a href="#_5" class="t3">成立</a><a href="#_6" class="t3">部分成立</a><a href="#_7" class="t3">被证伪 / 高度误导</a><a href="#_8" class="t3">无法验证</a><a href="#12-transfer" class="t2">12. Transfer</a><a href="#1-capability-inventory-sunk-cost" class="t3">1. 把失败项目当 capability inventory，不只当 sunk cost</a><a href="#2-platform-learning-project" class="t3">2. 大项目之前先做低风险 platform-learning project</a><a href="#3-steam-page-playable-demo" class="t3">3. Steam page / playable demo 要尽早制造“被发现接口”</a><a href="#4-demo-development-market-function" class="t3">4. Demo 可以同时承担 development 与 market function</a><a href="#5-launch-plan" class="t3">5. 在 launch plan 证据变差时，允许改变世界模型</a><a href="#6-creator-outreach" class="t3">6. 把 creator outreach 看成概率分布，不看成采购单</a><a href="#13-non-transfer" class="t2">13. Non-transfer</a><a href="#14-evidence-index" class="t2">14. Evidence Index</a><a href="#15-open-questions" class="t2">15. Open Questions</a></aside><article class="doc"><div class="col"><h1 id="case-025-bills-must-be-paid-rike-games">CASE-025 — Bills Must Be Paid / Rike Games</h1>
+<ul>
+<li>Case ID: CASE-025</li>
+<li>Subject: Bills Must Be Paid / Rike Games</li>
+<li>Related games: No Pain No Gain; earlier Rike Games mobile / web prototypes</li>
+<li>Period covered: 2019–2026</li>
+<li>Research status: RESEARCHING</li>
+<li>Last verified: 2026-10-04</li>
+<li>Related Claims: C002, C003, C004, C007, C009, C010, C011</li>
+</ul>
+<h2 id="why-this-case">Why this case</h2>
+<p class="dc">《Bills Must Be Paid》很容易被压缩成一个符合 2026 年独立游戏传播口味的故事：</p>
+<blockquote>
+<p>一对夫妻、两个人、没有发行商、没有外部融资，用七个月做出第一款真正的 Steam 游戏，首发不到 72 小时卖出十万份。</p>
+</blockquote>
+<p>这个版本并不完全错，但它把最有解释力的部分删掉了。</p>
+<p>Rike Games 的两位创始人 Roxy 与 Mike 从 2019 年开始一起做游戏。根据他们自己的 postmortem，在 <code>Bills Must Be Paid</code> 以前，他们已经经历约七年 mobile / web 开发、约四年 mobile publisher 合同生产、接近一百个 prototype / game、多个失败项目、自发行旧原型、浏览器平台分发，以及 <code>No Pain No Gain</code> 这次专门用于学习 Steam 的过渡项目。到 2026 年 1 月正式押注 <code>Bills Must Be Paid</code> 时，他们说自己只剩“几个月 runway”。</p>
+<p>因此本案真正要检验的是：</p>
+<blockquote>
+<p><strong>“七个月两人爆款”到底有多少是七个月本身，又有多少其实是此前七年高频试错、平台迁移和失败资本被压缩进了这次生产？</strong></p>
+</blockquote>
+<p>它还提供了一个非常少见的市场接入样本：团队公开记录了 Steam 页上线、早期 wishlist、原定四月发售、改做 demo、Trending Free、creator outreach、中国自然传播、Next Fest、付费广告失败、Steam 平台曝光和最终 61k+ launch wishlist 的连续链条。</p>
+<h2 id="1-myth">1. Myth</h2>
+<h3 id="a-steam">神话 A：两个人七个月从零做出十万销量 Steam 爆款</h3>
+<p>七个月基本只描述最终项目窗口，不描述能力形成。</p>
+<p>团队此前已经：</p>
+<ul>
+<li>连续做游戏约七年；</li>
+<li>经历大量商业失败；</li>
+<li>以 mobile publisher 合同为生约四年；</li>
+<li>高频制作简单 prototype；</li>
+<li>自己处理 mobile / browser 发行；</li>
+<li>有一个 10M+ web plays / 45 万+ mobile downloads 量级的自报前作经验；</li>
+<li>专门把 <code>No Pain No Gain</code> 移植到 Steam 学平台。</li>
+</ul>
+<p>所以 <code>Bills Must Be Paid</code> 更像一次<strong>长期能力资本终于命中产品—市场窗口</strong>，不是两名新人突然完成职业跃迁。</p>
+<h3 id="b-publisher-external-funding">神话 B：没有 publisher / external funding，所以是“零资源”成功</h3>
+<p>Steam 上 developer 和 publisher 的确都是 Rike Games，团队也明确说没有外部融资。</p>
+<p>但“没有发行商”不等于没有生产条件：</p>
+<ul>
+<li>过去 mobile publisher 合同曾长期支付他们的生存成本；</li>
+<li>后续旧作、mobile 和 browser catalogue 继续提供现金流；</li>
+<li><code>No Pain No Gain</code> 提供 Steam 学习；</li>
+<li>两位创始人本身是长期共同生活、共同工作的夫妻组合；</li>
+<li>他们已有官网、Discord、YouTube、X、browser portals 与既有玩家触点。</li>
+</ul>
+<p>真正可说的是：<strong>最终 premium Steam 项目没有外部 publisher / financing；不能因此把此前所有资本、渠道和能力前史抹掉。</strong></p>
+<h3 id="cdemo-steam">神话 C：Demo 一发，Steam 算法就把游戏抬起来了</h3>
+<p>Demo 是关键转折，但不是单因果。</p>
+<p>团队自己的记录同时存在：</p>
+<ul>
+<li>Steam Trending Free 的意外曝光；</li>
+<li>Reddit 帖子；</li>
+<li>itch / CrazyGames / Armor Games；</li>
+<li>接近 1,000 个 creator outreach；</li>
+<li>Bilibili / 中国 creator 自然传播；</li>
+<li>一次盗版事件及媒体报道；</li>
+<li>Steam Next Fest；</li>
+<li>release-date announcement；</li>
+<li>Steam Personal Calendar / upcoming visibility；</li>
+<li>launch 前最后一周 front-page ramp。</li>
+</ul>
+<p>因此本案反而证明：<strong>市场接入不是一个按钮，而是多个可控与不可控通道叠加。</strong></p>
+<h3 id="d">神话 D：坚持就会成功</h3>
+<p>开发者自己在成功 postmortem 里反复强调 “Keep Going”。这是真实主观经验，但作为解释模型太弱。</p>
+<p>本案能观察到的更具体机制包括：</p>
+<ul>
+<li>高频 prototype 训练；</li>
+<li>失败后的技能保留；</li>
+<li>publisher 合同维持职业连续性；</li>
+<li>被 publisher 切断后改变收入结构；</li>
+<li>用前作先学习 Steam；</li>
+<li>对小核心 loop 极端 polish；</li>
+<li>在低 wishlist 阶段主动改变发售计划；</li>
+<li>把 demo 变成开发反馈与市场接入工具。</li>
+</ul>
+<p>“坚持”只有在这些机制中才有解释力。</p>
+<h2 id="2-origin">2. Origin</h2>
+<p>Rike Games 位于德国 Frankfurt。</p>
+<p>官方 press kit 说明：</p>
+<ul>
+<li>创始人为 Roxanne Góngora Alfonso（Roxy）与 Mike Niclas Gschwilm（Mike）；</li>
+<li>两人是 Cuban-German married couple；</li>
+<li>2016 年相识、2017 年结婚；</li>
+<li>2019 年开始一起做游戏；</li>
+<li>Roxy 主要负责 art，Mike 主要负责 code / technical side；</li>
+<li>两人会跨职能共同参与开发。</li>
+</ul>
+<p>开发者自己的 2026 postmortem 对起点描述得更不浪漫：他们当时玩一款简单 mobile game，觉得“看起来不难，我们也能做”，于是直接开始。第一款 simple mobile game 做了约三个月，随后失败。</p>
+<p>这个失败是后续生产史的真正起点，而不是 2026 年那次 Steam 立项。</p>
+<h2 id="3-capability">3. Capability</h2>
+<h3 id="mobile-prototype">高频 mobile prototype 是能力学校</h3>
+<p>团队说自己长期与 mobile publishers 合作，常见要求是：</p>
+<ul>
+<li>一个月做 1–2 个 prototype；</li>
+<li>快速形成玩法；</li>
+<li>快速测试；</li>
+<li>根据 KPI 决定继续还是 kill；</li>
+<li>某些合同甚至采用“按交付 prototype 才付款”的强节奏。</li>
+</ul>
+<p>到 2026 年，他们自报已经做过约 100 个 prototype / game。</p>
+<p>这不意味着一百款商业成品，而意味着他们已经反复训练：</p>
+<ul>
+<li>快速实现 core loop；</li>
+<li>快速判断 feel；</li>
+<li>小团队协作；</li>
+<li>art / code handoff；</li>
+<li>scope 压缩；</li>
+<li>build / publish；</li>
+<li>失败后立即进入下一轮。</li>
+</ul>
+<h3 id="mobile-web-steam">从 mobile / web 到 Steam 的平台迁移能力</h3>
+<p>团队在 2023 年末失去 publisher 后，开始自行把旧 prototype 包装成 mobile 游戏并投 browser portals。</p>
+<p>随后 <code>No Pain No Gain</code> 在 web / mobile 得到较大规模传播。官方 press kit 直接把它定义为：</p>
+<blockquote>
+<p>the bridge to Steam</p>
+</blockquote>
+<p>也就是说，他们没有把第一款真正想做的 premium Steam 游戏同时当作第一堂 Steam 课，而是先用较低风险前作学习：</p>
+<ul>
+<li>Steam page；</li>
+<li>build submission；</li>
+<li>demo / release；</li>
+<li>store mechanics；</li>
+<li>player behavior；</li>
+<li>PC packaging。</li>
+</ul>
+<p>这一点对 C003 与 C011 很重要：<strong>平台能力本身也是此前积累。</strong></p>
+<h2 id="4-runway">4. Runway</h2>
+<p>本案目前不能给出可审计 euro budget，但能重建 runway 类型转换。</p>
+<table>
+<thead>
+<tr>
+<th>时段</th>
+<th>来源</th>
+<th>金额/口径</th>
+<th>证据</th>
+<th>置信度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>c. 2020–2023</td>
+<td>mobile publisher prototype contracts</td>
+<td>未公开；团队说长期依赖其付款生存</td>
+<td>E002 / E008</td>
+<td>中</td>
+</tr>
+<tr>
+<td>2024–2025</td>
+<td>自发行 mobile + browser catalogue</td>
+<td>未公开；团队称整体收入“barely enough to keep going”</td>
+<td>E002</td>
+<td>中</td>
+</tr>
+<tr>
+<td>2025–early 2026</td>
+<td><code>No Pain No Gain</code> mobile/web/Steam + catalogue</td>
+<td>规模可见、利润未知</td>
+<td>E001 / E002</td>
+<td>中</td>
+</tr>
+<tr>
+<td>Jan 2026</td>
+<td>剩余内部 runway</td>
+<td>团队自报只剩几个月</td>
+<td>E002</td>
+<td>中</td>
+</tr>
+<tr>
+<td>Jul 2026 后</td>
+<td><code>Bills Must Be Paid</code> 销售</td>
+<td>100k+ copies &lt;72h 为开发者公开里程碑</td>
+<td>E002 / E005</td>
+<td>中高（销量声明为第一方）</td>
+</tr>
+</tbody>
+</table>
+<p>关键点不是某一笔大钱，而是生产制度不断切换：</p>
+<pre><code class="language-text">publisher payments
+→ self-published mobile/browser catalogue
+→ Steam learning bridge
+→ remaining internal runway
+→ premium Steam launch revenue
+</code></pre>
+<p>这使它成为 C002 的一个好案例：<strong>项目能活到爆发前，并不是因为某一轮融资，而是团队不断替换现金流来源。</strong></p>
+<p>但目前仍未知：</p>
+<ul>
+<li>家庭储蓄；</li>
+<li>房租 / 生活 burn；</li>
+<li>publisher 年收入；</li>
+<li>browser / ads / IAP 收入；</li>
+<li><code>No Pain No Gain</code> 的净收入；</li>
+<li>是否存在家庭外部支持。</li>
+</ul>
+<p>这些不能用首发销量倒推。</p>
+<h2 id="5-production">5. Production</h2>
+<h3 id="_1">核心团队</h3>
+<p>官方与开发者自述一致：</p>
+<ul>
+<li>Roxy：art 为主；</li>
+<li>Mike：code / technical 为主；</li>
+<li>两人共同参与产品其他部分。</li>
+</ul>
+<h3 id="contributor-boundary">当前 contributor boundary</h3>
+<p>目前只能确认“两人 studio / 两人 core”，不能确认所有生产环节都只由两人完成。</p>
+<p>尚未完成的 contributor audit 包括：</p>
+<ul>
+<li>music / SFX 来源；</li>
+<li>localization；</li>
+<li>QA / playtest；</li>
+<li>trailer / press assets；</li>
+<li>store art；</li>
+<li>middleware / asset-store content；</li>
+<li>external contractors；</li>
+<li>browser portal support。</li>
+</ul>
+<p>所以正式表述应是：</p>
+<blockquote>
+<p><strong>two-person core studio / self-published premium release</strong></p>
+</blockquote>
+<p>而不是：</p>
+<blockquote>
+<p><strong>all production done by exactly two people with no outside inputs</strong>。</p>
+</blockquote>
+<h3 id="_2">工具链</h3>
+<ul>
+<li>Unity 已由 itch.io 与 SteamDB metadata 支持；</li>
+<li>PC / Mac Steam；</li>
+<li>HTML5 / browser build 也用于 demo distribution。</li>
+</ul>
+<h2 id="6-scope">6. Scope</h2>
+<p><code>Bills Must Be Paid</code> 的成功 scope 不是“内容很多”，而是<strong>先把一个极窄的 tactile loop 做得非常明确</strong>。</p>
+<p>开发者回顾：</p>
+<ol>
+<li>先长时间 brainstorm；</li>
+<li>kill 多个 idea；</li>
+<li>找到“砸 piggy bank 得钱”的 loop；</li>
+<li>先做一个只验证 mechanic 的极简 prototype；</li>
+<li>从一开始就追求这个动作的 polish；</li>
+<li>确认核心 feel 后，再讨论如何把 loop 扩成更完整 progression。</li>
+</ol>
+<p>最终产品仍维持低概念解释成本：</p>
+<ul>
+<li>smash piggy banks；</li>
+<li>stamina；</li>
+<li>random loot；</li>
+<li>pay bills；</li>
+<li>perk / skill tree；</li>
+<li>bankruptcy / prestige；</li>
+<li>hammers / piggy variants。</li>
+</ul>
+<p>这种 scope engineering 的关键不是简单地“做小”，而是把大部分生产资源集中在一个<strong>无需复杂教程就能被视频、demo、stream 立即理解</strong>的动作上。</p>
+<p>这是 C007 的较强候选，但仍需要避免事后把“简单可传播”说成充分成功条件。</p>
+<h2 id="7-failure">7. Failure</h2>
+<h3 id="2019-mobile-game">2019：第一款 mobile game 失败</h3>
+<p>团队把它明确描述为失败。</p>
+<h3 id="prototype-game-hit">之后多年：大量 prototype / game 没成为 hit</h3>
+<p>团队直到 <code>Bills Must Be Paid</code> 才把它称为第一款真正 successful game。</p>
+<h3 id="2023publisher">2023：publisher 关系终止</h3>
+<p>这本来可能是职业中断，却逼迫团队从“为 publisher 产 prototype”转向：</p>
+<ul>
+<li>自发行旧项目；</li>
+<li>mobile monetization；</li>
+<li>browser distribution；</li>
+<li>自己建立平台关系。</li>
+</ul>
+<h3 id="2026-mobile">2026：险些用 mobile 世界模型过早发售</h3>
+<p>这是本案最有研究价值的失败未遂。</p>
+<p>早期 Reddit 帖显示，当时只有约 200 wishlist，团队仍在认真考虑一个月后直接 full launch，理由之一是担心 incremental wave 很快饱和。</p>
+<p>他们后来自己承认：如果按原计划四月直接上线，不仅游戏没准备好，商业上也可能是灾难。</p>
+<p>最终做法是：</p>
+<blockquote>
+<p><strong>原定 full release → 改成 polished demo → 继续收反馈、积 wishlist、参加 Next Fest → 七月正式上线。</strong></p>
+</blockquote>
+<p>这个 course correction 比结果本身更适合支持 C009：<strong>从 mobile 继承来的正确经验，到了 Steam 可能成为错误模型。</strong></p>
+<h2 id="8-market">8. Market</h2>
+<p>这是目前 corpus 中市场路径记录最细的案例之一。</p>
+<h3 id="steam-page-traction">Steam page：尽早上线，但最初几乎没有 traction</h3>
+<p>团队自报：</p>
+<ul>
+<li>2026-02-14 上 Steam page；</li>
+<li>day 1：11 wishlist；</li>
+<li>后续通常 1–7 / day；</li>
+<li>Feb 14–Apr 20：528 total wishlist。</li>
+</ul>
+<p>这直接反驳“挂 Steam 页就会自然长”的简化叙事。</p>
+<h3 id="bilibili-organic-pickup">早期 Bilibili organic pickup</h3>
+<p>一个 Bilibili creator 自然发现 trailer，带来一次小但可测的 wishlist spike。</p>
+<p>它的研究意义不是“去 B 站就会爆”，而是：</p>
+<blockquote>
+<p><strong>公开页面 + 可传播物料会制造被随机发现的机会。</strong></p>
+</blockquote>
+<h3 id="demo">Demo：既是市场物料，也是生产工具</h3>
+<p>团队把原定四月正式版改成 demo。</p>
+<p>之后：</p>
+<ul>
+<li>Steam Trending Free 出现约 340 CCU；</li>
+<li>玩家评论与 Discord feedback 进入 full game 改进；</li>
+<li>demo 后 wishlist/day 大幅抬升；</li>
+<li>Steam demo lifetime unique users 最终自报 80k+。</li>
+</ul>
+<p>因此本案里的 demo 不能只算 marketing asset，它同时承担：</p>
+<ul>
+<li>validation；</li>
+<li>playtest；</li>
+<li>polish pressure；</li>
+<li>community formation；</li>
+<li>creator playable build；</li>
+<li>Steam algorithm surface；</li>
+<li>wishlist conversion surface。</li>
+</ul>
+<h3 id="creator-outreach">Creator outreach</h3>
+<p>团队说在 Next Fest 前累计联系接近 1,000 个 creators。</p>
+<p>但他们自己也强调 attribution 很差：</p>
+<ul>
+<li>很多人不回邮件但会发视频；</li>
+<li>有些是 organic；</li>
+<li>有些来自观众推荐；</li>
+<li>creator 之间可能相互跟进。</li>
+</ul>
+<p>因此“发 1,000 封邮件 = 61k wishlist”是禁止推论。</p>
+<h3 id="browser-portals">Browser portals</h3>
+<p>他们把 demo 投到：</p>
+<ul>
+<li>itch.io；</li>
+<li>CrazyGames；</li>
+<li>Armor Games；</li>
+<li>其他 browser 环境。</li>
+</ul>
+<p>这扩大了试玩面，但团队认为部分 portal 到 Steam wishlist 的转化较低。</p>
+<h3 id="china">China：重要但高度不可复制的右尾链条</h3>
+<p>团队先后经历：</p>
+<ul>
+<li>Bilibili creator 自然拾取；</li>
+<li>中国玩家 / creator 关注；</li>
+<li>未发售游戏被 decompile / reupload；</li>
+<li>piracy story 被媒体报道；</li>
+<li>后续 creator 再次传播。</li>
+</ul>
+<p>这是典型 Luck + Market coupling：团队能做的是让产品可见、可试玩、可分享；“盗版事件变成新闻”不是可以计划复制的 acquisition tactic。</p>
+<h3 id="steam-next-fest">Steam Next Fest</h3>
+<p>团队自报：</p>
+<ul>
+<li>进入 Next Fest：15,623 wishlist；</li>
+<li>Fest 期间新增约 7k，包括相关媒体覆盖。</li>
+</ul>
+<p>同一团队另一款只有约 800 wishlist 的游戏参加 2026 February Next Fest，最终只增加约 173 wishlist。这个自我对照说明：<strong>Next Fest 的结果强烈依赖进入活动前的产品 / audience 状态，不能当固定倍率。</strong></p>
+<h3 id="paid-ads">Paid ads</h3>
+<p>Reddit ads：</p>
+<ul>
+<li>USD 200；</li>
+<li>19 tracked wishlist；</li>
+<li>没看到持续抬升。</li>
+</ul>
+<p>至少对这款游戏，这次小规模 paid experiment 明显弱于 organic / demo / creator / platform exposure。</p>
+<p>但不能外推成“Steam 游戏都不应该买量”。</p>
+<h3 id="pre-launch-ramp">最终 pre-launch ramp</h3>
+<p>Steam 官方 developer news 在 launch 前 7 天记录 40k+ wishlist；团队 launch-day postmortem 报告最终 61k+。</p>
+<p>团队认为 Steam Personal Calendar / front-page upcoming exposure 对最后一段 ramp 很重要，但这仍是观察性归因。</p>
+<h3 id="launch">Launch</h3>
+<ul>
+<li>2026-07-29；</li>
+<li>USD 6.99；</li>
+<li>launch discount -30%；</li>
+<li>2026-08-01 Steam developer news：100k+ copies in &lt;72h；</li>
+<li>Reddit postmortem：67 hours / 101,079 copies / 1,800 reviews / 97% positive。</li>
+</ul>
+<p>精确 units 是 first-party claim；SteamDB 的后续 review scale 与活跃数据只做量级 corroboration。</p>
+<h2 id="9-environment">9. Environment</h2>
+<h3 id="frankfurt">德国 / Frankfurt</h3>
+<p>目前还没有足够材料证明：</p>
+<ul>
+<li>德国福利；</li>
+<li>医疗；</li>
+<li>住房成本；</li>
+<li>创业补助；</li>
+<li>家庭资产；</li>
+</ul>
+<p>在本案中具体承担了多少 downside protection。</p>
+<p>因此不应因为 studio 位于德国就自动把成功解释成“福利国家 advantage”。</p>
+<h3 id="_3">夫妻两人团队</h3>
+<p>共同生活 + 共同创业很可能降低一部分沟通成本，也可能集中家庭财务风险。</p>
+<p>目前只确认两人是夫妻与共同创始人；不推断家庭资金结构。</p>
+<h3 id="_4">全球平台环境</h3>
+<p>团队能连续使用：</p>
+<ul>
+<li>mobile stores；</li>
+<li>browser portals；</li>
+<li>itch；</li>
+<li>Steam；</li>
+<li>Reddit；</li>
+<li>YouTube；</li>
+<li>Bilibili / China creator ecosystem。</li>
+</ul>
+<p>这使他们能在 publisher 关系结束后重新组合 distribution，而不是必须重新进入另一家 publisher 的封闭供应链。</p>
+<h2 id="10-luck">10. Luck</h2>
+<p>本案至少有四类不可直接控制的右尾事件：</p>
+<ol>
+<li>Steam demo unexpectedly 进入 Trending Free；</li>
+<li>Bilibili / 中国 creator 自然发现；</li>
+<li>piracy incident 变成媒体 story；</li>
+<li>launch 前 Steam platform surfaces 与 creator cascades 的具体强度。</li>
+</ol>
+<p>团队能控制的是：</p>
+<ul>
+<li>page 存在；</li>
+<li>demo 可玩；</li>
+<li>product feel；</li>
+<li>creator outreach；</li>
+<li>release timing；</li>
+<li>follow-up material；</li>
+<li>feedback response。</li>
+</ul>
+<p>团队不能控制的是：</p>
+<ul>
+<li>哪个 creator 会捡；</li>
+<li>Steam 何时给多少曝光；</li>
+<li>一次盗版事故是否变成新闻；</li>
+<li>audience cascade 到底扩大几倍。</li>
+</ul>
+<p>因此应把“可重复准备工作”和“右尾放大事件”分开记录。</p>
+<h2 id="11-verdict">11. Verdict</h2>
+<h3 id="_5">成立</h3>
+<ul>
+<li>Rike Games 的核心确实是两个人；</li>
+<li>premium Steam 版本确实 self-published；</li>
+<li><code>Bills Must Be Paid</code> 的最终项目周期约七个月；</li>
+<li>developer-announced launch milestone 确实达到 100k+ copies &lt;72h。</li>
+</ul>
+<h3 id="_6">部分成立</h3>
+<ul>
+<li>“没有 publisher / external funding”：对最终 Steam 项目成立，但忽略此前四年 publisher-backed production career 与旧作现金流。</li>
+<li>“first Steam game”：更准确应说 first premium Steam release；<code>No Pain No Gain</code> 已经先被移植到 Steam 学平台。</li>
+</ul>
+<h3 id="_7">被证伪 / 高度误导</h3>
+<ul>
+<li>“七个月从零学会做游戏”；</li>
+<li>“没有营销”；</li>
+<li>“Demo / Next Fest 单独制造了成功”；</li>
+<li>“十万销量证明坚持本身就是充分解释”。</li>
+</ul>
+<h3 id="_8">无法验证</h3>
+<ul>
+<li>精确 budget；</li>
+<li>净利润；</li>
+<li>household burn；</li>
+<li>各市场渠道的 causal contribution；</li>
+<li>全部 contributors。</li>
+</ul>
+<h2 id="12-transfer">12. Transfer</h2>
+<h3 id="1-capability-inventory-sunk-cost">1. 把失败项目当 capability inventory，不只当 sunk cost</h3>
+<p>适用条件：每一轮 prototype 都真的留下技能、工具、判断或发行经验。</p>
+<h3 id="2-platform-learning-project">2. 大项目之前先做低风险 platform-learning project</h3>
+<p><code>No Pain No Gain → Steam</code> 的价值在于，把商店、build、平台流程的学习成本与真正押注的 premium title 分离。</p>
+<h3 id="3-steam-page-playable-demo">3. Steam page / playable demo 要尽早制造“被发现接口”</h3>
+<p>不是因为页面自动带流量，而是因为没有 public artifact，creator、平台算法、玩家社区都无法形成偶然发现。</p>
+<h3 id="4-demo-development-market-function">4. Demo 可以同时承担 development 与 market function</h3>
+<p>前提：demo 本身足够 polished，且团队真的能处理反馈。</p>
+<h3 id="5-launch-plan">5. 在 launch plan 证据变差时，允许改变世界模型</h3>
+<p>团队原本准备四月上线。最终最关键的生产决策之一，是承认 mobile-style fast launch 假设不适合当前 Steam 项目。</p>
+<h3 id="6-creator-outreach">6. 把 creator outreach 看成概率分布，不看成采购单</h3>
+<p>大量 outreach 的实际效果不可线性预测；重点是增加 exposure surface，而不是把回复率当成功率。</p>
+<h2 id="13-non-transfer">13. Non-transfer</h2>
+<p>不能直接复制：</p>
+<ul>
+<li>夫妻共同创业结构；</li>
+<li>七年累积的 tacit knowledge；</li>
+<li>四年 publisher prototype training；</li>
+<li>约百个 prototype 的失败资本；</li>
+<li>中国 creator / piracy-news 右尾事件；</li>
+<li>Steam Trending Free / Personal Calendar 的具体曝光；</li>
+<li>2026 年 incremental market 时点；</li>
+<li>极高工作强度。</li>
+</ul>
+<p>特别禁止把“almost every waking hour”写成 production best practice。这只是团队自述的投入强度，同时伴随明显健康 / burnout 风险，且不是因果可识别变量。</p>
+<h2 id="14-evidence-index">14. Evidence Index</h2>
+<ul>
+<li>E001 — Rike Games official press kit：两人团队、2019 起步、mobile/web 前史、<code>No Pain No Gain</code> 作为 Steam bridge。</li>
+<li>E002 — 100k / 72h developer postmortem：约 100 prototype、四年 mobile publisher、publisher 断供、runway、七个月项目与 launch sales 自报。</li>
+<li>E003 — 61k wishlist developer postmortem：Steam page → demo → creators → China → Next Fest → paid ads → release-date ramp。</li>
+<li>E004 — 早期 200 wishlist Reddit 帖：在成功发生前捕获“是否四月发售”的真实决策模型。</li>
+<li>E005 — Steam developer news：demo / launch / 40k wishlist / 100k copies milestone 的平台时间线。</li>
+<li>E006 — Steam + SteamDB：release、self-publishing、Unity 与 review-scale corroboration。</li>
+<li>E007 — itch.io + Armor Games：browser demo distribution perimeter。</li>
+<li>E008 — 后续 mobile-publishing retrospective：团队对 early KPI / kill model 的反思，与 E004 构成前后对照。</li>
+</ul>
+<h2 id="15-open-questions">15. Open Questions</h2>
+<ol>
+<li>2020–2023 的 publisher 合同具体由哪些公司构成？付款结构、prototype ownership 和交付节奏能否找到合同外的公开证据？</li>
+<li><code>No Pain No Gain</code> 的 Steam / mobile / browser 收入分别多少，它实际购买了几个月 runway？</li>
+<li>2026 年 1 月“few months of runway”对应多少家庭 burn？</li>
+<li>两人之外的 music / SFX / localization / QA / assets / trailer / contractor 贡献边界是什么？</li>
+<li>Demo 从 528 wishlist 到 8,952 再到 15,623 的每一段里，Steam organic、creator、China、press 的贡献能否进一步拆？</li>
+<li>61k launch wishlist 的 day-1 / week-1 conversion 和 refund-adjusted sales 是多少？</li>
+<li>当前 100k+ launch milestone 之后的 lifetime sales / revenue 是否有后续公开披露？</li>
+<li>这个案例是否能形成一个更窄的新命题：<strong>mobile rapid-prototype capability 对 Steam premium production 既是能力资本，也可能携带错误 market model</strong>？</li>
+</ol><div class="crumbs"><a href="/heroes-portal/">书阁</a> / cases/CASE-025-bills-must-be-paid.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

@@ -1,0 +1,732 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>跨模型协作与书稿质量整顿：一轮外部审查及其处置建议 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl class="on"" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0" class="t2">0. 这份审查怎么做的</a><a href="#1" class="t2">1. 收口</a><a href="#11" class="t3">1.1 依赖关系（实测）</a><a href="#12" class="t3">1.2 重复修改</a><a href="#13" class="t3">1.3 冲突文件</a><a href="#14" class="t3">1.4 尚未合入的有效成果（实测）</a><a href="#15-pr" class="t3">1.5 PR 处置表</a><a href="#16-312" class="t3">1.6 #312 的统计与测试正确性</a><a href="#17-313" class="t3">1.7 #313 的原始证据与时间线（已独立核对）</a><a href="#18-314" class="t3">1.8 #314 的人物稿事实忠实性</a><a href="#2" class="t2">2. 五篇的编辑诊断</a><a href="#21-gunpointbookprofilesgunpointmd" class="t3">2.1 Gunpoint（book/profiles/gunpoint.md）</a><a href="#22-kenshibookprofileskenshimd" class="t3">2.2 Kenshi（book/profiles/kenshi.md）</a><a href="#23-zach-barthbookprofileszach-barth-zachtronicsmd" class="t3">2.3 Zach Barth（book/profiles/zach-barth-zachtronics.md）</a><a href="#24-early-id-doombookprofilesearly-id-doommd" class="t3">2.4 early id / DOOM（book/profiles/early-id-doom.md）</a><a href="#25-limit-theory" class="t3">2.5 Limit Theory（对照组，结论与预期相反）</a><a href="#26" class="t3">2.6 跨篇共性</a><a href="#3" class="t2">3. 工作流是否过度治理</a><a href="#31" class="t3">3.1 应保留（有真实收益证据）</a><a href="#32" class="t3">3.2 应修改（规则互相冲突）</a><a href="#33" class="t3">3.3 应质疑（可能只是劳动量）</a><a href="#34" class="t3">3.4 结论</a><a href="#4" class="t2">4. 交付</a><a href="#41" class="t3">4.1 优先级整改清单</a><a href="#42-gpt" class="t3">4.2 必须交给 GPT 补原始资料的问题</a><a href="#43-codex" class="t3">4.3 交给 Codex 的文件级写作任务</a><a href="#5" class="t2">5. 本轮边界</a></aside><article class="doc"><div class="col"><h1 id="_1">跨模型协作与书稿质量整顿：一轮外部审查及其处置建议</h1>
+<p>© 2026 洪荒行者。All Rights Reserved.</p>
+<ul>
+<li>Scope: PR #311–#314、Issue #315 的收口；Gunpoint / Kenshi / Zach Barth / early id–DOOM / Limit Theory 五篇 reader prose 的独立诊断；工作流治理审查</li>
+<li>Status: EXTERNAL REVIEW NOTE / NO NEW CLAIM / NOT CANONICAL EVIDENCE</li>
+<li>Author: Reasonix（独立审查会话），提交待作者验收</li>
+<li>Reviewed: 2026-10-10</li>
+<li>Baseline: 审查开始时 <code>main @ 0f75dd4</code>、<code>editorial/chapter-copy-lint-20261009 @ e7b509e</code>；审查过程中 main 被 pull 前移至 <code>00945b7</code></li>
+<li>Excludes: 私人项目材料；不新增 Case / Evidence / Claim；不修改任何 canonical 事实</li>
+</ul>
+<p class="dc">本文件是<strong>外部审查意见</strong>，不是事实源。它引用的每个 Case / Evidence / PR 结论，仍以对应文件的最新版原文为准。</p>
+<hr />
+<h2 id="0">0. 这份审查怎么做的</h2>
+<p>不是读网页摘要。本轮全部结论来自本地 git 对象与实跑：</p>
+<table>
+<thead>
+<tr>
+<th>动作</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>本地对象比对</td>
+<td>#311–#314 四个 head（<code>e7b509e</code> / <code>74a6f21</code> / <code>bd546ca</code> / <code>1a64f1d</code>）本地均可用，因此 diff 是逐行读过的</td>
+</tr>
+<tr>
+<td>文件重叠检查</td>
+<td><code>editorial</code> 与 <code>main@0f75dd4</code> 两侧改动文件集合<strong>交集为空</strong></td>
+</tr>
+<tr>
+<td>实跑审计工具</td>
+<td><code>reader_evidence_sync_audit.py</code> 的 #311 版与 #312 版各跑一次，并另写探针统计字段覆盖率</td>
+</tr>
+<tr>
+<td>实跑章节检查</td>
+<td><code>chapter_copy_lint.py</code> 正常跑 + 注入泄漏做负向测试</td>
+</tr>
+<tr>
+<td>直连原始来源</td>
+<td>拉取 <code>theamphour.com/332</code> 的<strong>发言归属转录</strong>（HTTP 200，116KB）逐字核对 #313 / #314</td>
+</tr>
+<tr>
+<td>全库检索</td>
+<td>对 Limit Theory 的 2022 源码断言做 <code>rg</code> 全库核对</td>
+</tr>
+</tbody>
+</table>
+<p><strong>审查期间 main 前移</strong>（<code>0f75dd4</code> → <code>00945b7</code>，见 §1.3）。这本身是本轮要处理的问题类型的一个实例。</p>
+<hr />
+<h2 id="1">1. 收口</h2>
+<h3 id="11">1.1 依赖关系（实测）</h3>
+<pre><code class="language-text">main @0f75dd4 ──(10 commits, 全部 china/OPEN-QUESTIONS，与本轮文件零重叠)
+      │
+      └ a0a9830 ── editorial/chapter-copy-lint-20261009 @e7b509e   [#311: 29 commits, 44 files, +1527/-39]
+                        ├── chatgpt/record-level-evidence-audit-20261010 @74a6f21   [#312: 3 files, +102/-27]
+                        ├── research/zachtronics-primary-transcript-20261010 @bd546ca   [#313: 2 files, +46/-15]
+                        │        └── editorial/zach-barth-interruption-candidate-20261010 @1a64f1d   [#314: 1 file, +13/-3]
+</code></pre>
+<p>editorial 领先 29 / 落后 10（开始审查时）；main 前移后落后 11。</p>
+<h3 id="12">1.2 重复修改</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>对象</th>
+<th>证据</th>
+<th>后果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>tools/reader_evidence_sync_audit.py</code>、<code>book/EDITORIAL-GATE.md</code></td>
+<td>#311 与 #312 同时改</td>
+<td>stacked 正常；但 #312 重写了 #311 写进 Gate 的 &ldquo;31/65&rdquo; 段，<strong>合并次序必须 #311 → #312</strong>，否则该段回退</td>
+</tr>
+<tr>
+<td>2</td>
+<td>CASE-012 / E001</td>
+<td>#311 自述与 <code>codex/gunpoint-life-history-evidence-20261009</code> 并行改同一份；<code>7ccdde4</code> 已吸收其 E001–E008 基线</td>
+<td>该分支属<strong>已回收未关闭</strong>；同一 E001 有两个来源分支</td>
+</tr>
+<tr>
+<td>3</td>
+<td>CASE-051</td>
+<td>#313 新增 <code>E011</code>，而 ledger 已有 <code>E006</code> = 同一期节目、同一 URL、同为 P1</td>
+<td>同一来源被登记两次（见 §1.7）</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>cases/CASE-059-slay-the-spire-mega-crit.md</code></td>
+<td><code>main</code> blob <code>7857689</code> vs <code>origin/research/slay-spire-prestige-pipeline-026</code> blob <code>7717775</code></td>
+<td><strong>同名 Case 双线演化，内容不同</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="13">1.3 冲突文件</h3>
+<p><strong>审查开始时：文本冲突 0。</strong> 但——</p>
+<ul>
+<li><strong>方向性风险</strong>：main 的 10 个 commit 不在 editorial。「以 editorial 覆盖 main」会直接丢掉它们。<strong>#311 只能 merge / rebase，不得 force。</strong></li>
+<li><strong>审查中新增的冲突面</strong>：main 前移到 <code>00945b7</code>（<code>research(education): family-school agency…</code>），它修改了 <code>book/chapters/01-goals-are-made-not-found.md</code> 与 <code>book/BOOK-ARCHITECTURE.md</code> —— <strong>这两个文件 editorial 分支也改过</strong>。因此 #311 rebase 到最新 main 时，这两处需要人工确认（改动位置不同，git 多半能自动合并，但不能假设）。</li>
+<li>这一条同时说明：#315 要求的&rdquo;先确认基线再动手&rdquo;在现实中很难维持——审查期间基线就动了。<strong>建议在每次跨模型交付时把基线 commit 写进交接物</strong>（<code>schemas/evidence-material-refresh.md</code> 已有此要求，但只在 Lane B 生效）。</li>
+</ul>
+<h3 id="14">1.4 尚未合入的有效成果（实测）</h3>
+<ul>
+<li>editorial 分支内含：17 份 ledger 的逐字引语回填、<code>chapter_copy_lint.py</code>、<code>reader/</code>（277 行新 surface）、<code>EDITORIAL-GATE</code> 0.6、三个 schema 文件、<code>workflow-lanes</code> 跨模型交接章。</li>
+<li><strong>远程分支 219 个，其中 188 个不在 main</strong>；只有 4 个有开放 PR。抽查确认含 main 中不存在文件的分支：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>分支</th>
+<th>新增文件</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>research/yearly-production-capability-map-20261009</code></td>
+<td>34</td>
+<td><code>cross-industry/industrial-revolutions/</code> 观测字典 + CSV/SVG</td>
+</tr>
+<tr>
+<td><code>research/slavic-ecology-2026-10-07</code></td>
+<td>44</td>
+<td><code>country-studies/china/</code> 队列重构</td>
+</tr>
+<tr>
+<td><code>chatgpt/jonas-tyroller-longitudinal-case-v2</code></td>
+<td>110</td>
+<td><code>.github/ISSUE_TEMPLATE/*</code>（与 main 同名不同版）与纵向 Case</td>
+</tr>
+<tr>
+<td><code>codex/gunpoint-long-life-narrative-20261009</code></td>
+<td>5</td>
+<td>Gunpoint / Kenshi / early id 长篇候选稿</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>计数注意：<code>--diff-filter=A</code> 会<strong>高估</strong>。实测 <code>cases/CASE-059-…</code>、<code>.github/ISSUE_TEMPLATE/1-case-correction.yml</code>、<code>book/life-routes/big-company-veteran-to-author-001.md</code>、<code>author-corpus/AC-010-…</code> 都已在 main 中存在。因此清仓必须<strong>逐文件比 blob</strong>，不能按分支名或文件数判定。</p>
+</blockquote>
+<h3 id="15-pr">1.5 PR 处置表</h3>
+<table>
+<thead>
+<tr>
+<th>PR</th>
+<th>处置</th>
+<th>建议理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>#311</strong></td>
+<td><strong>修正描述后，按 commit 分组 rebase 到最新 main 再合</strong></td>
+<td>内容大多是正面证据工作（17 份 ledger 逐字回填、CASE-012 事实修正）。但：①描述称 <code>book/profiles/kenshi.md</code>「未改」，实测该文件有 21 行改动——描述与 diff 不一致；②跨三 Lane 混在一条线，评审必须按 commit 走；③<code>reader/</code> 建议单独决策（§3.3）。<strong>不要为了减少 PR 数量整支直推。</strong></td>
+</tr>
+<tr>
+<td><strong>#312</strong></td>
+<td><strong>修正后合并</strong>（必须在 #311 之后）</td>
+<td>分母修正正确（实测 65 → 63）。但统计漏匹配、输出不可追踪（§1.6）。</td>
+</tr>
+<tr>
+<td><strong>#313</strong></td>
+<td><strong>修正后合并；不要新增 Evidence ID</strong></td>
+<td>转录经直连核对，事实链成立。但 E011 与 E006 同源，且漏一个解释性节点（§1.7）。</td>
+</tr>
+<tr>
+<td><strong>#314</strong></td>
+<td><strong>等 #313 定稿；建议 <code>REVISE_AGAIN</code></strong></td>
+<td>忠实性总体合格，但新增段落偏长，profile 既有结构问题未处理。<strong>不得自动合并。</strong></td>
+</tr>
+<tr>
+<td><strong>#315</strong></td>
+<td><strong>保留为唯一整合 Issue，更新基线</strong></td>
+<td>退出条件合理，但「重新核对所有分支」在 188 个未合并分支下不可完成 → 改为「清仓流程 + 抽查最高价值 5 条」。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="16-312">1.6 #312 的统计与测试正确性</h3>
+<p>✅ 正确：分母 <code>evidence/*.md</code> 65 vs <code>CASE-*-source-ledger.md</code> 63（多出的正是 <code>README.md</code> 与 <code>research-material-ingestion-2026-10.md</code>）；<code>--strict</code> 只对 backlink / year 生效；<code>EDITORIAL-GATE</code> 的 31/65 口径纠错准确；3 个单测通过。</p>
+<p>❌ <strong>缺陷 1（漏统计）</strong>：<code>SOURCE_CLASS_RE</code> 不匹配 markdown 粗体 <code>- **Class:**</code>。实测 <strong>18 条记录</strong>被跳过，其中 <strong>15 条声明 P0/P1</strong>。报告的 <code>P0/P1 records without a detectable long quote</code> 因此由 375 低估为实际 386（已在修正分支复现）。
+样本：<code>evidence/CASE-016-early-id-software-source-ledger.md</code> E020–E031。</p>
+<p>❌ <strong>缺陷 2（不可追踪）</strong>：只打印 <code>primary_no_quote[:12]</code>，按文件名序 ⇒ 报告顶部永远是 CASE-001 起，后面的 Case 永不出现。这不满足 #315 的「reproducible per-Evidence refresh queue identifies actual IDs」。</p>
+<p>⚠️ <strong>测试覆盖不足</strong>：3 个单测只覆盖人造 <code>- Class:</code> 形状，没有真实 ledger 形状的 fixture，所以上述缺陷测不出来。</p>
+<blockquote>
+<p>处理：修正分支见 PR「Audit: count bold <code>- **Class:**</code> tiers, and expose the whole queue」。</p>
+</blockquote>
+<h3 id="17-313">1.7 #313 的原始证据与时间线（已独立核对）</h3>
+<p>直连 <code>https://www.theamphour.com/332-an-interview-with-zach-barth-of-zachtronics/</code>，官网确有<strong>发言归属转录</strong>（<code>Zach Barth Of Zachtronics:</code> / <code>Chris Gammell:</code> / <code>Dave Jones:</code>）。逐条核对：</p>
+<table>
+<thead>
+<tr>
+<th>#313 断言</th>
+<th>转录</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>show notes 把 Ironclad → 关门压缩</td>
+<td>✅ show notes 原文即 &ldquo;After Ironclad Tactics didn&rsquo;t go as well as they wanted, they shut down the studio for 1 year&rdquo;</td>
+</tr>
+<tr>
+<td>Infinifactory、TIS-100 在暂停<strong>之前</strong></td>
+<td>✅ &ldquo;And then we made Infinifactory. We made TIS 100. <strong>At that point</strong>… I got kind of burnt out&rdquo;</td>
+</tr>
+<tr>
+<td>&ldquo;we shut down the studio&rdquo;</td>
+<td>✅ 逐字存在</td>
+</tr>
+<tr>
+<td>&ldquo;worked there for 10 months&rdquo;</td>
+<td>✅ 逐字存在</td>
+</tr>
+<tr>
+<td>&ldquo;tired of running the business, but I wasn&rsquo;t tired of making games&rdquo;</td>
+<td>⚠️ 原文为 &ldquo;because <strong>I was</strong> tired of running…&rdquo;，引语起点未回原句边界</td>
+</tr>
+<tr>
+<td>通过 Amplify 时期人脉接触 Alliance</td>
+<td>✅ &ldquo;one of the writers there ended up at this company, Alliance&rdquo;</td>
+</tr>
+<tr>
+<td>日期 2017-01-20</td>
+<td>✅ 页面 &ldquo;Jan 20, 2017&rdquo;，与 E006 一致</td>
+</tr>
+</tbody>
+</table>
+<p><strong>问题 A（登记结构）</strong>：<code>E011</code> 与既有 <code>E006</code> 同源、同 URL、同为 P1、同期节目 ⇒ 应把新事实节点<strong>并入 E006</strong>，或明确写清 E006/E011 的分工并互相交叉引用。否则同一来源会有两个 ID，引用漂移不可避免。</p>
+<p><strong>问题 B（遗漏一个改变解释的节点）</strong>：转录中 Barth 明确说，去 Valve 之前<strong>又面试了一次 Microsoft 但没成</strong>——&ldquo;Actually, before that, I interviewed at Microsoft again… I can&rsquo;t go back… But I interviewed at Valve and worked there for 10 months.&rdquo; 这句话才是「为什么是 Valve 而不是回归大厂」的直接证据。E011 与 <code>CASE-051</code> §4.5 都没有记录。</p>
+<p><strong>问题 C（静默丢弃）</strong>：#313 改写 <code>L001</code> 时删掉了原 S2 lead 的 RPI 节点（&rdquo;started making games as a student at Rensselar Polytechnic Institute&rdquo;）。该节点在转录中<strong>没有</strong> Barth 本人对应发言，降级为未核线索是对的，但应当<strong>保留为线索</strong>而非删除。</p>
+<p><strong>问题 D（AGENTS.md §10 缺口）</strong>：<code>Locator</code> 写 &ldquo;around &lsquo;we shut down the studio&rsquo;&rdquo;，<strong>无 timecode</strong>。需音频或带时间戳版本。</p>
+<h3 id="18-314">1.8 #314 的人物稿事实忠实性</h3>
+<p>逐条对照转录<strong>全部通过</strong>：约一年暂停 ≠ 十个月 Valve；Infinifactory/TIS-100 在暂停前；Amplify → Alliance；旧游戏继续销售；「不想经营但仍想做游戏」；未虚构售价与控制权。</p>
+<p>需修两处：</p>
+<ol>
+<li>「他在 2017 年的访谈里回忆，<strong>那段时间</strong>公司一度接近无法继续经营」——转录原文 &ldquo;Almost went out of business when Iron Cloud Tactics didn&rsquo;t do as well as we thought it would&rdquo; 是 <strong>Ironclad 时点</strong>的陈述，不是暂停期间。指代应明确。</li>
+<li>新增 4 段（约 800 字）偏长，末段「这段经历让『找到适合自己的作品』多了一层含义」是抽象收束，与 profile 既有收束重复。</li>
+</ol>
+<hr />
+<h2 id="2">2. 五篇的编辑诊断</h2>
+<p>分类：<code>资料缺口</code> / <code>研究错误</code> / <code>章节结构</code> / <code>句子表达</code>。全部给出可定位的段落依据。</p>
+<h3 id="21-gunpointbookprofilesgunpointmd">2.1 Gunpoint（<code>book/profiles/gunpoint.md</code>）</h3>
+<ul>
+<li><code>研究错误</code> + <code>资料缺口</code> — 第 131 行 <code>Observed: c. 2009–2013</code> 无证据支撑：ledger 最早记录为 <code>2010-10-25</code>，其自己的 STRONGLY SUPPORTED 写 &ldquo;publicly documented over about three years&rdquo;。同一缺陷在文内自相矛盾（第 45 行小标题「2010 年，他重新看了一遍 roadmap」）。editorial 分支已把它记为 year drift note（先记不改，做法正确），但<strong>至今未解决</strong>。</li>
+<li><code>章节结构</code> — 第 13–53 行连续四节讲同一件事（评论 → 比较 → 选择 → 删减），且每节都以「这里的…」收束（第 19、29、41、51 行），属 Gate §4 要防的连续「宣布新解释」推进。第 1–9 行把主问题、术语、结论预告一次性说完，读者在第 9 行之前只看到「在 PC Gamer 写游戏评论」。</li>
+<li><code>句子表达</code> — 「品味决定命运」出现在第 1、7、63、75、97、101、103 行共 7 次；第 7 行直接宣布命名，按 Gate §3 应在遇到人之后。</li>
+<li><strong>应保留</strong>：第 47–53 行 roadmap 审查、第 73 行「首发周销量跨过辞职阈值」、第 89 行「不到一个月便有可移动原型」——具体行动密度是五篇最高。第 65 行主动指出媒体职业带来的网络与可见性，是保留作者判断的正面例子。</li>
+</ul>
+<h3 id="22-kenshibookprofileskenshimd">2.2 Kenshi（<code>book/profiles/kenshi.md</code>）</h3>
+<ul>
+<li><code>研究错误</code>（已修，但<strong>未进 main</strong>）— main 版第 7、39–41 行把 <strong>Steam Early Access 写成收入起点</strong>。editorial 分支已改（第 7 行改为自营网站 alpha 已足以养活本人并雇 freelancers；小标题改为「玩家付款进入生产，发生过两次」）。<strong>这是 #311 必须尽快合入的核心理由</strong>：错误结论当前仍在 main 上。</li>
+<li><code>资料缺口</code> — editorial 分支已补 CASE-012 的 <strong>E003–E008</strong>，但 <code>kenshi.md</code> 第 97–98 行的「研究依据」仍只列 E001、E002。证据层已扩，reader layer 完全没消费。</li>
+<li><code>章节结构</code> — 第 29 行标题「《Kenshi》还有一个麻烦：……」是元评论；同一判断在第 35、67、87 行出现三次。</li>
+<li><code>句子表达</code> — 第 67 行用「生产函数」这一经济学词且置于目录项，与 Gate §5 相悖。</li>
+<li><code>人物具体度</code> — 中等。E003（交出部分工作、模拟系统错误与受众反应）、E004（早期工作周、核心成员与自由职业协作者）是能写出动作的现成素材。</li>
+</ul>
+<h3 id="23-zach-barthbookprofileszach-barth-zachtronicsmd">2.3 Zach Barth（<code>book/profiles/zach-barth-zachtronics.md</code>）</h3>
+<ul>
+<li><code>章节结构</code>（本篇最严重）— 7 个 <code>##</code> 全是机制／概念式标题，<strong>没有任何一节从具体时刻、处境或选择进入</strong>（Gate §1）。同一结论出现三次以上：开头第 5 行 → 第 53–59 行 → 第 61–65 行整节，再加第 71–79 行三连卡片。「4,000 美元」被讨论 5 次（第 23、25、29、63、73 行）。</li>
+<li><code>研究错误</code>（实为遗漏）— 缺 §1.7 问题 B 的 Microsoft 面试节点。补上后，「2022 关闭」与「2017 暂停」之间出现一条连续线索：他两次尝试回到受雇身份（Microsoft 未成 → Valve 十个月），最后用出售公司换取「不做管理、仍能做游戏」。这改变的是<strong>解释</strong>，不只是细节。</li>
+<li><code>句子表达</code> — 加粗道理句密度高：第 29 行、第 65 行等，属「每节末尾例行拔高」。</li>
+</ul>
+<h3 id="24-early-id-doombookprofilesearly-id-doommd">2.4 early id / DOOM（<code>book/profiles/early-id-doom.md</code>）</h3>
+<ul>
+<li><code>章节结构</code>（最集中）— 第 217 行出现<strong>一级标题</strong>「# 所以这本书到底应该教一个普通年轻人什么？」，把 Profile 变成全书总论，并再次总结全部案例；直接违反 Gate §7、§11。第 195–215 行的家族／代际大节引入 Bithell、Croshaw、Keith Judge、梁其伟四组<strong>外部反例</strong>，属 Chapter 材料（Gate §7）。收束句在第 99、125、143、147、157、169、191、201、219–227 行，共 8 处以上。</li>
+<li><code>句子表达</code> — 两个「最」式标题并列（第 103 行「DOOM 最不能被写错的一点…」、第 161 行「DOOM 最革命的地方之一…」）；第 211 行直接对读者发问。</li>
+<li><code>资料缺口</code> — 证据层极厚，但 profile 几乎全依赖 Kushner 传记与多年后回顾，缺少同期一手细节。第 39 行使用 Census 分布数据（8.2% / 1.7% / 22.9%）把「天才」还原为分布，非常有力。</li>
+<li><strong>应作为模板</strong>：第 49–55 行「那个不让 Romero 玩游戏的人，为什么又给他买了电脑？」、第 89–99 行「同样一份 Softdisk 工资，对每个人意味着不同的东西」。</li>
+</ul>
+<h3 id="25-limit-theory">2.5 Limit Theory（对照组，结论与预期相反）</h3>
+<ul>
+<li><code>研究错误</code>（本轮最重）— 第 135–153 行整节「2022 年，他兑现了另一种承诺」在 <strong>CASE-054 ledger 中没有任何证据</strong>：<code>rg "2022"</code> 在 main 与 editorial 两个版本的 ledger 中零命中；E005 只写仓库存在，Published: UNKNOWN。该断言已扩散到三处：<code>josh-parnell-limit-theory.md</code> 第 139、183 行、<code>book/profiles/README.md</code> 第 35 行、<code>book/chapters/03-…md</code> 第 105 行。<code>book/research-notes/editorial-fidelity-pilot-001.md:100</code> <strong>已经</strong>把它登记为 <code>NEEDS_VERIFY / VERIFY_IN_LANE_B</code>——所以这不是隐藏错误，而是「已登记、未降级、仍以肯定句出现在读者层」。</li>
+<li><code>研究错误</code>（同类）— 第 67 行「2013 年，支持者可以拿到早期可玩原型」在 main 的 ledger 里没有节点，只在 editorial 分支补的 E006 时间线里（&rdquo;Apr 28 Prototype is Released&rdquo;）⇒ Profile 依赖尚未合入的证据。</li>
+<li><code>句子表达</code>（两处硬伤）— 第 23 行同句混用姓氏与名：「Parnell 的背景与 <strong>Josh</strong> 后来给自己选择的产品方向有非常直接的联系。」；第 111 行语法不通：「只是当其他人终于加入，原来承诺的整个产品仍然有巨大距离。」</li>
+<li><code>章节结构</code> — 全篇 40 处以上单句成段（第 17、19、35、37、47、49、51、53、59、61、65、79…），节奏由切分而非材料决定（Gate §3）。</li>
+<li><strong>应保留</strong> — 第 181–191 行「事实范围、成本口径与不可迁移条件」是全库最规范的卡片；第 163 行明确写出 early id / Carmack 作为反例，保留作者的边界判断。</li>
+</ul>
+<h3 id="26">2.6 跨篇共性</h3>
+<ol>
+<li><strong>四篇结尾都在替全书说同一句话</strong>：Gunpoint 第 103 行、Kenshi 第 55 行、Zach 第 65 行、DOOM 第 227 行，都在说「成功只是把你送到下一道题前／不能许诺同样结果」。Gate §7 明文禁止，但四篇全犯 ⇒ <strong>这条规则没有执行机制</strong>。</li>
+<li><strong>加粗道理句作为小节结尾</strong>：四篇合计 40+ 处。</li>
+<li><strong>除 early-id 两个小节外，全部缺少「具体时刻」开头</strong>；Zach Barth 最严重。</li>
+<li><strong>读者层术语不一致</strong>：<code>chapters/</code> 已被 lint 清成中文（「来源账本」「案例档案」），<code>profiles/</code> 仍写 <code>CASE-007</code>、<code>Evidence Ledger</code>、<code>P1</code>（gunpoint 第 142–153 行）。规则是全书级的，执行只覆盖 chapters。</li>
+</ol>
+<hr />
+<h2 id="3">3. 工作流是否过度治理</h2>
+<p>判断标准：<strong>有已发生的重复故障 → 保留；只增加劳动量 → 删。</strong></p>
+<h3 id="31">3.1 应保留（有真实收益证据）</h3>
+<table>
+<thead>
+<tr>
+<th>规则／工具</th>
+<th>故障证据</th>
+<th>实测</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tools/chapter_copy_lint.py</code></td>
+<td>chapters 01/04/06/07 共 4 处后台术语泄漏</td>
+<td>实跑 <code>OK (8 chapter files)</code>；注入 <code>P0</code> 后立即 <code>FAIL</code> 并给出行号。功能正确、成本近零</td>
+</tr>
+<tr>
+<td><code>tools/reader_evidence_sync_audit.py</code>（report-only）</td>
+<td>CASE-012 把 Steam 写成收入起点</td>
+<td>未进 CI；<code>--strict</code> 只对 backlink/year 生效，边界正确</td>
+</tr>
+<tr>
+<td><code>evidence-record-template</code> 的 <code>Exact Wording</code> 必填</td>
+<td>11 Case 实测 + CASE-012 具体错误</td>
+<td>正确，但<strong>制造了存量债</strong>：498 条记录中 433 条无长引语 ⇒ 必须继续不进 CI（当前确实没有）</td>
+</tr>
+<tr>
+<td><code>claim-template</code> 的 Review trigger</td>
+<td>15 个 Claim 中 <code>VERIFIED</code> = 0、<code>REFUTED</code> = 0</td>
+<td>真实的不收敛故障</td>
+</tr>
+<tr>
+<td><code>workflow-lanes</code> 跨模型交接章</td>
+<td>CASE-012 双线改同一 E001 + 摘要压缩</td>
+<td>保留；本文件本身就是它的用例</td>
+</tr>
+</tbody>
+</table>
+<h3 id="32">3.2 应修改（规则互相冲突）</h3>
+<p><strong>冲突 1（必须修）</strong>：<code>chapter_copy_lint</code> 的禁词表含 <code>runway</code>，而 <code>book/EDITORIAL-GATE.md</code> §5 明确写「<strong>可以使用</strong>：<code>runway</code>、<code>scope</code>、<code>market access</code>、<code>capability capital</code>、<code>staged commitment</code>，但第一次出现必须先让普通读者知道它指什么」。同时 <code>scope</code> / <code>market access</code> 未进禁词表 ⇒ 禁词表没有原则。
+已发生的后果：<code>chapter 02</code> 的改动正是 REWRITE-PROTOCOL §Pass A 明令禁止的<strong>同义替换式清洗</strong>（「Runway 不只是账户里有多少钱」→「能撑多久，不只看账户里有多少钱」；「也就是runway」被删）。这是在满足正则，不是在修读者问题。
+建议：把 <code>runway</code> 移出禁词表（<code>证据增强</code> / <code>承诺升级</code> 是研究后台语言，保留）。</p>
+<p><strong>冲突 2（范围不一致）</strong>：lint 只 glob <code>book/chapters/*.md</code>，而 <code>BOOK-ARCHITECTURE.md</code> 的原文是「<strong>正文</strong>不出现 P0/P1…」，profiles 里大量存在。要么扩到 profiles 的研究依据节之外，要么把文档口径改成「章节正文」。</p>
+<p><strong>冲突 3（规则重复）</strong>：<code>EDITORIAL-GATE</code> 的 §0、§2、§3、§4 与新增 §0.6 讲同一件事（不要为叙事牺牲事实）。0.6 的唯一新意是那句可操作检查（「起点／首次／唯一／才」必须回原文核对）。建议把新意并入 §0，避免同一原则有四个版本。</p>
+<h3 id="33">3.3 应质疑（可能只是劳动量）</h3>
+<ul>
+<li><strong><code>reader/index.html</code> + <code>reader/README.md</code>（#311 新增，277 行）</strong>：<code>workflow-lanes</code> 的 <code>Change escalation</code> 第 5 条要求「只有真实用户需要消费时，再做新的 reader surface」；该 README 自己也写「先验证这个阅读形态是否真的比在 GitHub 上一章一章点开更好用，再决定是否需要部署」。<strong>目前没有读者测试记录。</strong> 建议：不合并，或合并但标 <code>EXPERIMENTAL</code> 且不进导航。它是仓库第 2 个 UI surface（<code>explorer/</code> 已有 1 个），会持续吸收维护注意力。</li>
+<li><strong><code>schemas/evidence-material-refresh.md</code> 的抓取能力表</strong>：内容有用，但「实测于 2026-10-09」的 403 / 405 / shell 结论是高时效变量，却写成长期 schema。建议加 <code>Last verified</code>，过期后降级为 research-note。</li>
+</ul>
+<h3 id="34">3.4 结论</h3>
+<p>「过度治理」的症结<strong>不在 CI 步数</strong>（WORKFLOW.md 9 → 10 项、CI 9 → 10 步；<code>chapter_copy_lint</code> 是秒级正则，成本可忽略），而在<strong>规则之间的冲突与重复</strong>：同一原则在 Gate 里有 4 个版本、禁词表与 Gate §5 打架、文档口径与 lint 覆盖范围不一致。</p>
+<p>唯一真正会爆炸的工作量债是 <code>Exact Wording</code> 必填之于 433 条存量记录。<strong>建议明确写下：不做一次性 backfill，只在触碰某条记录时补。</strong> 否则下一个模型很可能发起全库补引语工程，那既不可能完成，也会稀释 #311 那类有价值的逐字回填。</p>
+<hr />
+<h2 id="4">4. 交付</h2>
+<h3 id="41">4.1 优先级整改清单</h3>
+<p><strong>P0 — 事实与研究正确性</strong></p>
+<ol>
+<li>Limit Theory「2022 源码公开」：补证或降级措辞，<strong>同步三处</strong>（profile 第 139 / 183 行、<code>book/profiles/README.md</code> 第 35 行、<code>book/chapters/03</code> 第 105 行）。</li>
+<li>
+<h1 id="311-rebase-merge-main-force-bookchapters01-bookbook-architecturemd-main">311 的合入路径：必须 rebase / merge 到最新 main，<strong>不得 force</strong>；注意 <code>book/chapters/01</code> 与 <code>book/BOOK-ARCHITECTURE.md</code> 因 main 前移而新增的冲突面。</h1>
+</li>
+<li>
+<h1 id="311-case-012-kenshi-steam-main">311 的 CASE-012 修正（Kenshi Steam 起点错误）必须尽快进 main。</h1>
+</li>
+<li>Gunpoint 的 <code>c. 2009–2013</code> 与其自身「约三年」表述冲突，取证后二选一。</li>
+<li>
+<h1 id="313-e011e006-microsoft-timecode">313 的 E011/E006 同源重复 + 补 Microsoft 面试节点 + 补 timecode。</h1>
+</li>
+</ol>
+<p><strong>P1 — 结构与一致性</strong></p>
+<ol start="6">
+<li>profiles 的读者层术语未清理（chapters 已清）。</li>
+<li>四篇结尾的「全书总论」与加粗道理句（§2.6）。</li>
+<li><code>chapter_copy_lint</code> 的 <code>runway</code> 冲突。</li>
+<li>early-id 的家族／代际节迁到 chapter 层。</li>
+<li>CASE-012 的 E003–E008 未被 profile 消费。</li>
+</ol>
+<p><strong>P2 — 治理与债</strong></p>
+<ol start="11">
+<li>188 个未合并分支的清仓流程（逐文件比 blob，不按分支名）。</li>
+<li><code>reader/</code> 视图的保留决策。</li>
+<li>
+<h1 id="312">312 的正则漏匹配与输出可追踪性。</h1>
+</li>
+</ol>
+<h3 id="42-gpt">4.2 必须交给 GPT 补原始资料的问题</h3>
+<p>每条给出：目标 / 定位符 / 要带回什么 / 已知可达性。</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>目标</th>
+<th>定位符</th>
+<th>要带回</th>
+<th>可达性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Gunpoint 开发起点</td>
+<td><code>pentadact.com</code> devlog 首篇 / GDC Europe 2013 视频 / IGF 2012 报名页</td>
+<td>第一版原型有日期的记录</td>
+<td><code>pentadact.wordpress.com</code> <strong>403</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td>Limit Theory 源码公开</td>
+<td><code>github.com/JoshParnell/ltheory</code>（首个 release / commit）、<code>ltheory-old</code></td>
+<td>公开日期 + 公开范围</td>
+<td>direct</td>
+</tr>
+<tr>
+<td>3</td>
+<td>The Amp Hour #332</td>
+<td>该期音频或带时间戳版本</td>
+<td>「we shut down the studio」等处 <strong>timecode</strong>；<code>currently we're four and we've peaked</code> 的 team-size 原句</td>
+<td>官网转录 direct（已核）；音频未听</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Alliance 收购</td>
+<td>2018 年前后官方声明 / 新闻稿</td>
+<td>收购方全名、日期、是否公开金额</td>
+<td>未探</td>
+</tr>
+<tr>
+<td>5</td>
+<td>CASE-012</td>
+<td>Siliconera 2015 原采访；4Gamer / GameSkinny 原文</td>
+<td>自营 alpha 的<strong>原句与售价</strong>；同期团队成员名单</td>
+<td>部分 blocked / shell</td>
+</tr>
+<tr>
+<td>6</td>
+<td>CASE-016</td>
+<td>E020–E031（<code>- **Class:**</code> 那批）</td>
+<td>补齐这些 P0/P1 记录的逐字引语</td>
+<td>ledger 内已有 URL</td>
+</tr>
+<tr>
+<td>7</td>
+<td>early id</td>
+<td>Kushner《DOOM启世录》1993 餐厅道歉段；WIRED 1998 <em>Legion of Doom</em></td>
+<td>可引用的原页原句与页码</td>
+<td>书需具体页码</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Zach Barth 2015 年财务变动</td>
+<td><code>CASE-051</code> Open Questions 第 2 项</td>
+<td>原始出处或确认不可获得</td>
+<td>未探</td>
+</tr>
+</tbody>
+</table>
+<h3 id="43-codex">4.3 交给 Codex 的文件级写作任务</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>文件</th>
+<th>基线</th>
+<th>做什么</th>
+<th>不许做</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T1</td>
+<td><code>book/profiles/kenshi.md</code></td>
+<td>合 #311 后</td>
+<td>消费 E003–E008：把「前五六年」扩成 2 个有动作的段落（2017 交出部分工作；2018 早期工作周）；删第 67 行「生产函数」；第 29 行小标题去掉「还有一个麻烦」</td>
+<td>不补 headcount、不补工资</td>
+</tr>
+<tr>
+<td>T2</td>
+<td><code>book/profiles/zach-barth-zachtronics.md</code></td>
+<td>main + #314</td>
+<td>B 稿压成 2 段；补 Microsoft 面试节点（须先由 Lane B 落 E006/E011）；删第 61–65 或第 71–79 之一；给出一个「具体时刻」入口</td>
+<td>不改 4,000 美元口径；不推断股权</td>
+</tr>
+<tr>
+<td>T3</td>
+<td><code>book/profiles/josh-parnell-limit-theory.md</code></td>
+<td>main</td>
+<td>修第 23 行 <code>Josh</code>、第 111 行语法；处理第 135–153 行；第 67 行等 E006 合入后再引用</td>
+<td>不批量合并 40 处单句成段（那是风格清洗）</td>
+</tr>
+<tr>
+<td>T4</td>
+<td><code>book/profiles/gunpoint.md</code></td>
+<td>main</td>
+<td>合并第 23–31 与 33–41 两节；限制「品味决定命运」的重复</td>
+<td>不动第 47–53、69–75 行的具体事实段</td>
+</tr>
+<tr>
+<td>T5</td>
+<td><code>book/profiles/early-id-doom.md</code> + 目标 chapter</td>
+<td>main</td>
+<td>第 195–215 行家族／代际节迁出为 chapter 素材；第 217–227 行改为回到 Romero／团队的 profile 结尾；删 8 处「作者在这里保留的判断」</td>
+<td>不删 Bithell / Croshaw / Judge 反例本身，只换位置</td>
+</tr>
+<tr>
+<td>T6</td>
+<td><code>tools/chapter_copy_lint.py</code></td>
+<td>editorial</td>
+<td>解除 <code>runway</code> 禁用并记录理由</td>
+<td>不放宽 P0/P1/状态词</td>
+</tr>
+<tr>
+<td>T7</td>
+<td><code>evidence/CASE-051-zachtronics-source-ledger.md</code></td>
+<td>#313</td>
+<td>E011 并入 E006 或写清分工；补 Microsoft 节点；引语回到原句边界；保留 RPI 线索</td>
+<td>不声称已听音频</td>
+</tr>
+<tr>
+<td>T8</td>
+<td><code>tools/reader_evidence_sync_audit.py</code></td>
+<td>#312</td>
+<td>支持 <code>- **Class:**</code>；<code>--all</code> / <code>--json</code> 稳定输出；补真实 ledger fixture</td>
+<td>不让它进 CI</td>
+</tr>
+<tr>
+<td>T9</td>
+<td><code>book/profiles/README.md</code>、<code>book/chapters/03</code></td>
+<td>main</td>
+<td>与 T3 同步 Limit Theory 的 2022 措辞</td>
+<td>不同步虚构日期</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="5">5. 本轮边界</h2>
+<ul>
+<li>本文件不新增或改变任何 canonical Case / Evidence / Claim；不合并任何 PR；不改写任何既有 Profile。</li>
+<li>引用 PR 与 Issue 的编号、标题、base / head 均以 2026-10-10 的 GitHub 实测为准；审查期间 <code>main</code> 由 <code>0f75dd4</code> 前移至 <code>00945b7</code>，涉及 chapter 01 / BOOK-ARCHITECTURE 的合并面需在 rebase 时重新确认。</li>
+<li>§2 的每一条诊断都可由文中给出的文件名、行号或工具输出复现。</li>
+<li>是否采纳、采纳哪几条，仍由作者裁决。</li>
+</ul><div class="crumbs"><a href="/heroes-portal/">书阁</a> / book/research-notes/cross-model-collaboration-and-prose-review-2026-10-10.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

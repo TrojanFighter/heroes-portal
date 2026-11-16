@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第六篇阅读改造：事实锁与结构剪辑 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl class="on"" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#_2" class="t2">写入预检与基线</a><a href="#narrative-packet" class="t2">Narrative Packet</a><a href="#fact-lock" class="t2">正文生成前 Fact Lock</a><a href="#structural-cut" class="t2">Structural Cut：原章逐节职责与去向</a><a href="#_3" class="t2">网上原稿核验记录</a><a href="#_4" class="t2">三遍编辑与回读计划</a><a href="#fidelity-readback" class="t2">原稿与候选的 Fidelity Readback</a><a href="#ab" class="t2">六维 A/B 编辑比较</a><a href="#_5" class="t2">交付状态与后续</a></aside><article class="doc"><div class="col"><h1 id="_1">第六篇阅读改造：事实锁与结构剪辑</h1>
+<p class="dc">状态：AUTHOR_REVIEW_PENDING。Lane C；真实读者测试 NOT TESTED。本记录先于候选正文建立。</p>
+<h2 id="_2">写入预检与基线</h2>
+<ul>
+<li>精确目标：<code>TrojanFighter/IndieGameLegendaryHeroes</code>，公开行业案例的跨人物专题。</li>
+<li>最新 main：<code>44cc729e1e4ab6e127cd31a6b730bb52823119c2</code>；分支：<code>codex/chapter06-editorial-pilot-20261009</code>。</li>
+<li>原稿：<a href="/heroes-portal/book/chapters/06-you-do-not-need-a-standard-studio.html"><code>06-you-do-not-need-a-standard-studio.md</code></a>，blob <code>436914e480d542b9d6db999abe36ba627da359ef</code>。</li>
+<li>本轮只新增本笔记与一份完整专题候选；不覆盖正式 Chapter，不改 <a href="/heroes-portal/book/life-routes/project-thesis-capability-gap-004.html">LR-004</a>，不改 Case/Evidence/Claim/Schema/metadata。</li>
+<li>原稿可从 baseline commit/blob 恢复。候选经独立史实回读后交单独 PR，作者验收前不合并。</li>
+<li>历史事实 Owner 为 CASE-007/042/048/050/056 及各自 Ledger；其研究状态不由本轮编辑改变。用公开资料独立写作，无其他项目内部材料、私人执行建议或匿名私人信息。</li>
+<li>主线之外的既有比较消费 CASE-060/054/047/057/026 及各自 Ledger，具体锁定见下表；C015 仍为 SUPPORTED，不将适配方法写成商业成功条件。</li>
+</ul>
+<h2 id="narrative-packet">Narrative Packet</h2>
+<p>本篇是跨人物专题。主问题为：同样说“做不出来”，为什么有人寻找共同作者，有人删掉制作义务，有人购买现成材料，而合适的团队仍可能难以持续？</p>
+<p>Roset 的视觉设想与技术伙伴形成作品；Francis 在工资支持的业余制作中重划范围；Wehle 在职业与育儿约束中借用素材。三者不排成成功步骤，也不把职业标签当成选择的原因。Playdead 用成功后的关系变动检验“互补就能长期共存”；Question 用成品的商业不足检验“能力匹配就能养活团队”。</p>
+<p>采用比较随笔：先让 Roset/Francis 的相反选择相遇，再让 Wehle 的整合劳动改变“自己做”的定义，随后转入合作的时间成本与市场边界。两种失败压力来自不同问题，不将治理冲突和销量不足混成一项。</p>
+<p>要保存的作者判断：扩大能力集合与缩减产品义务均有价值；岗位名不能定义瓶颈；共同作者带来共同权力；学习、购买和融资都要说明服务什么作品任务；制作可行与市场可持续分别核验。保持锋芒，但不重复同一套课堂总结。</p>
+<p>禁止补写相遇现场、谈判对白、焦虑或信任的心理描写、家庭照护分工、资金分配和人物过错。作品题材、协作者、工资和家庭责任保留其已有口径。</p>
+<h2 id="fact-lock">正文生成前 Fact Lock</h2>
+<table>
+<thead>
+<tr>
+<th>人物/动作</th>
+<th>Canonical 依据</th>
+<th>口径与未核部分</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Roset 职业插画经历、先有颜色恢复设想；Mendoza/Cuevas 有 AAA 程序经验；作品先于公司</td>
+<td><a href="/heroes-portal/cases/CASE-050-nomada-gris-neva.html">CASE-050</a>；<a href="/heroes-portal/evidence/CASE-050-nomada-gris-neva-source-ledger.html">Ledger</a> E001–E003</td>
+<td>2019 发售后回忆与 2018 发售前访谈分开；具体股份、创始人资金 UNKNOWN</td>
+</tr>
+<tr>
+<td>三人做 demo、向 Gamescom 发行商展示</td>
+<td>CASE-050 E002</td>
+<td>已登记事实，可用于填充叙述；不加六个月经费、合同条款或“因为展会所以成功”</td>
+</tr>
+<tr>
+<td>Francis 长期评论、发现 GameMaker/原型、2010 删脚本演出；艺术与音乐协作、工资与首发周辞职阈值</td>
+<td><a href="/heroes-portal/cases/CASE-007-gunpoint.html">CASE-007</a>；<a href="/heroes-portal/evidence/CASE-007-gunpoint-source-ledger.html">Ledger</a> E001/E002/E004/E006/E008</td>
+<td>2010 当时记录、2014 方法归纳分开；删昂贵外壳是作者分析，不是所有决定共享当时路线图；收入/预算 UNKNOWN</td>
+</tr>
+<tr>
+<td>Wehle 职业技术美术、前作约两年、2016 在职育儿、偏好短简单范围、授权素材/脚本、环境叙事 UX 强项</td>
+<td><a href="/heroes-portal/cases/CASE-042-the-first-tree.html">CASE-042</a>；<a href="/heroes-portal/evidence/CASE-042-the-first-tree-source-ledger.html">Ledger</a> E002/E003/E005</td>
+<td>前作约两年来自可能更新的本人作品页，不能当逐日开发日志；家庭预算、照护分工未知</td>
+</tr>
+<tr>
+<td>Jensen 愿景与 Patti 公司建设分工；2016 退出、2017 冲突报道及其人生/项目时间安排说法</td>
+<td><a href="/heroes-portal/cases/CASE-056-playdead-founder-governance.html">CASE-056</a>；<a href="/heroes-portal/evidence/CASE-056-playdead-founder-governance-source-ledger.html">Ledger</a> E001–E003/E005–E007</td>
+<td>不是未完成第二作，不裁定责任；股权、法律因果和可避免冲突的条款未知</td>
+</tr>
+<tr>
+<td>Question 三位核心的职业前史变成玩法/题材；Shin 不同阶段加入；2016 商业不足，2018 选择合作恐怖</td>
+<td><a href="/heroes-portal/cases/CASE-048-the-magic-circle.html">CASE-048</a>；<a href="/heroes-portal/evidence/CASE-048-the-magic-circle-source-ledger.html">Ledger</a> E001–E005/E008–E010</td>
+<td>三位核心不是全部 contributors、不是从第一天同为全职；无营销预算不是无营销；销量不等于终身财务；后作盈利未知</td>
+</tr>
+<tr>
+<td>Croteam 沿用引擎/Editor、补叙事专长及谜题测试；Limit Theory 取消时游戏远未功能完成</td>
+<td>CASE-060 Ledger E002–E004；CASE-054 <a href="/heroes-portal/evidence/CASE-054-limit-theory-source-ledger.html">Ledger</a> E006/E007</td>
+<td>只比较学习与产品距离；不单归因自研引擎；未加入新的效率、成本或反事实成功判断</td>
+</tr>
+<tr>
+<td>The Witness 前作收入与建筑/景观专长；thatgamecompany 公司股权融资扩展发行能力</td>
+<td>CASE-047 Ledger E001/E003–E005；CASE-057 Ledger E001/E005/E006</td>
+<td>资本口径不混同；不推特定权益、创意否决或融资导致全部延期</td>
+</tr>
+<tr>
+<td>Brigador 展会、报道、EA、商业不足与展示错配</td>
+<td>CASE-026 Ledger E001/E004/E006</td>
+<td>开发者定性诊断，不确定全部因果；有市场活动不等于有效转化</td>
+</tr>
+</tbody>
+</table>
+<p>H/作者分析不升级成 Claim；没有新 Signal 或外部报道事实直接入稿。观察年代与 2026 可用性分开，历史渠道和生活成本不默认仍有效。</p>
+<h2 id="structural-cut">Structural Cut：原章逐节职责与去向</h2>
+<p>N=人物行动，A=作者分析，D=决策建议，R=研究边界。用于发现阅读断点，不设比例。</p>
+<table>
+<thead>
+<tr>
+<th>原章段落组</th>
+<th>用途</th>
+<th>候选操作及观点去向</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>开头 + Roset 技术伙伴</td>
+<td>N/A/R</td>
+<td>合并起点，补入已有 E002 的 demo 与发行商展示；删除未发生的“自学全套/先做好再画图”展开，保留视觉意图与共同作者判断</td>
+</tr>
+<tr>
+<td>Francis 遇到不同问题</td>
+<td>N/A/R</td>
+<td>与 Roset 并置，保留 2010 删改和协作者；补已有首发周辞职时间，避免裸辞叙事</td>
+</tr>
+<tr>
+<td>原型不漂亮的三种诊断</td>
+<td>D</td>
+<td>正文用短比较保留“岗位名不是瓶颈”判断；细表链接 LR-004 第一/二关与虚构双人示例，原稿可回查，不新增路线教程</td>
+</tr>
+<tr>
+<td>自己学不免费：Wehle/Croteam/Limit Theory</td>
+<td>N/A/D/R</td>
+<td>主线集中 Wehle 的前作、在职育儿、外部材料；学习有成本的原观点保留；Croteam/Limit Theory 连同学习评价句转为候选末尾延伸比较</td>
+</tr>
+<tr>
+<td>共同创始人/Playdead</td>
+<td>N/A/D/R</td>
+<td>保留完成两作后仍分裂的反压力；删假设等五年谈判问答，权力与长期责任保留；方法链接 LR-004 COMPOSE</td>
+</tr>
+<tr>
+<td>有钱招人：Witness/thatgamecompany</td>
+<td>N/A/D/R</td>
+<td>放入候选末尾“延伸对照”，保留资本来源、长期组织义务及融资非验证判断；不消除而是从主线让出篇幅</td>
+</tr>
+<tr>
+<td>最冷酷反例：Question/Brigador</td>
+<td>N/A/R</td>
+<td>Question 推进到下一作方向，商业不足不写成解散；Brigador 与定性归因边界链接延伸对照</td>
+</tr>
+<tr>
+<td>怎样判断合作 + 先确认再承诺</td>
+<td>D/A</td>
+<td>取消第二次岗位诊断，结尾保留能力与作品相互调整、长期承诺必须核具体任务；方法只链接 LR-004</td>
+</tr>
+<tr>
+<td>时效卡 + 继续读 + 来源</td>
+<td>R/D</td>
+<td>保留观察年份/历史条件/状态；主线五组事实回链，旁支给现有 Case/Route 链接</td>
+</tr>
+</tbody>
+</table>
+<p>没有搬写或修改 LR-004。现有路线已包含 S0–S4 证据门、能力核心与可验收外围、六种动作、生产/市场两次检查和虚构视觉诊断。原章三种视觉问题与路线示例不完全逐字相同，候选保留其共同判断；若作者希望保留三分表，可继续保留原稿或另审路线，不谎称全量迁移已完成。</p>
+<h2 id="_3">网上原稿核验记录</h2>
+<p>访问日期 2026-10-09；这些是编辑读源记录，不修改 Ledger 的来源等级。</p>
+<ul>
+<li>David Wehle，<a href="https://www.gamedeveloper.com/business/so-many-projects-so-little-time">So Many Projects, So Little Time</a>，2016-07-06，正文完整读。用于 E005 已登记的在职、育儿、范围与材料选择；未新增每日工作、报价、家庭分工或当代授权建议。</li>
+<li>Ryan Lambie，<a href="https://filmstories.co.uk/gaming/interview-bioshock-2-director-jordan-thomas-on-the-blackout-club/">Interview: BioShock 2 director Jordan Thomas on The Blackout Club</a>，2018-11-26，访谈正文完整读。只消费 E008 的后续方向，未引入新的团队数、试玩现场及预测；引言年代不替代 canonical 前史。</li>
+<li>Christian Nutt，<a href="https://www.gamedeveloper.com/business/hanging-in-limbo">Hanging in Limbo</a>，2012-02-24，已读开头及作品/公司关系段，未声称完整读完长访谈。用 E002/E003 交叉核工作职责；新增删减比例与制作轶事不入稿。</li>
+<li>Alex Wawro，<a href="https://www.gamedeveloper.com/business/road-to-the-igf-question-s-i-the-magic-circle-i-">Road to the IGF: Question&rsquo;s The Magic Circle</a>，2016-01-15，已读背景、工具、制作时长与题材起点段；未声称完整阅读。E001 的角色及加入阶段可回查；新增技术、外包轶事不入稿。</li>
+<li>Enerio Dima，AnaitGames，2019-08-02，<a href="https://www.anaitgames.com/entrevistas/celsius-2019-entrevista-conrad-roset-roger-mendoza-adrian-cuevas">Nomada founders interview</a> 本轮访问超时，不能称重新读过；保留 E001 的既有证据身份，不靠搜索摘要填充。demo 补叙用另项已登记 E002。</li>
+<li>Nintenderos，<a href="https://www.nintenderos.com/2018/09/entrevista-hablamos-con-conrad-roset-director-creativo-de-gris-sobre-la-industria-del-videojuego-el-origen-y-las-inspiraciones-de-este-titulo-y-mucho-mas/">Hablamos con Conrad Roset</a>，访谈正文完整读。当前页标 <code>Publicado 07/09/2018</code>，与 E002 登记的 <code>2018-09-25</code> 不同；不静默改 Ledger，候选仅写 2018 年。辞职谓词紧随两位程序员，故候选不笼统写三人都辞职。访谈还说 Gamescom “三年前”，不直接推算demo年份，具体时间线交 Lane B。画作起点、音乐协作等未登记新细节不引入本轮。</li>
+</ul>
+<h2 id="_4">三遍编辑与回读计划</h2>
+<p>Delete：先移出重复决策教程和第三轮总结，再处理句子。Restore Person：保留劳动与合作的实际安排，用已登记前作/demo/转型填叙述断处。Rhythm：五条路径彼此提出问题，不依次重复“背景—结论—限制—建议”。</p>
+<p>作者验收始终独立；不以模型意见、篇幅减少或禁词数量作为通过标准。</p>
+<h2 id="fidelity-readback">原稿与候选的 Fidelity Readback</h2>
+<p>完整候选见 <a href="/heroes-portal/book/research-notes/chapter06-narrative-candidate-2026-10-09.html">Chapter 06 阅读稿</a>。A 为上述 baseline 下的正式原章，B 为该候选；本轮做明示版本的编辑比较，未假装匿名盲测。原章没有被删除或替换，逐节删移关系见 Structural Cut。</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>状态</th>
+<th>回读重点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>人物与署名</td>
+<td>PRESERVED</td>
+<td>Roset/Mendoza/Cuevas、Francis艺术音乐协作、Wehle外部材料、Jensen/Patti分工、Question三人职责；核心不等于完整贡献者</td>
+</tr>
+<tr>
+<td>时间与知识</td>
+<td>PRESERVED</td>
+<td>2010 Francis开发记录与2014方法归纳分开；2013首发周后退出职业；Roset2018/2019访谈分别归属；Patti2016退出与2017冲突报道分开</td>
+</tr>
+<tr>
+<td>新增叙事填充</td>
+<td>PRESERVED</td>
+<td>GRIS demo/Gamescom → CASE-050 E002；Wehle前作/约两年 → CASE-042 E003；Shin兼职到全职 → CASE-048 E001；均已在 canonical corpus，不产生新史实</td>
+</tr>
+<tr>
+<td>数字口径</td>
+<td>PRESERVED</td>
+<td>Wehle约两年是前作制作，不是 The First Tree；没有增加预算/工时/人数/销量；三位核心不写成第一天全职或总人力</td>
+</tr>
+<tr>
+<td>否定、情态、因果</td>
+<td>PRESERVED</td>
+<td>不承诺小作品/素材/合作成功；无营销预算仍与实际活动分开；前作/方法不隔离出唯一成功原因；商业短缺不是立即解散</td>
+</tr>
+<tr>
+<td>未知与争议</td>
+<td>PRESERVED</td>
+<td>demo资金、股份、家庭预算、工资阈值、Patti责任/法律、Question后作盈利未知保留；不替双方归责</td>
+</tr>
+<tr>
+<td>作者观点与 H</td>
+<td>PRESERVED</td>
+<td>能力集合/制作义务、判断与整合、学习到成品的距离、共同权力、融资非需求验证、市场与制作两次检查分别保留；均为有边界的作者分析</td>
+</tr>
+<tr>
+<td>时效</td>
+<td>PRESERVED</td>
+<td>主线给观察年份、历史条件及2026状态；DURABLE仅指治理与核验问题，不给当前品类/渠道推荐；延伸对照可回原章时效卡</td>
+</tr>
+<tr>
+<td>引语与权利</td>
+<td>PRESERVED</td>
+<td>新增正文独立中文转述，无虚构对白与长引语；保留作者原有判断语句，书稿继续 All Rights Reserved</td>
+</tr>
+<tr>
+<td>未核来源</td>
+<td>NEEDS_VERIFY</td>
+<td>AnaitGames重访超时不作成功核验；Nintenderos页面与登记日期不同、demo相对年份待核，候选不填具体月日/年份且删除笼统辞职归责；合同、家庭、财务仍需 Lane B</td>
+</tr>
+</tbody>
+</table>
+<p>独立 AI 编辑于2026-10-09对照原章、候选、主线与旁支Ledger，确认Wehle约两年属于前作，Shin阶段、无预算/市场活动、Patti归责与Question后作财务边界保留。提出两项提交前修正：GRIS时效表可能暗定demo年份；“保留撤回空间”的原观点弱化。已分别改成demo具体年份待核，并在结尾恢复投入无效时撤回、改变合作方式或改作品的检查。除此未发现必须阻断的事实 REGRESSION。审读为非盲AI编辑意见，未重新打开外链，不构成真人测试或作者验收。</p>
+<h2 id="ab">六维 A/B 编辑比较</h2>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>候选相对原稿的变化与限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>人物具体性</td>
+<td>demo、前作、加入阶段补上实际动作；不靠表情或内心填故事；五组人物仍只是专题窗口，不替代完整传记</td>
+</tr>
+<tr>
+<td>连贯度</td>
+<td>Roset的共创直接遇见Francis的删减，Wehle改变“自己做”的含义，Playdead/Question分别压力测试长期合作与市场；省去中途虚构招聘教程</td>
+</tr>
+<tr>
+<td>作者观点</td>
+<td>主要判断在过程之后落地；学习/资本/Brigador下沉仍明确可读，原文也可查。作者需确认延伸对照的压缩是否降低锋芒</td>
+</tr>
+<tr>
+<td>节奏</td>
+<td>少一次“列问题—逐项建议—总结”的循环；章节长度服务比较，不以字数减少定优劣；五段例子是否仍太像依次摘要待读者判断</td>
+</tr>
+<tr>
+<td>继续阅读意愿</td>
+<td>编辑预期后半的两种压力能改变前半理解，但真实读者测试 NOT TESTED；无人类完成率、跳读或偏好数据</td>
+</tr>
+<tr>
+<td>忠实性</td>
+<td>已锁事实保持，并保留时代/未知边界；新增的是既有档案的叙述空间，不是外部新事实或新的研究结论</td>
+</tr>
+</tbody>
+</table>
+<p>作者仍需判断：三种视觉障碍是否应保留原三分表；学习、融资的旁支是否值得重新放回主线；结尾是否足以保留作者原有批判；五组人物是否真正构成比较，而非只是较短的串讲。</p>
+<h2 id="_5">交付状态与后续</h2>
+<p>暂定 AUTHOR_REVIEW_PENDING。Gunpoint #283 与 DOOM #284 当前均 OPEN、无作者 reviews，不能据此宣布其候选已进入 main。第六篇继续独立提交，不能把主分支填充目标缩为“若干 PR 已绿灯”。正式替换与合并仍需对应稿件的作者验收。</p>
+<p><code>python tools/reader_layer_lint.py</code> 通过；新增内容、提交消息与PR描述已做公开/跨库边界语义审阅。暂存/提交/推送接受本库现有私人内容hooks，远端结果见PR；没有为研究/schema/metadata未改的内容重复跑无关测试。</p>
+<p>本轮完成后可让作者同时比较三份试验的不同叙述方式；当前不适合全库自动套用，也不另建新 Gate。正文替换、main合并与真人阅读效果仍未完成。</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / book/research-notes/chapter06-narrative-pilot-2026-10-09.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

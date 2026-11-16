@@ -1,0 +1,1319 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>026 — Spinout ≠ Indie：组织退出、题目退出与独立生产方式的正交关系 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl class="on"" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0" class="t2">0. 核心修正</a><a href="#1-spinout" class="t2">1. Spinout到底证明了什么？</a><a href="#2-exit-stack" class="t2">2. 五层Exit Stack</a><a href="#21-employment-exit" class="t3">2.1 EMPLOYMENT EXIT</a><a href="#22-ownership-exit" class="t3">2.2 OWNERSHIP EXIT</a><a href="#23-product-divergence" class="t3">2.3 PRODUCT DIVERGENCE</a><a href="#24-objective-function-exit" class="t3">2.4 OBJECTIVE-FUNCTION EXIT</a><a href="#25-production-mode-exit-indie-mode-transition" class="t3">2.5 PRODUCTION-MODE EXIT / INDIE-MODE TRANSITION</a><a href="#4-successful-manager-trap" class="t2">4. SUCCESSFUL-MANAGER TRAP / 成功经理人陷阱</a><a href="#41-heterodoxy" class="t2">4.1 四种Heterodoxy：做“不一样”到底哪里不一样？</a><a href="#product-heterodoxy" class="t3">PRODUCT HETERODOXY</a><a href="#business-model-heterodoxy" class="t3">BUSINESS-MODEL HETERODOXY</a><a href="#production-heterodoxy" class="t3">PRODUCTION HETERODOXY</a><a href="#governance-heterodoxy" class="t3">GOVERNANCE HETERODOXY</a><a href="#61-second-dinner-dreamhaven-frost-giantindie" class="t2">6.1 Second Dinner / Dreamhaven / Frost Giant：三个很好的“创业强、indie判断需另做”样本</a><a href="#second-dinner" class="t3">Second Dinner</a><a href="#dreamhaven" class="t3">Dreamhaven</a><a href="#frost-giant" class="t3">Frost Giant</a><a href="#71-ownership-exitindie-route" class="t2">7.1 莉莉丝：强Ownership Exit，不是indie-route证据</a><a href="#72-game-sciencepremium" class="t2">7.2 Game Science：离职创业与作者型premium转型之间有时间差</a><a href="#73-202526owner-conversionindie-wave" class="t2">7.3 网易2025–26创业潮：现在只能判Owner Conversion，不能判Indie Wave</a><a href="#74-mihoyo-alumni" class="t2">7.4 miHoYo alumni：样本反而更异质</a><a href="#type-s-scale-continuity-spinout" class="t2">Type S — SCALE-CONTINUITY SPINOUT</a><a href="#type-a-authorial-studio-spinout" class="t2">Type A — AUTHORIAL-STUDIO SPINOUT</a><a href="#type-i-indie-mode-spinout" class="t2">Type I — INDIE-MODE SPINOUT</a><a href="#type-x-infrastructure-capital-tool-spinout" class="t2">Type X — INFRASTRUCTURE / CAPITAL / TOOL SPINOUT</a><a href="#91-problem-ownership" class="t3">9.1 PROBLEM OWNERSHIP</a><a href="#92-scope-plasticity" class="t3">9.2 SCOPE PLASTICITY</a><a href="#93-fixed-burn-discipline" class="t3">9.3 FIXED-BURN DISCIPLINE</a><a href="#94-hands-on-creator-density" class="t3">9.4 HANDS-ON CREATOR DENSITY</a><a href="#95-player-truth-proximity" class="t3">9.5 PLAYER-TRUTH PROXIMITY</a><a href="#96-capability-shaped-formation" class="t3">9.6 CAPABILITY-SHAPED FORMATION</a><a href="#97-governance-optionality" class="t3">9.7 GOVERNANCE OPTIONALITY</a><a href="#a-high-transfer-high-compatibility" class="t2">A. High-transfer / high-compatibility</a><a href="#b-conditional" class="t2">B. Conditional</a><a href="#c-high-risk-carryover" class="t2">C. High-risk carryover</a><a href="#_1" class="t3">初步工作矩阵</a><a href="#_2" class="t3">一个特别重要的非单调关系</a><a href="#102-pedigree-capitalization" class="t2">10.2 PEDIGREE CAPITALIZATION / 履历资本化</a><a href="#pedigree-first-scale" class="t3">PEDIGREE-FIRST SCALE</a><a href="#thesis-first-expansion" class="t3">THESIS-FIRST EXPANSION</a><a href="#self-funded-thesis-preservation" class="t3">SELF-FUNDED THESIS PRESERVATION</a><a href="#111-capability-gap-response" class="t2">11.1 CAPABILITY-GAP RESPONSE / 能力缺口响应函数</a><a href="#a-hire-to-spec" class="t3">A. HIRE-TO-SPEC</a><a href="#b-reshape-to-capability" class="t3">B. RESHAPE-TO-CAPABILITY</a><a href="#c-compose-at-founding" class="t3">C. COMPOSE-AT-FOUNDING</a><a href="#d-specialist-periphery" class="t3">D. SPECIALIST PERIPHERY</a><a href="#authorial-divergence-rate" class="t2">AUTHORIAL-DIVERGENCE RATE</a><a href="#indie-mode-conversion-rate" class="t2">INDIE-MODE CONVERSION RATE</a><a href="#141-founder-school-indie-school" class="t2">14.1 Founder School / Indie School 二维图</a><a href="#founder-school-strength" class="t3">FOUNDER SCHOOL STRENGTH</a><a href="#indie-school-strength" class="t3">INDIE SCHOOL STRENGTH</a><a href="#142-company-builderindie-mode" class="t2">14.2 四象限样本：Company Builder能力与Indie-Mode能力不是一条轴</a><a href="#151-senior-founder-sampling-bias" class="t2">15.1 SENIOR-FOUNDER SAMPLING BIAS / 高层创业者取样偏差</a><a href="#a-senior-founder-cohort" class="t3">A. Senior founder cohort</a><a href="#b-hands-on-creator-cohort" class="t3">B. Hands-on creator cohort</a><a href="#c-side-project-cohort" class="t3">C. Side-project cohort</a><a href="#d-internal-frontier-cohort" class="t3">D. Internal-frontier cohort</a><a href="#19-indie-mode-conversion" class="t2">19. Indie-Mode Conversion 还需要重建默认响应函数</a></aside><article class="doc"><div class="col"><h1 id="026-spinout-indie">026 — Spinout ≠ Indie：组织退出、题目退出与独立生产方式的正交关系</h1>
+<ul>
+<li>Program: C / 中国国情研究 × 独立游戏运动 × Creator Mobility</li>
+<li>Status: <strong>MECHANISM CORRECTION / TAXONOMY SPLIT / DENOMINATOR REQUIRED</strong></li>
+<li>As-of: 2026-10-08</li>
+<li>Parent: <a href="/heroes-portal/country-studies/china/025-alumni-spinout-quantification-ledger-v01.html">025 — Alumni → Spinout Quantification Ledger v0.1</a></li>
+<li>Mobility: <a href="/heroes-portal/country-studies/china/024-creator-mobility-spinout-topology-noncompete.html">024 — Creator Mobility &amp; Spinout Topology</a></li>
+<li>Indie movement definition: <a href="/heroes-portal/book/INDIE-MOVEMENT.html">Indie Movement</a></li>
+<li>Capability route: <a href="/heroes-portal/book/research-notes/industrial-capability-independent-authorship-comparison-027.html">Industrial Capability × Independent Authorship</a></li>
+<li>Core case: <a href="/heroes-portal/cases/CASE-061-supergiant-bastion-aaa-to-author.html">CASE-061 — Supergiant / Bastion</a></li>
+<li>Individualism synthesis: <a href="/heroes-portal/country-studies/china/027-individualism-as-innovation-infrastructure.html">027 — Individualism as Innovation Infrastructure</a></li>
+<li>Hacker / scale-down extension: <a href="/heroes-portal/country-studies/china/028-hacker-spirit-scale-down-commercial-antitraining.html">028 — Hacker Spirit × Scale Down × Commercial Anti-Training</a></li>
+<li>Boundary: 本文明确禁止把“离开大厂创业”“做不同产品”“成为独立公司”“做indie”“获得作者权”五件事互相替代。</li>
+</ul>
+<h2 id="0">0. 核心修正</h2>
+<p class="dc">前一轮用 alumni → spinout 研究“公司会不会生孩子”，但用户指出一个关键错误风险：</p>
+<blockquote>
+<p><strong>出去做不一样的事情，和出去做独游，以及一个大厂人的能力与独游生产方式是否相容，是三件不同的事。</strong></p>
+</blockquote>
+<p>因此必须拆开至少五种转换：</p>
+<ol>
+<li><code>EMPLOYMENT EXIT</code>：离开原雇主；</li>
+<li><code>OWNERSHIP EXIT</code>：从employee变成founder / owner；</li>
+<li><code>PRODUCT DIVERGENCE</code>：新公司做的产品与原公司不同；</li>
+<li><code>OBJECTIVE-FUNCTION EXIT</code>：不再沿用原公司的主要商业/组织目标函数；</li>
+<li><code>INDIE-MODE TRANSITION</code>：项目采用低成本实验、小团队高作者密度、直接市场接口、能力塑形等独立生产逻辑。</li>
+</ol>
+<p>其中：</p>
+<pre><code class="language-text">OWNERSHIP EXIT ≠ INDIE-MODE TRANSITION
+PRODUCT DIVERGENCE ≠ OBJECTIVE-FUNCTION EXIT
+AUTHORIAL AUTONOMY ≠ SMALL TEAM
+SMALL TEAM ≠ INDIE
+</code></pre>
+<p>spinout既不是indie的充分条件，也不是必要条件。</p>
+<hr />
+<h2 id="1-spinout">1. Spinout到底证明了什么？</h2>
+<p>一个高spinout母公司，只能先证明：</p>
+<ul>
+<li>员工具备创业意愿/能力；</li>
+<li>能组队；</li>
+<li>能融资或自筹；</li>
+<li>劳动力市场允许一定程度的退出与重组；</li>
+<li>alumni reputation可被资本/同行识别。</li>
+</ul>
+<p>它<strong>不能自动证明</strong>：</p>
+<ul>
+<li>离职者在做低成本原创实验；</li>
+<li>离职者获得了更强作者性；</li>
+<li>新公司摆脱原行业objective function；</li>
+<li>新公司不是“小号原雇主”；</li>
+<li>新产品属于独立游戏文化运动。</li>
+</ul>
+<p>因此025的<code>SPINOUT CONVERSION RATE</code>只能研究：</p>
+<blockquote>
+<p>employee → founder/owner</p>
+</blockquote>
+<p>不能代替：</p>
+<blockquote>
+<p>employee → indie author</p>
+</blockquote>
+<hr />
+<h2 id="2-exit-stack">2. 五层Exit Stack</h2>
+<h3 id="21-employment-exit">2.1 <code>EMPLOYMENT EXIT</code></h3>
+<p>离开原公司。</p>
+<p>最低层。
+可能只是：
+- Tencent → NetEase；
+- Blizzard → another AAA studio。</p>
+<p>没有产权变化。</p>
+<h3 id="22-ownership-exit">2.2 <code>OWNERSHIP EXIT</code></h3>
+<p>离开并获得：
+- founder equity；
+- studio ownership；
+- governance role。</p>
+<p>这是024/025主要研究对象。</p>
+<p>但它仍可能：
+- VC重资；
+- 100人团队；
+- licensed IP；
+- F2P/live-service；
+- publisher milestone；
+- 大规模performance marketing。</p>
+<p>所以不是indie。</p>
+<h3 id="23-product-divergence">2.3 <code>PRODUCT DIVERGENCE</code></h3>
+<p>新公司做不同题材/genre/platform。</p>
+<p>例如：
+- 从MMO去卡牌；
+- 从ARPG去RTS；
+- 从游戏去AI工具。</p>
+<p>这只说明产品不同。</p>
+<p>如果生产函数仍然是：</p>
+<pre><code class="language-text">raise capital
+→ hire full departments
+→ benchmark category
+→ scale before player truth
+</code></pre>
+<p>就没有发生indie-mode transition。</p>
+<h3 id="24-objective-function-exit">2.4 <code>OBJECTIVE-FUNCTION EXIT</code></h3>
+<p>真正离开旧组织最关键的优化目标。</p>
+<p>可能从：
+- retention / LTV；
+- annual franchise cadence；
+- licensed-IP KPI；
+- publisher milestone；
+- AAA feature completeness</p>
+<p>转成：
+- one coherent authored experience；
+- narrow player thesis；
+- premium bounded sale；
+- direct niche market；
+- experimental mechanic。</p>
+<p>这是“做不一样”里真正重要的一层。</p>
+<h3 id="25-production-mode-exit-indie-mode-transition">2.5 <code>PRODUCTION-MODE EXIT / INDIE-MODE TRANSITION</code></h3>
+<p>进一步改变“怎么做”。</p>
+<p>典型特征不是贫穷，而是：</p>
+<ul>
+<li>低fixed burn；</li>
+<li>小型高信任核心；</li>
+<li>founder hands-on；</li>
+<li>prototype优先；</li>
+<li>scope根据能力向量塑形；</li>
+<li>强Weakness Deletion；</li>
+<li>specialist periphery而非先补齐部门；</li>
+<li>尽早player truth；</li>
+<li>尽可能保留decision rights；</li>
+<li>市场失败时仍有高optionality。</li>
+</ul>
+<p>这才与本书定义的independent-production lineage高度相容。</p>
+<hr />
+<h1 id="3">3. 为什么“大厂创业能力”与“独游能力”可能只部分重合？</h1>
+<p>大厂里容易晋升为强leader/founder的人，常积累：</p>
+<ul>
+<li>hiring；</li>
+<li>budget management；</li>
+<li>cross-functional coordination；</li>
+<li>milestone control；</li>
+<li>live operations；</li>
+<li>KPI management；</li>
+<li>publisher/business negotiation；</li>
+<li>scaling teams；</li>
+<li>political capital。</li>
+</ul>
+<p>这些是：</p>
+<h1 id="organizational-scaling-capital"><code>ORGANIZATIONAL SCALING CAPITAL</code></h1>
+<p>它们非常适合：</p>
+<blockquote>
+<p>开一家新的商业游戏公司。</p>
+</blockquote>
+<p>但独游早期常更依赖：</p>
+<ul>
+<li>hands-on implementation；</li>
+<li>scope compression；</li>
+<li>self-knowledge；</li>
+<li>capability-shaped design；</li>
+<li>player-facing prototyping；</li>
+<li>ability to discard prestige pipeline；</li>
+<li>tolerance for unfinished-looking tests；</li>
+<li>low-status generalist work；</li>
+<li>direct taste judgment。</li>
+</ul>
+<p>这些是：</p>
+<h1 id="authorial-small-team-capital"><code>AUTHORIAL SMALL-TEAM CAPITAL</code></h1>
+<p>两者有交集，但不等价。</p>
+<hr />
+<h2 id="4-successful-manager-trap">4. <code>SUCCESSFUL-MANAGER TRAP / 成功经理人陷阱</code></h2>
+<p>一个人在大组织越成功，可能越容易带走：</p>
+<ul>
+<li>管理方法；</li>
+<li>招人习惯；</li>
+<li>benchmark；</li>
+<li>staffing template；</li>
+<li>budget expectation；</li>
+<li>“完整项目应该长什么样”的prestige model。</li>
+</ul>
+<p>离职后最自然的创业方式就可能是：</p>
+<blockquote>
+<p><strong>把自己最熟悉的工业组织缩小一点重新建一次。</strong></p>
+</blockquote>
+<p>这会产生：</p>
+<pre><code class="language-text">BIG-COMPANY CAPABILITY
+→ STARTUP
+→ MINIATURE INCUMBENT
+</code></pre>
+<p>而不是：</p>
+<pre><code class="language-text">BIG-COMPANY CAPABILITY
+→ SUBTRACT OLD OBJECTIVE FUNCTION
+→ REDESIGN PROJECT AROUND SMALL TEAM
+</code></pre>
+<p>因此创业成功经验可能成为indie-mode的反向路径依赖。</p>
+<p>这不是说经理人不适合indie；
+而是说明：</p>
+<blockquote>
+<p><strong>组织扩张能力越强，越需要主动证明自己也会做组织减法。</strong></p>
+</blockquote>
+<hr />
+<h2 id="41-heterodoxy">4.1 四种Heterodoxy：做“不一样”到底哪里不一样？</h2>
+<p>一个spinout与母公司的差异至少有四种：</p>
+<h3 id="product-heterodoxy"><code>PRODUCT HETERODOXY</code></h3>
+<p>做不同genre / mechanic / aesthetic。</p>
+<h3 id="business-model-heterodoxy"><code>BUSINESS-MODEL HETERODOXY</code></h3>
+<p>改变：
+- F2P / premium；
+- subscription；
+- DLC；
+- distribution；
+- target payer。</p>
+<h3 id="production-heterodoxy"><code>PRODUCTION HETERODOXY</code></h3>
+<p>改变：
+- headcount；
+- workflow；
+- prototype sequence；
+- department structure；
+- capability acquisition；
+- player-truth timing。</p>
+<h3 id="governance-heterodoxy"><code>GOVERNANCE HETERODOXY</code></h3>
+<p>改变：
+- who owns；
+- who decides；
+- IP；
+- publisher veto；
+- residual judgment rights。</p>
+<p>一个项目可能：
+- product非常新，但production/governance完全旧；
+- product看起来传统，但production制度极新；
+- 商业模式创新，但作者权很低；
+- studio产权独立，但依然复制成熟工业语法。</p>
+<p>现代indie movement最关心的通常不是单独一种product heterodoxy，而是：</p>
+<blockquote>
+<p><strong>production + governance层面是否让更小主体获得direct agency与低成本实验权。</strong></p>
+</blockquote>
+<h1 id="5-supergiant-bastioncapability-retention-organizational-grammar-deletion">5. Supergiant / Bastion：<code>CAPABILITY RETENTION × ORGANIZATIONAL GRAMMAR DELETION</code></h1>
+<p>Supergiant是区分spinout与indie-mode最好的正样本之一。</p>
+<p>已核材料显示：
+- Amir Rao / Gavin Simon等带有EA Command &amp; Conquer工业经验；
+- 2009离开EA；
+- 在住宅客厅开始；
+- Bastion核心团队约7人；
+- WB后期提供发行/推广接口，而非开发资金；
+- 工作室保持独立并保留原创IP；
+- 后续Transistor仍自筹，把Bastion收入重新投入下一作。</p>
+<p>Supergiant官方2011直接强调：
+- 仍是6–7人的小团队；
+- 在living room制作；
+- Warner提供XBLA发行与promotion，而不是把团队重新变成AAA组织。</p>
+<p>Sources:
+- https://www.supergiantgames.com/blog/20/
+- https://www.supergiantgames.com/blog/bastion-faq/
+- https://www.supergiantgames.com/blog/transistor-faq/</p>
+<p>所以真正重要的动作不是：</p>
+<blockquote>
+<p>“EA员工辞职创业”。</p>
+</blockquote>
+<p>而是：</p>
+<h1 id="capability-retention-grammar-deletion"><code>CAPABILITY RETENTION × GRAMMAR DELETION</code></h1>
+<p>保留：
+- professional gameplay craft；
+- engineering；
+- production experience；
+- specialist network。</p>
+<p>删除：
+- AAA staffing grammar；
+- feature-list legitimacy；
+- department completeness；
+- outside development funding dependency。</p>
+<p>因此：</p>
+<pre><code class="language-text">EA capability
+≠
+EA production regime
+</code></pre>
+<p>这正是“大厂能力与独游相性”里最值得研究的操作。</p>
+<hr />
+<h1 id="6-blizzard-alumnispinoutindie-conversion">6. Blizzard alumni：高Spinout不自动等于高Indie Conversion</h1>
+<p>025已经确认Blizzard拥有大量direct alumni studio节点。</p>
+<p>但逐节点看，很多路线首先是：</p>
+<ul>
+<li>ArenaNet → MMO；</li>
+<li>Flagship → commercial ARPG；</li>
+<li>Carbine → MMO；</li>
+<li>Second Dinner → licensed-IP mobile/F2P；</li>
+<li>Dreamhaven → multi-studio company/publisher；</li>
+<li>Frost Giant → venture/crowdfunding-backed RTS。</li>
+</ul>
+<p>这些案例可以强力支持：
+- entrepreneurship；
+- alumni network；
+- ownership transition；
+- industry recombination。</p>
+<p>却不能直接支持：</p>
+<blockquote>
+<p>“Blizzard很会生产indie creators。”</p>
+</blockquote>
+<p>因此025以后必须同时记录：</p>
+<h1 id="spinout-count"><code>SPINOUT COUNT</code></h1>
+<p>和</p>
+<h1 id="indie-mode-conversion"><code>INDIE-MODE CONVERSION</code></h1>
+<p>二者可能完全不同。</p>
+<hr />
+<h2 id="61-second-dinner-dreamhaven-frost-giantindie">6.1 Second Dinner / Dreamhaven / Frost Giant：三个很好的“创业强、indie判断需另做”样本</h2>
+<h3 id="second-dinner">Second Dinner</h3>
+<p>Second Dinner由前Hearthstone核心成员创办，创始团队强调重新回到hands-on development；但2019很早就获得NetEase <strong>3000万美元少数股权投资</strong>并拿到Marvel授权，首作最终成为Marvel Snap。</p>
+<p>Sources:
+- https://ir.netease.com/news-releases/news-release-details/second-dinner-declares-it-now-real-company-because-they-have
+- https://www.gamedeveloper.com/game-platforms/second-dinner-grabs-marvel-partnership-and-30m-investment-for-inaugural-game</p>
+<p>这说明同一案例可以同时拥有：
+- high ownership exit；
+- high creator hands-on desire；
+- strong external capital；
+- licensed IP；
+- F2P/mobile commercial regime。</p>
+<p>所以它既不能被简单判成“仍是Blizzard复制品”，也不能因为“小团队创办”自动判为indie-mode。</p>
+<p>最好的标法是：</p>
+<blockquote>
+<p><strong>strong founder/authorial signal；indie-mode dimensions mixed。</strong></p>
+</blockquote>
+<h3 id="dreamhaven">Dreamhaven</h3>
+<p>Dreamhaven 2020由Morhaime等大量Blizzard veteran创立，一开始就是：
+- parent company；
+- 两个内部studio；
+- publishing function。</p>
+<p>官方目标强调empower creators和原创产品。</p>
+<p>Source:
+- https://www.dreamhaven.com/news/announcement</p>
+<p>但它的组织形态本身更接近：</p>
+<blockquote>
+<p><strong>creator-governed commercial platform / studio group</strong></p>
+</blockquote>
+<p>而不是“小团队indie spinout”。</p>
+<p>它对023 Creator Class Formation可能比“独游转型”更有价值。</p>
+<h3 id="frost-giant">Frost Giant</h3>
+<p>Frost Giant做Stormgate时：
+- 明确是独立studio；
+- 已获得大量venture funding；
+- Kickstarter主要承担collector edition / beta-server等成本；
+- 2024又做crowd equity；
+- 其产品目标仍是大型长期RTS/live product。</p>
+<p>Sources:
+- https://www.sec.gov/Archives/edgar/data/2013852/000166516024000316/offeringmemoformc.pdf
+- https://techcrunch.com/2024/02/22/frost-giant-kickstarter-campaign/</p>
+<p>所以：</p>
+<blockquote>
+<p><strong>independent company ≠ indie production mode。</strong></p>
+</blockquote>
+<p>Frost Giant非常适合做：
+<code>OWNERSHIP EXIT HIGH / GENRE AUTHORSHIP HIGH / CAPITAL INTENSITY HIGH / SCALE DECOMPRESSION LOW</code>
+的对照。</p>
+<h1 id="7">7. 中国案例也必须重写</h1>
+<h2 id="71-ownership-exitindie-route">7.1 莉莉丝：强Ownership Exit，不是indie-route证据</h2>
+<p>腾讯员工离职创办莉莉丝，证明：
+- founder conversion；
+- ownership；
+-商业执行；
+- mobile/F2P entrepreneurship。</p>
+<p>但它不应自动进入：</p>
+<blockquote>
+<p>“大厂→独游作者”</p>
+</blockquote>
+<p>样本。</p>
+<p>它更适合：</p>
+<h1 id="commercial-entrepreneurial-spinout"><code>COMMERCIAL ENTREPRENEURIAL SPINOUT</code></h1>
+<hr />
+<h2 id="72-game-sciencepremium">7.2 Game Science：离职创业与作者型premium转型之间有时间差</h2>
+<p>游戏科学2014由腾讯《斗战神》相关成员创立。</p>
+<p>但其早期并不是：</p>
+<blockquote>
+<p>“离开腾讯马上做《黑神话》式独立premium”。</p>
+</blockquote>
+<p>团队先经历商业手游阶段，
+随后才逐渐形成《黑神话：悟空》的premium/high-spec authorial studio形态。</p>
+<p>因此它至少包含两个转换：</p>
+<pre><code class="language-text">Tencent employee
+→ founder-owned commercial studio
+
+then later
+
+commercial studio
+→ premium authorial thesis
+</code></pre>
+<p>这比：</p>
+<blockquote>
+<p>“腾讯员工出去做独游成功”</p>
+</blockquote>
+<p>精确得多。</p>
+<p>新增：</p>
+<h1 id="delayed-authorial-transition"><code>DELAYED AUTHORIAL TRANSITION</code></h1>
+<blockquote>
+<p><strong>ownership exit先发生，objective-function / authorial regime exit若干年后才发生。</strong></p>
+</blockquote>
+<p>这个路径对中国大厂老兵尤其重要：</p>
+<blockquote>
+<p>创业本身可能只是获得未来转型所需产权容器，而不是indie transition当天就完成。</p>
+</blockquote>
+<hr />
+<h2 id="73-202526owner-conversionindie-wave">7.3 网易2025–26创业潮：现在只能判Owner Conversion，不能判Indie Wave</h2>
+<p>Seed Games、李凯明等当前公开信息可支持：
+- senior producer exit；
+- large external financing；
+- team formation；
+- ownership transition。</p>
+<p>但项目：
+- 团队规模；
+-资本结构；
+-最终商业模式；
+- player-truth architecture；
+- authorial decision rights</p>
+<p>尚不足以统一判定。</p>
+<p>所以当前必须标：</p>
+<p><code>OWNER CONVERSION = YES</code><br />
+<code>INDIE-MODE AFFINITY = UNKNOWN / CASE-SPECIFIC</code></p>
+<p>不能把“网易老将创业潮”写成“网易独游潮”。</p>
+<hr />
+<h2 id="74-mihoyo-alumni">7.4 miHoYo alumni：样本反而更异质</h2>
+<p>目前可见至少有：
+- solo/small creator；
+- mobile startup；
+- AI/tool company；
+-多人商业项目。</p>
+<p>因此miHoYo外溢最能提醒：</p>
+<blockquote>
+<p><strong>同一个母公司的alumni可以进入完全不同的生产制度。</strong></p>
+</blockquote>
+<p>母公司本身不能给子项目自动贴“indie/non-indie”。</p>
+<hr />
+<h1 id="8-spinout-mode">8. 新的四类Spinout Mode</h1>
+<p>以后025所有节点至少标一类主模式；允许随时间转换。</p>
+<h2 id="type-s-scale-continuity-spinout">Type S — <code>SCALE-CONTINUITY SPINOUT</code></h2>
+<p>离职、创业，但延续成熟商业生产语法。</p>
+<p>特征：
+- 大额融资；
+-较快扩编；
+-成熟genre；
+-完整部门；
+-同类KPI；
+-live-service / AAA-like production。</p>
+<p>它可以高度创新，
+但不是indie-mode证据。</p>
+<h2 id="type-a-authorial-studio-spinout">Type A — <code>AUTHORIAL-STUDIO SPINOUT</code></h2>
+<p>核心目标是获得：
+- thesis ownership；
+- decision rights；
+-作品连续性。</p>
+<p>团队可以最后变大，
+所以：</p>
+<blockquote>
+<p>authorial ≠ indie。</p>
+</blockquote>
+<p>Game Science成熟阶段更适合在这里讨论。</p>
+<h2 id="type-i-indie-mode-spinout">Type I — <code>INDIE-MODE SPINOUT</code></h2>
+<p>同时出现：
+- ownership/agency提高；
+- small bounded core；
+- low-cost experimentation；
+- capability-shaped project；
+- direct player truth；
+- bounded outside governance。</p>
+<p>Supergiant early Bastion是强样本。</p>
+<h2 id="type-x-infrastructure-capital-tool-spinout">Type X — <code>INFRASTRUCTURE / CAPITAL / TOOL SPINOUT</code></h2>
+<p>离开大厂以后不主要做作品，而是：
+- publisher；
+- fund；
+-incubator；
+-tool/AI；
+-service company。</p>
+<p>这种节点对Creator Class可能极重要，
+但不能计入indie creator数量。</p>
+<hr />
+<h1 id="9-indie-mode-affinity-vector">9. <code>INDIE-MODE AFFINITY VECTOR</code></h1>
+<p>禁止再用一个indie yes/no去审计大厂出走者。</p>
+<p>统一看七个维度：</p>
+<h3 id="91-problem-ownership">9.1 <code>PROBLEM OWNERSHIP</code></h3>
+<p>题目是谁出的？</p>
+<h3 id="92-scope-plasticity">9.2 <code>SCOPE PLASTICITY</code></h3>
+<p>项目是否可以因为团队能力/玩家反馈大幅变形？</p>
+<h3 id="93-fixed-burn-discipline">9.3 <code>FIXED-BURN DISCIPLINE</code></h3>
+<p>是否避免在product truth前锁定高成本组织？</p>
+<h3 id="94-hands-on-creator-density">9.4 <code>HANDS-ON CREATOR DENSITY</code></h3>
+<p>核心owner是否直接参与设计/实现，而不只是管理资源？</p>
+<h3 id="95-player-truth-proximity">9.5 <code>PLAYER-TRUTH PROXIMITY</code></h3>
+<p>多久能把可玩物给真实用户？</p>
+<h3 id="96-capability-shaped-formation">9.6 <code>CAPABILITY-SHAPED FORMATION</code></h3>
+<p>项目是否围绕团队真实强项塑形，而不是先写标准feature list再补人？</p>
+<h3 id="97-governance-optionality">9.7 <code>GOVERNANCE OPTIONALITY</code></h3>
+<p>失败/转向时是否有足够decision rights与低外部批准成本？</p>
+<p>这些指标彼此独立，不压成“indie分”。</p>
+<hr />
+<h1 id="10-indie-compatibility-of-industrial-capability">10. <code>INDIE COMPATIBILITY OF INDUSTRIAL CAPABILITY</code></h1>
+<p>大厂能力不能笼统说“有用”或“有毒”。</p>
+<p>应分三类：</p>
+<h2 id="a-high-transfer-high-compatibility">A. High-transfer / high-compatibility</h2>
+<p>通常高度可转：
+- gameplay craft；
+- technical craft；
+- QA discipline；
+- production estimation；
+- shipping literacy；
+- platform compliance；
+- specialist network。</p>
+<h2 id="b-conditional">B. Conditional</h2>
+<p>是否有用取决于项目：
+- art pipeline；
+- live telemetry；
+- management；
+- outsourcing；
+- analytics；
+- monetization knowledge。</p>
+<h2 id="c-high-risk-carryover">C. High-risk carryover</h2>
+<p>容易把小团队拖回旧语法：
+- headcount as progress；
+- department completeness；
+- prestige fidelity；
+- benchmark-first design；
+- long pre-production without player truth；
+- KPI replacing thesis；
+- “缺能力就招聘”而不是先改题；
+- 把融资额当项目成立证明。</p>
+<p>所以大厂老兵的indie能力不是：</p>
+<blockquote>
+<p>会多少。</p>
+</blockquote>
+<p>而是：</p>
+<h1 id="selective-capability-retention"><code>SELECTIVE CAPABILITY RETENTION</code></h1>
+<blockquote>
+<p><strong>知道哪些工业能力值得带走，哪些必须主动丢掉。</strong></p>
+</blockquote>
+<hr />
+<h1 id="101-role-scale-dependence">10.1 <code>ROLE SCALE DEPENDENCE / 岗位规模依赖度</code></h1>
+<p>大厂能力能否转到独游，不只看“能力强不强”，还要看：</p>
+<blockquote>
+<p><strong>这项能力离开大型组织、预算、部门和基础设施以后，还剩多少直接产品价值？</strong></p>
+</blockquote>
+<p>定义：</p>
+<h1 id="indie-transferability"><code>INDIE TRANSFERABILITY</code></h1>
+<blockquote>
+<p><strong>某项职业能力在团队规模显著缩小时，仍能直接压缩生产成本、提高核心体验或加快player truth的程度。</strong></p>
+</blockquote>
+<p>与之相对：</p>
+<h1 id="role-scale-dependence"><code>ROLE SCALE DEPENDENCE</code></h1>
+<blockquote>
+<p><strong>某项能力需要多大的组织、预算、跨部门接口和持续运营系统才能发挥价值。</strong></p>
+</blockquote>
+<h3 id="_1">初步工作矩阵</h3>
+<table>
+<thead>
+<tr>
+<th>能力/岗位</th>
+<th style="text-align: right;">Founder compatibility</th>
+<th style="text-align: right;">Indie-mode compatibility</th>
+<th>主要原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>gameplay programmer / systems designer</td>
+<td style="text-align: right;">中高</td>
+<td style="text-align: right;">高</td>
+<td>能直接把idea→playable压短</td>
+</tr>
+<tr>
+<td>technical artist</td>
+<td style="text-align: right;">中</td>
+<td style="text-align: right;">高或很高</td>
+<td>若项目围绕视觉/工具强项塑形，可同时承担生产与market legibility</td>
+</tr>
+<tr>
+<td>QA / player-facing systems literacy</td>
+<td style="text-align: right;">中</td>
+<td style="text-align: right;">中高</td>
+<td>能强化reality adjudication；需另有authorial substrate</td>
+</tr>
+<tr>
+<td>generalist designer-programmer</td>
+<td style="text-align: right;">中</td>
+<td style="text-align: right;">很高</td>
+<td>hands-on + scope塑形</td>
+</tr>
+<tr>
+<td>senior producer / executive producer</td>
+<td style="text-align: right;">很高</td>
+<td style="text-align: right;">条件性</td>
+<td>强组织能力；若缺hands-on/subtraction，容易重建大组织</td>
+</tr>
+<tr>
+<td>live-ops / economy specialist</td>
+<td style="text-align: right;">很高（商业创业）</td>
+<td style="text-align: right;">项目依赖</td>
+<td>对F2P startup强，对bounded premium未必是核心</td>
+</tr>
+<tr>
+<td>cinematic / ultra-specialized AAA role</td>
+<td style="text-align: right;">中</td>
+<td style="text-align: right;">条件性或低</td>
+<td>能力价值可能依赖完整pipeline；也可通过能力反向立项重新变高</td>
+</tr>
+<tr>
+<td>publishing / BD / UA leader</td>
+<td style="text-align: right;">很高</td>
+<td style="text-align: right;">低到条件性</td>
+<td>强market/company formation，但不自动产生product thesis</td>
+</tr>
+</tbody>
+</table>
+<p>这不是职业等级表。
+同一岗位因：
+- outside hobby；
+- cofounder composition；
+- project thesis；
+-工具进步；
+可以改变相性。</p>
+<h3 id="_2">一个特别重要的非单调关系</h3>
+<pre><code class="language-text">seniority ↑
+→ capital / hiring / organization skill often ↑
+
+but
+
+hands-on density may ↓
+status decompression cost may ↑
+role scale dependence may ↑
+</code></pre>
+<p>所以：</p>
+<blockquote>
+<p><strong>Founder readiness可能随seniority上升，而Indie-mode readiness未必同步上升。</strong></p>
+</blockquote>
+<p>这正是“出去创业”和“出去做独游相性”必须分开的原因。</p>
+<h2 id="102-pedigree-capitalization">10.2 <code>PEDIGREE CAPITALIZATION / 履历资本化</code></h2>
+<p>大厂老兵拥有一个普通首作作者没有的优势：</p>
+<blockquote>
+<p><strong>可以在产品被玩家验证以前，就用履历、团队名单和前作credit向资本证明“我们值得下注”。</strong></p>
+</blockquote>
+<p>路径：</p>
+<pre><code class="language-text">prestigious employer / shipped hit
+→ investor confidence
+→ capital before player truth
+→ hiring / organization build
+→ product later
+</code></pre>
+<p>这对创业非常有利。</p>
+<p>但它与indie-mode存在一个条件性张力：</p>
+<pre><code class="language-text">capital substitutes for early external validation
+→ burn can rise before thesis is proven
+→ scope becomes harder to reshape
+→ sunk organization creates feature obligations
+</code></pre>
+<p>因此新增：</p>
+<h1 id="capital-sequencing"><code>CAPITAL SEQUENCING</code></h1>
+<p>真正要问的不是：</p>
+<blockquote>
+<p>“有没有融资？”</p>
+</blockquote>
+<p>而是：</p>
+<blockquote>
+<p><strong>资本在product thesis被什么程度验证以后进入？它买的是验证前的组织规模，还是验证后的缺失能力？</strong></p>
+</blockquote>
+<h3 id="pedigree-first-scale"><code>PEDIGREE-FIRST SCALE</code></h3>
+<p>先凭团队履历融资，再建立完整组织。</p>
+<p>适合：
+- 资本密集项目；
+- licensed IP；
+- MMO / live service；
+-高规格技术目标。</p>
+<p>它是强创业路径，不是indie-mode失败。</p>
+<h3 id="thesis-first-expansion"><code>THESIS-FIRST EXPANSION</code></h3>
+<p>先用：
+- hobby prototype；
+- small playable；
+- direct player test</p>
+<p>证明核心thesis，
+再用资金购买：
+- art；
+- QA；
+- porting；
+- publishing；
+- specialist capability。</p>
+<p>更接近许多indie→AA作者项目的扩张顺序。</p>
+<h3 id="self-funded-thesis-preservation"><code>SELF-FUNDED THESIS PRESERVATION</code></h3>
+<p>上一作retained earnings让creator在不新增外部governance的情况下扩能力。
+The Witness属于强样本。</p>
+<p>边界：
+- thesis-first不是永远更优；
+- 有些技术项目必须先投入大量资本；
+- early player signal也可能误导；
+- 外部资本可以帮助而非破坏作者性。</p>
+<p>重点只是：</p>
+<blockquote>
+<p><strong>资本进入顺序会改变谁在早期拥有现实裁决权。</strong></p>
+</blockquote>
+<h1 id="11-indiesubtraction-capability">11. Indie相性真正关键的个人能力可能是<code>SUBTRACTION CAPABILITY</code></h1>
+<p>大组织常奖励：
+-增加资源；
+-协调资源；
+-扩大覆盖；
+-减少遗漏。</p>
+<p>独游却经常奖励：</p>
+<h1 id="subtraction-capability"><code>SUBTRACTION CAPABILITY / 减法能力</code></h1>
+<p>包括：
+- 砍feature；
+-删除岗位需求；
+-降低资产复杂度；
+-把content转system；
+-把弱项变成非问题；
+-把scope降到现实production frontier。</p>
+<p>这和传统“管理能力”不是同一能力。</p>
+<p>一个极优秀的AAA producer可能很会：</p>
+<blockquote>
+<p>把100人组织好。</p>
+</blockquote>
+<p>却未必擅长：</p>
+<blockquote>
+<p><strong>把问题改成根本不需要100人。</strong></p>
+</blockquote>
+<p>后者才是indie-mode特别关键的能力。</p>
+<hr />
+<h2 id="111-capability-gap-response">11.1 <code>CAPABILITY-GAP RESPONSE / 能力缺口响应函数</code></h2>
+<p>发现“我们不会做X”以后，一个团队怎么反应，是indie相性的核心观察变量。</p>
+<h3 id="a-hire-to-spec">A. <code>HIRE-TO-SPEC</code></h3>
+<pre><code class="language-text">project spec fixed
+→ missing role
+→ raise money / hire
+</code></pre>
+<p>大型工业最自然。</p>
+<h3 id="b-reshape-to-capability">B. <code>RESHAPE-TO-CAPABILITY</code></h3>
+<pre><code class="language-text">missing capability
+→ redefine problem
+→ delete / abstract / systematize requirement
+</code></pre>
+<p>这是Capability-Shaped Project Formation最典型的indie动作。</p>
+<h3 id="c-compose-at-founding">C. <code>COMPOSE-AT-FOUNDING</code></h3>
+<p>缺的不是普通岗位，而是核心作者能力：</p>
+<blockquote>
+<p>找互补cofounder，共享equity/control。</p>
+</blockquote>
+<p>GRIS是典型研究方向。</p>
+<h3 id="d-specialist-periphery">D. <code>SPECIALIST PERIPHERY</code></h3>
+<p>保留核心内部作者权，
+把非核心：
+- music；
+- porting；
+- localization；
+- QA；
+- asset</p>
+<p>放到外围。</p>
+<p>真正成熟的小团队不是“什么都自己做”，而是：</p>
+<blockquote>
+<p><strong>知道什么必须拥有，什么只需要购买。</strong></p>
+</blockquote>
+<p>所以“大厂老兵相不相容”不能只看skill list，
+还要看他的默认缺口响应：</p>
+<blockquote>
+<p><strong>一缺人就扩组织，还是会先问“这个需求本身能不能消失？”</strong></p>
+</blockquote>
+<h1 id="12-status-decompression">12. <code>STATUS-DECOMPRESSION</code>：大厂老兵还要适应身份降级</h1>
+<p>独游转型常要求：</p>
+<ul>
+<li>founder自己做杂活；
+-没有完整support department；
+-早期prototype很丑；
+-工资下降；
+-办公室/品牌 prestige下降；
+-同行可能觉得项目“小”。</li>
+</ul>
+<p>所以大厂→indie还需要：</p>
+<h1 id="status-decompression-capacity"><code>STATUS-DECOMPRESSION CAPACITY</code></h1>
+<blockquote>
+<p><strong>能否接受职业身份从“高规格组织里的高级角色”暂时变回“亲手解决低层具体问题的人”。</strong></p>
+</blockquote>
+<p>这可能是纯创业和独游创业之间的隐藏差异。</p>
+<p>融资数千万、迅速招60人：
+- 对高级制作人身份连续性很友好；
+- 对indie-mode未必友好。</p>
+<p>而Supergiant founders在住宅客厅、低薪、小团队开始，
+正是一次强status decompression。</p>
+<hr />
+<h1 id="13-pre-existing-authorial-substrate">13. <code>PRE-EXISTING AUTHORIAL SUBSTRATE</code>仍然非常重要</h1>
+<p>027已提示：</p>
+<p>许多大厂→作者型成功者在进公司前/公司外就已有：
+- personal game taste；
+-mod/side project；
+-桌游/创作圈；
+-长期共同作者；
+-明确产品 thesis。</p>
+<p>因此不要把：</p>
+<blockquote>
+<p>“在大厂学会专业以后出去做作者”</p>
+</blockquote>
+<p>误写成唯一顺序。</p>
+<p>更常见的强路径可能是：</p>
+<pre><code class="language-text">pre-existing authorial thread
++
+industrial capability acquisition
++
+ownership exit
++
+selective capability retention
+=
+authorial small-team transition
+</code></pre>
+<p>如果一个人只有：
+-组织能力；
+-项目履历；
+-执行力；</p>
+<p>但没有company-external taste/thread，
+其最自然的创业产品可能仍然由：
+-融资市场；
+-前雇主genre；
+-validated business model</p>
+<p>来出题。</p>
+<hr />
+<h1 id="14-ratespinout-rate">14. 新增两个Rate：不能再只算Spinout Rate</h1>
+<h2 id="authorial-divergence-rate"><code>AUTHORIAL-DIVERGENCE RATE</code></h2>
+<blockquote>
+<p>每100个creator-owned spinout里，有多少显著改变了原母公司的objective function，而不是只换法人？</p>
+</blockquote>
+<h2 id="indie-mode-conversion-rate"><code>INDIE-MODE CONVERSION RATE</code></h2>
+<blockquote>
+<p>每100个高资历离职founder里，有多少进入小团队、低fixed-burn、direct player truth、capability-shaped的independent-production route？</p>
+</blockquote>
+<p>这两个rate都需要：
+- cohort；
+- 时间窗；
+-统一编码；
+-不能从几个名例推断。</p>
+<p>可能出现：</p>
+<pre><code class="language-text">High Spinout Rate
+Low Indie Conversion
+</code></pre>
+<p>例如一个高度创业但资本密集的商业生态。</p>
+<p>也可能：</p>
+<pre><code class="language-text">Low Spinout Rate
+High Indie Conversion among those who exit
+</code></pre>
+<p>两者政策含义完全不同。</p>
+<hr />
+<h2 id="141-founder-school-indie-school">14.1 Founder School / Indie School 二维图</h2>
+<p>母公司真正应该有两个不同输出：</p>
+<h3 id="founder-school-strength"><code>FOUNDER SCHOOL STRENGTH</code></h3>
+<p>能否把员工训练成：
+- 招人；
+- 融资；
+-建公司；
+-ship；
+-经营组织。</p>
+<h3 id="indie-school-strength"><code>INDIE SCHOOL STRENGTH</code></h3>
+<p>离职者中有多少能：
+- 自己出题；
+-缩scope；
+-低burn；
+-亲手做prototype；
+-快速见玩家；
+-保留optionality；
+-避免复制旧组织。</p>
+<p>可能出现四象限：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Indie School弱</th>
+<th>Indie School强</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Founder School弱</td>
+<td>普通雇员型组织</td>
+<td>少数作者出走，但难形成公司</td>
+</tr>
+<tr>
+<td>Founder School强</td>
+<td><strong>大量商业spinout / 新大厂</strong></td>
+<td><strong>最容易形成作者型studio forest</strong></td>
+</tr>
+</tbody>
+</table>
+<p>当前H：
+- Blizzard很可能是高Founder School，但其Indie School强度仍需另算；
+- Tencent明确具备Founder School样本，Indie School不能由Lilith/Game Science数量直接推出；
+- Supergiant只是“EA alumni中一个高Indie-mode conversion案例”，不能证明EA整体是Indie School。</p>
+<p>这张图直接修正：</p>
+<blockquote>
+<p>“某公司出了很多创业者，所以它很鼓励独立创作。”</p>
+</blockquote>
+<p>完全不一定。</p>
+<h2 id="142-company-builderindie-mode">14.2 四象限样本：Company Builder能力与Indie-Mode能力不是一条轴</h2>
+<table>
+<thead>
+<tr>
+<th>Case</th>
+<th style="text-align: right;">Organization-building</th>
+<th style="text-align: right;">Indie-mode conversion</th>
+<th>读法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Supergiant early Bastion</td>
+<td style="text-align: right;">中</td>
+<td style="text-align: right;"><strong>高</strong></td>
+<td>小核心、低burn、作者thesis、专业能力保留</td>
+</tr>
+<tr>
+<td>Lucas Pope</td>
+<td style="text-align: right;">低</td>
+<td style="text-align: right;"><strong>很高</strong></td>
+<td>不建大组织，直接压成solo author unit</td>
+</tr>
+<tr>
+<td>Second Dinner</td>
+<td style="text-align: right;"><strong>高</strong></td>
+<td style="text-align: right;">混合</td>
+<td>hands-on creator impulse + $30m minority capital + licensed IP + F2P</td>
+</tr>
+<tr>
+<td>Frost Giant</td>
+<td style="text-align: right;"><strong>高</strong></td>
+<td style="text-align: right;">低/混合</td>
+<td>独立studio、作者RTS愿景，但资本/规模/长期服务强</td>
+</tr>
+<tr>
+<td>Dreamhaven</td>
+<td style="text-align: right;"><strong>很高</strong></td>
+<td style="text-align: right;">不适合单一编码</td>
+<td>更像creator-governed company/publisher infrastructure</td>
+</tr>
+<tr>
+<td>Game Science</td>
+<td style="text-align: right;"><strong>高</strong></td>
+<td style="text-align: right;">phase-dependent</td>
+<td>先commercial ownership exit，后premium authorial turn；最终不是典型small-team indie</td>
+</tr>
+</tbody>
+</table>
+<p>所以“最会创业的人”与“最适合独游的人”不是同一排序。</p>
+<h1 id="15-025">15. 对025当前样本的初步重新解释</h1>
+<table>
+<thead>
+<tr>
+<th>Parent</th>
+<th>Spinout evidence</th>
+<th>Indie-mode inference</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Atari</td>
+<td>strong early ownership exit</td>
+<td>independent-production ancestor; not modern indie label</td>
+</tr>
+<tr>
+<td>Looking Glass</td>
+<td>selective spinout + huge design diffusion</td>
+<td>some authorial exits; case-by-case</td>
+</tr>
+<tr>
+<td>Blizzard</td>
+<td>very strong founder ecology</td>
+<td><strong>cannot infer strong indie-school</strong></td>
+</tr>
+<tr>
+<td>id</td>
+<td>serial founder-heavy</td>
+<td>early independent lineage strong, later cases mixed</td>
+</tr>
+<tr>
+<td>Valve</td>
+<td>low strict outward spinout</td>
+<td>high community→professional; indie inference not applicable</td>
+</tr>
+<tr>
+<td>Tencent</td>
+<td>clear founder-school</td>
+<td>Lilith ≠ indie; Game Science = delayed authorial transition; others mixed</td>
+</tr>
+<tr>
+<td>NetEase</td>
+<td>visible owner-conversion wave</td>
+<td>indie affinity currently unknown</td>
+</tr>
+<tr>
+<td>miHoYo</td>
+<td>young, heterogeneous exits</td>
+<td>contains solo/creator/tool/commercial routes; cannot aggregate</td>
+</tr>
+</tbody>
+</table>
+<p>因此：</p>
+<blockquote>
+<p><strong>025衡量“公司是否生新的产权节点”；026才衡量这些新节点有没有转入independent-production逻辑。</strong></p>
+</blockquote>
+<hr />
+<h2 id="151-senior-founder-sampling-bias">15.1 <code>SENIOR-FOUNDER SAMPLING BIAS / 高层创业者取样偏差</code></h2>
+<p>如果为了研究“大厂→独游”只搜：
+- 制作人离职；
+- 总监创业；
+- 融资新闻；
+- 新公司工商信息；</p>
+<p>样本会天然偏向：</p>
+<pre><code class="language-text">high organizational-scaling capital
++ high fundraising legibility
++ public founder visibility
+</code></pre>
+<p>而漏掉：
+- gameplay programmer自己做小项目；
+- technical artist side project；
+- Game Jam作者；
+- 夫妻/朋友2–3人组；
+- 不融资的solo creator；
+- 内部小原型后来离职继续；
+- 先兼职验证再退出的人。</p>
+<p>这些群体反而可能具有更高：
+- hands-on density；
+- scope plasticity；
+- status decompression；
+- indie transferability。</p>
+<p>因此：</p>
+<blockquote>
+<p><strong>Senior-founder denominator只能回答Founder School，不能回答Indie School。</strong></p>
+</blockquote>
+<p>未来Indie-Mode Conversion cohort至少应增加：</p>
+<h3 id="a-senior-founder-cohort">A. Senior founder cohort</h3>
+<p>lead / director / producer → founder</p>
+<h3 id="b-hands-on-creator-cohort">B. Hands-on creator cohort</h3>
+<p>programmer / designer / artist / TA → solo / micro-team</p>
+<h3 id="c-side-project-cohort">C. Side-project cohort</h3>
+<p>在职期间已有：
+- Game Jam；
+- mod；
+- hobby game；
+- public prototype</p>
+<p>的人。</p>
+<h3 id="d-internal-frontier-cohort">D. Internal-frontier cohort</h3>
+<p>NExT式内部小团队、实验组、孵化组。</p>
+<p>然后比较：</p>
+<blockquote>
+<p>哪一类最容易真正完成objective-function exit和production-mode exit？</p>
+</blockquote>
+<p>这可能得到一个与“谁最容易融资创业”完全不同的排序。</p>
+<h1 id="16">16. 对“中国为何独游较晚”的新含义</h1>
+<p>即使中国大厂不断产生创业者，也可能长期不产生同数量级的indie movement，原因是：</p>
+<pre><code class="language-text">industrial skill
+→ founder
+→ capital
+→ recreate scalable commercial studio
+</code></pre>
+<p>这条链本身非常合理、甚至高回报。</p>
+<p>要形成indie movement还需要另一条：</p>
+<pre><code class="language-text">industrial skill
+→ authorial thesis
+→ scope reset
+→ low-burn prototype
+→ direct audience
+→ bounded success
+→ second attempt
+</code></pre>
+<p>两条路线对：
+- 人；
+-资金；
+-家庭；
+-职业身份；
+-市场基础设施</p>
+<p>要求不同。</p>
+<p>所以未来比较美国/中国不能只数：</p>
+<blockquote>
+<p>alumni founders</p>
+</blockquote>
+<p>还要数：</p>
+<blockquote>
+<p><strong>alumni founders who deliberately decompressed production scale and moved decision-making closer to the creator/player interface.</strong></p>
+</blockquote>
+<hr />
+<h1 id="17-aiconversion">17. AI时代：最可能提高的是哪一个conversion？</h1>
+<p>AI不一定提高：</p>
+<blockquote>
+<p>spinout rate</p>
+</blockquote>
+<p>它更可能首先提高：</p>
+<h1 id="indie-mode-feasibility"><code>INDIE-MODE FEASIBILITY</code></h1>
+<p>因为它降低：
+- team completeness requirement；
+- specialist hiring pressure；
+- prototype cost；
+- content burden。</p>
+<p>于是原本一个大厂lead只能选择：</p>
+<pre><code class="language-text">stay employee
+or
+raise millions and rebuild a studio
+</code></pre>
+<p>未来可能多出第三条：</p>
+<pre><code class="language-text">2–5 person authorial cell
+→ AI-supported prototype
+→ player truth
+→ decide whether to scale
+</code></pre>
+<p>这意味着第四次工业革命真正可能改变的是：</p>
+<blockquote>
+<p><strong>Ownership Exit 与 Indie-Mode Transition之间过去很大的资本鸿沟。</strong></p>
+</blockquote>
+<p>是否真的发生，要看2025–30 cohort，而不是由工具能力自动推出。</p>
+<hr />
+<h1 id="18">18. 当前最小结论</h1>
+<blockquote>
+<p><strong>创业生态和独立游戏生态必须分开研究。大厂员工离职成为founder，只证明Mobility-to-Ownership Conversion；做了不同产品，只证明Product Divergence；只有当项目进一步改变旧公司的objective function，并主动重置团队规模、固定成本、player-truth距离、能力塑形与治理结构时，才出现与现代independent-production lineage相符的Indie-Mode Transition。Supergiant的价值正在于“带走EA能力、删除EA生产语法”；而Blizzard/Tencent的高spinout现象首先证明其Founder School能力，不能直接当作Indie School。今后必须同时统计Spinout Rate、Authorial-Divergence Rate和Indie-Mode Conversion Rate。</strong></p>
+</blockquote>
+<h2 id="19-indie-mode-conversion">19. Indie-Mode Conversion 还需要重建默认响应函数</h2>
+<p>026已经区分Founder School与Indie School，但028进一步指出：</p>
+<blockquote>
+<p><strong>大厂老兵是否适合indie，不只取决于skill vector，也取决于遇到约束时的default response。</strong></p>
+</blockquote>
+<p>如果默认是：</p>
+<pre><code class="language-text">missing capability
+→ hire / budget / department / benchmark / approval
+</code></pre>
+<p>则即使作者目的很强，也可能继续复制旧production grammar。</p>
+<p>如果能切换成：</p>
+<pre><code class="language-text">missing capability
+→ delete / reshape / abstract / buy peripheral / prototype
+</code></pre>
+<p>才发生更深的indie retraining。</p>
+<p>Canonical:
+- <a href="/heroes-portal/country-studies/china/028-hacker-spirit-scale-down-commercial-antitraining.html">028 — Hacker Spirit × Scale Down × Commercial Anti-Training</a></p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / country-studies/china/026-spinout-vs-indie-mode-conversion.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

@@ -1,0 +1,685 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Intuitive Expertise / Taste Validity：Klein × Kahneman × Hogarth 与判断资本的适用域 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl class="on"" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0-taste-capital" class="t2">0. 最重要的新边界：Taste Capital 不能按年资或自信计算</a><a href="#1-kleinrpd" class="t2">1. Klein：RPD不是神秘直觉，而是识别和心理模拟</a><a href="#2-kahneman" class="t2">2. Kahneman：直觉的力量也能在没有规律的地方形成“技能错觉”</a><a href="#3-hogarthkind-wicked" class="t2">3. Hogarth：Kind / Wicked 学习环境，解决了“为什么重复次数不等于校准次数”</a><a href="#4-exposurecalibrated-practice" class="t2">4. 区分两种“经验”：Exposure与Calibrated Practice</a><a href="#experience-exposure" class="t3">Experience Exposure</a><a href="#calibrated-judgment-repetitions" class="t3">Calibrated Judgment Repetitions</a><a href="#5-taste-domain-maptaste" class="t2">5. Taste Domain Map：同一个强设计师可能只有局部Taste高度有效</a><a href="#6-tastepattern-recognitionproblem-creation" class="t2">6. 两种Taste：Pattern Recognition与Problem Creation</a><a href="#type-a-calibrated-recognition-taste" class="t3">Type A — Calibrated Recognition Taste</a><a href="#type-b-generative-hypothesis-taste" class="t3">Type B — Generative Hypothesis Taste</a><a href="#7-kleincritical-decision-method" class="t2">7. Klein的Critical Decision Method：把高手直觉拆成可观察证据</a><a href="#8-premortemcue" class="t2">8. Premortem：用未来失败的假设让被压制的cue提前合法化</a><a href="#9-taste-reliability-audit" class="t2">9. 设计一个Taste Reliability Audit</a><a href="#10" class="t2">10. 为什么这个理论特别适合研究“高学历做题家”与大厂老兵</a><a href="#standard-problem-environment" class="t3">Standard Problem Environment</a><a href="#frontier-product-environment" class="t3">Frontier Product Environment</a><a href="#11" class="t2">11. 与个人主义：判断主权不是免于质量审核的权力</a><a href="#12" class="t2">12. 风险：把“可靠直觉条件”错读成“新创意必须能预测”</a><a href="#13-aitaste" class="t2">13. AI时代：模型的自信感、答案流畅度不是Taste证据</a><a href="#14" class="t2">14. 分开审计三个不同表现指标</a><a href="#15-reader-facing" class="t2">15. 新增Reader-facing问句</a><a href="#16-open-questions-future-case-work" class="t2">16. Open Questions / future case work</a><a href="#17" class="t2">17. 统一原则：判断主权属于个人，判断信用来自现实</a><a href="#judgment-right" class="t3">Judgment Right — 判断权</a><a href="#epistemic-credit" class="t3">Epistemic Credit — 认识论信用</a><a href="#18-taste-reliability-audit" class="t2">18. 首批 Taste Reliability Audit：范围、取证与防错</a><a href="#181-decision-episode" class="t3">18.1 每个Decision Episode最小记录字段</a><a href="#182" class="t3">18.2 对三位候选人物的不同审计任务</a><a href="#183" class="t3">18.3 强制比较规则</a><a href="#184" class="t3">18.4 合理的下一步</a><a href="#sources-audit-pointers" class="t2">Sources / audit pointers</a></aside><article class="doc"><div class="col"><h1 id="intuitive-expertise-taste-validityklein-kahneman-hogarth">Intuitive Expertise / Taste Validity：Klein × Kahneman × Hogarth 与判断资本的适用域</h1>
+<ul>
+<li>Status: CROSS-INDUSTRY SYNTHESIS / RESEARCH THEORY / HYPOTHESES SEPARATED FROM STUDY RESULTS</li>
+<li>As-of: 2026-10-08</li>
+<li>Purpose: 为此前 Taste Capital、Selection Apprenticeship、Ambiguity Competence、Judgment Trace 加上最重要的质量控制：经验是否真的训练出可迁移的有效直觉？</li>
+<li>Related:</li>
+<li><a href="/heroes-portal/cross-industry/tacit-judgment-selection-apprenticeship-ai-001.html">Tacit Judgment / Selection Apprenticeship</a></li>
+<li><a href="/heroes-portal/cross-industry/sensemaking-ambiguity-competence-001.html">Sensemaking / Ambiguity Competence</a></li>
+<li><a href="/heroes-portal/cross-industry/judgment-under-uncertainty-theory-stack-001.html">Judgment Under Uncertainty</a></li>
+<li><a href="/heroes-portal/cross-industry/double-loop-learning-defensive-routines-001.html">Double-Loop Learning</a></li>
+<li><a href="/heroes-portal/cross-industry/reversible-bets-irreversibility-gradient-001.html">Reversible Bets</a></li>
+<li><a href="/heroes-portal/cross-industry/innovation-constitutionalism-exit-voice-loyalty-001.html">Innovation Constitutionalism</a></li>
+</ul>
+<h2 id="0-taste-capital">0. 最重要的新边界：Taste Capital 不能按年资或自信计算</h2>
+<p class="dc">此前讨论 Polanyi、Dreyfus、Nintendo 师承与作者形成，已经指出：
+- 专家可能通过重复实战形成快速情境感知；
+- 核心知识并非都能文档化；
+- 新人需要真实反馈和判断权。</p>
+<p>但还有更危险的问题：</p>
+<blockquote>
+<p>什么时候这种快速感知是真实可依赖的专业能力，什么时候只是在噪声里学到了自信和习惯？</p>
+</blockquote>
+<p>Kahneman 与 Klein 2009 联合论文给出非常明确的边界：</p>
+<ol>
+<li>环境必须存在可被学习、足够稳定的有效规律（high-validity environment）。</li>
+<li>个体必须有充分练习机会和足够好的反馈来学习这些规律。</li>
+<li><strong>主观确信感并非判断准确性的可靠指标。</strong></li>
+</ol>
+<p>Primary S1 empirical/theoretical synthesis:
+- Kahneman, D. &amp; Klein, G. (2009), “Conditions for Intuitive Expertise: A Failure to Disagree,” <em>American Psychologist</em>, 64(6), 515–526:
+  https://doi.org/10.1037/a0016755
+- PubMed abstract:
+  https://pubmed.ncbi.nlm.nih.gov/19739881/</p>
+<p>所以本节点最重要的研究修正是：</p>
+<h1 id="taste-capital-years-of-exposure">TASTE CAPITAL ≠ YEARS OF EXPOSURE</h1>
+<p>更精确：</p>
+<h1 id="validated-taste-capital-domain-regularity-calibration-opportunity-feedback-quality-model-updating">VALIDATED TASTE CAPITAL = DOMAIN REGULARITY × CALIBRATION OPPORTUNITY × FEEDBACK QUALITY × MODEL UPDATING</h1>
+<p>这是概念模型，不是实证乘法公式。</p>
+<h2 id="1-kleinrpd">1. Klein：RPD不是神秘直觉，而是识别和心理模拟</h2>
+<p>Klein研究的 Naturalistic Decision Making（NDM）主要是：
+- 时间紧；
+- 后果严重；
+- 信息不完整；
+- 多个目标冲突；
+- 环境动态；
+- 专家必须立即行动。</p>
+<p>原始消防指挥员访谈，2010年重新发表：
+- 26位经验丰富的fireground commanders，平均23年经验；
+- 研究分析156个关键决策点；
+- 少于12%的决策点有证据显示同时比较两种以上方案；
+- 超过80%的决策点使用“识别熟悉情境—提出典型行动方案”的方式。</p>
+<p>Source:
+- Klein, Calderwood &amp; Clinton-Cirocco (2010), “Rapid Decision Making on the Fire Ground: The Original Study Plus a Postscript,” <em>Journal of Cognitive Engineering and Decision Making</em>, 4(3), 186–209:
+  https://doi.org/10.1518/155534310X12844000801203</p>
+<p><strong>口径限制：</strong>这是特定职业、回顾性访谈、156个决策点的描述性研究；不能将80%外推成“80%的直觉准确”或“所有创新应靠第一反应”。</p>
+<p>Recognition-Primed Decision（RPD）的核心：
+- 通过情境线索识别熟悉的pattern；
+- 产生一个可行而非必然全局最优的行动；
+- 可能在心中模拟该行动的后果，若不可行则修正或换方案；
+- 不必在所有备选方案间进行显式穷举。</p>
+<p>它可以解释某些专家为什么非常快，但尚未说明此模式何时可靠。</p>
+<h2 id="2-kahneman">2. Kahneman：直觉的力量也能在没有规律的地方形成“技能错觉”</h2>
+<p>2009联合论文区分：
+- <strong>真正可学习的cue–outcome规律</strong>；
+- <strong>人脑在噪声中形成的模式印象</strong>。</p>
+<p>经验丰富、职位很高、解释连贯、主观极度确定，并不自动构成有效专业直觉。</p>
+<p>如果环境的底层规律很弱或剧烈变化，即使个人有大量反馈与自信，也可能很难形成准确预测。</p>
+<p>因此：</p>
+<h1 id="experience-can-compound-error-not-just-skill">EXPERIENCE CAN COMPOUND ERROR, NOT JUST SKILL</h1>
+<p>尤其危险的是：
+- 可见成功者被媒体过度曝光；
+- 失败者退出样本；
+- 结果受运气、资本和平台流量影响；
+- 反馈延迟很长；
+- 成败难以归因；
+- 人只能看到自己选择后的路径，看不到未选择方案的真实反事实。</p>
+<h2 id="3-hogarthkind-wicked">3. Hogarth：Kind / Wicked 学习环境，解决了“为什么重复次数不等于校准次数”</h2>
+<p>Hogarth、Lejarraga 与 Soyer 2015明确提出：学习环境与实际应用环境的 informational elements 需要足够匹配，才能支持准确迁移。</p>
+<ul>
+<li><strong>Kind learning</strong>：可代表性、稳定规律、反馈准确及时、学习与应用的环境匹配；</li>
+<li><strong>Wicked learning</strong>：反馈缺失、迟滞、扭曲、选择偏差、因果结果不可见、环境变动或迁移失配。</li>
+</ul>
+<p>Primary:
+- Hogarth, Lejarraga &amp; Soyer (2015), “The Two Settings of Kind and Wicked Learning Environments,” <em>Current Directions in Psychological Science</em>, 24(5), 379–385:
+  https://doi.org/10.1177/0963721415591878</p>
+<p>重要修正：kind/wicked不是“简单工作/复杂工作”。消防可以复杂、高压却部分具有可学习的规律；有些看似简单的市场预测反而缺少稳定信号。</p>
+<p>新增：</p>
+<h1 id="learning-ecology-validity">LEARNING-ECOLOGY VALIDITY / 学习生态有效性</h1>
+<p>一个人的履历必须同时审核：
+1. 当时判断的变量是否存在稳定规律？
+2. 他真正看到的反馈是什么？
+3. 反馈多久后出现，是否明确？
+4. 有没有选择偏差、混杂与运气污染？
+5. 现在面对的对象是否仍处于同一学习分布？
+6. 是否有多轮本人负责预测并独立行动的记录？</p>
+<h2 id="4-exposurecalibrated-practice">4. 区分两种“经验”：Exposure与Calibrated Practice</h2>
+<h3 id="experience-exposure">Experience Exposure</h3>
+<ul>
+<li>玩过大量作品；</li>
+<li>做过大量需求；</li>
+<li>看过大量业务报告；</li>
+<li>在一个行业工作多年。</li>
+</ul>
+<h3 id="calibrated-judgment-repetitions">Calibrated Judgment Repetitions</h3>
+<ul>
+<li>形成有区分力的事前判断；</li>
+<li>把选择与结果明确对应；</li>
+<li>观察真实反馈；</li>
+<li>比较替代解释；</li>
+<li>更新具体belief；</li>
+<li>在相似但新情境重复测试。</li>
+</ul>
+<p>两个量可以高度分离。</p>
+<p>因此之前的 Authorial Calibration Density 应被重新限定为：</p>
+<blockquote>
+<p>有多少次<strong>能够真正检验某项判断</strong>的完整现实反馈循环？</p>
+</blockquote>
+<p>不是“做了多少个项目”。</p>
+<h2 id="5-taste-domain-maptaste">5. Taste Domain Map：同一个强设计师可能只有局部Taste高度有效</h2>
+<p>新增：</p>
+<h1 id="taste-domain-map">TASTE DOMAIN MAP / 鉴别力适用域地图</h1>
+<p>以游戏制作作为一般公开行业例子，暂作H级映射，不是实证排序：</p>
+<table>
+<thead>
+<tr>
+<th>判断对象</th>
+<th>反馈/规律特征</th>
+<th>经验可校准的可能性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>输入延迟、反馈节奏、操作易读性</td>
+<td>短环、高重复、可实测</td>
+<td>相对较高</td>
+</tr>
+<tr>
+<td>熟悉系统中的平衡、敌人可读性、明确行为假设</td>
+<td>高频原型反馈，但依赖样本/情境</td>
+<td>有条件较高</td>
+</tr>
+<tr>
+<td>完整作品的节奏/美术/叙事整合</td>
+<td>维度多、反馈更慢、受组合影响</td>
+<td>中等且需分解</td>
+</tr>
+<tr>
+<td>新类型、新市场需求</td>
+<td>低可比性、强选择偏差、窗口变化</td>
+<td>很不确定</td>
+</tr>
+<tr>
+<td>某款游戏最终收入与文化影响</td>
+<td>低样本、营销/时机/平台等混杂</td>
+<td>通常很难仅靠主观经验校准</td>
+</tr>
+</tbody>
+</table>
+<p>一位前沿战斗设计师的技能，不会自动延展成：
+- 新IP市场规模预测；
+- 跨品类项目成功率预测；
+- 用户文化趋势预测；
+- 融资与发行窗口判断。</p>
+<p>同理，优秀商业运营人才的D7优化经验不能自动证明其有高水平pre-paradigm product judgment。</p>
+<p>新增：</p>
+<h1 id="expertise-fractionation-kahneman-klein">EXPERTISE FRACTIONATION / 专长碎片化（源于 Kahneman × Klein）</h1>
+<blockquote>
+<p><strong>一个人可能拥有高度可靠的局部专业直觉，同时对邻近却结构不同的重大判断过度自信。</strong></p>
+</blockquote>
+<p>团队不要把“他在A领域很强”未经验证地升级成“他在B领域拥有最终Decision Right”。</p>
+<h2 id="6-tastepattern-recognitionproblem-creation">6. 两种Taste：Pattern Recognition与Problem Creation</h2>
+<p>Klein–Kahneman的核心研究解释的是：</p>
+<blockquote>
+<p>直觉判断何时可以在有效规律上变得可靠。</p>
+</blockquote>
+<p>但创新还需要另一类判断：</p>
+<blockquote>
+<p>在尚未出现稳定训练分布时，判断什么问题值得创造性探索。</p>
+</blockquote>
+<p>因此区分：</p>
+<h3 id="type-a-calibrated-recognition-taste">Type A — Calibrated Recognition Taste</h3>
+<p>在可学习领域识别异常、质量与情境。</p>
+<h3 id="type-b-generative-hypothesis-taste">Type B — Generative Hypothesis Taste</h3>
+<p>在缺乏可统计同类的前范式领域生成有价值的可检验假说。</p>
+<p>后者不能简单要求事前“直觉准确率”，因为可能没有现成的重复预测对象；却仍可评价：
+- 提出假说的解释力；
+- 是否设计高信息密度实验；
+- 修改的速度和质量；
+- 能否识别自身盲区；
+- 是否在实践中创造此前不存在的可用能力。</p>
+<p>所以：</p>
+<h1 id="high-validity-experience-is-not-a-prerequisite-for-having-a-new-idea">HIGH-VALIDITY EXPERIENCE IS NOT A PREREQUISITE FOR HAVING A NEW IDEA</h1>
+<p>但它是相信“我对未来结果有很高概率把握”的重要约束。</p>
+<h2 id="7-kleincritical-decision-method">7. Klein的Critical Decision Method：把高手直觉拆成可观察证据</h2>
+<p>Critical Decision Method（CDM）不是简单采访“你怎么想”。</p>
+<p>它针对真实、非常规的关键事件，用多轮追问：
+- 当时最早看见什么异常？
+- 哪些cue使局势发生变化？
+- 哪个决定点最关键？
+- 如果换成新手会注意什么、错过什么？
+- 哪个行动当时被排除？
+- 如果出现另一种cue，你会如何改变决定？</p>
+<p>Sources:
+- Klein, Calderwood &amp; MacGregor (1989), “Critical Decision Method for Eliciting Knowledge,” <em>IEEE Transactions on Systems, Man, and Cybernetics</em>, 19(3), 462–472. DOI: 10.1109/21.31053.
+- Gary Klein, CDM description: https://www.gary-klein.com/cdm</p>
+<p>与此前Polanyi / Selection Apprenticeship连接：</p>
+<h1 id="decision-cue-elicitation">DECISION CUE ELICITATION / 决策线索提取</h1>
+<p>不是把expert intuition强制翻译成一万条明确规则，而是帮助新人看见专家在真实情境中发现的线索与判断转换。</p>
+<p>边界：CDM主要依靠事后回忆，可能受到retrospective reconstruction污染，因此必须尽量和版本历史、真实时间戳、当时预测、录像、系统记录交叉验证。</p>
+<h2 id="8-premortemcue">8. Premortem：用未来失败的假设让被压制的cue提前合法化</h2>
+<p>Gary Klein 2007《Performing a Project Premortem》提出：
+- 假设项目已经失败；
+- 每个参与者独立构想具体失败机制；
+- 汇集原本难以公开的保留意见；
+- 尽可能在投入不可逆资源前调整计划。</p>
+<p>Primary:
+- Klein, “Performing a Project Premortem,” HBR, 2007:
+  https://hbr.org/2007/09/performing-a-project-premortem</p>
+<p>它真正的组织价值不是“多一些风险清单”，而是：</p>
+<h1 id="dissent-legitimization">DISSENT LEGITIMIZATION / 异议合法化</h1>
+<p>在正常计划会上说“老板方案要失败”可能威胁身份；
+在premortem里说“假设它已失败，我发现是因为X”则更容易暴露被压低的cue。</p>
+<p>但绝不能据此断言Premortem已在所有行业证明能提高成功率。它是具体的决策方法，不是万能效率百分比。</p>
+<p>与Innovation Constitutionalism（Voice）、Argyris（Defensive Routines）直接连接。</p>
+<h2 id="9-taste-reliability-audit">9. 设计一个Taste Reliability Audit</h2>
+<p>如果要评价某个“老兵”、专家、著名制作人或机构的建议，不要问：</p>
+<blockquote>
+<p>他名气多大？做过多少个项目？</p>
+</blockquote>
+<p>而问：</p>
+<ol>
+<li><strong>Domain</strong>：他说的是自己被反复验证过的微观问题，还是跨到了另一类宏观预测？</li>
+<li><strong>Environmental Validity</strong>：当前环境是否存在过去可学到的规律？</li>
+<li><strong>Feedback Integrity</strong>：他的失败、没被选择的方案和现实结果是否真的可见？</li>
+<li><strong>Calibration Record</strong>：是否保留结果前的预测，而非结果后解释？</li>
+<li><strong>Distribution Shift</strong>：引擎、用户、流量、技术、平台是否已经变化？</li>
+<li><strong>Counterfactual Blindness</strong>：有没有将一次成功错误归因为唯一可见决策？</li>
+<li><strong>Confidence–Accuracy Gap</strong>：自信程度是否长期超过实际命中程度？</li>
+<li><strong>Error Response</strong>：遇到反例时，更新模型还是解释掉？</li>
+<li><strong>Power Independence</strong>：他的判断是否因为地位而减少了反对与纠错？</li>
+<li><strong>Transfer Claim</strong>：是否清楚承认“我在A方面懂得多，但B尚无可防御优势”？</li>
+</ol>
+<p>新增：</p>
+<h1 id="expertise-scope-discipline">EXPERTISE SCOPE DISCIPLINE / 专家适用域纪律</h1>
+<h2 id="10">10. 为什么这个理论特别适合研究“高学历做题家”与大厂老兵</h2>
+<p>严格区分两个不同的学习环境：</p>
+<h3 id="standard-problem-environment">Standard Problem Environment</h3>
+<ul>
+<li>评价标准固定；</li>
+<li>反馈明确；</li>
+<li>题目被预先定义；</li>
+<li>短周期重复足够多。</li>
+</ul>
+<p>它可以非常有效地产生：
+- 解题熟练度；
+- 特定模式识别；
+- 快速错误修正。</p>
+<h3 id="frontier-product-environment">Frontier Product Environment</h3>
+<ul>
+<li>什么算问题尚不清楚；</li>
+<li>目标函数待定义；</li>
+<li>玩家价值与商业价值部分冲突；</li>
+<li>关键反馈迟滞；</li>
+<li>市场变化；</li>
+<li>成败强烈受偶然性影响。</li>
+</ul>
+<p>前者形成的直觉对同类环境可能很可靠；但不能据此对后者的判断进行无条件授权。</p>
+<p>因此本项目的研究假说应是：</p>
+<h1 id="learning-environment-transfer-gap">LEARNING-ENVIRONMENT TRANSFER GAP / 学习环境迁移缺口</h1>
+<blockquote>
+<p>从高反馈、明确评分环境里获得的高能力，可能被错误用于低反馈、高模糊、分布漂移环境。</p>
+</blockquote>
+<p>这仍需真实职业路径和预测记录验证；Kahneman/Klein研究不构成针对中国人或中国游戏行业的因果证明。</p>
+<h2 id="11">11. 与个人主义：判断主权不是免于质量审核的权力</h2>
+<p>前面建立的：
+- Judgment Sovereignty；
+- Representation Sovereignty；
+- Programme Accountability；
+- Reality Correction；</p>
+<p>到这一轮应补：</p>
+<h1 id="intuitive-authority-must-be-domain-bound-and-evidence-bound">INTUITIVE AUTHORITY MUST BE DOMAIN-BOUND AND EVIDENCE-BOUND</h1>
+<p>即：</p>
+<blockquote>
+<p>你有权提出自己的独立判断，但你过去的经验只赋予你其实际验证过的范围内的认识论信用。</p>
+</blockquote>
+<p>反面也成立：</p>
+<blockquote>
+<p>一个尚未拥有大厂title的人，若在某个新交互领域积累了更直接、更高质量的现实反馈，可能比高管更接近正确答案。</p>
+</blockquote>
+<p>关键不是：
+- 老兵一定对；
+- 新人一定对；</p>
+<p>而是：
+- 哪个人拥有更相关的有效学习经历。</p>
+<h2 id="12">12. 风险：把“可靠直觉条件”错读成“新创意必须能预测”</h2>
+<p>还要防另一个错误：</p>
+<ul>
+<li>新范式开始前没有可靠概率，不证明探索者不应该行动；</li>
+<li>直觉无法校准，并不代表只有传统benchmark路线是合理的；</li>
+<li>低validity环境应减少无根据的确定性、控制不可逆承诺，而不是取消试验资格；</li>
+<li>非共识者可以提出原创假说，但需要在后续实验中逐步创造一个可检验的学习环境。</li>
+</ul>
+<p>即：</p>
+<h1 id="high-uncertainty-no-agency">HIGH UNCERTAINTY ≠ NO AGENCY</h1>
+<h1 id="low-validity-no-experimentation">LOW VALIDITY ≠ NO EXPERIMENTATION</h1>
+<p>这与Knight、Reversible Bets、Weick最强的共同点是：</p>
+<blockquote>
+<p>在不能自信预测的地方，设计产生有用新证据的行动。</p>
+</blockquote>
+<h2 id="13-aitaste">13. AI时代：模型的自信感、答案流畅度不是Taste证据</h2>
+<p>人和AI都可能：
+- 观察大量成功案例；
+- 在结果出现后讲出高度连贯的解释；
+- 对各种问题给出专业建议；</p>
+<p>但这不自动证明：
+- 它见过相关失败分母；
+- 它在真实行动之前预测过结果；
+- 它能适应分布变化；
+- 它有独立的ground truth反馈。</p>
+<p>所以AI时代应优先记录：</p>
+<p>context → pre-registered forecast → artifact/action → observed outcome → error type → update</p>
+<p>对于AI和人采用<strong>同一套</strong>事前预测/结果检验，不以文采、模型大小或职业头衔替代准确性。</p>
+<h2 id="14">14. 分开审计三个不同表现指标</h2>
+<p>一个专家可能：
+1. <strong>Fast Situation Recognition</strong>：很快看见熟悉问题。
+2. <strong>Calibrated Outcome Prediction</strong>：能对可预测结果给出恰当概率。
+3. <strong>Creative Problem Formation</strong>：能够提出新的、值得检验的产品问题。</p>
+<p>三者可相关，但不能互相推出。</p>
+<p>这也保护此前的“伟大创作者Taste”研究：</p>
+<blockquote>
+<p>不应把创意能力简单等同于中奖概率的事前预测准确率。</p>
+</blockquote>
+<p>更有效的研究方法是：
+- 识别新假设；
+- 考察实验如何产生新能力和新证据；
+- 验证他是否反复修正模型；
+- 长期观察而非仅看最终销量。</p>
+<h2 id="15-reader-facing">15. 新增Reader-facing问句</h2>
+<p>遇到一个强专家：</p>
+<blockquote>
+<p>他到底擅长判断哪一层？他在哪些情境中真正错过、并被现实纠正过？</p>
+</blockquote>
+<p>遇到一个自信的投资人 / 发行商：</p>
+<blockquote>
+<p>对新类型收益的预测，有没有可比前史和记录？还是拿已知成功者的故事外推？</p>
+</blockquote>
+<p>遇到一个天才式创始人：</p>
+<blockquote>
+<p>他承认哪些领域自己没有valid intuition？哪些决策选择用小实验替代确信？</p>
+</blockquote>
+<p>遇到一个几乎所有feature都能讲清楚的公司：</p>
+<blockquote>
+<p>它对下一代产品的预测有没有改善，还是只会解释上一代成功？</p>
+</blockquote>
+<p>遇到AI建议：</p>
+<blockquote>
+<p>它提供的是有相关现实依据的判断，还是未校准的高流畅叙事？</p>
+</blockquote>
+<h2 id="16-open-questions-future-case-work">16. Open Questions / future case work</h2>
+<ol>
+<li>游戏行业可否构建不同Taste域（操作、节奏、叙事、市场、组织）的独立校准史？</li>
+<li>开发者口中的“直觉”有多少是RPD pattern recognition，多少是creative hypothesis formation？</li>
+<li>高销量公司能否培养可靠pre-paradigm intuition，还是更多在既定市场regime里校准？</li>
+<li>国际资深设计师判断新平台、新付费形式、跨品类新IP的实际结果前预测记录在哪里？</li>
+<li>数字商店平台/推荐算法更替后，哪些成功经验出现distribution shift？</li>
+<li>AI生成的成功解释在预测未来时，对简单base-rate模型的增益有多大？</li>
+<li>高级导师如何防止在把自己的“局部专长”授予新人时误将个人身份与全部判断权捆绑？</li>
+<li>能否用CDM、版本历史、pre-mortem与prediction log共同建立更高保真Judgment Trace？</li>
+</ol>
+<h2 id="17">17. 统一原则：判断主权属于个人，判断信用来自现实</h2>
+<p>与 <a href="/heroes-portal/cross-industry/innovation-constitutionalism-exit-voice-loyalty-001.html">Innovation Constitutionalism</a> 及 <a href="/heroes-portal/cross-industry/judgment-under-uncertainty-theory-stack-001.html">Judgment Under Uncertainty</a> 合并后，本项目把以下两件事严格分开：</p>
+<blockquote>
+<p><strong>判断主权属于个人，判断信用来自现实。</strong></p>
+</blockquote>
+<h3 id="judgment-right">Judgment Right — 判断权</h3>
+<p>任何人都可以提出非共识假说，包括没有职位、名校履历和先前成功的人。身份和权威不是发言、构造假说、申请低成本试验资格的先决条件。</p>
+<h3 id="epistemic-credit">Epistemic Credit — 认识论信用</h3>
+<p>某人的判断是否值得在某个<strong>特定领域</strong>加重权重，要由相关问题中的前瞻性判断、有效反馈、错误校准、替代解释和适用环境决定。经验、履历、故事感染力、名气、职位和自信都不能代替这部分证据。</p>
+<p>二者不互相取消：
+- <strong>有判断权</strong>不意味着判断可靠；
+- <strong>此前没有校准记录</strong>不意味着没有探索权；
+- <strong>某领域高度可靠</strong>不意味着跨域也高度可靠；
+- <strong>现实结果很好</strong>不意味着提出者当时的因果判断就是成功原因。</p>
+<p>原则适用于人类专家、机构、LLM/Agent以及研究者自己。</p>
+<h2 id="18-taste-reliability-audit">18. 首批 Taste Reliability Audit：范围、取证与防错</h2>
+<p><strong>Status: AUDIT PROTOCOL / OPEN QUESTIONS; NOT A COMPLETED COMPARATIVE STUDY.</strong></p>
+<p>首批值得研究 Jobs、Miyamoto、Carmack，再加入同年代/同任务下声望相近但结果不佳者和未成名者，避免将成功者传记直接当成校准记录。前三者是<strong>不同领域的压力测试样本</strong>，不是可代表整个产业的随机样本。</p>
+<h3 id="181-decision-episode">18.1 每个Decision Episode最小记录字段</h3>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>记录要求</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Decision date / domain</td>
+<td>当时哪年、哪个产品阶段、属于技术/手感/市场/组织/设计哪一类</td>
+</tr>
+<tr>
+<td>Information available then</td>
+<td>决策时公开或组织可得的材料，不得用后来结果倒灌</td>
+</tr>
+<tr>
+<td>Actor&rsquo;s contemporaneous claim</td>
+<td>决策前或决策当时本人到底提出了什么主张；找不到记 UNKNOWN</td>
+</tr>
+<tr>
+<td>Alternative paths</td>
+<td>同期真实替代方案；无证据不虚构</td>
+</tr>
+<tr>
+<td>Decision right / stake</td>
+<td>当事人有何权限、押了什么、是否可以逆转</td>
+</tr>
+<tr>
+<td>Forecast / falsifier</td>
+<td>有没有明确事前预测、可能改变判断的条件；没有不得补写</td>
+</tr>
+<tr>
+<td>Outcome / time window</td>
+<td>何时出现、按哪个尺度衡量；销量、口碑、制作能力和组织健康要分开</td>
+</tr>
+<tr>
+<td>Calibration verdict</td>
+<td>只能在存在足够可评分预测时评论预测准确；否则仅记录选择—结果</td>
+</tr>
+<tr>
+<td>Environment validity / shift</td>
+<td>此前经验和本次问题之间的环境规律是否可迁移</td>
+</tr>
+<tr>
+<td>Countercases / denominator</td>
+<td>同期失败者、未选方案、其他团队、采访可见性与样本截尾</td>
+</tr>
+<tr>
+<td>Evidence tier</td>
+<td>P0 / P1 / S1 / S2 / H；回忆性叙事不能伪装为同期预测</td>
+</tr>
+<tr>
+<td>Transfer validity</td>
+<td>发生年代、技术/市场/平台版本与2026年的迁移边界</td>
+</tr>
+</tbody>
+</table>
+<h3 id="182">18.2 对三位候选人物的不同审计任务</h3>
+<ul>
+<li><strong>Jobs</strong>：区分产品整合Taste、设计/商业化判断与大品类预测；优先找当时的产品决策、价格与定位依据、失败项目及事后修正。不能因为后来Apple整体成功，就给每个早期判断追认正确。</li>
+<li><strong>Miyamoto</strong>：区分高频动作/游戏行为/可读性迭代的判断，与硬件、受众扩大、市场预测；同时检视其他Nintendo开发者真实的判断权。不能把集体作品和公司销量单人归因。</li>
+<li><strong>Carmack</strong>：区分技术可行性、性能/近似求解、工具链与产品整合、玩法、商业市场判断；审计技术突破收益与进度、内容生产、组织成本的不同口径。不能以某种技术先进，推出产品判断必然先进。</li>
+</ul>
+<h3 id="183">18.3 强制比较规则</h3>
+<ol>
+<li><strong>不从三名天才推断一般人的直觉准确率</strong>，也不从单一失败断言其Taste不存在。</li>
+<li><strong>不把已成产品的结果伪造成事前概率预测</strong>；若无同期记录，应记“forecast unavailable”。</li>
+<li><strong>不拿作品命中率等同预测命中率</strong>：团队选择、资金、营销、技术窗口、平台、运气都是混杂变量。</li>
+<li><strong>不把局部Taste可靠性升级为跨域组织统治权</strong>，也不因新领域缺少历史规律而否定探索合法性。</li>
+<li><strong>若证据仅够做选择史，不够做Reliability Audit，应明确降级</strong>为决策事件目录，未来再补校准数据。</li>
+</ol>
+<h3 id="184">18.4 合理的下一步</h3>
+<p>优先建立每人5–8个有明确日期和可检索当期资料的Decision Episodes；至少为每人找2个不利结果/明确修正的片段，再寻找同一时间尺度下的对照。完成证据搜集后，再决定哪些领域可形成有分母的校准判断，哪些只能讲“选择曾经发生过什么”。这些是<strong>研究目标，不是已完成数量</strong>。</p>
+<p>结论必须区分：
+- 快速情境识别；
+- 预测校准；
+- 生成性问题选择；
+- 最终产出；
+- 组织权力与制度条件。</p>
+<hr />
+<h2 id="sources-audit-pointers">Sources / audit pointers</h2>
+<ul>
+<li>Kahneman &amp; Klein 2009, <em>American Psychologist</em>: https://doi.org/10.1037/a0016755</li>
+<li>PubMed research abstract: https://pubmed.ncbi.nlm.nih.gov/19739881/</li>
+<li>Klein et al. 2010, original fireground study restatement: https://doi.org/10.1518/155534310X12844000801203</li>
+<li>Gary Klein 2008, <em>Naturalistic Decision Making</em>, <em>Human Factors</em>: https://pubmed.ncbi.nlm.nih.gov/18689053/</li>
+<li>Klein et al. 1989, Critical Decision Method: https://doi.org/10.1109/21.31053</li>
+<li>Gary Klein CDM method description: https://www.gary-klein.com/cdm</li>
+<li>Hogarth, Lejarraga, Soyer 2015, Kind / Wicked: https://doi.org/10.1177/0963721415591878</li>
+<li>Klein 2007, HBR Premortem: https://hbr.org/2007/09/performing-a-project-premortem</li>
+<li>Tetlock, <em>Expert Political Judgment</em> 2005 (later forecast boundary comparison): https://www.jstor.org/stable/j.ctt7spbt</li>
+<li>Mandel and Barnes critique/countercomparison in PNAS: https://pmc.ncbi.nlm.nih.gov/articles/PMC4136586/</li>
+</ul><div class="crumbs"><a href="/heroes-portal/">书阁</a> / cross-industry/intuitive-expertise-taste-validity-001.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

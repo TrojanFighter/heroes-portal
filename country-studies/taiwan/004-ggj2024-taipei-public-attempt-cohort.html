@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>004 — GGJ 2024 台北第一会场：台湾首个非明星 Public-Attempt Cohort · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl class="on"" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0" class="t2">0. 为什么这个队列比“台湾优秀独游”有用</a><a href="#1-sampling-frame" class="t2">1. Sampling frame 声明</a><a href="#2" class="t2">2. 起点证据</a><a href="#3" class="t2">3. 第一轮项目名册</a><a href="#_1" class="t3">目录测试条目</a><a href="#4" class="t2">4. 已确认的“生产痕迹”例子，但暂不计成功</a><a href="#5" class="t2">5. 与深圳南山试点怎么比</a><a href="#6-follow-up-coding" class="t2">6. 下一轮 follow-up coding</a></aside><article class="doc"><div class="col"><h1 id="004-ggj-2024-public-attempt-cohort">004 — GGJ 2024 台北第一会场：台湾首个非明星 Public-Attempt Cohort</h1>
+<ul>
+<li>Status: PILOT / ROSTER VERIFIED AT PROJECT LEVEL / TWO CREATOR PUBLIC FOLLOW-UP EXAMPLES / COMPLETE FOLLOW-UP NOT DONE</li>
+<li>Program: C Taiwan comparator</li>
+<li>As of: 2026-10-07</li>
+<li>Cohort event: MIT Game Jam #12 × Global Game Jam 2024，台北第一会场</li>
+<li>Unit: jam team/project, not individual developer</li>
+<li>Comparison candidate: GGJ 2024深圳南山站试点</li>
+<li>Method gate: 媒体可见性与分母协议028</li>
+</ul>
+<h2 id="0">0. 为什么这个队列比“台湾优秀独游”有用</h2>
+<p class="dc">它的入选条件是固定时间 + 固定场地 + 实际参加jam并提交作品，不是销量、媒体采访或奖项。</p>
+<p>因此可以观察：
+- 普通公开尝试者是否继续制作；
+- 哪些项目留下GitHub/itch痕迹；
+- 多少人两年后还参加jam或做游戏；
+- 哪些完全没有可观察后续。</p>
+<p>但它仍不是台湾人口/游戏从业者概率样本：参加GGJ本身已经经过兴趣、时间、城市和社群自选。</p>
+<h2 id="1-sampling-frame">1. Sampling frame 声明</h2>
+<p>Question: 固定台北GGJ会场的全部实际小组，两年后留下了什么公开生产痕迹？</p>
+<ul>
+<li>target_population: 2024 MIT Game Jam #12 台北第一会场实际A-J十组项目</li>
+<li>unit_of_analysis: project_team</li>
+<li>cohort_entry_event: 完成台北第一会场活动并在主办方活动纪录中列为A-J组</li>
+<li>geography: Taipei City, Taiwan</li>
+<li>event_window: 2024-01-26 17:00 to 2024-01-28 17:00</li>
+<li>selection_rule: 活动主办方复盘列出的A-J十组，不按奖项/后续/媒体报道筛选</li>
+<li>denominator_status: VERIFIED_FOR_EVENT_TEAMS</li>
+<li>denominator_count: 10</li>
+<li>ggj_directory_count: 11</li>
+<li>directory_artifact_exclusion: test-taipei-2024 — GGJ目录测试条目；不在主办方A-J实际组清单</li>
+<li>participant_capacity: 66</li>
+<li>registration_snapshot: KKTIX 65/66 at captured page</li>
+<li>followup_window: 2024-01-28 to 2026-10-07</li>
+<li>post_jam_outcomes: NOT_ASSESSED</li>
+<li>forbidden_inference: 台湾创作者成功率、台湾vs大陆创新率、所有参赛者国籍或职业</li>
+</ul>
+<h2 id="2">2. 起点证据</h2>
+<p><strong>TWGGJ24-E01｜Global Game Jam官方场地页（P0）</strong><br />
+https://globalgamejam.org/jam-sites/2024/mit-game-jam-12-x-global-game-jam-2024</p>
+<ul>
+<li>实体会场；</li>
+<li>2024-01-26 17:00 至 2024-01-28 17:00；</li>
+<li>18+；</li>
+<li>免费；</li>
+<li>最大容量66；</li>
+<li>“Anyone”可参加；</li>
+<li>官方说明实际报名由KKTIX处理；</li>
+<li>同页随机显示多个该场地作品。</li>
+</ul>
+<p><strong>TWGGJ24-E02｜IGDA Taiwan / KKTIX活动页（P0机构资料）</strong><br />
+https://igda-tw.kktix.cc/events/mitjam12-ggj2024</p>
+<ul>
+<li>页面快照显示65/66；</li>
+<li>规定参与者需对游戏内容制作、程序开发等必备项目“有一定熟悉程度”，包含学生。</li>
+<li>因此它不是“随机台湾年轻人”，甚至不是完全零门槛兴趣组；ability self-selection必须保留。</li>
+</ul>
+<p><strong>TWGGJ24-E03｜GGJ场地作品目录（P0）</strong><br />
+https://globalgamejam.org/group/639/games</p>
+<ul>
+<li>目录显示 Displaying 1 - 11 of 11。</li>
+<li>其中含 test-taipei-2024（描述仅“test”）。</li>
+<li>不能直接把11条目录listing当11个实际参赛团队。</li>
+</ul>
+<p><strong>TWGGJ24-E04｜IGDSHARE活动纪录（主办方活动复盘；P0机构资料）</strong><br />
+https://igdshare.org/content/mitjam12-ggj2024-archives</p>
+<p>主办方明确列出A—J十个实际组并逐一链接GGJ项目页：
+A 猜猜我是誰<br />
+B 食物鍊金術<br />
+C Hell Cast<br />
+D SUBARMAN<br />
+E 神說，讓我笑<br />
+F Make Me Laugh<br />
+G The Slap<br />
+H 笑到終點：迷因三寶之路<br />
+I Win87<br />
+J Let Me Laugh</p>
+<p>因此本pilot的可观察实际团队分母暂定为10，不是11。</p>
+<h2 id="3">3. 第一轮项目名册</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th style="text-align: right;">组</th>
+<th>项目</th>
+<th>GGJ项目页/证据</th>
+<th>2024后续</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TW-TPE24-01</td>
+<td style="text-align: right;">A</td>
+<td>猜猜我是誰</td>
+<td>https://globalgamejam.org/games/2024/caicaiwoshishui-2</td>
+<td>NOT_ASSESSED</td>
+</tr>
+<tr>
+<td>TW-TPE24-02</td>
+<td style="text-align: right;">B</td>
+<td>食物鍊金術</td>
+<td>https://globalgamejam.org/games/2024/shiwulianjinshu-5</td>
+<td>NOT_ASSESSED</td>
+</tr>
+<tr>
+<td>TW-TPE24-03</td>
+<td style="text-align: right;">C</td>
+<td>Hell Cast</td>
+<td>https://globalgamejam.org/games/2024/hell-case-8</td>
+<td>NOT_ASSESSED</td>
+</tr>
+<tr>
+<td>TW-TPE24-04</td>
+<td style="text-align: right;">D</td>
+<td>SUBARMAN</td>
+<td>https://globalgamejam.org/games/2024/subarman-7</td>
+<td>NOT_ASSESSED</td>
+</tr>
+<tr>
+<td>TW-TPE24-05</td>
+<td style="text-align: right;">E</td>
+<td>神說，讓我笑</td>
+<td>https://globalgamejam.org/games/2024/jizhiwenda-8</td>
+<td>NOT_ASSESSED</td>
+</tr>
+<tr>
+<td>TW-TPE24-06</td>
+<td style="text-align: right;">F</td>
+<td>Make Me Laugh</td>
+<td>https://globalgamejam.org/games/2024/make-me-laugh-0-2</td>
+<td>NOT_ASSESSED</td>
+</tr>
+<tr>
+<td>TW-TPE24-07</td>
+<td style="text-align: right;">G</td>
+<td>The Slap</td>
+<td>https://globalgamejam.org/games/2024/slap-3</td>
+<td>NOT_ASSESSED</td>
+</tr>
+<tr>
+<td>TW-TPE24-08</td>
+<td style="text-align: right;">H</td>
+<td>笑到終點：迷因三寶之路</td>
+<td>https://globalgamejam.org/games/2024/xiaodaozhongdianmiyinsanbaozhilu-5</td>
+<td>NOT_ASSESSED</td>
+</tr>
+<tr>
+<td>TW-TPE24-09</td>
+<td style="text-align: right;">I</td>
+<td>Win87</td>
+<td>https://globalgamejam.org/games/2024/teami-6</td>
+<td>NOT_ASSESSED</td>
+</tr>
+<tr>
+<td>TW-TPE24-10</td>
+<td style="text-align: right;">J</td>
+<td>LetMeLaugh</td>
+<td>https://globalgamejam.org/games/2024/letmelaugh-5</td>
+<td>NOT_ASSESSED</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_1">目录测试条目</h3>
+<ul>
+<li>test-taipei-2024：出现在GGJ 11条listing中，描述为“test”，但不出现在主办方A-J十组纪录。</li>
+<li>分类：ADMIN/TEST DIRECTORY ARTIFACT；不进入实际团队分母。</li>
+<li>这也是为什么公开目录队列不能在不做去重/行政条目审计时直接拿页面总数计算。</li>
+</ul>
+<h2 id="4">4. 已确认的“生产痕迹”例子，但暂不计成功</h2>
+<p>若干项目页已公开：
+- The Slap 有GitHub repository和明确6名左右分工（程序、美术、设计/声音）；
+- 神說，讓我笑 有GitHub、itch playable；
+- Win87 有GitHub、itch playable；
+- 笑到終點 有GitHub；
+- LetMeLaugh 有GitHub和可在线游玩版本。</p>
+<p>这些只能证明jam期公开artifact和团队协作，不等于后续开发、商业发行或职业转化。</p>
+<p>第一轮个体追踪已经证明这个队列内部能力差异很大，因此它不能被叫作“新人队列”：</p>
+<ul>
+<li>GGJ用户“鄒佳宏”页面显示其2024参与《神說，讓我笑》，2026又参加MIT Game Jam #14并有新作《HELL-o-WORD》。这是“持续公开创作”的可追踪实例，但不等于职业化或创业。来源：https://globalgamejam.org/users/zoujiahong</li>
+<li>F组《Make Me Laugh》成员古明弘的GGJ个人页在“Past Games”中列出Steam作品，并显示2025《星塵入海 reStar》、2026《情緒按摩師》等后续jam作品。来源：https://globalgamejam.org/users/guminghong</li>
+<li>其中Steam App 2251430《Original》在2023-07-05已正式发售，即<strong>早于本队列的2024 GGJ</strong>。因此至少一位参与者在入组时已经有商业Steam发行经历。Steam记录入口：https://store.steampowered.com/app/2251430/Original/</li>
+<li>古明弘2025又参加同系列MIT Game Jam #13《星塵入海 reStar》：https://globalgamejam.org/games/2025/xingchenruhai-restar-4</li>
+</ul>
+<p>这几项只支持一个方法论修正：本队列是<strong>public creative-attempt cohort / 社群创作队列</strong>，不是beginner cohort。后续coding必须新增：
+- pre_2024_commercial_release
+- pre_2024_game_jam_history
+- pre_2024_professional_or_public_portfolio</p>
+<p>否则会把“已有开发者继续参加jam”误算成“jam把新人转化成开发者”。</p>
+<h2 id="5">5. 与深圳南山试点怎么比</h2>
+<p>跨海峡公共平台栈审计见：<a href="/heroes-portal/country-studies/taiwan/015-amateur-public-artifact-platform-stack-taipei-vs-shenzhen.html">015 — 台北 × 深圳GGJ公共作品栈</a>。015已核本会场至少7/10实际组有GGJ页直接暴露的公开源码/仓库链路，同时保留GitHub diversifier、参与者前史和深圳可观察性不对称等竞争解释；不得直接计算“台湾公开率高于深圳”。</p>
+<p>当前不能直接比较“台湾10 vs 深圳16”，原因：
+- 深圳当前统计单位是16条官方目录listing、15个不同题名，尚未完全重建实际团队数；
+- 台北第一会场已经借主办方纪录校正为10个实际组；
+- 台北报名规则要求一定制作熟悉度，深圳站规则不同；
+- 城市、主办网络、场地容量、参与者职业构成均不同。</p>
+<p>下一步应该先把双方都统一成：</p>
+<p>actual event teams
+→ GGJ project artifact
+→ public contributor perimeter
+→ 24/36-month public follow-up
+→ commercial release / continued creation / no observable trace / unknown</p>
+<p>再比较可观察转化，并始终保留self-selection和missingness。</p>
+<h2 id="6-follow-up-coding">6. 下一轮 follow-up coding</h2>
+<p>每个项目逐项填：
+- repository_alive_2026
+- itch_or_store_release
+- same_team_continued
+- individual_creator_continued
+- next_jam
+- commercial_project
+- employment_provenance_observable
+- media_featured
+- no_public_trace_observed
+- unknown_due_to_identity_or_alias</p>
+<p>禁止把：
+- NO PUBLIC TRACE OBSERVED 写成“退出游戏行业”；
+- GitHub更新写成“职业开发者”；
+- 参加下一届jam写成“创业”；
+- Steam发售写成“商业成功”。</p>
+<p>完成十组follow-up后，本队列才有资格成为台湾“普通公开尝试者”的第一份纵向资料。</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / country-studies/taiwan/004-ggj2024-taipei-public-attempt-cohort.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

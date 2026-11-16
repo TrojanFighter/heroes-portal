@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>案例地图 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl class="on"" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<section class="sect"><div class="wrap">
+<h2>案例地图<small>63 个编号 Case</small></h2>
+<p class="lede">Case ID 用于审计，不代表证据成熟度或推荐阅读顺序。带"待核"标记的对象尚未全部核实生产史与独立资格；「台账」列进该案的来源清单（P0/P1/S1/S2/H）。</p>
+<img class="band" src="/heroes-portal/assets/band-atlas.webp" alt="" loading="lazy">
+<input class="filter" id="f" placeholder="筛选案例：编号 / 游戏名 / 关键词…" oninput="q(this.value)">
+<table class="atlas" id="t"><tr><th>Case</th><th>对象</th><th>它主要让我们看见什么</th><th>证据</th></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-001-ftl.html">CASE-001</a></td><td>FTL / Subset Games</td><td>runway、地理成本、众筹与“低 burn”</td><td class="id"><a href="/heroes-portal/evidence/CASE-001-ftl-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-002-rocket-league.html">CASE-002</a></td><td>Rocket League / Psyonix</td><td>work-for-hire 养原创、失败前作、长期迭代</td><td class="id"><a href="/heroes-portal/evidence/CASE-002-rocket-league-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-003-papers-please.html">CASE-003</a></td><td>Papers, Please / Lucas Pope</td><td>大厂能力资本如何转成个人作者生产</td><td class="id"><a href="/heroes-portal/evidence/CASE-003-papers-please-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-004-stardew-valley.html">CASE-004</a></td><td>Stardew Valley / ConcernedApe</td><td>长期 solo、伴侣/家庭支持、能力积累</td><td class="id"><a href="/heroes-portal/evidence/CASE-004-stardew-valley-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-005-dwarf-fortress.html">CASE-005</a></td><td>Dwarf Fortress / Bay 12</td><td>极长周期、替代性收入、表现成本重定义</td><td class="id"><a href="/heroes-portal/evidence/CASE-005-dwarf-fortress-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-006-repo.html">CASE-006</a></td><td>R.E.P.O. / semiwork</td><td>失败前作、再投资与更短 failure loop</td><td class="id"><a href="/heroes-portal/evidence/CASE-006-repo-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-007-gunpoint.html">CASE-007</a></td><td>Gunpoint / Tom Francis</td><td>工资 runway、品味→自我生产、全球协作者</td><td class="id"><a href="/heroes-portal/evidence/CASE-007-gunpoint-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-008-dream-quest.html">CASE-008</a></td><td>Dream Quest / Peter Whalen</td><td>玩家能力、职业转向与首作生产</td><td class="id"><a href="/heroes-portal/evidence/CASE-008-dream-quest-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-009-project-wingman.html">CASE-009</a></td><td>Project Wingman / Sector D2</td><td>小团队挑战成熟品类、引擎/社区/众筹</td><td class="id"><a href="/heroes-portal/evidence/CASE-009-project-wingman-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-010-undertale.html">CASE-010</a></td><td>Undertale / Toby Fox</td><td>UGC、音乐与社区前史如何形成能力资本</td><td class="id"><a href="/heroes-portal/evidence/CASE-010-undertale-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-011-lethal-company.html">CASE-011</a></td><td>Lethal Company / Zeekerss</td><td>Roblox→多次发售→Patreon/playtest→爆款</td><td class="id"><a href="/heroes-portal/evidence/CASE-011-lethal-company-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-012-kenshi.html">CASE-012</a></td><td>Kenshi / Lo-Fi Games</td><td>夜班工资、极长个人时间资本、自营 paid alpha、EA 后扩团队</td><td class="id"><a href="/heroes-portal/evidence/CASE-012-kenshi-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-013-rise-of-the-white-sun.html">CASE-013</a></td><td>Rise of the White Sun</td><td>系统抽象、历史研究与外围协作如何压成本</td><td class="id"><a href="/heroes-portal/evidence/CASE-013-rise-of-the-white-sun-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-014-minecraft.html">CASE-014</a></td><td>Minecraft / Markus Persson → Mojang</td><td>周末原型、付费 Alpha、公开开发、自融资</td><td class="id"><a href="/heroes-portal/evidence/CASE-014-minecraft-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-015-hollow-knight.html">CASE-015</a></td><td>Hollow Knight / Team Cherry</td><td>jam→Kickstarter，家庭收入/储蓄/基金共同构成 runway</td><td class="id"><a href="/heroes-portal/evidence/CASE-015-hollow-knight-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-016-early-id-software.html">CASE-016</a></td><td>early id Software / Commander Keen</td><td>moonlighting、高频职业出货与 shareware 前史</td><td class="id"><a href="/heroes-portal/evidence/CASE-016-early-id-software-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-017-among-us.html">CASE-017</a></td><td>Among Us / Innersloth</td><td>“完成后两年才爆”以及爆发后的组织技术压力</td><td class="id"><a href="/heroes-portal/evidence/CASE-017-among-us-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-018-rollercoaster-tycoon.html">CASE-018</a></td><td>RollerCoaster Tycoon / Chris Sawyer</td><td>OPC 神话、长期能力资本与 contributor boundary</td><td class="id"><a href="/heroes-portal/evidence/CASE-018-rollercoaster-tycoon-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-019-schedule-i.html">CASE-019</a></td><td>Schedule I / TVGS</td><td>solo core、专业外围、EA/community infrastructure</td><td class="id"><a href="/heroes-portal/evidence/CASE-019-schedule-i-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-020-into-the-breach.html">CASE-020</a></td><td>Into the Breach / Subset Games</td><td>第一次成功如何购买第二作的低 burn 与长试错</td><td class="id"><a href="/heroes-portal/evidence/CASE-020-into-the-breach-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-021-roblox-creator-cluster.html">CASE-021</a></td><td>Roblox Creator Cluster</td><td>学习、出货、收入、就业与 studio formation 被压进一个平台</td><td class="id"><a href="/heroes-portal/evidence/CASE-021-roblox-creator-cluster-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-022-escape-from-tarkov-lineage.html">CASE-022</a></td><td>Escape from Tarkov / Contract Wars → Battlestate</td><td>商业前置项目如何积累技术、团队、现金流与市场资格</td><td class="id"><a href="/heroes-portal/evidence/CASE-022-escape-from-tarkov-lineage-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-023-despelote.html">CASE-023</a></td><td>despelote</td><td>incubator、文化资金、bridge grant、vertical slice、publisher fit</td><td class="id"><a href="/heroes-portal/evidence/CASE-023-despelote-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-024-escape-from-duckov.html">CASE-024</a></td><td>Escape from Duckov / Team Soda</td><td>NON-INDIE COMPARATOR：小核心≠独立所有权；公司工资、发行与流量外围如何改变可复制性</td><td class="id"><a href="/heroes-portal/evidence/CASE-024-escape-from-duckov-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-025-bills-must-be-paid.html">CASE-025</a></td><td>Bills Must Be Paid / Rike Games</td><td>七年 mobile/web 失败与高频原型能力压缩进七个月项目；demo / Steam market model course correction</td><td class="id"><a href="/heroes-portal/evidence/CASE-025-bills-must-be-paid-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-026-brigador.html">CASE-026</a></td><td>Brigador / Stellar Jockeys</td><td>强产品执行仍可被 onboarding、market legibility、受众预期与成本—市场错位击穿</td><td class="id"><a href="/heroes-portal/evidence/CASE-026-brigador-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-027-dyson-sphere-program.html">CASE-027</a></td><td>Dyson Sphere Program / Youthcat Studio</td><td>RESEARCHING：已核5人核心、主创前史、prototype-before-quit、创始人储蓄runway与发行外围；合同/household/完整contributors仍待核</td><td class="id"><a href="/heroes-portal/evidence/CASE-027-dyson-sphere-program-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-028-chinese-online-game.html">CASE-028</a></td><td>中国式网游 / 648工作室</td><td>官方自述单人业余约五年；模拟网游体验的表现成本解释为 H，职业前史仍 UNKNOWN</td><td class="id"><a href="/heroes-portal/evidence/CASE-028-chinese-online-game-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-029-boundary.html">CASE-029</a></td><td>Boundary / Surgical Scalpels Studio</td><td>已恢复制作人 / 创始人资料与首发商业信号；检验强 novelty / acquisition 已成立时的长周期 error persistence 与 multiplayer ecosystem obligation</td><td class="id"><a href="/heroes-portal/evidence/CASE-029-boundary-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-030-outpost-infinity-siege.html">CASE-030</a></td><td>Outpost: Infinity Siege / Team Ranger</td><td>SKELETON：团队归属、职业前史与产品范围待核，不预设企业负例</td><td class="id"><a href="/heroes-portal/evidence/CASE-030-outpost-infinity-siege-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-031-jonas-tyroller.html">CASE-031</a></td><td>Jonas Tyroller / ISLANDERS → Will You Snail? → Thronefall</td><td>同一开发者跨三人、solo-core、两人团队的纵向方法审计：原型筛选、范围压缩、公开沟通与运气</td><td class="id"><a href="/heroes-portal/evidence/CASE-031-jonas-tyroller-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-032-pubg-brendan-greene.html">CASE-032</a></td><td>PLAYERUNKNOWN / Brendan Greene: DayZ Battle Royale → H1Z1 → PUBG</td><td>LINEAGE / TRANSITION CASE：mod 规则发明与社区验证怎样先于商业职位，再被 SOE / Bluehole 放大成大型公司产品</td><td class="id"><a href="/heroes-portal/evidence/CASE-032-pubg-brendan-greene-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-033-zhengtu-shi-yuzhu.html">CASE-033</a></td><td>Zhengtu / Shi Yuzhu</td><td>CHINA INDUSTRY TRANSITION / BUSINESS-MODEL COMPARATOR：市场调研、F2P、虚拟商品、县乡地推与 live ops 怎样组成新商业函数，并改变后续行业能力树</td><td class="id"><a href="/heroes-portal/evidence/CASE-033-zhengtu-shi-yuzhu-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-034-landfall-games.html">CASE-034</a></td><td>Landfall Games</td><td>纵向微型工作室：产品验证后扩张、短周期原型、失败分母、长项目技术债与弹性外围</td><td class="id"><a href="/heroes-portal/evidence/CASE-034-landfall-games-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-035-factorio-wube.html">CASE-035</a></td><td>Factorio / Wube Software</td><td>自筹 demo、众筹模型修正、官网 paid alpha、creator 放大与 product-led scaling</td><td class="id"><a href="/heroes-portal/evidence/CASE-035-factorio-wube-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-036-manor-lords.html">CASE-036</a></td><td>Manor Lords / Slavic Magic</td><td>solo core 与完整 production perimeter 的边界；grant、freelancer、QA 与 publisher 的分工</td><td class="id"><a href="/heroes-portal/evidence/CASE-036-manor-lords-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-037-darkwood.html">CASE-037</a></td><td>Darkwood / Acid Wizard Studio</td><td>paid contract bridge、crowdfunding gross→真实 runway、工期误判与 EA 延展</td><td class="id"><a href="/heroes-portal/evidence/CASE-037-darkwood-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-038-sultans-game.html">CASE-038</a></td><td>Sultan&#x27;s Game / Double Cross</td><td>商业手游老兵在组织收缩后的能力迁移、scope/管理/world-model 重写与 human-cost 边界</td><td class="id"><a href="/heroes-portal/evidence/CASE-038-sultans-game-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-039-gunfire-reborn.html">CASE-039</a></td><td>Gunfire Reborn / Duoyi Games Gunfire Studio</td><td>NON-INDIE PRODUCTION-FUNDAMENTALS COMPARATOR：premium / Early Access、T9 高 ownership span 与 evidence-led escalation；公司内部资源和 T9 formative history 保持边界</td><td class="id"><a href="/heroes-portal/evidence/CASE-039-gunfire-reborn-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-040-tripwire-lineage.html">CASE-040</a></td><td>Tripwire / Red Orchestra → Killing Floor → Rising Storm</td><td>VALIDATION-LADDER / COMMUNITY-AS-PRODUCTION：mod/community 先产生 playable 与 evidence，再公司化、商业化、吸收外部团队</td><td class="id"><a href="/heroes-portal/evidence/CASE-040-tripwire-lineage-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-041-next-synced.html">CASE-041</a></td><td>NExT Studios portfolio → SYNCED</td><td>CORPORATE-INNOVATION / REGIME-TRANSITION COMPARATOR：比较早期小型 0→1 与大型 F2P/GaaS 的 resource escalation 与 error persistence</td><td class="id"><a href="/heroes-portal/evidence/CASE-041-next-synced-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-042-the-first-tree.html">CASE-042</a></td><td>The First Tree / David Wehle</td><td>Technical Artist / visual-first：能力强项怎样同时重写产品形态、资产生产与视觉型市场接口；2016–2017 tactics 按时效规则审计</td><td class="id"><a href="/heroes-portal/evidence/CASE-042-the-first-tree-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-043-everything-david-oreilly.html">CASE-043</a></td><td>Everything / David OReilly</td><td>Animation-auteur / problem redefinition：抽象动画语言、procedural movement 与核心 programmer dyad 如何替代传统 animation obligation，同时制造新的 systems complexity</td><td class="id"><a href="/heroes-portal/evidence/CASE-043-everything-david-oreilly-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-044-garry-newman-sbox.html">CASE-044</a></td><td>Garry Newman / Garry&#x27;s Mod → Rust → s&amp;box</td><td>modder→studio→creator-platform 的长期纵向样本；2026 launch 后 discovery、performance、UGC-quality 与定位压力提供 CURRENT 反压力</td><td class="id"><a href="/heroes-portal/evidence/CASE-044-garry-newman-sbox-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-045-rimworld.html">CASE-045</a></td><td>RimWorld / Tynan Sylvester</td><td>“story generator”作为 design thesis 如何控制 feature selection、strategic omission 与 simulation cost</td><td class="id"><a href="/heroes-portal/evidence/CASE-045-rimworld-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-046-sandfall-expedition33.html">CASE-046</a></td><td>Sandfall / Clair Obscur: Expedition 33</td><td>AAA 能力迁移 + &lt;30 core + UE5/tool leverage + publisher/external production perimeter；拆解“30 人 AAA”神话</td><td class="id"><a href="/heroes-portal/evidence/CASE-046-sandfall-expedition33-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-047-the-witness.html">CASE-047</a></td><td>The Witness / Jonathan Blow</td><td>CAPABILITY-EXPANDED：用 prior-hit retained earnings 扩张 art / architecture / landscape / specialist capability，而不是让项目完全服从 founder 当前能力；同时压力测试 C014/C015</td><td class="id"><a href="/heroes-portal/evidence/CASE-047-the-witness-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-048-the-magic-circle.html">CASE-048</a></td><td>The Magic Circle / Question</td><td>FIT-STRONG / MARKET-FAILED：AAA/immersive-sim 前史直接变成 mechanic 与题材，但销量仍被 creator 评价为不可持续；检验 creator–project fit 与 project–market selection 的分离</td><td class="id"><a href="/heroes-portal/evidence/CASE-048-the-magic-circle-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-049-outer-wilds.html">CASE-049</a></td><td>Outer Wilds / Mobius Digital</td><td>CAPABILITY-EXPANDED / EXTERNAL-CAPITAL：playable thesis 先成立，再通过 studio/crowdfunding/publisher/platform 资金扩张能力；检验不同资本来源的 control / stakeholder cost</td><td class="id"><a href="/heroes-portal/evidence/CASE-049-outer-wilds-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-050-nomada-gris-neva.html">CASE-050</a></td><td>Nomada Studio / GRIS → Neva</td><td>CAPABILITY-COMPOSED：visual thesis 先出现，再由 illustrator + AAA programmers 组成互补 founding capability；把 cofounder composition 纳入生产设计</td><td class="id"><a href="/heroes-portal/evidence/CASE-050-nomada-gris-neva-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-051-zachtronics.html">CASE-051</a></td><td>Zachtronics / Zach Barth</td><td>programmer/engineering-author：把 engineering literacy 变成核心 game language；同时提供第一份 FIT-LOCK-IN 长期路径依赖锚点</td><td class="id"><a href="/heroes-portal/evidence/CASE-051-zachtronics-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-052-house-house-goose-game.html">CASE-052</a></td><td>House House / Untitled Goose Game → Big Walk</td><td>grant + publisher 购买不同 capability bundle；成功后再变成 retained-earnings optionality，补齐 non-dilutive expansion 路线</td><td class="id"><a href="/heroes-portal/evidence/CASE-052-house-house-goose-game-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-053-kenny-sun.html">CASE-053</a></td><td>Kenny Sun / Circa Infinity → Mr. Sun&#x27;s Hatbox → BALL x PIT</td><td>连续小作、职业工作、scope reversal、publisher periphery 与 specialist team 怎样逐轮生产下一阶段能力</td><td class="id"><a href="/heroes-portal/evidence/CASE-053-kenny-sun-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-054-limit-theory-fit-trap.html">CASE-054</a></td><td>Limit Theory / Josh Parnell</td><td>真正的 FIT-TRAP：工程能力持续成功，为什么完整产品反而越来越远</td><td class="id"><a href="/heroes-portal/evidence/CASE-054-limit-theory-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-055-factorio-stop-conditions.html">CASE-055</a></td><td>Wube / Factorio — Technical Stop Condition</td><td>deep-tech 成功侧压力对照：多人规模做到远超目标后主动宣布 enough，删除低边际价值机制，并以 1.0 deadline + descoping 购买产品收敛</td><td class="id"><a href="/heroes-portal/evidence/CASE-055-factorio-stop-conditions-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-056-playdead-founder-governance.html">CASE-056</a></td><td>Playdead / Arnt Jensen + Dino Patti</td><td>CAPABILITY-COMPOSED 治理压力：创意作者 + production/business founder 的互补组合成功做出作品，却仍暴露 equity、authorship、time horizon、control 与 exit 的长期成本</td><td class="id"><a href="/heroes-portal/evidence/CASE-056-playdead-founder-governance-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-057-thatgamecompany-vc-equity-expansion.html">CASE-057</a></td><td>thatgamecompany / VC-equity expansion</td><td>$5.5M Benchmark + board seat 与后续 $7M 让开发工作室内建 self-publishing / marketing / distribution / support；比较 publisher/project control 与 equity/company governance 的位置变化</td><td class="id"><a href="/heroes-portal/evidence/CASE-057-thatgamecompany-vc-equity-expansion-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-058-spiderweb-fit-lock-in.html">CASE-058</a></td><td>Spiderweb Software / Jeff Vogel</td><td>第二个 FIT-LOCK-IN 长期锚点：几十年 niche/engine/assets/audience 复利让同类项目越来越便宜，也让 Queen&#x27;s Wish 式转型同时支付生产 reset 与受众替换成本</td><td class="id"><a href="/heroes-portal/evidence/CASE-058-spiderweb-fit-lock-in-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-059-slay-the-spire-mega-crit.html">CASE-059</a></td><td>Slay the Spire / Mega Crit</td><td>Amazon QA / software career 与 college-era author thread 并存：检验 Parallel Authorial Thread、prestige pipeline、选择性能力迁移、metrics-driven reality adjudication 与 pre-paradigm genre formation</td><td class="id"><a href="/heroes-portal/evidence/CASE-059-slay-the-spire-mega-crit-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-060-croteam-staged-lockin-escape.html">CASE-060</a></td><td>Croteam / Serious Sam → The Talos Principle → UE5</td><td>成熟产品语法的正向逃逸：沿用 FPS 引擎/工具生产新解谜体验、叙事/测试能力；随后在公司被 Devolver 收购的另一制度阶段才切换 UE5。区分产品与工具两类 lock-in</td><td class="id"><a href="/heroes-portal/evidence/CASE-060-croteam-staged-lockin-escape-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-061-supergiant-bastion-aaa-to-author.html">CASE-061</a></td><td>Supergiant / Bastion</td><td>EA 经验并不要求复制 AAA 组织：自筹资金、家中办公、七人互补、IP 保留和玩家验证共同构成作者型小团队</td><td class="id"><a href="/heroes-portal/evidence/CASE-061-supergiant-bastion-aaa-to-author-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-062-red-hook-darkest-dungeon-veteran-household-risk.html">CASE-062</a></td><td>Red Hook / Darkest Dungeon</td><td>资深游戏职业能力与作者题目并存，但房贷、育儿、无薪、借款、众筹与 EA 现金桥梁必须进入真正人生账本</td><td class="id"><a href="/heroes-portal/evidence/CASE-062-red-hook-darkest-dungeon-veteran-household-risk-source-ledger.html">台账</a></td></tr><tr><td class="id"><a href="/heroes-portal/cases/CASE-063-ivories-ggj-to-steam.html">CASE-063</a></td><td>Ivories Studios / GGJ 2024 → Shake the Baby!</td><td>由18条普通 Jam 公开投稿的后续追踪发现：2024 GGJ 原型经团队直接叙述、开发者聚会反馈和后续制作，在2025年 Steam 发售；验证产品谱系但无法推断盈利或团队成员职业去向</td><td class="id"><a href="/heroes-portal/evidence/CASE-063-ivories-ggj-to-steam-source-ledger.html">台账</a></td></tr></table>
+</div></section>
+<script>function q(v){v=v.toLowerCase();document.querySelectorAll('#t tr').forEach((r,i)=>{if(i==0)return;r.style.display=r.innerText.toLowerCase().includes(v)?'':'none'})}</script>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

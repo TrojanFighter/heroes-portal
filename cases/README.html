@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cases Index · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl class="on"" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#creator-life-decision-audit" class="t2">Creator Life / Decision Audit</a><a href="#_1" class="t2">规则</a><a href="#_2" class="t2">中国独立案例下一优先级</a></aside><article class="doc"><div class="col"><h1 id="cases-index">Cases Index</h1>
+<p class="dc">案例用于覆盖不同的生产结构，不是“史上最佳独立游戏”榜单。正式 Case 必须能检验至少一个核心 Claim；单纯有名但暂时缺乏解释价值的作品留在 <code>BACKLOG.md</code>。</p>
+<p><strong>Case 编号不自动等于“indie eligibility 通过”。</strong> 为了保留已经形成的研究谱系，少量公司内部项目或其他非独立对象可以作为 <code>NON-INDIE COMPARATOR</code> 或 <code>LINEAGE / TRANSITION CASE</code> 保留编号，但必须在案例正文中显式标记，且不能在 reader layer 被包装成“独立游戏英雄”。小团队、买断制、Steam <code>Indie</code> 标签、作者自主性都不能单独替代所有权 / 雇佣 / runway / publisher / market-access 审计。</p>
+<p>编号也不代表证据成熟：当前 63 个档案中，61 个为 RESEARCHING，2 个为 SKELETON；骨架中的研究问题不能作为已证实结论。</p>
+<p>除了正式编号 Case，本项目另设 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes/blob/main/failure-workshop/README.md"><code>Failure Workshop</code></a> 失败生产史栏目：优先保存开发者公开复盘的设计、生产、市场、发行、组织、技术与 human-cost 失败，不要求每个失败对象都立即服务某个 Claim 或获得 Case ID。该栏目用于降低成功者偏差；其中证据成熟、解释价值足够的对象再升级正式 Case。</p>
+<table>
+<thead>
+<tr>
+<th>Case ID</th>
+<th>Subject</th>
+<th>研究目的</th>
+<th>状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CASE-001</td>
+<td>FTL / Subset Games</td>
+<td>检验储蓄、地区成本、前职业经验、众筹与小团队范围控制</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-002</td>
+<td>Rocket League / Psyonix</td>
+<td>检验合同工作交叉补贴、失败前作、长期积累与平台/市场放大</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-003</td>
+<td>Papers, Please / Lucas Pope</td>
+<td>检验成熟职业开发者转入个人作者型生产，以及范围/表现成本重构</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-004</td>
+<td>Stardew Valley / ConcernedApe</td>
+<td>检验长期个人开发、伴侣支持、能力资本与市场外围</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-005</td>
+<td>Dwarf Fortress / Bay 12 Games</td>
+<td>检验长期极小团队复杂系统开发、捐赠式 runway 与表现成本重构</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-006</td>
+<td>R.E.P.O. / semiwork</td>
+<td>检验前作六年积累、收入再投资、快速失败与多人技术外围</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-007</td>
+<td>Gunpoint / Tom Francis</td>
+<td>检验工资型 runway、业余开发、极低现金成本与全球协作者网络</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-008</td>
+<td>Dream Quest / Peter Whalen</td>
+<td>检验“资深玩家→作者”的品味资本、旧引擎复用与低表现成本</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-009</td>
+<td>Project Wingman / Sector D2</td>
+<td>检验通用引擎、自学、公开 Alpha、众筹和社区协作如何支撑小团队挑战成熟品类</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-010</td>
+<td>Undertale / Toby Fox</td>
+<td>检验学生开发、mod/音乐社区前史、众筹与“solo”协作者边界</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-011</td>
+<td>Lethal Company / Zeekerss</td>
+<td>检验 Roblox/连续发售前史、迭代能力、试玩反馈与主播传播</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-012</td>
+<td>Kenshi / Lo-Fi Games</td>
+<td>检验夜班工作维持长期 runway、长期 solo 研发、自营网站 paid alpha 与 Early Access 两段扩团队</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-013</td>
+<td>Rise of the White Sun / Maestro Cinetik</td>
+<td>检验极小核心如何通过系统抽象、历史研究、社群反馈与外围协作重构大战略成本</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-014</td>
+<td>Minecraft / Markus Persson → Mojang</td>
+<td>检验付费 Alpha、公开开发与市场—生产耦合如何制造研发 runway</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-015</td>
+<td>Hollow Knight / Team Cherry</td>
+<td>检验家庭收入、储蓄、低地区成本、众筹、Indie Fund、工具与外围协作者如何共同支撑超范围小团队项目</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-016</td>
+<td>Early id Software / Commander Keen</td>
+<td>检验职业高频出货、moonlighting、shareware 与约束驱动 scope 如何购买组织独立</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-017</td>
+<td>Among Us / Innersloth</td>
+<td>检验长期低可见度迭代、延迟爆发，以及成功后技术债和组织重构</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-018</td>
+<td>RollerCoaster Tycoon / Chris Sawyer</td>
+<td>检验 OPC 历史原型：长期能力资本、代码复用、极端熟练技术栈与专业外围</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-019</td>
+<td>Schedule I / TVGS</td>
+<td>检验现代 solo core、自发行、Early Access、专业协作者与社区反馈的压缩型组织结构</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-020</td>
+<td>Into the Breach / Subset Games</td>
+<td>检验第一次成功如何被转换为低 burn、低承诺、可长时间试错和大规模删改的生产选择权</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-021</td>
+<td>Roblox Creator Cluster / Cindering, alexnewtron, badcc + asimo3089</td>
+<td>检验 UGC 平台如何把学习、出货、收入、职业化、分发与创业压缩到同一生产环境，并测量其幸存者偏差</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-022</td>
+<td>Escape from Tarkov / Contract Wars → Battlestate Games</td>
+<td>检验低风险商业前作如何同时生产技术、团队能力和资金，再被兑换成高风险 hardcore 原创项目</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-023</td>
+<td>despelote / Julián Cordero + Sebastián Valbuena</td>
+<td>检验小额 non-dilutive funding 如何购买 full-time runway、生成 publisher-pitch vertical slice，并接入 publisher financing / distribution</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-024</td>
+<td>Escape from Duckov / Team Soda</td>
+<td><strong>NON-INDIE COMPARATOR</strong>：检验 Bilibili 内部五人核心如何借公司工资、发行/流量外围与前作能力，通过删 multiplayer/mobile/hardcore simulation 重写 extraction 的生产成本；不得作为独立发行正例</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-025</td>
+<td>Bills Must Be Paid / Rike Games</td>
+<td>检验两人工作室的七年高频失败/原型能力如何压缩进七个月 Steam 项目，以及 mobile 世界模型如何在 demo / wishlist / creator 市场接入中被修正</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-026</td>
+<td>Brigador / Stellar Jockeys</td>
+<td>失败 comparator：检验强产品执行为何仍可因 onboarding、market legibility、受众预期与成本—市场错位导致首发商业失败</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-027</td>
+<td>Dyson Sphere Program / Youthcat Studio</td>
+<td>已核：5人核心、主创前史、prototype-before-quit、创始人储蓄runway与发行外围；合同/household/完整contributors仍待核</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-028</td>
+<td>Chinese Online Game / 648 Studio</td>
+<td>官方自述单人业余约五年；检验模拟网游体验的表现成本，职业前史与完整协作者边界仍 UNKNOWN</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-029</td>
+<td>Boundary / Surgical Scalpels Studio</td>
+<td><strong>LONG-CYCLE MULTIPLAYER FAILURE-PRESSURE CASE</strong>：已确认三人起步、PVE 成本压力、多次方向变化、首日 &gt;100k paid copies 与后续停服；检验 novelty/acquisition 已成立时的 error-persistence 与 ecosystem obligation，不做单一责任归因</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-030</td>
+<td>Outpost: Infinity Siege / Team Ranger</td>
+<td>待核：团队归属、职业前史、范围与市场预期；不预设企业内部负例结论</td>
+<td>SKELETON</td>
+</tr>
+<tr>
+<td>CASE-031</td>
+<td>Jonas Tyroller / ISLANDERS → Will You Snail? → Thronefall</td>
+<td><strong>LONGITUDINAL PRACTITIONER</strong>：检验同一开发者如何跨三人、solo-core、两人团队反复出货，并区分快速原型、范围压缩、市场可读性、公开沟通与运气各自的真实作用</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-032</td>
+<td>PLAYERUNKNOWN / Brendan Greene: DayZ Battle Royale → H1Z1 → PUBG</td>
+<td><strong>LINEAGE / TRANSITION CASE</strong>：检验非传统作者怎样在 Arma/DayZ mod 中以规则发明和社区验证先获得作品信用，再经 H1Z1 与 Bluehole 两轮商业组织放大为 PUBG；不得把 PUBG 公司生产整体包装成独立游戏</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-033</td>
+<td>Zhengtu / Shi Yuzhu</td>
+<td><strong>CHINA INDUSTRY TRANSITION / BUSINESS-MODEL COMPARATOR</strong>：检验市场调研、F2P、虚拟商品、县乡地推、快速运营与玩家分层如何组成中国网游的新商业函数，以及高回报商业模式怎样反向塑造行业能力树；不得包装成独立游戏正例</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-034</td>
+<td>Landfall Games / Air Brawl → TABS → Content Warning → HASTE → PEAK</td>
+<td><strong>LONGITUDINAL MICRO-STUDIO</strong>：检验产品验证后扩张、短周期原型、失败分母、长项目技术债与弹性外围如何共同塑造工作室</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-035</td>
+<td>Factorio / Wube Software</td>
+<td>检验自筹 demo、众筹失误修正、官网 paid alpha、creator 放大与 product-led scaling 如何连续制造 runway</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-036</td>
+<td>Manor Lords / Slavic Magic</td>
+<td>检验 <code>solo core</code> 与完整 production perimeter 的边界，以及 Patreon / MegaGrant / freelancer / QA / publisher 如何分阶段补足单人作者短板</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-037</td>
+<td>Darkwood / Acid Wizard Studio</td>
+<td>检验合同工作桥接、众筹 gross 与真实 runway 的错位、工期误判、Early Access 延展与多人功能删除</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-038</td>
+<td>Sultan&rsquo;s Game / Double Cross</td>
+<td><strong>CHINA INDUSTRY TRANSITION / CAPABILITY-TRANSFER CASE</strong>：检验商业手游老兵如何在组织收缩后保留专业能力、重写 scope/管理/市场接口，并区分能力正迁移、world-model 负迁移与 human-cost；独立资格与融资边界继续审计</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-039</td>
+<td>Gunfire Reborn / Duoyi Games Gunfire Studio</td>
+<td><strong>NON-INDIE PRODUCTION-FUNDAMENTALS COMPARATOR</strong>：检验 premium / Early Access、T9 高 ownership span 与证据后扩张；公司内部资源与 T9 formative history 继续审计</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-040</td>
+<td>Tripwire: Red Orchestra → Killing Floor → Rising Storm</td>
+<td><strong>VALIDATION-LADDER / COMMUNITY-AS-PRODUCTION CASE</strong>：检验 mod/community playable 如何先形成证据，再公司化、商业化与吸收外部团队</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-041</td>
+<td>NExT Studios portfolio → SYNCED</td>
+<td><strong>CORPORATE-INNOVATION / REGIME-TRANSITION COMPARATOR</strong>：比较早期小型 premium 0→1 与 SYNCED 的 2A/AAA + F2P/GaaS resource escalation，区分产品失败与组织残值</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-042</td>
+<td>The First Tree / David Wehle</td>
+<td><strong>TECHNICAL-ARTIST / VISUAL-FIRST CAPABILITY–PROJECT FIT</strong>：检验 motion / interactive / technical-art 强项如何通过短流程、licensed assets、环境叙事与视觉型 market surface 共同重写 solo 3D 项目成本；2016–2017 社媒打法按时效规则审计</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-043</td>
+<td>Everything / David OReilly</td>
+<td><strong>ANIMATION-AUTEUR / PROBLEM-REDEFINITION CASE</strong>：检验成熟动画作者如何把 abstraction、procedural movement 与长期 programmer dyad 转成游戏语言，并区分传统动画成本被删除与新系统复杂度被制造</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-044</td>
+<td>Garry Newman / Garry&rsquo;s Mod → Rust → s&amp;box</td>
+<td><strong>LONGITUDINAL CREATOR-PLATFORM / CURRENT PRESSURE</strong>：从 2004 mod 商业化到 2026 s&amp;box 多年 false starts、discovery、performance 与 UGC-quality 压力，检验旧成功能力资本为何不能自动给出新 regime 的正确 product model</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-045</td>
+<td>RimWorld / Tynan Sylvester</td>
+<td><strong>DESIGN-THESIS / SELECTION-FIRST CASE</strong>：用“story generator”而非完整 simulation 作为价值函数，检验 feature omission、prototype failure 与公开反馈如何共同降低 decision entropy</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-046</td>
+<td>Sandfall / Clair Obscur: Expedition 33</td>
+<td><strong>AAA→AUTHORIAL / SMALL-CORE + INDUSTRIAL-PERIPHERY COMPARATOR</strong>：拆解 Ubisoft 能力迁移、&lt;30 core、UE5/tool leverage、Kepler 与 438-credit production perimeter，反驳“30 人完成 AAA RPG”神话</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-047</td>
+<td>The Witness / Jonathan Blow</td>
+<td><strong>CAPABILITY-EXPANDED / HIGH-CAPITAL AUTHORIAL COMPARATOR</strong>：检验 Braid retained earnings 如何让作者不必缩项目，而是购买 art / architecture / landscape 等缺失能力；同时作为 C015 边界与 C014 高前置承诺成功反压力</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-048</td>
+<td>The Magic Circle / Question</td>
+<td><strong>FIT-STRONG / MARKET-FAILED / AAA→AUTHORIAL</strong>：三位 immersive-sim 老兵的能力与题材/AI mechanic 高度耦合，却仍因 genre illegibility、niche market 与零 marketing budget 等导致商业不可持续；作为 C015 第二失败压力样本</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-049</td>
+<td>Outer Wilds / Mobius Digital</td>
+<td><strong>CAPABILITY-EXPANDED / EXTERNAL-CAPITAL COMPARATOR</strong>：USC thesis / playable evidence 经 Mobius、Fig、Annapurna、Xbox、Epic 等层层扩张团队与 runway；比较外部资本如何购买能力并扩大 stakeholder surface</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-050</td>
+<td>Nomada Studio / GRIS → Neva</td>
+<td><strong>CAPABILITY-COMPOSED / VISUAL-FIRST / AAA→AUTHORIAL</strong>：visual thesis 先出现，再由 illustrator + AAA programmers 组成互补 founding capability；检验 cofounder composition、2D/视觉强项与 publisher-facing production expansion</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-051</td>
+<td>Zachtronics / Zach Barth</td>
+<td><strong>PROGRAMMER / ENGINEERING-AUTHOR / FIT-LOCK-IN</strong>：把 engineering literacy 直接做成玩家语言与 niche market；同时检验长期 capability fit 如何沉淀成工具/品牌/受众并提高转型成本</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-052</td>
+<td>House House / Untitled Goose Game → Big Walk</td>
+<td><strong>GRANT-FINANCED CAPABILITY EXPANSION / LONGITUDINAL OPTIONALITY</strong>：Film Victoria grant 买 development/completion 与 specialist capability，Panic 补 publisher periphery，成功后再转成 Big Walk 的 retained-earnings risk buffer</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-053</td>
+<td>Kenny Sun / Circa Infinity → Mr. Sun&rsquo;s Hatbox → BALL x PIT</td>
+<td><strong>LONGITUDINAL CAPABILITY ACCRETION / PROGRAMMER-GENERALIST / SOLO→TEAM-LEAD</strong>：检验能力向量如何被连续小作、职业工作、scope reversal、publisher periphery 与 specialist team 逐轮生产出来，而不是把“主创能力”当成固定出身标签</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-054</td>
+<td>Josh Parnell / Limit Theory</td>
+<td><strong>TRUE-INDIE FIT-TRAP / ENGINEERING-CAPABILITY OVERINVESTMENT</strong>：强 engine / graphics / procedural 能力不断产出真实局部成果，但 technical frontier 与 shipped-game closure 脱钩；以 engine 比 game code 更成熟、六年后仍远离 feature completion 的一手记录检验“能力也是陷阱”</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-055</td>
+<td>Wube / Factorio</td>
+<td><strong>DEEP-TECH SUCCESS COUNTERPOINT / TECHNICAL STOP CONDITION</strong>：同样拥有强 simulation / engine / optimization 能力，却多次显式声明“enough”、删除低边际价值 mechanic、锁定 1.0 并 descoping；检验何时技术能力关闭 product obligation、何时只是继续扩大技术前沿</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-056</td>
+<td>Playdead / Arnt Jensen + Dino Patti</td>
+<td><strong>CAPABILITY-COMPOSED / FOUNDER-GOVERNANCE DISSOLUTION PRESSURE</strong>：原创作者 + production/programming/business founder 的互补组合成功支撑 LIMBO / INSIDE，却在成功后暴露 equity、time horizon、authorship、control 与 exit 成本；检验“互补能力”为什么不等于“免费合伙”</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-057</td>
+<td>thatgamecompany / Sony → Benchmark → Sky</td>
+<td><strong>CAPABILITY-EXPANDED / VC-EQUITY / CONTROL-SURFACE COMPARATOR</strong>：$5.5M Benchmark 融资 + board seat、后续 $7M 扩 development/self-publishing/marketing/distribution；检验股权资本怎样把发行能力内建，同时把 obligation 移到 ownership / board / investor-return / future-round 层</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-058</td>
+<td>Spiderweb Software / Jeff Vogel</td>
+<td><strong>FIT-STRONG / LONG-RUN FIT-LOCK-IN / NICHE-COMPOUNDING</strong>：engine/assets、低成本 CRPG grammar、稳定出货节奏、niche audience 与 back catalog 长期复利；Queen&rsquo;s Wish 的 new-engine/new-system 转型把 production reset + audience replacement cost 显性化</td>
+<td>RESEARCHING</td>
+</tr>
+<tr>
+<td>CASE-059</td>
+<td>Slay the Spire / Mega Crit</td>
+<td><strong>PARALLEL-AUTHORIAL-THREAD / BIG-COMPANY-EXIT / PRE-PARADIGM DESIGN</strong>：Casey Yano 的 Amazon QA 能力被选择性迁移，但 college-era hobby-game author thread 与 Anthony 的 card/roguelike taste 保持公司外连续性；检验 prestige pipeline、作者身份、metrics-driven reality adjudication 与 category formation</td>
+<td>RESEARCHING</td>
+</tr>
+</tbody>
+</table>
+<p>| CASE-060 | Croteam / Serious Sam → The Talos Principle → UE5 | <strong>MATURE-GRAMMAR ESCAPE / STAGED DECOUPLING</strong>：2014 保留 Serious Engine/Editor 但从十余年 FPS 生产语法中分离解谜体验，补叙事和 puzzle-testing 能力；2020 被 Devolver 收购后，2023 才替换为 UE5。首个成熟 FIT-LOCK-IN 成功侧正例；不跨 ownership regime 推成本 | RESEARCHING |</p>
+<p>| CASE-061 | Supergiant / Bastion | <strong>AAA CAPABILITY→AUTHORIAL / HOUSEHOLD SPACE SUBSIDY</strong>：EA Command &amp; Conquer 从业者保留工业能力与关系，但不照抄 AAA 岗位/流程；七人专业互补、家庭提供办公场地、自筹低薪与 Warner 发行外围共同构成成功条件 | RESEARCHING |
+| CASE-062 | Red Hook / Darkest Dungeon | <strong>INDUSTRY VETERAN / HOUSEHOLD RISK / STAGED FUNDING</strong>：成熟美术/设计/程序能力下形成原创题目，创始人仍背负育儿、房贷、借款与无薪期；Kickstarter 毛额不能充当项目总成本 | RESEARCHING |
+| CASE-063 | Ivories Studios / GGJ2024 → Shake the Baby! (2025) | <strong>PUBLIC-ATTEMPT COHORT / VERIFIED PRODUCT LINEAGE / PEER FEEDBACK≠PROFIT</strong>：18 个普通 Jam 提交中的团队网络追踪，发现开发者第一人称证明 2024 原型经现场反馈、一年扩展、2025 Steam 发售；已有 2021 前作，销售与个人收入仍未知 | RESEARCHING |</p>
+<h2 id="creator-life-decision-audit">Creator Life / Decision Audit</h2>
+<p>为了让案例库真正服务“人生性价比”而不是只服务项目复盘，重要 Case 现在增加一层统一审计：</p>
+<ul>
+<li>household structure；</li>
+<li>cash runway；</li>
+<li>hidden household cost；</li>
+<li>exit / reemployment option；</li>
+<li>capability vector；</li>
+<li>problem ownership；</li>
+<li>validation architecture；</li>
+<li>reality adjudication；</li>
+<li>capability capture risk；</li>
+<li>market sufficiency / legibility；</li>
+<li>capability scaling；</li>
+<li>identity coupling（名校/名企/职级是否成为主要身份评分器）；</li>
+<li>parallel authorial thread（公司外是否持续有自主 artifact/feedback 链）；</li>
+<li>prestige-preserving project distortion（项目是否为了维持履历声望而提前增加成本）。</li>
+</ul>
+<p>Schema：<a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes/blob/main/schemas/creator-life-decision-audit.md"><code>../schemas/creator-life-decision-audit.md</code></a></p>
+<p>覆盖率：<a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes/blob/main/metadata/creator-life-audit-coverage.json"><code>../metadata/creator-life-audit-coverage.json</code></a></p>
+<p>当前原则：
+- 没有来源就写 <code>UNKNOWN</code>；
+- corporate comparator 可以做 organization-level audit，但不得伪装成 founder household risk；
+- Case 没达到最低可比记录时，不得直接用于“该不该辞职/创业”之类 reader-facing 建议；
+- household / 婚育 / 房贷 / 配偶收入不进入机器索引事实层，canonical facts 留在 Case / Evidence。</p>
+<h2 id="_1">规则</h2>
+<ul>
+<li>每个案例先建立事实时间线，再写判断。</li>
+<li>所有“研究目的”都是待检验问题，不是当前结论。</li>
+<li>案例文件必须回链 Claim 与 Evidence；不得成为孤立传记。</li>
+<li><strong>Indie eligibility 与 production scale 分离审计</strong>：公司内部小团队可以很“indie-like”，但若雇佣、runway、IP/所有权、publisher 与市场接入处于母公司体系，就不得仅凭团队小、买断制或创作自主性归入核心独立谱系。</li>
+<li><strong>外部发行商本身不自动取消独立资格</strong>：关键要继续核验开发工作室所有权、融资/控制权、IP、是否能独立选择项目与发行关系。<code>publisher-financed external indie</code> 与 <code>corporate-owned internal studio</code> 必须分开。</li>
+<li><code>NON-INDIE COMPARATOR</code> 可以保留正式 Case ID，以免破坏既有引用，但不得在 <code>book/profiles/</code> 中写成“独立英雄”；其 Transfer 必须明确哪些公司资源外部团队不可默认获得。</li>
+<li><code>LINEAGE / TRANSITION CASE</code> 用于研究原创能力如何从 mod / UGC / 极小规模实验进入商业组织；必须分阶段审计每一阶段的 ownership、employment、runway 与 production perimeter，不能用后来的公司规模倒写早期，也不能用早期独立性覆盖后来的公司资源。</li>
+<li>状态、关系、证据成熟度、解释重要性与叙事价值的机器索引见 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes/blob/main/metadata/cases.json"><code>../metadata/cases.json</code></a>。</li>
+<li>本表是人读索引；CI 会检查它与 metadata 状态一致。</li>
+<li>还未正式编号但曾在作者公开文章、历史深研或对话中承担论证功能的对象，统一进入 <a href="/heroes-portal/cases/BACKLOG.html"><code>BACKLOG.md</code></a>，禁止靠记忆临时捡案例。</li>
+</ul>
+<h2 id="_2">中国独立案例下一优先级</h2>
+<p><code>Sultan's Game / 双头龙工作室 (Double Cross)</code> 已升级为 <a href="/heroes-portal/cases/CASE-038-sultans-game.html"><code>CASE-038</code></a>。当前仍保留 ownership、旧投资关系、2P Games funding/recoup、摩点净融资与完整 contributor perimeter 等明确未决项，不把“9 人”“几乎没有买量”等宣传性概括直接升级为独立资格或自然传播结论。</p>
+<p>Artless Games 的作品、公开言论与持续创作方式继续保留在 <a href="/heroes-portal/cases/BACKLOG.html">候选池</a>。</p>
+<p>《植物大战僵尸杂交版》已进入 <a href="/heroes-portal/book/research-notes/pvz-hybrid-ugc-production-and-spread-001.html"><code>book/research-notes/pvz-hybrid-ugc-production-and-spread-001.md</code></a> 的高优先级 UGC / fan-production intake：先核完整协作者、技术栈、免费同人经济结构、IP/授权和传播时间线，再决定是否升正式 <code>UGC / FAN-PRODUCTION LINEAGE CASE</code>，不得把商业 IP 的现成认知资本误记为原创 IP 的独立市场验证。</p>
+<p>正式升级其他中国候选前仍要做一次 Schema v2 的 Context–Situation–Action 与 ownership / financing / publisher-control audit，尤其核清：成员离开原公司后的 runway、外部发行商介入时间与资金/控制权、众筹在开发资金中的真实作用，以及“几乎没有买量”与实际 creator / platform resources 的边界。</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / cases/README.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

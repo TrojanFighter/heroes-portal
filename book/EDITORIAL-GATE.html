@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reader Profile Editorial Gate · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl class="on"" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#-1-profile-chapter" class="t2">-1. 先判断你在写 Profile 还是 Chapter</a><a href="#0" class="t2">0. 事实边界先于文风</a><a href="#05" class="t2">0.5. 新稿写作入口：预防模板化</a><a href="#narrative-packet" class="t3">动笔前：事实锁与 Narrative Packet</a><a href="#_1" class="t3">初稿：让事实承担叙述</a><a href="#_2" class="t3">交付前：初稿也经过三遍编辑</a><a href="#06" class="t2">0.6. 先读当时的声音，再决定怎样讲</a><a href="#_3" class="t3">为读者备好原文与作品入口</a><a href="#07" class="t2">0.7. 来源表达、双向回读与全文检查（试行）</a><a href="#_4" class="t3">写前：一张表达纸条</a><a href="#_5" class="t3">改后：按两个方向核关系</a><a href="#_6" class="t3">最后：连读全文再判断收益</a><a href="#1" class="t2">1. 先让读者遇见人，再让读者遇见理论</a><a href="#2" class="t2">2. 每篇只保留一个主命题</a><a href="#3-reader-layer" class="t2">3. Reader layer 要少说“研究正在做什么”</a><a href="#4" class="t2">4. 控制“不是……而是……”和结论句密度</a><a href="#5" class="t2">5. 专有研究词必须先翻成人话</a><a href="#6" class="t2">6. 把具体行动写在人格判断前面</a><a href="#7" class="t2">7. 跨案例综合不要侵占每篇结尾</a><a href="#8-provenance" class="t2">8. Provenance 与叙事分层</a><a href="#provenance" class="t3">顶部最小 provenance</a><a href="#research-boundary" class="t3">文末 research boundary</a><a href="#85" class="t2">8.5. 所有“值得学”都必须有年份与时效性</a><a href="#86" class="t2">8.6 不得把有媒体报道的成功者当代表性开发者</a><a href="#9" class="t2">9. 场景化不等于小说化</a><a href="#10" class="t2">10. 发布前人工检查</a><a href="#105" class="t2">10.5. 既有书稿重写必须留下可审计差异</a><a href="#automation-boundary" class="t2">Automation boundary</a><a href="#11" class="t2">11. 研究元数据下沉，不占读者第一屏</a></aside><article class="doc"><div class="col"><h1 id="reader-profile-editorial-gate">Reader Profile Editorial Gate</h1>
+<p class="dc">本 Gate 属于 <strong>Lane C / Editorial</strong>，但由 Lane A 维护其流程边界。它不创造事实，也不替代 Case / Evidence / Claim。</p>
+<p>目的：让 reader profile 真正成为“人物与生产史”，而不是把研究档案换成更顺的论文。</p>
+<h2 id="-1-profile-chapter">-1. 先判断你在写 Profile 还是 Chapter</h2>
+<p><strong>Profile</strong> 的主角是一个人 / 团队，核心问题是：</p>
+<blockquote>
+<p>他 / 他们怎样走到这里？</p>
+</blockquote>
+<p><strong>Chapter</strong> 的主角是一个现实问题，核心问题是：</p>
+<blockquote>
+<p>多个人生放在一起，能让读者更清楚地判断什么？</p>
+</blockquote>
+<p>Chapter 必须做到：
+- 至少比较两个已进入 reader layer 的人物 / 团队；
+- 不能按“案例 A、案例 B、案例 C”机械摘要；
+- 必须存在冲突、反例、边界或不同路径；
+- 结论必须比任何单个 Profile 更一般，但不能超过 Claims / Evidence 支持范围；
+- 面向非游戏行业读者时，先翻译成人生问题，再保留游戏产业细节。</p>
+<p>若只是把 Case 散文化，既不是合格 Profile，也不是合格 Chapter。</p>
+<hr />
+<p>本 Gate 规定质量原则；涉及已有 reader prose 的去模板化、重写或结构清理时，按 <a href="/heroes-portal/book/EDITORIAL-REWRITE-PROTOCOL.html">Editorial Rewrite &amp; Historical Fidelity Protocol</a> 执行 <strong>Fact Lock → Narrative Packet → Delete / Person / Rhythm → Fidelity Readback → A/B → Author Acceptance</strong>。不得把“AI 味少了”作为不必核对 Case / Evidence 的理由。</p>
+<hr />
+<h2 id="0">0. 事实边界先于文风</h2>
+<ul>
+<li>关键事实必须能回指 Case / Evidence。</li>
+<li>不得为了场景感补写 UNKNOWN。</li>
+<li>不得虚构对话、动作、心理、地点细节或时间顺序。</li>
+<li>P1 回忆必须保持“多年后回顾”的性质，不倒写成同期已知。</li>
+<li>任何书级 Thesis Candidate 都不能因为文章需要高潮而写成已证实规律。</li>
+</ul>
+<p>若叙事需要的细节不存在，宁可写得克制，也不要小说化补洞。</p>
+<hr />
+<h2 id="05">0.5. 新稿写作入口：预防模板化</h2>
+<p>本入口适用于新写 <code>profiles/</code>、<code>chapters/</code>、<code>life-routes/</code> 的读者正文。改写旧稿继续执行 <a href="/heroes-portal/book/EDITORIAL-REWRITE-PROTOCOL.html">Historical Fidelity Rewrite Protocol</a>。新稿不能等到发布前才处理人物缺席、理论压过经历和叙事串味。</p>
+<h3 id="narrative-packet">动笔前：事实锁与 Narrative Packet</h3>
+<p>在任务交付笔记或 PR 中先留下短纸条，不新增 canonical metadata，也不把这些字段搬到读者第一屏：</p>
+<ul>
+<li><strong>事实锁：</strong> 指明消费的 Case / Evidence / Claim 及版本，列出关键人物归责、时间、数字口径、回忆时点、否定与条件，以及 UNKNOWN / H / Signal 和时效边界。没有来源的关键句标 <code>VERIFY_IN_LANE_B</code>，不为叙述补齐。</li>
+<li><strong>叙述对象与主问题：</strong> 是单人、群像、失败调查还是跨案例问题？用一句话写清本篇读者要追问什么。</li>
+<li><strong>人物、时代与具体处境：</strong> 当时有什么、缺什么、可选择什么？哪些工具、渠道、资金和非开发支持真正可用？</li>
+<li><strong>决定与后果：</strong> 选已有证据能承担的行动节点和可观察反馈；不以人格标签、抽象机制或事后成功替代过程。</li>
+<li><strong>叙述方式：</strong> 从哪个具体入口开始，怎样推进，在哪里结束？与相邻文章比较，说明为何这种方式适合本对象；不为形式差异强造场景。</li>
+<li><strong>作者观点与文风边界：</strong> 明确要保留的判断、依据与适用范围，区分作者解释和来源事实；列出不能补写的心理、对话、关系和现场细节。</li>
+</ul>
+<p>Packet 可复用改写协议中的字段，但它是策划纸条，不是所有文章必须采用的章节模板。证据不足以写出人物行动时，采用克制的说明性叙述，或交回 Lane B；不能生成一篇漂亮传记再倒找证据。</p>
+<h3 id="_1">初稿：让事实承担叙述</h3>
+<ul>
+<li>Profile 从人物的时间、处境、作品状态或决定进入；Chapter 从现实问题和案例之间的冲突进入。Myth 反驳只在确实需要纠错时使用，不作为统一开头。</li>
+<li>以行动、反馈、代价和后续变化推进；分析紧随能承担它的事实。保留作者的锋芒和判断，不让人物反复替全书宣读同一结论。</li>
+<li>“不是……而是……”、短句、强调句和理论术语均可使用，但要有具体职责；连续反转、例行小节拔高和重复结论先检查是否冗余，不做同义替换式清洗。</li>
+<li>段落长短随材料变化，重音留给真正改变理解的地方；不将连句成段、减少词频或增添修辞视为自动改善。</li>
+<li>Profile 结束人物的这一段经历和仍在的边界；全书综合留给 Chapter。各篇不用同一开头、节奏与结尾，但也不为了求异改变历史顺序与因果。</li>
+</ul>
+<h3 id="_2">交付前：初稿也经过三遍编辑</h3>
+<p>依次执行 <strong>Delete → Restore Person → Rhythm</strong>，再按 <a href="/heroes-portal/book/EDITORIAL-REWRITE-PROTOCOL.html#3-fidelity-readback逐项核改写是否改变认识">Fidelity Readback</a> 回读人物归责、时间、数字口径、否定/情态、因果、回忆与同期、UNKNOWN/H/Signal、历史环境及引语。重复可以删除，必要反驳、作者观点和事实边界必须保留。任何未纠正的历史忠实性倒退均不能用可读性补偿。</p>
+<p>交付说明人物具体性、连贯度、观点保存、节奏、继续阅读意愿和历史忠实性的编辑判断，并明确是否有独立审查或实际读者测试。首次新稿没有旧版，不要求虚构 A/B；若比较初稿与修订稿，保存版本并说明是否盲测。词频、短句比例和模型自评不构成验收；作者验收仍是独立步骤，不能自行标为通过。</p>
+<p>本入口是人工编辑流程，<strong>不新增 AI 文风 lint、固定禁词表或自动合格阈值</strong>。</p>
+<hr />
+<h2 id="06">0.6. 先读当时的声音，再决定怎样讲</h2>
+<p>本节适用于新稿与既有正文改写，补入现有事实锁、Narrative Packet和Fidelity Readback，不另建验收流程。</p>
+<ul>
+<li><strong>材料先于提纲。</strong> 动笔前读与人物关键阶段有关的同期采访、报道、试玩/评论和开发记录，也寻找批评、迟疑、失败及不符合作者解释的材料。在编辑笔记记录哪些已全文读、哪些只读选段、哪些未取得；搜索摘要和互相转载不算独立阅读。没有同期材料时明确缺口，不用后来的回顾冒充。</li>
+<li><strong>区分谁在说话。</strong> 当事人的回答、记者的观察或提问、评论人的体验判断、宣传文案和本书作者的解释分别归属。报道中的直接证词可按说话人与时点判断等级，记者概括不能改成开发者原话。一篇评论不代表全体玩家，几篇报道也不能证明成功原因或群体发生率。</li>
+<li><strong>保留人物当时可用的语言与认识。</strong> 人物只知道当时已知的结果，可能尚不清楚机制、市场或后果。保留其专业词、具体问题、迟疑和条件，不让引语或转述突然掌握本书的事后理论。作者可以另作分析，但不能把分析放进人物嘴里；不为声线差异模拟未有记录的对白。</li>
+<li><strong>让来源改变叙述。</strong> 先辨认材料真正提出的问题、行动和分歧，再选开场、顺序与结尾。不能先固定“神话→反转→机制→教训”，随后只用引文装饰它。采访中的自我怀疑、外界未获解答的问题、作品评价中的矛盾，都可能改变叙述焦点；不得剪去反面材料只留下证明作者正确的部分。</li>
+<li><strong>引用服务阅读。</strong> 在关键节点使用能承担人物立场或外界反应的短引语、带署名转述及就近来源链接，避免全文只剩模型的概括。没有必要引语时不强加；不设每篇引用数量、引文占比或媒体篇数门槛，也不拼接长篇第三方文字代替作者叙述。译引标清来源，核对过去时、否定、情态与上下文；刊出日期不自动等于采访日期。</li>
+<li><strong>入稿仍服从事实Owner。</strong> 新找到的报道即使已经读完，尚未由Case/Evidence承担的关键事实仍为<code>VERIFY_IN_LANE_B</code>。记录拟接入位置和核证问题，不能用引号或记者署名绕过证据摄取；未知与冲突不补齐。</li>
+</ul>
+<h3 id="_3">为读者备好原文与作品入口</h3>
+<ul>
+<li>引语和关键转述就近提供原文直接链接，保留作者/机构、标题与发表日期；文末整理本人博客、开发记录及相关报道，不要求读者先到Evidence Ledger寻找网页。编辑记录如实登记未读或失效状态；未读材料不充当已核引文依据，直接影响正文理解的缺口用人话说明，不编造地址。</li>
+<li>文中主要作品首次出现时提供核过作品身份的官方Steam入口；没有Steam页面或所谈的是历史旧版时，可优先链接官网。原免费版、重制版、移植版与后续商业版分别标清，不能让当前商品入口替换历史起源。正文少量就近链接，文末可集中列出作品，便于读者继续阅读或体验。</li>
+<li>来源链接、作品体验入口与延伸阅读各有用途。页面可打开不等于事实已证；延伸阅读不自动接纳新事实，商店页也不证明历史成功原因。不顺手把动态售价、折扣、评测量写进历史叙述，不设固定链接数或来源数量门槛；未有官方入口时如实保留缺口。</li>
+</ul>
+<p>交付时增加两项编辑回读：删去人名后，各篇是否仍由同一个模型的问答、比喻和结论推进；保留引文与已核行动、暂去掉作者总结后，读者是否仍能追随人物经历。前者检查叙述串味，后者检查事实能否承担故事，<strong>都不要求伪造不同声线，也不要求删除作者观点</strong>。说明哪条来源确实改变了写法；没有改变时如实记录，不以增加引文数量宣称可读性改善。最终仍按六维比较与作者验收判断。</p>
+<hr />
+<h2 id="07">0.7. 来源表达、双向回读与全文检查（试行）</h2>
+<p>本节补入已有Narrative Packet、三遍编辑和Fidelity Readback。适用读者叙事正文，包括暂存在research-notes中的书稿候选；不要求Case、Evidence、研究笔记或日常讨论使用传记文风。方法经逐篇试验保留或撤回，不新增人物事实源、声线目录、Schema、检测分数或自动合格阈值。</p>
+<h3 id="_4">写前：一张表达纸条</h3>
+<p>在现有编辑记录中简短写下：哪些已读来源怎样提问、表达确定程度、使用技术词或自嘲；哪些特点只出现在某个阶段；本人表达、记者观察和作者评论怎样交接。每项回指已核材料，表达观察不当成人格事实，也不据此生成本人从未说过的对白、心理或判断。作者认可的中文样本优先；没有认可样本就明说，第三方报道与Agent候选不能自行标为AUTHOR_APPROVED。</p>
+<p>保留来源中不同方向的行动和认识：想制作也可能停顿，愿意删减仍可能留下更难的工作，回顾的方法未必在开工时已清楚。不能将它们修平成“始终坚持”“总能选对”或稳定的成功性格。写一两个本篇不应出现的反例即可，不把表达纸条变成每篇相同的提纲。</p>
+<h3 id="_5">改后：按两个方向核关系</h3>
+<ul>
+<li><strong>原文→新文：</strong> 独有事实、动作、作者判断、否定、条件、范围、完成态、比较对象和责任各在哪里保留？删掉的内容必须确属重复或已授权删除。换词后流畅不代表等义，例如“乐趣至多一次”不能变成“只能看一次”。</li>
+<li><strong>新文→依据：</strong> 新增或改写的每个关键关系，由哪个原句及Case/Evidence承担？重点找暗添的时间先后、必然性、因果、效果类型和人物归责。已有稿件不能独立替代事实源；新发现的关键事实仍交Lane B。没有依据的关系恢复原表达或撤回，不靠追加免责声明掩盖。</li>
+</ul>
+<p>不另做一张全库事实表；在现有Fidelity Readback中记录实际发生漂移的子句、修正及未解决问题。独立审读与作者验收仍分开。</p>
+<h3 id="_6">最后：连读全文再判断收益</h3>
+<p>逐节正确不等于全文好读。连读开篇到结尾，检查是否反复先概括、再举例、再总结，是否每个小节都同样短促，是否正文夹入了上一稿的编辑说明。只处理实际冗余，必要转场、作者有意强调、技术用语、原话和事实边界仍保留。不强制口语化、随机变化句长或把不同作者写成刻意不同的角色。</p>
+<p>译腔另查语境与中文搭配，不能只核对字典词义。职业名词先辨岗位、职责、职级或身份，再检查它与“应聘、担任、负责、转岗”等动词怎样搭配；优先写清具体工作。例如杂志招聘语境的staff writer可写“撰稿岗位”，后续职责可写“转去写稿”，不写“应聘杂志的写作者”。writer并非处处同译，也不能为顺口把它升级成主编、加上自由职业身份或管理权限。陌生职称回查原文和职责，必要时保留原称说明；直接引语不擅改，A/B中的旧译保留为历史版本。这是语境审读，不是“写作者”等词的黑名单。</p>
+<p>交付沿用六维比较，附少量原句/改句及编辑收益；可判KEEP_ORIGINAL或REVISE_AGAIN。如实记录是否匿名、由谁比较及是否有真实读者参与；非匿名比较不称盲测，Agent比较不能证明真实读者阅读意愿改善。跨篇复用的是检查方法，不是Gunpoint的八节结构或固定字数。</p>
+<p>方法参考（2026-10-09核读，独立转述）：<a href="https://github.com/op7418/Humanizer-zh/blob/main/SKILL.md">Humanizer-zh</a>的作者声音与模式诊断、<a href="https://github.com/hardikpandya/stop-slop/blob/main/SKILL.md">stop-slop</a>的具体表达检查、<a href="https://github.com/MrGeDiao/shuorenhua/blob/main/SKILL.md">shuorenhua</a>的实词与语义回读、<a href="https://github.com/alchaincyf/nuwa-skill/blob/main/SKILL.md">nuwa-skill</a>的表达维度与张力观察。上述方法各自的整套流程、禁词/禁标点、人物模拟或自动编排不因此成为本库规则；外部效果自述未由本库验证。实践差异见独立Lane C <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes/pull/289">Gunpoint候选PR #289</a>，作者及真实读者验收仍待完成。</p>
+<p><strong>跨模型执行要义：</strong> 读事实与来源 → 留表达纸条 → 按人物经历写 → Delete / Restore Person / Rhythm → 双向Fidelity Readback → 全文连读 → 六维比较 → 作者验收。任何模型都可以保留原句，不为证明工作量强改；方法试行不授权批量覆盖书稿。</p>
+<hr />
+<h2 id="1">1. 先让读者遇见人，再让读者遇见理论</h2>
+<p>Profile 的开头优先让读者看到：</p>
+<ul>
+<li>一个具体时刻；</li>
+<li>一个具体处境；</li>
+<li>一个具体选择；</li>
+<li>一个具体矛盾；</li>
+<li>或一个足以改变生产路径的事实。</li>
+</ul>
+<p>不要默认从：</p>
+<blockquote>
+<p>“独立游戏史经常把这个故事讲成……”</p>
+</blockquote>
+<p>起手。</p>
+<p>“流行神话 → 反驳神话”仍然可以使用，但不能成为所有 profile 的统一模板。</p>
+<p>如果证据允许，前 300–500 字应尽量出现至少一个<strong>人 + 决策/处境</strong>，而不是只出现项目 thesis。</p>
+<hr />
+<h2 id="2">2. 每篇只保留一个主命题</h2>
+<p>一篇 profile 可以触及多个 Claim，但 reader layer 需要一个清楚的主问题。</p>
+<p>写作前先完成一句：</p>
+<blockquote>
+<p>“这篇主要回答：<strong><em>_</em></strong>_？”</p>
+</blockquote>
+<p>例如：</p>
+<ul>
+<li>Kenshi：一个明显超过单人正常产能的项目，什么时候开始不再只靠一个人的生命时间供养？</li>
+<li>Rocket League：一家公司怎样用服务业务购买组织存续，并保留第二次原创下注的权利？</li>
+<li>FTL：团队怎样把一次高风险创业拆成逐步增加承诺的实验？</li>
+</ul>
+<p>次级命题必须服务主问题，不要每一段都重新宣布一个“大结论”。</p>
+<hr />
+<h2 id="3-reader-layer">3. Reader layer 要少说“研究正在做什么”</h2>
+<p>以下语言属于 research backend 的正常语言，但在 reader profile 中高频出现会破坏叙事：</p>
+<ul>
+<li>“本案最值得研究的是……”</li>
+<li>“当前证据支持……”</li>
+<li>“从生产史角度看……”</li>
+<li>“真正重要的是……”</li>
+<li>“这个案例证明……”</li>
+<li>“Evidence Ledger 显示……”</li>
+</ul>
+<p>这些词不是禁词，但应优先转成：</p>
+<blockquote>
+<p>人当时面对什么 → 做了什么 → 直接发生了什么 → 我们为什么因此改变理解。</p>
+</blockquote>
+<p>研究状态、UNKNOWN、证据等级应集中放在 provenance / research boundary 区，而不是不断插入正文。</p>
+<hr />
+<h2 id="4">4. 控制“不是……而是……”和结论句密度</h2>
+<p>当前样稿反复依赖：</p>
+<ul>
+<li>“不是 X，而是 Y”；</li>
+<li>“真正的故事不是……”；</li>
+<li>“真正值得记住的是……”；</li>
+<li>“这很重要”；</li>
+<li>“换句话说”。</li>
+</ul>
+<p>这种结构适合纠正 Myth，但高频会让五篇文章拥有同一个说话节奏。</p>
+<p>编辑时检查：如果连续几个小节都以否定旧解释、宣布新解释推进，至少重写一部分为<strong>时间推进、行动结果或具体矛盾</strong>。</p>
+<hr />
+<h2 id="5">5. 专有研究词必须先翻成人话</h2>
+<p>可以使用：<code>runway</code>、<code>scope</code>、<code>market access</code>、<code>capability capital</code>、<code>staged commitment</code> 等术语，但第一次出现必须先让普通读者知道它具体指什么。</p>
+<p>优先写：</p>
+<blockquote>
+<p>“还能不接别的工作、继续做这个游戏多久”</p>
+</blockquote>
+<p>再告诉读者这就是这里说的 <code>runway</code>。</p>
+<p>不要连续使用多层抽象词，例如：</p>
+<blockquote>
+<p>“capability capital 改变 production function，并通过 market-access infrastructure 转成 organization capital”。</p>
+</blockquote>
+<p>研究档案可以这样压缩；书稿不应该要求读者先学术语才能理解故事。</p>
+<hr />
+<h2 id="6">6. 把具体行动写在人格判断前面</h2>
+<p>坏：</p>
+<blockquote>
+<p>他很有品味。<br />
+团队很灵活。<br />
+他们非常坚持。</p>
+</blockquote>
+<p>好：</p>
+<blockquote>
+<p>他删除了哪些昂贵但不服务核心体验的内容；<br />
+团队把 full launch 改成 demo；<br />
+公司继续接 work-for-hire，让合同项目覆盖原创团队；<br />
+开发者用付费 alpha 把玩家收入换成下一阶段人力。</p>
+</blockquote>
+<p>如果一句人格描述不能被至少一个具体行动支撑，应删掉或降成作者判断。</p>
+<hr />
+<h2 id="7">7. 跨案例综合不要侵占每篇结尾</h2>
+<p>Profile 的结尾优先回到：</p>
+<ul>
+<li>这个人 / 团队；</li>
+<li>本篇主问题；</li>
+<li>这一案的 transfer boundary。</li>
+</ul>
+<p>不要每篇都在最后重新串一次 Kenshi / FTL / Rocket League / Gunpoint / 其他案例。</p>
+<p>跨案例综合主要放在：</p>
+<ul>
+<li>章节导语；</li>
+<li>book-level synthesis；</li>
+<li><code>THESIS-CANDIDATES.md</code>；</li>
+<li>最终 TOC / thematic chapter。</li>
+</ul>
+<p>个案偶尔引用另一案做对照可以，但不应把 profile 变成全书 thesis 的证明段落。</p>
+<hr />
+<h2 id="8-provenance">8. Provenance 与叙事分层</h2>
+<p>每篇必须保留 Case / Evidence 回链，但建议分成两个层级：</p>
+<h3 id="provenance">顶部最小 provenance</h3>
+<ul>
+<li>对应 Case；</li>
+<li>Evidence Ledger；</li>
+<li>必要时一句当前状态。</li>
+</ul>
+<h3 id="research-boundary">文末 research boundary</h3>
+<p>集中列：</p>
+<ul>
+<li>仍 UNKNOWN；</li>
+<li>关键证据；</li>
+<li>不可直接复制条件；</li>
+<li>尚未解决的因果问题。</li>
+</ul>
+<p>不要让同一研究状态免责声明在正文中反复出现。</p>
+<hr />
+<h2 id="85">8.5. 所有“值得学”都必须有年份与时效性</h2>
+<p>Reader layer 一旦从历史事实推出“今天可以学什么”，必须同时回答：</p>
+<ul>
+<li><strong>Observed When</strong>：这个做法真正发生在什么年份；</li>
+<li><strong>Regime</strong>：当时的平台、工具、发行、支付、社区、竞争与成本条件；</li>
+<li><strong>2026 Transfer Status</strong>：<code>DURABLE / CONDITIONAL / HISTORICAL / CURRENT / UNKNOWN</code>；</li>
+<li><strong>Mechanism vs Tactic</strong>：今天保留的是结构机制，还是某个已经过期的渠道打法。</li>
+</ul>
+<p>禁止把“2019 年成功经验”写成无日期的通则。</p>
+<p>平台 / 算法 / 商店曝光 / creator discovery / 众筹 / 生活成本 / 融资环境属于高时效变量；未做当前核验时默认 <code>CONDITIONAL / UNKNOWN</code>。</p>
+<p>完整规则见 <a href="/heroes-portal/book/TEMPORAL-VALIDITY.html"><code>TEMPORAL-VALIDITY.md</code></a>。</p>
+<hr />
+<h2 id="86">8.6 不得把有媒体报道的成功者当代表性开发者</h2>
+<p>人物传记依赖一手采访是合理的；<strong>将报道人物的选择过程忽略，再归纳其群体发生率则不合理</strong>。</p>
+<p>发布 Profile / Chapter / Life Route 时检查：
+- 作者为什么会被我们搜到？获奖、畅销、创业融资、发行商 PR、英文媒体、GDC 演讲、公开失败、玩家社区？写作采样未必由研究者主动控制。
+- 报道发生在项目成功/失败之前还是之后？成功后的自述可能重新编排因果顺序。
+- 该人物可以证明哪种机制存在？什么比例/国别/普通读者成功率是<strong>没有分母</strong>而不能说的？
+- 是否把“没有作品公开记录”错误写成“从未拥有作者性”？
+- 所谓“加入失败案例”是不是只加入了<strong>最会讲故事的著名失败者</strong>？
+- 一旦文章使用“通常/大多数/中国比美国/某些岗位更容易”等分布判断，必须回指一个预先定义且可观察的 cohort sampling frame，否则删除或标 UNKNOWN。</p>
+<p>正式流程：<a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes/blob/main/schemas/creator-visibility-sampling-gate.md">Creator Visibility / Sampling Gate</a> 与 <a href="/heroes-portal/book/research-notes/media-selection-survivorship-and-denominator-protocol-028.html">028 样本偏差审计</a>。</p>
+<hr />
+<h2 id="9">9. 场景化不等于小说化</h2>
+<p>优先使用已有证据中的具体东西：</p>
+<ul>
+<li>时间；</li>
+<li>工作岗位；</li>
+<li>数字；</li>
+<li>公开开发日志；</li>
+<li>决策节点；</li>
+<li>当事人同期说法；</li>
+<li>产品当时的状态；</li>
+<li>失败后的实际动作。</li>
+</ul>
+<p>禁止补写来源没有的：</p>
+<ul>
+<li>“他坐在昏暗办公室里”；</li>
+<li>“他当时一定感到绝望”；</li>
+<li>“两人对视后决定赌上一切”；</li>
+<li>未核验的日常细节。</li>
+</ul>
+<p>好的生产史靠<strong>决策细节</strong>产生戏剧性，不靠虚构文学细节。</p>
+<hr />
+<h2 id="10">10. 发布前人工检查</h2>
+<p>每篇 profile 升级前至少问一次：</p>
+<ol>
+<li>前 500 字能看到“人和处境”吗？</li>
+<li>能用一句话说清这篇主问题吗？</li>
+<li>是否连续三次以上用 Myth → 反转 → thesis 推进？</li>
+<li>是否研究术语比具体行动更密？</li>
+<li>是否为了叙事补了 Case 没有的细节？</li>
+<li>文章是否把同一个 thesis 说了三遍以上？</li>
+<li>结尾是在结束这个人的故事，还是又替整本书写总论？</li>
+<li>UNKNOWN / transfer boundary 是否仍然清楚？</li>
+<li>Case / Evidence 回链是否存在？</li>
+<li>这篇和上一篇在开头、节奏、结尾上是否明显不同？</li>
+<li>所有可迁移经验是否写明观察年份和 2026 时效状态？</li>
+<li>是否把某个历史平台 tactic 误写成 timeless mechanism？</li>
+</ol>
+<h2 id="105">10.5. 既有书稿重写必须留下可审计差异</h2>
+<ul>
+<li>先保留原文 SHA，明确只改哪些章节；不能无差别清洗全书。</li>
+<li>先删除重复论点，再恢复人物与行动，最后调整节奏；不能只替换疑似 AI 词汇。</li>
+<li>修改后的时间、归责、否定、情态、数字口径、来源和 UNKNOWN 边界要做 Fidelity Readback。</li>
+<li><strong>重要事实删减须双向核查：</strong>若准备以“Evidence Ledger 没记”为理由删去人物的设计立场、行动、团队成员、资金阶段或关键抉择，先复核该 Evidence 指向的原始材料；摘要缺席不等于原始事实不存在。原文不可核时移交 Lane B 并保留待核标记，不得直接宣布“无证据”。执行细节见下述 Rewrite Protocol §3。</li>
+<li>有条件时对不同版本进行匿名 A/B 对照；不达标可以保留旧稿。</li>
+<li>由作者确认新稿才合并；Agent 不自动把“更好读”当成批准。</li>
+</ul>
+<p>详见 <a href="/heroes-portal/book/EDITORIAL-REWRITE-PROTOCOL.html">改写执行协议</a>。</p>
+<hr />
+<h2 id="automation-boundary">Automation boundary</h2>
+<p>当前 Gate <strong>不进入机械 lint</strong>。</p>
+<p>原因：以上问题多数依赖语境和叙事判断。只有未来出现明确、重复、可机械识别的错误（例如 provenance 缺失、链接漂移、固定字段缺失），才升级为工具 / CI。</p>
+<h2 id="11">11. 研究元数据下沉，不占读者第一屏</h2>
+<p>Profile / Chapter 第一屏原则上不出现：
+- CASE 编号；
+- Evidence Ledger；
+- RESEARCHING / SKELETON；
+- P0 / P1 / S1 / S2；
+- lint / schema / metadata。</p>
+<p>这些信息原则上集中到文末的“研究与证据入口 / 研究依据”。</p>
+<p>例外只有一种：某个研究状态本身直接影响读者如何理解正文，例如关键争议尚未解决。这时也应先用人话说明，不要先抛后台术语。</p>
+<p>Reader layer 的目标不是隐藏证据，而是让证据待在正确的位置。</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / book/EDITORIAL-GATE.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

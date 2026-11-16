@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Complementary Taste / Founder Pair Lifecycle — 互补鉴别力、创始组合与生命周期 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl class="on"" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0" class="t2">0. 核心修正：互补不是“技能拼图”，而是错误检测器的组合</a><a href="#error-complementarity" class="t3">ERROR COMPLEMENTARITY / 错误互补</a><a href="#1-carmack-romero" class="t2">1. Carmack × Romero：技术真理与游戏真理的短回路</a><a href="#technical-truth-play-truth-product-truth" class="t3">TECHNICAL TRUTH × PLAY TRUTH × PRODUCT TRUTH</a><a href="#2-quake" class="t2">2. Quake：互补关系没有立刻消失，反馈时序先坏了</a><a href="#feedback-timing-compatibility" class="t3">FEEDBACK-TIMING COMPATIBILITY / 反馈时序兼容</a><a href="#3" class="t2">3. 从产品争论到公司争论：不同模型何时从互补变成治理冲突</a><a href="#goal-alignment-gate" class="t3">GOAL ALIGNMENT GATE</a><a href="#4-role-transition-failure" class="t2">4. Role Transition Failure：创业早期的评价函数可能不再适合成功后的公司</a><a href="#role-transition-failure" class="t3">ROLE TRANSITION FAILURE / 角色转型失败</a><a href="#5-jobs-wozcapability-creation-product-synthesis" class="t2">5. Jobs × Woz：另一种互补——Capability Creation × Product Synthesis</a><a href="#wozniak" class="t3">Wozniak 的一手/回顾性证据</a><a href="#product-boundary-definition" class="t3">PRODUCT BOUNDARY DEFINITION / 产品边界定义</a><a href="#6-translation-bandwidth-jobs" class="t2">6. Translation Bandwidth：为什么 Jobs 不是普通“商务创始人”</a><a href="#translation-bandwidth" class="t3">TRANSLATION BANDWIDTH / 跨鉴别体系翻译带宽</a><a href="#7-identity-territory-overlap" class="t2">7. Identity Territory Overlap：创始人冲突不只看技能重叠</a><a href="#identity-territory-overlap" class="t3">IDENTITY TERRITORY OVERLAP / 身份领地重叠</a><a href="#8-task-bounded-complementarity" class="t2">8. Task-Bounded Complementarity：黄金组合的合理寿命可能本来有限</a><a href="#task-bounded-complementarity" class="t3">TASK-BOUNDED COMPLEMENTARITY / 任务有界互补</a><a href="#9-founder-fit-is-stage-dependent" class="t2">9. Founder Fit Is Stage-Dependent / 创始人适配具有阶段性</a><a href="#founder-taste-boundary-awareness" class="t3">FOUNDER TASTE BOUNDARY AWARENESS</a><a href="#10" class="t2">10. 互补组合至少有三种终局</a><a href="#a-conflict-failure" class="t3">A. CONFLICT FAILURE / 冲突失效</a><a href="#b-task-completion" class="t3">B. TASK COMPLETION / 任务完成</a><a href="#c-capability-succession" class="t3">C. CAPABILITY SUCCESSION / 能力继承</a><a href="#11-complementary-taste-lifecycle" class="t2">11. Complementary Taste Lifecycle / 互补鉴别力生命周期</a><a href="#phase-1-formation" class="t3">Phase 1 — Formation</a><a href="#phase-2-coupling" class="t3">Phase 2 — Coupling</a><a href="#phase-3-scaling" class="t3">Phase 3 — Scaling</a><a href="#phase-4-reallocation" class="t3">Phase 4 — Reallocation</a><a href="#phase-5-terminal-state" class="t3">Phase 5 — Terminal State</a><a href="#12" class="t2">12. 新的压力测试问题</a><a href="#13" class="t2">13. 当前证据等级与边界</a><a href="#_1" class="t3">较强支持</a><a href="#h" class="t3">H 级，不得当事实</a><a href="#_2" class="t3">尚缺</a><a href="#14-sources" class="t2">14. Sources / 公开证据入口</a><a href="#jobs-woz" class="t3">Jobs × Woz</a><a href="#carmack-romero" class="t3">Carmack × Romero</a><a href="#15" class="t2">15. 下一步</a><a href="#p0" class="t3">P0</a><a href="#p1" class="t3">P1</a></aside><article class="doc"><div class="col"><h1 id="complementary-taste-founder-pair-lifecycle">Complementary Taste / Founder Pair Lifecycle — 互补鉴别力、创始组合与生命周期</h1>
+<ul>
+<li><strong>Status:</strong> CROSS-INDUSTRY RESEARCH NOTE / HYPOTHESIS FRAMEWORK / 2026-10-08</li>
+<li><strong>Program:</strong> D — 发达国家创新者与跨行业研究；与 Program A 的 Early id / DOOM 纵向案例交叉引用。</li>
+<li><strong>Primary game anchor:</strong> <a href="/heroes-portal/book/research-notes/carmack-romero-complementary-error-correction-network-042.html">042 — Carmack × Romero：互补错误修正网络</a></li>
+<li><strong>Related case:</strong> <a href="/heroes-portal/cases/CASE-016-early-id-software.html">CASE-016 — Early id Software</a></li>
+<li><strong>Related theory:</strong> <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes/blob/main/author-corpus/AC-005-taste-capital-and-selection.md">Taste Capital</a>、<a href="/heroes-portal/cross-industry/self-obsolescence-second-answer-test-001.html">Self-Obsolescence / Second-Answer Test</a></li>
+<li><strong>Core question:</strong> 为什么某些创始人组合的产出远高于个体能力简单相加；这种互补何时是稳定资产，何时会因任务变化、权力重叠、反馈时序改变而解体？</li>
+<li><strong>Evidence rule:</strong> ERROR COMPLEMENTARITY、TRANSLATION BANDWIDTH、TASK-BOUNDED COMPLEMENTARITY、IDENTITY TERRITORY OVERLAP、GOVERNANCE ADAPTABILITY、COMPLEMENTARY TASTE LIFECYCLE 均为本项目 H 级分析框架，不是 Carmack、Romero、Jobs、Wozniak 的原始术语。</li>
+</ul>
+<hr />
+<h2 id="0">0. 核心修正：互补不是“技能拼图”，而是错误检测器的组合</h2>
+<p class="dc">常见创始团队叙事把互补写成：</p>
+<ul>
+<li>A 会程序；</li>
+<li>B 会美术 / 商务 / 设计；</li>
+<li>所以 A+B 互补。</li>
+</ul>
+<p>这只能描述 production coverage，不能解释为什么少数组合会产生远高于“岗位补齐”的超额产出。</p>
+<p>本研究更关心：</p>
+<blockquote>
+<p><strong>A 最容易漏掉的错误，是否恰好是 B 最敏感的错误；B 的盲区，是否又能被 A 的现实模型及时发现。</strong></p>
+</blockquote>
+<h3 id="error-complementarity">ERROR COMPLEMENTARITY / 错误互补</h3>
+<blockquote>
+<p><strong>两套 selection function 在不同维度上拥有高质量但不完全重合的错误检测能力，并能在同一 artifact 上互相修正。</strong></p>
+</blockquote>
+<p>它不同于 skill complementarity：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Skill complementarity</td>
+<td>谁能把任务做完？</td>
+</tr>
+<tr>
+<td>Error complementarity</td>
+<td>谁能发现另一方最容易看错什么？</td>
+</tr>
+<tr>
+<td>Taste complementarity</td>
+<td>哪些不同评价函数能在同一产品上互相约束？</td>
+</tr>
+</tbody>
+</table>
+<p>互补的真正价值，不只是覆盖更多任务，而是减少单一评价函数长期统治产品的概率。</p>
+<hr />
+<h2 id="1-carmack-romero">1. Carmack × Romero：技术真理与游戏真理的短回路</h2>
+<p>042 已记录 Early id 的详细证据；本节只抽取跨行业机制，不重复建立第二份事实档案。</p>
+<p>Early id 的高产阶段至少具备四个同时条件：</p>
+<ol>
+<li><strong>Taste 差异高</strong>：Carmack 更强于技术可行性、性能边界与 capability creation；Romero 更强于关卡、速度、玩法反馈与 player-facing translation。</li>
+<li><strong>Translation bandwidth 高</strong>：Romero 本身具有程序背景，能在理解技术约束的前提下谈设计，而不是把体验诉求作为黑箱需求交给工程侧。</li>
+<li><strong>Feedback cadence 极快</strong>：小团队、低流程、短依赖链让 idea → code → play → revision 高频循环。</li>
+<li><strong>Goal alignment 极高</strong>：早期共同问题非常简单——把下一款 PC 游戏做得更强、更好玩并尽快交到玩家手里。</li>
+</ol>
+<p>因此，Early id 的优势不是抽象的“天才密度”，而是：</p>
+<blockquote>
+<p><strong>不同 reality loop 能在极短周期内作用于同一个 artifact。</strong></p>
+</blockquote>
+<h3 id="technical-truth-play-truth-product-truth">TECHNICAL TRUTH × PLAY TRUTH × PRODUCT TRUTH</h3>
+<p>042 与 CASE-016 已支持把 DOOM 看成三类现实同时对齐的强案例：</p>
+<ul>
+<li>Technical Truth：机器允许什么；</li>
+<li>Play Truth：玩家行为与反馈是否成立；</li>
+<li>Product Truth：最终产品、发行与市场路径是否能成立。</li>
+</ul>
+<p>这是乘法式依赖，而非三项分数简单相加。技术能力很强但无法被玩法消费，会退化成技术展示；玩法有趣但工程/产品结构不能承载，也无法形成最终结果。</p>
+<hr />
+<h2 id="2-quake">2. Quake：互补关系没有立刻消失，反馈时序先坏了</h2>
+<p>Quake 不能简单写成“两位创始人性格不合”。</p>
+<p>现有 042、CASE-016 与 Early id profile 更支持一种过程性解释：</p>
+<blockquote>
+<p><strong>技术前置周期显著拉长后，原本高速双向的 tech ↔ design 反馈开始变成 design 等待技术。</strong></p>
+</blockquote>
+<p>这提出一个新的 H：</p>
+<h3 id="feedback-timing-compatibility">FEEDBACK-TIMING COMPATIBILITY / 反馈时序兼容</h3>
+<blockquote>
+<p><strong>即使两套 Taste 高度互补，如果它们产出可供对方检验的 artifact 周期严重错位，互补收益也会下降。</strong></p>
+</blockquote>
+<p>工作模型：</p>
+<p>Founder Synergy<br />
+≈ Error Complementarity<br />
+× Translation Bandwidth<br />
+× Goal Alignment<br />
+× Feedback Cadence<br />
+× Governance Adaptability</p>
+<p>这里不是精确统计公式，而是 failure checklist：任何一项长期接近零，都可能使传奇级个体仍无法维持组合优势。</p>
+<hr />
+<h2 id="3">3. 从产品争论到公司争论：不同模型何时从互补变成治理冲突</h2>
+<p>Carmack 与 Romero 后期的分歧逐渐越过“哪种设计更好”，进入：</p>
+<ul>
+<li>公司要不要扩大；</li>
+<li>是否多团队并行；</li>
+<li>licensing 是否应成为更独立的能力；</li>
+<li>创始人的非直接制作贡献怎样评价；</li>
+<li>谁拥有公司未来形态的最终决定权。</li>
+</ul>
+<p>这说明：</p>
+<blockquote>
+<p><strong>不同模型只有在共享目标函数时天然形成 productive dissent；当双方开始优化不同公司目标时，同一差异会转化为 governance conflict。</strong></p>
+</blockquote>
+<h3 id="goal-alignment-gate">GOAL ALIGNMENT GATE</h3>
+<p>Different Models + Shared Goal → Productive Dissent</p>
+<p>Different Models + Different Goals → Governance Conflict</p>
+<p>这不是说目标必须完全一致。关键是：当目标分叉后，组织是否有显式机制重新定义角色、决策权、贡献与退出路径。</p>
+<hr />
+<h2 id="4-role-transition-failure">4. Role Transition Failure：创业早期的评价函数可能不再适合成功后的公司</h2>
+<p>Early id 的早期隐含规则接近：</p>
+<blockquote>
+<p>谁持续直接生产核心 artifact，谁就在持续创造核心价值。</p>
+</blockquote>
+<p>在极小 craft cluster 中，这种评价函数可以工作。</p>
+<p>公司成功后，成员可能逐渐转向：</p>
+<ul>
+<li>设计领导；</li>
+<li>licensing；</li>
+<li>hiring；</li>
+<li>publishing / partner relations；</li>
+<li>business development；</li>
+<li>多团队资源配置。</li>
+</ul>
+<p>此时如果组织仍只按“谁亲手写更多核心代码 / 地图 /资产”评价贡献，就会发生：</p>
+<h3 id="role-transition-failure">ROLE TRANSITION FAILURE / 角色转型失败</h3>
+<blockquote>
+<p><strong>组织阶段已经变化，但创始人贡献的评价函数仍停留在早期 craft cluster。</strong></p>
+</blockquote>
+<p>Carmack 多年后的回顾明确承认，如果当时更懂现代公司结构、股权与不同贡献模式，某些创始人关系可能存在其他治理解法。该材料属于 P1 retrospective，支持“当事人后来认为治理结构不足”，但不能反推当年的所有冲突只由治理造成。</p>
+<hr />
+<h2 id="5-jobs-wozcapability-creation-product-synthesis">5. Jobs × Woz：另一种互补——Capability Creation × Product Synthesis</h2>
+<p>Jobs × Wozniak 提供第二个、性质不同的 founder pair。</p>
+<h3 id="wozniak">Wozniak 的一手/回顾性证据</h3>
+<p>1985 BYTE 访谈中，Wozniak 明确说：</p>
+<ul>
+<li>Apple 已经有约一百名工程师时，他觉得自己“不再那么重要”；</li>
+<li>他不想做 manager，只想做 engineer；</li>
+<li>回到 Apple 后仍倾向于自己能独立处理的小项目；</li>
+<li>创始人身份理论上允许他选择很多角色，但他并不想把身份转化成管理权。</li>
+</ul>
+<p>这支持一个较强的 P1 结论：</p>
+<blockquote>
+<p><strong>Wozniak 的职业目标函数长期高度偏向个人 engineering craft，而非组织控制。</strong></p>
+</blockquote>
+<p>Wharton 后来的访谈进一步给出角色自述：</p>
+<ul>
+<li>创业后两人逐渐明确分工；</li>
+<li>Wozniak 选择把 engineering 做到最好，并主动避免进入别人的管理领地；</li>
+<li>Jobs 则学习公司经营各个环节；</li>
+<li>Wozniak认为 Jobs 的重要能力不是亲自设计电脑，而是能理解技术好坏，并把 technology / marketing / operations 放进同一个整体。</li>
+</ul>
+<p>这使 Jobs × Woz 不能只概括为“技术 + 销售”。</p>
+<h3 id="product-boundary-definition">PRODUCT BOUNDARY DEFINITION / 产品边界定义</h3>
+<p>Jobs 1985 Playboy 访谈对 Apple I → Apple II 的回忆非常关键：</p>
+<ul>
+<li>Apple I 仍主要是一块电路板，用户需要自己准备键盘、电源等；</li>
+<li>Apple II 的关键跃迁之一，是成为完整组装、带外壳和键盘、可以直接使用的 finished product；</li>
+<li>Jobs 还明确说 Wozniak 主要负责设计，而自己在“把它变成产品”这一步参与更多。</li>
+</ul>
+<p>因此该组合更接近：</p>
+<blockquote>
+<p><strong>Wozniak：Capability Creation</strong><br />
+<strong>Jobs：Product Synthesis / Product Boundary Definition</strong></p>
+</blockquote>
+<p>这与 Carmack × Romero 的“Capability Creation × Play Translation”并不相同。</p>
+<hr />
+<h2 id="6-translation-bandwidth-jobs">6. Translation Bandwidth：为什么 Jobs 不是普通“商务创始人”</h2>
+<h3 id="translation-bandwidth">TRANSLATION BANDWIDTH / 跨鉴别体系翻译带宽</h3>
+<blockquote>
+<p><strong>一个成员无需拥有另一成员同等级 craft，但必须足够理解对方领域的价值、约束与错误类型，才能把不同 selection function 接入同一产品。</strong></p>
+</blockquote>
+<p>Wharton 的 Wozniak 回顾明确支持：</p>
+<ul>
+<li>Jobs 不能亲自完成 Wozniak 那种计算机设计；</li>
+<li>但能理解哪些技术好、哪些不好；</li>
+<li>更重要的是能把“整个 landscape”放到一个判断里。</li>
+</ul>
+<p>因此高互补不是：</p>
+<blockquote>
+<p>技术人做技术，外行老板做商业。</p>
+</blockquote>
+<p>而是：</p>
+<blockquote>
+<p><strong>双方在专业能力上不对称，但认知接口足够宽。</strong></p>
+</blockquote>
+<p>如果 Translation Bandwidth 太低，所谓互补容易退化成需求单、部门墙或权力命令。</p>
+<hr />
+<h2 id="7-identity-territory-overlap">7. Identity Territory Overlap：创始人冲突不只看技能重叠</h2>
+<p>Jobs × Woz 与 Carmack × Romero 最大的对照之一，是成功后是否争夺同一块身份/控制领地。</p>
+<p>Wozniak 的回忆持续显示：</p>
+<ul>
+<li>不希望成为管理者；</li>
+<li>不想通过创始人身份进入所有决策；</li>
+<li>更愿意回到小项目和 personally tractable engineering。</li>
+</ul>
+<p>这提出：</p>
+<h3 id="identity-territory-overlap">IDENTITY TERRITORY OVERLAP / 身份领地重叠</h3>
+<blockquote>
+<p><strong>两个高能力创始人是否都需要同一块最终控制权，才能实现各自对“我是谁 / 公司应该是什么”的核心定义。</strong></p>
+</blockquote>
+<p>工作假说：</p>
+<p>Different Roles + Noncompetitive Identity → Lower Governance Conflict</p>
+<p>Different Roles + Overlapping Identity Territory → Higher Governance Load</p>
+<p>这不代表“不争权就一定成功”，也不代表 Wozniak 与 Jobs 没有摩擦；它只用于解释为什么“能力差异巨大”本身不会自动制造创始人战争。</p>
+<hr />
+<h2 id="8-task-bounded-complementarity">8. Task-Bounded Complementarity：黄金组合的合理寿命可能本来有限</h2>
+<p>Apple I / II 阶段，Wozniak 一人的工程能力对公司具有极高边际价值。</p>
+<p>当 Apple 进入：</p>
+<ul>
+<li>大规模 engineering organization；</li>
+<li>manufacturing；</li>
+<li>software；</li>
+<li>sales；</li>
+<li>multi-product management；</li>
+<li>更复杂的组织协调</li>
+</ul>
+<p>以后，早期由一个人压缩承担的能力逐渐被组织吸收。</p>
+<p>Wozniak 自己在 1985 BYTE 的表述直接支持这种主观感受：公司已有大量工程师，他觉得自己不再像早期那样是不可替代中心。</p>
+<p>这提出：</p>
+<h3 id="task-bounded-complementarity">TASK-BOUNDED COMPLEMENTARITY / 任务有界互补</h3>
+<blockquote>
+<p><strong>某一创始组合的超额价值，可能只在一个特定历史问题尚未被解决、尚未被组织化时存在。任务完成后，组合的边际必要性自然下降。</strong></p>
+</blockquote>
+<p>这允许我们区分：</p>
+<ol>
+<li>组合失败；</li>
+<li>组合完成使命；</li>
+<li>组织已经把原来的个人 capability 内生化。</li>
+</ol>
+<p>因此：</p>
+<blockquote>
+<p><strong>创始人没有一起工作三十年，不等于创始组合失败。</strong></p>
+</blockquote>
+<p>正确问题是：原先由这个组合承担的关键功能，后来是否被可靠继承。</p>
+<hr />
+<h2 id="9-founder-fit-is-stage-dependent">9. Founder Fit Is Stage-Dependent / 创始人适配具有阶段性</h2>
+<p>创业初期的关键瓶颈可能是：</p>
+<p>Engineering + Productization</p>
+<p>五年后可能变成：</p>
+<p>Hiring + Capital Allocation + Portfolio + Management + Distribution</p>
+<p>因此：</p>
+<blockquote>
+<p><strong>0→1 的极高贡献，不自动赋予 1→10 / 10→100 阶段所有领域的永久决策优势。</strong></p>
+</blockquote>
+<p>这不是对创始贡献的贬低，而是 production function 已改变。</p>
+<h3 id="founder-taste-boundary-awareness">FOUNDER TASTE BOUNDARY AWARENESS</h3>
+<blockquote>
+<p><strong>创始人能否识别：自己在哪个阶段仍是高价值 selector，在哪个阶段更适合把权力交给新的 capability owner。</strong></p>
+</blockquote>
+<p>Wozniak 是一个很有价值的正向候选：至少从其 P1 自述看，他并未把 founder identity 自动兑换成更大管理权，而是长期承认自己更愿意做 engineering。</p>
+<p>但不能据此把他的所有退出选择浪漫化为治理智慧；个人兴趣、飞机事故、重返大学、生活选择等也必须保留。</p>
+<hr />
+<h2 id="10">10. 互补组合至少有三种终局</h2>
+<p>现阶段提出三个 H 级 lifecycle 类型：</p>
+<h3 id="a-conflict-failure">A. CONFLICT FAILURE / 冲突失效</h3>
+<p>互补曾经真实存在，但后来：
+- 目标函数分叉；
+- role / control overlap 增长；
+- governance 无法适应；
+- 组合以冲突方式解体。</p>
+<p>Carmack × Romero 后期是当前强候选，但仍应避免把复杂分裂压缩成单一人格冲突。</p>
+<h3 id="b-task-completion">B. TASK COMPLETION / 任务完成</h3>
+<p>组合解决了一个阶段性问题；随后：
+- 原能力被组织化；
+- 新阶段瓶颈改变；
+- 至少一方不希望迁移到新的权力/角色结构；
+- 组合自然解耦，不等于失败。</p>
+<p>Jobs × Woz 是当前强候选。</p>
+<h3 id="c-capability-succession">C. CAPABILITY SUCCESSION / 能力继承</h3>
+<p>更高阶形态待 Nintendo 线验证：</p>
+<blockquote>
+<p><strong>上一代的 selection principles 不只完成任务，还被下一代吸收、修改并继续产生新作品。</strong></p>
+</blockquote>
+<p>候选研究链：
+- Gunpei Yokoi → Shigeru Miyamoto；
+- Miyamoto → Eiji Aonuma / younger Nintendo teams；
+- Satoru Iwata 作为 engineering / management / translation bridge；
+- 组织如何把个人 Taste 转成 prototype、review、mentor 与 decision-right architecture。</p>
+<p>目前不得预设 Nintendo 已成功“复制天才”。必须区分：
+- 同期合作；
+- 师徒自述；
+- 组织制度；
+- 后人事后构建的企业神话。</p>
+<hr />
+<h2 id="11-complementary-taste-lifecycle">11. Complementary Taste Lifecycle / 互补鉴别力生命周期</h2>
+<p>目前可用的研究框架：</p>
+<h3 id="phase-1-formation">Phase 1 — Formation</h3>
+<p>不同个体形成差异化 reality loop：
+- machine / engineering；
+- player behavior；
+- product / market；
+- craft / aesthetic；
+- organization / capital。</p>
+<h3 id="phase-2-coupling">Phase 2 — Coupling</h3>
+<p>真正决定组合质量的不是“岗位齐全”，而是：
+- Error Complementarity；
+- Translation Bandwidth；
+- Shared Artifact；
+- Feedback Cadence。</p>
+<h3 id="phase-3-scaling">Phase 3 — Scaling</h3>
+<p>成功后 production function 改变：
+- 人数增加；
+- 时间变长；
+- 工作异步化；
+- 角色从 craft 转向 management / allocation；
+- 旧 implicit governance 开始失效。</p>
+<h3 id="phase-4-reallocation">Phase 4 — Reallocation</h3>
+<p>健康组合需要重新回答：
+- 谁继续拥有 product decision；
+- 谁转成 specialist / mentor / executive；
+- 哪些旧个人能力已被组织吸收；
+- 哪些 capability 仍不可替代；
+- 退出是否等于失败。</p>
+<h3 id="phase-5-terminal-state">Phase 5 — Terminal State</h3>
+<p>至少三类：
+- Conflict Failure；
+- Task Completion；
+- Capability Succession。</p>
+<hr />
+<h2 id="12">12. 新的压力测试问题</h2>
+<p>研究任何传奇 founder pair 时，至少问：</p>
+<ol>
+<li>两人的 skill difference 是什么？</li>
+<li>更重要：两人的 <strong>error detection difference</strong> 是什么？</li>
+<li>双方能否理解对方领域到足以讨论 trade-off？</li>
+<li>共同 artifact 多久能产生一次真实反馈？</li>
+<li>谁最容易犯的错误，是否真由另一方修正过？</li>
+<li>成功后双方是否仍优化同一个公司目标？</li>
+<li>Identity Territory 是否开始重叠？</li>
+<li>角色变化后，贡献评价函数有没有更新？</li>
+<li>组合结束是冲突、任务完成，还是能力继承？</li>
+<li>组合中的关键 capability 最终进入了组织，还是跟着个人离开？</li>
+<li>后来成功/失败是否被事后神话重写？</li>
+<li>是否存在能力同样互补但最终失败的对照组？</li>
+</ol>
+<hr />
+<h2 id="13">13. 当前证据等级与边界</h2>
+<h3 id="_1">较强支持</h3>
+<ul>
+<li>Early id 的技术 / 玩法互补、短反馈回路与后期治理分歧：由 042、CASE-016 及其 evidence ledger 承担。</li>
+<li>Jobs 1985 对 Apple I / Apple II 产品化差异、Wozniak / Jobs 分工的回顾：P1。</li>
+<li>Wozniak 1985 BYTE 对“不想做 manager”“公司已有约百名工程师后自己不再那么重要”的回顾：P1。</li>
+<li>Wozniak 后来对两人角色差异、Jobs 能整合 technology / marketing / operations 的回顾：P1。</li>
+</ul>
+<h3 id="h">H 级，不得当事实</h3>
+<ul>
+<li>ERROR COMPLEMENTARITY；</li>
+<li>TRANSLATION BANDWIDTH；</li>
+<li>IDENTITY TERRITORY OVERLAP；</li>
+<li>TASK-BOUNDED COMPLEMENTARITY；</li>
+<li>FOUNDER TASTE BOUNDARY AWARENESS；</li>
+<li>三终局 taxonomy；</li>
+<li>上述乘法式 Founder Synergy 模型。</li>
+</ul>
+<h3 id="_2">尚缺</h3>
+<ul>
+<li>Jobs × Woz 的同期组织文档 / correspondence，对两人角色和治理关系做 P0 校准；</li>
+<li>同能力组合但失败的 founder-pair 反例；</li>
+<li>“自然解耦”与“关系恶化但未公开”之间的边界核验；</li>
+<li>Nintendo capability succession 的多代一手材料；</li>
+<li>founder role transition 的更广样本，避免两组传奇人物就生成普遍理论。</li>
+</ul>
+<hr />
+<h2 id="14-sources">14. Sources / 公开证据入口</h2>
+<h3 id="jobs-woz">Jobs × Woz</h3>
+<ol>
+<li>
+<p><strong>Steve Jobs, Playboy interview, 1985</strong> — P1 contemporary retrospective。用于 Apple I / Apple II、产品化、Wozniak 分工与两人后期关系的直接回顾。<br />
+   https://allaboutstevejobs.com/verbatim/interviews/playboy_1985</p>
+</li>
+<li>
+<p><strong>Steve Wozniak, BYTE interview, 1985; archived by Apple II History</strong> — P1。用于 Wozniak 对工程师身份、管理偏好、Apple 工程规模与个人角色变化的自述。<br />
+   https://www.apple2history.org/museum-a-l/articles/byte8501/</p>
+</li>
+<li>
+<p><strong>Steve Wozniak, Knowledge at Wharton interview</strong> — P1。用于两人角色形成、Wozniak 对 Jobs 技术理解与整合能力的回顾。<br />
+   https://knowledge.wharton.upenn.edu/article/steve-wozniak-on-apple-steve-jobs-and-the-value-of-a-good-prank/</p>
+</li>
+<li>
+<p><strong>Steve Jobs, Triumph of the Nerds interview, 1995</strong> — P1。用于 Apple II “packaged personal computer” 产品边界的后续回顾与交叉校准。<br />
+   https://allaboutstevejobs.com/videos/misc/triumph_of_the_nerds_interview_1995</p>
+</li>
+</ol>
+<h3 id="carmack-romero">Carmack × Romero</h3>
+<p>不在本文件复制来源表。事实与来源见：
+- <a href="/heroes-portal/book/research-notes/carmack-romero-complementary-error-correction-network-042.html">042 — Carmack × Romero：互补错误修正网络</a>
+- <a href="/heroes-portal/cases/CASE-016-early-id-software.html">CASE-016 — Early id Software</a>
+- <a href="/heroes-portal/evidence/CASE-016-early-id-software-source-ledger.html">CASE-016 Evidence Ledger</a></p>
+<hr />
+<h2 id="15">15. 下一步</h2>
+<h3 id="p0">P0</h3>
+<p>研究 <strong>Yokoi → Miyamoto → Iwata / Nintendo</strong>：</p>
+<p>重点不是再增加“任天堂名人名言”，而是检验：
+- Taste 是否真的发生代际传递；
+- 什么是 mentor influence，什么是独立形成；
+- prototype culture 是否是个人习惯还是组织制度；
+- senior critique 与 junior decision right 怎样配置；
+- capability succession 是否能跨人物持续。</p>
+<h3 id="p1">P1</h3>
+<p>寻找至少两个失败对照：
+- 技能高度互补但 Translation Bandwidth 低；
+- Error Complementarity 高但 Goal Alignment / Governance 失效；
+- 任务完成后仍因 founder identity 锁定而拒绝角色重分配。</p>
+<p>在这些反例加入前，本文件只提供研究语言，不提供“最佳创始团队公式”。</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / cross-industry/complementary-taste-founder-pairs-001.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

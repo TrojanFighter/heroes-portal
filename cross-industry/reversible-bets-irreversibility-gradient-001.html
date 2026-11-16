@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reversible Bets / Irreversibility Gradient — 可逆下注、创新期权与承诺升级 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl class="on"" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0" class="t2">0. 核心修正：创新管理不是“更敢失败”，而是重新设计失败成本</a><a href="#1-bezosone-way-door-two-way-door" class="t2">1. Bezos：one-way door / two-way door 提供“可逆性”一手管理语言</a><a href="#h" class="t3">本项目可迁移机制（H）</a><a href="#source" class="t3">Source</a><a href="#2-mcgrath-macmillan" class="t2">2. McGrath / MacMillan：高未知项目的早期产出是学习，不是预测命中</a><a href="#information-first-milestone-h" class="t3">INFORMATION-FIRST MILESTONE / 信息优先里程碑（H）</a><a href="#sources" class="t3">Sources</a><a href="#3-irreversibility-gradient" class="t2">3. IRREVERSIBILITY GRADIENT / 不可逆性梯度</a><a href="#4-prototype-question-made-executable" class="t2">4. Prototype 的更严格定义：QUESTION MADE EXECUTABLE</a><a href="#feasibility-prototype" class="t3">FEASIBILITY PROTOTYPE</a><a href="#behaviour-prototype" class="t3">BEHAVIOUR PROTOTYPE</a><a href="#desirability-prototype" class="t3">DESIRABILITY PROTOTYPE</a><a href="#production-prototype" class="t3">PRODUCTION PROTOTYPE</a><a href="#market-prototype" class="t3">MARKET PROTOTYPE</a><a href="#organization-prototype" class="t3">ORGANIZATION PROTOTYPE</a><a href="#5-option-value" class="t2">5. OPTION VALUE：早期投入可以买“以后继续”的权利，而不是买最终产品</a><a href="#6-perpetual-optionality" class="t2">6. 反面：PERPETUAL OPTIONALITY / 永久期权状态</a><a href="#7-christensenemergent-strategy-deliberate-execution" class="t2">7. Christensen：emergent strategy 不能永久替代 deliberate execution</a><a href="#explore-commit-switchh" class="t3">EXPLORE → COMMIT SWITCH（H）</a><a href="#sources_1" class="t3">Sources</a><a href="#8-grove" class="t2">8. Grove：等待更多信息本身也有成本</a><a href="#option-expiry-h" class="t3">OPTION EXPIRY / 期权过期（H）</a><a href="#source_1" class="t3">Source</a><a href="#9-one-way-door-two-way-doors" class="t2">9. One-way Door 可以经常被重新设计成一串 Two-way Doors</a><a href="#10" class="t2">10. 与现有节点的连接</a><a href="#self-obsolescence" class="t3">Self-Obsolescence</a><a href="#complementary-taste" class="t3">Complementary Taste</a><a href="#innovation-optionality" class="t3">Innovation Optionality</a><a href="#11-prototype-false-negative" class="t2">11. 当前边界：prototype 本身也可能制造 false negative</a><a href="#prototype-false-negative-problemopen" class="t3">PROTOTYPE FALSE-NEGATIVE PROBLEM（OPEN）</a></aside><article class="doc"><div class="col"><h1 id="reversible-bets-irreversibility-gradient">Reversible Bets / Irreversibility Gradient — 可逆下注、创新期权与承诺升级</h1>
+<ul>
+<li><strong>Status:</strong> CROSS-INDUSTRY RESEARCH NOTE / HYPOTHESIS FRAMEWORK / 2026-10-08</li>
+<li><strong>Program:</strong> D — 发达国家创新者与跨行业研究。</li>
+<li><strong>Related theory:</strong> <a href="/heroes-portal/cross-industry/self-obsolescence-second-answer-test-001.html">Self-Obsolescence / Second-Answer Test</a>、<a href="/heroes-portal/cross-industry/complementary-taste-founder-pairs-001.html">Complementary Taste / Founder Pair Lifecycle</a></li>
+<li><strong>Core question:</strong> 在高度不确定的创新里，组织怎样把大赌注拆成一系列更便宜、可撤销、能显著增加信息的下注；又在什么时候停止试探，升级为真正的资源承诺？</li>
+<li><strong>Evidence rule:</strong> REVERSIBLE BET、IRREVERSIBILITY GRADIENT、QUESTION-MADE-EXECUTABLE、PERPETUAL OPTIONALITY、OPTION EXPIRY 等均为本项目 H 级分析框架，不是 Bezos、McGrath、MacMillan、Christensen 或 Grove 的原始术语。不得把少数成功公司案例升级成普遍管理定律。</li>
+</ul>
+<hr />
+<h2 id="0">0. 核心修正：创新管理不是“更敢失败”，而是重新设计失败成本</h2>
+<p class="dc">“敢冒险 / 容忍失败”把性质完全不同的决定混在一起。</p>
+<p>更有解释力的问题是：</p>
+<ol>
+<li>当前决定有多可逆？</li>
+<li>一旦做错，回退成本有多高？</li>
+<li>这次下注能否显著减少最关键的不确定性？</li>
+<li>等待本身是否会损失窗口、人才、技术学习或市场位置？</li>
+<li>一旦证据逐渐收敛，组织是否有能力从探索切换到集中执行？</li>
+</ol>
+<p>工作命题：</p>
+<blockquote>
+<p><strong>高不确定性不应自动推出更多分析，而应优先推出更小的下注规模。</strong></p>
+</blockquote>
+<p>这不是反分析主义。真正未知的新市场 / 新产品往往缺少可供传统预测使用的历史数据；早期 artifact 的首要产出可能是信息，而不是完成度。</p>
+<hr />
+<h2 id="1-bezosone-way-door-two-way-door">1. Bezos：one-way door / two-way door 提供“可逆性”一手管理语言</h2>
+<p>Amazon 2015 年股东信明确区分：</p>
+<ul>
+<li><strong>Type 1 / one-way door</strong>：后果重大、不可逆或近乎不可逆，应更慢、更慎重地决策；</li>
+<li><strong>Type 2 / two-way door</strong>：可改变、可撤销，应该由高判断力个人或小团队快速决定。</li>
+</ul>
+<p>Bezos 同时警告，大组织会把大量 Type 2 决定也套用 Type 1 的重流程，造成速度下降、风险厌恶和实验不足。</p>
+<p>2016 年股东信又给出一个经验判断：许多决定在掌握约 70% 希望拥有的信息时就应行动；等待 90% 往往意味着过慢，同时必须擅长快速识别并纠正错误。</p>
+<h3 id="h">本项目可迁移机制（H）</h3>
+<p>不是机械采用“70% rule”，而是：</p>
+<blockquote>
+<p><strong>决策流程强度应与不可逆性匹配，而不是与组织规模或管理层焦虑匹配。</strong></p>
+</blockquote>
+<h3 id="source">Source</h3>
+<ul>
+<li>Jeff Bezos, <em>2015 Letter to Shareholders</em>, Amazon.
+  https://ir.aboutamazon.com/files/doc_financials/annual/2015-Letter-to-Shareholders.PDF</li>
+<li>Jeff Bezos, <em>2016 Letter to Shareholders</em>, Amazon.
+  https://www.aboutamazon.com/news/company-news/2016-letter-to-shareholders</li>
+</ul>
+<hr />
+<h2 id="2-mcgrath-macmillan">2. McGrath / MacMillan：高未知项目的早期产出是学习，不是预测命中</h2>
+<p>McGrath 与 MacMillan 1995 年提出 <strong>Discovery-Driven Planning</strong>，明确针对 new venture / unknown territory：成熟业务可以从历史经验外推，新业务却具有更高的 assumptions-to-knowledge ratio。</p>
+<p>McGrath 后来的直接表述是：</p>
+<blockquote>
+<p>这类环境应 <strong>plan to learn，而不是 plan to be right</strong>。</p>
+</blockquote>
+<p>因此早期计划的作用不是假装已经知道最终答案，而是：</p>
+<ul>
+<li>暴露关键假设；</li>
+<li>明确“哪些条件必须为真”；</li>
+<li>用最小开支优先攻击最危险假设；</li>
+<li>根据新证据修改计划。</li>
+</ul>
+<h3 id="information-first-milestone-h">INFORMATION-FIRST MILESTONE / 信息优先里程碑（H）</h3>
+<p>传统 milestone 常问：</p>
+<blockquote>
+<p>完成了多少资产 / 功能？</p>
+</blockquote>
+<p>高不确定性阶段更应该问：</p>
+<blockquote>
+<p><strong>这个阶段消灭了哪个关键未知量？</strong></p>
+</blockquote>
+<p>因此同样叫“prototype完成”，信息价值可能完全不同。</p>
+<h3 id="sources">Sources</h3>
+<ul>
+<li>Rita Gunther McGrath &amp; Ian C. MacMillan, <em>Discovery-Driven Planning</em>, Harvard Business Review, July–August 1995.
+  https://hbr.org/1995/07/discovery-driven-planning</li>
+<li>Rita McGrath, <em>Defining a Growth Strategy in Uncertain Times</em>, HBR IdeaCast, 2023.
+  https://hbr.org/podcast/2023/07/defining-a-growth-strategy-in-uncertain-times</li>
+</ul>
+<hr />
+<h2 id="3-irreversibility-gradient">3. IRREVERSIBILITY GRADIENT / 不可逆性梯度</h2>
+<p>创新项目不应只分“做 / 不做”。</p>
+<p>更接近现实的是：</p>
+<p>idea
+→ paper / logic test
+→ rough prototype
+→ playable prototype
+→ vertical slice
+→ limited production
+→ full production
+→ launch
+→ long-term brand / platform commitment</p>
+<p>越往右：</p>
+<ul>
+<li>sunk cost 增加；</li>
+<li>组织依赖增加；</li>
+<li>对外承诺增加；</li>
+<li>技术 / 内容 pipeline 被锁定；</li>
+<li>reversal cost 增加。</li>
+</ul>
+<p>因此提出 H：</p>
+<blockquote>
+<p><strong>Evidence quality 应随 irreversibility 同步上升。</strong></p>
+</blockquote>
+<p>如果投入不断上升，但核心 unknowns 没有下降，项目不是在“进展”，而是在扩大未来错误成本。</p>
+<hr />
+<h2 id="4-prototype-question-made-executable">4. Prototype 的更严格定义：QUESTION MADE EXECUTABLE</h2>
+<p>prototype 不应被定义成“小版本产品”或“给管理层看的样片”。</p>
+<p>本研究暂定义：</p>
+<blockquote>
+<p><strong>QUESTION MADE EXECUTABLE / 可以运行的问题：把一个关键假设转化成能与现实接触的 artifact。</strong></p>
+</blockquote>
+<p>按它真正要回答的问题，可拆为：</p>
+<h3 id="feasibility-prototype">FEASIBILITY PROTOTYPE</h3>
+<p>能不能做？性能 / 延迟 / 成本 / 技术约束是否成立？</p>
+<h3 id="behaviour-prototype">BEHAVIOUR PROTOTYPE</h3>
+<p>使用者 / 玩家实际会不会产生预期行为？</p>
+<h3 id="desirability-prototype">DESIRABILITY PROTOTYPE</h3>
+<p>即使会用，是否愿意继续、回来、付钱或主动传播？</p>
+<h3 id="production-prototype">PRODUCTION PROTOTYPE</h3>
+<p>团队能否以目标成本、速度和质量稳定重复生产？</p>
+<h3 id="market-prototype">MARKET PROTOTYPE</h3>
+<p>有没有真实用户愿意点击、报名、wishlist、预购、购买或推荐？</p>
+<h3 id="organization-prototype">ORGANIZATION PROTOTYPE</h3>
+<p>当前团队结构、创始组合、外包关系和 decision-right 分配能否持续合作？</p>
+<p>最后一项尤其容易被漏掉：产品可以被反复 prototype，创始关系和组织结构却常被当成一次性承诺。</p>
+<hr />
+<h2 id="5-option-value">5. OPTION VALUE：早期投入可以买“以后继续”的权利，而不是买最终产品</h2>
+<p>Real-options 语言可以帮助解释小额试验：</p>
+<blockquote>
+<p>小额前置投入的价值，不只在 artifact 本身，而在于它购买了“获得更多信息后继续投入、也可以不继续”的选择权。</p>
+</blockquote>
+<p>工作分解：</p>
+<p>Prototype Value
+≈ Artifact Value
++ Information Value
++ Future Option Value
++ Avoided Error Cost</p>
+<p>因此：</p>
+<blockquote>
+<p>9 个失败 prototype + 1 个进入制作，不等于前 9 个预算全部浪费。</p>
+</blockquote>
+<p>如果它们阻止更昂贵的错误进入 full production，失败样本本身具有信息收益。</p>
+<p>但这只能作为 H 级框架使用；不能在没有反事实预算 / 项目数据时，把所有失败 prototype 都宣称为“值得”。</p>
+<hr />
+<h2 id="6-perpetual-optionality">6. 反面：PERPETUAL OPTIONALITY / 永久期权状态</h2>
+<p>“保持可逆”也可以成为组织逃避承诺的借口。</p>
+<p>典型表现：</p>
+<ul>
+<li>endless pilot；</li>
+<li>endless prototype；</li>
+<li>repeated user research；</li>
+<li>永远等待更完整信息；</li>
+<li>不愿锁技术、内容、人员、品牌或市场窗口。</li>
+</ul>
+<p>于是需要区分：</p>
+<blockquote>
+<p><strong>探索价值</strong> 与 <strong>永远不 commit</strong>。</p>
+</blockquote>
+<p>真正的 option 会过期。</p>
+<hr />
+<h2 id="7-christensenemergent-strategy-deliberate-execution">7. Christensen：emergent strategy 不能永久替代 deliberate execution</h2>
+<p>Christensen 借 Mintzberg / Waters 的 deliberate vs emergent strategy 区分强调：当未来高度不确定时，组织应允许 emergent strategy 从实际机会与阻碍中形成；一旦有效方向清楚，deliberate strategy 的集中协调价值上升。</p>
+<p>HBS 对 Christensen 的总结同时引用 Discovery-Driven Planning 的核心问题：</p>
+<blockquote>
+<p>“What assumptions must prove true for this plan to work?”</p>
+</blockquote>
+<h3 id="explore-commit-switchh">EXPLORE → COMMIT SWITCH（H）</h3>
+<p>健康创新系统不是永远保持最大自由度，而是：</p>
+<ol>
+<li>未知高：允许 variation / small bets；</li>
+<li>evidence收敛：提高资源浓度；</li>
+<li>核心方向成立：降低内部自由度，进入 deliberate execution；</li>
+<li>环境再变：旧答案重新进入 revalidation。</li>
+</ol>
+<h3 id="sources_1">Sources</h3>
+<ul>
+<li>Harvard Business School Working Knowledge, <em>The Business of Life</em>.
+  https://www.library.hbs.edu/working-knowledge/the-business-of-life</li>
+<li>HBS Online, <em>Emergent vs. Deliberate Strategy: How &amp; When to Use Each</em> (updated 2026).
+  https://online.hbs.edu/blog/post/emergent-vs-deliberate-strategy</li>
+</ul>
+<hr />
+<h2 id="8-grove">8. Grove：等待更多信息本身也有成本</h2>
+<p>Andy Grove 1998 Academy of Management 演讲强调 strategic inflection point 早期应允许 experimentation / “let chaos reign”，观察不同业务单元如何适应，再从中学习；但他同样强调不能长期停留在 denial 与无序实验中，时间会让竞争环境继续变化。</p>
+<p>因此：</p>
+<h3 id="option-expiry-h">OPTION EXPIRY / 期权过期（H）</h3>
+<blockquote>
+<p><strong>等待不是零成本状态。</strong></p>
+</blockquote>
+<p>等待可能损失：</p>
+<ul>
+<li>技术窗口；</li>
+<li>市场先机；</li>
+<li>团队连续性；</li>
+<li>学习速度；</li>
+<li>供应链 / 平台位置；</li>
+<li>潜在作者的耐心与职业窗口。</li>
+</ul>
+<p>所以“多收集信息”与“快速行动”不能脱离 reversibility / expiry 讨论。</p>
+<h3 id="source_1">Source</h3>
+<ul>
+<li>Andrew S. Grove, <em>Academy of Management</em>, Intel, 1998.
+  https://www.intel.com/pressroom/archive/speeches/ag080998.htm</li>
+</ul>
+<hr />
+<h2 id="9-one-way-door-two-way-doors">9. One-way Door 可以经常被重新设计成一串 Two-way Doors</h2>
+<p>重大选择不一定天然只能“一次梭哈”。</p>
+<p>工作假说：</p>
+<blockquote>
+<p><strong>成熟的创新者会把巨大不可逆决定重构为 sequence of options。</strong></p>
+</blockquote>
+<p>例如一般结构：</p>
+<p>small test
+→ evidence
+→ limited commitment
+→ evidence
+→ capability build
+→ evidence
+→ concentrated commitment</p>
+<p>重要的是每一步都必须：</p>
+<ul>
+<li>有明确要解决的 unknown；</li>
+<li>有停止条件；</li>
+<li>有进入下一阶段的 evidence gate；</li>
+<li>不因 sunk cost 自动升级。</li>
+</ul>
+<p>这既适用于产品，也适用于团队 / 组织 / 渠道 / 技术路线。</p>
+<hr />
+<h2 id="10">10. 与现有节点的连接</h2>
+<h3 id="self-obsolescence">Self-Obsolescence</h3>
+<p>旧成功公式重新接受验证，需要能低成本产生反证；否则只有全面市场失败才会触发变化。</p>
+<h3 id="complementary-taste">Complementary Taste</h3>
+<p>Carmack × Romero 提示：产品 prototype 可以成功，而组织本身没有被 prototype。团队规模、授权、licensing、创始角色变化可能需要独立的小规模治理实验。</p>
+<h3 id="innovation-optionality">Innovation Optionality</h3>
+<p>取消产品不等于销毁知识、人才和未来重启权。好的 small bet 应尽量保留 residual capital。</p>
+<hr />
+<h2 id="11-prototype-false-negative">11. 当前边界：prototype 本身也可能制造 false negative</h2>
+<p>本框架目前不能推出：</p>
+<blockquote>
+<p>“一切伟大创新都应该先用廉价、低保真 prototype 证明。”</p>
+</blockquote>
+<p>下一轮必须专门压力测试：</p>
+<h3 id="prototype-false-negative-problemopen">PROTOTYPE FALSE-NEGATIVE PROBLEM（OPEN）</h3>
+<p>某些产品价值可能依赖：</p>
+<ul>
+<li>高保真感官体验；</li>
+<li>大规模网络效应；</li>
+<li>内容密度；</li>
+<li>长时间叙事累积；</li>
+<li>生态 / complements；</li>
+<li>品牌与社会意义；</li>
+<li>大规模组织协同；</li>
+<li>新用户学习后的行为变化。</li>
+</ul>
+<p>低保真版本可能系统性去掉“真正创造价值的变量”，从而错误证明：</p>
+<blockquote>
+<p>“这个idea不成立。”</p>
+</blockquote>
+<p>因此需要回答：</p>
+<ol>
+<li>什么类型的未知适合 cheap prototype？</li>
+<li>什么类型只能通过 higher-fidelity commitment 才可观察？</li>
+<li>prototype fidelity 应如何与假设类型匹配？</li>
+<li>哪些伟大产品如果按严格早期 metric / MVP 逻辑，会被提前杀死？</li>
+<li>怎样区分“需要耐心的伟大创新”和“用愿景为坏项目续命”？</li>
+</ol>
+<p>在补足反例前，不把 LEAN / PROTOTYPE FIRST 升级成普遍原则。</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / cross-industry/reversible-bets-irreversibility-gradient-001.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

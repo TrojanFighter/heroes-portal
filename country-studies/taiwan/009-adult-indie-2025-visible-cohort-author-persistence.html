@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>009 — 台湾成人独游2025可见发行队列：收益偏斜、发行商重叠与作者第二作存活 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl class="on"" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0" class="t2">0. 为什么要做这一层</a><a href="#_1" class="t3">但目录有明显重叠</a><a href="#mango-party15" class="t2">Mango Party：可见15款</a><a href="#_2" class="t3">解释</a><a href="#playmeow16" class="t2">PlayMeow：可见16款</a><a href="#_3" class="t3">解释</a><a href="#lewdloco92025-base-games" class="t2">LewdLoco：可见9款2025 base games</a><a href="#_4" class="t3">解释</a><a href="#a-repeat-studio" class="t2">A. 樹懶叫工作室：明显的repeat studio</a><a href="#b-tiramisu" class="t2">B. Tiramisu：从极小作品到连续商业项目</a><a href="#c-nagatoui" class="t2">C. NAGATOUI：低表现后仍做第二款</a><a href="#d-warumiyo" class="t2">D. Warumiyo：同年连续第二作</a><a href="#e-hentopia" class="t2">E. Hentopia：爆款后已经公开下一作</a><a href="#f-sigmaguro" class="t2">F. SiGMAGURO：低表现首作后仍继续</a><a href="#g-mokyumokyusoft-passionplaystudio" class="t2">G. MokyuMokyuSoft / PassionPlayStudio：当前只看到单款</a><a href="#serial-studio" class="t3">Serial studio</a><a href="#hit-acceleration" class="t3">Hit acceleration</a><a href="#long-tail-persistence" class="t3">Long-tail persistence</a><a href="#_5" class="t2">市场不是饱和到“不能做”，而是分层成熟</a><a href="#_6" class="t3">顶部</a><a href="#_7" class="t3">中间</a><a href="#_8" class="t3">底部</a><a href="#_9" class="t2">当前最重要的方法论结论</a></aside><article class="doc"><div class="col"><h1 id="009-2025">009 — 台湾成人独游2025可见发行队列：收益偏斜、发行商重叠与作者第二作存活</h1>
+<ul>
+<li>Status: VISIBLE-CATALOG SNAPSHOT / AUTHOR-PERSISTENCE PILOT / NOT COMPLETE MARKET CENSUS</li>
+<li>Program: C Taiwan comparator</li>
+<li>As of: 2026-10-08</li>
+<li>Source base: SteamDB当前发行商/开发商目录快照 + 官方发行商页面</li>
+<li>Publishers: Mango Party / PlayMeow / LewdLoco</li>
+<li>Unit: released base game（排除Demo、DLC、Soundtrack、Artbook）</li>
+<li>Core restriction:</li>
+<li>SteamDB发行商页对Mango Party / PlayMeow存在100条显示上限，因此本文件只称“可见目录样本”，不是全年完整发行总数；</li>
+<li>Steam合作伙伴可自行填写publisher/developer字段，SteamDB也明确提示可能存在误归属；</li>
+<li>同一作品可能同时出现在多个发行商目录，<strong>绝对不能把三家产品数相加当市场规模</strong>；</li>
+<li>followers / peak CCU / rating用于可见度与相对表现，不换算销量或收入。</li>
+</ul>
+<h2 id="0">0. 为什么要做这一层</h2>
+<p class="dc">只看《Summer Clover》《V-LOVER!》《Take Me To The Dungeon!!》会把市场误读成高收益赛道。</p>
+<p>本轮改用：
+- 三家专业发行商的当前SteamDB目录；
+- 只抽2025正式发售的base games；
+- 保留头部、中腰部和低尾；
+- 再抽若干开发者追踪其Steam目录，观察首作/后续作是否持续。</p>
+<p>目标不是估算整个台湾R18市场收入，而是回答：</p>
+<blockquote>
+<p>在专业发行商已经形成规模以后，普通作品的“典型可见表现”是什么？创作者做完一作之后会不会继续？</p>
+</blockquote>
+<hr />
+<h1 id="1">1. 发行商规模不能简单相加</h1>
+<p>当前SteamDB目录：
+- Mango Party News：页面显示100 products，且明确提示结果因过多被限制；
+- PlayMeow：页面显示100 products，同样提示结果被限制；
+- LewdLoco：67 products。</p>
+<p>Sources:
+https://steamdb.info/publisher/Mango%20Party%20News/
+https://steamdb.info/publisher/Playmeow/
+https://steamdb.info/publisher/LewdLoco/</p>
+<p>官方Steam关注：
+- Mango Party约32万+关注；
+- PlayMeow约17万+关注。</p>
+<p>Sources:
+https://store.steampowered.com/publisher/mangoparty/about/
+https://store.steampowered.com/publisher/playmeow/about/</p>
+<h3 id="_1">但目录有明显重叠</h3>
+<p>例如：
+- 《Homebody Hostess》SteamDB同时列Mango Party、LewdLoco；
+- 《Taiwan Love Story⁵》同时出现在Mango Party与LewdLoco目录；
+- 《Lewd Gym》等也存在多发行商/历史合作字段。</p>
+<p>所以：</p>
+<p>Mango 100+
++ PlayMeow 100+
++ LewdLoco 67
+≠ 267款独立作品
+≠ 267个台湾开发项目。</p>
+<p>正确单位应拆成：
+- unique app；
+- unique developer；
+- publisher relationship；
+- Taiwan legal entity；
+- developer location。</p>
+<p>这再次支持“台湾是发行枢纽”而不等于“全部作品都是台湾自产”。</p>
+<hr />
+<h1 id="2-2025">2. 2025可见目录快照：三家发行商表现层级明显不同</h1>
+<p>以下只使用当前SteamDB页面可见、2025发售、base game条目。</p>
+<h2 id="mango-party15">Mango Party：可见15款</h2>
+<p>样本包括：
+Sweet Succubus Home、Isekai Sex Boutique、Love Mansion、NTR Office、AV Director Life!、Mirai&rsquo;s Midnight Stream、My Wife Wants to Be a Professional Cosplayer?!、The Censor DX Edition、Cursed Armor 2、Busty Idol Manor、Exorcist of Lust: Kaede、Latex &amp; Tentacles、NTRaholic SS、Delivery Hot、Homebody Hostess。</p>
+<p>当前快照的描述统计：
+- n = 15；
+- follower中位数 ≈ 7,480；
+- peak CCU中位数 ≈ 536；
+- rating中位数 ≈ 79.4%；
+- 约27%样本peak &gt;= 1,000；
+- 约7%样本peak &lt; 100；
+- top peak ≈ 2,959；
+- low visible peak ≈ 92。</p>
+<p>Source:
+https://steamdb.info/publisher/Mango%20Party%20News/</p>
+<h3 id="_2">解释</h3>
+<p>Mango当前可见2025样本的下限明显高于另外两家：
+- 它已经拥有很强发行品牌与Steam follower资产；
+- 头部/中腰部较厚；
+- 但仍存在60%上下rating的失败/争议产品，例如《Delivery Hot》；
+- “Mango发行”不是质量保险，只是提高了distribution floor。</p>
+<hr />
+<h2 id="playmeow16">PlayMeow：可见16款</h2>
+<p>样本包括：
+Fallen Elf Freya、Sex Change Contract and Molester Girl、Days with My Lonely Teacher、Fox Sex Farm、The Daily Life of Serving Doll、Female Anchor Next Door、Travel through the adult game and build a harem、My Royal Maid R、Futanari Master!、Blood Crawler、Holy Whore Emily、Destroy! Mosaic!、Lustful Butler And Charming Sisters、Days In Palis、MASSAGE MY EX-BULLY、Freestyle Man in Office。</p>
+<p>当前快照：
+- n = 16；
+- follower中位数 ≈ 5,790；
+- peak CCU中位数 ≈ 199；
+- rating中位数 ≈ 74.8%；
+- 约6%样本peak &gt;= 1,000；
+- 25%样本peak &lt; 100；
+- top peak ≈ 1,013；
+- low visible peak ≈ 28。</p>
+<p>Source:
+https://steamdb.info/publisher/Playmeow/</p>
+<h3 id="_3">解释</h3>
+<p>PlayMeow更像一个“更宽的creator funnel”：
+- 既有《Fallen Elf Freya》这种千人峰值产品；
+- 也有几十峰值的小产品；
+- 与其低代码工具/creator education策略一致：更多创作者能进入，distribution variance自然更大。</p>
+<p>这不是负面判断。它可能说明PlayMeow承担了比Mango更明显的“creator conversion / incubation”功能。</p>
+<hr />
+<h2 id="lewdloco92025-base-games">LewdLoco：可见9款2025 base games</h2>
+<p>样本：
+V-LOVER!、Dark Lord Leona、Futanari&rsquo;s Sex World!、With a VTuber Girl、SexCP-069、Tower of Megami Descents、Homebody Hostess、Koumi-Jima after Training with Konomi-chan、NTR Sexy girl with Cold-hearded。</p>
+<p>当前快照：
+- n = 9；
+- follower中位数 ≈ 2,356；
+- peak CCU中位数 ≈ 57；
+- rating中位数 ≈ 72.0%；
+- 约11%样本peak &gt;= 1,000；
+- 约67%样本peak &lt; 100；
+- V-LOVER! peak ≈ 2,112；
+- low tail最低可见peak ≈ 13。</p>
+<p>Source:
+https://steamdb.info/publisher/LewdLoco/</p>
+<h3 id="_4">解释</h3>
+<p>LewdLoco最能暴露典型右偏分布：</p>
+<p>V-LOVER! 2,112 peak
+vs
+多个产品只有13—86 peak。</p>
+<p>所以一个成人专业发行商可以同时拥有：
+- 真正爆款；
+- 小而稳定niche；
+- 极弱长尾；
+- 低评价产品。</p>
+<p>这就是portfolio publishing存在的经济理由之一。</p>
+<hr />
+<h1 id="3">3. 这不是三家“发行能力排名”</h1>
+<p>以上统计<strong>不能</strong>直接解释成：</p>
+<p>Mango &gt; PlayMeow &gt; LewdLoco。</p>
+<p>原因：
+1. Mango / PlayMeow页面被SteamDB限制到100条，可见样本可能漏掉更低rating产品；
+2. 各家2025发行数量不同；
+3. 发行商选择的项目成熟度不同；
+4. 品类、价格、发行月份不同；
+5. 有联合发行和重复条目；
+6. developer品牌资产不同；
+7. 2025作品观察窗口不完全一致。</p>
+<p>当前只能说：</p>
+<blockquote>
+<p>三家目录共同证明专业发行并没有消除极端收益偏斜；而不同发行商可能分别选择了更成熟的项目、较宽的creator funnel或不同风险组合。</p>
+</blockquote>
+<hr />
+<h1 id="4">4. 开发者“第二作存活”初步追踪</h1>
+<p>本轮不是只追头部作者，而是从2025样本抽出低、中、高不同表现开发者，检查Steam开发者目录。</p>
+<h2 id="a-repeat-studio">A. 樹懶叫工作室：明显的repeat studio</h2>
+<p>《Homebody Hostess》开发者之一樹懶叫工作室当前SteamDB目录有25 products，游戏包括：
+- Wolf of Stock Street (2021)
+- Idol Hands (2022)
+- Demon Speakeasy (2022)
+- Idol Hands 2 / Daily life with my succubus boss / Lewd Gym (2023)
+- Lovey-Dovey Lockdown / Half-Demon Shinobi (2024)
+- Homebody Hostess (2025)</p>
+<p>Source:
+https://steamdb.info/developer/%E6%A8%B9%E6%87%B6%E5%8F%AB%E5%B7%A5%E4%BD%9C%E5%AE%A4/</p>
+<p>这是成熟的“serial small-team studio”，不是一作作者。</p>
+<hr />
+<h2 id="b-tiramisu">B. Tiramisu：从极小作品到连续商业项目</h2>
+<p>SteamDB开发者目录：
+- Kemps (2023)：peak 6，follows约39；
+- The Censor DX Edition (2025)：peak约2,959；
+- NTRaholic SS (2025)：peak约1,241；
+- Lifeguard Holic (2026)：peak约2,533。</p>
+<p>Source:
+https://steamdb.info/developer/Tiramisu/</p>
+<p>这是非常有价值的反幸存者材料：</p>
+<blockquote>
+<p>一个开发者曾经有几乎没人玩的Steam产品，后来并没有退出，而是两年后连续做出大幅更高表现作品。</p>
+</blockquote>
+<p>因此“首作弱→作者退出”绝不是必然。</p>
+<hr />
+<h2 id="c-nagatoui">C. NAGATOUI：低表现后仍做第二款</h2>
+<p>SteamDB：
+- Devils&rsquo; Night Party (2023)：peak约126，rating约57%；
+- Futanari Master! (2025)：peak约28，rating约74%。</p>
+<p>Source:
+https://steamdb.info/developer/NAGATOUI/</p>
+<p>从商业可见度看并没有走向爆款，但开发者至少持续两年以上继续制作。</p>
+<hr />
+<h2 id="d-warumiyo">D. Warumiyo：同年连续第二作</h2>
+<p>SteamDB：
+- MASSAGE MY EX-BULLY (2025)：peak约955；
+- The Taming Massage Parlor ~Mari&rsquo;s Story~ (2025)：peak约455。</p>
+<p>Source:
+https://steamdb.info/developer/Warumiyo/</p>
+<p>这体现一种成人indie常见策略：
+<strong>复用题材/系统/生产管线，快速做第二款而不是五年磨一作。</strong></p>
+<hr />
+<h2 id="e-hentopia">E. Hentopia：爆款后已经公开下一作</h2>
+<p>SteamDB：
+- V-LOVER! (2025)：peak约2,112；
+- Ghost Lover：Coming Soon。</p>
+<p>Source:
+https://steamdb.info/developer/Hentopia/</p>
+<p>说明头部作者正在形成IP/团队连续生产，而不是一次性项目。</p>
+<hr />
+<h2 id="f-sigmaguro">F. SiGMAGURO：低表现首作后仍继续</h2>
+<p>SteamDB：
+- Tower of Megami Descents (2025)：peak约27；
+- Ayane: The Pregnancy Planet (2026)：peak约41。</p>
+<p>Source:
+https://steamdb.info/developer/SiGMAGURO/</p>
+<p>这是对“低尾=死亡”的直接反例。</p>
+<p>至少在该类小scope成人游戏中：</p>
+<blockquote>
+<p>27 peak并不必然意味着开发者停止。</p>
+</blockquote>
+<hr />
+<h2 id="g-mokyumokyusoft-passionplaystudio">G. MokyuMokyuSoft / PassionPlayStudio：当前只看到单款</h2>
+<p>MokyuMokyuSoft：
+- Exorcist of Lust: Kaede (2025)：当前目录只看到1款。</p>
+<p>https://steamdb.info/developer/MokyuMokyuSoft/</p>
+<p>PassionPlayStudio：
+- Days In Palis (2025)：当前目录只看到1款。</p>
+<p>https://steamdb.info/developer/PassionPlayStudio/</p>
+<p>这只能编码：
+ONE_VISIBLE_STEAM_TITLE_AS_OF_2026-10</p>
+<p>不能写：
+- 团队解散；
+- 退出行业；
+- 项目失败。</p>
+<p>可能存在DLsite、itch、同人平台、改名或未公开下一作。</p>
+<hr />
+<h1 id="5-r18">5. 初步作者存活模型：R18更像“连续小赌注”而不是“一作定终身”</h1>
+<p>从这一小组样本能看到三类路径：</p>
+<h3 id="serial-studio">Serial studio</h3>
+<p>樹懶叫工作室：
+多年连续生产、多个项目、多个发行关系。</p>
+<h3 id="hit-acceleration">Hit acceleration</h3>
+<p>Tiramisu / Hentopia：
+前作/初作 → 强市场反馈 → 快速下一作与更大scope。</p>
+<h3 id="long-tail-persistence">Long-tail persistence</h3>
+<p>NAGATOUI / SiGMAGURO：
+低峰值项目后仍继续制作。</p>
+<p>因此成人独游相对传统premium indie的一个重要结构优势可能是：</p>
+<p><strong>smaller scope
++ reusable art/system pipeline
++ explicit niche demand
++ publisher infrastructure
+→ lower cost of another attempt.</strong></p>
+<p>也就是说，单个作品失败的职业终局风险可能更低，因为作者可以更快再试一款。</p>
+<p>Status: PROMISING HYPOTHESIS.</p>
+<p>还缺：
+- 开发成本；
+- 实际净收入；
+- 作者是否full-time；
+- 第二作之间是否靠接案/本职工作维持；
+- 被发行商拒绝的作者；
+- 完全停止更新的开发者分母。</p>
+<hr />
+<h1 id="6-risk-pooling">6. 发行商越来越像risk-pooling机构</h1>
+<p>LewdLoco官方业务说明：
+- 从开发到销售的技术支持；
+- 本地化翻译/配音；
+- 游戏测试、优化；
+- Steam / DLsite上架；
+- 数据分析、target marketing、promotion；
+- VTuber / media / event exposure；
+- team matching。</p>
+<p>Source:
+https://www.lewdloco.com/
+https://www.lewdloco.com/%E5%90%88%E4%BD%9C%E6%9F%A5%E8%A9%A2</p>
+<p>Mango Party公司自述也包含：
+- 投资；
+- 产品顾问；
+- 翻译；
+- 技术/开发支持；
+- 移植；
+- 社群/媒体营销。</p>
+<p>Source:
+https://www.cake.me/companies/store-steampowered-franchise-mangoparty</p>
+<p>PlayMeow则进一步加入：
+- low-code creator tool；
+- creator education；
+- own platform；
+- funding / publishing pipeline。</p>
+<p>这三家并不是“传统发行商复制品”，更像成人indie专门的：
+<strong>portfolio selector + shared services + audience aggregator + risk pool</strong>。</p>
+<hr />
+<h1 id="7">7. 但最重要的商业条款仍是黑箱</h1>
+<p>本轮没有找到三家公开标准化的：
+- publisher advance；
+- minimum guarantee；
+- revenue split；
+- recoup waterfall；
+- marketing recoup；
+- IP ownership；
+- sequel option；
+- exclusivity；
+- localization cost allocation。</p>
+<p>LewdLoco合作页公开的是服务范围，不公开term sheet。
+Mango / PlayMeow公开页面同样以合作联络为主。</p>
+<p>因此不能从“发行商提供很多服务”推导：</p>
+<blockquote>
+<p>开发者拿到的钱很多 / 条款友好 / IP一定归作者。</p>
+</blockquote>
+<p>这恰恰是下一阶段最需要访谈、开发者公开复盘或合同泄露/范本才能补的证据。</p>
+<hr />
+<h1 id="8">8. 对市场空间的新判断</h1>
+<h2 id="_5">市场不是饱和到“不能做”，而是分层成熟</h2>
+<h3 id="_6">顶部</h3>
+<p>仍有可观爆款空间。
+2025可见样本里仍出现2,000—3,000 peak级产品。</p>
+<h3 id="_7">中间</h3>
+<p>200—900 peak产品很多，这可能才是专业发行商真正稳定的“中腰部”。</p>
+<h3 id="_8">底部</h3>
+<p>13—100 peak同样大量存在，且有些开发者仍继续下一作。</p>
+<p>所以“市场空间”不能只问：</p>
+<blockquote>
+<p>还能不能出爆款？</p>
+</blockquote>
+<p>更应该问：</p>
+<blockquote>
+<p>在什么开发成本下，50 / 200 / 500 peak的产品是否还能支撑下一次尝试？</p>
+</blockquote>
+<p>真正决定产业可持续性的不是头部销量，而是：
+<strong>median project economics + second-attempt survival</strong>。</p>
+<p>当前缺成本与净收入，不能回答盈亏平衡。</p>
+<hr />
+<h1 id="9">9. 下一步：从作品分母转向“开发者经济学”</h1>
+<p>下一轮优先：</p>
+<ol>
+<li>对2024/2025发行目录做unique developer去重；</li>
+<li>追每个developer首作年份、作品数、最大/最小表现、是否有2026/2027新作；</li>
+<li>抽低尾作者寻找：
+   - Patreon/FANBOX；
+   - DLsite；
+   - freelance job；
+   - full-time employment；
+   - publisher funding；</li>
+<li>搜发行商与开发者公开合同/分成复盘；</li>
+<li>建“second-title survival”：
+   - 2024首发作者在2026是否有第二款；
+   - 高/中/低表现分别比较；</li>
+<li>只有拿到成本/分成后，才估算成人indie的真实median career viability。</li>
+</ol>
+<h2 id="_9">当前最重要的方法论结论</h2>
+<blockquote>
+<p>成人游戏的优势未必是“单作更容易爆”，而可能是“scope小、需求明确、发行服务成熟，使创作者更容易获得第二次和第三次尝试”。</p>
+</blockquote>
+<p>这比只看爆款更接近行业长期竞争力。</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / country-studies/taiwan/009-adult-indie-2025-visible-cohort-author-persistence.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

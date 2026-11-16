@@ -1,0 +1,733 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>C015 — Capability-Shaped Project Formation / 能力反向立项 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl class="on"" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#definition" class="t2">Definition</a><a href="#falsification-test" class="t2">Falsification Test</a><a href="#evidence-for" class="t2">Evidence For</a><a href="#counterpressure" class="t2">Counterpressure</a><a href="#case-026-brigador-fit-strong-launch-failed" class="t3">CASE-026 Brigador — FIT-STRONG / LAUNCH-FAILED</a><a href="#case-047-the-witness-capability-expanded-counter-model" class="t3">CASE-047 The Witness — CAPABILITY-EXPANDED counter-model</a><a href="#case-048-the-magic-circle-second-fit-strong-market-failed-pressure" class="t3">CASE-048 The Magic Circle — second FIT-STRONG / MARKET-FAILED pressure</a><a href="#case-049-outer-wilds-external-capital-capability-expanded" class="t3">CASE-049 Outer Wilds — external-capital CAPABILITY-EXPANDED</a><a href="#case-050-nomada-gris-capability-composed" class="t3">CASE-050 Nomada / GRIS — CAPABILITY-COMPOSED</a><a href="#case-051-zachtronics-fit-lock-in-capability-path-dependence" class="t3">CASE-051 Zachtronics — FIT-LOCK-IN / capability path dependence</a><a href="#case-058-spiderweb-software-second-fit-lock-in-anchor" class="t3">CASE-058 Spiderweb Software — second FIT-LOCK-IN anchor</a><a href="#case-020-into-the-breach-lock-in-prevention-optionality-preservation" class="t3">CASE-020 Into the Breach — LOCK-IN PREVENTION / optionality preservation</a><a href="#case-060-croteam-escaping-mature-product-grammar-by-staged-decoupling" class="t3">CASE-060 Croteam — escaping mature product grammar by staged decoupling</a><a href="#case-052-house-house-grant-financed-capability-expansion" class="t3">CASE-052 House House — GRANT-FINANCED capability expansion</a><a href="#case-053-kenny-sun-longitudinal-capability-formation" class="t3">CASE-053 Kenny Sun — longitudinal capability formation</a><a href="#case-054-limit-theory-fit-trap-capability-attracts-its-own-problem-surface" class="t3">CASE-054 Limit Theory — FIT-TRAP / capability attracts its own problem surface</a><a href="#case-055-factorio-deep-tech-success-with-explicit-stop-conditions" class="t3">CASE-055 Factorio — deep-tech success with explicit stop conditions</a><a href="#case-056-playdead-complementary-founders-solve-capability-gaps-but-create-governance-obligations" class="t3">CASE-056 Playdead — complementary founders solve capability gaps but create governance obligations</a><a href="#case-057-thatgamecompany-equity-capital-moves-the-control-surface" class="t3">CASE-057 thatgamecompany — equity capital moves the control surface</a><a href="#other-boundaries" class="t3">Other boundaries</a><a href="#distinction-from-existing-claims" class="t2">Distinction from Existing Claims</a><a href="#c004-manufacture-production-conditions" class="t3">C004 — manufacture production conditions</a><a href="#c007-redefine-problem-cost-structure" class="t3">C007 — redefine problem / cost structure</a><a href="#c003-capability-capital" class="t3">C003 — capability capital</a><a href="#current-reading" class="t2">Current Reading</a><a href="#boundary-forbidden-inference" class="t2">Boundary / Forbidden Inference</a><a href="#next-evidence-needed" class="t2">Next Evidence Needed</a></aside><article class="doc"><div class="col"><h1 id="c015-capability-shaped-project-formation">C015 — Capability-Shaped Project Formation / 能力反向立项</h1>
+<ul>
+<li>Claim ID: C015</li>
+<li>Statement: 在资源受限的作者型游戏中，一部分高价值项目不是先确定“完整游戏愿景”再被迫缩小，而是主创先识别自己的不对称能力、已知弱项与可获得外围资源，再反向选择或重写项目，使核心体验主要由强项产生，并把弱项相关的高成本 obligation 删除、抽象、复用或外围化；这种“能力反向立项”本身是一种设计能力，而不只是项目管理。</li>
+<li>Scope: 作者型 / 极小团队 / 小团队的 0→1 立项与早期产品定义；不主张所有成功独游都必须按个人短板设计，也不主张能力越偏科越好。</li>
+<li>Status: SUPPORTED</li>
+<li>Last reviewed: 2026-10-07</li>
+<li>Related Cases: CASE-007, CASE-008, CASE-018, CASE-020, CASE-026, CASE-042, CASE-043, CASE-047, CASE-048, CASE-049, CASE-050, CASE-051, CASE-052, CASE-053, CASE-054, CASE-055, CASE-056, CASE-057, CASE-058, CASE-059, CASE-060</li>
+</ul>
+<h2 id="definition">Definition</h2>
+<p class="dc">这里把机制暂定名为：</p>
+<blockquote>
+<p><strong>Capability-Shaped Project Formation（能力反向立项）</strong></p>
+</blockquote>
+<p>它不是简单的 <code>scope cut</code>。</p>
+<p>判据是：</p>
+<ol>
+<li>主创对自己的 capability vector 有显性或可观察的认识；</li>
+<li>这种认识发生在核心产品定义 / 早期制作阶段，而不是只在后期救火；</li>
+<li>项目的价值密度被主动压到强项上；</li>
+<li>弱项对应的昂贵生产 obligation 被删除、抽象、借用工具、复用旧资产或交给 specialist periphery；</li>
+<li>最终“这个游戏是什么”因此被改变，而不只是“同一个游戏少做一些内容”。</li>
+</ol>
+<h2 id="falsification-test">Falsification Test</h2>
+<p>支持证据：
+- creator contemporaneously says what they are good/bad at and changes project shape accordingly;
+- project mechanics / representation / tooling align unusually well with pre-existing asymmetric capability;
+- costly weak-skill obligations are consciously removed or externalized;
+- later project history shows this was a repeatable selection method rather than one accidental fit.</p>
+<p>反驳证据：
+- project concept was fixed independently of creator capability and only later survived through brute-force labor;
+- the alleged “fit” appears only in post-success storytelling;
+- creators repeatedly choose projects requiring their weakest capabilities without compensating structures yet perform equally well;
+- controlling for tool access, runway, collaborators and market timing removes most of the supposed advantage.</p>
+<h2 id="evidence-for">Evidence For</h2>
+<table>
+<thead>
+<tr>
+<th>Evidence ID</th>
+<th>Case</th>
+<th>Mechanism</th>
+<th>Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CASE-007:E004</td>
+<td>Gunpoint</td>
+<td>Francis uses years of criticism to judge whether a small idea is unusual/testable rather than reproducing large games</td>
+<td>high</td>
+</tr>
+<tr>
+<td>CASE-007:E006</td>
+<td>Gunpoint</td>
+<td>creator explicitly describes compressing the thing he loves into a simple reusable rule system</td>
+<td>high</td>
+</tr>
+<tr>
+<td>CASE-007:E008</td>
+<td>Gunpoint</td>
+<td>contemporaneous roadmap cut removes scripted content that was expensive but low-value for “Gunpoint as a game”</td>
+<td>high</td>
+</tr>
+<tr>
+<td>CASE-008:E001</td>
+<td>Dream Quest</td>
+<td>Whalen enters with card-game/math/system capital, existing engine and weak/unstable art access; product remains abstract and system-dense</td>
+<td>medium</td>
+</tr>
+<tr>
+<td>CASE-018:E005</td>
+<td>RollerCoaster Tycoon</td>
+<td>Sawyer uses the language/toolchain in which he personally works fastest and most reliably to support simulation density</td>
+<td>high</td>
+</tr>
+<tr>
+<td>CASE-018:E008</td>
+<td>RollerCoaster Tycoon 2</td>
+<td>deliberately refuses a multi-year graphical prestige upgrade and invests in interaction/construction/gameplay instead</td>
+<td>high</td>
+</tr>
+<tr>
+<td>CASE-042:E005</td>
+<td>The First Tree</td>
+<td>contemporaneous Wehle post explicitly names his strengths/weaknesses, keeps project short/simple and buys/modifies models/music/scripts</td>
+<td>very high</td>
+</tr>
+<tr>
+<td>CASE-042:E006</td>
+<td>The First Tree</td>
+<td>launch-period reflection ties scope, Asset Store use and visual market surface into one production strategy</td>
+<td>high</td>
+</tr>
+<tr>
+<td>CASE-043:E006</td>
+<td>Everything</td>
+<td>OReilly explicitly frames abstraction/procedural movement as both limitation-aware and artistically intentional</td>
+<td>high</td>
+</tr>
+<tr>
+<td>CASE-043:E009</td>
+<td>Everything</td>
+<td>later direct account confirms locomotion was optimization/problem-redefinition, while still technically difficult</td>
+<td>medium-high</td>
+</tr>
+<tr>
+<td>CASE-051:E004</td>
+<td>TIS-100</td>
+<td>Barth abandons a more art/content-heavy concept as too expensive and extracts an assembly-code puzzle into a viable product</td>
+<td>very high</td>
+</tr>
+<tr>
+<td>CASE-052:E001</td>
+<td>Untitled Goose Game</td>
+<td>team works backward from desired comic situations into minimal AI/object systems instead of inheriting a standard stealth specification</td>
+<td>high</td>
+</tr>
+<tr>
+<td>CASE-053:E005</td>
+<td>Kenny Sun / Hatbox</td>
+<td>retrospective confirms weekend shipping, 2018 full-time transition and broad solo capability accumulated before Hatbox</td>
+<td>high</td>
+</tr>
+<tr>
+<td>CASE-053:E006</td>
+<td>Kenny Sun / Hatbox</td>
+<td>2016 prototype was shelved when scope exceeded free-time frontier, then restarted after production conditions changed; later publisher perimeter externalized selling/release weaknesses</td>
+<td>very high</td>
+</tr>
+<tr>
+<td>CASE-020:E003</td>
+<td>Into the Breach</td>
+<td>after FTL, Subset deliberately avoids designing to fan expectations, delays announcement, and tries to make a new/different game while retaining shared design ethos; supports early lock-in prevention rather than mature lock-in escape</td>
+<td>high</td>
+</tr>
+<tr>
+<td>CASE-060:E002</td>
+<td>Croteam / The Talos Principle</td>
+<td>old Serious Sam mechanics spawned a separate puzzle thesis; cross-testing, public alpha, deletion and automation formed a new product validation grammar on retained engine capability</td>
+<td>very high</td>
+</tr>
+<tr>
+<td>CASE-054:E003</td>
+<td>Limit Theory</td>
+<td>custom-engine rationale explicitly combines procedural-control requirements with creator enthusiasm for engine / graphics-engine design</td>
+<td>high</td>
+</tr>
+<tr>
+<td>CASE-054:E006</td>
+<td>Limit Theory</td>
+<td>engine/performance progress culminates in 2000+ ship demo while content implementation / gameplay are still described as next</td>
+<td>very high</td>
+</tr>
+<tr>
+<td>CASE-054:E007</td>
+<td>Limit Theory</td>
+<td>cancellation records far-from-complete product, exhausted resources and an engine more mature than game code</td>
+<td>very high</td>
+</tr>
+</tbody>
+</table>
+<p>| CASE-059:E002 | Slay the Spire | Anthony 的 card-game / roguelike taste 与工作期间 design document 先于公司形成，项目形态围绕这种作者能力组合展开，而不是复制雇主产品 grammar | high |</p>
+<h2 id="counterpressure">Counterpressure</h2>
+<h3 id="case-026-brigador-fit-strong-launch-failed">CASE-026 Brigador — FIT-STRONG / LAUNCH-FAILED</h3>
+<p>Brigador is now the strongest direct pressure against turning C015 into success doctrine.</p>
+<p>Direct creator evidence shows:
+- multiple prototypes before the final direction;
+- explicit rejection of a four-player arena project the team did not actually like;
+- team-specific taste/capability entering the final design;
+- custom technology, three-space aiming and a digital-kitbash art pipeline tightly coupled to the product;
+- narrative/music specialist work peripheralized to collaborators.</p>
+<p>Yet the 2016 launch was still commercially unsuccessful.</p>
+<p>Therefore:</p>
+<blockquote>
+<p><strong>Capability–Project Fit can be strong while market fit, onboarding, legibility and timing are weak.</strong></p>
+</blockquote>
+<p>C015 describes a project-formation technique, not a commercial success condition.</p>
+<h3 id="case-047-the-witness-capability-expanded-counter-model">CASE-047 The Witness — CAPABILITY-EXPANDED counter-model</h3>
+<p>The Witness demonstrates a second route:</p>
+<blockquote>
+<p><strong>Instead of changing the project to fit the founder&rsquo;s current capability set, a founder with sufficient capital can acquire capabilities until the organization fits the project.</strong></p>
+</blockquote>
+<p>Blow&rsquo;s Braid proceeds purchased a long runway and allowed him to preserve authorial control while adding:
+- a core art team;
+- architects;
+- landscape architects;
+- specialist sound / platform work.</p>
+<p>This does not refute C015. It limits its domain:</p>
+<blockquote>
+<p><strong>Capability-shaped formation is most binding when capability acquisition is expensive, slow, control-diluting or unavailable.</strong></p>
+</blockquote>
+<p>When founder-owned capital and recruiting power are unusually strong, a project may be <code>CAPABILITY-EXPANDED</code> instead.</p>
+<h3 id="case-048-the-magic-circle-second-fit-strong-market-failed-pressure">CASE-048 The Magic Circle — second FIT-STRONG / MARKET-FAILED pressure</h3>
+<p>The Magic Circle adds a structurally different failure sample.</p>
+<p>Its three core creators had unusually strong fit with the project:
+- immersive-sim design / narrative / FX / AI prehistory;
+- game-development culture used as subject matter;
+- player-editable AI used as the core mechanic;
+- deliberate rejection of process-heavy AAA collaboration norms.</p>
+<p>Yet creator-reported sales were still unsustainable, and the team itself diagnosed unclear genre, niche-within-niche framing and lack of a marketing budget.</p>
+<p>Therefore the audit must separate:</p>
+<ol>
+<li><strong>Creator–Project Fit</strong> — are these people unusually suited to make this game?</li>
+<li><strong>Project–Market Selection</strong> — is this game, in this market and at this time, a sufficiently good commercial bet?</li>
+</ol>
+<p>The Magic Circle is strong on the first and weak on the second.</p>
+<h3 id="case-049-outer-wilds-external-capital-capability-expanded">CASE-049 Outer Wilds — external-capital CAPABILITY-EXPANDED</h3>
+<p>Outer Wilds adds the missing capital-source comparison.</p>
+<p>The Witness used founder-owned retained earnings. Outer Wilds moved from student thesis / playable evidence into:
+- Mobius studio support;
+- Fig funding;
+- team expansion;
+- Annapurna publishing;
+- Xbox / Epic partnerships.</p>
+<p>The developer explicitly connected those partnerships to keeping the studio alive long enough to ship at the desired quality.</p>
+<p>This introduces a new distinction:</p>
+<blockquote>
+<p><strong>Capability expansion is not one mechanism. Its control cost depends on who supplies the capital.</strong></p>
+</blockquote>
+<p>Founder-owned money primarily costs burn / opportunity cost.
+External money can additionally create:
+- investor / backer expectations;
+- publisher / platform milestones;
+- distribution commitments;
+- additional approval / stakeholder surfaces.</p>
+<p>Exact Outer Wilds contract terms remain UNKNOWN, so this is a governance surface, not a claim that a partner forced any specific design decision.</p>
+<h3 id="case-050-nomada-gris-capability-composed">CASE-050 Nomada / GRIS — CAPABILITY-COMPOSED</h3>
+<p>GRIS adds a third formation route.</p>
+<p>The project thesis existed before the company, but instead of:
+- shrinking the project to one person&rsquo;s capability; or
+- buying missing capability through later hiring,</p>
+<p>Roset, Cuevas and Mendoza formed a complementary founding team around the project.</p>
+<p>This suggests:</p>
+<blockquote>
+<p><strong>Capability supply can move through founder composition before it moves through payroll.</strong></p>
+</blockquote>
+<p>That is not free capability.</p>
+<p>Cofounder composition pays with:
+- equity;
+- authorship;
+- control sharing;
+- long-term relationship dependency.</p>
+<p>So capability acquisition must distinguish:
+- employee;
+- contractor;
+- publisher/service periphery;
+- cofounder / shared author.</p>
+<h3 id="case-051-zachtronics-fit-lock-in-capability-path-dependence">CASE-051 Zachtronics — FIT-LOCK-IN / capability path dependence</h3>
+<p>Zachtronics adds a longitudinal pressure.</p>
+<p>A strong capability–project match can compound:
+- tools;
+- team routines;
+- brand;
+- audience;
+- creator identity;
+- market expectation.</p>
+<p>Those assets make the next similar project cheaper and more legible.</p>
+<p>But Barth&rsquo;s 2022 closure explanation also shows the reverse:</p>
+<blockquote>
+<p><strong>the better the organization becomes at one capability-shaped product family, the more expensive it may become to stop being that organization.</strong></p>
+</blockquote>
+<p><code>FIT-LOCK-IN</code> is therefore a longitudinal overlay, not a launch-fit score.</p>
+<h3 id="case-058-spiderweb-software-second-fit-lock-in-anchor">CASE-058 Spiderweb Software — second FIT-LOCK-IN anchor</h3>
+<p>Spiderweb turns <code>FIT-LOCK-IN</code> from a Zachtronics-only observation into a cross-case mechanism.</p>
+<p>For decades Jeff Vogel deliberately reused:
+- a narrow low-budget turn-based RPG grammar;
+- familiar engine/code;
+- art and asset libraries;
+- direct audience knowledge;
+- back-catalog economics;
+- a production cadence normally closer to 12–14 months than multi-year reinvention.</p>
+<p>This was not accidental stagnation. Vogel repeatedly describes reuse as survival economics and explicitly says he has a niche he serves well, while one real flop can threaten a tiny company.</p>
+<p>The same accumulated fit then raises switching cost.</p>
+<p>Queen&rsquo;s Wish is a useful transition experiment because it intentionally introduced a new world, new engine, new system and substantially different presentation. Vogel reports that the first game took roughly 20 months rather than his more normal 12–14 month cycle. It eventually found an audience, but the second game later sold roughly half as much on Steam as the first. A full third game became financially infeasible; Spiderweb returned to remasters to stabilize the business and finished the story with a smaller free epilogue.</p>
+<p>Vogel&rsquo;s own 2026 diagnosis is unusually close to the mechanism:</p>
+<blockquote>
+<p>changing designs loses some existing fans; the new design must acquire enough new fans to replace them. Queen&rsquo;s Wish changed substantially, some old customers drifted away, and the replacements were insufficient.</p>
+</blockquote>
+<p>This strengthens the longitudinal overlay:</p>
+<p><code>repeated capability fit</code>
+→ tools / assets / skill / audience / brand / back catalog
+→ lower cost of staying
+→ higher switching cost</p>
+<p>Therefore <code>FIT-LOCK-IN</code> should not be read as “success makes creators lazy.” It is closer to an asset-allocation problem:</p>
+<blockquote>
+<p><strong>the more historical cost has been amortized inside one product grammar, the more a transition must repay both production reset cost and audience replacement cost.</strong></p>
+</blockquote>
+<p>Zachtronics and Spiderweb are deliberately heterogeneous:
+- engineering-puzzle studio vs text-heavy CRPG studio;
+- different eras, genres and market structures;
+- both nevertheless show repeated fit compounding into transition cost.</p>
+<h3 id="case-020-into-the-breach-lock-in-prevention-optionality-preservation">CASE-020 Into the Breach — LOCK-IN PREVENTION / optionality preservation</h3>
+<p>Into the Breach adds a longitudinal mechanism that should not be confused with mature <code>FIT-LOCK-IN</code> escape.</p>
+<p>FTL gave Subset Games money, reputation and a ready audience. Those assets could have been converted immediately into:
+- a direct sequel;
+- larger permanent payroll;
+- earlier public commitment;
+- stronger dependence on existing fan expectations.</p>
+<p>Instead, Ma / Davis describe almost the opposite strategy:
+- accept that FTL may remain the most popular thing they ever make rather than trying to top it;
+- deliberately make something new and different;
+- avoid letting “will the FTL audience like this?” become the primary design variable;
+- delay public announcement until the product had stabilized, reducing expectation lock-in;
+- retain shared design principles / ethos without copying the previous product grammar.</p>
+<p>This suggests a pre-lock-in mechanism:</p>
+<p><code>first hit</code>
+→ money + audience + sequel pressure
+→ <strong>low burn + delayed commitment + private search</strong>
+→ optionality preserved
+→ new product can diverge before old success becomes fixed infrastructure</p>
+<p>The important boundary is temporal.</p>
+<p>One hit is not the same as decades of accumulated:
+- tools;
+- specialized workflow;
+- brand;
+- audience expectation;
+- catalog economics.</p>
+<p>Therefore CASE-020 supports:</p>
+<blockquote>
+<p><strong>LOCK-IN PREVENTION</strong></p>
+</blockquote>
+<p>not:</p>
+<blockquote>
+<p><strong>successful escape from mature FIT-LOCK-IN</strong>.</p>
+</blockquote>
+<p>That mature escape cell remains open.</p>
+<h3 id="case-060-croteam-escaping-mature-product-grammar-by-staged-decoupling">CASE-060 Croteam — escaping mature product grammar by staged decoupling</h3>
+<p>Croteam supplies the first strong positive <em>mature</em> <code>FIT-LOCK-IN</code> escape pressure case rather than another instance of lock-in itself.</p>
+<p>From 2001 to 2012 its studio/brand/tooling were identified with high-tempo Serious Sam FPS titles and the Serious Engine. New Jammer/puzzle mechanics prototyped for Serious Sam 4 in 2012 proved hard to contain inside that established shooter grammar. In mid-2013 Croteam and Devolver agreed to separate the idea into The Talos Principle; the resulting 2014 release became a highly acclaimed new product line.</p>
+<p>The key is not that the team threw away old capability:
+- <strong>retained substrate:</strong> first-person 3D production, Serious Engine/Editor, spatial level/toolchain capital;
+- <strong>replaced player thesis:</strong> high-speed combat grammar → logic puzzles, exploration and philosophical narrative;
+- <strong>added capability:</strong> writing specialists Tom Jubert / Jonas Kyratzes, puzzle difficulty testing, public-alpha design adjudication, automated state/QA verification;
+- <strong>publisher interface:</strong> Devolver published the new product, but finance/approval terms remain UNKNOWN.</p>
+<p>The 2015 GDC postmortem records actual product-response decisions: internal difficulty stats, public alpha, removing redundant puzzles and an entire level, and redesigning Sigils/pacing. The mature FPS team&rsquo;s skill was not assumed to mean it could instantly judge puzzle player value.</p>
+<p>A second, separate regime followed: after Devolver acquired Croteam in 2020, the team evaluated in-house engine upgrade cost and released The Talos Principle 2 on UE5 in 2023. That engine switch was a <strong>toolchain</strong> escape while retaining the new Talos puzzle grammar; it does not belong to the same independent ownership regime as the 2014 genre pivot.</p>
+<p>This qualifies the lock-in overlay:</p>
+<blockquote>
+<p><strong>Mature product grammar can sometimes be escaped by keeping useful old technical capital while changing the player-facing thesis, adding missing specialty and rebuilding feedback channels. Product-grammar and toolchain lock-in need not be solved simultaneously.</strong></p>
+</blockquote>
+<p>Boundaries: 2014 financial profitability, audience churn, publisher contract and actual cost of the later UE5 migration remain UNKNOWN. One positive studio is not a general rule.</p>
+<h3 id="case-052-house-house-grant-financed-capability-expansion">CASE-052 House House — GRANT-FINANCED capability expansion</h3>
+<p>Untitled Goose Game fills the non-dilutive funding gap.</p>
+<p>Film Victoria&rsquo;s official case study records:
+- development funding;
+- completion funding;
+- additional local developer capability, including accessibility work.</p>
+<p>Panic then supplied a different capability bundle:
+- audio / music budget;
+- publishing;
+- platform/release operations;
+- event/market infrastructure.</p>
+<p>So external capital must be decomposed by:</p>
+<blockquote>
+<p><strong>source × capability purchased × governance cost</strong></p>
+</blockquote>
+<p>Grant money and publisher money are not interchangeable even when both increase runway.</p>
+<p>House House also completes a longitudinal conversion:</p>
+<p><code>grant + publisher support → hit → retained earnings → next-project risk tolerance</code>.</p>
+<h3 id="case-053-kenny-sun-longitudinal-capability-formation">CASE-053 Kenny Sun — longitudinal capability formation</h3>
+<p>Kenny Sun adds a time dimension that C015 previously under-specified.</p>
+<p>The same creator did not simply discover one permanent fit. The feasible project set changed through:
+- repeated small releases;
+- professional gameplay-programming work;
+- side-project revenue;
+- deliberate scope reversal;
+- publisher periphery;
+- later specialist-team leadership.</p>
+<p>The clearest C015 evidence is the 2016 Hatbox reversal: the project was explicitly judged too large for the available free-time production frontier and shelved. After the creator&rsquo;s runway and capability situation changed, the same idea re-entered the feasible set.</p>
+<p>This supports a longitudinal research direction without changing C015 into a universal growth law:</p>
+<blockquote>
+<p><strong>project fit can be recalculated over time because previous projects also change the creator&rsquo;s capability vector.</strong></p>
+</blockquote>
+<p>The broader <code>project_t → capability_(t+1)</code> mechanism remains a research hypothesis until additional longitudinal cases are found.</p>
+<h3 id="case-054-limit-theory-fit-trap-capability-attracts-its-own-problem-surface">CASE-054 Limit Theory — FIT-TRAP / capability attracts its own problem surface</h3>
+<p>Limit Theory adds the negative mirror that the capability framework previously lacked.</p>
+<p>Josh Parnell entered with unusually strong engine / graphics capability. The project legitimately benefited from that capability: custom technology enabled procedural generation, simulation, tooling and eventually very high entity counts.</p>
+<p>But the same capability also created an effectively unbounded local optimization surface. The strongest contemporaneous checkpoint is January 2018: the official site celebrates a PAX demo simulating 2000+ ships with projectiles and full AI and says the engine work has paid off, while content implementation and then gameplay are still described as the next stages. Eight months later, cancellation states that the product remains frighteningly far from feature completion while the engine is materially more solid than the Lua game code.</p>
+<p>So C015 requires a negative boundary:</p>
+<blockquote>
+<p><strong>A project can fit a creator&rsquo;s strongest capability too well. If that capability keeps generating attractive subproblems whose completion does not close the player product, capability capital becomes a FIT-TRAP rather than leverage.</strong></p>
+</blockquote>
+<p>This does not imply custom engines are bad. Early id / DOOM remains the opposite case: technical innovation can create and compress a new product space. The diagnostic variable is whether technical progress reduces remaining product obligations or continuously opens new ones.</p>
+<h3 id="case-055-factorio-deep-tech-success-with-explicit-stop-conditions">CASE-055 Factorio — deep-tech success with explicit stop conditions</h3>
+<p>Factorio supplies the success-side pressure control that CASE-054 requires.</p>
+<p>Wube is not a “use less technology” studio. It repeatedly rewrote multiplayer, optimized the deterministic simulation, modernized rendering and maintained a highly technical modding / tooling surface. The crucial difference is that the team also leaves unusually explicit evidence of asking when a technical target is <strong>enough</strong>.</p>
+<p>Three independent checkpoints matter:</p>
+<ol>
+<li>after multiplayer work exceeded the original 20–50 player ambition and reached hundreds of players, kovarex explicitly asked whether further scale still improved gameplay or merely continued an internal race, declared roughly 200-player support sufficient, and redirected work toward factory simulation that also benefited single-player;</li>
+<li>the team removed fluid-wagon tank-separation mechanics partly because the problem already had a trivial player solution while the mechanic imposed continuing code / UI / bug cost;</li>
+<li>in 2019–2020 Wube stated that “done when done” could make development continue forever, publicly locked a 1.0 date, then cancelled / postponed / cut major work so the product could close.</li>
+</ol>
+<p>This creates a positive boundary for FIT-TRAP:</p>
+<blockquote>
+<p><strong>Technical capability stays leverage when the team can attach an “enough” condition to it and redirect resources once marginal player/product value falls.</strong></p>
+</blockquote>
+<p>For now <code>TECHNICAL STOP CONDITION</code> is a research mechanism, not a formal fit label. One studio is not enough to claim universality.</p>
+<p>Together with early id / DOOM, Factorio also separates two successful uses of deep technology:
+- <strong>frontier creation</strong> — new technology directly creates a new playable product space;
+- <strong>frontier discipline</strong> — deep technology remains valuable, but only while it continues to close core product obligations.</p>
+<h3 id="case-056-playdead-complementary-founders-solve-capability-gaps-but-create-governance-obligations">CASE-056 Playdead — complementary founders solve capability gaps but create governance obligations</h3>
+<p>Playdead supplies the missing pressure case for <code>CAPABILITY-COMPOSED</code>.</p>
+<p>The formation evidence is unusually clean. Arnt Jensen&rsquo;s LIMBO thesis and visual/game-direction work precede the full studio. Dino Patti joins later with programming / production experience and becomes central to hiring, financing, company building and execution. In the 2012 joint interview, the structure is already visible: Patti&rsquo;s initial aim was to help Jensen realize the creative vision; Jensen says he had originally wanted to make it himself, while Patti helped turn the project into a financed team and company.</p>
+<p>This composition clearly <strong>worked as production</strong>. The pair built Playdead and shipped LIMBO and later INSIDE. So CASE-056 is not a story of obvious founder mismatch.</p>
+<p>The pressure appears later. Despite product success, the founder relationship dissolved; Patti exited nearly half ownership for DKK 50m after a severe conflict. Patti&rsquo;s later direct accounts identify both the personal fallout and disagreement with entering another extremely long development horizon as relevant dimensions. Years after the exit, authorship / credit remained part of an active legal dispute.</p>
+<p>This gives <code>CAPABILITY-COMPOSED</code> a necessary cost boundary:</p>
+<blockquote>
+<p><strong>A complementary cofounder does not merely supply missing labor. Founder-level capability is purchased with shared equity, authority, authorship, time-horizon dependency, deadlock exposure and exit cost.</strong></p>
+</blockquote>
+<p>Therefore Nomada / GRIS must not be read as “find a complementary cofounder and the capability gap disappears.” The more accurate model is:</p>
+<p><code>missing capability → founder composition → executable capability set + shared governance surface</code></p>
+<p>The product side can be highly successful while the governance side later becomes the dominant cost.</p>
+<p>For now <code>FOUNDER-GOVERNANCE DISSOLUTION PRESSURE</code> is only a research mechanism, not a new taxonomy label or Claim.</p>
+<h3 id="case-057-thatgamecompany-equity-capital-moves-the-control-surface">CASE-057 thatgamecompany — equity capital moves the control surface</h3>
+<p>thatgamecompany fills the missing <code>VC / EQUITY-FINANCED CAPABILITY EXPANSION</code> cell.</p>
+<p>After the Sony three-game relationship ended, Benchmark invested $5.5M in 2012 and Benchmark GP Mitch Lasky joined TGC&rsquo;s board. The strategic purpose was not just to extend runway: TGC wanted to move beyond a single publisher/platform relationship and independently develop/release future games to a broader audience. In 2014 an additional $7M round was explicitly tied to scaling development and building self-publishing, marketing and distribution infrastructure.</p>
+<p>This creates a useful contrast with CASE-047 / 049 / 052:</p>
+<ul>
+<li>retained earnings can expand capability with founder burn as the main visible cost;</li>
+<li>publisher/platform money can expand capability while adding project/distribution stakeholders;</li>
+<li>grants can buy time/capability without equity dilution;</li>
+<li><strong>equity capital can permanently internalize company capabilities while adding ownership / board / investor-return / future-financing obligations.</strong></li>
+</ul>
+<p>The key boundary is equally important. Chen said in 2013 that after TGC pitched its vision, the venture investors did not give him creative input. Therefore:</p>
+<blockquote>
+<p><strong>Board/equity governance and product creative approval are not the same control surface.</strong></p>
+</blockquote>
+<p>By Chen&rsquo;s 2024 retrospective, the first $5.5M helped the company grow toward roughly 15 people; self-publishing required internal customer-service, marketing and PR teams; TGC was around 40 people by Sky&rsquo;s launch. But the larger organization and unresolved product direction also exhausted capital, requiring additional fundraising rounds, and Chen says each fundraising trip disrupted development.</p>
+<p>So capability expansion has a recursive cost:</p>
+<p><code>equity capital → capability expansion → higher fixed burn / organization surface → possible next-round dependency → founder fundraising overhead</code></p>
+<p>This does not make VC bad. It makes the accounting more complete.</p>
+<h3 id="other-boundaries">Other boundaries</h3>
+<ul>
+<li>CASE-043 shows redefinition can merely <strong>move</strong> cost: rolling/procedural locomotion deleted conventional animation obligations but created hard systems work.</li>
+<li>CASE-008 does not yet prove Dream Quest was selected <em>because</em> Whalen lacked art; abstraction may be both taste and constraint. It is supporting, not decisive.</li>
+<li>CASE-018 is an extreme capability outlier. Sawyer&rsquo;s assembler choice is evidence for personal capability-fit, not a general recommendation to choose niche technology.</li>
+<li>CASE-042 still lacks full household-burn accounting; project fit does not remove runway requirements.</li>
+<li>Gunpoint benefited from PC Gamer salary/network and GameMaker. Correct self-tailoring did not operate in a vacuum.</li>
+</ul>
+<h2 id="distinction-from-existing-claims">Distinction from Existing Claims</h2>
+<h3 id="c004-manufacture-production-conditions">C004 — manufacture production conditions</h3>
+<p>C004 asks:</p>
+<blockquote>
+<p>How does a developer build a production environment that makes the project feasible?</p>
+</blockquote>
+<p>C015 asks one step earlier:</p>
+<blockquote>
+<p><strong>How does the developer choose what project should exist given who they actually are?</strong></p>
+</blockquote>
+<h3 id="c007-redefine-problem-cost-structure">C007 — redefine problem / cost structure</h3>
+<p>C007 asks:</p>
+<blockquote>
+<p>How can a small team redefine an expensive game problem?</p>
+</blockquote>
+<p>C015 asks:</p>
+<blockquote>
+<p><strong>Why was this particular problem chosen/redefined in this direction? Was the product itself tailored around the creator&rsquo;s capability vector?</strong></p>
+</blockquote>
+<h3 id="c003-capability-capital">C003 — capability capital</h3>
+<p>C003 says the capability existed before the apparent “solo miracle.”</p>
+<p>C015 says:</p>
+<blockquote>
+<p><strong>The creator can use knowledge of that capability distribution as an input to project formation.</strong></p>
+</blockquote>
+<h2 id="current-reading">Current Reading</h2>
+<p>The five cases support a stronger interpretation of indie design than “do less”:</p>
+<blockquote>
+<p><strong>Indie scope can be personalized rather than merely reduced.</strong></p>
+</blockquote>
+<p>For a large or well-capitalized organization, project definition can assume a broader labor market: missing capabilities can be hired.</p>
+<p>For a very small authorial team, the team itself is a hard design constraint. The sophisticated response is not necessarily to imitate a normal project with fewer people. It can be to invent a project whose highest-value problems are exactly the problems this person is unusually cheap/good at solving.</p>
+<p>CASE-047 and CASE-049 now add the mirror image:</p>
+<blockquote>
+<p><strong>When enough capital can be mobilized, the team can choose to expand the capability set instead of shrinking/redefining the project. The source of that capital changes the control/stakeholder surface.</strong></p>
+</blockquote>
+<p>So the real design variable is not simply <code>team size</code>, but:</p>
+<blockquote>
+<p><strong>which side is allowed to move — project requirements, founding-team composition, capability supply, or several at once?</strong></p>
+</blockquote>
+<p>That creates several recurring transformations:</p>
+<ul>
+<li>critic / systems thinker → rule-dense game rather than content-heavy imitation;</li>
+<li>technical artist → environment / motion / presentation becomes gameplay and market surface;</li>
+<li>weak art access + strong systems/taste → abstraction becomes product language;</li>
+<li>unusually strong low-level programmer → simulation scale becomes viable while prestige graphics are rejected;</li>
+<li>animation auteur + programmer dyad → abstraction becomes interaction grammar instead of missing polish.</li>
+<li>visual artist + AAA programmers → complementary founders make an art-first product feasible without asking one founder to become a generalist;</li>
+<li>engineering-author studio → repeated fit compounds into a niche production system, but can later become <code>FIT-LOCK-IN</code>;</li>
+<li>outsider creative collective + grant/publisher periphery → public/non-dilutive and commercial capital buy different missing capabilities.</li>
+</ul>
+<p>This is why some independent games look “strange” relative to industry genre templates:</p>
+<blockquote>
+<p>their form is partly the visible shape of the creator&rsquo;s capability vector.</p>
+</blockquote>
+<h2 id="boundary-forbidden-inference">Boundary / Forbidden Inference</h2>
+<p>不得推出：</p>
+<ul>
+<li>“只做自己擅长的事”；</li>
+<li>“不要学习弱项”；</li>
+<li>“偏科一定比均衡能力更好”；</li>
+<li>“solo dev 天生更有创意”；</li>
+<li>“缺钱会自动逼出好设计”；</li>
+<li>“只要项目贴合个人能力就会成功”；</li>
+<li>“外包弱项永远比内部学习更优”；</li>
+<li>“所有成功独立游戏都是按主创能力反向定制的”；</li>
+<li>“找到最适合自己的类型就应该永远做下去”；</li>
+<li>“第一次成功后做一个不同类型的新作，就已经证明能逃出成熟 FIT-LOCK-IN”；</li>
+<li>“共同创始人是免费补能力”；</li>
+<li>“互补共同创始人只要成功做成过产品，治理结构就已经被永久验证”；</li>
+<li>“grant、publisher、VC 只是同一种钱”；</li>
+<li>“摆脱发行商以后就等于没有外部控制面”；</li>
+<li>“board seat 自动等于投资人拥有游戏创意否决权”；</li>
+<li>“强项越强，越应该让项目无限增加强项相关复杂度”；</li>
+<li>“自研引擎本身就是 FIT-TRAP”。</li>
+</ul>
+<p>真正的命题是：</p>
+<blockquote>
+<p><strong>显性认识 capability constraints，并把它们用于项目定义，可以成为作者型独立开发的一种可观察设计技术。</strong></p>
+</blockquote>
+<h2 id="next-evidence-needed">Next Evidence Needed</h2>
+<ol>
+<li>Brigador + The Magic Circle 已满足第一轮两份结构不同的 <code>FIT-STRONG / MARKET-FAILED</code> 压力样本；下一步不再机械增加失败者，而是比较失败发生在 onboarding、category legibility、audience size、timing 还是 capital structure。</li>
+<li>把 Lucas Pope / Papers, Please 是否属于此机制重新核：目前更多证据是 disciplined cutting，而非明确以弱项反向立项。</li>
+<li>在 Jonas Tyroller 多项目里寻找同一个人是否越来越显性地做 capability–project matching。</li>
+<li>检验 2020s AI / asset / no-code 环境是否扩大了 creator 可选择的项目集合，从而改变“能力反向立项”的边界。</li>
+<li>CASE-047（prior-hit self-financed）+ CASE-049（external-capital stack）+ CASE-052（grant + publisher）+ CASE-057（VC/equity）现已覆盖四种 capability expansion 资本结构。下一步不再补“谁融过资”，而是优先寻找<strong>公开 term sheet / board / veto / liquidation / milestone / buyback 等更细 decision-right evidence</strong>，并验证 capital source 是否系统性改变 capability bundle 与 control surface。</li>
+<li>CASE-050 Nomada + CASE-056 Playdead 已形成第一组 <code>CAPABILITY-COMPOSED</code> 正例 / 治理解体压力对照：互补能力可以把 thesis 变成可执行组织，但 founder-level capability 同时绑定 equity / authorship / authority / exit。下一步优先找一例<strong>显式设计 deadlock / buy-sell / role authority 并长期运作成功</strong>的治理对照，或一例在产品完成前就因 composition/governance 失败的样本。</li>
+<li>CASE-051 Zachtronics + CASE-058 Spiderweb 是两个成熟 <code>FIT-LOCK-IN</code> 压力锚点；CASE-020 是更早阶段的 <code>LOCK-IN PREVENTION</code>；CASE-060 Croteam 则成为第一份<strong>成熟 grammar 逃逸成功侧</strong>。下一步重点检验其分阶段解耦能否在其他工作室复现，并补 Devolver 合同/开发预算/受众迁移等仍未知成本，不能仅凭口碑把因果链视为闭合。</li>
+<li>CASE-055 已建立第一份 deep-tech success-side stop-condition 对照，与 CASE-054 形成首个 failure/success pair；下一步再找一个非 Wube 样本，检验 <code>enough condition / player-facing obligation / maintenance tail / release closure</code> 是否可跨工作室复现。</li>
+</ol><div class="crumbs"><a href="/heroes-portal/">书阁</a> / claims/C015-capability-shaped-project-formation.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

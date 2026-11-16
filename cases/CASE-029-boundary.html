@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CASE-029 — 边境 / 柳叶刀工作室 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl class="on"" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#why-this-case" class="t2">Why this case</a><a href="#1-myth" class="t2">1. Myth</a><a href="#myth-a-boundary-fps" class="t3">Myth A — Boundary 失败说明“太空 FPS 没市场”</a><a href="#myth-b-boundary" class="t3">Myth B — Boundary 只是发行商毁掉了一个已经完成的好产品</a><a href="#myth-c-pve-pvp" class="t3">Myth C — PVE → PvP 是一次明确降本，所以之后的复杂度天然更低</a><a href="#2-contextsituationaction-snapshot" class="t2">2. Context–Situation–Action Snapshot</a><a href="#era-production-regime" class="t3">Era / Production Regime</a><a href="#actor-situation" class="t3">Actor Situation</a><a href="#action-maneuver" class="t3">Action / Maneuver</a><a href="#anachronism-check" class="t3">Anachronism Check</a><a href="#3-origin" class="t2">3. Origin</a><a href="#4-capability" class="t2">4. Capability</a><a href="#5-runway" class="t2">5. Runway</a><a href="#6-production" class="t2">6. Production</a><a href="#7-scope" class="t2">7. Scope</a><a href="#8-failure" class="t2">8. Failure</a><a href="#9-market" class="t2">9. Market</a><a href="#10-environment" class="t2">10. Environment</a><a href="#11-luck" class="t2">11. Luck</a><a href="#12-verdict" class="t2">12. Verdict</a><a href="#13-transfer" class="t2">13. Transfer</a><a href="#14-non-transfer" class="t2">14. Non-transfer</a><a href="#15-evidence-index" class="t2">15. Evidence Index</a><a href="#16-open-questions" class="t2">16. Open Questions</a><a href="#creator-life-decision-audit" class="t2">Creator Life / Decision Audit</a></aside><article class="doc"><div class="col"><h1 id="case-029">CASE-029 — 边境 / 柳叶刀工作室</h1>
+<ul>
+<li>Case ID: CASE-029</li>
+<li>Subject: Boundary / Surgical Scalpels Studio</li>
+<li>Related Claims: C014</li>
+<li>Research status: RESEARCHING</li>
+<li>Corpus role: CHINESE COMPARATOR / LONG-CYCLE MULTIPLAYER FAILURE-PRESSURE CASE</li>
+<li>Last verified: 2026-10-06</li>
+<li>Evidence Ledger: <a href="/heroes-portal/evidence/CASE-029-boundary-source-ledger.html">来源账本</a></li>
+<li>未核原稿：<a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes/blob/main/sources/research-intake/CASE-029-boundary-unverified-20261005.md">研究线索存档</a>，继续只作 research lead。</li>
+</ul>
+<h2 id="why-this-case">Why this case</h2>
+<p class="dc">Boundary 的研究价值现在已经不只是“失败项目”。公开资料可以同时确认：</p>
+<ul>
+<li>三位开发者离开稳定工作，以小核心开始；</li>
+<li>早期 PVE prototype 很快暴露高内容成本；</li>
+<li>项目随后转向 PvP，并在多年开发中多次调整方向；</li>
+<li>零重力 FPS 的 differentiation hook 确实获得市场注意，Early Access 首日付费销量超过 10 万份；</li>
+<li>但项目最终没有把 initial acquisition 转成可持续 multiplayer ecosystem，且停服责任存在发行方与开发方争议。</li>
+</ul>
+<p>因此本案最适合检验的是：<strong>技术 / 题材 novelty 成立时，长开发周期、方向变化和 multiplayer obligation 怎样提高 error-persistence cost；同时避免把失败简化成“没人想玩”。</strong></p>
+<h2 id="1-myth">1. Myth</h2>
+<h3 id="myth-a-boundary-fps">Myth A — Boundary 失败说明“太空 FPS 没市场”</h3>
+<p>不成立。E011 的首日付费销售证明产品至少有显著的 novelty / acquisition signal。</p>
+<h3 id="myth-b-boundary">Myth B — Boundary 只是发行商毁掉了一个已经完成的好产品</h3>
+<p>证据不足。发行与开发双方责任仍有争议；制作人自己的回顾也承认核心方向、项目管理、deadline 与更早验证方面存在问题。</p>
+<h3 id="myth-c-pve-pvp">Myth C — PVE → PvP 是一次明确降本，所以之后的复杂度天然更低</h3>
+<p>过强。制作人回顾支持早期 PVE 内容成本压力与转向事实，但 PvP 又引入网络、平衡、留存、匹配和长期玩家生态等另一组 obligation。不能把“少做 PVE 内容”直接等同于总复杂度下降。</p>
+<h2 id="2-contextsituationaction-snapshot">2. Context–Situation–Action Snapshot</h2>
+<h3 id="era-production-regime">Era / Production Regime</h3>
+<p>项目起点处于中国主机 / PC 开发资源逐步增加、China Hero Project 等平台扶持出现的时期。团队试图用零重力 FPS 做国际市场差异化，但在线 PvP 同时要求较高工程质量、持续内容与玩家密度。</p>
+<h3 id="actor-situation">Actor Situation</h3>
+<p>E010 支持“三位开发者离开稳定工作、概念先于公司形成”的创始叙事；China Hero Project 被创始人描述为对小工作室重要。历史股权、虎牙 / 腾讯资金、各阶段团队口径仍需继续审计。</p>
+<p>Steam 当前列 Developer = Studio Surgical Scalpels、Publisher = Huya Games（E007）。该字段不能反推完整历史 ownership / financing。</p>
+<h3 id="action-maneuver">Action / Maneuver</h3>
+<table>
+<thead>
+<tr>
+<th>时间/窗口</th>
+<th>Binding constraint</th>
+<th>具体行动</th>
+<th>直接结果</th>
+<th>Evidence</th>
+<th>Transfer boundary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>早期 prototype</td>
+<td>目标品质下 PVE 内容成本过高</td>
+<td>从单机 / PVE 路线转向 PvP</td>
+<td>将内容问题改写为在线竞技问题</td>
+<td>E009</td>
+<td>成本迁移不等于成本消失</td>
+</tr>
+<tr>
+<td>多年开发</td>
+<td>核心产品定位仍在探索</td>
+<td>多次调整方向与商业 benchmark</td>
+<td>开发周期拉长，持续投入</td>
+<td>E009/E012</td>
+<td>E012 为一方证词，只作反压力</td>
+</tr>
+<tr>
+<td>2019–2020 宣传期</td>
+<td>需要建立国际市场差异化</td>
+<td>强调零重力 FPS hook</td>
+<td>获得平台 / 媒体注意</td>
+<td>E010</td>
+<td>宣传访谈不证明留存</td>
+</tr>
+<tr>
+<td>2023 EA</td>
+<td>需要把兴趣转成付费玩家</td>
+<td>Early Access 上线</td>
+<td>首日 &gt;100k paid copies</td>
+<td>E011</td>
+<td>acquisition ≠ retention</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>服务不可持续且发行关系破裂</td>
+<td>进入停服 / 发行权争议</td>
+<td>产品生命周期结束</td>
+<td>E008</td>
+<td>责任归属仍 contested</td>
+</tr>
+</tbody>
+</table>
+<h3 id="anachronism-check">Anachronism Check</h3>
+<p>不能用 2026 年更成熟的 Steam indie / AI 工具条件倒写早期团队，也不能假设“做 PvP”在当时天然比 PVE 便宜。真正需要比较的是每次 pivot 后新增的 production obligation。</p>
+<h2 id="3-origin">3. Origin</h2>
+<p>目前可支持：
+- 三人核心起步；
+- 创始成员离开稳定工作；
+- 项目概念与零重力 FPS differentiation 很早存在。</p>
+<p>仍 UNKNOWN：
+- 完整个人履历；
+- 法律 ownership；
+- 每轮融资与股权变化。</p>
+<h2 id="4-capability">4. Capability</h2>
+<p>团队能完成技术辨识度很高的零重力 FPS，并获得强首发购买信号。不能从成品技术表现反推其所有生产环节都成熟，也不能用技术能力替代 multiplayer ecosystem 能力。</p>
+<h2 id="5-runway">5. Runway</h2>
+<p>China Hero Project 支持被创始人明确认为重要；虎牙、腾讯、其他资金与发行关系仍需分拆核验。当前不估总预算。</p>
+<h2 id="6-production">6. Production</h2>
+<p>现有材料支持“长周期、多次方向变化”，但 3–4、7–14、29、40–50+ 等人数口径尚未全部完成同源时间序列，因此不写成精确扩张曲线。</p>
+<h2 id="7-scope">7. Scope</h2>
+<p>早期 PVE 成本问题是真实决策压力。转 PvP 减少某些手工内容压力，却增加网络、平衡、留存、匹配、反作弊与玩家密度等系统性要求。本案因此是“复杂度迁移”而不是简单“砍 scope”案例。</p>
+<h2 id="8-failure">8. Failure</h2>
+<p>制作人 E009 的反事实回顾是本案关键证据：如果重新选择，他不会轻易直接做 PvP 太空 shooter；即使仍做，也会更早规划、验证、跑通核心流程并强化项目管理。</p>
+<p>这支持 C014 的 error-budget / time-to-player-truth 读法，但仍不足以证明“早验证”是唯一缺失变量。</p>
+<h2 id="9-market">9. Market</h2>
+<p>E011 说明 initial hook / acquisition 不是零。真正失败发生在把注意力与购买转成长期活跃 multiplayer ecosystem 的过程中。</p>
+<p>因此不能把“首发卖得动”和“live ecosystem 可持续”当成同一个 market truth。</p>
+<h2 id="10-environment">10. Environment</h2>
+<p>平台扶持、公司融资、发行商和中国 PC / console 市场环境都可能改变项目可持续投入时间。它们既可能提供必要 runway，也可能提高错误方向继续存在的上限；后一层目前仍是待量化机制。</p>
+<h2 id="11-luck">11. Luck</h2>
+<p>发行关系、市场 timing 与同类竞争可能影响结局，但当前没有证据允许用 luck 替代生产和产品机制分析。</p>
+<h2 id="12-verdict">12. Verdict</h2>
+<p>当前最强结论是：</p>
+<blockquote>
+<p>Boundary 不是“没人要的怪点子”，而是一个成功制造 novelty / acquisition signal，却在长期生产与 multiplayer ecosystem 上承受高 error-persistence cost 的案例。</p>
+</blockquote>
+<p>这使它可以正式参与 C014；但停服责任、完整资金链、团队扩张与各次 pivot 的具体因果仍保持 OPEN。</p>
+<h2 id="13-transfer">13. Transfer</h2>
+<p>可迁移：
+- 把“多久知道错”与“错一次花多少”列为立项变量；
+- 区分 acquisition validation 与 retention / ecosystem validation；
+- 每次 pivot 都重新计算新增 obligation；
+- 技术 novelty 不能替代 core-loop / community economics 验证。</p>
+<h2 id="14-non-transfer">14. Non-transfer</h2>
+<p>不可直接复制 / 推断：
+- China Hero Project 等平台扶持；
+- 历史融资与大公司关系；
+- 太空 FPS 题材本身；
+- 任何单一责任归因。</p>
+<h2 id="15-evidence-index">15. Evidence Index</h2>
+<ul>
+<li>E001–E006：旧 intake leads，仍为 UNVERIFIED。</li>
+<li>E007：Steam 当前平台身份，P0。</li>
+<li>E008：Skystone 2024 服务终止公告，P0 / 单方声明。</li>
+<li>E009：制作人长篇回顾，P1/S1；三人起步、PVE 成本、pivots、七年与反事实教训。</li>
+<li>E010：创始人国际采访，P1；三人起步、差异化与 China Hero Project。</li>
+<li>E011：PC Gamer 对首日 &gt;100k paid copies 的报道，S1。</li>
+<li>E012：前社区 / 市场员工复盘，S2；只作 adversarial testimony。</li>
+</ul>
+<h2 id="16-open-questions">16. Open Questions</h2>
+<ol>
+<li>各阶段团队规模与 pivot 的精确时间序列是什么？</li>
+<li>China Hero Project 的支持类型、时间和金额是什么？</li>
+<li>虎牙、腾讯等资金的融资、股权、IP 与发行控制如何区分？</li>
+<li>开发方与 Skystone 争议的双方完整原始材料是什么？</li>
+<li>首发后 DAU / retention / matchmaking health 如何变化？</li>
+</ol>
+<h2 id="creator-life-decision-audit">Creator Life / Decision Audit</h2>
+<ul>
+<li><strong>Audit status:</strong> PARTIAL</li>
+<li><strong>Life stage:</strong> 三位创始开发者离开稳定工作后开始；完整年龄、婚育与 household 阶段 <code>UNKNOWN</code>。</li>
+<li><strong>Household:</strong> relationship / children / housing / family support 均 <code>UNKNOWN</code>。</li>
+<li><strong>Runway:</strong> China Hero Project 支持被创始人认为重要；虎牙、腾讯及其他资金/股权/发行关系尚未完成拆分；不得估总预算。</li>
+<li><strong>Household burn:</strong> <code>UNKNOWN</code>；当前只知道从稳定工作转创业发生了真实职业收入风险。</li>
+<li><strong>Exit / recovery:</strong> <code>UNKNOWN</code> — 有稳定工作前史，但项目长期化之后的再就业/回撤条件没有公开闭环。</li>
+<li><strong>Capability vector:</strong> 零重力 FPS、networked shooter、技术表现与国际市场 hook 较强；multiplayer ecosystem / live-service capability 是否同步成熟不能从成品表现反推。</li>
+<li><strong>Problem ownership:</strong> <strong>MIXED / UNKNOWN CONTROL BOUNDARY</strong> — 创始概念很早由核心团队提出，但后续融资、发行、benchmark 与 approval 权限未核清。</li>
+<li><strong>Validation architecture:</strong> early PVE prototype / cost realization → PvP pivot → China Hero / public exposure → long development → Early Access &gt;100k paid first-day signal → retention/ecosystem failure → shutdown。</li>
+<li><strong>Reality adjudication:</strong> <strong>PARTIAL / LATE</strong> — PVE 成本很早迫使团队改方向；但 acquisition signal 与 sustainable multiplayer truth 被分开验证，后者到较晚阶段才充分暴露。</li>
+<li><strong>Capability capture risk:</strong> <strong>MEDIUM / HYPOTHESIS</strong> — 高技术/novelty 可持续制造外部关注，但当前不足以证明技术强项本身主导了 scope capture。</li>
+<li><strong>Market sufficiency / legibility:</strong> <strong>STRONG acquisition / WEAK ecosystem sufficiency</strong> — 首日购买证明 hook 可读；长期 multiplayer liquidity/retention 没有成立。</li>
+<li><strong>Capability scaling:</strong> 技术与团队规模长期扩大，但 live ecosystem 未形成可持续闭环。</li>
+<li><strong>Major unknowns:</strong> founders household economics、ownership/股权、各阶段团队规模、项目预算、publisher control、DAU/retention。</li>
+</ul><div class="crumbs"><a href="/heroes-portal/">书阁</a> / cases/CASE-029-boundary.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

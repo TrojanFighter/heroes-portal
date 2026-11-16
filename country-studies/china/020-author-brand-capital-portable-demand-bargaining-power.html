@@ -1,0 +1,821 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>020 — Author Brand Capital：作者名字如何变成可迁移的市场资产 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl class="on"" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0" class="t2">0. 核心问题</a><a href="#1" class="t2">1. 作者品牌资本的五级转换链</a><a href="#11-author_recognition" class="t3">1.1 AUTHOR_RECOGNITION</a><a href="#12-attention_portability" class="t3">1.2 ATTENTION_PORTABILITY</a><a href="#13-revenue_portability" class="t3">1.3 REVENUE_PORTABILITY</a><a href="#14-financing_conversion" class="t3">1.4 FINANCING_CONVERSION</a><a href="#15-bargaining_power_conversion" class="t3">1.5 BARGAINING_POWER_CONVERSION</a><a href="#2-exit_with_demand" class="t2">2. 小岛秀夫：EXIT_WITH_DEMAND 的极端样本</a><a href="#3-jonathan-blowreputation-cash-autonomy" class="t2">3. Jonathan Blow：REPUTATION → CASH → AUTONOMY 的纯净样本</a><a href="#4-market-legitimation-internal-authority" class="t2">4. 宫崎英高：MARKET LEGITIMATION → INTERNAL AUTHORITY</a><a href="#5-sid-meierinstitutionalized-fossilized" class="t2">5. Sid Meier：作者品牌可以被INSTITUTIONALIZED / FOSSILIZED</a><a href="#author_brand_institutionalization" class="t3">AUTHOR_BRAND_INSTITUTIONALIZATION</a><a href="#author_name_fossilization" class="t3">AUTHOR_NAME_FOSSILIZATION</a><a href="#6-call-of-dutyipstudio-brand-capital" class="t2">6. Call of Duty：IP/STUDIO BRAND CAPITAL 是可行的另一套工业解</a><a href="#7-authorial-continuity" class="t2">7. 中国：梁其伟是当前最清楚的AUTHORIAL CONTINUITY样本之一</a><a href="#8-game-sciencestudioip-brand" class="t2">8. 冯骥 / Game Science：STUDIO/IP BRAND 已强，个人可迁移品牌仍待下一局验证</a><a href="#9" class="t2">9. 作者品牌资本的黑暗面</a><a href="#91-expectation-lock-in" class="t3">9.1 EXPECTATION LOCK-IN</a><a href="#92-key-person-risk" class="t3">9.2 KEY-PERSON RISK</a><a href="#93-credit-appropriation" class="t3">9.3 CREDIT APPROPRIATION</a><a href="#94-brand-capture" class="t3">9.4 BRAND CAPTURE</a><a href="#10" class="t2">10. 作者品牌资本如何改变劳动政治</a><a href="#101-demand-side-quasi-property" class="t2">10.1 DEMAND-SIDE QUASI-PROPERTY / 需求侧准产权</a><a href="#2015-kojimakonamiattribution-asset" class="t3">2015 Kojima/Konami：ATTRIBUTION ASSET 的可见冲突</a><a href="#credit-bottleneck" class="t3">CREDIT BOTTLENECK</a><a href="#11-taste-institutions" class="t2">11. 与 Taste Institutions 的接口</a><a href="#111-brand-locus" class="t2">11.1 BRAND LOCUS 四种典型结构</a><a href="#12-creator-profile" class="t2">12. 新的Creator Profile强制字段</a><a href="#13-ai" class="t2">13. AI时代：执行商品化以后，信任可能更稀缺</a><a href="#a-author-trust-capital" class="t3">A. AUTHOR TRUST CAPITAL</a><a href="#b-studio-trust-capital" class="t3">B. STUDIO TRUST CAPITAL</a><a href="#platform-capture-risk" class="t3">PLATFORM-CAPTURE RISK</a><a href="#14" class="t2">14. 中国接下来最值得做的实证</a><a href="#p0" class="t3">P0 — 作者识别率</a><a href="#p0-ip" class="t3">P0 — 创作者换IP迁移</a><a href="#p1-success-rights" class="t3">P1 — Success → Rights</a><a href="#p1-credit-visibility" class="t3">P1 — Credit visibility</a><a href="#p1-failure-cases" class="t3">P1 — Failure cases</a><a href="#15" class="t2">15. 当前最小结论</a><a href="#16-attribution-politics" class="t2">16. 作者品牌的上游：Attribution Politics</a></aside><article class="doc"><div class="col"><h1 id="020-author-brand-capital">020 — Author Brand Capital：作者名字如何变成可迁移的市场资产</h1>
+<ul>
+<li>Program: C / 中国国情研究 × 英雄传说 × 作者权</li>
+<li>Status: <strong>MECHANISM FRAMEWORK / COMPARATIVE CASES / HYPOTHESIS-BUILDING</strong></li>
+<li>As-of: 2026-10-08</li>
+<li>Demand-side parent: <a href="/heroes-portal/country-studies/china/017-demand-side-creator-selection-player-veto.html">017 — Demand-Side Creator Selection</a></li>
+<li>Taste institutions: <a href="/heroes-portal/country-studies/china/019-taste-institutions-player-literacy-creator-selection.html">019 — Taste Institutions</a></li>
+<li>Attribution politics: <a href="/heroes-portal/country-studies/china/021-attribution-politics-credit-regimes-author-power.html">021 — Credit Regimes and Author Power</a></li>
+<li>Author-right comparator: <a href="/heroes-portal/country-studies/china/015-japan-comparator-frontier-permeability-author-rights-and-creator-replacement.html">015 — 中国 × 日本</a></li>
+<li>Boundary: 本文研究“作者声誉能否转成可迁移的经济/组织权利”，不是主张所有游戏都应 auteur-centered，也不把商业成功直接归因于个人天才。</li>
+</ul>
+<h2 id="0">0. 核心问题</h2>
+<p class="dc">一个玩家说：</p>
+<blockquote>
+<p>“我喜欢《Metal Gear》。”</p>
+</blockquote>
+<p>和：</p>
+<blockquote>
+<p>“我会去买 Hideo Kojima 下一款游戏。”</p>
+</blockquote>
+<p>不是同一种市场资产。</p>
+<p>前者主要属于：
+- IP；
+- publisher；
+- studio；
+- franchise。</p>
+<p>后者才意味着：</p>
+<h1 id="author_brand_capital"><code>AUTHOR_BRAND_CAPITAL / 作者品牌资本</code></h1>
+<p>定义：</p>
+<blockquote>
+<p><strong>玩家、平台、发行商、投资人或合作方对某个具体创作者判断力的可识别信任；这种信任能够脱离单一作品/IP/雇主，转成下一项目的注意力、融资、发行条件、招聘力或创作自主权。</strong></p>
+</blockquote>
+<p>它至少必须具有某种 <code>PORTABILITY</code>。</p>
+<p>若一个人只有在原IP/公司里有名，离开后注意力和资源立即归零，则其个人 reputation 还不足以构成强 Author Brand Capital。</p>
+<h2 id="1">1. 作者品牌资本的五级转换链</h2>
+<h3 id="11-author_recognition">1.1 <code>AUTHOR_RECOGNITION</code></h3>
+<p>玩家是否知道“是谁做的”？</p>
+<p>最低层：
+- director / designer name recognition；
+- 开发者访谈；
+- media labeling；
+- “from the creator of&hellip;”营销。</p>
+<p>这只证明知名度，不证明经济权力。</p>
+<h3 id="12-attention_portability">1.2 <code>ATTENTION_PORTABILITY</code></h3>
+<p>作者换IP、换公司后，玩家是否仍愿意关注？</p>
+<p>观察：
+- 新IP announcement reach；
+- social following；
+- press pickup；
+- wishlist / trailer response；
+- community migration。</p>
+<h3 id="13-revenue_portability">1.3 <code>REVENUE_PORTABILITY</code></h3>
+<p>注意力能否继续变成购买？</p>
+<p>这是最难验证的一层。
+不能用“媒体很关注”替代。
+需要：
+- 新IP销量；
+- preorder / wishlist；
+- repeat audience；
+- audience overlap / cohort evidence。</p>
+<h3 id="14-financing_conversion">1.4 <code>FINANCING_CONVERSION</code></h3>
+<p>作者名声能否直接降低下一作融资约束？</p>
+<p>观察：
+- self-funding；
+- publisher competition；
+- platform first-party deals；
+- investor terms；
+- distribution-only rather than funding-dependent contracts。</p>
+<h3 id="15-bargaining_power_conversion">1.5 <code>BARGAINING_POWER_CONVERSION</code></h3>
+<p>品牌是否真的让作者获得更大decision rights？</p>
+<p>观察：
+- greenlight authority；
+- budget control；
+- IP ownership；
+- publisher approval rights；
+- creative control；
+- platform choice；
+- ability to exit；
+- ability to refuse imposed scope/monetization。</p>
+<p>完整链：</p>
+<pre><code class="language-text">WORK
+→ author recognition
+→ portable audience
+→ portable revenue expectation
+→ financing / partner competition
+→ stronger outside option
+→ greater bargaining power
+→ more authorial autonomy
+</code></pre>
+<p>这才是“玩家认识作者本身是一种劳动权力”的严格版本。</p>
+<h2 id="2-exit_with_demand">2. 小岛秀夫：<code>EXIT_WITH_DEMAND</code> 的极端样本</h2>
+<p>Kojima Productions官方公司史显示：
+- 2015年12月独立工作室正式成立；
+- 同月 Sony Interactive Entertainment 即宣布与新工作室签约制作其首款PS4作品；
+- 2019《Death Stranding》发行；
+- 到2025年3月，Kojima Productions宣布《Death Stranding》跨平台累计连接超过2000万玩家。</p>
+<p>Sources:
+- https://www.kojimaproductions.jp/en/company
+- https://www.kojimaproductions.jp/DS-20million-porters</p>
+<p>这里最重要的不是单纯“Death Stranding卖得不错”，而是：</p>
+<blockquote>
+<p><strong>小岛离开Konami、失去Metal Gear IP之后，并没有回到匿名创业者状态。</strong></p>
+</blockquote>
+<p>其既有 creator reputation 立即降低了：
+- platform trust cost；
+- media discovery cost；
+- recruiting legitimacy；
+- audience acquisition uncertainty。</p>
+<p>2022 Xbox又以“小岛是行业最具创新性的创作者之一”为合作理由宣布与Kojima Productions合作；2023公开的 <code>A HIDEO KOJIMA GAME</code>《OD》更把作者名字直接作为产品营销层；到2026年9月，Xbox CEO在扩大合作、接手《PHYSINT》发行时直接强调“创作者可以选择在哪里、如何实现自己的想法”，并把Kojima“选择Xbox”本身写进合作叙事。</p>
+<p>Sources:
+- https://news.xbox.com/en-us/2022/06/12/announcing-a-new-partnership-between-xbox-game-studios-and-kojima-productions/
+- https://kojimaproductions.jp/index.php/en/OD-announcement
+- https://news.xbox.com/en-us/2026/09/09/xbox-and-kojima-productions-expand-partnership-to-publish-physint/
+- https://www.kojimaproductions.jp/en/xbox_partnership_announcement</p>
+<p>因此小岛案例可定义：</p>
+<h1 id="exit_with_demand"><code>EXIT_WITH_DEMAND</code></h1>
+<blockquote>
+<p><strong>创作者离开原组织时，不只是带走能力和同事，还带走一部分外部需求与平台信任。</strong></p>
+</blockquote>
+<p>这会显著提高 <code>OUTSIDE_OPTION</code>。</p>
+<p>但边界：
+- 不能证明2000万Death Stranding玩家全部因“小岛个人”购买；
+- Sony/Xbox合作也受团队能力、IP概念、行业关系等影响；
+- 因此只能把其称为“极强作者品牌资本个案”，不能作为所有auteur职业路径的基线。</p>
+<h2 id="3-jonathan-blowreputation-cash-autonomy">3. Jonathan Blow：<code>REPUTATION → CASH → AUTONOMY</code> 的纯净样本</h2>
+<p>Game Developer 2011与2016采访提供少见的直接证据：</p>
+<ul>
+<li>《Braid》成功带来的销售收入，使Blow能够完全自筹《The Witness》；</li>
+<li>2011他明确表示，即使签publisher，也更可能只为无法自发行的平台解决distribution，而不是融资；</li>
+<li>2016他明确说，没有Braid的钱，就不可能做The Witness，且已把Braid收入投入七年开发。</li>
+</ul>
+<p>Sources:
+- https://www.gamedeveloper.com/business/bearing-i-witness-i-
+- https://www.gamedeveloper.com/business/q-a-jonathan-blow-on-i-the-witness-i-and-the-state-of-indie-games</p>
+<p>这个案例特别重要，因为它展示了最直接的：</p>
+<pre><code class="language-text">player selection
+→ sales
+→ retained creator capital
+→ no external funding dependence
+→ stronger contract position
+→ long-horizon personal project
+</code></pre>
+<p>这里作者品牌和现金资本发生耦合。</p>
+<p>正式变量：</p>
+<h1 id="reputation-capital-compounding"><code>REPUTATION-CAPITAL COMPOUNDING</code></h1>
+<blockquote>
+<p><strong>一次成功不只留下“名声”，还留下钱、玩家信任和更有利的下一轮融资位置；三者互相强化。</strong></p>
+</blockquote>
+<p>这就是独立作者能够获得第二次更大赌注的关键机制之一。</p>
+<h2 id="4-market-legitimation-internal-authority">4. 宫崎英高：<code>MARKET LEGITIMATION → INTERNAL AUTHORITY</code></h2>
+<p>宫崎提供另一条不同路径。</p>
+<p>Guardian 2015访谈记录：
+- 2004进入FromSoftware；
+- 接手已经问题重重的Demon&rsquo;s Souls；
+- 首周日本销量约2万；
+- 随后通过社区口碑、攻略和玩家传播，数月内销量超过10万，并找到西方发行；
+- 他的名字逐渐与该设计哲学绑定；
+- 十年内升为公司社长，被采访者称为日本企业环境下极不寻常的晋升速度。</p>
+<p>Source:
+- https://www.theguardian.com/technology/2015/mar/31/bloodborne-dark-souls-creator-hidetaka-miyazaki-interview</p>
+<p>官方PlayStation材料到2022已经直接用“Souls series creator”标识宫崎，并把Demon&rsquo;s Souls→Dark Souls→Sekiro→Elden Ring的设计连续性与其个人联系起来。</p>
+<p>Sources:
+- https://blog.playstation.com/2022/02/04/the-best-fromsoftware-bosses-as-picked-by-playstation-studio-devs/
+- https://blog.playstation.com/?p=359935</p>
+<p>FromSoftware当前官方公司页仍列宫崎为Representative Director and President。</p>
+<p>Source:
+- https://www.fromsoftware.jp/ww/company_about.html</p>
+<p>因此宫崎案例更接近：</p>
+<h1 id="external-legitimation-internal-power"><code>EXTERNAL LEGITIMATION → INTERNAL POWER</code></h1>
+<blockquote>
+<p><strong>玩家/评论/销量反复证明某种个人判断后，公司内部更有理由继续把decision rights集中给这个人。</strong></p>
+</blockquote>
+<p>这与小岛不同：
+- 小岛证明 <code>author brand supports exit</code>；
+- 宫崎更像 <code>author brand compounds inside the firm</code>。</p>
+<p>但仍需避免把其升任社长简单写成“玩家投票直接任命CEO”；公司治理、股权和内部领导能力均是必要中介。</p>
+<h2 id="5-sid-meierinstitutionalized-fossilized">5. Sid Meier：作者品牌可以被<code>INSTITUTIONALIZED / FOSSILIZED</code></h2>
+<p>Sid Meier案例揭示作者品牌的另一种终局。</p>
+<p>Game Developer回顾记录：
+- 从《Sid Meier&rsquo;s Pirates!》开始，把名字放进标题本来就是营销决策，希望把已有玩家对Meier作品的信任带到一款偏离公司原有品类的新作；
+- Meier本人后来明确承认自己的名字已经成为一种“brand”；
+- Civilization后续各代由不同lead designer主导，但仍持续使用“Sid Meier&rsquo;s Civilization”。</p>
+<p>Sources:
+- https://www.gamedeveloper.com/business/game-designer-spotlight-sid-meier
+- https://www.gamedeveloper.com/audio/building-i-civilization-v-i-
+- https://www.gamedeveloper.com/design/there-s-value-in-embracing-new-ideas-from-other-people-says-sid-meier
+- https://civilization.2k.com/</p>
+<p>因此新增两个变量：</p>
+<h3 id="author_brand_institutionalization"><code>AUTHOR_BRAND_INSTITUTIONALIZATION</code></h3>
+<p>作者的设计信誉被工作室/IP吸收为长期质量承诺。</p>
+<h3 id="author_name_fossilization"><code>AUTHOR_NAME_FOSSILIZATION</code></h3>
+<p>作者名字仍存在于产品品牌，但当期具体设计劳动已由多人/后继者完成。</p>
+<p>这说明：</p>
+<blockquote>
+<p><strong>作者品牌资本可以最终转化为机构品牌资本，而不再要求原作者承担每一项具体创作。</strong></p>
+</blockquote>
+<p>所以不能看到人名在标题里就推定“auteur control仍然存在”。</p>
+<h2 id="6-call-of-dutyipstudio-brand-capital">6. Call of Duty：<code>IP/STUDIO BRAND CAPITAL</code> 是可行的另一套工业解</h2>
+<p>2026《Call of Duty: Modern Warfare 4》官方开发信息显示：
+- Infinity Ward为lead studio；
+- 同时有Beenox、Raven、Sledgehammer、Treyarch、Digital Legends等多家团队参与。</p>
+<p>Source:
+- https://www.callofduty.com/blog/2026/05/modernwarfare4-fob</p>
+<p>这说明一个成熟大型franchise完全可以把可信度放在：
+- IP；
+- studio network；
+- production standard；
+- release cadence；</p>
+<p>而不是单一作者个人。</p>
+<p>因此本项目正式禁止：</p>
+<blockquote>
+<p>“作者品牌越强，产业越高级。”</p>
+</blockquote>
+<p>更准确的是：</p>
+<h1 id="brand-locus"><code>BRAND LOCUS / 品牌资本落点</code></h1>
+<p>一个产品的购买信任可以主要落在：</p>
+<ol>
+<li><code>AUTHOR</code> — Kojima / Blow；</li>
+<li><code>STUDIO</code> — FromSoftware / Supergiant；</li>
+<li><code>IP</code> — Call of Duty / Pokémon；</li>
+<li><code>PLATFORM/PUBLISHER</code> — Nintendo / early Blizzard-like publisher trust；</li>
+<li><code>GENRE/SYSTEM</code> — sports annualization / live-service ecosystems；</li>
+<li><code>HYBRID</code> — Miyazaki + FromSoftware + Souls-like formula。</li>
+</ol>
+<p>研究重点不是谁更“艺术”，而是：</p>
+<blockquote>
+<p><strong>失败与成功之后，品牌资产归谁？谁可以把它带进下一局？</strong></p>
+</blockquote>
+<h2 id="7-authorial-continuity">7. 中国：梁其伟是当前最清楚的<code>AUTHORIAL CONTINUITY</code>样本之一</h2>
+<p>PlayStation 2023官方开发者文章由S-Game创始人梁其伟本人署名，明确重建：
+- 2010年以RPG Maker独立制作《Rainblood: Town of Death》；
+- 回国后创办S-GAME；
+- Rainblood演化成Phantom Blade系列；
+- 移动作品主要在中国发行，但积累超过2000万玩家；
+- 《Phantom Blade Zero》被他定义为原始Rainblood的“spiritual rebirth”和团队一直想做的游戏。</p>
+<p>Source:
+- https://blog.playstation.com/?p=380020</p>
+<p>到2026年8月，PlayStation仍由梁其伟以Founder &amp; CEO身份亲自介绍《Phantom Blade Zero》的深层系统；该作定于2026年10月29日发行。</p>
+<p>Source:
+- https://blog.playstation.com/?p=421706</p>
+<p>这是一条很少见的中国连续谱：</p>
+<pre><code class="language-text">solo RPG Maker author
+→ own studio
+→ mobile commercial regime
+→ 20m-player franchise
+→ global premium/console return
+→ same creator publicly narrates continuity
+</code></pre>
+<p>它至少支持：</p>
+<h1 id="authorial_identity_continuity"><code>AUTHORIAL_IDENTITY_CONTINUITY</code></h1>
+<blockquote>
+<p><strong>作者身份没有因从业制度切换而完全消失，而是跨hobbyist / mobile / premium阶段保存。</strong></p>
+</blockquote>
+<p>但目前还不能把它完全等同于“Kojima型个人品牌”：
+- 20m玩家更可能认Phantom Blade/IP或S-GAME，而不是梁其伟本人；
+- 《Phantom Blade Zero》发售后的buyer attribution、下一IP portability仍待观察。</p>
+<p>所以中国当前最严谨的状态是：</p>
+<blockquote>
+<p><strong>梁其伟 = strong authorial continuity；independent author-brand portability = not yet fully proven。</strong></p>
+</blockquote>
+<h2 id="8-game-sciencestudioip-brand">8. 冯骥 / Game Science：<code>STUDIO/IP BRAND</code> 已强，个人可迁移品牌仍待下一局验证</h2>
+<p>2020《黑神话》首次实机公开后，冯骥作为制作人/创始人被大量媒体直接采访；现有访谈也反复把《斗战神》经历、创办Game Science和《黑神话》愿景联系起来。</p>
+<p>Sources:
+- https://www.gamersky.com/news/202009/1320373.shtml
+- https://www.gamersky.com/news/202407/1781563.shtml</p>
+<p>到2025年，Game Science又正式扩展“黑神话BLACKMYTH”品牌。</p>
+<p>Source:
+- https://www.gamersky.com/news/202501/1871554.shtml</p>
+<p>所以目前可安全确认：
+- Game Science studio brand 强；
+- Black Myth IP brand 强；
+- 冯骥拥有较高 creator visibility。</p>
+<p>但真正的 <code>AUTHOR_BRAND_PORTABILITY</code> 测试尚未完成：</p>
+<blockquote>
+<p>如果冯骥明天做一个完全不同于《黑神话》的新IP，玩家是否因为“冯骥做的”而迁移？</p>
+</blockquote>
+<p>在没有第二个非同IP产品或真实buyer attribution之前，不能直接把冯骥升级成中国版Kojima。</p>
+<p>这个区分对整个中国研究极重要：</p>
+<blockquote>
+<p><strong>creator visibility ≠ portable creator demand。</strong></p>
+</blockquote>
+<h2 id="9">9. 作者品牌资本的黑暗面</h2>
+<p>作者品牌不是纯收益。</p>
+<h3 id="91-expectation-lock-in">9.1 <code>EXPECTATION LOCK-IN</code></h3>
+<p>一旦玩家期待“宫崎式”“小岛式”“Blow式”作品，作者可能被自己的成功语法绑架。</p>
+<p>问题：
+- 能否跨品类；
+- 玩家是否接受较小项目；
+- 作者是否被迫重复最受欢迎的signature。</p>
+<h3 id="92-key-person-risk">9.2 <code>KEY-PERSON RISK</code></h3>
+<p>品牌过度集中个人：
+- 生病/离职/冲突；
+- succession困难；
+- 团队贡献被遮蔽；
+- publisher valuation波动。</p>
+<h3 id="93-credit-appropriation">9.3 <code>CREDIT APPROPRIATION</code></h3>
+<p>过强auteur narrative可能把大量团队劳动错误归给一人。</p>
+<p>所以所有profile必须同时记录：
+- named auteur；
+- actual lead team；
+- studio continuity；
+- who owns IP；
+- who owns customer relationship。</p>
+<h3 id="94-brand-capture">9.4 <code>BRAND CAPTURE</code></h3>
+<p>作者名声也可能被公司吸收：
+- 名字继续用于产品；
+- IP继续销售；
+- 作者本人却未必继续拥有对应decision rights。</p>
+<p>Sid Meier是良性制度化案例；其他案例需区分是否发生非自愿capture。</p>
+<h2 id="10">10. 作者品牌资本如何改变劳动政治</h2>
+<p>如果玩家只认IP：</p>
+<pre><code class="language-text">employee leaves
+→ IP stays
+→ demand stays
+→ worker outside option weak
+</code></pre>
+<p>如果玩家认具体作者：</p>
+<pre><code class="language-text">creator leaves
+→ part of attention/demand may follow
+→ employer replacement risk rises
+→ creator outside option rises
+→ bargaining power rises
+</code></pre>
+<p>因此：</p>
+<blockquote>
+<p><strong>作者署名、公开采访、开发者品牌、玩家能否识别“是谁做的”，并不是虚荣问题，而是creative labor bargaining structure的一部分。</strong></p>
+</blockquote>
+<p>这也意味着一个公司如果系统性压低个人署名/作者可见性，可能不仅是在做品牌管理，也在降低员工的外部可迁移资本。</p>
+<p>这是H，后续需要真实contract / credit / exit案例验证，不应直接推定公司故意如此。</p>
+<h2 id="101-demand-side-quasi-property">10.1 <code>DEMAND-SIDE QUASI-PROPERTY / 需求侧准产权</code></h2>
+<p>作者品牌资本可被理解为一种非法律意义上的“准产权”：</p>
+<pre><code class="language-text">company may own:
+IP / trademark / code / distribution contract
+
+creator may still own:
+skill / judgment / reputation / portable audience trust
+</code></pre>
+<p>如果玩家的购买意愿部分绑定到具体作者，这部分需求关系并不能被雇主像IP一样完全占有。</p>
+<p>于是：
+- creator被替换时，部分attention/revenue可能流失；
+- creator离职时，能把一部分市场预期带走；
+- publisher / platform为了获得这部分需求，需要直接与creator重新谈判。</p>
+<p>因此：</p>
+<blockquote>
+<p><strong>作者品牌资本是一种把“人格/声誉”转化为outside option的需求侧资产。</strong></p>
+</blockquote>
+<p>它不是法律上的IP权，也不保证创作者拥有客户名单或数据，因此必须称“quasi-property”，不能写成正式产权。</p>
+<h3 id="2015-kojimakonamiattribution-asset">2015 Kojima/Konami：<code>ATTRIBUTION ASSET</code> 的可见冲突</h3>
+<p>2015年《MGSV》最终box art与宣传材料移除了此前存在的Kojima Productions标识与 “A Hideo Kojima Game”；同时Kojima名字/工作室branding也从多个官方渠道被弱化或移除。</p>
+<p>Sources:
+- https://arstechnica.com/gaming/2015/07/konami-removes-kojimas-name-from-metal-gear-solid-v-box-art/
+- https://www.theguardian.com/technology/2015/dec/17/metal-gear-solid-games-creator-hideo-kojima-konami</p>
+<p>这里能确认的是：</p>
+<blockquote>
+<p><strong>产品归因方式发生了变化。</strong></p>
+</blockquote>
+<p>不能确认：</p>
+<blockquote>
+<p>Konami主观目的就是为了剥夺Kojima bargaining power。</p>
+</blockquote>
+<p>但该事件证明：
+- author attribution不是抽象荣誉；
+- box art / marketing / studio label会改变玩家把作品归因给谁；
+- attribution本身属于品牌资产形成机制。</p>
+<p>因此新增：</p>
+<h1 id="attribution_infrastructure"><code>ATTRIBUTION_INFRASTRUCTURE</code></h1>
+<blockquote>
+<p><strong>把作品结果稳定绑定到具体作者/团队的制度与传播设施。</strong></p>
+</blockquote>
+<p>包括：
+- credits；
+- box/store-page naming；
+- “A ___ Game”式标识；
+- developer interviews；
+- awards attribution；
+- conference talks；
+- media retrospectives；
+- public studio identity。</p>
+<p>没有 Attribution Infrastructure，作者即使做出关键贡献，也可能难以形成portable demand。</p>
+<h3 id="credit-bottleneck"><code>CREDIT BOTTLENECK</code></h3>
+<p>如果：
+- 玩家只见到IP；
+- 媒体只采访公司发言人；
+- 商店页不突出creator；
+- awards只给产品/公司；
+- 关键个人长期不公开；</p>
+<p>则可能出现：</p>
+<pre><code class="language-text">individual creates differentiated value
+→ value recognized at product level
+→ brand accrues to IP/studio
+→ individual portable market capital remains low
+</code></pre>
+<p>这不自动等于不公，因为：
+- 大型游戏确实是集体生产；
+- 公司也需要降低key-person risk；
+- studio brand可能比个人auteur更适合长期组织。</p>
+<p>研究重点仍是：</p>
+<blockquote>
+<p><strong>credit与decision-right / economic-return到底如何分配，而不是要求所有团队制造明星。</strong></p>
+</blockquote>
+<h2 id="11-taste-institutions">11. 与 Taste Institutions 的接口</h2>
+<p>作者品牌不能凭空形成。</p>
+<p>需要：</p>
+<pre><code class="language-text">INTERPRETATION
+媒体告诉玩家谁负责什么
+        ↓
+MEMORY
+作品史把作者与设计判断绑定
+        ↓
+REPUTATIONAL CARRYOVER
+下一作继续提作者名
+        ↓
+TRANSACTION
+玩家真的因作者而购买
+        ↓
+AUTHOR BRAND CAPITAL
+</code></pre>
+<p>所以一个只报道：
+- IP；
+- 角色；
+-公司；
+-流水；</p>
+<p>很少报道：
+- director；
+- designer；
+- programmer；
+- writer；
+- artist；</p>
+<p>的媒体生态，会天然减弱作者品牌资本的生成速度。</p>
+<p>这就是019未来要测的“中国玩家作者识别率”。</p>
+<h2 id="111-brand-locus">11.1 <code>BRAND LOCUS</code> 四种典型结构</h2>
+<table>
+<thead>
+<tr>
+<th>Archetype</th>
+<th>Brand locus</th>
+<th>机制</th>
+<th>主要风险</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kojima</td>
+<td>AUTHOR-dominant</td>
+<td>玩家/平台把创作信任绑定个人，可跨IP/平台迁移</td>
+<td>key-person / expectation lock-in</td>
+</tr>
+<tr>
+<td>Miyazaki + FromSoftware</td>
+<td>AUTHOR × STUDIO hybrid</td>
+<td>个人设计哲学与工作室工艺共同构成信任</td>
+<td>继任与团队贡献遮蔽</td>
+</tr>
+<tr>
+<td>Sid Meier&rsquo;s Civilization</td>
+<td>institutionalized AUTHOR NAME × IP</td>
+<td>原作者名字成为长期quality seal，即使lead designer更换</td>
+<td>name fossilization / attribution ambiguity</td>
+</tr>
+<tr>
+<td>Call of Duty</td>
+<td>IP × STUDIO NETWORK</td>
+<td>多工作室工业系统维持品牌，不依赖单个公开auteur</td>
+<td>individual portable credit弱</td>
+</tr>
+</tbody>
+</table>
+<p>这四种都可能生产优秀作品。</p>
+<p>因此真正的问题不是：</p>
+<blockquote>
+<p>“有没有明星制作人？”</p>
+</blockquote>
+<p>而是：</p>
+<blockquote>
+<p><strong>品牌资本被配置到哪一层？这种配置是否与团队治理、创新需求和继任模型匹配？</strong></p>
+</blockquote>
+<p>中国2026可能同时出现：
+- 冯骥 / Game Science / Black Myth 的 hybrid；
+- 梁其伟 / S-GAME / Phantom Blade 的 authorial-continuity hybrid；
+- 米哈游/HoYoverse等更强corporate/studio brand；
+- 大型商业IP中较弱的individual creator visibility。</p>
+<p>这些需要逐案取证，不能从公司类型直接赋值。</p>
+<h2 id="12-creator-profile">12. 新的Creator Profile强制字段</h2>
+<p>以后英雄传记增加：</p>
+<ul>
+<li><code>brand_locus</code>: author / studio / IP / publisher / hybrid</li>
+<li><code>author_recognition</code></li>
+<li><code>attention_portability</code></li>
+<li><code>revenue_portability</code></li>
+<li><code>financing_conversion</code></li>
+<li><code>bargaining_power_conversion</code></li>
+<li><code>outside_option</code></li>
+<li><code>IP_ownership</code></li>
+<li><code>customer_relationship_ownership</code></li>
+<li><code>brand_capture_risk</code></li>
+<li><code>expectation_lock_in</code></li>
+<li><code>succession_model</code></li>
+</ul>
+<p>这组变量防止把“著名制作人”写成未经检验的英雄神话。</p>
+<h2 id="13-ai">13. AI时代：执行商品化以后，信任可能更稀缺</h2>
+<p>第四次工业革命对作者品牌的影响，不应先假设成“AI让作者不重要”。</p>
+<p>相反，一个值得跟踪的H是：</p>
+<pre><code class="language-text">production cost ↓
+content supply ↑↑
+visible quality floor ↑
+choice overload ↑
+→ player search / trust cost ↑
+→ reliable author/studio reputation becomes more valuable
+</code></pre>
+<p>即：</p>
+<h1 id="trust-bottleneck"><code>TRUST BOTTLENECK / 信任瓶颈</code></h1>
+<blockquote>
+<p><strong>当大量团队都能低成本制造“看起来像产品”的内容时，真正稀缺的可能从production capacity转向judgment credibility。</strong></p>
+</blockquote>
+<p>玩家需要判断：
+- 谁不会拿AI批量灌水；
+- 谁有稳定taste；
+- 谁能完成而非只做漂亮demo；
+- 谁值得几十小时注意力；
+- 谁的下一作即使看不懂也愿意试。</p>
+<p>因此AI时代可能同时强化两种brand locus：</p>
+<h3 id="a-author-trust-capital">A. <code>AUTHOR TRUST CAPITAL</code></h3>
+<p>适合：
+- small auteur；
+- strong design thesis；
+- essay/devlog/direct audience；
+- personally portable reputation。</p>
+<h3 id="b-studio-trust-capital">B. <code>STUDIO TRUST CAPITAL</code></h3>
+<p>适合：
+- 小中团队；
+- 多人核心能力；
+- 希望降低key-person risk；
+- 让玩家信任“一群人的共同taste”。</p>
+<p>对中国尤其重要：</p>
+<blockquote>
+<p>不一定要复制“Kojima明星导演制”；更现实的健康目标可能是让 <strong>Game Science / S-GAME / 下一代小中团队</strong> 获得可迁移的studio trust，同时让核心作者保留足够credit和outside option。</p>
+</blockquote>
+<h3 id="platform-capture-risk"><code>PLATFORM-CAPTURE RISK</code></h3>
+<p>AI也可能产生相反结果：
+- 供给爆炸后更依赖推荐算法；
+- creator reach越来越由Steam/Bilibili/TikTok/平台feed决定；
+- 个人“粉丝很多”未必等于自己拥有customer relationship。</p>
+<p>因此新增：</p>
+<h1 id="audience_ownership"><code>AUDIENCE_OWNERSHIP</code></h1>
+<blockquote>
+<p><strong>作者/工作室的受众关系有多少是平台可随时重新排序的attention，有多少是能跨平台带走的direct demand？</strong></p>
+</blockquote>
+<p>可观察：
+- cross-platform following；
+- mailing/community；
+- Discord/论坛/自有站；
+- wishlist迁移；
+- direct store / crowdfunding；
+- platform change后reach retention。</p>
+<p>所以AI降低 <code>PRODUCTION ENTRY COST</code>，但不保证降低：
+- discovery cost；
+- trust cost；
+- customer acquisition cost。</p>
+<p>未来英雄传说应重点研究：</p>
+<blockquote>
+<p><strong>谁不仅用AI把东西做出来，还建立了可跨平台迁移的“相信我下一次判断”的玩家关系？</strong></p>
+</blockquote>
+<h2 id="14">14. 中国接下来最值得做的实证</h2>
+<h3 id="p0">P0 — 作者识别率</h3>
+<p>抽样中国premium玩家：
+- 认识多少IP；
+- 认识多少studio；
+- 认识多少director/designer；
+- “下一作购买意愿”受哪个层级影响最大。</p>
+<h3 id="p0-ip">P0 — 创作者换IP迁移</h3>
+<p>追中国已有可见创作者：
+- 梁其伟；
+- 冯骥；
+- 梁其伟之后更多indie/AA作者；
+记录从旧作到新IP的wishlist、社媒关注、发行条件。</p>
+<h3 id="p1-success-rights">P1 — Success → Rights</h3>
+<p>成功后主创是否得到：
+- 更大预算；
+- IP ownership；
+- self-publishing；
+- 更少publisher veto；
+- 更高收益分成；
+- 第二项目自主权。</p>
+<h3 id="p1-credit-visibility">P1 — Credit visibility</h3>
+<p>中国大厂/独立游戏：
+- store page credits；
+- media interview；
+- award attribution；
+- launch marketing；
+比较玩家到底认识“谁”。</p>
+<h3 id="p1-failure-cases">P1 — Failure cases</h3>
+<p>必须找：
+- 名创作者新IP失败；
+- 作者名声没有转成购买；
+- IP离开原作者仍成功；
+- studio brand压过个人brand。</p>
+<p>没有这些分母，Author Brand Capital会滑成“成功大师循环论证”。</p>
+<h2 id="15">15. 当前最小结论</h2>
+<blockquote>
+<p><strong>作者品牌资本不是名气，而是“对作者判断的信任能否跨越作品、IP与雇主继续产生经济和组织后果”。它可以通过玩家选择转成融资、自筹能力、发行伙伴竞争和更强outside option，从而提升作者权；但它不是所有游戏工业的必要条件，成熟IP/工作室也可以承载品牌信任。真正该比较的是brand locus在哪里、谁拥有客户关系，以及成功后这份市场资本能否被创作者带入下一局。</strong></p>
+</blockquote>
+<h2 id="16-attribution-politics">16. 作者品牌的上游：Attribution Politics</h2>
+<p>020只回答“作者名声能不能变成portable demand”，021进一步回答“作者名声为什么会落到这个人身上”。</p>
+<p>强制链条：</p>
+<pre><code class="language-text">real contribution / decision rights
+→ credit attribution
+→ public interpretation
+→ memory / reputation
+→ portable demand
+→ author brand capital
+</code></pre>
+<p>如果第二步断裂，即使个人真实贡献极大，也可能无法形成后续 portable market capital。</p>
+<p>因此：</p>
+<blockquote>
+<p><strong>Author Brand Capital 不是自然结果，而是 Attribution Infrastructure 的下游产物。</strong></p>
+</blockquote>
+<p>Canonical:
+- <a href="/heroes-portal/country-studies/china/021-attribution-politics-credit-regimes-author-power.html">021 — Attribution Politics</a></p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / country-studies/china/020-author-brand-capital-portable-demand-bargaining-power.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

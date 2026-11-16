@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>凉屋内部制度对照：programmer-producer 与 hybrid plannerized live-service · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl class="on"" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0" class="t2">0. 研究问题</a><a href="#1-20172019-programmer-producer-regime" class="t2">1. 2017–2019：早期凉屋的 programmer-producer regime</a><a href="#_1" class="t3">当前读法</a><a href="#2" class="t2">2. 当前凉屋：专职策划重新出现，但早期小队制度没有被替换</a><a href="#_2" class="t3">重要边界</a><a href="#25-alumni" class="t2">2.5 刘永涛为什么是这个纵向对照中的特殊 alumni 样本</a><a href="#3-vs" class="t2">3. 产品级对照：《中国式网游》 vs 《元气骑士前传》</a><a href="#31-f2p" class="t3">3.1 最有意思的反转：《中国式网游》不是“不懂 F2P”</a><a href="#32-live-service-obligation" class="t3">3.2 《元气骑士前传》则是真实承担 live-service obligation</a><a href="#4" class="t2">4. 这个同公司对照支持什么</a><a href="#5" class="t2">5. 这个对照不能支持什么</a><a href="#51" class="t3">5.1 不能说“凉屋有策划以后游戏变差”</a><a href="#52" class="t3">5.2 不能说“程序员做的都是纯独游，策划做的都是商业套路”</a><a href="#53" class="t3">5.3 不能把《元气骑士前传》称为“策划作者作品”</a><a href="#6-role-origin-audit" class="t2">6. 对 Role-Origin Audit 的新变量</a><a href="#7" class="t2">7. 下一步证据缺口</a><a href="#8-source-anchors" class="t2">8. Source anchors</a><a href="#9" class="t2">9. 当前结论边界</a></aside><article class="doc"><div class="col"><h1 id="programmer-producer-hybrid-plannerized-live-service">凉屋内部制度对照：programmer-producer 与 hybrid plannerized live-service</h1>
+<ul>
+<li>Status: RESEARCH NOTE / WITHIN-FIRM COMPARATOR / NOT A FORMAL CLAIM</li>
+<li>Last verified: 2026-10-06</li>
+<li>Scope: 凉屋游戏如何在保留自下而上、小队原型与制作人 ownership 的同时，叠加专职玩法、数值、经济策划与 live-service 职能</li>
+<li>Related: <code>china-commercial-game-training-role-origin-audit-005.md</code>, <code>CASE-028 Chinese Online Game</code></li>
+<li>Claim status: <strong>NOT A FORMAL CLAIM</strong></li>
+</ul>
+<h2 id="0">0. 研究问题</h2>
+<p class="dc">Role-Origin Audit 的一个关键难题是：如果只把人按“程序 / 策划”分桶，很容易把真正的制度变量漏掉。</p>
+<p>凉屋提供了一个罕见的同公司纵向对照：</p>
+<blockquote>
+<p><strong>早期凉屋公开采用“程序/美术可立项、通常程序制作人、无专职策划、设计者亲自实现”的小团队结构；而当前凉屋已经形成专职玩法、数值、经济、角色等策划岗位，并运行具有赛季、长期成长与应用内购买的 live-service 产品。</strong></p>
+</blockquote>
+<p>因此更值得研究的不是“程序员和策划谁更会设计”，而是：</p>
+<blockquote>
+<p><strong>同一公司在团队规模、收入接口、live-service obligation 和岗位分工改变后，设计者所面对的反馈函数如何改变。</strong></p>
+</blockquote>
+<hr />
+<h2 id="1-20172019-programmer-producer-regime">1. 2017–2019：早期凉屋的 programmer-producer regime</h2>
+<p>2017 年凉屋团队公开说明：</p>
+<ul>
+<li>公司当时约 10 人；</li>
+<li>单个项目通常只有 1–3 人；</li>
+<li>团队任何成员都可以做 prototype；</li>
+<li>原型验证有效，就可能成为自己的正式项目；</li>
+<li>“通常是程序作为制作人，把握整个游戏的感觉”；</li>
+<li>立项最初优先考虑自己擅长什么、想做什么，而不是先做市场模型。</li>
+</ul>
+<p>2018 年凉屋官方博客进一步把这种制度说得更明确：</p>
+<ul>
+<li>当时没有专职策划岗位；</li>
+<li>程序、美术、文字等单项技能之外，成员需要把游戏作为整体思考；</li>
+<li>不依赖强顶层规划和厚策划文档，而采用增量迭代；</li>
+<li>设计者最终要把自己的设计真正做出来，因此工作量与制作难度会直接反馈进设计判断；</li>
+<li>官方甚至用 “eat your own dog food” 来描述这种责任闭环。</li>
+</ul>
+<p>2019 年公开采访仍然说明：凉屋扩张时引入的制作人有美术背景、有程序背景，“唯独没有策划”；团队认为好的主意应由制作人以美术或程序角色亲自实现。</p>
+<h3 id="_1">当前读法</h3>
+<p>这是一个非常清楚的 <strong>high prototype authority + high cost visibility + broad ownership</strong> 制度。</p>
+<p>它不能证明程序员 taste 更好，但它说明：</p>
+<blockquote>
+<p><strong>程序员如果同时被制度赋予产品定义权、原型权和删改权，他接受的训练就不再只是“实现别人的策划案”。</strong></p>
+</blockquote>
+<hr />
+<h2 id="2">2. 当前凉屋：专职策划重新出现，但早期小队制度没有被替换</h2>
+<p>当前凉屋官网与招聘页面已经出现明确的专业策划岗位：</p>
+<ul>
+<li>游戏策划；</li>
+<li>主策划 / 资深数值策划；</li>
+<li>角色设计方向策划；</li>
+<li>《元气骑士》项目策划；</li>
+<li>《元气骑士前传》项目玩法策划。</li>
+</ul>
+<p>其中当前主策 / 资深数值岗位公开职责包括：</p>
+<ul>
+<li>与制作人共同确定设计方向；</li>
+<li>系统、数值、经济框架；</li>
+<li>分析运营数据与玩家行为；</li>
+<li>游戏生命周期与付费模式；</li>
+<li>策划团队管理。</li>
+</ul>
+<p>《元气骑士前传》的项目定向玩法策划岗位则直接包括：</p>
+<ul>
+<li>核心玩法规则；</li>
+<li>核心机制；</li>
+<li>数值框架；</li>
+<li>关卡逻辑；</li>
+<li>“易上手、高留存”的玩法体验。</li>
+</ul>
+<p>这说明当前凉屋的 production regime 已经不能再用 2017 年的“没有专职策划”描述。</p>
+<p>2026 年 4Gamer 对李泽阳的采访又补上了关键反压力：公司虽已接近 200 人、同时运行十条以上开发线，但大部分项目仍由员工主动发起，管理层自上而下推动的项目不多；新项目通常只有 4–5 人起步，产品跑起来后再增加成员。也就是说，凉屋没有简单从 author-driven 小队“转型成”传统职能制大团队，而是形成了<strong>小队自组织 + 专业职能叠加</strong>的混合结构。</p>
+<p>因此这里的纵向变化应写成 <strong>hybridization</strong>，而不是 linear replacement：</p>
+<pre><code class="language-text">早期：1–3 人、无专职策划、programmer/artist-producer
+↓
+规模扩大、live-service obligation 增加
+↓
+当前：4–5 人起步的自组织项目仍保留
+     + 专职玩法 / 数值 / 经济 / 文案等策划
+     + 赛季、经济、长期运营、数据反馈职能
+</code></pre>
+<h3 id="_2">重要边界</h3>
+<p>这不等于凉屋放弃制作人主导，也不等于现代凉屋是传统大厂结构。</p>
+<p>公开材料仍显示凉屋强调小团队、员工自发立项、制作人 ownership 和 prototype 文化。</p>
+<p>更准确的表述是：</p>
+<blockquote>
+<p><strong>原有的 author-driven producer model 没有消失，而是在更大的组织中与专业化策划、长期运营、经济系统与数据反馈职能并存。</strong></p>
+</blockquote>
+<hr />
+<h2 id="25-alumni">2.5 刘永涛为什么是这个纵向对照中的特殊 alumni 样本</h2>
+<p>CASE-028 的证据现已分层：</p>
+<ul>
+<li>公开活动资料核定刘永涛为《中国式网游》制作人；</li>
+<li>当事人直接 personal communication 确认刘永涛此前曾任<strong>凉屋游戏程序岗位</strong>；</li>
+<li>具体任职年份、参与项目、职级与是否曾承担制作人职责仍 UNKNOWN。</li>
+</ul>
+<p>因此，本案现在可以作为 <strong>ChillyRoom alumnus / programmer-generalist</strong> 样本使用，但存在一个重要 confound：</p>
+<blockquote>
+<p>凉屋历史上的“程序岗位”本来就不是传统大型商业团队里只负责实现策划案的窄程序岗位。公开组织记录显示，凉屋曾长期鼓励程序/美术自己做 prototype、自己立项，并经常由程序担任制作人。</p>
+</blockquote>
+<p>所以刘永涛案例不能被用来证明：</p>
+<blockquote>
+<p>“商业手游程序员天然比商业策划更会做独立游戏。”</p>
+</blockquote>
+<p>更合理的候选解释是：</p>
+<blockquote>
+<p><strong>如果其任职阶段与上述凉屋制度存在重叠，那么他可能在职业环境中就接受过较高 prototype authority、cost visibility 与 product ownership 的训练。</strong></p>
+</blockquote>
+<p>由于具体任职年份尚未核定，最后一句仍是 H，而不是已证实因果链。</p>
+<hr />
+<h2 id="3-vs">3. 产品级对照：《中国式网游》 vs 《元气骑士前传》</h2>
+<p>这个对比不是“谁更好玩”的主观评分，也不是“某个策划个人 vs 某个程序个人”的能力排名。</p>
+<p>它只比较两种 production objective 在产品结构上的可观察差异。</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>《中国式网游》</th>
+<th>《元气骑士前传》</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>核心生产结构</td>
+<td>solo core；作者自述策划、程序、简单美术大量工作一人承担</td>
+<td>项目仍可能从 4–5 人自组织小队起步，但成熟 live-service 线已拥有玩法、数值/经济等专业岗位</td>
+</tr>
+<tr>
+<td>商业接口</td>
+<td>premium / 买断制单机</td>
+<td>移动 live-service；包含广告与应用内购买</td>
+</tr>
+<tr>
+<td>时间结构</td>
+<td>有限作品，把长期网游经验压缩成单机流程</td>
+<td>赛季持续更新、长期回流与成长</td>
+</tr>
+<tr>
+<td>progression</td>
+<td>充值、成长、排行榜、活动等被转换为模拟/讽刺对象</td>
+<td>职业、技能、装备、羁绊、专精、赛季等构成真实长期成长系统</td>
+</tr>
+<tr>
+<td>内容 obligation</td>
+<td>作品完成后不需要持续多年维护一整套真实 MMO economy</td>
+<td>需要长期内容、平衡、赛季、线上服务和经济维护</td>
+</tr>
+<tr>
+<td>设计反馈</td>
+<td>单一作者直接承担 scope 与实现成本</td>
+<td>制作人 + 专业岗位 + 运营数据 / 玩家行为形成多节点反馈</td>
+</tr>
+<tr>
+<td>retention</td>
+<td>不是产品结构上的长期服务目标</td>
+<td>当前项目招聘明确把“高留存”写入玩法目标</td>
+</tr>
+</tbody>
+</table>
+<h3 id="31-f2p">3.1 最有意思的反转：《中国式网游》不是“不懂 F2P”</h3>
+<p>它的核心恰恰是高度理解 F2P / 中国网游语言：</p>
+<ul>
+<li>充值；</li>
+<li>战力；</li>
+<li>排行榜；</li>
+<li>养成；</li>
+<li>活动；</li>
+<li>消费心理。</li>
+</ul>
+<p>但这些元素被重新编码：</p>
+<blockquote>
+<p><strong>原本用于维持真实付费与长期运营的系统语法，被变成一次购买后供玩家体验、识别和讽刺的内容。</strong></p>
+</blockquote>
+<p>因此它更适合作为 <strong>Domain Knowledge Inversion</strong>：</p>
+<p>不是“不懂商业游戏”，而是把商业游戏知识反过来使用。</p>
+<h3 id="32-live-service-obligation">3.2 《元气骑士前传》则是真实承担 live-service obligation</h3>
+<p>公开商店页面显示：</p>
+<ul>
+<li>广告与应用内购买；</li>
+<li>多人联机；</li>
+<li>长期赛季更新；</li>
+<li>多职业与混合职业；</li>
+<li>大量装备与羁绊组合；</li>
+<li>持续扩展的养成和新内容。</li>
+</ul>
+<p>这类产品自然需要：</p>
+<ul>
+<li>economy；</li>
+<li>progression；</li>
+<li>balance；</li>
+<li>retention；</li>
+<li>content cadence；</li>
+<li>player-behavior feedback。</li>
+</ul>
+<p>因此专职策划岗位出现并不奇怪。</p>
+<hr />
+<h2 id="4">4. 这个同公司对照支持什么</h2>
+<p>当前最合理的命题是：</p>
+<blockquote>
+<p><strong>岗位分工不是独立变量。商业模式、团队规模和长期服务义务会共同决定一个组织需要什么样的设计岗位，并进一步训练这些岗位反复解决什么问题。</strong></p>
+</blockquote>
+<p>早期凉屋的程序制作人被反复训练的是：</p>
+<ul>
+<li>能不能快速做出来；</li>
+<li>核心交互是否成立；</li>
+<li>这个 feature 值不值得自己的实现成本；</li>
+<li>小团队能否完成。</li>
+</ul>
+<p>hybrid plannerized live-service 项目中的专业岗位则更频繁面对：</p>
+<ul>
+<li>数值经济是否稳定；</li>
+<li>长期成长是否成立；</li>
+<li>新内容怎样接入既有系统；</li>
+<li>玩家行为与留存如何变化；</li>
+<li>赛季与付费结构怎样持续运转。</li>
+</ul>
+<p>两组能力都是真实专业能力。</p>
+<p>研究问题是：</p>
+<blockquote>
+<p><strong>当人从后一种环境突然进入极小团队 premium 项目时，哪些训练可以直接迁移，哪些默认解法需要主动卸载？</strong></p>
+</blockquote>
+<hr />
+<h2 id="5">5. 这个对照不能支持什么</h2>
+<h3 id="51">5.1 不能说“凉屋有策划以后游戏变差”</h3>
+<p>当前没有这样的因果证据。</p>
+<p>产品类型、团队规模、用户规模、平台和商业模式全部同时变化。</p>
+<h3 id="52">5.2 不能说“程序员做的都是纯独游，策划做的都是商业套路”</h3>
+<p>早期凉屋本身就是特殊制度；程序在这里经常同时承担制作人与设计责任。</p>
+<p>当前凉屋的玩法策划岗位也要求参与核心玩法落地，并非只做表格。</p>
+<h3 id="53">5.3 不能把《元气骑士前传》称为“策划作者作品”</h3>
+<p>公开证据只能证明：</p>
+<ul>
+<li>当前该项目存在专职玩法策划岗位；</li>
+<li>凉屋当前存在数值 / 经济 / 系统策划专业化；</li>
+<li>产品属于实际 live-service 结构。</li>
+</ul>
+<p>它不能证明某一名专职策划是该产品的唯一创意作者。</p>
+<p>因此本研究使用 <strong>plannerized product / plannerized production regime</strong>，而不是 <strong>planner-authored game</strong>。</p>
+<hr />
+<h2 id="6-role-origin-audit">6. 对 Role-Origin Audit 的新变量</h2>
+<p>凉屋这个纵向对照要求 Role-Origin Dataset 增加几个字段：</p>
+<ol>
+<li>
+<p><strong>organization regime at time of employment</strong>
+   - no-dedicated-planner
+   - prototype/incubation
+   - traditional functional specialization
+   - live-service specialization</p>
+</li>
+<li>
+<p><strong>producer architecture</strong>
+   - programmer-producer
+   - artist-producer
+   - planner-producer
+   - dedicated producer + functional planners</p>
+</li>
+<li>
+<p><strong>service obligation</strong>
+   - fixed premium
+   - early access
+   - seasonal live-service
+   - MMO / persistent economy</p>
+</li>
+<li>
+<p><strong>implementation accountability</strong>
+   - 设计者是否亲自实现
+   - 是否需要通过独立执行岗位
+   - feature 成本多久反馈回提出者</p>
+</li>
+<li>
+<p><strong>metric exposure</strong>
+   - 主要反馈来自 playtest / feel
+   - 还是 DAU / retention / economy / payer segmentation
+   - 或两者都有</p>
+</li>
+</ol>
+<p>这样才能避免把“在凉屋做程序”和“在大型 F2P 公司做客户端基础设施程序”误编码成同一个 treatment。</p>
+<hr />
+<h2 id="7">7. 下一步证据缺口</h2>
+<ol>
+<li>凉屋从“无专职策划”到建立专业策划岗位，大致发生在哪一阶段？</li>
+<li>哪些具体项目最早出现专职玩法 / 数值 / 经济策划？</li>
+<li>《元气骑士》《战魂铭人》《元气骑士前传》各自主创的原岗位和 ownership span 如何变化？</li>
+<li>programmer-producer 项目与 plannerized 项目在 prototype latency、feature deletion、meta 层数和内容 cadence 上是否存在稳定差异？</li>
+<li>是否能找到离开凉屋的程序、美术、策划分别独立制作作品的更多 alumni 样本？</li>
+</ol>
+<hr />
+<h2 id="8-source-anchors">8. Source anchors</h2>
+<ul>
+<li>
+<p>凉屋团队采访（2017）：全员可 prototype、项目 1–3 人、通常程序制作人、先考虑擅长/想做什么。<br />
+  https://youxichaguan.com/archives/57624</p>
+</li>
+<li>
+<p>凉屋官方博客：《2018年校招，值得加入的游戏公司有哪些？》；无专职策划、设计者自己实现、增量迭代。<br />
+  https://chilly.tech/zh/blog/post5</p>
+</li>
+<li>
+<p>新浪 / 游戏陀螺（2019）：扩张后的制作人有美术、有程序，“唯独没有策划”。<br />
+  https://games.sina.cn/cyfw/cyxw/2019-07-15/detail-ihytcitm2122276.d.html</p>
+</li>
+<li>
+<p>4Gamer（2026-06-23）：李泽阳说明凉屋接近 200 人、十条以上开发线，大部分项目仍由员工主动发起，新项目通常 4–5 人起步，跑起来后再扩人。<br />
+  https://www.4gamer.net/games/963/G096388/20260609005/</p>
+</li>
+<li>
+<p>凉屋当前招聘：游戏策划、主策/资深数值策划；职责包含系统、经济、玩家行为、生命周期与付费模式。<br />
+  https://www.chilly.tech/zh/join-us</p>
+</li>
+<li>
+<p>BOSS 直聘当前凉屋岗位聚合：《元气骑士前传》项目玩法策划，职责包含核心机制、数值框架、关卡逻辑与高留存。<br />
+  https://www.zhipin.com/zhaopin/6d830e1ad319b17b1nxz39u1/</p>
+</li>
+<li>
+<p>Google Play：《元气骑士前传》；应用内购买、多人、赛季持续更新、装备与长期成长结构。<br />
+  https://play.google.com/store/apps/details?id=com.chillyroom.soulknightprequel</p>
+</li>
+<li>
+<p>indienova GameDB：《中国式网游》开发者自述；2018 立项、业余约五年、策划/程序/简单美术主要由一人完成。<br />
+  https://indienova.com/game/chinese-online-game</p>
+</li>
+</ul>
+<h2 id="9">9. 当前结论边界</h2>
+<p>截至 2026-10-06，这个 within-firm comparator 最多支持：</p>
+<blockquote>
+<p><strong>同一开发公司可以在保留小队自组织与制作人 ownership 的同时，因商业模式、组织规模与 service obligation 增加而叠加专业策划职能；因此“程序 / 策划”职位标签本身不足以解释独立游戏能力迁移。</strong></p>
+</blockquote>
+<p>它尚不能支持：</p>
+<blockquote>
+<p>“专职策划制度导致产品质量下降”；</p>
+</blockquote>
+<p>也不能支持：</p>
+<blockquote>
+<p>“程序员制作人制度在所有游戏类型上更优”。</p>
+</blockquote>
+<p>后续需要具体 alumni、项目 credits 与失败样本继续检验。</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / book/research-notes/chillyroom-programmer-producer-to-plannerized-live-service-007.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

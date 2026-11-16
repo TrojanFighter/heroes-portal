@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>目标怎样在作品和反馈中形成 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl class="on"" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#romero" class="t2">Romero：机器、练习与愿意发表作品的编辑</a><a href="#_2" class="t2">还有一些人的目标，从来没获得形成的机会</a><a href="#_3" class="t2">梁其伟曾经真的把做了一年的游戏收起来</a><a href="#carmack" class="t2">Carmack：修改以后，机器给出反馈</a><a href="#tom-francis" class="t2">Tom Francis：评论中的判断也需要测试</a><a href="#_4" class="t2">三种反馈检验的是不同问题</a><a href="#_5" class="t2">从玩家到作者，不是一道门</a><a href="#_6" class="t2">规划需要新的信息</a><a href="#_7" class="t2">真正值得警惕的是：把兴趣永久关在消费区</a><a href="#doom" class="t2">DOOM 后来的意义又多了一层：生产者还可以制造下一代生产者</a><a href="#_8" class="t2">这一章能留下什么</a><a href="#_9" class="t2">时效性卡｜“目标通过行动形成”不等于照抄当年的入口</a><a href="#_10" class="t2">继续读</a></aside><article class="doc lit"><div class="col"><h1 id="_1">目标怎样在作品和反馈中形成</h1><img class="docfig" src="/heroes-portal/assets/ch-01.webp" alt="">
+<p>© 2026 洪荒行者。All Rights Reserved.</p>
+<p class="dc">职业规划常要求一个人先说清想做什么，再据此学习和行动。目标暂时不清楚，就容易被理解成不成熟或缺乏规划。但要作出选择，一个人也需要接触工具、尝试制作，知道自己能做什么，以及别人怎样回应。</p>
+<p>John Romero把游戏投给编辑，John Carmack修改游戏数据，Tom Francis把评论中形成的判断做成原型。他们遇到的反馈不同，却都让原先模糊的兴趣获得了更具体的内容。本章比较这些转换，也追问那些缺少设备、许可或第二次机会的人，是否有条件获得同样的信息。</p>
+<hr />
+<h2 id="romero">Romero：机器、练习与愿意发表作品的编辑</h2>
+<p>1979年，十一岁的Romero已经在加州一所大学的计算机房接触大型机和Apple II。1980年代初，继父给家里买了Apple II+，使他能长时间在家练习；馆藏访谈记为1981年，其他回忆中也有1982年的说法，确切年份仍有冲突。1982年家人又提供了汇编语言教材。机器在1983年随家庭迁往英国时经历了约半年的运输中断，当地美军基地学校的Apple II与BASIC课程又提供了练习环境。</p>
+<p>这些入口先后出现，不能把其中某一次写成他第一次获得制作能力的机会。学校也没有替他预先规划后来在id Software参与《Commander Keen》《Wolfenstein 3D》《DOOM》《Quake》的职业道路。</p>
+<p>按Kushner的传记记述，他写游戏、投稿，遇到拒绝后继续投，后来有人发表作品并付钱。机器让他能练习，编辑让作品进入外部评价。对本章而言，这些小节点使“喜欢游戏”逐步变成有作品、有回应的生产活动，职业方向也由此有了现实依据。</p>
+<hr />
+<h2 id="_2">还有一些人的目标，从来没获得形成的机会</h2>
+<p>Romero 的故事并不能只从“他选择了游戏”说起。那位严厉禁止他打街机、甚至动过手的继父，后来却买了 Apple II+ 给他学习编程；家长既是阻力，也是设备资助者。要是他没有遇到大学机房、懂编程的学生、家用机器和愿意买稿子的编辑，谁能肯定他会走到后来那一步？</p>
+<p>同年代的 Jordan Mechner 则经历了另一个家庭：父亲不玩游戏，却直接为《Karateka》创作音乐，成为作品生产的一部分。两个人没有一条共同的、必然通向成功的家庭成长公式。</p>
+<p>当一个人的成长环境从小就不让他接触游戏、拿不到编程或创作工具，成年时再责问“你为什么没有形成明确目标”，其实忽略了目标形成所需的前置实验机会。反过来，获得很多游戏时间也并不保证成为好的开发者。</p>
+<p>这里有一个比“是不是够努力”更前置的问题：<strong>你曾被允许反复尝试多少种不同的事，直到其中一件真的产生作品和反馈？</strong></p>
+<p><a href="/heroes-portal/book/research-notes/family-gates-game-creator-us-china-029.html">家庭如何控制游戏创作者的经验入口和职业出口：中美历史对照与证据边界</a>。</p>
+<hr />
+<p>这段对照还有一个不容易被看见的人群：<strong>连第一次投给编辑、第一次做出原型、第一次因为兴趣与家人争论的机会都没有获得的人</strong>。他们通常不会出现在开发者访谈中，也没有失败项目可供游戏记者复盘。</p>
+<p>这不能用一个成功者的童年反向证明哪一种教育必然有效。家庭可能给机器，却反对街机；学校可能安排大量考试，也可能恰好有一位提供机房、社团和实践机会的教师。决定有没有下一步的，往往不是一句“相信梦想”，而是那一年有没有时间、工具、愿意回应作品的人，以及失败一次以后是否还能继续。</p>
+<p>因此，行业如何在后来选择开发者，只是故事的后半段。某些潜在作者的故事在行业出现以前就已终止。具体的家校机制和未出发者分母，目前仍是<a href="/heroes-portal/country-studies/china/037-family-school-agency-risk-hero-nondeparture.html">中国037研究</a>中的待证问题，而不是这几位后来成名的作者已经替我们验证的定论。</p>
+<h2 id="_3">梁其伟曾经真的把做了一年的游戏收起来</h2>
+<p>十几年后的中国，有一位青年也在学习和做游戏之间付过直接代价。</p>
+<p>梁其伟还没接触 RPG Maker 时，就已经画了几十本自己的世界观和人物设定。但童年并非始终得到家人的保护：2016年的采访还记载，部分漫画和手绘曾被家人撕毁、丢弃。成年以后，他母亲却格外珍藏那些<strong>幸存的</strong>画册。这里是两段时间里的两种家庭态度，而不是从小便得到无条件支持。2006年，他在66RPG发现制作工具，把过去只能留在纸上的人物与故事装进《雨血》。他甚至不觉得必须有别人来玩；2007年初，这款粗糙的游戏至少已经可以由他自己通关。</p>
+<p>然后他挂科了，并按他2014年的回忆失去了原有的研究生保送资格。</p>
+<p>这不是抽象的“父母不理解艺术”。有一条当时非常清晰、可以继续走的升学道路突然消失了。父母、导师、伴侣与伴侣家庭都对这次偏离提出异议。那个暑假，他把游戏连同400多项待修改清单放进移动硬盘，重新去学英语、准备考试。此后约一年，他没再打开那个工程。</p>
+<p>2008年下半年，他去了美国New Haven。在那里，第一次给周围的同学和教授看《雨血》时，得到的不是为什么荒废学业的指责，而是对游戏本身、画面与东方美学的反馈。他又开始制作，并在2010年通过国内外渠道让真正的玩家接触它。</p>
+<p><strong>这段人生里没有一个永久不变的“反派家庭”，却也确实存在不可逆的作品损失。</strong> 童年部分画稿遭毁坏，成年后幸存作品由母亲珍藏；家人也确实在升学资格失效后施压。也不能把美国学校想成让所有人获得创作自由的魔法场所：梁其伟已经拥有可玩的项目，且有能力赴美继续学习。</p>
+<p>真正被改变的，是<strong>同一件作品在什么人面前算有价值、在什么评价制度下算损失，以及一个年轻人在失去一次官方认可以后是否还有第二次现实裁决机会</strong>。</p>
+<p>梁其伟2014年的自述讲到了这段中断与恢复。那些做过作品却没有得到第二次机会的人经历了什么，仅靠这些成功者的传记还无法回答。</p>
+<p><a href="/heroes-portal/book/research-notes/family-gate-china-near-miss-liang-qiwei-030.html">研究后台：2006–2010 梁其伟／《雨血》的家庭—学业—创作中断史</a>（主要据2014年本人自述，并补入2016年记者采访有关童年作品被毁与成年后母亲珍藏的S1材料；保研档案和家庭第二方视角尚未核实）。</p>
+<hr />
+<h2 id="carmack">Carmack：修改以后，机器给出反馈</h2>
+<p>Carmack在2013年的回顾中谈到，少年时期玩《Ultima II》时，他会直接修改Apple II磁盘的sector数据。Romero把作品送给编辑，Carmack则从游戏数据内部开始操作，修改是否生效成为可以观察的反馈。</p>
+<p>这种动作把游玩推进到对软件的主动改动。它不要求少年先拥有完整的职业答案，也不能证明游玩本身会自动训练程序能力。许多兴趣会停留在娱乐；本章关注的是那些已经开始拆、改、写、做的转换。</p>
+<hr />
+<h2 id="tom-francis">Tom Francis：评论中的判断也需要测试</h2>
+<p>Francis做《Gunpoint》以前没有职业游戏开发背景，却已长期在PC Gamer做记者和编辑。他在2013年的演讲中，以九年的评论经验讨论设计训练；这九年也包含他边工作边开发的时期。比较大量作品，辨认哪些做法有效、哪些乏味，让他熟悉已有方案，也逐渐形成自己想改变什么的判断。</p>
+<p>在2012年的采访中，他说，作为评论者经常想到游戏可以怎样改进，开始制作正是为了测试这些想法是否正确。做原型对他是新的，把作品放在一起比较却已有积累。本项目将长期体验、比较和表达留下的参照称为Experience Capital，即经验资本。</p>
+<p>评论经验没有替他完成游戏。他仍需用GameMaker把判断做成能交给测试者的原型，让别人的操作和回应检验想法。媒体职业同时带来的关系与曝光，也不能从这段经历中排除。</p>
+<hr />
+<h2 id="_4">三种反馈检验的是不同问题</h2>
+<p>编辑愿意发表，说明作品跨过了一道外部选择；修改后的软件是否运行，给出技术反馈；陌生测试者的操作，则可以暴露创作者预想的乐趣是否成立。三种反馈不能互相替代：代码有效不保证有人愿意玩，作品发表也不保证能长期谋生。</p>
+<p>本章把它们放在一起，是因为实际制作能提供单靠想象难以得到的信息：</p>
+<ul>
+<li>你愿不愿意持续做；</li>
+<li>你有没有形成能力；</li>
+<li>别人是否能理解；</li>
+<li>现实是否给你正反馈；</li>
+<li>你愿不愿意在负反馈后继续改。</li>
+</ul>
+<p>这些问题有了可观察的回答，下一轮目标才有机会变得具体。</p>
+<hr />
+<h2 id="_5">从玩家到作者，不是一道门</h2>
+<p>一个玩过大量游戏的人，可能已经能准确指出同类作品的问题，却始终没有提出可实现、可试错的规则；也可能写出点子，却一直没做原型；有些人已经有了可玩作品，却没有接触陌生目标玩家的办法。继续制作还会遇到另一道门：第一次作品的反馈、收入和留下的能力，是否足以购买下一次尝试。把这些遭遇统称为“有品味但没成功”，解释不了他究竟停在哪里。</p>
+<p>作者在 2023 年《正在到来的中度数值通胀率游戏设计革命》中曾用“审美割裂”讨论创作者个人体验、市场用户和商业生产需求之间的错位。本书不把那一判断原样当作国别结论；放到具体人生里，它首先要求问：<strong>这个人想要的体验，能不能变成自己做得出的东西；做出来以后，又有没有能抵达、识别并回报它的受众？</strong> 有能力鉴赏不等于有能力生产，有作品也不保证能连续生产。</p>
+<p>这些问题会交错出现，也可能反复遇到，不能要求每个人按同一顺序过关。研究后台详见 <a href="/heroes-portal/book/research-notes/experience-capital-creator-conversion-gates-047.html">047 — 体验资本转换的七道关口</a>。各关口的转化率目前尚未得到同口径跨国证据，不能由这些成功人物反推出普通玩家持续创作或谋生的概率。</p>
+<hr />
+<h2 id="_6">规划需要新的信息</h2>
+<p>规划仍然有用，前提是能被实际结果修正。先把一个长期兴趣推进到小作品，再接受外部反馈，可以让后续投入比最初的想象更有根据。这里提倡的是减少一次选定终身职业的负担：暂时不知道一生要做什么，也可以先判断自己是否愿意把这个爱好推进到制作。</p>
+<hr />
+<h2 id="_7">真正值得警惕的是：把兴趣永久关在消费区</h2>
+<p>休息和娱乐有自己的价值，每个爱好都不必变成职业。如果一个人希望进一步制作，那么可以检查自己是否已经做过从消费者转向生产者的动作，例如：</p>
+<ul>
+<li>写一篇真正有判断的评论；</li>
+<li>改一张地图；</li>
+<li>写一个脚本；</li>
+<li>做一个小工具；</li>
+<li>做一个 prototype；</li>
+<li>给陌生人看；</li>
+<li>接受别人不喜欢它。</li>
+</ul>
+<p>这些小动作能暴露能力、兴趣与外部理解之间的差距。暂时没有作品或反馈，也可能是机会不足，不能一概归咎于当事人缺少主动性。</p>
+<hr />
+<h2 id="doom">DOOM 后来的意义又多了一层：生产者还可以制造下一代生产者</h2>
+<p>DOOM的WAD与mod生态给另一批玩家提供了制作入口。1998年，WIRED的《Legion of Doom》报道了一些知名关卡作者：他们制作并公开作品，积累声誉，随后获得职业公司的面试或招聘机会。公司可以从已做出的关卡认识作者，玩家也有机会让制作能力在正式入职以前被看见。</p>
+<p>这些被报道的成功者说明，当年的入口确实通向过职业生产；还有多少人公开了作品却未获聘，报道没有提供分母。它留给本章的判断是：目标形成还取决于环境是否允许人低成本地试做、发表、接受陌生人的评价。当作品能获得课堂与正式岗位以外的反馈，个人便多了一种判断兴趣和能力的依据；这些反馈仍不保证他能靠创作生活。</p>
+<p><a href="/heroes-portal/evidence/CASE-016-early-id-software-source-ledger.html#e013--doom-playersmodders-becoming-professional-level-designers">研究依据：CASE-016 Evidence Ledger，E013</a>。</p>
+<hr />
+<h2 id="_8">这一章能留下什么</h2>
+<p><strong>明确目标不是行动的必要前提，目标也可以在行动与反馈中形成。</strong> Romero的投稿、Carmack的修改和Francis的原型说明了几种已经发生的转换，却不能给出跟随爱好者的普遍成功率。</p>
+<p>因此，本章给目标暂时不清的读者留下一个较小的问题：有什么可获得的工具和机会，能让你做出一点东西，再接受外部判断？这个问题也要问环境。家庭、学校、编辑与工具提供的入口，决定了谁有条件开始；梁其伟经历过的中断则提醒我们，作品已经存在，也可能暂时失去继续制作的空间。</p>
+<hr />
+<h2 id="_9">时效性卡｜“目标通过行动形成”不等于照抄当年的入口</h2>
+<table>
+<thead>
+<tr>
+<th>历史路径</th>
+<th style="text-align: right;">观察年份</th>
+<th>当时条件</th>
+<th>2026 状态</th>
+<th>今天保留什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Romero / Carmack 从可编程个人电脑、杂志投稿、修改软件进入生产</td>
+<td style="text-align: right;">1980s–early 1990s</td>
+<td>Apple II / early PC、计算机杂志、低层可修改软件文化</td>
+<td>HISTORICAL tactics / DURABLE mechanism</td>
+<td>把兴趣推进成可公开、可反馈的 artifact；具体硬件与投稿渠道不可复制</td>
+</tr>
+<tr>
+<td>Tom Francis 从长期评论转 prototype</td>
+<td style="text-align: right;">c. 2000s–2013</td>
+<td>PC 游戏媒体职业、GameMaker、devlog/IGF/Steam</td>
+<td>CONDITIONAL</td>
+<td>长期比较 → 显性判断 → 低成本 prototype；媒体职业带来的网络与曝光不可默认存在</td>
+</tr>
+<tr>
+<td>DOOM modder → professional pathway</td>
+<td style="text-align: right;">1990s</td>
+<td>WAD/mod 开放、当时 PC mod 社区、职业公司吸收</td>
+<td>HISTORICAL / CONDITIONAL</td>
+<td>public artifact 可以成为 credential；具体 mod 生态与招聘入口需按今天平台重核</td>
+</tr>
+</tbody>
+</table>
+<p>完整规则见 <a href="/heroes-portal/book/TEMPORAL-VALIDITY.html">Temporal Validity Gate</a>。</p>
+<h2 id="_10">继续读</h2>
+<p>人物全文：
+- <a href="/heroes-portal/book/profiles/early-id-doom.html">early id / DOOM</a>
+- <a href="/heroes-portal/book/profiles/gunpoint.html">Gunpoint / Tom Francis</a></p>
+<p>研究背景：
+- <a href="/heroes-portal/book/HERO-PROFILE-DIMENSIONS.html">Hero Profile Dimensions</a>
+- <a href="/heroes-portal/book/research-notes/goal-formation-through-production-001.html">Goal Formation Through Production</a>
+- <a href="/heroes-portal/book/research-notes/play-to-production-fourth-industrial-revolution-001.html">Play → Production Audit</a></p>
+<p>本章不声称这些成功路径具有普遍成功率；家庭、教育、技术可得性、地区与历史窗口都必须在具体人物中分别计算。</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / book/chapters/01-goals-are-made-not-found.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

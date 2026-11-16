@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>失败不是资产：只有留下下一次还能使用的东西，失败才开始值钱 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl class="on"" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#sarpbc-rocket-league" class="t2">SARPBC 没有成为 Rocket League，但它也没有归零</a><a href="#bills-must-be-paid" class="t2">Bills Must Be Paid 更极端：七个月制作周期，背后是七年和大量原型</a><a href="#_2" class="t2">那些没有上新闻的作品，有时连“失败”都还谈不上</a><a href="#_3" class="t2">那些小作品还可能留下一个能在下次聚起来的团队</a><a href="#_4" class="t2">但“做得多”也可能只是重复犯错</a><a href="#_5" class="t2">还有一种失败留下的是“平台知识”</a><a href="#_6" class="t2">反过来，什么时候应该承认过去真的沉没了</a><a href="#_7" class="t2">失败者不只有“下次爆款”这一种结局</a><a href="#_8" class="t2">“坚持”这个词为什么经常没什么信息量</a><a href="#_9" class="t2">这一章能留下什么</a><a href="#_10" class="t2">时效性卡｜失败残值是结构问题，不是某一代平台秘诀</a><a href="#_11" class="t2">继续读</a></aside><article class="doc lit"><div class="col"><h1 id="_1">失败不是资产：只有留下下一次还能使用的东西，失败才开始值钱</h1><img class="docfig" src="/heroes-portal/assets/ch-03.webp" alt="">
+<p>© 2026 洪荒行者。All Rights Reserved.</p>
+<p class="dc">Psyonix 再做汽车踢球时，已经有一部前作可供检验；Rike Games 制作《Bills Must Be Paid》时，已经做过多年原型。最后一个项目的制作周期，都容不下他们此前经历过的全部尝试。</p>
+<p>但从后来的成功回望，很容易把每一次挫折都安排成必经之路。那些没有等到后作、没有交付成品，或只是暂时停下的人，又该怎样理解过去的投入？</p>
+<p>这一章追问的是：<strong>一个项目结束以后，到底有什么东西还能被带走？</strong> 代码、工具、技能、伙伴、玩家反馈和平台知识都可能留下；已经花掉的时间、钱与精力，却不会因为有了这些残值就自动收回。失败既不能单凭结果判一个人“不行”，也不能自动记作宝贵经验。</p>
+<hr />
+<h2 id="sarpbc-rocket-league">SARPBC 没有成为 Rocket League，但它也没有归零</h2>
+<p>2008 年，Psyonix 发布《Supersonic Acrobatic Rocket-Powered Battle-Cars》（SARPBC），后来《Rocket League》的汽车踢球玩法已经在这里出现。前作没有达到后作的商业规模，精确商业结果仍待核实；只叫它“失败前作”，又会漏掉团队实际做过一次这种玩法的经历。</p>
+<p>在 2016 年的采访中，Dave Hagewood 与 Corey Davis 回顾了前作带来的可进入性和团队玩法经验：新手怎样进入这套物理玩具，队伍配合有哪些问题，哪些地方还需要改进。服务业务在这段长期改进中支付公司的账单，团队才有机会再次处理同一个问题。</p>
+<p>这些经验与源码能否复用是两回事。SARPBC 到《Rocket League》究竟直接继承了多少代码，我们仍不知道；即使假设代码全部重写，对玩家行为与玩法问题的理解也可能继续使用。前作是否留下资产，要看下一次制作究竟能用上什么，不能只看旧源码还能否运行。</p>
+<hr />
+<h2 id="bills-must-be-paid">Bills Must Be Paid 更极端：七个月制作周期，背后是七年和大量原型</h2>
+<p>Rike Games 的两位核心作者 Roxy 和 Mike，从 2019 年开始一起做游戏。他们在 2026 年成功后的复盘中说，首款简单移动游戏做了约三个月，商业上失败；此后继续制作，到《Bills Must Be Paid》时，已经做过约一百个原型或游戏。这是他们自报的尝试数量，不能换算成一百款完整商业作品。</p>
+<p>其中约四年，他们依靠移动发行商合同维持制作。原型要快速搭好，再按早期指标决定继续、迭代或终止。这样的工作让两人反复练习把美术与程序接起来、控制小团队范围、筛选想法；但移动游戏的筛选标准，也不一定适合后来进入的付费 Steam 市场。</p>
+<p>制作《Bills Must Be Paid》时，他们仍然砍掉多个概念，从一个小玩法出发打磨和扩展。约七个月描述的是这个项目的制作期，约七年描述的是此前共同制作的历程。把两种时间分开，才能看见这次选择动用了哪些经验，也才能继续追问：哪些旧判断需要放下？</p>
+<hr />
+<h2 id="_2">那些没有上新闻的作品，有时连“失败”都还谈不上</h2>
+<p>2022 年 4 月，一个叫 Week Sauce 的小型游戏 jam 公开收到 18 个作品。活动允许开发者不连续地安排七天，甚至鼓励把还没做完的版本交出来，因为报名者可能白天有工作，回家以后还有别的生活。</p>
+<p>从《Rocket League》回看前作，已经知道团队后来做成了什么。<a href="/heroes-portal/book/research-notes/public-unfeatured-week-sauce-apr-2022-cohort-031.html">这18项公开提交的完整名册</a>则从一次小型活动出发，作品可能尚未完成，作者的下一步也未必可见。</p>
+<p>Randy Fluharty 做了一款叫《Plugging In Simulator》的谜题游戏，玩法是想办法把不同形状的插头塞进插座。他只做了两天，留下一个严重 Bug，公开说明生活中的事情打断了制作。他知道自己还有哪些想法没有实现，但当时没有足够时间。</p>
+<p><a href="https://yousayrandy.itch.io/plugging-in-simulator">作品页面</a>上的状态却写着“Released”。</p>
+<p>另一位作者 Mr.Sunflower 做了一段关于熊、饥饿和王冠的互动故事。玩家留言希望每次选择能产生更多不同结果。他回复说，这确实是问题，自己企图做的内容超过时间允许的范围。他喜欢这个故事，但不知道以后会不会回来添加结局，因为时间实在太少。</p>
+<p><a href="https://mrsunflower.itch.io/the-queen-an-interactive-fiction-for-week-sauce">《The Queen》</a>的状态还写着“In development”。</p>
+<p>与此同时，Cerbyo 制作的 <a href="https://cerbyo.itch.io/againsthecurrent-the-legend-of-the-chunchuntree">《AgainstheCurrent》</a> 虽然也被标为“In development”，同一页面却放出了 jam 版本和后来改进的完整版本。</p>
+<p>2026年核查时，这三页把“公开”“完成”和“继续修改”分开了：Randy公开了未完原型，Mr.Sunflower当时不确定是否会回来，Cerbyo已经提供后续版本。仅凭页面标签给他们判定失败，会丢掉各自实际做过的事。这份名册能记录作品与修改，不能给出作者的职业去向、家庭状况或成功率。</p>
+<p>2026年10月7日，<a href="/heroes-portal/book/research-notes/week-sauce-2022-public-creator-followup-033.html">18个原主提交账号的主页回访</a>又把旧项目与后续制作分开。有些主页只陈列当年的作品，有的能找到2025年jam作品、2024年自制控制器活动，或与Steam发行工作室的联系。它们不是18位经实名核实、互相独立的自然人，也不能代表原作品里的所有协作者。</p>
+<p>当年只用了两天就被生活打断的 Randy，<strong>两个月以后又做了一款新小游戏</strong>。那是 <a href="https://itch.io/jam/geojam-2022">GeoJam 2022</a> 的《Swap Afloat》：他公开说，三天活动里自己用了分散的六小时完成。这没有把四月那款留下 Bug 的游戏变成成功作品，但足以证明“这个项目被打断”没有自动变成“这个人再不做游戏”。</p>
+<p>Wulf在2022年名册里的《L.H.C.B.》原游戏链接，回访时已经无法访问。<a href="https://wulf-denloft.itch.io/">同一itch主页</a>却陈列着直播互动问答游戏《TileTrivia》，也写着VTuber软件和直播overlay工具的制作。旧项目不再可见，账号仍有别种制作的公开记录；这些工具的首发日期、2023—2026每一年的工作和收入仍未知。这些其他作品不说明旧作品后来怎样，却让我们看见同一账号还公开了什么制作。</p>
+<p>至于那些只陈列一个作品的账号，仍然不知他们到底转行、换平台、私下创作，还是从此没有兴趣。这恰恰是我们不能随意给普通人写人生结局的原因。</p>
+<hr />
+<h2 id="_3">那些小作品还可能留下一个能在下次聚起来的团队</h2>
+<p>作品主页还记录了谁与谁一起制作。沿着署名看后作，可以发现个人主页不一定说明的合作关系。</p>
+<p>2022 年，《Snails in Peril》由 Bogdan Foca、Jonte Herben 与 Cosmin Anton 分别承担程序、三维美术和关卡工作。到了 2023 年，他们又共同署名另一部《The Sip of Life》，这次部分职责已经发生变化；页面的开发日志提供了 2023 年 4 月的时间锚。与其猜测他们是否成立了公司，不如先确认一个更朴素的事实：<strong>这三个人的合作至少在两款作品里真实发生过</strong>。</p>
+<p>2022年多人Jam作品《THE CURE》中的SJ Singh、Shane Bergeron、Angela Geiss、Will Edmisten，2023年又共同出现在《Dyscophus》的署名里，分别承担美术与制作、程序和音频工作。四位具名贡献者再次合作，不等于原作全体成员都留了下来，也没有证明他们组成永久工作室。</p>
+<p>对照一下，《Guns N’ Roses》的原团队署名包含 Mike、Diana 和 Sheila，2025 年同一发布账号又有新作，却没有完整公开后作的制作成员。我们只能确认账号延续，<strong>不能替没有被署名的旧成员宣布仍然合作</strong>。</p>
+<p>这几条关系及其原始 credits 收录于<a href="/heroes-portal/book/research-notes/week-sauce-contributor-collaboration-graph-034.html">贡献者关系追踪 034</a>。</p>
+<p>这些署名让“伙伴能否带到下一次”有了具体记录：有人重聚，有人只有发布账号延续。<strong>一次短期合作可能成为下一次重新组队的资本，不必立刻把所有人变成长期雇员。</strong> 这仍是已观察到的可能路径；工资、职业、家庭条件与持续合作概率都未知，不能用几组重复署名替有限资金的创作者保证组织会继续。</p>
+<hr />
+<h2 id="_4">但“做得多”也可能只是重复犯错</h2>
+<p>做过十个项目，是次数；有没有学会处理其中的问题，还要另看。如果没有记录失败原因、留下可复用工具或接触真实玩家，下一次可能仍在重复同样的错误。范围是否更可控，选择想法的依据是否改变，完成并交付作品的能力是否提高，都比次数更能说明经验的用途。</p>
+<p>清点这些经历时，可以问：留下了什么？下一次哪里更快了？哪个错误不必重新交学费？有没有判断被实际结果改变？答不出这些问题，不能只凭“已经失败十次”就认定第十一次更有价值。</p>
+<hr />
+<h2 id="_5">还有一种失败留下的是“平台知识”</h2>
+<p>制作《Bills Must Be Paid》以前，Rike Games已经做过移动和网页游戏，也尝试过自发行。按工作室press kit的说明，他们把《No Pain No Gain》移植到Steam，用它学习这个平台。后来制作首款付费Steam游戏时，便不再是第一次接触平台。</p>
+<p>这种学习也可以成为旧项目留下的东西。一个项目未必取得很大的商业回报，却可能让下一作少承担一项“第一次做”的不确定性。但先学平台不等于已懂新市场，也不意味着试验总能便宜完成；Rike在成功后的回顾中，也反省了把移动游戏筛选指标带到Steam的做法。这里能确认的是他们做过这项准备，不能把它单独算成后作成功的原因。</p>
+<hr />
+<h2 id="_6">反过来，什么时候应该承认过去真的沉没了</h2>
+<p>已经投入三年，可以说明过去的成本，不能单凭这一点决定继续。下一笔时间和钱准备换来什么，仍要重新判断；若留下的工具、技能或关系更适合别的作品，也没有必要为了证明过去值得而留在原项目里。</p>
+<p><strong>过去有没有留下残值，与这个项目现在是否值得继续，是两个问题。</strong> 停掉项目、承认产品判断错了，仍可能把工具、技能、渠道、伙伴和判断带走。研究失败留下的资本，不该替沉没成本提供一个更漂亮的继续理由。</p>
+<hr />
+<h2 id="_7">失败者不只有“下次爆款”这一种结局</h2>
+<p>当我们只用《Rocket League》和《Bills Must Be Paid》讲失败留下的资本，读者很容易得出另一种过于美丽的结论：失败总会在某一款更成功的游戏里被偿还。</p>
+<p>但 <a href="/heroes-portal/book/profiles/josh-parnell-limit-theory.html">Josh Parnell 的《Limit Theory》</a> 已经在 2018 年取消。游戏工程积累很深，2022 年公开了源代码，支持者仍没有得到原本承诺的完成版游戏。作者损失的大量个人时间与储蓄，不能被一份代码档案自动抵消。</p>
+<p><a href="/heroes-portal/book/profiles/question-magic-circle-blackout-club.html">Question 的《The Magic Circle》</a> 则提供了另一种路径：作品已经完成，还获得 IGF 叙事提名，2016 年的商业回报却不足以支撑原经营预期。Question 没有因此解散，而是在下一作《The Blackout Club》中有意识地改变市场入口，继续运用已有的系统设计与叙事能力。</p>
+<p>成品、源码、资产、受众和IP，是可以清点的产品残值。工程、设计、协作与市场知识能否用于下一个项目，则是能力的问题。工作室、共同作者和客户或发行网络有没有继续，又需要另看组织的变化。这三项有时能从公开作品与署名追踪，却不能替我们回答个人的账：钱、精力、生活与就业选择恢复了多少？</p>
+<p>个人回撤最难验证，也最不能为了传记的圆满而补写。<strong>下一次继续做游戏，不等于上一次失败的代价已经偿还。</strong> 源码留下、组织继续，可以与个人损失仍未恢复同时存在。</p>
+<hr />
+<h2 id="_8">“坚持”这个词为什么经常没什么信息量</h2>
+<p>Rike Games 在成功后的复盘里强调 Keep Going。作为他们对自己经历的表达，这句话有其位置；用来解释结果，却还得回到他们终止了哪些概念、怎样换平台、怎样重新选择市场。Psyonix 再做汽车踢球，也带着前作的问题继续改进。</p>
+<p>Rike 的路径包含继续与放弃，Psyonix 则继续改进前作的问题。值得追踪的是反馈是否更快、错误是否更早终止、范围是否更可控，以及工具和市场接入是否改善。单凭投入持续多久，无法判断这些变化有没有发生，更不能保证下一次成功。</p>
+<hr />
+<h2 id="_9">这一章能留下什么</h2>
+<p>回头清点一个旧项目，可以把账分成两边：一边是带得走的能力、工具、关系和判断，另一边是已经消耗的钱、时间、健康与机会。前者再丰富，也不能替后者销账。</p>
+<p>Psyonix 和 Rike Games 让我们看见了经验如何进入后作；普通提交者的页面与署名，只允许确认较有限的延续；Limit Theory 和 Question 则提醒我们，源码留下、作品完成、组织继续，与个人损失是否恢复是不同的问题。</p>
+<p><strong>失败不自动成为资产，只有转换后仍能使用的东西才可能成为资产。</strong> 至于原项目是否值得继续，还要看下一笔投入能换来什么。承认过去的损失，和保留下一次的能力，可以同时成立。</p>
+<hr />
+<h2 id="_10">时效性卡｜失败残值是结构问题，不是某一代平台秘诀</h2>
+<table>
+<thead>
+<tr>
+<th>历史路径</th>
+<th style="text-align: right;">观察年份</th>
+<th>当时条件</th>
+<th>2026 状态</th>
+<th>今天保留什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SARPBC → Rocket League</td>
+<td style="text-align: right;">2008–2015</td>
+<td>同团队长期存在、服务业务供血、同一问题二次下注</td>
+<td>DURABLE mechanism</td>
+<td>失败前作是否留下 tacit knowledge / team / tooling / second-shot option</td>
+</tr>
+<tr>
+<td>Rike Games 高频 mobile prototype → Steam 项目</td>
+<td style="text-align: right;">2019–2026</td>
+<td>mobile publisher prototype 制度、web/mobile/Steam 迁移</td>
+<td>CURRENT history / CONDITIONAL transfer</td>
+<td>高频 shipping 可形成能力；mobile KPI 世界模型不能直接迁到 premium Steam</td>
+</tr>
+<tr>
+<td>staging project 先支付平台学习成本</td>
+<td style="text-align: right;">2020s</td>
+<td>不同商店/构建/发行流程</td>
+<td>DURABLE mechanism</td>
+<td>让真正想押的项目少承担“第一次学平台”的不确定性；具体平台流程持续变化</td>
+</tr>
+</tbody>
+</table>
+<p>完整规则见 <a href="/heroes-portal/book/TEMPORAL-VALIDITY.html">Temporal Validity Gate</a>。</p>
+<h2 id="_11">继续读</h2>
+<p>人物全文：
+- <a href="/heroes-portal/book/profiles/rocket-league.html">Rocket League / Psyonix</a>
+- <a href="/heroes-portal/book/profiles/bills-must-be-paid.html">Bills Must Be Paid / Rike Games</a>
+- <a href="/heroes-portal/book/profiles/josh-parnell-limit-theory.html">Limit Theory / Josh Parnell：技术成功但游戏未交付</a>
+- <a href="/heroes-portal/book/profiles/question-magic-circle-blackout-club.html">The Magic Circle / Question：首作市场不足后组织继续</a></p>
+<p>继续压力测试：
+- <a href="/heroes-portal/cases/CASE-026-brigador.html">Brigador Case</a>
+- <a href="/heroes-portal/cases/CASE-034-landfall-games.html">Landfall Case</a>
+- <a href="/heroes-portal/cases/CASE-006-repo.html">R.E.P.O. Case</a>
+- <a href="/heroes-portal/cases/CASE-022-escape-from-tarkov-lineage.html">Escape from Tarkov lineage</a></p>
+<p>这一章刻意不把“失败越多越好”当结论。失败的成本、健康损耗、机会成本和不可逆损失仍然必须单独计算。</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / book/chapters/03-failure-only-matters-if-something-survives.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

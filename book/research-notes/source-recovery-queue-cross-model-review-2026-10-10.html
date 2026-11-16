@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>跨模型审查：原始资料补取队列（2026-10-10） · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl class="on"" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#_1" class="t2">这份文件是干什么的</a><a href="#_2" class="t2">交付格式（每条都按这个回）</a><a href="#_3" class="t2">三条硬约束</a><a href="#_4" class="t2">队列</a><a href="#r1-limit-theory" class="t3">R1 — Limit Theory：源码公开的实际日期与范围 ★最高优先</a><a href="#r2-gunpoint" class="t3">R2 — Gunpoint：开发到底从哪一年开始</a><a href="#r3-the-amp-hour-332timecode" class="t3">R3 — The Amp Hour #332：timecode 与团队规模原句</a><a href="#r4-case-051alliance" class="t3">R4 — CASE-051：Alliance 收购的公开信息</a><a href="#r5-case-012-alpha" class="t3">R5 — CASE-012：自营 alpha 的原句、售价与团队名单</a><a href="#r6-case-016-class" class="t3">R6 — CASE-016：把 - **Class:** 那批记录的引语补齐</a><a href="#r7-early-idkushner-wired-1998" class="t3">R7 — early id：Kushner 书与 WIRED 1998 的可引用定位</a><a href="#r8-case-0512015" class="t3">R8 — CASE-051：2015 年财务变动的原始出处</a><a href="#_5" class="t2">不要做的事</a></aside><article class="doc"><div class="col"><h1 id="2026-10-10">跨模型审查：原始资料补取队列（2026-10-10）</h1>
+<p>© 2026 洪荒行者。All Rights Reserved.</p>
+<ul>
+<li>Scope: 把本轮审查里&rdquo;必须回到原文才能解决&rdquo;的证据缺口，写成一份可直接投喂给对话侧模型的任务队列</li>
+<li>Status: OPEN TASK QUEUE / NOT CANONICAL EVIDENCE</li>
+<li>Companion: <a href="/heroes-portal/book/research-notes/cross-model-collaboration-and-prose-review-2026-10-10.html">跨模型协作与书稿质量整顿</a>（PR #320）</li>
+<li>Excludes: 私人项目材料；本文件不下结论、不提升任何 Case / Claim 状态</li>
+</ul>
+<hr />
+<h2 id="_1">这份文件是干什么的</h2>
+<p class="dc">它只问一件事：<strong>把证据层缺的那句话、那个日期、那个原句带回来。</strong></p>
+<p>它不要求、也不接受在投喂过程中产生解释、推论或状态升级。带回的内容按 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes/blob/main/schemas/evidence-material-refresh.md"><code>schemas/evidence-material-refresh.md</code></a> 的交接合同落库，由 Lane B 决定它支持什么。</p>
+<h2 id="_2">交付格式（每条都按这个回）</h2>
+<pre><code class="language-text">[Case]      CASE-0XX
+[来源]      URL / 平台 / 发布日期 / 作者或机构
+[定位符]    可复现的定位：timecode / 页码 / appid / release tag / commit（不是「某次采访」）
+[可达性]    direct | blocked | shell | gone | api
+[逐字引语]  短引语；英文原文照抄，非英文保留原文并可附译文
+[事实节点]  这条引语支撑哪些事实
+[边界]      不能证明什么；口径、时点、回忆偏差
+[仍缺]      还差哪一条具体证据
+</code></pre>
+<h2 id="_3">三条硬约束</h2>
+<ol>
+<li><strong>不交摘要，交原话。</strong> 摘要压掉的正是因果起点、当事人的话和口径边界——这三类下游无论如何补不出来。</li>
+<li><strong>标注可达性。</strong> 200 不等于拿到内容：JS 渲染页会返回 200 + 空壳。</li>
+<li><strong>取不到就说取不到。</strong> 写 <code>NOT REACHABLE</code> 并说明，不要用摘要冒充引语，也不要把「取不到」当成「不存在」。</li>
+</ol>
+<hr />
+<h2 id="_4">队列</h2>
+<h3 id="r1-limit-theory">R1 — Limit Theory：源码公开的实际日期与范围 ★最高优先</h3>
+<ul>
+<li><strong>为什么</strong>：<code>book/profiles/josh-parnell-limit-theory.md</code> 第 135–153 行有一整节讲「2022 年他兑现了另一种承诺」，但 <code>evidence/CASE-054-limit-theory-source-ledger.md</code> 里<strong>没有任何 2022 年记录</strong>（<code>rg "2022"</code> 在两个版本中均零命中）；E005 只写&rdquo;repositories exist&rdquo;，<code>Published: UNKNOWN</code>。该断言已扩散到 <code>book/profiles/README.md</code> 第 35 行与 <code>book/chapters/03-failure-only-matters-if-something-survives.md</code> 第 105 行。<code>book/research-notes/editorial-fidelity-pilot-001.md</code> 已把它登记为 <code>NEEDS_VERIFY</code>，但读者层仍是肯定句。</li>
+<li><strong>来源</strong>：<code>github.com/JoshParnell/ltheory</code>，以及 <code>github.com/JoshParnell/ltheory-old</code></li>
+<li><strong>定位符</strong>：首个 release tag、首次公开 commit 的日期；仓库 README 中关于「这段代码是什么/不是什么」的原句</li>
+<li><strong>可达性</strong>：direct</li>
+<li><strong>要带回</strong>：公开日期（年-月）；公开范围（全部代码？只引擎？）；发布时作者自己的说法原句</li>
+<li><strong>回填到</strong>：<code>CASE-054</code> ledger 新 E 记录（或补进 E005 的 <code>Published</code>），再决定 profile 那一节是保留、改措辞还是删除</li>
+</ul>
+<h3 id="r2-gunpoint">R2 — Gunpoint：开发到底从哪一年开始</h3>
+<ul>
+<li><strong>为什么</strong>：<code>book/profiles/gunpoint.md</code> 第 131 行的时效性卡写 <code>Observed: c. 2009–2013</code>，但 ledger 最早记录是 <code>2010-10-25</code>，而同一份 ledger 的 STRONGLY SUPPORTED 写 &ldquo;about three years&rdquo;。文内第 45 行小标题是「2010 年，他重新看了一遍 roadmap」。editorial 分支已把这条记成 year drift note，但<strong>未解决</strong>。</li>
+<li><strong>来源</strong>：<code>pentadact.com</code> 的 devlog 首篇；GDC Europe 2013 演讲《How Reviewing Games for Nine Years Helped in Designing Gunpoint》视频；IGF 2012 的报名／入围材料</li>
+<li><strong>定位符</strong>：任何一处<strong>有日期</strong>的「第一次做出可玩原型」记录</li>
+<li><strong>可达性</strong>：<code>pentadact.wordpress.com</code> <strong>403</strong>；<code>pentadact.com</code> 现为作者当前站点，不再提供 2012 年那份 resume</li>
+<li><strong>要带回</strong>：原型的日期，或明确结论&rdquo;没有任何公开材料支持 2009&rdquo;</li>
+<li><strong>回填到</strong>：CASE-007 ledger 新增 E 记录 → 然后 profile 要么保留 2009 要么改成 <code>c. 2010–2013</code>。<strong>先证据后正文。</strong></li>
+</ul>
+<h3 id="r3-the-amp-hour-332timecode">R3 — The Amp Hour #332：timecode 与团队规模原句</h3>
+<ul>
+<li><strong>为什么</strong>：<code>evidence/CASE-051-zachtronics-source-ledger.md</code> 的 E011 <code>Locator</code> 只写 &ldquo;around &lsquo;we shut down the studio&rsquo;&rdquo;，<strong>没有 timecode</strong>，不符合 AGENTS.md §10 对音视频来源的要求。另外转录里 Barth 说过 <code>currently we're four and we've peaked as hig…</code>，涉及团队规模口径（AGENTS.md §6 要求区分核心/峰值/累计）。</li>
+<li><strong>来源</strong>：<code>theamphour.com/332</code>（官网转录已是<strong>发言归属</strong>文本，我已直连核对过三条引语，事实链成立）；音频本身尚未独立听</li>
+<li><strong>定位符</strong>：音频 timecode（<code>we shut down the studio</code> / <code>worked there for 10 months</code> / <code>tired of running the business</code>）；含 <code>currently we're four</code> 那段的完整句</li>
+<li><strong>可达性</strong>：官网转录 direct；音频需下载后自行核对</li>
+<li><strong>要带回</strong>：三处 timecode + team-size 原句 + 说明该处是 Barth 本人还是主持人的推测</li>
+<li><strong>回填到</strong>：E011（或合并后的 E006）的 <code>Locator</code> 与 <code>Fetch status</code></li>
+</ul>
+<h3 id="r4-case-051alliance">R4 — CASE-051：Alliance 收购的公开信息</h3>
+<ul>
+<li><strong>为什么</strong>：profile 与 Case 都写「Alliance 收购了 Zachtronics」，但收购方全名、日期、是否公开金额全部 UNKNOWN。这是「出售公司换取不做管理」这条解释链的关键一环。</li>
+<li><strong>来源</strong>：Zachtronics / Alliance 官方声明；2018 年前后的行业报道；Alliance 的公司资料</li>
+<li><strong>定位符</strong>：带有日期的官方声明或报道</li>
+<li><strong>可达性</strong>：未探（需要用企业名 + 年份搜）</li>
+<li><strong>要带回</strong>：收购方全名、公告日期、是否披露金额；<strong>若确认从未公开，也要明确写&rdquo;从未公开&rdquo;</strong></li>
+<li><strong>回填到</strong>：CASE-051 ledger 新 E 记录；Case §4.5 与 Open Questions</li>
+</ul>
+<h3 id="r5-case-012-alpha">R5 — CASE-012：自营 alpha 的原句、售价与团队名单</h3>
+<ul>
+<li><strong>为什么</strong>：#319 已把「Greenlight 之前就在自己网站卖 alpha，收入足以养活本人并雇 freelancers」写进正文与 Case，但<strong>金额、时间跨度、原句</strong>都还没有。editorial 分支补的 E003–E008 也还没被 profile 消费。</li>
+<li><strong>来源</strong>：Siliconera 2015 interview（自营 alpha 那句）；GameSkinny 2017；4Gamer 2018（日文）；PC Games Insider 2018；2019 Reddit AMA；游研社 2019</li>
+<li><strong>定位符</strong>：Siliconera 原文中该段落的逐字英文；4Gamer 日文原文中「两个夜班 + 五个开发日」那句</li>
+<li><strong>可达性</strong>：部分 direct、部分 shell / blocked，详见 ledger 各条 <code>Fetch status</code></li>
+<li><strong>要带回</strong>：自营 alpha 的<strong>售价与原句</strong>；4Gamer 的核心四人 + 两位 freelancer 名单原句</li>
+<li><strong>回填到</strong>：CASE-012 ledger E001 与 E003–E008</li>
+</ul>
+<h3 id="r6-case-016-class">R6 — CASE-016：把 <code>- **Class:**</code> 那批记录的引语补齐</h3>
+<ul>
+<li><strong>为什么</strong>：E020–E031 这批记录使用粗体 <code>- **Class:**</code> 格式，此前连审计工具都漏读（已由 #318 修正）。它们是 early id 一章里少见的<strong>同期机构数据</strong>（Census 1984/1989、IBM PC、NES 治理），值得有逐字引语而不是摘要。</li>
+<li><strong>来源</strong>：ledger 内已有 URL：U.S. Census <code>P23-155</code> / <code>P23-171</code> PDF、IBM 官方 PC 史、Smithsonian 藏品档案、TIME 1982 封面</li>
+<li><strong>定位符</strong>：PDF 页码 / 表格名；机构页面小标题</li>
+<li><strong>可达性</strong>：官方 PDF 与机构页面通常 direct</li>
+<li><strong>要带回</strong>：8.2% / 1.7% / 22.9% / 15.0% 等数字的<strong>原表名与页码</strong>，以及原文对口径的表述（household 还是 person）</li>
+<li><strong>回填到</strong>：CASE-016 ledger E020–E031 的 <code>Exact Wording</code></li>
+</ul>
+<h3 id="r7-early-idkushner-wired-1998">R7 — early id：Kushner 书与 WIRED 1998 的可引用定位</h3>
+<ul>
+<li><strong>为什么</strong>：<code>book/profiles/early-id-doom.md</code> 有多个关键场景只有转述（1993 年餐厅道歉、1999 年保龄球馆、WIRED《Legion of Doom》里的地图作者就业）。它需要的是<strong>可引用的定位</strong>，而这正是 profile 目前最薄的地方。</li>
+<li><strong>来源</strong>：David Kushner, <em>Masters of Doom</em>（2003）；WIRED 1998 年 <em>Legion of Doom</em> 报道</li>
+<li><strong>定位符</strong>：书的<strong>页码与版次</strong>（不同版页码不同，必须注明）；WIRED 文章的段落定位</li>
+<li><strong>可达性</strong>：书需实体/电子版；WIRED 旧文可能 direct 或需 archive</li>
+<li><strong>要带回</strong>：页码 + 可直接引用的短原句；若某场景只有转述而无原文，写清「仅有转述」</li>
+<li><strong>回填到</strong>：CASE-016 ledger 相应 E 记录</li>
+</ul>
+<h3 id="r8-case-0512015">R8 — CASE-051：2015 年财务变动的原始出处</h3>
+<ul>
+<li><strong>为什么</strong>：Case 的 Open Questions 第 2 项仍是 <code>temporary shutdown capitalization and ownership details</code>。profile 的「明确未知」清单里也列着「工作室暂停期间的完整财务数据」。</li>
+<li><strong>来源</strong>：2015 年前后 Barth 的公开说法；当时的报道</li>
+<li><strong>定位符</strong>：任何带日期的公开陈述</li>
+<li><strong>可达性</strong>：未探</li>
+<li><strong>要带回</strong>：原始出处，或明确结论&rdquo;公开材料不存在&rdquo;</li>
+<li><strong>回填到</strong>：CASE-051 ledger / Case Open Questions</li>
+</ul>
+<hr />
+<h2 id="_5">不要做的事</h2>
+<ul>
+<li>不要用 200 响应当作拿到内容；</li>
+<li>不要把 show notes、聚合稿、转载稿当成一手来源（它们是 S2，只能登记为 Lead）；</li>
+<li>不要为了填满这条队列而用模型知识补日期或金额；</li>
+<li>不要在本队列里下结论——带回原话就结束，判断留给 Lane B。</li>
+</ul><div class="crumbs"><a href="/heroes-portal/">书阁</a> / book/research-notes/source-recovery-queue-cross-model-review-2026-10-10.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

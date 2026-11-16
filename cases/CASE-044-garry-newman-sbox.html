@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CASE-044 — Garry Newman / Garry&#x27;s Mod → Rust → s&amp;box · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl class="on"" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#why-this-case" class="t2">Why this case</a><a href="#2-contextsituationaction-snapshot" class="t2">2. Context–Situation–Action Snapshot</a><a href="#era-production-regime" class="t3">Era / Production Regime</a><a href="#actor-situation" class="t3">Actor Situation</a><a href="#action-maneuver" class="t3">Action / Maneuver</a><a href="#anachronism-check" class="t3">Anachronism Check</a><a href="#origin-capability" class="t2">Origin / Capability</a><a href="#garrys-mod-rust" class="t2">Garry&amp;rsquo;s Mod → Rust</a><a href="#sbox-false-starts-matter" class="t2">s&amp;amp;box: False Starts Matter</a><a href="#launch-pressure-2026-current-evidence" class="t2">Launch Pressure: 2026 Current Evidence</a><a href="#market-as-production" class="t2">Market as Production</a><a href="#error-budget" class="t2">Error Budget</a><a href="#current-verdict" class="t2">Current Verdict</a><a href="#_1" class="t3">已支持</a><a href="#_2" class="t3">禁止结论</a><a href="#transfer" class="t2">Transfer</a><a href="#open-questions" class="t2">Open Questions</a></aside><article class="doc"><div class="col"><h1 id="case-044-garry-newman-garrys-mod-rust-sbox">CASE-044 — Garry Newman / Garry&rsquo;s Mod → Rust → s&amp;box</h1>
+<ul>
+<li>Case ID: CASE-044</li>
+<li>Subject: Garry Newman / Garry&rsquo;s Mod → Rust → s&amp;box</li>
+<li>Period covered: 2004–2026</li>
+<li>Research status: RESEARCHING</li>
+<li>Corpus role: LONGITUDINAL CREATOR-PLATFORM / MODDER→STUDIO→PLATFORM / CURRENT PRESSURE</li>
+<li>Related Claims: C003, C004, C008, C010, C011, C014</li>
+<li>Evidence Ledger: <a href="/heroes-portal/evidence/CASE-044-garry-newman-sbox-source-ledger.html">来源账本</a></li>
+</ul>
+<h2 id="why-this-case">Why this case</h2>
+<p class="dc">这个案例的价值不是再讲一次“modder 逆袭”。</p>
+<p>它提供一个很少见的同人纵向：</p>
+<blockquote>
+<p>Garry&rsquo;s Mod 成功 → Facepunch 组织化 → Rust 成功 → 多年 s&amp;box false starts → 2026 正式发售后立即暴露新的 discovery / performance / positioning / UGC-quality 问题。</p>
+</blockquote>
+<p>因此可以检验：</p>
+<blockquote>
+<p><strong>旧 regime 的成功能力资本可以迁移，但不会自动给出新 regime 的正确 product model。</strong></p>
+</blockquote>
+<h2 id="2-contextsituationaction-snapshot">2. Context–Situation–Action Snapshot</h2>
+<h3 id="era-production-regime">Era / Production Regime</h3>
+<p>这个谱系跨越三个完全不同的生产环境：</p>
+<ul>
+<li>2004–2006：Half-Life 2 / Source mod ecology + Steam 早期商业化；</li>
+<li>2013–2018：Early Access、survival multiplayer 与 persistent online service 快速扩张；</li>
+<li>2026：creator platform 面对高度拥挤的 UGC、算法 discovery、AI-generated low-effort content、跨内容质量治理与平台级 performance obligation。</li>
+</ul>
+<p>不能把 2004 年“免费 mod → Valve 邀请商业化”的路径当成 2026 creator-platform 的可复制 acquisition 模板。</p>
+<h3 id="actor-situation">Actor Situation</h3>
+<p>Newman / Facepunch 到 s&amp;box 时已经拥有：</p>
+<ul>
+<li>超长期 community / mod / UGC 产品经验；</li>
+<li>GMod 与 Rust 带来的组织、技术和财务资本；</li>
+<li>Steam / Source 生态长期经验；</li>
+<li>一支成熟 studio，而不是 2004 年的个人 modder 状态。</li>
+</ul>
+<p>这恰好使本案成为强反压力：</p>
+<blockquote>
+<p><strong>能力资本和 runway 都很强，仍然不能替代重新寻找 product truth。</strong></p>
+</blockquote>
+<h3 id="action-maneuver">Action / Maneuver</h3>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>主动动作</th>
+<th>解决的问题</th>
+<th>新增 obligation</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GMod</td>
+<td>快速 mod iteration → paid Steam product</td>
+<td>把 creator sandbox 变成持续开发产品</td>
+<td>community / compatibility / update responsibility</td>
+<td>E001</td>
+</tr>
+<tr>
+<td>Rust</td>
+<td>从 GMod 产品线切到 survival multiplayer</td>
+<td>新品类探索</td>
+<td>persistent online / live community / multiplayer systems</td>
+<td>E002</td>
+</tr>
+<tr>
+<td>s&amp;box 多轮开发</td>
+<td>拒绝只做“GMod on Source 2”，多次重启/换 engine</td>
+<td>寻找下一代 creator-platform thesis</td>
+<td>多年 error persistence</td>
+<td>E003</td>
+</tr>
+<tr>
+<td>2026 release</td>
+<td>先发布，再以真实玩家/创作者行为改 discovery、review、onboarding</td>
+<td>缩短 platform-level player truth</td>
+<td>ranking / moderation / performance / creator economics</td>
+<td>E004–E007</td>
+</tr>
+</tbody>
+</table>
+<h3 id="anachronism-check">Anachronism Check</h3>
+<ul>
+<li>GMod 的 Steam 商业化发生在完全不同的平台竞争密度下；</li>
+<li>Rust 的 2013 survival / Early Access 窗口不能直接类比 2026；</li>
+<li>s&amp;box 的 2026 discovery / AI-slop 问题属于 CURRENT regime，未来仍可能快速变化；</li>
+<li>所以可迁移的是“公开产品→真实反馈→快速系统修正”的能力，不是某一代平台 tactic。</li>
+</ul>
+<h2 id="origin-capability">Origin / Capability</h2>
+<p>2004 年 Garry&rsquo;s Mod 从 Half-Life 2 / Source mod 生态中长出。2019 年 PC Gamer 对 Newman 与 Valve 的联合回顾确认：</p>
+<ul>
+<li>最初是 free mod；</li>
+<li>通过快速 iteration 与社区反馈成长；</li>
+<li>Valve 后来主动提出 Steam 商业化；</li>
+<li>paid version 让持续开发得到经济理由；</li>
+<li>Steam 更新基础设施改变了迭代频率；</li>
+<li>GMod 长期成为用户生成 gamemode / machinima / mods 的底座。</li>
+</ul>
+<p>Newman 也公开承认自己并不是传统“白板算法面试”型程序员；他的优势更接近：</p>
+<ul>
+<li>快速做东西；</li>
+<li>反复 ship；</li>
+<li>直接读用户反馈；</li>
+<li>creator-tool intuition；</li>
+<li>产品和平台长期迭代；</li>
+<li>围绕社区形成生产系统。</li>
+</ul>
+<h2 id="garrys-mod-rust">Garry&rsquo;s Mod → Rust</h2>
+<p>Rust 不是 GMod 的简单续作。</p>
+<p>2013 直接访谈里 Newman 很直白：团队喜欢 DayZ，想做类似东西，于是开始做 Rust。</p>
+<p>这里重要的不是“原创度评价”，而是 Facepunch 已经从 modder 个人进入：
+- studio production；
+- Early Access；
+- live community；
+- persistent online systems。</p>
+<p>同一个组织的能力从 creator sandbox 转到 survival multiplayer，说明 capability capital 可跨产品，但 product thesis 需要重新形成。</p>
+<h2 id="sbox-false-starts-matter">s&amp;box: False Starts Matter</h2>
+<p>2026-04-28 官方 release note 是极强的 contemporaneous evidence：</p>
+<p>Newman 明确写：
+- multiple years；
+- multiple false starts；
+- multiple engines；
+- 如果今天已知答案再从头做，可能不到一年；
+- 但真正困难的是“找到那个答案”；
+- 他刻意没有走“Garry&rsquo;s Mod + Source 2”的简单路线，因为认为应该做更多。</p>
+<p>这使 s&amp;box 成为 C014 的极好纵向样本：</p>
+<blockquote>
+<p>已经成功过的人，也可能在新产品定义上承担长期 error persistence。</p>
+</blockquote>
+<h2 id="launch-pressure-2026-current-evidence">Launch Pressure: 2026 Current Evidence</h2>
+<p>发售第二天，官方 post-release 记录：</p>
+<ul>
+<li>当月已经实现 profit；</li>
+<li>Steam review 一度 mixed / 44%；</li>
+<li>主要负面主题包括 AI slop、performance、&rdquo;This Isn&rsquo;t Garry&rsquo;s Mod&rdquo;；</li>
+<li>团队故意没有要求 Valve front-page takeover，希望 organic discovery；</li>
+<li>backend 发生未预期压力；</li>
+<li>discovery algorithm 仍在快速重写。</li>
+</ul>
+<p>随后数月：</p>
+<ul>
+<li>reviews 被结构化成 discovery signal；</li>
+<li>AI thumbnail/content quality 被主动降权；</li>
+<li>performance 持续优化；</li>
+<li>welcome screen 用来解释产品到底是什么；</li>
+<li>2026-09 主菜单和 discovery 又被重做，因为旧算法只给极少数游戏真实曝光。</li>
+</ul>
+<p>所以“平台上线”并不是 product truth 的终点。</p>
+<h2 id="market-as-production">Market as Production</h2>
+<p>s&amp;box 是 C010 的极端版本：</p>
+<p>这里 market interface 不是宣传部门。</p>
+<p>它本身就是产品：
+- discovery；
+- review semantics；
+- ranking；
+- creator onboarding；
+- thumbnails；
+- tags；
+- quality control；
+- payout / play fund；
+- gamer vs developer expectation setting。</p>
+<p>当 discovery 错时，平台内部好内容也可能等同不存在。</p>
+<h2 id="error-budget">Error Budget</h2>
+<p>s&amp;box 对 C014 的贡献不是证明“做平台很危险”这种废话。</p>
+<p>它显示：</p>
+<ul>
+<li>old success 可以制造很长 runway；</li>
+<li>long runway 允许多年 false starts；</li>
+<li>但也允许方向错误持续更久；</li>
+<li>creator-platform 的核心假设无法只靠内部技术完成来验证；</li>
+<li>release 后大量真实用户行为才暴露 discovery / positioning / quality problems。</li>
+</ul>
+<p>因此：</p>
+<blockquote>
+<p>runway 是 option value，也可能扩大 error persistence。</p>
+</blockquote>
+<h2 id="current-verdict">Current Verdict</h2>
+<h3 id="_1">已支持</h3>
+<ul>
+<li>Garry&rsquo;s Mod 是 mod/community→commercial product 的长期成功 lineage；</li>
+<li>Steam 商业化改变了持续开发条件；</li>
+<li>s&amp;box 经历多年、多引擎、多个 false starts；</li>
+<li>2026 release 后 discovery、performance、AI/low-effort content、产品定位成为显性问题；</li>
+<li>Facepunch 正以 weekly iteration 重写这些系统。</li>
+</ul>
+<h3 id="_2">禁止结论</h3>
+<ul>
+<li>“s&amp;box 已失败”；</li>
+<li>“Garry Newman 失去能力”；</li>
+<li>“UGC platform 做不成”；</li>
+<li>“旧经验完全无用”。</li>
+</ul>
+<p>更准确是：</p>
+<blockquote>
+<p><strong>成功能力资本没有消失，但新 regime 的关键未知仍必须重新向现实购买答案。</strong></p>
+</blockquote>
+<h2 id="transfer">Transfer</h2>
+<ul>
+<li>long-lived community feedback competence = DURABLE；</li>
+<li>platform discovery as product = DURABLE；</li>
+<li>weekly public iteration = mechanism durable / implementation conditional；</li>
+<li>2004 Source mod → Steam path = HISTORICAL；</li>
+<li>2026 s&amp;box launch feedback = CURRENT。</li>
+</ul>
+<h2 id="open-questions">Open Questions</h2>
+<ol>
+<li>s&amp;box 各阶段 UE4→Source 2 / engine changes 的完整 chronology；</li>
+<li>每轮 false start 的 headcount / sunk cost；</li>
+<li>Rust revenue 对 s&amp;box runway 的实际贡献；</li>
+<li>s&amp;box creator payout / Play Fund 的单位经济；</li>
+<li>review/discovery redesign 是否改善 creator retention 与 player discovery；</li>
+<li>当前 mixed-review pressure 到 2027 是否收敛。</li>
+</ol><div class="crumbs"><a href="/heroes-portal/">书阁</a> / cases/CASE-044-garry-newman-sbox.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

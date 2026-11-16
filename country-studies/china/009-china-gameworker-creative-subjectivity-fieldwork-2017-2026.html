@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>009 — 中国游戏雇员的创造性为什么会被「片段性调用」？2017—2026年劳动田野与反例审计 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl class="on"" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#2026-10-07" class="t2">2026-10-07 组织权利链实例：员工创意是否能继续，最终由谁签字？</a><a href="#0" class="t2">0. 结论升级：此前是「没找到中国在职员工量化问卷」，不是没有真正的中国游戏雇员研究</a><a href="#1-202642" class="t2">1. 最强的中国境内直接证据：2026年《社会》42人民族志</a><a href="#2-2017" class="t2">2. 2017年现场材料：美术工种拥有「工艺自由」，却未必拥有项目决策权</a><a href="#3-2019" class="t2">3. 2019年上海工人创意研究：不只是“缺少灵感”，还涉及提案被市场风险约束</a><a href="#4-20252026" class="t2">4. 两篇 2025/2026论文进一步改变了分析框架，但可见全文有限</a><a href="#41-lu-liu" class="t3">4.1 原创压力不限于大厂：Lu &amp;amp; Liu</a><a href="#42-xiong" class="t3">4.2 “独立”不只是融资身份：Xiong</a><a href="#5-f2pgaas-supercell" class="t2">5. 针对「大厂/F2P/GaaS 必然摧毁创造力」的芬兰反例：Supercell</a><a href="#51" class="t3">5.1 比较矩阵：公司愿不愿授权核心产品问题定义？</a><a href="#52-52" class="t3">5.2 一项真正的单一组织内商业版本对照：北美游戏工作室52人访谈</a><a href="#53" class="t3">5.3 比较研究中最容易犯的另一种国别错误：把「游戏化管理美国科技公司」当中国游戏业</a><a href="#6" class="t2">6. 从劳动现场到职业人生：不再仅用「是否创业」评价选择</a><a href="#_1" class="t3">招聘阶段要多测一道：「创作热情被招来做什么？」</a><a href="#7" class="t2">7. 证据质量裁决：这轮找到了实证，但仍不等于「中国游戏劳工抽样完毕」</a></aside><article class="doc"><div class="col"><h1 id="009-20172026">009 — 中国游戏雇员的创造性为什么会被「片段性调用」？2017—2026年劳动田野与反例审计</h1>
+<ul>
+<li>Program: C / 教育 × 行业版本 × 社会版本意识</li>
+<li>Status: <strong>QUALITATIVE FIELDWORK EVIDENCE FOUND / NOT A WORKFORCE PREVALENCE ESTIMATE / PRIMARY CLAIM NOT YET PROMOTED</strong></li>
+<li>As-of: 2026-10-07</li>
+<li>Related: <a href="/heroes-portal/country-studies/china/007-workforce-authorship-sampling-pivot-and-comparators.html">007 在职作者性样本转向</a>, <a href="/heroes-portal/country-studies/china/008-china-worker-side-creation-open-source-and-ip-gates.html">008 中国在职旁路创作</a>, <a href="/heroes-portal/country-studies/china/004-cuc-creator-training-to-career-cohort-gates.html">004 中传毕业职业选择</a>, <a href="/heroes-portal/book/research-notes/china-game-commercial-regime-lineage-003.html">中国产业版本</a>, <a href="/heroes-portal/book/research-notes/media-selection-survivorship-and-denominator-protocol-028.html">媒体与分母协议</a></li>
+<li>Evidence gate: 文中 <strong>P0-SELF-RESEARCH</strong> 为作者公开可审计的方法/结果/原话，<strong>S1-ABSTRACT-ONLY</strong> 为经同行评审的论文摘要但全文不可读；<strong>ORG-FIRST-PARTY</strong> 为公司负责人公开自述（有强自我宣传激励）；所有跨个案机制解释保留 <strong>H</strong>。</li>
+<li>Privacy: 只描述已由学者匿名的公开职业群体；不尝试恢复受访者姓名、公司内部合同、未公开业余作品；不包含任何私有游戏或作者个人经历。</li>
+</ul>
+<h2 id="2026-10-07">2026-10-07 组织权利链实例：员工创意是否能继续，最终由谁签字？</h2>
+<p class="dc">新增 <a href="/heroes-portal/country-studies/china/010-next-studios-greenlight-rights-governance-lifecycle-2017-2024.html">010 NExT Studios 2017—2024管理制度与命运</a>：2018年经理顾煜公开回忆员工、专家与匿名项目组共同评审，但<strong>当成员或专家有争议，沈黎是最终主观仲裁者</strong>；2018真实存在OWO私人Demo→内部项目，也有试作项目缩队回炉及员工离职；2023员工报道与负责人采访展示经理离职后组织评估/资金耐心的变化。这比仅靠劳动民族志中“表达自由 vs 高工时”的文本判断，多了一层可核的<code>GREENLIGHT_RIGHT / KILL_RIGHT / PARENT_BUDGET_RIGHT</code>。</p>
+<p>2019腾讯层约150提案、50+立项、10+测试、5–6上市均为高管口述模糊年度层级数字，不拼成真实个人转化率。</p>
+<h2 id="0">0. 结论升级：此前是「没找到中国在职员工量化问卷」，<strong>不是没有真正的中国游戏雇员研究</strong></h2>
+<p>2026年最新研究揭示一个能被更精确检验的机制：</p>
+<blockquote>
+<p><strong>游戏业先通过游戏文化与创作赛事寻找高度投入、想亲手创造产品的劳动者；随后专业化、模块化的组织在工作中更多运用他们的劳动投入和执行力，却限制个人的创作提案与玩家判断；当事人可能通过晋升、业余项目或情感撤离适应。</strong></p>
+</blockquote>
+<p>这是潘竹涛、吴桐雨在 <strong>18个月民族志田野 + 42名中国游戏开发从业者半结构访谈</strong>中提出的「片段性调用（fragmented appropriation）」劳动过程概念。它直接覆盖此前 [007]/[008] 的关键资料空缺：<strong>中国内部确实存在深入、且有方法说明的在职人员定性证据，不能继续写成“只能从海外推测”。</strong></p>
+<p>但是 42人不是全行业随机样本：<code>N=42</code> 能描述受访者构成，<strong>不能推出被压抑创造性者占中国游戏员工X%</strong>，也没有被同人回访证明入职前后因果净效应。</p>
+<p>最值得研究的并非抽象「中国人创新能力不强」，而是 <strong><code>RECRUITED_FOR_CREATIVE_SUBJECTIVITY</code> 与 <code>AUTHORIZED_FOR_PRODUCT_DECISIONS</code> 的差额</strong>。</p>
+<h2 id="1-202642">1. 最强的中国境内直接证据：2026年《社会》42人民族志</h2>
+<p><strong>潘竹涛、吴桐雨，《动员与压抑：中国游戏产业劳动主体性的片段性调用机制》，《社会》46(3):57–82，官网中文/英文摘要；“出版日期2026-05-20，发布日期2026-07-24”按照官网显示，避免替换为观察年份。</strong></p>
+<p>官方英文<strong>扩展摘要</strong>比中文短摘要包含一个极关键、容易漏掉的发现：</p>
+<ul>
+<li>组织利用游戏开发竞赛等途径招募的某类高投入开发者，被研究者称为<strong>「肝客」</strong>：热爱游戏、愿意长时间练习，有玩家身份与创作动机，也倾向接受高强度工作。<strong>「肝客」是研究中的特定主体性概念，不是游戏行业所有雇员的标签。</strong></li>
+<li>随模块化组织发展，研究者发现劳动强度维度被持续动员，转化为稳定的过劳实践，而创作热情/玩家身份等维度遭到限制。<strong>这不是把“懂游戏”直接变成“没能力做设计”</strong>；恰恰是已有创作主体性在组织中被选择性利用。</li>
+<li>当事人的两类路径：<strong>部分希望靠晋升获得更大的创作范围；部分将热情转向 side projects，降低对日常工作的情感投入</strong>。所以<strong>「雇员没作者性」这个全称命题被同一篇研究内部的业余创作实例直接挑战</strong>。</li>
+<li>42名访谈对象构成：<strong>策划13、程序11、美术13、其他5</strong>；年龄以 <strong>25–29岁27人</strong>居多，20–24岁7人，30–34岁7人，35–39岁1人。职业结构与年龄选择可能让资深创意总监/管理高层、刚入职/已离职人员覆盖不足。</li>
+<li>访谈与田野结论属于<strong>机制的定性证据</strong>；受访者表是研究自选样本构成，不是中国游戏就业市场结构。网页短摘要没有公开：公司/地区种类、样本招募渠道、田野具体年份、工作行为观察资料、个体项目如何编码等全部细节；该方面即使HTML/PDF存在，也须先取得全文核查才可声称复核完成。</li>
+</ul>
+<p><strong>P0-SELF-RESEARCH / 公开同行评审作者自身摘要与表：</strong>
+https://www.society.shu.edu.cn/EN/abstract/abstract22357.shtml
+https://www.society.shu.edu.cn/CN/Y2026/V46/I3/57</p>
+<p><strong>有必要回到作者使用的三重评价标准：</strong>
+<code>EFFORT_COMMITMENT</code>（愿不愿意长时工作）、<code>PLAYER_JUDGMENT</code>（是否能作为资深玩家批判既有机制）、<code>PRODUCT_PROBLEM_RIGHTS</code>（能否决定做什么游戏、目标/核心玩法、何时推翻假设）。高工时、玩家身份和个人作品三者<strong>都不可代替</strong>第三项。</p>
+<h2 id="2-2017">2. 2017年现场材料：美术工种拥有「工艺自由」，却未必拥有项目决策权</h2>
+<p><strong>黄佩、杨丰源，《“弹性”的创意：电子游戏的美术劳动》，《国际新闻界》40(5):82–97，2018发表；</strong>2017年6—10月对<strong>5名</strong>不同岗位及经验的在职游戏行业美术相关人员、管理人员做每次约2–3小时访谈。期刊官网摘要 + 《国际新闻界》经搜狐公开转载的正文可读。<strong>这是一份可与2026研究形成真实时序对照的中国质性材料，但五名均为有目的访谈，且以美术为主，不是2017全国趋势抽样。</strong></p>
+<p>文本中职业分工细节尤其重要：
+- 从端游到手游，受访者描述大厂美术中心可能成为<strong>内部外包/共享资源部门</strong>：同一人今天服务项目A、明天服务项目B；这可能增加接触项目的广度，同时损失对单一作品的归属感。<strong>结论是代价与收益同时存在</strong>，不可简单说美术工业化=全员创意死亡。
+- 在有主美/美术总监的团队，管理者有选择风格、资源配额、专业审核和跨美术/策划/程序协调的真实权限。<strong>局部创作自主权确实存在</strong>，但不等于拥有立项、玩法方向和最终产品商业目标的控制权。
+- 一位新人美术受访者表示，她的美术输出会在技术/市场环节被否决返工；另有受访者把成熟大项目形容为标准化流程、由项目管理者把控验收。此为<strong>不同岗位对分工的亲历</strong>，不能扩大为所有中国团队没有艺术自由。
+- 受访者把资本对回报的要求与短开发周期、稳妥重复和项目管理联系起来，是其<strong>当事人解释</strong>；并未单独统计发行渠道、资金类型/项目被否决率，从而严格证明「2017年所有中国公司短期主义」。
+- 同一篇也记录优质资深人员可以利用技能与跨部门协商争取空间，以及新人得到指导、成长的渠道。<strong>培训增益与作者性限制可以共存</strong>。</p>
+<p><strong>可检验的分权矩阵：</strong>
+<code>CRAFT_STYLE_AUTHORITY</code> / <code>TASK_ACCEPTANCE_AUTHORITY</code> / <code>BUDGET_SCOPE_AUTHORITY</code> / <code>GAMEPLAY_PROBLEM_AUTHORITY</code> / <code>GREENLIGHT_RIGHT</code> / <code>SHIP_OR_CANCEL_RIGHT</code>。
+获得其中任何一个，不自动等于全套作者性；也不等于毫无自主性。</p>
+<p><strong>P0 作者正式期刊摘要：</strong> https://cjjc.ruc.edu.cn/CN/Y2018/V40/I5/82
+<strong>S1 作者全文公开转载（研究部分与访谈可逐段核）：</strong> https://www.sohu.com/a/240292091_652768 。</p>
+<h2 id="3-2019">3. 2019年上海工人创意研究：不只是“缺少灵感”，还涉及提案被市场风险约束</h2>
+<p><strong>Huiwen Gong &amp; Xiaorui Xin, <em>Buzz and tranquility, what matters for creativity? A case study of the online games industry in Shanghai</em>, <em>Geoforum</em> 106:105–114, 2019-11; DOI 10.1016/j.geoforum.2019.08.002.</strong></p>
+<p>发行商页面摘要与部分索引出的章节记录：
+- 研究对象为<strong>上海网络游戏制作中的不同职能在职者</strong>；重视实际员工的创造过程，而非上市收入。
+- 学习路径：在线学习/网络资源、做项目中学习对个人创意有重要作用；线下城市密度/社交活动的重要程度不必然与宏观“创新集群”叙事一样高；安静时间和退出信息过载对个人创造过程也是重要资源。
+- 章节片段明确记录<strong>若干游戏策划受访者</strong>说雇主顾虑冒险推出完全新玩法、害怕失去潜在玩家，因此工作中只能在有限选择集里提出设计。章节列出访谈编号 3、15、22、31，但<strong>绝不能据此算4/N遭否决的比例</strong>：本轮没有核完整访谈总N/所有访谈背景。
+- <strong>真正的补充</strong>：即使工时可支配，也可能在组织层面受 <code>EXPECTED_REVENUE_RISK</code> 与 <code>PLAYER_RETENTION_FEAR</code> 约束；反过来，「没有安静的连续深度工作时段」可能压缩设计探索，即使没有显式内容审查/上司否决。</p>
+<p><strong>S1 当前只核过出版社公开摘要与被搜索引擎索引的章节片段；部分全文不可直接访问，不能声称逐页精读</strong>：
+https://www.sciencedirect.com/science/article/abs/pii/S0016718519302490
+https://doi.org/10.1016/j.geoforum.2019.08.002</p>
+<h2 id="4-20252026">4. 两篇 2025/2026论文进一步改变了分析框架，但可见全文有限</h2>
+<h3 id="41-lu-liu">4.1 原创压力不限于大厂：Lu &amp; Liu</h3>
+<p><strong>Xiao Lu &amp; Hong Yu Liu, <em>From copycat to magical monkey: Understanding the video game development culture in China</em>, <em>European Journal of Cultural Studies</em>, online first </strong>2025-06-30<strong>；卷29(1)于</strong>2026-02<strong>刊出, DOI 10.1177/13675494251348356。</strong></p>
+<p>期刊正式<strong>公开摘要</strong>认为，无论大型商业公司还是独立团队，竞争、模仿、短期财务回报、不可持续工时与能力缺口都会影响创新。<strong>这不等于所有独游团队都短视</strong>；我们尚未获得可逐段核查全文/采样细节，摘要是作者的研究结论，不是可得的比例/因果数据。</p>
+<p>本研究将其作为压力测试：
+- 独立团队如果受发行商里程碑、现金耗尽风险、买量/流量压力，仍可能被短期 KPI 驱动。
+- 大公司如果给予工作室真实立项与范围否决权，或允许团队长周期验证，仍可能保留作者性。
+- 核心不是 <code>INDIE vs AAA</code> 或 <code>CHINA vs WEST</code>，而是<strong>具体的人控制哪个决策节点，谁承担什么风险、何时被市场证据否决</strong>。</p>
+<p>Source: https://journals.sagepub.com/doi/abs/10.1177/13675494251348356</p>
+<h3 id="42-xiong">4.2 “独立”不只是融资身份：Xiong</h3>
+<p><strong>Haoxuan Xiong, <em>Who gets to be independent?: Labelling and boundary work of China&rsquo;s indie game scene</em>, <em>International Journal of Cultural Studies</em>, online first </strong>2026-07-03<strong>, DOI 10.1177/13678779261466320。</strong></p>
+<p>公开摘要：以民族志与访谈研究 <code>indie</code> 身份在中国的社会认同、道德边界与机制博弈；“相对独立”可能和平台、政府扶持、商业与全球文化表达交织。<strong>因此拿了资金≠自动没作者性；挂 indie 名号≠事实拥有决策权。</strong> 但同样<strong>尚未取得全文方法与人群范围</strong>，不作分布/效应量外推。</p>
+<p>Source: https://journals.sagepub.com/doi/abs/10.1177/13678779261466320</p>
+<h2 id="5-f2pgaas-supercell">5. 针对「大厂/F2P/GaaS 必然摧毁创造力」的芬兰反例：Supercell</h2>
+<p><strong>并不是与2017上海员工同条件的实验，而是一个 <em>business model and organizational rights are not identical</em> 的制度反例。</strong></p>
+<p>Supercell负责人 Ilkka Paananen 在 <strong>2020-05-14</strong>《10 Learnings from 10 Years》及 <strong>2025-02-11</strong>《In for the Forever Game》反复公开公司运作：
+- 早期的模块化小团队，允许游戏组<strong>自主决定是否开发、终止或变更作品</strong>，管理层常不直接推翻成员决策；2020文章述及 <em>Boom Beach</em> 经历多数高层希望砍项目而仍由项目组决定继续，属于<strong>自述的实际冲突节点</strong>，比“我们尊重创意”的宣言更可核。
+- 同时，公司明确以玩家长期留存、形成长期服务游戏为最高公司级目标。<strong>自主权是在既定商业目标内，而非无限艺术自由</strong>。因此 <code>CELL_AUTONOMY</code> 与 <code>F2P_GAAS_OBJECTIVE</code> 可以同时为真。
+- 2025年度公开 <code>Spark</code>：以 game jams / 快速原型<strong>先筛团队，再给团队长期立项权</strong>，而不是只挑评奖作品。公司自述<strong>30名开发者经过该程序、形成5个新团队</strong>，不能把5/30当成项目成功率：人数与团队单位不一致、且团队还在制作。
+- 2025年公司报告继续强调创意团队对于战术和目标的自主决定；但这是<strong>CEO公开组织自述</strong>，缺乏对底层员工、已退出人员和被砍项目的独立取样，而且仍存在过劳、自我剥削、商业验证的组织约束。
+- 公司自己在2025文章承认，将内部新团队设计成 startups 并不容易；<strong>所以“Supercell每个人有完全自由”同样错误</strong>。</p>
+<p>来源 ORG-FIRST-PARTY：
+- Supercell, <em>10 Learnings from 10 Years</em>, https://supercell.com/en/news/10-learnings-10-years/7436/
+- Supercell, <em>In for the Forever Game</em>, 2025-02-11, https://supercell.com/en/news/forever-game/
+- Supercell, <em>What We&rsquo;ve Learned from Failures</em>, 2026-01-15, https://supercell.com/en/news/learning-from-failures/</p>
+<h3 id="51">5.1 比较矩阵：<strong>公司愿不愿授权核心产品问题定义？</strong></h3>
+<table>
+<thead>
+<tr>
+<th>Comparison</th>
+<th>中国2017美术五人 / 2019上海片段 / 2026定性42人</th>
+<th>Supercell 2020/25组织自述</th>
+<th>仍未知</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>人才筛选</td>
+<td>2026研究描述借赛事筛高投入/玩家身份型“肝客”</td>
+<td>Spark以原型协作筛<strong>团队</strong>，并非只凭比赛获奖</td>
+<td>各公司筛选实践普遍性</td>
+</tr>
+<tr>
+<td>可被调用的能力</td>
+<td>专业执行、工时、高技能美术/策划</td>
+<td>游戏组完整研发执行+商业表现负责</td>
+<td>能力画像与招聘/升迁标准在大样本中的比例</td>
+</tr>
+<tr>
+<td>玩法/题材权</td>
+<td>2019特定策划反映新玩法受市场风险约束</td>
+<td>宣称团队获得较高选题和继续开发的自由</td>
+<td>具体哪类团队真的能否决管理层目标</td>
+</tr>
+<tr>
+<td>作品存亡权</td>
+<td>2017美术手段与风格权≠项目决策权；2026不含明确greenlight分布</td>
+<td>2020自述Boom Beach管理层意见与项目组冲突时让项目组继续</td>
+<td>所有项目实际裁决机制/失败项目比例</td>
+</tr>
+<tr>
+<td>外部投资/KPI</td>
+<td>2017受访者将短周期与复制归因为利润压力</td>
+<td>本身同样以GaaS长期留存/商业规模考核</td>
+<td>谁承担风险、容忍几次试错</td>
+</tr>
+<tr>
+<td>工时与私人项目</td>
+<td>2026定性研究确有高强度工作/旁路个人项目应对</td>
+<td>2022/2026公司自述小组压力及学习机制</td>
+<td>可比工时、本人愿望、实际可公开创作身份</td>
+</tr>
+</tbody>
+</table>
+<p><strong>重要推断边界</strong>：这些材料来自不同国家、年代、岗位/方法（访谈 vs CEO声明）；<strong>不能从表格归纳 “Supercell更自由” 的平均因果差异</strong>。其作用是将原本含混的“GaaS毁创作”改写为更可证伪的“决策权分配与其所承受的现金流/玩家留存目标之间的相互作用”。</p>
+<h3 id="52-52">5.2 一项真正的单一组织内商业版本对照：北美游戏工作室52人访谈</h3>
+<p><strong>Louis-Etienne Dubois &amp; Johanna Weststar, <em>Games-as-a-service: Conflicted identities on the new front-line of video game development</em>, <em>New Media &amp; Society</em>, online first 2021-03-02, 2022卷24(10):2332–2353, DOI 10.1177/1461444821995815。</strong></p>
+<ul>
+<li>两位研究者经过职业关系获得一个<strong>北美大型游戏工作室</strong>准入，在同一组织内部对比 <strong>38位GaaS项目人员</strong>（主要是MOBA）与 <strong>14位GaaP传统产品开发人员</strong>（主要是射击续作），<strong>总计52位半结构访谈</strong>、每次约60分钟；这是比Supercell CEO独立自述<strong>更适合检验服务化工作方式差异</strong>的经验材料。</li>
+<li>研究认为 <code>SERVITIZATION</code> 能改变开发者的技能/工作心态、与玩家的关系、同行声誉、工作原则和职业身份。它<strong>不声称所有GaaS员工没有创造性</strong>，也不量化“中国F2P对创意的因果损失”。</li>
+<li>优点：<strong>同一公司内两种产品制度</strong>，减少了国家环境和单纯公司品牌的混杂。限制：仍是两类自选项目员工、角色不同/项目资历不同，样本只有<strong>一家公司</strong>且定性访谈；<code>38/14</code> <strong>不是GaaS/GaaP失去作者性人数/率</strong>。</li>
+<li>和芬兰Supercell配对更有辨识力：<strong>GaaS工作身份受到服务化改变</strong>与<strong>某些GaaS团队拥有较强项目决定权</strong>可以同时存在；商业版本和组织授权是相互作用变量，不是简单线性等式。</li>
+</ul>
+<p><strong>P0作者正式研究与可索引方法段：</strong> https://journals.sagepub.com/doi/10.1177/1461444821995815 ；开放存档 https://pmc.ncbi.nlm.nih.gov/articles/PMC9420891/ （2026-10官网偶有访问限制）。</p>
+<h3 id="53">5.3 比较研究中最容易犯的另一种国别错误：把「游戏化管理美国科技公司」当中国游戏业</h3>
+<p><strong>Tongyu Wu, <em>Play to Submission: Gaming Capitalism in a Tech Firm</em>, Temple University Press, 2024。</strong> 书研究的是<strong>美国大型科技企业（化名Behemoth）的游戏化工作管理</strong>，不是一家中国游戏制作工作室；作者本人在中国大学任教也不改变调查地点/行业。出版社介绍其<strong>13个月的民族志田野</strong>，以及竞争和“玩家身份”在技术员工管理中的作用。</p>
+<p>这形成一个非常强的压力测试：<strong>通过游戏/竞技身份调动高投入、甚至让劳动者内化绩效竞争，并非中国游戏企业独有</strong>。但这本书不是「在职游戏产品作者性」实证；只能在 <strong>labor control via gamer identity</strong> 维度与2026潘/吴比较。</p>
+<p><strong>P0出版社书籍简介</strong> https://www.bibliovault.org/BV.book.epl?ISBN=9781439922972
+<strong>S1学术书评</strong> https://academic.oup.com/sf/article/103/4/e21/7978628</p>
+<h2 id="6">6. 从劳动现场到职业人生：不再仅用「是否创业」评价选择</h2>
+<p><strong>研究内的新可观察轨迹（待具体人物回访，不是现成统计）：</strong></p>
+<pre><code class="language-text">原生玩家经验 / 开发赛事 / 早期自创原型
+    -&gt; 公司招聘：对热情和自我驱动的筛选
+    -&gt; 雇佣分工：工时、任务模块、职业技能和现金工资
+    -&gt; 作品权利：
+       A 只有 craft / task 选择权，项目题材与玩法目标外部规定
+       B 可自定义玩法问题，但不能改变 business / release gate
+       C 可决定立项与砍项目，同时须承担商业验证
+    -&gt; 个人人生的分流：
+       promotion_for_authority / internal_team_author
+       side_project_outside_work / leave_and_found
+       choose_employment_and_stability / emotional_withdrawal
+       pause_due_to_health_family_market / unknown_or_refuse
+</code></pre>
+<p>必须拒绝「晋升者被收编」「留在职者不勇敢」「做业余项目才有灵魂」等先验价值判断。事业与生活选择可能是理性最优，也可能与制度约束共存。<strong>作者性不是是否自雇的同义词</strong>。</p>
+<h3 id="_1">招聘阶段要多测一道：「创作热情被招来做什么？」</h3>
+<p>在 <a href="/heroes-portal/country-studies/china/008-china-worker-side-creation-open-source-and-ip-gates.html">008</a> 的同人匹配技术/游戏问项之外，新增：
+- <code>RECRUITMENT_GAME_IDENTITY_WEIGHT</code>：招聘时是否要求业余作品/游戏时间/社区贡献/参赛表现，谁评估？
+- <code>PROMISED_CREATIVE_OPPORTUNITY</code>：是否口头/书面承诺过提案与玩法主导；
+- <code>FIRST_12_MONTHS_WORK_TASK</code>：入职一年内实际分配的开发任务、工时、是原创判题还是执行工单；
+- <code>PROPOSED_VS_APPROVED</code>：过去12个月自己提案数、获得立项试做/生产/正式发行机会，以及<strong>缺少提案的原因</strong>；禁止把未被采纳直接等于创意抑制，需看项目质量/商业证据；
+- <code>SCOPE_KILL_RIGHTS</code>：谁可以决定砍除功能、否决失效方向、终止项目？生产负责人/策划/财务/市场/发行商/公司高层？
+- <code>ALTERNATIVE_AUTHORITY_CHANNEL</code>：晋升、跨部门、内部创业、私人作品、离职创业，是否有真实同部门可见先例？
+- <code>CHOICE_AND_RISK</code>：现金缓冲与照护、离职安全、职业喜好、不创业的主动选择；允许匿名拒答；
+- <code>FOLLOWUP</code>：本人授权的1/3/5年复访，观察作者性随岗位权限变动或自主作品是否延续。</p>
+<p>所有变量应按<strong>实际岗位与生产制度</strong>分层，不拿策划/程序/美术之间的差异解释民族性。</p>
+<h2 id="7">7. 证据质量裁决：这轮找到了实证，但仍不等于「中国游戏劳工抽样完毕」</h2>
+<table>
+<thead>
+<tr>
+<th>Study / data</th>
+<th>Evidence availability</th>
+<th>Strength</th>
+<th>Unknown</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>黄佩/杨丰源：2017/2018，5人</td>
+<td>期刊摘要+作者正文公开转载可读</td>
+<td>有具体工作分工、返工决策、组织结构的匿名访谈</td>
+<td>样本外代表性；公司制度的纵向比率</td>
+</tr>
+<tr>
+<td>Gong &amp; Xin：2019 上海游戏从业者</td>
+<td>出版社摘要、部分章节索引可读</td>
+<td>直接出现“原创玩法提案受市场顾虑限制”的一手访谈片段</td>
+<td>完整访谈N、职工构成、全文方法</td>
+</tr>
+<tr>
+<td>潘竹涛/吴桐雨：2026《社会》，18月+42人</td>
+<td>官网中英摘要、受访者构成表可读；<strong>全文阅读状态待核</strong></td>
+<td>中国雇员真实工作现场、招聘热情→模块劳动→个人项目的有机制解释力材料</td>
+<td>全国发生率、明确反事实、样本地域/产业版本分布、项目可公开比例</td>
+</tr>
+<tr>
+<td>Lu/Liu：2025 online / 2026 issue</td>
+<td>SAGE正式abstract-only</td>
+<td>提醒独立团队也可能短期主义</td>
+<td>全文取样、证据逻辑、跨岗位差异</td>
+</tr>
+<tr>
+<td>Xiong：2026-07 indie身份</td>
+<td>SAGE正式abstract-only</td>
+<td>“indie”标签是社会边界而非产权数值</td>
+<td>具体样本与case覆盖</td>
+</tr>
+<tr>
+<td>Supercell：2020/25/26</td>
+<td>官方CEO与组织发言、具体故事可核</td>
+<td>某些GaaS组织自述会下放立项/砍项决策</td>
+<td>独立审计、全员权利、失败完整名册、国别均值</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Qualified finding now</strong>：中国游戏公司内部，<strong>确实有历史上可见、并在当代学术田野中被细化的</strong>“高创作热情招募—模块化任务执行—作者性分离/旁路自创”的组织过程；但<strong>不是所有中国游戏人都经历它，更非只有中国会发生这种矛盾</strong>。接下来应研究个体决策权和创作输出，不再反复声称“中国缺少在职证据”。</p>
+<p><strong>Research priority changed</strong>：旧 backlog 中“寻找中国在职创作案例”状态为 <strong>PARTIALLY RESOLVED—QUALITATIVE</strong>；“取得同人可比、含不做个人项目者在内的中国游戏雇员问卷/纵向群体”状态为 <strong>OPEN</strong>。先取得2026论文可用全文并校验取样和引文，再尝试扩大；不可因只有摘要就擅自假定有作者/企业可量化发生率。</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / country-studies/china/009-china-gameworker-creative-subjectivity-fieldwork-2017-2026.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

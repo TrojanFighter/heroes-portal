@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CASE-007 — Gunpoint / Tom Francis · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl class="on"" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#why-this-case" class="t2">Why this case</a><a href="#myth" class="t2">Myth</a><a href="#origin-capability" class="t2">Origin / Capability</a><a href="#2026-10-09" class="t3">前史与制作时间线补证（2026-10-09）</a><a href="#_1" class="t3">不是开发经验，但也绝不是白纸</a><a href="#_2" class="t3">批评不是设计，除非你愿意拿它去测试</a><a href="#taste-as-capability-capital" class="t2">Taste as Capability Capital</a><a href="#1" class="t3">1. 品味首先是一种筛选能力</a><a href="#2" class="t3">2. 品味是一种“知道自己到底喜欢什么”的抽象能力</a><a href="#3" class="t3">3. 品味还决定“不做什么”</a><a href="#runway" class="t2">Runway</a><a href="#production" class="t2">Production</a><a href="#scope" class="t2">Scope</a><a href="#gamemaker" class="t3">GameMaker：让品味更快碰到现实</a><a href="#crosslink" class="t3">Crosslink：用规则密度代替内容规模</a><a href="#_3" class="t3">不是“想到好点子就行”</a><a href="#market" class="t2">Market</a><a href="#longitudinal-check" class="t2">Longitudinal Check</a><a href="#preliminary-verdict" class="t2">Preliminary Verdict</a><a href="#_4" class="t3">成立</a><a href="#_5" class="t3">但不成立的版本</a><a href="#transfer" class="t2">Transfer</a><a href="#non-transfer" class="t2">Non-transfer</a><a href="#evidence-index" class="t2">Evidence Index</a><a href="#gunpoint" class="t3">后续职业窗口（不改变Gunpoint因果判断）</a><a href="#open-questions" class="t2">Open Questions</a><a href="#creator-life-decision-audit" class="t2">Creator Life / Decision Audit</a></aside><article class="doc"><div class="col"><h1 id="case-007-gunpoint-tom-francis">CASE-007 — Gunpoint / Tom Francis</h1>
+<ul>
+<li>Status: RESEARCHING</li>
+<li>Subject: Gunpoint / Tom Francis</li>
+<li>Related Claims: C002, C003, C004, C006, C007, C008, C010, C011, C015</li>
+</ul>
+<h2 id="why-this-case">Why this case</h2>
+<p class="dc">这是作者“<strong>品味决定命运</strong>”命题最重要的历史来源之一。</p>
+<p>但这里的“品味”不能写成一句浪漫的“他很会鉴赏游戏”。Tom Francis 的价值恰恰在于，我们能看到一种更可审计的结构：</p>
+<blockquote>
+<p><strong>长期比较大量游戏 → 能明确说出自己喜欢/讨厌什么 → 判断一个点子是否足够特别 → 把不满翻译成可测试规则 → 用测试修正判断 → 把有限时间集中到最值得做的部分。</strong></p>
+</blockquote>
+<p>Gunpoint 同时能拆掉三个独游神话：</p>
+<blockquote>
+<p>“一个记者第一次学 GameMaker，花 30 美元就做出了成功游戏。”</p>
+<p>“solo dev = 一个人完成全部劳动。”</p>
+<p>“只要技术足够强，设计方向自然会出现。”</p>
+</blockquote>
+<p>本案真正值得研究的是：<strong>在技能、时间和现金都非常有限时，正确选择“什么值得做”和“什么不值得做”本身就是生产能力。</strong></p>
+<h2 id="myth">Myth</h2>
+<p>Gunpoint 常被压缩成“PC Gamer 记者第一次学 GameMaker，成本几乎为零，独立开发成功”。</p>
+<p>这类叙事删除了：</p>
+<ul>
+<li>多年的职业游戏评论/分析积累（2013年讲演的九年跨度包含开发期）；</li>
+<li>三年业余开发劳动；</li>
+<li>稳定工资提供的 runway；</li>
+<li>GameMaker 把工程门槛压低的作用；</li>
+<li>开发博客、解释视频、测试者和媒体形成的市场接入；</li>
+<li>全球美术/音乐协作者；</li>
+<li>延后支付 / revenue-share 的组织方式；</li>
+<li>Francis 本身作为 PC 游戏记者已有的行业网络与传播能力。</li>
+</ul>
+<p>因此“低现金成本”是真的，但“低前置资本”并不成立。这里的资本包括工资、时间、职业网络，也包括长期积累的<strong>判断资本 / taste capital</strong>。</p>
+<h2 id="origin-capability">Origin / Capability</h2>
+<h3 id="2026-10-09">前史与制作时间线补证（2026-10-09）</h3>
+<p>本次仅补经历、同期试错与回忆边界，不改变 Claim 状态或现有 Verdict。见 <a href="/heroes-portal/evidence/CASE-007-gunpoint-source-ledger.html">Evidence Ledger</a>。</p>
+<table>
+<thead>
+<tr>
+<th>时段</th>
+<th>可写入传记的经历</th>
+<th>证据与限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>中学至大学</td>
+<td>回忆中先向往写游戏报道，后来转向制作；毕业后约2003年写过游戏设计文档和科幻电视试播稿</td>
+<td>E009，2013年回忆；不写成必然职业轨迹</td>
+</tr>
+<tr>
+<td>2000–2003</td>
+<td>自列南安普顿大学数学与哲学理学学士，一等成绩</td>
+<td>E003，自述履历，未独立核学籍</td>
+</tr>
+<tr>
+<td>PC Gamer前后</td>
+<td>仓库装配滑板时应聘写作者未获录用；后来先做附赠光盘，再于入职一两年后转写作；履历标题将该职业时期起点列为2004</td>
+<td>E003；不把E009的压缩叙述写成一次应聘立即成功</td>
+</tr>
+<tr>
+<td>动手之前</td>
+<td>Darwinia先改变对小团队作品的认识；Spelunky与GameMaker进一步使尝试显得可行</td>
+<td>E009回忆、E010同期自述；这是本人的认识变化，不是两款作品的solo贡献审计</td>
+</tr>
+<tr>
+<td>2010-05至07</td>
+<td>Private Dick公开计划；碰撞实现受阻；约十位测试者反馈后修正移动，制作跳跃轨迹预览，暂改名Gunpoint</td>
+<td>E010–E012；计划不等于成品，时间投入按各次记录分段</td>
+</tr>
+<tr>
+<td>2010-10至2012</td>
+<td>删减非交互演出；评论建议转为可测试作品；整合协作者素材时仍受自己的制作速度限制</td>
+<td>E008、E004；删减不是永远不再安排故事</td>
+</tr>
+<tr>
+<td>2013</td>
+<td>后期裁切与三个月休假；约休假两个月后发布；首发销售越过事先辞职阈值，随后离开PC Gamer</td>
+<td>E001、E002；金额及是否带薪UNKNOWN</td>
+</tr>
+</tbody>
+</table>
+<p><strong>口径修正：</strong>“九年评论”是2013讲演的职业跨度，包含Gunpoint开发期，不得全部算在开工前。中学/大学愿望主要来自发售后访谈，不能把2013的连贯回忆当成当年已确定成功的计划。开发日志与后期复盘的晚间/周末投入描述不同，不能合成固定每周工作量。两个月未做项目的自述也限制“从未停下”的报道修辞。</p>
+<h3 id="_1">不是开发经验，但也绝不是白纸</h3>
+<p>Tom Francis 在 Gunpoint 之前没有传统开发履历，但已有多年 PC Gamer 游戏记者/编辑经验。</p>
+<p>GDC Europe 2013 的讲演标题本身就把这个前史说得非常清楚：</p>
+<blockquote>
+<p><code>How Reviewing Games for Nine Years Helped in Designing Gunpoint</code></p>
+</blockquote>
+<p>他后来在 Game Developer 的 IGF 采访中进一步解释，记者工作最有用的一部分是：</p>
+<ul>
+<li>必须持续知道市面上正在发生什么；</li>
+<li>必须辨认什么东西真正值得注意；</li>
+<li>因而更容易判断一个新点子是否“足够不寻常”。</li>
+</ul>
+<p>这使本案成为 C003 / C011 的重要补充：<strong>能力资本不只包括代码、美术和项目管理。长期、结构化地比较作品，也可能形成进入设计之前就存在的选择能力。</strong></p>
+<h3 id="_2">批评不是设计，除非你愿意拿它去测试</h3>
+<p>Francis 自己承认，做记者时经常在评论里想到“这个游戏如果这样改可能更好”，但聪明的设计师反而会提醒他：一个想法没让玩家试过之前，你并不知道它是不是真的好。</p>
+<p>于是 Gunpoint 对他而言也是一次方法转换：</p>
+<blockquote>
+<p><strong>从“我觉得应该这样” → “我做出来看看是不是这样”。</strong></p>
+</blockquote>
+<p>发现 <em>Spelunky</em> 用 GameMaker 制作，是一个关键触发点。工具门槛足够低，使他能在不到一个月内做出 movement prototype 并送给测试者。</p>
+<p>所以“品味决定命运”绝不能理解成“眼光比技术重要”。更准确的是：</p>
+<blockquote>
+<p><strong>品味负责提出值得验证的问题；低门槛工具负责把问题变成可测试物；反馈负责淘汰错误品味。</strong></p>
+</blockquote>
+<h2 id="taste-as-capability-capital">Taste as Capability Capital</h2>
+<h3 id="1">1. 品味首先是一种筛选能力</h3>
+<p>Francis 明确说，他不知道 Gunpoint 的核心机制最终是否会好玩，但他知道：</p>
+<blockquote>
+<p><strong>如果它成立，它至少会足够不寻常。</strong></p>
+</blockquote>
+<p>这不是预测成功，而是筛选项目。</p>
+<p>一个资源有限的人无法把所有好点子都做出来。于是第一层“品味”不是审美，而是：</p>
+<ul>
+<li>这个点子和已有市场相比有没有新意？</li>
+<li>它的新意能不能在一个很小的 prototype 里显现？</li>
+<li>如果它成功，别人能不能很快看出“这是什么”？</li>
+</ul>
+<p>Gunpoint 的公开开发形成了一个很具体的正反馈链：</p>
+<blockquote>
+<p>unusual mechanic → interest → 招到美术 → 表现提升 → 更多 interest → 招到音乐 → 产品继续增强。</p>
+</blockquote>
+<p>因此一个正确的早期设计判断不仅影响“游戏好不好玩”，还会影响<strong>你能不能吸引下一层生产资源。</strong></p>
+<h3 id="2">2. 品味是一种“知道自己到底喜欢什么”的抽象能力</h3>
+<p>Francis 后来总结自己的设计方法时说，项目往往始于他在别的作品里感受到某种兴奋。</p>
+<p>Gunpoint 的源头之一就是 <em>Deus Ex</em> 里“想办法潜入建筑”的快乐。</p>
+<p>但他不是尝试复制 <em>Deus Ex</em>。</p>
+<p>真正的转换发生在：</p>
+<blockquote>
+<p><strong>能不能把那种快乐压缩成一组简单规则，让它反复自己产生？</strong></p>
+</blockquote>
+<p>Gunpoint 的 Crosslink 就是这种压缩：不是去做 3D immersive sim 的城市、NPC、枪械、剧情、物理和资产规模，而是把“改变空间规则、聪明地利用系统”的感觉，压成电路重连。</p>
+<p>这正好连接 C007：</p>
+<blockquote>
+<p>小团队真正的优势不是缩小复制大游戏，而是识别自己真正想保留的体验，然后<strong>换一种成本结构重建它。</strong></p>
+</blockquote>
+<h3 id="3">3. 品味还决定“不做什么”</h3>
+<p>Gunpoint 2010 年的同期开发日志尤其重要，因为它不是成功以后回头总结。</p>
+<p>Francis 当时已经写了角色、场景和剧情发展，并本能地准备加入大量 scripted sequences。但重新看 roadmap 后，他意识到：</p>
+<ul>
+<li>这些东西需要大量编码；</li>
+<li>却没有给“作为游戏的 Gunpoint”增加相称价值。</li>
+</ul>
+<p>于是他开始砍。</p>
+<p>这说明真正有生产价值的 taste 必须有负面能力：</p>
+<blockquote>
+<p><strong>不是只会说“我想要这个”，还要能说“这个虽然不错，但不值得我花三个月”。</strong></p>
+</blockquote>
+<p>资源越少，这个判断越接近生死。</p>
+<h2 id="runway">Runway</h2>
+<p>核心结构不是“有一笔投资”，而是：</p>
+<blockquote>
+<p><strong>全职媒体工资 + 业余时间开发 → 三年逐步验证 → launch 销售超过辞职阈值 → 从雇员转独立开发者。</strong></p>
+</blockquote>
+<p>Francis 在 2013 年回顾中明确说，launch week 的销售跨过了自己预先设定的辞职阈值；当时他已经在 sabbatical，因此没有再回到 PC Gamer 岗位。</p>
+<p>因此本案是 C002 的重要异型案例：runway 可以是一份稳定工作，而不是储蓄或投资。</p>
+<p>这也意味着“品味决定命运”不能脱离 runway：</p>
+<blockquote>
+<p><strong>没有工资买来的三年试错时间，再好的判断也未必有机会被验证。</strong></p>
+</blockquote>
+<h2 id="production">Production</h2>
+<p>Tom Francis 自己的开发 breakdown 明确：</p>
+<ul>
+<li>从第一个周末开始公开写开发博客；</li>
+<li>美术通过公开 sample submission 招募；</li>
+<li>John Roberts 与 Fabian van Dommelen 负责不同视觉部分；</li>
+<li>Ryan Ike、John Robert Matz、Francisco Cerda 等参与音乐；</li>
+<li>团队分散全球，主要通过 email 协作；</li>
+<li>决定商业销售后按贡献比例约定收入分成。</li>
+</ul>
+<p>因此“solo”最多只能描述<strong>核心设计/编程 ownership</strong>，不能等于“只有一个人参与成品生产”。</p>
+<p>更值得注意的是，设计判断和生产组织之间并不是分开的：</p>
+<blockquote>
+<p>一个足够清晰、足够有辨识度、可以被视频快速解释的游戏，更容易吸引协作者。</p>
+</blockquote>
+<p>Gunpoint 的“品味”不是只发生在关卡里，它也改变了项目获取人力的能力。</p>
+<h2 id="scope">Scope</h2>
+<h3 id="gamemaker">GameMaker：让品味更快碰到现实</h3>
+<p>Francis 之所以真正开始开发，一个实际原因是发现自己喜欢的 <em>Spelunky</em> 使用 GameMaker，而这个工具对新手足够友好。</p>
+<p>这说明工具在本案中的角色不是“替代品味”，而是：</p>
+<blockquote>
+<p><strong>缩短 judgment → prototype → feedback 的距离。</strong></p>
+</blockquote>
+<h3 id="crosslink">Crosslink：用规则密度代替内容规模</h3>
+<p>Gunpoint 没有去复制高成本 immersive sim，而是把一组对象统一成可连接的 electrical devices。</p>
+<p>这样少量对象之间的组合可以产生大量解法。</p>
+<p>生产上，它把：</p>
+<blockquote>
+<p>更多关卡资产 / 更多脚本场景 / 更多手工分支</p>
+</blockquote>
+<p>的一部分价值，转移到：</p>
+<blockquote>
+<p><strong>少量规则之间的组合空间。</strong></p>
+</blockquote>
+<h3 id="_3">不是“想到好点子就行”</h3>
+<p>Francis 后来反复强调：早期 prototype 里的许多机制单独看并不好玩；Crosslink 很长时间也只是“有潜力”。真正产品化仍然需要多年测试、关卡设计和删改。</p>
+<p>所以本案禁止得出：</p>
+<blockquote>
+<p>“品味好的人第一次想到的设计就是对的。”</p>
+</blockquote>
+<p>更准确是：</p>
+<blockquote>
+<p><strong>品味提高你选择值得试的问题的概率；迭代才决定那个问题最后能不能变成游戏。</strong></p>
+</blockquote>
+<h2 id="market">Market</h2>
+<p>“零营销”对 Gunpoint 明显不成立：</p>
+<ul>
+<li>三年 devlog；</li>
+<li>多个解释玩法的视频；</li>
+<li>大型游戏媒体覆盖；</li>
+<li>公开测试者；</li>
+<li>Valve 主动联系 Steam distribution；</li>
+<li>IGF finalist；</li>
+<li>YouTubers / press；</li>
+<li>约 15,000 testers（Tom 自述）。</li>
+</ul>
+<p>特别值得注意的是，Francis 说第二支解释视频带来了显著媒体扩散和关注，这进一步证明：</p>
+<blockquote>
+<p><strong>一个设计如果能被清楚解释，本身就是一种市场资产。</strong></p>
+</blockquote>
+<p>它可能接近“低广告预算”，但不是“无市场接入”。</p>
+<h2 id="longitudinal-check">Longitudinal Check</h2>
+<p>如果“品味决定命运”只是我们对 Gunpoint 的事后美化，那么它在后续作品里应该消失。</p>
+<p>但 2020 年谈 <em>Tactical Breach Wizards</em> 时，Francis 把自己的流程说得非常直白：</p>
+<blockquote>
+<p>玩一个游戏，明确说出自己希望哪里不同，然后做一个“就按那个不同方式来”的游戏。</p>
+</blockquote>
+<p>TBW 的起点之一就是他非常喜欢 <em>XCOM 2</em>，同时又能详细说出自己认为它哪里有问题，然后把这些不满转换成：</p>
+<ul>
+<li>更简单清晰的战斗空间；</li>
+<li>去掉某些宏观层负担；</li>
+<li>free rewind；</li>
+<li>更鼓励尝试的战术结构。</li>
+</ul>
+<p>这使 Gunpoint 的案例价值进一步提高：</p>
+<blockquote>
+<p><strong>批评 → 显性偏好 → 可执行约束</strong> 不是一次幸运，而是至少延续到后续创作的方法。</p>
+</blockquote>
+<h2 id="preliminary-verdict">Preliminary Verdict</h2>
+<h3 id="_4">成立</h3>
+<blockquote>
+<p><strong>品味可以成为能力资本。</strong></p>
+</blockquote>
+<p>但必须把“品味”定义得足够严格：</p>
+<ol>
+<li>看过足够多，知道已有空间是什么；</li>
+<li>能准确说出为什么喜欢/不喜欢；</li>
+<li>能从复杂作品里抽出真正想保留的体验；</li>
+<li>能判断一个点子是否值得投入有限时间；</li>
+<li>能把偏好翻译成可测试规则；</li>
+<li>愿意让测试推翻自己；</li>
+<li>能为了核心体验删掉自己也喜欢、但不值得支付的东西。</li>
+</ol>
+<p>在这个定义下，Gunpoint 的确是“品味决定命运”的强案例。</p>
+<h3 id="_5">但不成立的版本</h3>
+<blockquote>
+<p>“审美好 → 一定能做出好游戏。”</p>
+</blockquote>
+<p>不成立。</p>
+<p>Gunpoint 的生产函数同时包括：</p>
+<ul>
+<li>多年游戏评论/比较经验（截至2013年的九年职业跨度包含开发期）；</li>
+<li>三年业余劳动；</li>
+<li>稳定工资提供的 downside protection；</li>
+<li>GameMaker 降低工程成本；</li>
+<li>测试反馈；</li>
+<li>全球协作者；</li>
+<li>devlog / 视频 / 媒体 / IGF / Steam 市场接入；</li>
+<li>产品执行与运气。</li>
+</ul>
+<p>因此最准确的表述是：</p>
+<blockquote>
+<p><strong>当一个开发者不可能拥有大团队全部资源时，品味决定他把有限技能、时间、人脉和现金投到哪里；这种资源配置能力会实质改变命运，但它不是命运的唯一变量。</strong></p>
+</blockquote>
+<h2 id="transfer">Transfer</h2>
+<p>可迁移的不是“去当九年游戏记者”，而是：</p>
+<ul>
+<li>主动扩大比较样本，而不是只玩自己熟悉的几款游戏；</li>
+<li>练习把“我喜欢/不喜欢”写成具体机制原因；</li>
+<li>在正式生产前问：这个点子如果成立，是否足够不同？</li>
+<li>把喜欢的大型游戏拆成“真正让我兴奋的那一件事”；</li>
+<li>尝试用更便宜的规则结构重新制造那种感觉；</li>
+<li>建立极短的 idea → prototype → tester 回路；</li>
+<li>把“砍什么”当作核心设计技能；</li>
+<li>选择能够被清楚展示/解释的核心机制，提高协作者和市场理解效率。</li>
+</ul>
+<h2 id="non-transfer">Non-transfer</h2>
+<p>不能直接复制：</p>
+<ul>
+<li>PC Gamer 职位带来的职业网络、媒体理解与可见性；</li>
+<li>当时 Steam / indie 媒体生态；</li>
+<li>Francis 的写作能力和公开表达能力；</li>
+<li>具体作品品味本身；</li>
+<li>Gunpoint 最终获得的媒体与平台兴趣。</li>
+</ul>
+<h2 id="evidence-index">Evidence Index</h2>
+<ul>
+<li>E001 — Tom Francis, <code>Gunpoint Development Breakdown</code>: 三年公开开发、协作者、视频/测试/Steam market access。</li>
+<li>E002 — Tom Francis, <code>2013</code>: launch sales 跨过辞职阈值。</li>
+<li>E003 — Tom Francis résumé: PC Gamer 职业与 IGF 前史。</li>
+<li>E004 — Game Developer <code>Road to the IGF</code>: 记者经验、市场全景、判断 idea 是否足够 unusual。</li>
+<li>E005 — GDC Europe 2013: <code>How Reviewing Games for Nine Years Helped in Designing Gunpoint</code>。</li>
+<li>E006 — <code>Game Design: The Non-Stick Plan</code>: 从喜欢的体验抽取简单规则系统。</li>
+<li>E007 — PC Gamer 2020: 后续作品继续使用“明确不满 → 按不同方式做”的方法。</li>
+<li>E008 — <code>Gunpoint And The Other Game</code> (2010): 同期 scope cut，删除昂贵但对“作为游戏”贡献有限的 scripted content。</li>
+<li>E009 — Patrick Klepek / Giant Bomb (2013): 求学时期愿望、毕业后写作与制作设想、Darwinia/Spelunky带来的认识变化；保留回忆和报道压缩限制。</li>
+<li>E010 — <code>Private Dick</code> (2010-05-03): 开始公开谈制作，预期、愿望和当时未决问题。</li>
+<li>E011 — <code>Collision</code> (2010-05-18): 碰撞实现与防卡死补救。</li>
+<li>E012 — <code>Gunpoint: Making The Jump</code> (2010-07-14): 测试改变移动、跳跃预览与工作间断。</li>
+<li>E013 — MCV 2015采访：前作收入使拒绝续作成为现实选择；旧3D设想转为2D，属于本人回忆。</li>
+<li>E014 — 2017发售日志：Heat Signature约3.5年与本人所述约20万英镑支出；首六天表现不能换算长期收入。</li>
+<li>E015 — 2024发售公告：Tactical Breach Wizards团队所述6.8年跨度，不是单人工时。</li>
+</ul>
+<h3 id="gunpoint">后续职业窗口（不改变Gunpoint因果判断）</h3>
+<p>E013–E015延长人物观察窗口至2024：前作收入增加选题自由，第二作仍有较大支出与市场不确定性，第三作经历多年团队开发。它们支持职业经历继续变化，不证明第一作的成功公式可重复，也不构成完整家庭、财务或贡献者审计。</p>
+<h2 id="open-questions">Open Questions</h2>
+<ol>
+<li>精确开发起止时间和每周投入？</li>
+<li>“$30 development cost”原始表述和口径？</li>
+<li>launch 前是否有正式储蓄/假期 runway？</li>
+<li>各贡献者收入分成与实际工作量边界？</li>
+<li>PC Gamer 身份究竟提供了多少早期媒体可见性，如何做反事实？</li>
+<li>能否从 GDC 2013 完整 transcript/slides 中进一步拆出 Francis 对“love/hate games”如何转化为设计判断的具体方法？</li>
+<li>在后续 <em>Heat Signature</em> / <em>Tactical Breach Wizards</em> 中，这套 taste→constraint 方法有哪些失败例，避免只收成功证据？</li>
+</ol>
+<h2 id="creator-life-decision-audit">Creator Life / Decision Audit</h2>
+<ul>
+<li><strong>Audit status:</strong> SUBSTANTIAL</li>
+<li><strong>Life stage:</strong> 多年 PC 游戏评论/编辑经验与开发期重叠；2013年讲演的九年职业跨度不全是开工前积累。以全职媒体工作维持三年业余开发，launch 时处于 sabbatical。</li>
+<li><strong>Household:</strong> relationship / children / housing <code>UNKNOWN</code>；本案当前不依赖家庭支持叙事。</li>
+<li><strong>Runway:</strong> PC Gamer salary + spare-time development；launch week 销售超过预设辞职阈值后才不回原岗位。</li>
+<li><strong>Household burn:</strong> <code>UNKNOWN</code>，但 day job 把现金风险和项目承诺显著分离。</li>
+<li><strong>Exit / recovery:</strong> <strong>HIGH EXIT OPTIONALITY</strong> — 开发期持续保留职业身份与工资，正式转独立以前设有销售阈值；launch 前并非 success-or-bankruptcy。</li>
+<li><strong>Capability vector:</strong> criticism / market comparison / writing / taste capital 强；初始 coding 弱；后续自学 GameMaker；外部美术、音乐按 sample/revenue-share 等方式补齐。</li>
+<li><strong>Problem ownership:</strong> <strong>HIGH</strong> — Francis 自己定义 mechanic、scope 与删改优先级。</li>
+<li><strong>Validation architecture:</strong> idea / criticism → &lt;1 month movement prototype → testers → devlog / explanatory video → wider interest → collaborators → launch。</li>
+<li><strong>Reality adjudication:</strong> <strong>STRONG</strong> — 明确把“我觉得应该这样”转为“做出来让人试”，并根据 roadmap / 测试删除低价值 scripted work。</li>
+<li><strong>Capability capture risk:</strong> <strong>LOW</strong> — 当前证据反而显示 taste 被用于拒绝不值得支付的内容义务；但不等于后续项目永远低风险。</li>
+<li><strong>Market sufficiency / legibility:</strong> <strong>STRONG</strong> — Crosslink 等机制可被视频清楚解释，devlog/媒体/测试形成发售前可读市场面。</li>
+<li><strong>Capability scaling:</strong> core design/programming ownership 保持集中；visual/audio 通过全球 collaborators 扩张，未要求 founder 补成六边形。</li>
+<li><strong>Major unknowns:</strong> household economics、开发三年的总时间投入、各 collaborator compensation 细节。</li>
+</ul><div class="crumbs"><a href="/heroes-portal/">书阁</a> / cases/CASE-007-gunpoint.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>工业能力 × 独立作者性 027：为何有人从 EA、Amazon、Ubisoft 带走专业，却不带走旧产品题目 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl class="on"" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#028" class="t2">先读：样本基线限定（028 方法修订）</a><a href="#0" class="t2">0. 问题的正确形式</a><a href="#_1" class="t2">一、四个成功的、机制不同的外部对照</a><a href="#sandfall" class="t3">Sandfall 的岗位与团队数量校正</a><a href="#sandfall_1" class="t3">Sandfall 的最新生产取向</a><a href="#_2" class="t2">二、两种高价值反压力</a><a href="#the-magic-circle" class="t3">The Magic Circle：有作者性 ≠ 商业足够</a><a href="#red-hook" class="t3">Red Hook：成功 ≠ 创始阶段风险很小</a><a href="#_3" class="t2">三、中国对照需要拆成“同国不同结果”</a><a href="#_4" class="t2">四、建议用六个原始观测项替代国别印象</a><a href="#_5" class="t2">五、对《独立游戏英雄传说》的作者写法</a><a href="#2026" class="t2">六、2026 可迁移与不可迁移</a><a href="#_6" class="t2">七、下一轮可证伪问题</a><a href="#2026-10-09qa" class="t2">八、2026-10-09增量：把「亚马逊QA→杀戮尖塔」与中国大厂退出者放在同一个机会集</a><a href="#a-amazonslay-the-spire" class="t3">A. Amazon不是抽象的“西方好雇主”，更不是Slay the Spire的原发创意来源</a><a href="#b" class="t3">B. 不是「中国没有这种人」，而是同国已经可见不同的生存结局</a><a href="#c-2026-04" class="t3">C. 2026-04触乐路演观察：出走者至少有两套不同的“立项默认值”</a><a href="#d-aaa" class="t3">D. 国际反例：脱离AAA评分器也不保证商业成功</a><a href="#e" class="t3">E. 截止当前可保留的比较结论</a><a href="#2026-10-09" class="t3">2026-10-09读法增量：云风不是“技术强就一定懂产品”的励志反证</a></aside><article class="doc"><div class="col"><h1 id="027-eaamazonubisoft">工业能力 × 独立作者性 027：为何有人从 EA、Amazon、Ubisoft 带走专业，却不带走旧产品题目</h1>
+<ul>
+<li>Status: RESEARCH NOTE / COMPARATIVE MECHANISM / PRE-CLAIM</li>
+<li>Last verified: 2026-10-07</li>
+<li>Related: AC-010, <code>prestige-pipeline-authorial-continuity-026.md</code>, <code>china-creator-three-layer-case-matrix-021.md</code>, <code>creator-life-decision-audit-p1-backfill-025.md</code></li>
+<li>Key cases: CASE-059 Mega Crit, CASE-061 Supergiant, CASE-062 Red Hook, CASE-046 Sandfall, CASE-060 Croteam, CASE-048 The Magic Circle</li>
+<li>China comparators: 王妙一/WILL, Game Science, Double Cross/苏丹, 月下/铸仙之境, Sea/安尼姆</li>
+<li>Boundary: 所有因果解释都按岗位、进入公司之前的兴趣与合作网络、家庭现金/职业回撤、年份与生产制度做对照；不建立“西方人进大厂也自由／中国人进大厂就失去作者性”的国别命题。</li>
+</ul>
+<h2 id="028">先读：样本基线限定（028 方法修订）</h2>
+<p class="dc">这份 027 研究是<strong>媒体可发现的成功者与若干著名失败者的目的性深描</strong>。Mega Crit / Supergiant / Red Hook / Sandfall 的 Case 材料足以检验“某个个体如何保留作者性”，但对任职同类组织的人口发生率、是否一般比中国更自由、名校–大厂规训机制有多强 <strong>没有统计识别力</strong>。</p>
+<p>尤其“名企出走者仍能发表公开创作经历”有明显报道倾向；更换 1–2 个失败案例并不能给我们补回<strong>从未发售、从未受访、没有离职、离职后回就业</strong>的人群。故本文所有“西方对照”只作为 case-based mechanism contrasts，不得作为 typicality 或国家分布推断。</p>
+<p>后续升级要先按 <a href="/heroes-portal/book/research-notes/media-selection-survivorship-and-denominator-protocol-028.html">028 媒体选择与分母重建</a> 与 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes/blob/main/schemas/creator-visibility-sampling-gate.md">取样 Gate</a> 建立可观察队列；否则结论保持 PRE-CLAIM。</p>
+<hr />
+<h2 id="0">0. 问题的正确形式</h2>
+<p>原问题：为什么名校绩优主义→名企绩效主义，可能让中国独立游戏主创在项目操作上发生规格保全和先招人后验证？</p>
+<p>反压力：CASE-059 Slay the Spire 两位创始人大学时期就做过游戏；Casey 在 Amazon QA 约四年、Anthony 有 QA 与桌游背景，他们并不需要一款产品证明“我配得上 Amazon”。但这不能证明“西方大厂文化优于中国”。</p>
+<p>真正要同时拆开五个变量：</p>
+<ol>
+<li><strong>Formative authorial substrate</strong>：入职以前积累了什么趣味、作品、共同作者与领域知识？</li>
+<li><strong>Occupational capability</strong>：在大公司学到了哪些可迁移的工程、流程、QA、关卡、组织、市场知识？</li>
+<li><strong>Evaluation-function separation</strong>：工作岗位的 KPI/benchmark 是否成为自己所有创作决策的唯一个性化标准？</li>
+<li><strong>Material/relationship optionality</strong>：家庭、收入、场地、时间、同伴、再就业是否允许做尚未证明的东西？</li>
+<li><strong>Reality adjudication</strong>：正式的玩家与市场能否纠正 thesis，而不是只靠作者自信？</li>
+</ol>
+<p><strong>“作者性没消失”可能来自入职前长期存在的作者线程，而不一定是大厂为其创造了自由环境。</strong></p>
+<h2 id="_1">一、四个成功的、机制不同的外部对照</h2>
+<table>
+<thead>
+<tr>
+<th>案例</th>
+<th>成熟组织能力</th>
+<th>公司外作者资本</th>
+<th>退出/资金结构</th>
+<th>核心差异</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Mega Crit / StS</strong></td>
+<td>Amazon QA、软件公司 QA/CS</td>
+<td>大学共同游戏、桌游/卡牌长期 taste、设计文档</td>
+<td>Casey 先走→prototype→Anthony 后走；家庭现金 UNKNOWN</td>
+<td>作者线程先于公司</td>
+</tr>
+<tr>
+<td><strong>Supergiant / Bastion</strong></td>
+<td>EA Command &amp; Conquer 的游戏工业专业能力与前同事网络</td>
+<td>Rao 桌面 RPG 组织者经历；七人互补 author team</td>
+<td>储蓄+低薪+父亲家中场地；WB 后来补营销/认证但不资助开发</td>
+<td>能力和产品目标拆开，重组团队</td>
+</tr>
+<tr>
+<td><strong>Red Hook / Darkest Dungeon</strong></td>
+<td>多年游戏/动画/美术/设计/程序前史</td>
+<td>Bourassa 与 Sigman 多年讨论“有精神压力的地牢英雄”</td>
+<td>家庭有孩子房贷；储蓄+欠款+无薪期+ Kickstarter→EA</td>
+<td>作者性强也可能承受家庭不可逆风险</td>
+</tr>
+<tr>
+<td><strong>Sandfall / Expedition 33</strong></td>
+<td>Guillaume 来自 Ubisoft，Tom 等有不同技术来源；不是“全员育碧”</td>
+<td>任职期间个人回合制 RPG thesis、早期技术/艺术互补</td>
+<td>hobby solo→协作者扩展→2020 成立公司→约 30 core + external periphery</td>
+<td>作者题先于组织与资本扩张</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sandfall">Sandfall 的岗位与团队数量校正</h3>
+<p>Broche 在 2025 Xbox 官方采访明确表示：
+- 最初只是他在其他游戏公司工作时的 personal passion project；
+- 需要编程时找 Tom，需要美术时找 Nicholas；
+- 到一定程度所有人离职，2020 建立 Sandfall。</p>
+<p>但 Broche 2026 年西语采访又强调，团队当时只有 <strong>四个</strong> Ubisoft 前雇员，不是媒体口中的“整个 Ubisoft 团队出走”。因此：</p>
+<blockquote>
+<p>“Ubisoft veteran” 是主创之一的职业前史，不能等同整家工作室的能力来源。</p>
+</blockquote>
+<p>Source P1: https://news.xbox.com/en-us/podcast/deep-dive-into-expedition-33-official-xbox-podcast/
+Source P1: https://www.3djuegos.com/juegos/clair-obscur-expedition-33/noticias/intentamos-no-pensar-demasiado-fans-porque-demasiada-presion-hablamos-creadores-clair-obscur-expedition-33</p>
+<h3 id="sandfall_1">Sandfall 的最新生产取向</h3>
+<p>2026 年 Broche 又强调，即使成功后资本更多，也不想自动通过招更多人把项目规模做得更大；约束能强迫团队聚焦。这是成功后防止身份/规模膨胀的 <strong>second-stage stop condition</strong>，但“限制产生创新”不是普遍定律，应该看限制是否迫使 design optimization，而不是妨碍最低产品义务。</p>
+<p>Source P1: https://automaton-media.com/en/interviews/clair-obscur-expedition-33-director-eliminating-limitations-is-a-big-mistake-we-talk-to-sandfall-interactive-about-staying-small-japanese-influences/</p>
+<h2 id="_2">二、两种高价值反压力</h2>
+<h3 id="the-magic-circle">The Magic Circle：有作者性 ≠ 商业足够</h3>
+<p>BioShock/Thief/Dishonored 老兵组成三人高信任团队，明确放弃 AAA 审批与高规格管线，也与自身作者能力高度匹配，最后仍商业不可持续。</p>
+<p>结论：</p>
+<blockquote>
+<p><strong>Independent Authorship ≠ Market Sufficiency。</strong></p>
+</blockquote>
+<h3 id="red-hook">Red Hook：成功 ≠ 创始阶段风险很小</h3>
+<p>Bourassa 已育有孩子、有房贷。多年专业履历、老朋友合作、邮件名单和 Kickstarter 成功没有免除风险。个人储蓄、退休账户、7.5 万借贷及无薪阶段是真实的承诺。</p>
+<p>结论：</p>
+<blockquote>
+<p><strong>Occupational Competence + Authorial Ownership ≠ Household Safety。</strong></p>
+</blockquote>
+<h2 id="_3">三、中国对照需要拆成“同国不同结果”</h2>
+<table>
+<thead>
+<tr>
+<th>中国案例</th>
+<th>产业资本</th>
+<th>作者线程与转型</th>
+<th>最需避免的误读</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>王妙一 / WILL</td>
+<td>清华双专业+网易技术/流程</td>
+<td>长期独立游戏趣味；根据编程/写作/美术短板重新塑形文字游戏</td>
+<td>“名校大厂注定没有作者性”</td>
+</tr>
+<tr>
+<td>Game Science</td>
+<td>腾讯 PC MMO + 手游商业公司经验</td>
+<td>对既有手游模板不足的自我否定，重定义 premium 目标</td>
+<td>“所有大厂老兵只能做 live ops”</td>
+</tr>
+<tr>
+<td>Double Cross / Sultan&rsquo;s Game</td>
+<td>商业手游团队经验与多年 tacit capital</td>
+<td>组织缩编后核心小说储备获得新产品权</td>
+<td>“创业成功纯靠放飞创意”</td>
+</tr>
+<tr>
+<td>月下 / 铸仙之境</td>
+<td>腾讯执行制作+融资/团队</td>
+<td>自述“不要有乙方心态”；离职后仍可能复制旧评价关系</td>
+<td>“公司损坏了个人所以必然失败”</td>
+</tr>
+<tr>
+<td>Sea / 安尼姆</td>
+<td>腾讯制作经历</td>
+<td>first attempt 中保留旧 habit；后来倾向 1–2 人先做 demo</td>
+<td>“只要自己醒悟就能零成本卸载旧函数”</td>
+</tr>
+</tbody>
+</table>
+<p>这里应该有一个正向结论和一个负向结论：</p>
+<blockquote>
+<p><strong>行业履历是真实可迁移的生产资本。</strong><br />
+<strong>它也可能附带错时代的 objective function 与声望身份成本。</strong></p>
+</blockquote>
+<p>两者不是同一个变量，也未必高度相关。</p>
+<h2 id="_4">四、建议用六个原始观测项替代国别印象</h2>
+<table>
+<thead>
+<tr>
+<th>变量</th>
+<th>可以从公开资料寻找的硬观察</th>
+<th>典型误判</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pre-entry author history</td>
+<td>任职前完成的作品、评论、社群与合作</td>
+<td>成功后把回忆改写成“天才一直如此”</td>
+</tr>
+<tr>
+<td>Company-role capital</td>
+<td>QA、关卡、工程、制作人/运营各自的真实任务</td>
+<td>把 Amazon QA 当作 Tencent 制作人的对称样本</td>
+</tr>
+<tr>
+<td>Prestige cost</td>
+<td>是否以“不够正规/不配履历”为由拒绝小规模测试</td>
+<td>把严格质量门槛一律心理化</td>
+</tr>
+<tr>
+<td>Scope before feedback</td>
+<td>什么日期做 playable、什么日期 hire/vertical slice</td>
+<td>用团队规模反推错误动机</td>
+</tr>
+<tr>
+<td>Household/risk</td>
+<td>缴费、住房、配偶/照护、储蓄/贷款、融资</td>
+<td>假设中西生活结构相同</td>
+</tr>
+<tr>
+<td>Decision rights</td>
+<td>谁拥有变更 thesis / 项目关闭 / budget approval 权</td>
+<td>有作者头衔就以为有控制权</td>
+</tr>
+</tbody>
+</table>
+<p>因果识别的最优先比较不是中美差异，而是：
+- 同岗、不同国家：同为游戏 QA、同为大型游戏制作人、同为技术美术等；
+- 同国、不同岗位：作者线程是否在员工/岗位之间呈系统差异；
+- 同一人，任职前→任职时→离职后：作品、playtest、创作控制权是否连续。</p>
+<p>否则只能做描述性解释，不能做文化定论。</p>
+<h2 id="_5">五、对《独立游戏英雄传说》的作者写法</h2>
+<p>不要写：</p>
+<blockquote>
+<p>西方人入大厂也能自由创新，老中名校生被驯化。</p>
+</blockquote>
+<p>应该写：</p>
+<blockquote>
+<p><strong>有些人从大公司带走了生产能力，却没有把自己的作品题目交给公司；另一些人离开了雇主，却仍带着雇主的评分器。区别可能来自入职前作者线程、具体岗位、关系网络、家庭生存期与现实验证的组合。</strong></p>
+</blockquote>
+<p>不要写：</p>
+<blockquote>
+<p>红钩拿 31 万众筹做出 Darkest Dungeon。</p>
+</blockquote>
+<p>应该写：</p>
+<blockquote>
+<p><strong>众筹总额不是项目总成本。创始人已有多年职业资本、无薪贡献、私人储蓄/贷款、家庭债务与后续付费 Early Access；融资海报抹去了最重要的人生风险。</strong></p>
+</blockquote>
+<p>不要写：</p>
+<blockquote>
+<p>Supergiant 七人凭热爱成功。</p>
+</blockquote>
+<p>应该写：</p>
+<blockquote>
+<p><strong>他们带着 EA 形成的专业能力与关系，使用创始人家中的场地和低工资 runway，经过九个月原型迭代；人手与美术、声音、玩法能力各司其职，保留 IP，借发行商扩市场而不把开发目标交回大公司。</strong></p>
+</blockquote>
+<h2 id="2026">六、2026 可迁移与不可迁移</h2>
+<ul>
+<li>DURABLE: 作者线程可以和雇佣平行；生产能力与项目目标函数分开评估；早期 scope 围绕能力与验证成本设计；保留真实的低承诺实验；家庭风险/合同权利显式建账。</li>
+<li>CONDITIONAL: 雇佣 side-project/IP 条款、岗位稳定性、Steam/EA 流量、当代团队 AI/外包能力、2026 目标玩家评鉴资本。</li>
+<li>HISTORICAL: 2010 PAX10/XBLA 发现机制、2014 KS 关注窗口、2017 Slay EA 类型空白。</li>
+</ul>
+<h2 id="_6">七、下一轮可证伪问题</h2>
+<ol>
+<li>控制 <strong>same role / same seniority / similar salary runway</strong> 后，中外作者线程的持续率是否真的不同？</li>
+<li>有 evidence 表明有人以“配得上名企履历”为由，把项目从 cheap prototype 过早推到 polished vertical slice 吗？需要直接访谈或项目时间线，而非推理。</li>
+<li>用公开招聘/劳动合同资料测 side-project/IP restriction 的实质差异；不要默认 Amazon/Ubisoft 更宽松。</li>
+<li>哪些人在公司期间持续发布同人/mod/游戏，一旦离职却仍因身份、市场或资本失败？把失败者重新收入样本。</li>
+<li>Supergiant/Red Hook 家庭/市场条件怎样与中国同岗背景者比较，哪些是时代差异而非文化差异？</li>
+</ol>
+<p>初步结论等级：
+- STRONG: Mega Crit/ Supergiant / Red Hook 的行业技能与独立作者题目可以并存；真实非项目现金/关系支持在多个案例中不可忽略。
+- PARTIAL: Sandfall 的个人原型到组织扩张顺序；完整资金/外包/雇佣权利仍缺。
+- HYPOTHESIS: 中国名校→名企社会声望闭环比美国同行产生更高的 prestige-preserving scope distortion。当前并无可识别的总体效应。</p>
+<hr />
+<h2 id="2026-10-09qa">八、2026-10-09增量：把「亚马逊QA→杀戮尖塔」与中国大厂退出者放在同一个机会集</h2>
+<p><strong>本节增量不是增加名人名单</strong>：原文件已有Mega Crit、Supergiant、王妙一、《苏丹的游戏》与月下。这次新增（A）Casey本人2026再访谈对劳动合同及经济余裕的解释、（B）中国<strong>未成功/未发售</strong>普通出走者、（C）2026同场路演的提案范围与融资漏斗、（D）技术老兵云风本人公开的业余作者再训练和现金安全垫、（E）欧美AAA老兵失利的公开数值。不得以本批便利样本宣称国别发生率。</p>
+<h3 id="a-amazonslay-the-spire">A. Amazon不是抽象的“西方好雇主”，更不是Slay the Spire的原发创意来源</h3>
+<ul>
+<li><strong>同期P0/2017访谈</strong>：Casey大学与Anthony合作过Flash/mobile作品，Amazon QA工作约4年，明确说喜欢同事但逐渐无聊，2015年先离职与Anthony制作可玩原型，确认反馈之后Anthony才离职。https://seattleindies.org/seattle-indies-spotlight-mega-crit-games/</li>
+<li><strong>P1/2026 AIAS访谈转录</strong>：Casey回忆，Amazon当时业余项目（moonlighting）政策很不明确，他甚至咨询过起草政策的律师；回顾自己多年Amazon工资带来了过去根本没有的经济余裕。这是自述，并没有公开核验他的储蓄额/竞业条款。https://app.listenleap.com/s-episode-en-slay-the-spire-2-interview-casey-yano</li>
+<li><strong>同期市场判断</strong>：Slay the Spire并不是有了最初原型就商业成功，抢先体验、QA/社区反馈与反复系统修订是其成功链条。https://arstechnica.com/gaming/2019/05/video-slay-the-spire-is-a-friendly-game-of-death-but-it-was-hard-to-get-it-right-</li>
+</ul>
+<p>因此至少拆三层：<strong>入职前作者资本（作品+共事关系+卡牌taste）</strong>，<strong>在职期间职业/工资资本（QA与runway）</strong>，<strong>离职后真实玩家校准</strong>。不得把2017年“喜欢Amazon”排斥2026年“moonlighting政策摩擦”：两项可以同时成立。</p>
+<h3 id="b">B. 不是「中国没有这种人」，而是同国已经可见不同的生存结局</h3>
+<table>
+<thead>
+<tr>
+<th>中国样本</th>
+<th>独立作者/职业前史</th>
+<th>退出后可见状态</th>
+<th>此样本能检验什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>王妙一 / WILL</strong></td>
+<td>网易技术岗、离职前独立游戏趣味</td>
+<td>2017原创文字游戏正式发表；之后公司解散回到个人</td>
+<td>与Casey接近的“作者题目不必等于旧雇主业务”</td>
+</tr>
+<tr>
+<td><strong>云风（2024–2026）</strong></td>
+<td>网易→简悦→阿里资深工程师；早年自研引擎、长期广泛PC游戏阅历</td>
+<td>2024离职探作者项目；2025坦言设计陷入死胡同，转做Deep Future桌游数字化练习，同年发布itch可玩版；其本人自述已有足够长期生活积蓄</td>
+<td>极高Production Capital仍可能主动补Problem-Framing，且财务条件极特殊</td>
+</tr>
+<tr>
+<td><strong>月下 / 铸仙之境</strong></td>
+<td>腾讯魔方制作岗位、早期同人游戏习惯</td>
+<td>离职不久融资千万元；31人→10人、半年不能发薪；2025访谈自述将创业误作融资方的“乙方项目”</td>
+<td><strong>有作者前史也可能在融资/组织层继承原评分器</strong>，并非只怪入职前训练</td>
+</tr>
+<tr>
+<td><strong>王剑 / 透视</strong></td>
+<td>2015离开广州网易；公开作者前史待核</td>
+<td>约4年后开始首作；有两个孩子、家庭反对与不稳定现金；2022媒体确认当时两人团队解散；后续再入场未知</td>
+<td>中年转作者同时面临时间、家庭许可与安全垫限制；不可写成永久退出</td>
+</tr>
+<tr>
+<td><strong>金鱼 / 仙骰诡道（2026-04）</strong></td>
+<td>成都手游公司SLG岗位</td>
+<td>与合作者全职8个月，按前工资计算机会成本约20余万元，向多家发行方求20万MG、被要求更多Demo；商业结局未知</td>
+<td>无融资、低预算普通转型者；还需要游戏与作品追踪</td>
+</tr>
+<tr>
+<td><strong>Jeff / 星际掠夺者等（2025报道）</strong></td>
+<td>2024离职腾讯，随后转AI室内设计→游戏；首年多次立项</td>
+<td>2025媒体显示已有一款正式发售、另一款待发；收入与长期结果未核</td>
+<td>出走也可能主动选择快速跟热点/商业赛道；不应将所有独游注册等同作者型原创</td>
+</tr>
+</tbody>
+</table>
+<p>来源：
+- 王妙一：https://www.ifanr.com/app/1201677 和 https://www.gamersky.com/zl/201708/940291.shtml
+- 云风在2024年六月聚餐观察（“游戏老兵聚会没人给出自己要做什么”是一次私人场景的见闻，不是群体统计）：https://blog.codingnow.com/2024/06/ ；2025设计学习：https://blog.codingnow.com/2025/08/gamedev.html ；2025试玩版复盘：https://blog.codingnow.com/2025/10/deepfuture_dev.html ；2024经济余裕一手自述：https://blog.codingnow.com/2024/06/
+- 月下：https://finance.sina.com.cn/tech/csj/2025-02-17/doc-inektuqr5120329.shtml
+- 王剑：https://news.yxrb.net/202207/04230157.html
+- 金鱼、路演、发行机构：https://www.chuapp.com/article/291336.html
+- Jeff：https://youxichaguan.com/archives/159529</p>
+<p><strong>这几个中国案例不是全国有代表性的匹配样本</strong>；选择它们是为了主动加入未成功、尚未发售和真实财务风险，而非用几个正反例推中美人均比。</p>
+<h3 id="c-2026-04">C. 2026-04触乐路演观察：出走者至少有两套不同的“立项默认值”</h3>
+<p>https://www.chuapp.com/article/291336.html</p>
+<p>同一成都公开路演呈现：
+- 20余个团队参与，不乏网易/米哈游/维塔士等资深生产人；
+- 一位前商业手游员工主张融资约1800万元作为启动款；另有少数团队居家、自负盈亏；
+- 某发行方在80款入围其观察的游戏中仅签2款，且两款都未收回预付款；这<strong>不是行业签约率或项目成功率</strong>；
+- 《浣熊推币机》主创在校已有完成作品的历史，两周新原型后进一步吸引鹰角开拓芯。它是<strong>学生maker背景的成功选择链</strong>，不是“大厂员工出走”的配对样本；
+- 另一位2025退出AAA动作项目的《Project MV》开发者不愿卖房，把居住条件明确视为继续开发的生产条件；
+- 发行、投资方被要求看到更多可玩的Demo，显示中国市场也在反向修正“PPT+头衔即应融资”的筛选。</p>
+<p><em>核心区分：1800万是</em><em>要价</em><em>而非实到；20余是活动提案数而非全国大厂出走总量；80/2是一个特定发行机构的筛选，不是全国发行成功率。</em></p>
+<h3 id="d-aaa">D. 国际反例：脱离AAA评分器也不保证商业成功</h3>
+<p>前BioShock/Thief/Dishonored开发者组成Question，2015发表《The Magic Circle》；Jordan Thomas复盘称当时约售出1.65万套、约4.4万wishlist，商业不可持续，并承认市场定位和营销问题。与《Bastion》同为资深大厂开发者组小队，但结果不同。</p>
+<ul>
+<li>同期出走背景：https://www.magiccirclegame.com/press-kit</li>
+<li>Jordan Thomas复盘及销售口径：https://www.gamedeveloper.com/business/devs-share-real-talk-about-surviving-the-latest-indiepocalypse-</li>
+</ul>
+<p>这意味着作者性、缩模、声望解耦都是<strong>必要性待测的可能机制</strong>，不是成功充分条件。</p>
+<h3 id="e">E. 截止当前可保留的比较结论</h3>
+<ol>
+<li><strong>STRONG / 存在性与过程</strong>：中外都可观察“入职前就有作者线程→从大厂取得专业能力与经济资本→独立重新设题”的路径，Casey、王妙一、云风不是“大厂亲自教授原发创意”的证据。</li>
+<li><strong>STRONG / 组织选择的可变性</strong>：中国同一时期已存在高预算职业化创业、两周小原型、低现金独立作者等并行方式；“中国大厂人离职只能做大项目”是错误全称。</li>
+<li><strong>PARTIAL / 结构性不对称</strong>：高薪职业/家庭责任/社会身份、旧手游benchmark与融资正统可能提高作者转型的机会成本；对中国现有个案成立程度不同，国别分布与效应大小未知。</li>
+<li><strong>UNKNOWN / 人数与比率</strong>：尚无法计算每万名中国/美国大型游戏/科技公司员工中完成首个独立原型、公开作品、卖过1万份、完成第二作的比例。现有问卷、成功者访谈、活动报名数均不提供所需同口径分母。</li>
+<li><strong>下一轮应采固定队列</strong>：按 <strong>游戏QA、非游戏软件QA、游戏制作人/策划、程序/引擎工程、资深管理者</strong> 分岗，并按2010–14/2015–19/2020–26时代窗，分别追踪入职前作品→在职业余项目→离职→可玩原型→市场→二次进入。没有离职的作者同样必须保留作对照。</li>
+</ol>
+<p><strong>主问题：</strong> 不是“欧美人有原创基因”，而是中外在员工层面的<code>PARALLEL AUTHORIAL THREAD RATE</code>、<code>EXTERNAL PROTOTYPE RIGHT</code>、<code>CHEAP PROJECT OPTION</code>与<code>POST-EXIT SURVIVAL</code>是否存在可检验的数量级差异；不能用美名人的数目替代这些率。</p>
+<h3 id="2026-10-09">2026-10-09读法增量：云风不是“技术强就一定懂产品”的励志反证</h3>
+<p>详见<a href="/heroes-portal/country-studies/china/033-technology-proxies-experience-demand-and-commercial-feedback.html">中国033 §13：技术越域外推×热门答案依赖</a>。云风2024/2025/2026一手文章展示了高工程能力者主动承认具体玩法/交互技能缺口、从广泛游戏与桌游历史重新学习并制作数字化原型、用独立玩家反馈修订交互、对AI生成具体卡牌设计采取试玩验证。但其项目目的主要为个人学习，且当事人声明经济安全垫充足；不能转写成技术老兵商业独游成功的统计证据。</p>
+<p>本研究后续考察大厂退出者必须同时问：<strong>是否从自己的真实玩家体验建立设计假说？是否能解释已有热门游戏的玩家需求和差异？是否主动识别技术岗位之外的认知缺口？当模仿热度消失时，是理性放弃低ROI项目还是实际上从未形成自选题目？</strong> 这四项要靠前期作品、可玩原型与事前判断核验，不能凭个人傲慢/谦逊印象下定论。</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / book/research-notes/industrial-capability-independent-authorship-comparison-027.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

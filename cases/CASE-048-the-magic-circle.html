@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CASE-048 — The Magic Circle / Question：能力高度匹配，商业仍不可持续 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl class="on"" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#1-why-this-case" class="t2">1. Why this case</a><a href="#2-contextsituationaction-snapshot" class="t2">2. Context–Situation–Action Snapshot</a><a href="#era-production-regime" class="t3">Era / Production Regime</a><a href="#actor-situation" class="t3">Actor Situation</a><a href="#action-maneuver" class="t3">Action / Maneuver</a><a href="#anachronism-check" class="t3">Anachronism Check</a><a href="#3-capability-shaped-formation" class="t2">3. Capability-Shaped Formation</a><a href="#thomas" class="t3">Thomas</a><a href="#alexander" class="t3">Alexander</a><a href="#shin" class="t3">Shin</a><a href="#4-aaa-capability-transfer-and-rejection" class="t2">4. AAA Capability Transfer and Rejection</a><a href="#5-scope-and-production" class="t2">5. Scope and Production</a><a href="#6-failure-pressure" class="t2">6. Failure Pressure</a><a href="#commercially-underwhelming" class="t3">Commercially underwhelming</a><a href="#developer-diagnosis" class="t3">Developer diagnosis</a><a href="#7-fit-is-not-selection-sufficiency" class="t2">7. Fit Is Not Selection Sufficiency</a><a href="#layer-a-creatorproject-fit" class="t3">Layer A — Creator–Project Fit</a><a href="#layer-b-projectmarket-selection" class="t3">Layer B — Project–Market Selection</a><a href="#8-market-access" class="t2">8. Market Access</a><a href="#85-longitudinal-continuation-failure-of-market-sufficiency-end-of-studio" class="t2">8.5 Longitudinal continuation: failure of market sufficiency ≠ end of studio</a><a href="#9-verdict" class="t2">9. Verdict</a><a href="#strongly-supported" class="t3">Strongly supported</a><a href="#boundary" class="t3">Boundary</a><a href="#10-transfer" class="t2">10. Transfer</a><a href="#11-evidence-index" class="t2">11. Evidence Index</a><a href="#12-open-questions" class="t2">12. Open Questions</a><a href="#creator-life-decision-audit" class="t2">Creator Life / Decision Audit</a></aside><article class="doc"><div class="col"><h1 id="case-048-the-magic-circle-question">CASE-048 — The Magic Circle / Question：能力高度匹配，商业仍不可持续</h1>
+<ul>
+<li>Case ID: CASE-048</li>
+<li>Subject: The Magic Circle / Question</li>
+<li>Period covered: AAA / immersive-sim prehistory → 2013–2015 production → 2016 commercial postmortem</li>
+<li>Research status: RESEARCHING</li>
+<li>Corpus role: <code>FIT-STRONG / MARKET-FAILED</code> / AAA→AUTHORIAL / SECOND C015 FAILURE PRESSURE</li>
+<li>Related Claims: C003, C004, C006, C007, C010, C011, C013, C015</li>
+<li>Evidence Ledger: <a href="/heroes-portal/evidence/CASE-048-the-magic-circle-source-ledger.html">来源账本</a></li>
+</ul>
+<h2 id="1-why-this-case">1. Why this case</h2>
+<p class="dc">The Magic Circle 是 C015 需要的第二个、结构上明显不同于 Brigador 的失败压力样本。</p>
+<p>Brigador 是：
+- 工业设计 / 美术管线 / custom tech / precision combat 高度贴合团队；
+- launch 在 onboarding / legibility / visibility 上失败。</p>
+<p>The Magic Circle 则是：
+- 三位核心成员的职业前史直接变成题材和 mechanic；
+- BioShock / Thief / Dishonored / immersive-sim 的多年经验，被压成“编辑 AI / 改写规则 / 讽刺 development hell”的产品；
+- 团队明确不想再做大厂式严重、流程化、共识化的游戏；
+- 最终却因为 niche-within-niche、genre illegibility、零 marketing budget 等问题销量不足以维持团队。</p>
+<p>因此它提供第二条强结论：</p>
+<blockquote>
+<p><strong>一个项目甚至可以“只有这几个人才会这样做”，却仍然不是一个足够好的商业选择。</strong></p>
+</blockquote>
+<h2 id="2-contextsituationaction-snapshot">2. Context–Situation–Action Snapshot</h2>
+<h3 id="era-production-regime">Era / Production Regime</h3>
+<p>核心开发发生在 2013–2015：</p>
+<ul>
+<li>Unity / middleware 已让三人级资深团队快速形成复杂 first-person systems；</li>
+<li>Steam Early Access 已可承担 QA / compatibility / feedback 接口；</li>
+<li>2013–2016 独立 PC 市场迅速从“稀缺 indie novelty”走向拥挤；</li>
+<li>YouTube / press / Steam discovery 正在重写 market access；</li>
+<li>当时“做一个优秀、独特游戏，媒体自然会发现”的独立游戏常识正在失效。</li>
+</ul>
+<h3 id="actor-situation">Actor Situation</h3>
+<p>Question 的核心三人拥有非常不对称、但互补的能力：</p>
+<ul>
+<li>Jordan Thomas：game journalism → Thief 3 → BioShock 系列，设计、叙事、导演；</li>
+<li>Stephen Alexander：visual effects → BioShock / BioShock Infinite，叙事美术 + FX；</li>
+<li>Kain Shin：Deus Ex / Thief / Dishonored 等，AI / gameplay programming。</li>
+</ul>
+<p>共同前史是：
+- first-person systemic games；
+- immersive-sim grammar；
+- AAA process；
+- 强 authorial opinions；
+- 对“设计者与玩家、创作者与组织”的长期经验。</p>
+<p>这不是一个随机三人团队。</p>
+<h3 id="action-maneuver">Action / Maneuver</h3>
+<table>
+<thead>
+<tr>
+<th>Existing capability / frustration</th>
+<th>Project decision</th>
+<th>Production effect</th>
+<th>Player-facing result</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>immersive-sim systems / AI</td>
+<td>玩家直接编辑 NPC 属性与关系</td>
+<td>把 AI/programming 变成核心 mechanic</td>
+<td>开放式 puzzle / emergent solution</td>
+<td>E001/E002/E006</td>
+</tr>
+<tr>
+<td>多年 game-development experience</td>
+<td>游戏世界本身是长期 development hell</td>
+<td>不需要凭空研究题材</td>
+<td>meta satire / insider authenticity</td>
+<td>E001/E003</td>
+</tr>
+<tr>
+<td>narrative + visual FX</td>
+<td>“未完成游戏”视觉和叙事共同表达</td>
+<td>brokenness 可被审美化</td>
+<td>黑白、placeholder、discarded versions 成为语言</td>
+<td>E002/E003</td>
+</tr>
+<tr>
+<td>不满 AAA process-heavy culture</td>
+<td>三人高信任、“wild west”协作</td>
+<td>减少内部 approval / meeting overhead</td>
+<td>高 authorial density</td>
+<td>E001</td>
+</tr>
+<tr>
+<td>小团队 QA 能力不足</td>
+<td>Early Access 暴露给真实玩家</td>
+<td>把部分 combinatorial QA 转到公开环境</td>
+<td>更稳的 editable-system product</td>
+<td>E003</td>
+</tr>
+<tr>
+<td>no marketing budget</td>
+<td>期待 quality / preview / press 自对齐</td>
+<td>market work 没有被完整 internalize</td>
+<td>launch conversion 不足</td>
+<td>E004/E005</td>
+</tr>
+</tbody>
+</table>
+<h3 id="anachronism-check">Anachronism Check</h3>
+<p>不能把 2015 的失败直接翻译成：</p>
+<blockquote>
+<p>“meta game 卖不动。”</p>
+</blockquote>
+<p>也不能把 2016 Steam 的 genre/discovery 条件直接套到 2026。</p>
+<p>可迁移的是：</p>
+<blockquote>
+<p><strong>强 creator–project fit 不能自动解决 market category、audience size、launch concentration 和 external legibility。</strong></p>
+</blockquote>
+<h2 id="3-capability-shaped-formation">3. Capability-Shaped Formation</h2>
+<p>本案比很多成功案例更接近“作者能力的可见投影”。</p>
+<h3 id="thomas">Thomas</h3>
+<ul>
+<li>immersive-sim design；</li>
+<li>narrative / writing；</li>
+<li>directing；</li>
+<li>对游戏开发文化的长期批判与观察。</li>
+</ul>
+<h3 id="alexander">Alexander</h3>
+<ul>
+<li>VFX；</li>
+<li>narrative art；</li>
+<li>BioShock production memory；</li>
+<li>visualizing deliberately unfinished / broken worlds。</li>
+</ul>
+<h3 id="shin">Shin</h3>
+<ul>
+<li>immersive-sim AI；</li>
+<li>gameplay programming；</li>
+<li>ability to make editable NPC systems remain robust under player manipulation。</li>
+</ul>
+<p>The Magic Circle 的核心 mechanic 和题材都直接使用这些能力。</p>
+<p>因此本案的 C015 标签应是：</p>
+<blockquote>
+<p><code>CAPABILITY-SHAPED / FIT-STRONG</code></p>
+</blockquote>
+<p>而不是：</p>
+<blockquote>
+<p>“三个 AAA 老兵出来做了个小项目。”</p>
+</blockquote>
+<h2 id="4-aaa-capability-transfer-and-rejection">4. AAA Capability Transfer and Rejection</h2>
+<p>本案对 C013 特别有价值。</p>
+<p>转移进来的：
+- first-person systemic design；
+- AI；
+- narrative；
+- visual effects；
+- production literacy；
+- rich-system / story tension 的认识。</p>
+<p>主动拒绝的：
+- process-heavy approval；
+- lead review / task bureaucracy；
+- 大组织 consensus；
+- AAA seriousness / prestige tone。</p>
+<p>Kain Shin 在 2016 访谈里明确把 Question 的早期协作描述成对旧 culture 的反向摆动：三个人高度信任，各自直接做需要做的东西。</p>
+<p>所以商业训练既是：</p>
+<blockquote>
+<p><strong>capability capital</strong></p>
+</blockquote>
+<p>也是：</p>
+<blockquote>
+<p><strong>negative reference model</strong></p>
+</blockquote>
+<h2 id="5-scope-and-production">5. Scope and Production</h2>
+<p>2014 同期报道把 Question 描述为 self-funded two-man studio，随后 Kain Shin 加入。</p>
+<p>2016 IGF 访谈给出：
+- 2013 春开始；
+- 2015 春进入 Early Access；
+- 约两年多开发；
+- Shin 2013 先兼职志愿参与，2014 停止外部 contract 转全职；
+- Unity + 多个 middleware；
+- 部分 mocap 最终由专业外部团队 Halon 替代；
+- audio 等也有 specialist periphery。</p>
+<p>因此：</p>
+<blockquote>
+<p>三人核心 ≠ 三人完成所有劳动。</p>
+</blockquote>
+<p>但 core authorial / system ownership 很高。</p>
+<h2 id="6-failure-pressure">6. Failure Pressure</h2>
+<h3 id="commercially-underwhelming">Commercially underwhelming</h3>
+<p>2016 公开分享中 Jordan Thomas 给出：
+- 约 16.5k copies；
+- 约 44k wishlists；
+- good reviews / previews；
+- IGF nomination；
+- 但他明确称这种结果对 Question <strong>unsustainable</strong>。</p>
+<h3 id="developer-diagnosis">Developer diagnosis</h3>
+<p>团队自己指出：
+- no marketing budget；
+- 过分相信“把好游戏做出来，其他会自动对齐”；
+- genre 不清；
+- meta satire 是 niche within niche；
+- 有些人把作品读成 angry / insider grievance；
+- debut title 的 market legibility 太弱。</p>
+<p>这使它成为 Brigador 的强结构对照。</p>
+<p>Brigador：</p>
+<blockquote>
+<p>product feel 被误编码。</p>
+</blockquote>
+<p>The Magic Circle：</p>
+<blockquote>
+<p>product category 本身就难以被快速编码。</p>
+</blockquote>
+<h2 id="7-fit-is-not-selection-sufficiency">7. Fit Is Not Selection Sufficiency</h2>
+<p>这个案例迫使我们把 C015 拆成两层：</p>
+<h3 id="layer-a-creatorproject-fit">Layer A — Creator–Project Fit</h3>
+<p>这个团队是否适合做这个项目？</p>
+<p>The Magic Circle：</p>
+<blockquote>
+<p><strong>很强。</strong></p>
+</blockquote>
+<h3 id="layer-b-projectmarket-selection">Layer B — Project–Market Selection</h3>
+<p>这个项目是否值得在该市场、该时间、以该进入方式做？</p>
+<p>2015–2016 商业结果：</p>
+<blockquote>
+<p><strong>明显有问题。</strong></p>
+</blockquote>
+<p>所以：</p>
+<blockquote>
+<p><strong>“这是最像我的项目”与“这是现在最值得我做的项目”不是同一个判断。</strong></p>
+</blockquote>
+<h2 id="8-market-access">8. Market Access</h2>
+<p>“没有 marketing budget”不等于没有 market access。</p>
+<p>已有：
+- previews；
+- Early Access；
+- press；
+- IGF nomination；
+- GDC / industry visibility；
+- high-quality professional network。</p>
+<p>但这些没有转成足够销量。</p>
+<p>因此 C010 再次需要区分：
+- awareness；
+- category comprehension；
+- audience fit；
+- conversion；
+- launch concentration。</p>
+<h2 id="85-longitudinal-continuation-failure-of-market-sufficiency-end-of-studio">8.5 Longitudinal continuation: failure of market sufficiency ≠ end of studio</h2>
+<p>2016 The Magic Circle 的当期销售不符合 Thomas 对 Question 的持续经营要求，但 Question 没有因此立刻解散。这是本案失利—回撤审计的重要界限。</p>
+<p>2016 NYU Game Center 直接采访中，Thomas 已经说明他在制作阶段担心高度元叙事的概念要求玩家理解太多层指涉；它对理解这一幽默的用户很有效，但在外部市场极难简要解释（新增 E007）。</p>
+<p>2018 Thomas 在直接访谈中描述了下一作选题如何主动寻找 <strong>“团队仍有兴趣” × “用户会购买”</strong> 的交集，并选择更容易识别的 cooperative horror（E008）。Question 官方团队史与 2018 同期行业报道确认随后增加 Michael Kelly / David Pittman / Sam Gauss 等制作合作者，并开发《The Blackout Club》（E009–E010）。</p>
+<p>因此至少存在以下连续性：
+<code>FIT-STRONG / MARKET-INSUFFICIENT first title → explicit second-title market re-selection → continuing studio organization</code></p>
+<p>仍然 UNKNOWN：The Blackout Club 的完整收入与利润、融资口径、员工薪酬、是否真正恢复了第一作的损失、相关个人退出/家庭恢复。</p>
+<p><strong>Forbidden inference：</strong> 不得将《The Magic Circle》写成“Question 破产或立即解散”；也不得以 Question 做出下一作反推第一作其实财务成功。</p>
+<h2 id="9-verdict">9. Verdict</h2>
+<h3 id="strongly-supported">Strongly supported</h3>
+<ul>
+<li>team capability and subject/mechanics were unusually tightly coupled；</li>
+<li>AAA / immersive-sim experience transferred directly into product；</li>
+<li>team deliberately rejected parts of AAA production culture；</li>
+<li>strong fit coexisted with unsustainable sales；</li>
+<li>lack of clear genre / market legibility was identified by creator as a problem。</li>
+</ul>
+<h3 id="boundary">Boundary</h3>
+<ul>
+<li>exact audited budget unknown；</li>
+<li>16.5k figure is creator-reported at a specific 2016 point, not lifetime sales；</li>
+<li>commercial underperformance does not mean artistic/product failure；</li>
+<li>Question 后来持续开发 Blackout Club 是已核的组织延续；其盈利/财务回撤是另一项尚未量化的 outcome。</li>
+</ul>
+<h2 id="10-transfer">10. Transfer</h2>
+<p>可迁移：
+- creator biography can become mechanic, not just theme；
+- commercial training can be both capital and anti-model；
+- <code>FIT-STRONG</code> must be audited separately from <code>MARKET-SUFFICIENT</code>；
+- debut project needs unusually clear category/hook because there is no prior audience guarantee。</p>
+<p>不可直接复制：
+- 2013–2016 Steam market；
+- BioShock / Dishonored professional network；
+- IGF-era press ecology；
+- three senior veterans&rsquo; accumulated capability。</p>
+<h2 id="11-evidence-index">11. Evidence Index</h2>
+<ul>
+<li>E001 — Road to the IGF 2016：三人职业前史、两年多开发、wild-west collaboration、financial discomfort。</li>
+<li>E002 — Game Developer 2014：self-funded two-man origin、immersive-sim prehistory、mechanic/subject fit。</li>
+<li>E003 — Game Developer 2015：开发文化题材、一手系统设计、Early Access QA boundary。</li>
+<li>E004 — Game Developer 2016 indiepocalypse panel：16.5k copies / 44k wishlists / unsustainable / genre + marketing diagnosis。</li>
+<li>E005 — GDC 2016 Jordan Thomas slides：niche-within-niche、creative compromise backlash、market price paid。</li>
+<li>E006 — Kain Shin 2016 AI optimization：核心 editable-AI mechanic 对工程能力要求。</li>
+</ul>
+<h2 id="12-open-questions">12. Open Questions</h2>
+<ol>
+<li>self-funding 的精确来源 / personal runway；</li>
+<li>Kain Shin contract→full-time 的现金结构；</li>
+<li>完整 contributor / contractor map；</li>
+<li>audited development cost；</li>
+<li>Early Access 到 1.0 的 sales curve；</li>
+<li>2016 之后 lifetime sales / break-even；</li>
+<li>如果当时做更清晰 genre 的 debut，Question 自己认为会牺牲什么？</li>
+</ol>
+<ul>
+<li>E007 — NYU Game Center 2016 direct interview: Thomas acknowledged market legibility doubts and niche category friction.</li>
+<li>E008 — Thomas 2018 direct interview: next-project selection based on overlap of creative interest and real customer purchasing.</li>
+<li>E009 — Question studio team history: group continued and expanded after The Magic Circle.</li>
+<li>E010 — Game Developer 2018 contemporaneous coverage of The Blackout Club / Early Access.</li>
+</ul>
+<h2 id="creator-life-decision-audit">Creator Life / Decision Audit</h2>
+<ul>
+<li><strong>Audit status:</strong> SUBSTANTIAL</li>
+<li><strong>Life stage:</strong> 三位核心均为成熟 AAA / immersive-sim 老兵，属于高职业资本转作者型创业。</li>
+<li><strong>Household:</strong> relationship / children / housing / household burn <code>UNKNOWN</code>。</li>
+<li><strong>Runway:</strong> self-funded core；Shin 早期兼有外部 contract，后停止外部合同转全职；完整预算未知。</li>
+<li><strong>Household burn:</strong> <code>UNKNOWN</code>；no marketing budget 可确认是市场约束之一，但不能替代生活成本审计。</li>
+<li><strong>Exit / recovery:</strong> <strong>MEDIUM EXIT OPTIONALITY</strong> — 三人拥有较强 AAA 职业资本，且至少 Shin 曾保持外部 contract；但 studio 失败后的具体回撤条件未知。</li>
+<li><strong>Capability vector:</strong> systemic design / narrative / directing + VFX / narrative art + AI / gameplay programming；三人能力互补且与产品 thesis 高度耦合。</li>
+<li><strong>Problem ownership:</strong> <strong>HIGH</strong> — 明确拒绝旧 AAA process-heavy approval 文化，核心团队直接控制题材和 mechanic。</li>
+<li><strong>Validation architecture:</strong> internal prototype → Early Access / public QA → reviews / previews / IGF → launch sales。</li>
+<li><strong>Reality adjudication:</strong> <strong>PARTIAL→STRONG post hoc</strong> — EA 提供真实玩家面，但团队仍高估“好游戏会自然被发现”；launch 后明确修正对 marketing/category 的判断。</li>
+<li><strong>Capability capture risk:</strong> <strong>LOW / NOT PRIMARY</strong> — failure 更接近 market legibility / audience sufficiency，而不是 specialist frontier 吸走 closure。</li>
+<li><strong>Market sufficiency / legibility:</strong> <strong>WEAK</strong> — creator 自己指出 genre 不清、meta satire niche-within-niche、零 marketing budget；约 16.5k copies 的阶段性销量不足以维持 Question。</li>
+<li><strong>Capability scaling:</strong> 产品完成并上市；首作销售未能支撑原经营预期，但 Question 后续确实继续并扩充团队开发《The Blackout Club》；长期财务可持续性 UNKNOWN。</li>
+<li><strong>Major unknowns:</strong> household economics、audited budget、marketing labor、long-tail lifetime sales。</li>
+</ul><div class="crumbs"><a href="/heroes-portal/">书阁</a> / cases/CASE-048-the-magic-circle.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

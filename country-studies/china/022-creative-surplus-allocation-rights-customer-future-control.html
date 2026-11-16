@@ -1,0 +1,1080 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>022 — Creative Surplus Allocation：创作剩余、产权链与“自己创造出来的未来” · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl class="on"" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0" class="t2">0. 核心问题</a><a href="#1" class="t2">1. 法律底盘：个人创造 ≠ 个人自动拥有成品产权</a><a href="#11-work-made-for-hire" class="t3">1.1 美国：work made for hire</a><a href="#12" class="t3">1.2 中国：职务软件的组织归属</a><a href="#2" class="t2">2. 创作剩余分配栈：十层资产</a><a href="#21-labor-cash" class="t3">2.1 LABOR CASH</a><a href="#22-revenue-participation" class="t3">2.2 REVENUE PARTICIPATION</a><a href="#23-equity" class="t3">2.3 EQUITY</a><a href="#24-attribution-credit" class="t3">2.4 ATTRIBUTION / CREDIT</a><a href="#25-ip-ownership" class="t3">2.5 IP OWNERSHIP</a><a href="#26-sequel-derivative-rights" class="t3">2.6 SEQUEL / DERIVATIVE RIGHTS</a><a href="#27-publishing-distribution-rights" class="t3">2.7 PUBLISHING / DISTRIBUTION RIGHTS</a><a href="#28-customer-relationship-service-obligations" class="t3">2.8 CUSTOMER RELATIONSHIP / SERVICE OBLIGATIONS</a><a href="#29-audience-brand-capital" class="t3">2.9 AUDIENCE / BRAND CAPITAL</a><a href="#210-future-decision-rights" class="t3">2.10 FUTURE DECISION RIGHTS</a><a href="#3-surplus-depth" class="t2">3. SURPLUS DEPTH / 创作剩余深度</a><a href="#level-0-wage-only" class="t3">Level 0 — Wage only</a><a href="#level-1-wage-credit" class="t3">Level 1 — Wage + credit</a><a href="#level-2-wage-credit-bonusroyalty" class="t3">Level 2 — Wage + credit + bonus/royalty</a><a href="#level-3-equity-studio-brand-participation" class="t3">Level 3 — Equity / studio brand participation</a><a href="#level-4-ip-sequel-publishing-participation" class="t3">Level 4 — IP / sequel / publishing participation</a><a href="#level-5-customeraudience-portability" class="t3">Level 5 — Customer/audience portability</a><a href="#level-6-future-decision-rights" class="t3">Level 6 — Future decision rights</a><a href="#4-atari-activisionlabor-cashcredit-royalty-exit" class="t2">4. Atari → Activision：从LABOR CASH争到CREDIT + ROYALTY + EXIT</a><a href="#5-bungieip" class="t2">5. Bungie：一家公司可以失去IP，却保留团队与未来</a><a href="#51-2007halomicrosoft" class="t3">5.1 2007：独立，但Halo留给Microsoft</a><a href="#52-2010bungieipactivision" class="t3">5.2 2010：Bungie保留新IP，Activision拿发行权</a><a href="#53-2019" class="t3">5.3 2019：连发行权和客户义务也可以再转回</a><a href="#6-io-interactiveip-retention" class="t2">6. IO Interactive：IP RETENTION可以直接决定工作室能否活着出来</a><a href="#7-jonathan-blow-playdeadcapital-independencedecision-rights" class="t2">7. Jonathan Blow / Playdead：CAPITAL INDEPENDENCE可以换成DECISION RIGHTS</a><a href="#71-blow" class="t3">7.1 Blow</a><a href="#72-playdead" class="t3">7.2 Playdead</a><a href="#8-ip" class="t2">8. 平台层：你可以拥有IP，却不完全拥有“触达玩家的通道”</a><a href="#81-nominal-ownership-access-sovereignty-gap" class="t2">8.1 NOMINAL OWNERSHIP / ACCESS-SOVEREIGNTY GAP</a><a href="#nominal-ownership-trap" class="t3">NOMINAL OWNERSHIP TRAP</a><a href="#9-customer-relationship-portability" class="t2">9. CUSTOMER RELATIONSHIP PORTABILITY</a><a href="#c0-non-portable" class="t3">C0 — Non-portable</a><a href="#c1-reputation-only" class="t3">C1 — Reputation only</a><a href="#c2-platform-follow-portable-within-ecosystem" class="t3">C2 — Platform-follow portable within ecosystem</a><a href="#c3-cross-platform-direct-relation" class="t3">C3 — Cross-platform direct relation</a><a href="#c4-transaction-portability" class="t3">C4 — Transaction portability</a><a href="#10-game-scienceequity-control" class="t2">10. Game Science：EQUITY + CONTROL 与外部资本可以分离</a><a href="#11-creative-surplus-allocation-types" class="t2">11. CREATIVE SURPLUS ALLOCATION TYPES</a><a href="#type-a-employee-execution-model" class="t3">Type A — EMPLOYEE EXECUTION MODEL</a><a href="#type-b-royalty-creator-model" class="t3">Type B — ROYALTY CREATOR MODEL</a><a href="#type-c-equity-studio-model" class="t3">Type C — EQUITY STUDIO MODEL</a><a href="#type-d-owned-ip-publisher-service-model" class="t3">Type D — OWNED-IP / PUBLISHER-SERVICE MODEL</a><a href="#type-e-self-funded-author-model" class="t3">Type E — SELF-FUNDED AUTHOR MODEL</a><a href="#type-f-platform-mediated-self-publishing-model" class="t3">Type F — PLATFORM-MEDIATED SELF-PUBLISHING MODEL</a><a href="#12_1" class="t2">12. 创作者真正拥有多少“自己创造出来的未来”？</a><a href="#121" class="t2">12.1 案例权利束对照</a><a href="#13-creative-surplus-compounding" class="t2">13. CREATIVE SURPLUS COMPOUNDING</a><a href="#131-future-capture-socialization" class="t2">13.1 FUTURE-CAPTURE SOCIALIZATION / 未来捕获率对职业人格的社会化</a><a href="#14-ip" class="t2">14. 关键反例：拥有IP也不等于拥有一切</a><a href="#15-aicreative-surplus" class="t2">15. AI时代：CREATIVE SURPLUS更可能向“判断所有权”集中</a><a href="#151-incomplete-contracts-residual-control-rights" class="t2">15.1 经济学底座：Incomplete Contracts / Residual Control Rights</a><a href="#creative-incompleteness" class="t3">CREATIVE INCOMPLETENESS</a><a href="#16" class="t2">16. 对《英雄传说》人物研究的强制升级</a><a href="#contribution" class="t3">Contribution</a><a href="#credit" class="t3">Credit</a><a href="#cash" class="t3">Cash</a><a href="#equity" class="t3">Equity</a><a href="#ip" class="t3">IP</a><a href="#publishing" class="t3">Publishing</a><a href="#customer" class="t3">Customer</a><a href="#brand" class="t3">Brand</a><a href="#exit" class="t3">Exit</a><a href="#future-rights" class="t3">Future Rights</a><a href="#17" class="t2">17. 下一步证据任务</a><a href="#p0" class="t3">P0 — 中国创作者剩余分配</a><a href="#p0-bungieioi" class="t3">P0 — Bungie/IOI式产权迁移比较</a><a href="#p1-steam" class="t3">P1 — Steam玩家关系</a><a href="#p1-game-science-s-game-premium-studio" class="t3">P1 — 中国Game Science / S-GAME /更多premium studio</a><a href="#p1" class="t3">P1 — 失败反例</a><a href="#18" class="t2">18. 当前最小结论</a><a href="#19-future-capture" class="t2">19. Future Capture 之后：成功是否外溢给下一代？</a></aside><article class="doc"><div class="col"><h1 id="022-creative-surplus-allocation">022 — Creative Surplus Allocation：创作剩余、产权链与“自己创造出来的未来”</h1>
+<ul>
+<li>Program: C / 中国国情研究 × 英雄传说 × 劳动政治 × 公司治理</li>
+<li>Status: <strong>MECHANISM FRAMEWORK / COMPARATIVE CASES / NOT LEGAL ADVICE</strong></li>
+<li>As-of: 2026-10-08</li>
+<li>Parent: <a href="/heroes-portal/country-studies/china/021-attribution-politics-credit-regimes-author-power.html">021 — Attribution Politics</a></li>
+<li>Ecosystem extension: <a href="/heroes-portal/country-studies/china/023-creator-class-formation-intergenerational-reproduction.html">023 — Creator Class Formation</a></li>
+<li>Author brand: <a href="/heroes-portal/country-studies/china/020-author-brand-capital-portable-demand-bargaining-power.html">020 — Author Brand Capital</a></li>
+<li>Author rights: <a href="/heroes-portal/country-studies/china/015-japan-comparator-frontier-permeability-author-rights-and-creator-replacement.html">015 — 中国 × 日本：作者权与代际更新</a></li>
+<li>Boundary: 本文的“创作剩余”不是严格马克思主义“剩余价值”法律/经济学术语，而是指<strong>一款作品成功后，除当期工资与已结算成本之外继续沉淀、可被下一轮复用的经济、品牌、产权与决策资产</strong>。</li>
+</ul>
+<h2 id="0">0. 核心问题</h2>
+<p class="dc">一款游戏做成以后，真正留下来的不只是利润。</p>
+<p>还可能留下：</p>
+<ul>
+<li>credit；</li>
+<li>bonus / royalty；</li>
+<li>equity；</li>
+<li>copyright / software rights；</li>
+<li>trademark / IP；</li>
+<li>sequel / derivative rights；</li>
+<li>publishing / distribution rights；</li>
+<li>player accounts / customer obligations；</li>
+<li>store followers / wishlists / platform reputation；</li>
+<li>author/studio brand；</li>
+<li>data / analytics；</li>
+<li>hiring power；</li>
+<li>financing credibility；</li>
+<li>next-project greenlight；</li>
+<li>final decision rights。</li>
+</ul>
+<p>因此真正的问题不是：</p>
+<blockquote>
+<p>“这个游戏是谁的？”</p>
+</blockquote>
+<p>而是：</p>
+<h1 id="creative-surplus-allocation-stack"><code>CREATIVE SURPLUS ALLOCATION STACK / 创作剩余分配栈</code></h1>
+<blockquote>
+<p><strong>作品成功后，不同类型的可复用资产分别沉淀到谁手中？哪些能跟人走，哪些留在公司/IP/发行商/平台？</strong></p>
+</blockquote>
+<h2 id="1">1. 法律底盘：个人创造 ≠ 个人自动拥有成品产权</h2>
+<h3 id="11-work-made-for-hire">1.1 美国：work made for hire</h3>
+<p>美国版权局明确：
+- 员工在职务范围内创作的work made for hire，由雇主被视为author和copyright owner；
+- 除非书面另有约定，相关权利归雇主。</p>
+<p>Sources:
+- https://www.copyright.gov/register/se-hire.html
+- https://www.copyright.gov/title17/92chap2.html</p>
+<p>因此：</p>
+<blockquote>
+<p><strong>实际创造者、公开署名者、法律著作权人可以是不同主体。</strong></p>
+</blockquote>
+<h3 id="12">1.2 中国：职务软件的组织归属</h3>
+<p>《计算机软件保护条例》第13条规定，任职期间开发的软件若：
+- 属于本职工作明确目标；
+- 是本职工作可预见/自然结果；
+- 主要使用单位资金、设备、未公开专门信息并由单位承担责任；</p>
+<p>则软件著作权由法人/组织享有，并可对开发者奖励。</p>
+<p>Official:
+- https://www.cac.gov.cn/2013-02/08/c_12648744.htm</p>
+<p>所以中美在一个重要底层逻辑上并没有“西方天然个人产权、中国天然公司产权”的简单分野：</p>
+<blockquote>
+<p><strong>现代软件工业本来就普遍允许雇主集中持有职务成果产权。</strong></p>
+</blockquote>
+<p>真正差异要继续看：
+- credit；
+- royalty；
+- equity；
+- portable reputation；
+- exit；
+- IP carve-out；
+- next-project rights。</p>
+<h2 id="2">2. 创作剩余分配栈：十层资产</h2>
+<h3 id="21-labor-cash">2.1 <code>LABOR CASH</code></h3>
+<p>工资、项目奖金、一次性奖励。</p>
+<p>特点：
+- 最确定；
+- 最不可复利；
+- 通常不随产品未来增长无限上升。</p>
+<h3 id="22-revenue-participation">2.2 <code>REVENUE PARTICIPATION</code></h3>
+<p>royalty、profit share、sales bonus、milestone share。</p>
+<p>特点：
+- 成功与收入部分耦合；
+- 但不自动带来IP、客户或决策权。</p>
+<h3 id="23-equity">2.3 <code>EQUITY</code></h3>
+<p>公司股权 / partnership interest / employee ownership。</p>
+<p>特点：
+- 把未来企业整体价值与个人绑定；
+- 但小股权 ≠ 决策控制；
+- 公司拥有IP时，equity可能是间接分享IP增值的方式。</p>
+<h3 id="24-attribution-credit">2.4 <code>ATTRIBUTION / CREDIT</code></h3>
+<p>可验证“谁做了什么”的职业资本。</p>
+<p>特点：
+- 不等于产权；
+- 但可转成下一份工作、融资、作者品牌与玩家注意。</p>
+<h3 id="25-ip-ownership">2.5 <code>IP OWNERSHIP</code></h3>
+<p>copyright、trademark、角色/世界/系列权利。</p>
+<p>特点：
+- 决定谁能合法继续开发、授权、改编、出售；
+- 但IP owner未必拥有最强author brand。</p>
+<h3 id="26-sequel-derivative-rights">2.6 <code>SEQUEL / DERIVATIVE RIGHTS</code></h3>
+<p>谁能决定做续作、衍生、重制、影视/周边。</p>
+<p>这比“拥有一款已完成游戏”更接近长期租金来源。</p>
+<h3 id="27-publishing-distribution-rights">2.7 <code>PUBLISHING / DISTRIBUTION RIGHTS</code></h3>
+<p>谁控制：
+- 平台版本；
+- 地区；
+-营销；
+- 上线窗口；
+- 零售/数字发行；
+- publisher approval。</p>
+<p>这可以和IP完全分离。</p>
+<h3 id="28-customer-relationship-service-obligations">2.8 <code>CUSTOMER RELATIONSHIP / SERVICE OBLIGATIONS</code></h3>
+<p>谁掌握：
+- 玩家账号；
+- 服务责任；
+- community operations；
+- notification channels；
+- direct support；
+- live-service obligations。</p>
+<p>这也可以和IP、发行权分开。</p>
+<h3 id="29-audience-brand-capital">2.9 <code>AUDIENCE / BRAND CAPITAL</code></h3>
+<p>谁能带走：
+- 玩家信任；
+-媒体注意；
+- studio/author reputation；
+-下一作的预期需求。</p>
+<p>它不完全是法律产权，但能形成020的 <code>DEMAND-SIDE QUASI-PROPERTY</code>。</p>
+<h3 id="210-future-decision-rights">2.10 <code>FUTURE DECISION RIGHTS</code></h3>
+<p>谁因这次成功获得：
+- 下一项目 greenlight；
+- scope决定；
+- hiring authority；
+- budget control；
+- kill right；
+- IP选择；
+- publisher选择；
+- self-publishing能力。</p>
+<p>这是最深的一层：</p>
+<blockquote>
+<p><strong>一款作品最大的创作剩余，可能不是钱，而是“下一次谁有资格决定做什么”。</strong></p>
+</blockquote>
+<h2 id="3-surplus-depth">3. <code>SURPLUS DEPTH / 创作剩余深度</code></h2>
+<p>同样一款成功作品，不同参与者可能拿到完全不同的“深度”。</p>
+<h3 id="level-0-wage-only">Level 0 — Wage only</h3>
+<pre><code class="language-text">salary
+→ project ends
+→ little portable asset
+</code></pre>
+<h3 id="level-1-wage-credit">Level 1 — Wage + credit</h3>
+<pre><code class="language-text">salary
++ verified reputation
+→ better next job
+</code></pre>
+<h3 id="level-2-wage-credit-bonusroyalty">Level 2 — Wage + credit + bonus/royalty</h3>
+<p>成功部分转成现金复利。</p>
+<h3 id="level-3-equity-studio-brand-participation">Level 3 — Equity / studio brand participation</h3>
+<p>个人开始分享组织长期价值。</p>
+<h3 id="level-4-ip-sequel-publishing-participation">Level 4 — IP / sequel / publishing participation</h3>
+<p>能够决定成功资产如何继续商业化。</p>
+<h3 id="level-5-customeraudience-portability">Level 5 — Customer/audience portability</h3>
+<p>离开组织后仍能带走需求侧资产。</p>
+<h3 id="level-6-future-decision-rights">Level 6 — Future decision rights</h3>
+<p>成功最终改变“下一局谁说了算”。</p>
+<p>因此不能用“工资很高”替代作者权，也不能用“有署名”替代剩余控制。</p>
+<h2 id="4-atari-activisionlabor-cashcredit-royalty-exit">4. Atari → Activision：从<code>LABOR CASH</code>争到<code>CREDIT + ROYALTY + EXIT</code></h2>
+<p>021已经记录：
+- Atari早期程序员可能匿名；
+- David Crane等人发现个人产品贡献巨大销售后，要求design credit + royalty；
+- 被拒后离职成立Activision。</p>
+<p>Sources:
+- https://www.gamedeveloper.com/business/atari-the-golden-years----a-history-1978-1981
+- https://www.gamedeveloper.com/game-platforms/feature-the-history-of-activision-</p>
+<p>这个案例说明：</p>
+<blockquote>
+<p><strong>劳动者不一定先要求“把Atari IP给我”；第一步往往是要求成功能不能以credit和收入形式部分留在自己身上。</strong></p>
+</blockquote>
+<p>Activision成立后，真正改变的是：
+- team owns company；
+- creator credit可公开；
+- creators开始参与公司未来增长；
+- exit本身创造新的产权壳。</p>
+<p>所以：</p>
+<h1 id="exit-to-ownership-conversion"><code>EXIT-TO-OWNERSHIP CONVERSION</code></h1>
+<blockquote>
+<p><strong>当旧组织不给更深层创作剩余时，创业可以把“个人能力”重新包装成股权、公司品牌和未来IP控制。</strong></p>
+</blockquote>
+<h2 id="5-bungieip">5. Bungie：一家公司可以失去IP，却保留团队与未来</h2>
+<p>Bungie是“产权分层”最漂亮的案例之一。</p>
+<h3 id="51-2007halomicrosoft">5.1 2007：独立，但Halo留给Microsoft</h3>
+<p>Microsoft 2007官方声明：
+- Bungie重新成为独立公司；
+- Microsoft保留Bungie部分股权；
+- Halo IP属于Microsoft；
+- 双方继续合作。</p>
+<p>Source:
+- https://news.microsoft.com/source/2007/10/05/microsoft-and-bungie-studios-to-evolve-relationship/</p>
+<p>因此：</p>
+<pre><code class="language-text">TEAM / STUDIO
+→ Bungie
+
+HALO IP
+→ Microsoft
+</code></pre>
+<p>Bungie失去的不是能力，也不是全部品牌，而是Halo这套具体IP租金。</p>
+<h3 id="52-2010bungieipactivision">5.2 2010：Bungie保留新IP，Activision拿发行权</h3>
+<p>Activision 2010官方公告写得非常清楚：
+- 双方签10年全球合作；
+- Activision获得新IP游戏的独家全球publish/distribute rights；
+- Bungie保持独立，并继续拥有其intellectual property。</p>
+<p>Source:
+- https://investor.activision.com/news-releases/news-release-details/bungie-and-activision-announce-exclusive-worldwide-partnership</p>
+<p>这是一个经典拆分：</p>
+<pre><code class="language-text">IP ownership
+→ Bungie
+
+global publishing/distribution rights
+→ Activision
+</code></pre>
+<p>说明：</p>
+<blockquote>
+<p><strong>融资/发行支持不必然要求开发者卖掉IP。</strong></p>
+</blockquote>
+<h3 id="53-2019">5.3 2019：连发行权和客户义务也可以再转回</h3>
+<p>Bungie 2019宣布：
+- Activision将Destiny publishing rights转回Bungie；
+- Bungie准备self-publish。</p>
+<p>Activision SEC文件进一步记录：
+- Activision转移publishing rights；
+- Bungie支付现金并承接Activision ongoing customer obligations；
+- Activision之后不再拥有Destiny实质权利/义务。</p>
+<p>Sources:
+- https://www.bungie.net/7/en/News/article/47569
+- https://www.sec.gov/Archives/edgar/data/718877/000071887719000004/R9.htm</p>
+<p>这是一个极重要的实证：</p>
+<h1 id="rights-are-modular"><code>RIGHTS ARE MODULAR</code></h1>
+<p>IP、publishing、customer obligations、team、brand、cash flow可以分别交易和重新组合。</p>
+<p>所以研究publisher deal禁止只问：</p>
+<blockquote>
+<p>“IP是谁的？”</p>
+</blockquote>
+<p>还要问：
+- 谁发行；
+- 谁维护玩家；
+- 谁掌握community；
+- 谁有续作决定权；
+- 终止合作时哪些权利可回收。</p>
+<h2 id="6-io-interactiveip-retention">6. IO Interactive：<code>IP RETENTION</code>可以直接决定工作室能否活着出来</h2>
+<p>2017 Square Enix准备出售IO Interactive。</p>
+<p>IO后续通过management buyout成为独立公司，并保留Hitman IP；Game Developer报道直接强调：
+- IO变成独立工作室；
+- deal让其retain Hitman rights；
+- 可不经Square继续做系列。</p>
+<p>Sources:
+- https://ioi.dk/about
+- https://www.gamedeveloper.com/business/io-interactive-goes-independent-secures-the-rights-to-i-hitman-i-franchise</p>
+<p>IO官方今天回顾这次独立时直接写：</p>
+<blockquote>
+<p>independence gave the studio full control over execution of its strategy.</p>
+</blockquote>
+<p>因此如果management buyout只带走人、不带走Hitman：
+- IO仍可能存在；
+- 但会失去最重要的brand/customer bridge。</p>
+<p>所以：</p>
+<h1 id="ip-escape-package"><code>IP ESCAPE PACKAGE</code></h1>
+<blockquote>
+<p><strong>一个团队从母公司独立时，能否把其最重要的成功资产一起带走，决定“创业”究竟是延续还是重置。</strong></p>
+</blockquote>
+<h2 id="7-jonathan-blow-playdeadcapital-independencedecision-rights">7. Jonathan Blow / Playdead：<code>CAPITAL INDEPENDENCE</code>可以换成<code>DECISION RIGHTS</code></h2>
+<h3 id="71-blow">7.1 Blow</h3>
+<p>《Braid》收入让Blow完全自筹《The Witness》；他明确表示即使找publisher，也不希望是funding deal，而更像distribution service。</p>
+<p>Sources:
+- https://www.gamedeveloper.com/business/bearing-i-witness-i-
+- https://www.gamedeveloper.com/business/q-a-jonathan-blow-on-i-the-witness-i-and-the-state-of-indie-games</p>
+<p>这是：</p>
+<pre><code class="language-text">success cash
+→ self-funding
+→ publisher dependency ↓
+→ veto exposure ↓
+→ authorial control ↑
+</code></pre>
+<p>即：</p>
+<h1 id="cash-to-autonomy-conversion"><code>CASH-TO-AUTONOMY CONVERSION</code></h1>
+<h3 id="72-playdead">7.2 Playdead</h3>
+<p>Playdead在《Limbo》成功后花大量资金买回投资人权益；团队公开解释，他们愿意付出这个成本，是因为不希望外部投资影响公司和产品方向。</p>
+<p>Source:
+- https://www.gamedeveloper.com/business/hanging-in-limbo</p>
+<p>说明：</p>
+<blockquote>
+<p><strong>equity本身就是decision-right container。</strong></p>
+</blockquote>
+<p>融资不是中性现金：
+- 谁持股；
+- 董事会/批准权；
+- exit条款；
+都可能影响创作剩余最终属于谁。</p>
+<h2 id="8-ip">8. 平台层：你可以拥有IP，却不完全拥有“触达玩家的通道”</h2>
+<p>Steam是很好的例子。</p>
+<p>Steamworks官方文档显示：
+- 玩家wishlist后，发布/折扣等通知由Steam向用户发送；
+- 开发者能看到wishlist总量、地区、转化等report；
+- follower关系存在于Steam game group / feed / news hub；
+- Developer/Publisher Homepage的“follow”同样由Steam为用户提供launch通知和商店展示。</p>
+<p>Sources:
+- https://partner.steamgames.com/doc/marketing/wishlist
+- https://partner.steamgames.com/doc/marketing/followers
+- https://partner.steamgames.com/doc/store/creator_homepage</p>
+<p>所以：</p>
+<blockquote>
+<p><strong>Steam极大增强Creator Selection Capacity，但玩家关系仍然高度platform-mediated。</strong></p>
+</blockquote>
+<p>开发者得到的是：
+- aggregate demand signal；
+- platform notification capability；
+- store visibility；
+而不是简单意义上的：
+- “我拥有所有wishlister的email名单”。</p>
+<p>因此新增：</p>
+<h1 id="platform-mediated-customer-relationship"><code>PLATFORM-MEDIATED CUSTOMER RELATIONSHIP</code></h1>
+<blockquote>
+<p><strong>创作者拥有产品/品牌，但和玩家之间的实际触达、推荐、通知和交易仍由平台基础设施中介。</strong></p>
+</blockquote>
+<p>这解释020的 <code>AUDIENCE_OWNERSHIP</code> 为什么不是二元变量。</p>
+<h2 id="81-nominal-ownership-access-sovereignty-gap">8.1 <code>NOMINAL OWNERSHIP / ACCESS-SOVEREIGNTY GAP</code></h2>
+<p>拥有IP，不等于拥有市场入口。</p>
+<p>一个团队可能：
+- 拥有copyright / trademark；
+- 可以决定续作；
+- 但仍依赖Steam / console platform / publisher触达玩家；
+- 玩家wishlist、follow、notification关系仍存在平台账户体系中；
+- 平台规则、推荐、审核和可见性会影响实际需求转化。</p>
+<p>Steamworks文档提供很清楚的结构例：
+- wishlist通知由Steam发送；
+- 开发者获得wishlist aggregate/report；
+- followers通过Steam feed / News Hub接收内容；
+- developer/publisher homepage follow也由Steam在商店里重新分发新作。</p>
+<p>Sources:
+- https://partner.steamgames.com/doc/marketing/wishlist
+- https://partner.steamgames.com/doc/marketing/followers
+- https://partner.steamgames.com/doc/store/creator_homepage</p>
+<p>因此定义：</p>
+<h1 id="access-sovereignty-gap"><code>ACCESS-SOVEREIGNTY GAP / 市场入口主权缺口</code></h1>
+<blockquote>
+<p><strong>创作者在法律上拥有作品/IP，但对发现、通知、交易、推荐与玩家关系仍高度依赖第三方基础设施的程度。</strong></p>
+</blockquote>
+<p>这不是“平台偷走IP”，而是：</p>
+<blockquote>
+<p><strong>property sovereignty 与 market-access sovereignty 可以属于不同主体。</strong></p>
+</blockquote>
+<p>所以“self-publishing”也要继续拆：
+- 谁拥有store account；
+- 谁决定pricing；
+- 谁拥有玩家direct contact；
+- 谁能跨store迁移；
+- 谁承担退款/客服/合规；
+- 谁控制推荐入口。</p>
+<h3 id="nominal-ownership-trap"><code>NOMINAL OWNERSHIP TRAP</code></h3>
+<p>禁止把：</p>
+<blockquote>
+<p>“我们保留IP”</p>
+</blockquote>
+<p>自动解释成：</p>
+<blockquote>
+<p>“我们拥有完整创作主权”。</p>
+</blockquote>
+<p>一个低现金、高平台依赖、无direct audience的IP owner，依然可能在现实中高度受制于：
+- publisher milestones；
+- platform certification；
+- visibility；
+- user-acquisition costs。</p>
+<h2 id="9-customer-relationship-portability">9. <code>CUSTOMER RELATIONSHIP PORTABILITY</code></h2>
+<p>未来所有案例都追：</p>
+<blockquote>
+<p>如果离开当前publisher/platform/IP，玩家关系还能带走多少？</p>
+</blockquote>
+<p>分四级：</p>
+<h3 id="c0-non-portable">C0 — Non-portable</h3>
+<p>玩家只认IP/platform，无direct relation。</p>
+<h3 id="c1-reputation-only">C1 — Reputation only</h3>
+<p>玩家记得作者/工作室，但没有稳定通知通道。</p>
+<h3 id="c2-platform-follow-portable-within-ecosystem">C2 — Platform-follow portable within ecosystem</h3>
+<p>例如Steam developer homepage能让玩家跨该开发者的新作继续被推荐/通知。</p>
+<h3 id="c3-cross-platform-direct-relation">C3 — Cross-platform direct relation</h3>
+<p>自有：
+- community；
+- mailing list；
+- site；
+- Discord/论坛；
+- crowdfunding backers；
+- social graph。</p>
+<h3 id="c4-transaction-portability">C4 — Transaction portability</h3>
+<p>能把相当部分核心用户直接迁移到：
+- 新store；
+- 新publisher；
+- crowdfunding；
+- self-publishing。</p>
+<p>等级越高，平台/发行商对creator的议价能力越低。</p>
+<h2 id="10-game-scienceequity-control">10. Game Science：<code>EQUITY + CONTROL</code> 与外部资本可以分离</h2>
+<p>中国当前一个值得观察的正向样本是游戏科学。</p>
+<p>2021公开报道的结构：
+- 腾讯入股约5%；
+- 冯骥直接持股约38.75%；
+- 团队其他成员通过股权持有大量股份；
+- 报道称腾讯承诺“不干预运营决策、不抢占项目主导、不寻求发行运营”。</p>
+<p>Sources:
+- https://www.yicai.com/news/101003224.html
+- https://m.jiemian.com/article/5881733_toutiao.html</p>
+<p>到2026年4月工商变更后：
+- 腾讯受让原英雄互娱相关19%股份，持股升至24%；
+- 冯骥直接持股38.76%，仍为第一大直接股东；
+- 两个员工持股平台分别持有27.36%和9.88%，结构未变；
+- 腾讯成为唯一外部股东。</p>
+<p>Source:
+- https://www.stcn.com/article/detail/3893417.html</p>
+<p>这不能单靠股比证明所有decision rights，也不能假设2021“三不”承诺的法律效力/全部细节延续不变。</p>
+<p>但至少提供一个重要结构样本：</p>
+<pre><code class="language-text">external capital exists
++
+founder/team retain large equity base
++
+studio retains operating identity
+</code></pre>
+<p>即：</p>
+<h1 id="capital-without-full-control-transfer"><code>CAPITAL WITHOUT FULL CONTROL TRANSFER</code></h1>
+<p>这比“有腾讯投资 = 腾讯控制”或“创始人持股 = 完全自由”都更精确。</p>
+<p>后续真正要追：
+- board seats；
+- veto rights；
+- financing covenants；
+- IP ownership；
+- publishing rights；
+- sequel approval；
+- dividend / exit structure。</p>
+<h2 id="11-creative-surplus-allocation-types">11. <code>CREATIVE SURPLUS ALLOCATION TYPES</code></h2>
+<h3 id="type-a-employee-execution-model">Type A — <code>EMPLOYEE EXECUTION MODEL</code></h3>
+<p>员工得到：
+- salary；
+- maybe bonus；
+- maybe credit。</p>
+<p>公司得到：
+- IP；
+- customer；
+- brand；
+- future project rights。</p>
+<p>优点：
+-风险由公司承担；
+-稳定。</p>
+<p>风险：
+-作者剩余浅；
+-退出后reset cost高。</p>
+<h3 id="type-b-royalty-creator-model">Type B — <code>ROYALTY CREATOR MODEL</code></h3>
+<p>员工/外部developer增加：
+- sales royalty / profit share。</p>
+<p>但IP/customer仍可归publisher。</p>
+<h3 id="type-c-equity-studio-model">Type C — <code>EQUITY STUDIO MODEL</code></h3>
+<p>核心团队拥有公司股权。</p>
+<p>成功转成：
+- enterprise value；
+-长期分红/退出；
+-一定治理权。</p>
+<h3 id="type-d-owned-ip-publisher-service-model">Type D — <code>OWNED-IP / PUBLISHER-SERVICE MODEL</code></h3>
+<p>开发者保留IP，publisher提供：
+- financing；
+- distribution；
+- marketing。</p>
+<p>Bungie 2010是强例。</p>
+<h3 id="type-e-self-funded-author-model">Type E — <code>SELF-FUNDED AUTHOR MODEL</code></h3>
+<p>作者用上一作cash直接融资下一作。</p>
+<p>Blow是强例。</p>
+<h3 id="type-f-platform-mediated-self-publishing-model">Type F — <code>PLATFORM-MEDIATED SELF-PUBLISHING MODEL</code></h3>
+<p>creator保留IP/brand/发行决策，但：
+-交易；
+-发现；
+-notification；
+-player graph</p>
+<p>高度依赖Steam/console store。</p>
+<p>这可能是2020s独立游戏最常见的“半主权”形态。</p>
+<h2 id="12_1">12. 创作者真正拥有多少“自己创造出来的未来”？</h2>
+<p>新增总指标：</p>
+<h1 id="future-capture-ratio"><code>FUTURE-CAPTURE RATIO / 未来捕获率</code></h1>
+<p>不是会计比率，而是机制评分：</p>
+<blockquote>
+<p><strong>一名创作者/团队这次成功产生的可复用资产，有多大比例能进入其下一次项目，而不是只留在雇主/IP/publisher/platform？</strong></p>
+</blockquote>
+<p>至少检查：</p>
+<ul>
+<li>cash retained；</li>
+<li>equity retained；</li>
+<li>IP retained；</li>
+<li>credit retained；</li>
+<li>customer relation retained；</li>
+<li>brand retained；</li>
+<li>team continuity；</li>
+<li>data/analytics access；</li>
+<li>publishing flexibility；</li>
+<li>greenlight autonomy。</li>
+</ul>
+<p>高future-capture：</p>
+<blockquote>
+<p>成功一次，下一次更容易。</p>
+</blockquote>
+<p>低future-capture：</p>
+<blockquote>
+<p>成功一次，只换来工资/头衔；换组织后大量归零。</p>
+</blockquote>
+<p>这与021的 <code>REPUTATION COMPOUNDING RATE</code> 是同一系统的产权版。</p>
+<h2 id="121">12.1 案例权利束对照</h2>
+<table>
+<thead>
+<tr>
+<th>Case</th>
+<th>Team/Company</th>
+<th>IP</th>
+<th>Publishing</th>
+<th>Customer/Platform</th>
+<th>Brand</th>
+<th>Future control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Atari employee era</td>
+<td>Atari</td>
+<td>Atari</td>
+<td>Atari</td>
+<td>Atari/retail</td>
+<td>Atari</td>
+<td>employee low</td>
+</tr>
+<tr>
+<td>early Activision</td>
+<td>founders/company</td>
+<td>company-owned new works</td>
+<td>Activision</td>
+<td>retail/platform partners</td>
+<td>creator + Activision</td>
+<td>high for founders</td>
+</tr>
+<tr>
+<td>Bungie after 2007</td>
+<td>Bungie independent</td>
+<td>Halo stays Microsoft</td>
+<td>Halo via Microsoft</td>
+<td>Xbox ecosystem</td>
+<td>Bungie remains strong</td>
+<td>new-IP freedom</td>
+</tr>
+<tr>
+<td>Bungie–Activision 2010</td>
+<td>Bungie</td>
+<td>Bungie owns Destiny IP</td>
+<td>Activision exclusive</td>
+<td>Activision + platform</td>
+<td>Bungie/Destiny</td>
+<td>split</td>
+</tr>
+<tr>
+<td>Bungie 2019 self-publishing</td>
+<td>Bungie</td>
+<td>Bungie</td>
+<td>Bungie</td>
+<td>Bungie assumes customer obligations; platforms remain</td>
+<td>Bungie/Destiny</td>
+<td>higher</td>
+</tr>
+<tr>
+<td>IOI 2017</td>
+<td>IOI independent</td>
+<td>Hitman retained</td>
+<td>increasingly IOI/self-publish</td>
+<td>platform-mediated</td>
+<td>IOI + Hitman</td>
+<td>high</td>
+</tr>
+<tr>
+<td>Jonathan Blow</td>
+<td>creator/company</td>
+<td>creator/company</td>
+<td>mostly self/distribution services</td>
+<td>platform-mediated</td>
+<td>strong author</td>
+<td>very high</td>
+</tr>
+<tr>
+<td>Game Science</td>
+<td>founder/team-heavy private company</td>
+<td>not fully verified here</td>
+<td>project-specific, needs tracing</td>
+<td>Steam/PS etc.</td>
+<td>Game Science + Black Myth + Feng visibility</td>
+<td>operating control appears high; contract detail open</td>
+</tr>
+</tbody>
+</table>
+<p>这张表故意避免给“谁最自由”打总分。</p>
+<p>它的用途是强制看到：</p>
+<blockquote>
+<p><strong>同一案例可以在IP上高主权、在customer relation上低主权；也可以失去旧IP，却保留team/brand并重新创建新IP。</strong></p>
+</blockquote>
+<h2 id="13-creative-surplus-compounding">13. <code>CREATIVE SURPLUS COMPOUNDING</code></h2>
+<p>真正强的作者生态不是每个人都拿最多钱，而是成功能形成复利：</p>
+<pre><code class="language-text">good judgment
+→ successful product
+→ credit + cash + brand + audience
+→ cheaper next financing
+→ stronger decision rights
+→ better ability to test next judgment
+</code></pre>
+<p>反之：</p>
+<pre><code class="language-text">good judgment
+→ successful product
+→ company/IP captures most reusable assets
+→ worker gets salary/title
+→ exit
+→ demand/financing reset
+</code></pre>
+<p>于是社会可能拥有大量优秀专业人员，却缺少持续自主作者。</p>
+<h2 id="131-future-capture-socialization">13.1 <code>FUTURE-CAPTURE SOCIALIZATION / 未来捕获率对职业人格的社会化</code></h2>
+<p>本项目最初从“个人主义传统”进入问题，但022提示一个反向因果：</p>
+<blockquote>
+<p><strong>个人主义式作者行为本身也可能被产权/职业制度生产。</strong></p>
+</blockquote>
+<p>如果长期观察到：</p>
+<pre><code class="language-text">non-consensus authorship
+→ high personal risk
+→ success assets mostly accrue to company/IP
+→ exit resets player demand
+→ reward = salary/title only
+</code></pre>
+<p>那么理性职业策略会更偏：
+- 获得leader认可；
+-升职；
+-进入核心项目；
+-优化既有objective function；
+-累积private industry reputation。</p>
+<p>反过来，如果：</p>
+<pre><code class="language-text">distinct personal judgment
+→ public credit
+→ royalty/equity
+→ portable audience
+→ cheaper next financing
+→ more decision rights
+</code></pre>
+<p>则“坚持自己的判断”会变成可复利职业策略。</p>
+<p>因此新增H：</p>
+<h1 id="institutionally-produced-individualism"><code>INSTITUTIONALLY PRODUCED INDIVIDUALISM</code></h1>
+<blockquote>
+<p><strong>创新型个人主义不只是一种前置文化性格，也可能是“个人判断被允许持续占有其成功后果”之后逐代形成的职业文化。</strong></p>
+</blockquote>
+<p>这不是说产权制度可以完全解释中美文化差异，也不是否认家庭/教育/社会规范。</p>
+<p>它只要求研究顺序改成：
+- culture → institution；
+- institution → repeated payoff；
+- repeated payoff → career strategy；
+- career strategy → next-generation culture；</p>
+<p>而不是单向文化决定论。</p>
+<h2 id="14-ip">14. 关键反例：拥有IP也不等于拥有一切</h2>
+<p>必须禁止：</p>
+<blockquote>
+<p>“IP ownership = creative sovereignty。”</p>
+</blockquote>
+<p>一个工作室即使拥有IP，也可能：
+- 依赖publisher融资；
+- 受milestone审批；
+- 受平台认证；
+- 无法直接触达玩家；
+- 缺少现金；
+- 董事会可撤换管理层。</p>
+<p>同样：</p>
+<blockquote>
+<p>“不拥有IP = 没有作者权”</p>
+</blockquote>
+<p>也不成立。</p>
+<p>例如：
+- 某director可能没有IP，但拥有极强author brand、内部决策权与profit participation；
+- Bungie离开Halo后仍能凭studio brand创建Destiny。</p>
+<p>因此必须分析整栈，而不是单项神化。</p>
+<h2 id="15-aicreative-surplus">15. AI时代：<code>CREATIVE SURPLUS</code>更可能向“判断所有权”集中</h2>
+<p>如果AI降低execution成本：</p>
+<ul>
+<li>code；</li>
+<li>art；</li>
+<li>localization；</li>
+<li>content；</li>
+<li>testing；</li>
+</ul>
+<p>那么作品成功后最稀缺的剩余可能越来越集中于：</p>
+<ul>
+<li>original problem selection；</li>
+<li>quality bar；</li>
+<li>curation；</li>
+<li>brand trust；</li>
+<li>audience relation；</li>
+<li>IP/world；</li>
+<li>decision provenance。</li>
+</ul>
+<p>所以未来最值得保护的未必是：</p>
+<blockquote>
+<p>“谁生成了最多asset。”</p>
+</blockquote>
+<p>而是：</p>
+<h1 id="judgment-residual-rights"><code>JUDGMENT RESIDUAL RIGHTS</code></h1>
+<blockquote>
+<p><strong>当大量execution可由AI/外包/agent完成时，谁拥有最后决定“做什么、保留什么、砍什么、下一次继续做什么”的剩余控制权？</strong></p>
+</blockquote>
+<p>这与现代公司治理里的residual control rights思路相似，但这里作为创作组织研究变量使用，不作为正式法律定性。</p>
+<h2 id="151-incomplete-contracts-residual-control-rights">15.1 经济学底座：Incomplete Contracts / Residual Control Rights</h2>
+<p>Grossman &amp; Hart (1986)以及Hart后续的不完全契约理论提供一个非常合适的理论底座：</p>
+<blockquote>
+<p>合同不可能事前规定资产未来所有可能用途，因此除了写明的specific rights，还存在未被合同穷尽的residual control rights；所有权的重要含义，就是在合同没有规定的情形下谁拥有最终决定权。</p>
+</blockquote>
+<p>Sources:
+- Grossman &amp; Hart, 1986: https://www.journals.uchicago.edu/doi/10.1086/261404
+- Hart Nobel lecture: https://www.nobelprize.org/uploads/2018/06/hart-lecture.pdf
+- Nobel Prize 2016 summary: https://www.nobelprize.org/prizes/economic-sciences/2016/press-release/</p>
+<p>这与游戏创作高度相关，因为最重要的创作问题通常无法在项目开始时写进完整合同：</p>
+<ul>
+<li>原型不好玩时砍不砍；</li>
+<li>剧情方向失败时重写多少；</li>
+<li>核心系统谁拥有最终否决权；</li>
+<li>延期还是按期上市；</li>
+<li>monetization与体验冲突时优先谁；</li>
+<li>publisher要求改方向时谁能拒绝；</li>
+<li>成功后做续作还是新IP；</li>
+<li>AI生成的100个方案最后保留哪个。</li>
+</ul>
+<p>因此022中的 <code>JUDGMENT RESIDUAL RIGHTS</code> 明确标记为：</p>
+<blockquote>
+<p><strong>对Property Rights Theory中residual control rights概念在创作组织问题上的应用性映射，而不是新的正式法律术语。</strong></p>
+</blockquote>
+<p>创作组织真正关键的产权问题由此变成：</p>
+<pre><code class="language-text">not:
+who owns every individual asset?
+
+but:
+when the contract/spec cannot tell us the answer,
+who gets the last word?
+</code></pre>
+<h3 id="creative-incompleteness"><code>CREATIVE INCOMPLETENESS</code></h3>
+<p>创作与普通标准化生产的一个特殊点是：</p>
+<blockquote>
+<p><strong>越创新，越难事前写完spec。</strong></p>
+</blockquote>
+<p>因此越靠：
+- 非共识设计；
+- 新类型；
+- 原发性创新；
+- 探索式研发；</p>
+<p>项目结果越依赖residual judgment，而不是可预先量化KPI。</p>
+<p>这给前面“中国商业公司更擅长同构异性创新、原发性创新更偶然”的研究增加一个产权维度：</p>
+<blockquote>
+<p><strong>成熟同构生产可以更多依靠specific rights / benchmarks / milestone；真正高不确定创新更依赖“谁拥有剩余判断权”。</strong></p>
+</blockquote>
+<p>所以如果组织：
+- 只给创作者执行权；
+- 所有未写明问题都由资本/上级收回；
+- 失败后作者没有second attempt；</p>
+<p>那么其 <code>JUDGMENT RESIDUAL RIGHTS</code> 很低，即使表面上允许提idea。</p>
+<p>反过来：
+- small founder team；
+- protected internal auteur；
+- studio-owned IP；
+- self-funded creator；</p>
+<p>往往拥有更高residual judgment，但也承担更高失败成本。</p>
+<p>这为“作者权”提供了比浪漫化自由更严格的经济学定义。</p>
+<h2 id="16">16. 对《英雄传说》人物研究的强制升级</h2>
+<p>以后任何人物案例都不只写：</p>
+<blockquote>
+<p>“X做出了Y。”</p>
+</blockquote>
+<p>还必须回答：</p>
+<h3 id="contribution">Contribution</h3>
+<ul>
+<li>他实际决定了什么？</li>
+</ul>
+<h3 id="credit">Credit</h3>
+<ul>
+<li>外界是否知道？</li>
+</ul>
+<h3 id="cash">Cash</h3>
+<ul>
+<li>成功给了他多少可再投资资源？</li>
+</ul>
+<h3 id="equity">Equity</h3>
+<ul>
+<li>他是否拥有组织长期价值？</li>
+</ul>
+<h3 id="ip">IP</h3>
+<ul>
+<li>系列/世界属于谁？</li>
+</ul>
+<h3 id="publishing">Publishing</h3>
+<ul>
+<li>谁控制发行和milestone？</li>
+</ul>
+<h3 id="customer">Customer</h3>
+<ul>
+<li>谁掌握玩家服务/通知/社区？</li>
+</ul>
+<h3 id="brand">Brand</h3>
+<ul>
+<li>玩家跟IP、studio还是人？</li>
+</ul>
+<h3 id="exit">Exit</h3>
+<ul>
+<li>离开后能带走什么？</li>
+</ul>
+<h3 id="future-rights">Future Rights</h3>
+<ul>
+<li>下一次谁有权说“做这个”？</li>
+</ul>
+<p>这十项合起来，才回答：</p>
+<blockquote>
+<p><strong>这个创作者到底拥有多少自己创造出来的未来？</strong></p>
+</blockquote>
+<h2 id="17">17. 下一步证据任务</h2>
+<h3 id="p0">P0 — 中国创作者剩余分配</h3>
+<p>找3类真实合同/融资结构：
+- 大厂雇员；
+- publisher-funded indie；
+- founder/equity-owned studio。</p>
+<p>重点不是“分成比例八卦”，而是：
+- IP；
+- sequel rights；
+- approval；
+- customer data；
+- exit；
+- credit。</p>
+<h3 id="p0-bungieioi">P0 — Bungie/IOI式产权迁移比较</h3>
+<p>追：
+- 哪些资产留下；
+- 哪些资产带走；
+- buyout / termination cost；
+- 独立后第一款产品表现。</p>
+<h3 id="p1-steam">P1 — Steam玩家关系</h3>
+<p>精确区分：
+- wishlist/follower；
+- developer homepage；
+- community hub；
+- direct email/community；
+- 哪些关系能跨平台迁移。</p>
+<h3 id="p1-game-science-s-game-premium-studio">P1 — 中国Game Science / S-GAME /更多premium studio</h3>
+<p>追：
+- equity；
+- publisher；
+- IP；
+- operating control；
+- studio vs author brand；
+- 下一作是否继续自持。</p>
+<h3 id="p1">P1 — 失败反例</h3>
+<p>寻找：
+- 自持IP但因资金失败；
+- 强author brand但新作商业失败；
+- 公司持IP却持续优秀；
+- 开发者拿royalty但没有decision rights。</p>
+<h2 id="18">18. 当前最小结论</h2>
+<blockquote>
+<p><strong>创作成功不是一个单一“利润池”，而会分裂成工资、分成、股权、署名、IP、续作权、发行权、客户关系、品牌与下一轮decision rights等多层资产。现代软件法律本来就允许公司集中持有职务作品产权，因此真正决定创新者能否持续自主的，不是“IP归个人还是公司”这一项，而是整个Creative Surplus Allocation Stack。最深的创作剩余不是上一作赚了多少钱，而是上一作成功以后，谁拥有更多资格、资源和市场信用去决定下一作。</strong></p>
+</blockquote>
+<h2 id="19-future-capture">19. Future Capture 之后：成功是否外溢给下一代？</h2>
+<p>022到此只回答：</p>
+<blockquote>
+<p>这次成功有多少资产进入了创作者自己的下一次项目？</p>
+</blockquote>
+<p>023进一步追：</p>
+<blockquote>
+<p><strong>创作者自己的Future Capture，有多少转化成别人的Future Transfer？</strong></p>
+</blockquote>
+<p>因此所有成熟生态研究必须继续追：
+- 是否资助其他creator；
+- 是否借出audience；
+- 是否开放工具/know-how；
+- 是否产生spinout；
+- 是否建立publisher/fund/jam/collective；
+- 受益的第二代是否继续扶持第三代。</p>
+<p>Canonical:
+- <a href="/heroes-portal/country-studies/china/023-creator-class-formation-intergenerational-reproduction.html">023 — Creator Class Formation</a></p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / country-studies/china/022-creative-surplus-allocation-rights-customer-future-control.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

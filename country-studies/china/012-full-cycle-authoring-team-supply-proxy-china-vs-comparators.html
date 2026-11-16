@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>012 — 中国缺的究竟是不是“完整作者型团队”？用 Steam 高关注产品管线与工作室密度做第一轮量化代理 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl class="on"" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0" class="t2">0. 结论先行：用户的直觉获得了一个强代理信号，但还不是终局证明</a><a href="#1-steam" class="t2">1. 为什么这个代理比“国产Steam游戏总数”更接近我们的问题</a><a href="#2" class="t2">2. 更强的反事实：韩国同样手游主导，却没有掉到中国的相对密度</a><a href="#3" class="t2">3. 欧洲小国不是“几个明星工作室”，而是有可见的团队密度</a><a href="#31-poland" class="t3">3.1 Poland</a><a href="#32-finland" class="t3">3.2 Finland</a><a href="#33-sweden" class="t3">3.3 Sweden</a><a href="#34-czechia" class="t3">3.4 Czechia</a><a href="#4" class="t2">4. 不能直接写“中国应该有几万家工作室”，但可以提出一个可核的数量级问题</a><a href="#5-ip" class="t2">5. “前沿IP承制团队少”如何被严谨改写</a><a href="#c1-verified-case" class="t3">C1 — VERIFIED CASE</a><a href="#c2-supported-proxy" class="t3">C2 — SUPPORTED PROXY</a><a href="#c3-open" class="t3">C3 — OPEN / 核心待证</a><a href="#6" class="t2">6. 为什么这比“独立游戏数量”更接近真正问题</a><a href="#65" class="t2">6.5 平台级第二次发行基线修正：必须固定观察窗</a><a href="#7" class="t2">7. 下一轮真正可量化的设计</a><a href="#a-steamfull-cycle-team-sample-frame" class="t3">A. 不要先统计所有Steam国产游戏，先建“Full-cycle Team Sample Frame”</a><a href="#b" class="t3">B. 对中国大厂另开“内部团队”框架</a><a href="#c-ip-procurement-frame" class="t3">C. “前沿IP可承制团队”单独做 procurement frame</a><a href="#75-20182020" class="t2">7.5 2018–2020固定首发队列已经完成首轮实证试跑</a><a href="#77-team-densityteam-memoryteam-count" class="t2">7.7 日本对中国team-density假说增加一个新变量：TEAM MEMORY，而不只是TEAM COUNT</a><a href="#8-verdict" class="t2">8. Verdict</a></aside><article class="doc"><div class="col"><h1 id="012-steam">012 — 中国缺的究竟是不是“完整作者型团队”？用 Steam 高关注产品管线与工作室密度做第一轮量化代理</h1>
+<ul>
+<li>Program: C / 中国国情研究：行业版本 × 团队形成 × 产品自主权</li>
+<li>Status: <strong>QUANTITATIVE PROXY / CROSS-COUNTRY SNAPSHOT / NOT A DIRECT COUNT OF AUTHOR-LED TEAMS</strong></li>
+<li>As-of: 2026-10-07</li>
+<li>Related: <a href="/heroes-portal/country-studies/china/009-china-gameworker-creative-subjectivity-fieldwork-2017-2026.html">009 中国游戏雇员创造性劳动</a> / <a href="/heroes-portal/country-studies/china/010-next-studios-greenlight-rights-governance-lifecycle-2017-2024.html">010 NExT立项权</a> / <a href="/heroes-portal/country-studies/china/011-boundary-wandering-earth-capability-second-chance-2024-2026.html">011 失败后的第二次机会</a> / <a href="/heroes-portal/book/research-notes/china-game-commercial-regime-lineage-003.html">中国商业制度谱系</a></li>
+<li>Core question: <strong>中国拥有巨大玩家市场、成熟商业游戏工业和大量专业人才，却是否相对缺少能独立定义、完成并向全球PC/主机市场推出新产品的稳定团队？</strong></li>
+<li>Boundary: 本文使用<strong>Steam愿望单Top200国别来源、各国官方/行业协会的工作室与从业者统计、人口</strong>作为代理指标。它们测量的是不同东西，不能直接相除为“创作者比例”；尤其 <code>TOP200_STEAM_WISHLIST != AUTHOR_LED_TEAM_COUNT</code>。</li>
+</ul>
+<h2 id="0">0. 结论先行：用户的直觉获得了一个强代理信号，但还不是终局证明</h2>
+<p class="dc">2025年7月，波兰官方产业报告引用 Game Industry Conference 对 <strong>Steam Top200愿望单</strong>的开发国统计：</p>
+<ul>
+<li>瑞典：<strong>14.75</strong> 个标题，占 7.53%</li>
+<li>波兰：<strong>12</strong></li>
+<li>韩国：<strong>10</strong></li>
+<li>中国：<strong>8</strong></li>
+<li>捷克：<strong>3</strong></li>
+<li>芬兰：<strong>2</strong></li>
+</ul>
+<p>中国按绝对数并非没有未来PC产品，但它以约<strong>14.09亿人口</strong>、全球最大级别游戏市场，只在这一个“全球高关注Steam在研产品”截面上排到第10位；波兰、瑞典、韩国的绝对标题数都高于中国。原表因跨国共同开发/来源分摊出现 0.25/0.5 等小数，因此不是简单“工作室个数”。来源：Polish Agency for Enterprise Development / Game Industry Conference，<em>The Game Industry of Poland – Report 2025</em>, Table 2, p.29（PDF页码29/文件P28）。</p>
+<p>如果只做<strong>人口粗调</strong>（World Bank 2024人口；并非研发人力调节）：</p>
+<table>
+<thead>
+<tr>
+<th>Country</th>
+<th style="text-align: right;">Top200 wishlist title-equivalents</th>
+<th style="text-align: right;">2024 population (million)</th>
+<th style="text-align: right;">titles / million population</th>
+<th style="text-align: right;">Relative to China</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>China</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">1,408.975</td>
+<td style="text-align: right;"><strong>0.0057</strong></td>
+<td style="text-align: right;">1.0×</td>
+</tr>
+<tr>
+<td>South Korea</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">51.751</td>
+<td style="text-align: right;"><strong>0.1932</strong></td>
+<td style="text-align: right;"><strong>34.0×</strong></td>
+</tr>
+<tr>
+<td>Poland</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">36.559</td>
+<td style="text-align: right;"><strong>0.3282</strong></td>
+<td style="text-align: right;"><strong>57.8×</strong></td>
+</tr>
+<tr>
+<td>Czechia</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">10.905</td>
+<td style="text-align: right;"><strong>0.2751</strong></td>
+<td style="text-align: right;"><strong>48.5×</strong></td>
+</tr>
+<tr>
+<td>Finland</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">5.620</td>
+<td style="text-align: right;"><strong>0.3559</strong></td>
+<td style="text-align: right;"><strong>62.7×</strong></td>
+</tr>
+<tr>
+<td>Sweden</td>
+<td style="text-align: right;">14.75</td>
+<td style="text-align: right;">10.570</td>
+<td style="text-align: right;"><strong>1.3955</strong></td>
+<td style="text-align: right;"><strong>245.8×</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>这个人口校正只是压力测试，不能解释为生产效率。</strong> 大国人口包含非游戏劳动力；小国人才国际化率高；Steam愿望单有语言、曝光、平台与品类偏差。但差距如此大，足以把“完整全球PC产品团队供给偏薄”升级为一个<strong>值得正式检验的产业结构命题</strong>，而不是继续只靠个案印象。</p>
+<p>Sources:
+- PARP / GIC, 2025 report p.29: https://www.parp.gov.pl/storage/publications/pdf/EBOOK-GAM-WCAG_27112025.pdf
+- World Bank 2024 population: https://data.worldbank.org/indicator/SP.POP.TOTL</p>
+<h2 id="1-steam">1. 为什么这个代理比“国产Steam游戏总数”更接近我们的问题</h2>
+<p>2025年中国第三方“国游销量榜”报告称全年纳入统计国产游戏约<strong>2,091款</strong>，其中大量为低价独立/买断作品；2024同口径约1,660款。该统计为社区/行业观察者数据，<strong>不是官方完整Steam开发者数据库</strong>，且媒体二次转述存在“买断制1757/757”文字冲突，因此这里只作为发现线索，不承担精确分母。</p>
+<p>这反而说明一个重要区分：</p>
+<pre><code>LOTS_OF_RELEASES
+    !=
+MANY_TEAMS_WITH_GLOBAL_HIGH-DEMAND_PIPELINE
+    !=
+MANY_TEAMS_CAPABLE_OF_HIGH-SPEC_FRONTIER_IP
+</code></pre>
+<p>中国可能同时拥有：
+- 很多低成本Steam作品；
+- 极强手游/F2P工业；
+- 少数头部PC/主机产品；
+- 但<strong>中间层——持续产生全球高关注、原创、完整PC/主机产品的稳定团队——密度仍偏低</strong>。</p>
+<p>Steam Top200愿望单比“总上架量”更接近<strong>市场已经提前验证有较强全球关注</strong>的生产管线，但仍包括大小项目、IP续作、外包/联合开发，也不能等同“原创作者型工作室”。</p>
+<h2 id="2">2. 更强的反事实：韩国同样手游主导，却没有掉到中国的相对密度</h2>
+<p>中国2024官方报告：
+- 国内游戏市场实际销售收入 <strong>3257.83亿元</strong>
+- 移动游戏占 <strong>73.12%</strong>
+- 客户端游戏占 <strong>20.87%</strong>
+- 自研海外收入 <strong>185.57亿美元</strong></p>
+<p>韩国2024官方白皮书（2025版）：
+- 游戏市场约 <strong>23.8515万亿韩元</strong>
+- 移动游戏占 <strong>59.0%</strong>
+- 游戏研发/发行企业 <strong>1,398家</strong>
+- 游戏研发/发行人员 <strong>54,285人</strong>（全产业87,576人）</p>
+<p>因此韩国也不是一个“天然premium单机社会”。它有强烈的移动/F2P历史和大型在线游戏工业，却在2025-07 Steam Top200愿望单中有 <strong>10个title-equivalents</strong>，高于中国的8；按人口粗调约为中国 <strong>34倍</strong>。</p>
+<p>这不能证明韩国组织制度更好，因为：
+- 韩国统计“研发+发行企业”与中国缺少同口径企业数；
+- Top200可能受2025特定项目周期影响；
+- 韩国近年主动向主机/PC转向，本身就是产业政策与公司策略结果；
+- 中国拥有庞大的本地PC在线产品和移动跨端产品，Steam不是所有全球化产品的唯一入口。</p>
+<p>但它足以<strong>削弱一个过于简单的解释</strong>：</p>
+<blockquote>
+<p>“中国只是因为手游/F2P占比高，所以Steam完整产品团队少。”</p>
+</blockquote>
+<p>移动商业制度可能是原因之一，但<strong>不是充分解释</strong>。</p>
+<p>Sources:
+- 中国音数协《2024年中国游戏产业报告》：https://www.cadpa.org.cn/3277/202501/41718.html
+- KOCCA, 2025 Game Industry White Paper summary（2024 data）：https://welcon.kocca.kr/ko/info/report/1957738</p>
+<h2 id="3">3. 欧洲小国不是“几个明星工作室”，而是有可见的团队密度</h2>
+<h3 id="31-poland">3.1 Poland</h3>
+<p>2025 PARP报告：
+- <strong>824 active game producers &amp; publishers</strong>
+- <strong>14,568</strong> specialists
+- 2024 revenue约 <strong>€1.293bn</strong>
+- 年度<strong>450+ platform-wise releases</strong>
+- studio survey：主要平台 <strong>PC 71.8%</strong>
+- 主要商业模式：<strong>premium 69%</strong>
+- <strong>40+ Polish game brands</strong>累计销量超过100万
+- 97%在波兰开发的游戏面向全球市场</p>
+<p>824这个数字因2025数据挖掘方法升级，报告明确说<strong>不宜直接与往年工作室数增长率比较</strong>；其中含publisher/service等主体，不是824个作者型开发组。可是报告目录里还能看到大量6人、8人、10人、30人级别的独立/专业小工作室——不是只靠CDPR、Techland两家公司支撑。</p>
+<p>Source: PARP 2025 https://kpo.parp.gov.pl/component/publications/publication/the-game-industry-of-poland&mdash;report-2025</p>
+<h3 id="32-finland">3.2 Finland</h3>
+<p>Neogames 2024：
+- <strong>270 active studios</strong>
+- <strong>4,300</strong> employees（其中约3,800在芬兰、500在芬兰公司海外工作室）
+- 2024 turnover <strong>€2.85bn</strong>
+- 2023–24两年发布约<strong>120款商业游戏</strong>
+- 其中只有约<strong>10款移动游戏</strong>，PC/在线/其他平台发行明显上升
+- 研究采访71家公司，但通过注册与公开资料补到141/185家不同字段，主动承认 active studio 定义不可能绝对完整</p>
+<p>这很重要：芬兰历史上同样是<strong>移动/GaaS强国</strong>，并非只生产传统买断制，却仍保留了大量活跃工作室和PC/其他平台的新产品供给。它进一步削弱“手游工业天然让完整产品团队消失”的单因解释。</p>
+<p>Source: Neogames / PlayFinland https://www.playfinland.fi/state-of-the-industry</p>
+<h3 id="33-sweden">3.3 Sweden</h3>
+<p>2025 Game Developer Index（2024数据）：
+- <strong>1,101</strong> game companies
+- 其中 <strong>202家至少5名员工</strong>
+- 行业就业 <strong>9,100+</strong>
+- 瑞典境内收入 <strong>SEK36.8bn</strong>
+- 93%的公司少于10人</p>
+<p>“1,101”显然包含大量微型公司，因此不能和韩国1,398研发/发行企业直接比较。但仅<strong>202个5人以上studio</strong>这一层，就说明一个约1,057万人国家拥有相当厚的稳定制作主体层。</p>
+<p>Source: Dataspelsbranschen https://www.dataspelsbranschen.se/rapporter/swedish-games-industry-2025-game-developer-index/</p>
+<h3 id="34-czechia">3.4 Czechia</h3>
+<p>2026 Czech Game Developers Association最新数据：
+- <strong>178 active studios</strong>
+- <strong>3,092</strong> industry workers
+- 2025 revenue <strong>CZK9.08bn</strong>
+- 2024 record revenue <strong>CZK9.19bn</strong></p>
+<p>更早2024行业报告也指出大多数工作室在10人以下，90%以上企业本地所有，收入98%以上来自海外市场。这里同样体现的是“多节点、小中团队、全球产品市场”的产业结构，而不是单一巨头。</p>
+<p>Source: GDA Czech 2026 https://gda.cz/czech-games-industry-outperforms-expectations-generating-more-than-czk-9-billion-in-revenue/</p>
+<h2 id="4">4. 不能直接写“中国应该有几万家工作室”，但可以提出一个可核的数量级问题</h2>
+<p>如果机械按人口匹配：
+- 波兰约22.5个“活跃producer/publisher”/百万人；
+- 芬兰约48.0个active studio/百万人；
+- 捷克约16.3个active studio/百万人；
+- 瑞典所有game company约104/百万人，5人以上studio约19.1/百万人。</p>
+<p>把这些比例直接乘中国14亿人口，会得到<strong>数万甚至十万级</strong>公司要求；这是<strong>不合法的推断</strong>：
+- 国别市场、工资、资本、城市密度、出口依赖、公司注册定义完全不同；
+- 瑞典/芬兰大量外国人才，不能把团队数解释为“本民族天生更创作”；
+- 中国也可能有大量工商注册/小团队没有被统一行业统计；
+- 中国大公司内部一个studio可包含数百/数千人和多个项目，欧洲“公司”单位更碎。</p>
+<p>所以我们不需要“证明中国本应有X万工作室”。</p>
+<p>真正值得建立的可比指标是：</p>
+<pre><code>FULL-CYCLE TEAM DENSITY
+= number of stable teams that
+  1) originated or substantially redefined a product problem;
+  2) shipped &gt;=1 complete commercial title;
+  3) retained a recognisable core for &gt;=1 additional attempt;
+  4) had meaningful scope / prototype / kill decisions;
+  5) faced direct external market feedback;
+  6) can be observed without success-media selection.
+</code></pre>
+<p>这里的<strong>团队</strong>而非公司法人是核心单位。腾讯一个事业群里可能有几十个项目团队；一个芬兰法人可能只有5人；不能直接以公司数替代。</p>
+<h2 id="5-ip">5. “前沿IP承制团队少”如何被严谨改写</h2>
+<p>用户直觉：</p>
+<blockquote>
+<p>中国那么大，为什么到了《流浪地球》这种前沿IP，还会落到做砸过《边境》的柳叶刀来做？那还是说明供给不行。</p>
+</blockquote>
+<p>现在可以改写为三个强度不同的命题：</p>
+<h3 id="c1-verified-case">C1 — VERIFIED CASE</h3>
+<p><strong>《流浪地球：望日》IP方确实从接近200份团队提案中挑中柳叶刀；柳叶刀此前《边境》商业/运营受挫，但其太空射击与硬科幻制作经历成为新合同的正资产。</strong></p>
+<p>详见 <a href="/heroes-portal/country-studies/china/011-boundary-wandering-earth-capability-second-chance-2024-2026.html">011</a>。</p>
+<h3 id="c2-supported-proxy">C2 — SUPPORTED PROXY</h3>
+<p><strong>中国面向全球PC premium市场的高关注在研产品管线，相对其人口与整个游戏产业规模明显偏薄。</strong></p>
+<p>支持：Top200 Steam wishlist国别快照；韩国/波兰/瑞典对照；中国行业收入/用户体量。
+限制：Steam-only，愿望单是市场注意力，不是完整团队数。</p>
+<h3 id="c3-open">C3 — OPEN / 核心待证</h3>
+<p><strong>中国“能从0→1定义并完整交付高规格原创PC/主机产品、且失败后还能再试”的稳定团队密度，显著低于韩国/波兰/北欧/捷克。</strong></p>
+<p>这才是我们真正想证明的“老中不行”产业命题。<strong>目前尚无中国全量team denominator，也没有各国同定义 longitudinal roster，所以状态必须保持 OPEN。</strong></p>
+<h2 id="6">6. 为什么这比“独立游戏数量”更接近真正问题</h2>
+<p>一个国家可以有很多：
+- Game Jam作品；
+- Steam低价小游戏；
+- 大厂数千人的模块执行岗位；
+- 外包团队；
+- publisher；
+- live-ops事业部；</p>
+<p>却依然缺少：</p>
+<blockquote>
+<p><strong>“一起做过完整产品→共同吃过市场反馈→仍保留下一次自定问题能力”的核心团队。</strong></p>
+</blockquote>
+<p>这种主体是产业的<strong>可复用创新节点</strong>。</p>
+<p>柳叶刀恰好说明：即便第一次产品商业受挫，<strong>完整做过一次</strong>本身也有稀缺价值。反过来，如果一个行业把一万名专业人才组织成少数超大流水线，却很少产生可以独立重新组合的完整产品核心，那么总就业、总收入和“作者型团队密度”可以同时朝相反方向发展。</p>
+<p>这也解释为什么单看中国游戏收入会低估问题。</p>
+<h2 id="65">6.5 平台级第二次发行基线修正：必须固定观察窗</h2>
+<p>新增 <a href="/heroes-portal/book/research-notes/steam-second-release-survival-baseline-037.html">Steam第二次发行生存基线037</a>。Steam目录的raw数据确实只有约<strong>21.7%</strong>开发者名称出现第二款，但独立复核显示明显右删失：首发已满3/5/8/10年的开发者中，后续发行比例约<strong>27%/31%/38%/47%</strong>；固定3年窗口则约<strong>20%</strong>会在3年内再发行。平台全体第二次发行本来就难，因此未来中国/波兰/韩国比较必须固定首发年份和3/5年窗口，而不是拿2026活跃工作室截面比较。</p>
+<p>更重要的修正：<strong>多发几款本身不机械提高成功概率</strong>。按此前最佳市场表现分层后，“第几款”解释力大幅下降，说明幸存者选择很强。中国真正要测的是 <code>SECOND_ATTEMPT_CAPACITY</code>：团队/资金/作者权/市场牵引能否把首作后的能力转成下一次有意义尝试，而不是Steam app数量。</p>
+<h2 id="7">7. 下一轮真正可量化的设计</h2>
+<h3 id="a-steamfull-cycle-team-sample-frame">A. 不要先统计所有Steam国产游戏，先建“Full-cycle Team Sample Frame”</h3>
+<p>按<strong>发布年份固定</strong>，例如2020–2022首次商业发行的中国/韩国/波兰/捷克/芬兰原创PC产品，预注册：
+- 不按销量筛选；
+- 团队有公开开发者/公司身份；
+- 非纯移植、纯外包、素材拼装；
+- 首次完整商业产品或可识别新核心团队；
+- 之后追5年。</p>
+<p>每个核心团队编码：
+<code>TEAM_SIZE_START</code>
+<code>CORE_RETENTION_2Y/5Y</code>
+<code>SECOND_PROJECT_ATTEMPT</code>
+<code>SECOND_PROJECT_SHIP</code>
+<code>PROJECT_KILLED_BUT_TEAM_RETAINED</code>
+<code>FOUNDER_EXIT</code>
+<code>RETURN_TO_EMPLOYMENT</code>
+<code>PUBLISHER/FUNDING</code>
+<code>PROBLEM_DEFINITION_RIGHTS</code>
+<code>KILL_RIGHTS</code></p>
+<h3 id="b">B. 对中国大厂另开“内部团队”框架</h3>
+<p>不能只看法人。
+NExT的100人日Demo小组、网易/腾讯/米哈游内部立项cell，都应以<strong>project team</strong>为单位；问：
+- 初始2–10人组有多少；
+- 多少完成vertical slice；
+- 多少得到二次尝试；
+- 主创在第一次失败后2/5年是否仍有立项权。</p>
+<p>这将直接检验“巨大工业把人才变成专业部件，而不是持续制造完整团队”的命题。</p>
+<h3 id="c-ip-procurement-frame">C. “前沿IP可承制团队”单独做 procurement frame</h3>
+<p>以后遇到《流浪地球》这类公开征集：
+- 全部合格申请团队数；
+- 已经ship过何种规模产品；
+- 有完整3D pipeline的比例；
+- 有原创/承制经历；
+- 通过技术测试数量；
+- 未入选原因（匿名）；
+- 两年后存续/第二项目情况。</p>
+<p>这比从最终承制商倒推“全国只有一家能做”严谨得多。</p>
+<h2 id="75-20182020">7.5 2018–2020固定首发队列已经完成首轮实证试跑</h2>
+<p><a href="/heroes-portal/country-studies/china/013-fixed-first-release-cohort-pilot-2018-2020.html">013 固定首发队列试跑</a>已将中国、波兰、韩国公开案例按同一日期/继续规则实际编码。结果证明时间线可以重建，但也实证发现五个会扭曲国别率的字段：<strong>付费EA应作为T0；Steam developer字符串须人工合并；公司实体不能冒充作者团队；第二项目启动可早于第二款ship多年；Steam首发可能晚于其他平台首发。</strong> 因当前公开VGI网页索引不是完整国家抽样框，013明确禁止计算当前便利案例的国别比例。</p>
+<p>特别是Creepy Jar：2018 <em>Green Hell</em> EA、2019年底已启动 <em>StarRupture</em>、2026才ship，说明 <code>SECOND_SHIP_5Y=NO</code> 与 <code>SECOND_ATTEMPT_5Y=YES</code> 可以同时成立；FYQD则说明 <code>SECOND_STEAM_APP_3Y=YES</code> 与 <code>SECOND_DISTINCT_IP=NO</code> 可以同时成立。012后续比较必须同时报告这些不同层次。</p>
+<h2 id="77-team-densityteam-memoryteam-count">7.7 日本对中国team-density假说增加一个新变量：TEAM MEMORY，而不只是TEAM COUNT</h2>
+<p><a href="/heroes-portal/country-studies/japan/002-veteran-continuity-technical-frontier-falcom-2025-2026.html">Japan 002</a>提示：两个国家即使拥有相同数量的活跃team，如果一个团队核心成员平均共同工作十年以上，另一个频繁被重组/换项目，它们的<strong>tacit production capital</strong>也可能完全不同。因此中国跨国比较后续除 <code>FULL_CYCLE_TEAM_DENSITY</code> 外应尝试加入：
+- <code>CORE_TEAM_TENURE</code>
+- <code>SERIES/GENRE_CONTINUITY</code>
+- <code>INTERNAL_APPRENTICESHIP</code>
+- <code>TEAM_MEMORY_SURVIVES_REORG</code></p>
+<p>目前日本CESA/Falcom提供了可见任职数据；中国同口径仍缺，不能先写“中国流动更快”。</p>
+<h2 id="8-verdict">8. Verdict</h2>
+<p><strong>现在可以比上一轮更强地说：</strong></p>
+<p>中国的症结已经越来越不像“没有人会做游戏”，而像是：</p>
+<blockquote>
+<p><strong>庞大的专业人才、收入与用户规模，没有按同等数量级转化为大量稳定、独立承担完整产品判断和全球市场验证的核心团队。</strong></p>
+</blockquote>
+<p>2025 Steam高愿望单快照不是最终证明，但它第一次给这个判断提供了一个<strong>跨国、同时点、非明星传记式的量化压力测试</strong>。</p>
+<p>尤其是<strong>韩国</strong>：
+- 同为东亚；
+- 同样大型商业公司占据核心；
+- 同样移动游戏占主导；
+- 但在人口只有中国约1/27的情况下，Top200 Steam wishlist 的来源标题仍比中国更多。</p>
+<p>因此，未来不能再只用“儒家/家庭”“手游/F2P”“人口”任一单变量解释中国。更可能是一条<strong>长期团队形成链</strong>的复合损耗：</p>
+<pre><code>experience capital
+→ self-defined prototype
+→ small-team ownership
+→ greenlight
+→ full-cycle ship
+→ external market feedback
+→ core-team survival
+→ second attempt
+</code></pre>
+<p>每一层中国都有人通过；真正需要核的是<strong>每一层损失多少，以及为什么</strong>。</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / country-studies/china/012-full-cycle-authoring-team-supply-proxy-china-vs-comparators.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

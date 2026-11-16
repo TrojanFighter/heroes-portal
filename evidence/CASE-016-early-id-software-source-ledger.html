@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Evidence Ledger — CASE-016 Early id Software / Commander Keen · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl class="on"" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#e001-john-romero-on-small-scale-development" class="t2">E001 — John Romero on small-scale development</a><a href="#e002-tom-hall-interview-on-moonlighting" class="t2">E002 — Tom Hall interview on moonlighting</a><a href="#e003-scott-miller-interview-on-shareware-and-id-transition" class="t2">E003 — Scott Miller interview on shareware and id transition</a><a href="#e004-archived-john-romero-interview" class="t2">E004 — archived John Romero interview</a><a href="#e005-shacknews-oral-history" class="t2">E005 — Shacknews oral history</a><a href="#e006-masters-of-doom-doom-as-narrative-spine" class="t2">E006 — Masters of Doom / 《DOOM启世录》 as narrative spine</a><a href="#e007-january-1994-game-developer-production-and-business-snapshot-immediately-after-doom" class="t2">E007 — January 1994 Game Developer: production and business snapshot immediately after DOOM</a><a href="#e008-wired-1996-on-ids-openmodding-ecology" class="t2">E008 — WIRED 1996 on id&amp;rsquo;s open/modding ecology</a><a href="#e009-john-romeros-doom-guy-and-direct-interviews-as-first-person-correction-layer" class="t2">E009 — John Romero&amp;rsquo;s DOOM Guy and direct interviews as first-person correction layer</a><a href="#e010-doom-shareware-modding-synthesis-for-later-triangulation" class="t2">E010 — DOOM shareware / modding synthesis for later triangulation</a><a href="#e011-romero-school-computer-access-basic-and-early-publishing-path" class="t2">E011 — Romero: school computer access, BASIC and early publishing path</a><a href="#e012-carmack-teenage-game-hacking-and-later-openness-rationale" class="t2">E012 — Carmack: teenage game hacking and later openness rationale</a><a href="#e013-doom-playersmodders-becoming-professional-level-designers" class="t2">E013 — Doom players/modders becoming professional level designers</a><a href="#e014-quake-era-organization-strain-after-doom-success" class="t2">E014 — Quake-era organization strain after DOOM success</a><a href="#e015-carmack-on-technology-creating-the-early-id-product-frontier" class="t2">E015 — Carmack on technology creating the early-id product frontier</a><a href="#e016-2003-doom" class="t2">E016 — 2003 年《DOOM启世录》的章节级重新摄取</a><a href="#e017-romero-2023-direct-accounts-on-quake-and-daikatana" class="t2">E017 — Romero 2023 direct accounts on Quake and Daikatana</a><a href="#e018-warren-spectors-contemporary-deus-ex-ion-storm-austin-postmortem" class="t2">E018 — Warren Spector&amp;rsquo;s contemporary Deus Ex / Ion Storm Austin postmortem</a><a href="#e019-combined-carmackromero-quake-hindsight" class="t2">E019 — Combined Carmack/Romero Quake hindsight</a><a href="#e020-census-computer-access-and-socioeconomic-filters-1984-1989" class="t2">E020 — Census computer access and socioeconomic filters (1984 / 1989)</a><a href="#e021-ibm-pc-platform-nintendo-console-governance-contemporary-computing-diffusion" class="t2">E021 — IBM PC platform / Nintendo console governance / contemporary computing diffusion</a><a href="#e022-tom-halls-first-person-alternative-to-the-dropout-myth" class="t2">E022 — Tom Hall&amp;rsquo;s first-person alternative to the dropout myth</a><a href="#e023-romero-20222023-on-schoolcommunity-lab-and-magazine-publishing" class="t2">E023 — Romero 2022–2023 on school/community lab and magazine publishing</a><a href="#e024-scott-miller-1987-episodic-shareware-entrepreneurship" class="t2">E024 — Scott Miller 1987 episodic shareware entrepreneurship</a><a href="#e025-1980s-macro-recession-and-shreveport-local-bust" class="t2">E025 — 1980s macro recession and Shreveport local bust</a><a href="#e026-kushner-2003-on-differentiated-pre-id-household-and-founder-lives" class="t2">E026 — Kushner 2003 on differentiated pre-id household and founder lives</a><a href="#e027-romeros-stepfather-opposed-gaming-and-bought-the-crucial-computer" class="t2">E027 — Romero&amp;rsquo;s stepfather opposed gaming and bought the crucial computer</a><a href="#e028-same-generation-family-positive-counterfactual-jordan-mechner-karateka" class="t2">E028 — Same-generation family-positive counterfactual: Jordan Mechner / Karateka</a><a href="#e029-1980s-usa-video-game-moral-panic-and-restrictive-local-authority" class="t2">E029 — 1980s USA video-game moral panic and restrictive local authority</a><a href="#e030-the-strong-museum-primary-artifact-romeros-first-apple-ii-and-notebooks" class="t2">E030 — The Strong Museum primary artifact: Romero&amp;rsquo;s first Apple II+ and notebooks</a><a href="#e031-kushner-2003-reconciliations-before-and-after-doom-success" class="t2">E031 — Kushner 2003: reconciliations before and after DOOM success</a><a href="#e032-romero-2023-shacknews-forgiveness-and-boundaries-in-adulthood" class="t2">E032 — Romero 2023 Shacknews: forgiveness and boundaries in adulthood</a><a href="#e033-romero-2023-gamesbeat-two-children-from-the-same-household-remember-differently" class="t2">E033 — Romero 2023 GamesBeat: two children from the same household remember differently</a><a href="#e034-romero-2025-la-repubblica-intergenerational-practice-change-as-a-father" class="t2">E034 — Romero 2025 la Repubblica: intergenerational practice change as a father</a><a href="#e035-romero-2023-on-choosing-to-materially-help-his-family-after-success" class="t2">E035 — Romero 2023 on choosing to materially help his family after success</a><a href="#e036-liang-qiwei-contemporaneous-2010-interview-vs-2014-self-account-unstable-permission-across-stages" class="t2">E036 — Liang Qiwei, contemporaneous 2010 interview vs 2014 self-account: unstable permission across stages</a><a href="#e037-parental-conditional-regard-theory-not-a-retroactive-founder-diagnosis" class="t2">E037 — Parental conditional regard theory, not a retroactive founder diagnosis</a><a href="#current-evidence-level-conclusions" class="t2">Current evidence-level conclusions</a><a href="#strongly-supported" class="t3">STRONGLY SUPPORTED</a><a href="#strongly-supported-as-a-research-method" class="t3">STRONGLY SUPPORTED AS A RESEARCH METHOD</a><a href="#partial-next-verify" class="t3">PARTIAL / NEXT VERIFY</a></aside><article class="doc"><div class="col"><h1 id="evidence-ledger-case-016-early-id-software-commander-keen">Evidence Ledger — CASE-016 Early id Software / Commander Keen</h1>
+<ul>
+<li>Case: <code>CASE-016</code></li>
+<li>Status: ACTIVE</li>
+<li>Last updated: 2026-10-07</li>
+</ul>
+<h2 id="e001-john-romero-on-small-scale-development">E001 — John Romero on small-scale development</h2>
+<ul>
+<li>Class: P1 — direct creator interview</li>
+<li>Source: How To Market A Game, <code>John Romero on his book Doom Guy and developing games at a small scale</code>, 2023-09-25</li>
+<li>URL: https://howtomarketagame.com/2023/09/25/john-romero-on-his-book-doom-guy-and-developing-games-at-a-small-scale/</li>
+</ul>
+<p class="dc">Romero states:
+- Gamer&rsquo;s Edge required frequent shipped games;
+- he and Carmack also made games outside normal work hours;
+- the team estimated how many levels/data they could finish inside fixed deadlines;
+- they deliberately did not scope beyond the finite time they knew they had.</p>
+<p>Supports:
+- C003/C011: repeated shipping preceded id&rsquo;s famous releases.
+- C007: scope was derived from constraints rather than copied from larger games.</p>
+<h2 id="e002-tom-hall-interview-on-moonlighting">E002 — Tom Hall interview on moonlighting</h2>
+<ul>
+<li>Class: P1 — direct creator retrospective</li>
+<li>Source: Episodic Content Magazine, <code>The Science of Happiness: An Interview with Tom Hall – Part 2</code>, 2015</li>
+<li>URL: https://episodiccontentmag.com/2015/04/17/tomhall2/</li>
+</ul>
+<p>Hall states:
+- Commander Keen was developed by moonlighting at night/weekends for roughly two and a half months;
+- the team remained under Softdisk obligations and agreed to continue making games as part of avoiding litigation;
+- Hall stayed temporarily to train a replacement while also working for id.</p>
+<p>Supports:
+- C005: paid employment / obligations and original development overlapped.
+- C002: full-time independence followed, rather than preceded, proof of revenue.</p>
+<h2 id="e003-scott-miller-interview-on-shareware-and-id-transition">E003 — Scott Miller interview on shareware and id transition</h2>
+<ul>
+<li>Class: P1 — direct publisher/founder retrospective</li>
+<li>Source: Episodic Content Magazine, <code>Bigger in Texas: An Interview with Scott Miller, Part 2</code>, 2015</li>
+<li>URL: https://episodiccontentmag.com/2015/08/17/bigger-in-texas-an-interview-with-scott-miller-part-2/</li>
+</ul>
+<p>Miller states:
+- id developed Keen while still at Softdisk, including use of Softdisk computers;
+- Keen&rsquo;s shareware success convinced the team that they could leave Softdisk and do this full time;
+- legal/contractual obligations complicated the transition.</p>
+<p>Supports:
+- distribution/revenue was part of organizational formation.</p>
+<h2 id="e004-archived-john-romero-interview">E004 — archived John Romero interview</h2>
+<ul>
+<li>Class: P1 — direct creator interview, archival provenance weaker than publisher records</li>
+<li>Source: Commander Keen interview archive, <code>John Romero</code></li>
+<li>URL: https://cc314.shikadi.net/oldcc314/interview-jr.htm</li>
+</ul>
+<p>Romero states that the first Keen trilogy was built in spare time and generated enough money to leave Softdisk and formally start id in early 1991.</p>
+<p>Boundary:
+- preserve as corroboration; seek an original dated interview/archive capture before using exact dates/financials as strongest proof.</p>
+<h2 id="e005-shacknews-oral-history">E005 — Shacknews oral history</h2>
+<ul>
+<li>Class: S1/P1 — reported oral history with direct participant quotations</li>
+<li>Source: Shacknews, <code>The Making of Quake, Part 1: We are the Wind</code>, 2021</li>
+<li>URL: https://www.shacknews.com/article/124731/the-making-of-quake-part-1-we-are-the-wind</li>
+</ul>
+<p>Source-derived facts:
+- team juggled Softdisk deadlines with Apogee work;
+- Romero describes id as a small company dependent on game-generated income and without loans in that period.</p>
+<h2 id="e006-masters-of-doom-doom-as-narrative-spine">E006 — <em>Masters of Doom</em> / 《DOOM启世录》 as narrative spine</h2>
+<ul>
+<li>Class: S1 — researched secondary narrative / book-length synthesis</li>
+<li>Source: David Kushner, <em>Masters of Doom: How Two Guys Created an Empire and Transformed Pop Culture</em>, Random House, 2003</li>
+<li>Publisher page: https://www.penguinrandomhouse.com/books/96382/masters-of-doom-by-david-kushner/9780812972153/</li>
+</ul>
+<p>Role in this case:
+- provides a continuous narrative across Carmack/Romero prehistory, Softdisk, Keen, Wolfenstein, DOOM, Quake and the founders&rsquo; split;
+- unusually useful for connecting technology, product design, business model, work culture and organizational conflict instead of treating them as separate stories;
+- high narrative value for the eventual reader layer.</p>
+<p>Boundary:
+- this is not a P0/P1 source and must not alone carry disputed numbers, motives, contract terms or blame allocation;
+- key claims should be cross-checked against contemporary trade press, creator memoirs/interviews and other participant accounts;
+- when <em>Masters of Doom</em> and later first-person accounts conflict, preserve the conflict rather than silently harmonizing it.</p>
+<h2 id="e007-january-1994-game-developer-production-and-business-snapshot-immediately-after-doom">E007 — January 1994 <em>Game Developer</em>: production and business snapshot immediately after DOOM</h2>
+<ul>
+<li>Class: P0/S1 — contemporaneous trade-press feature with direct John Carmack / id quotations</li>
+<li>Source: Alexander Antoniades, <code>Monsters From the Id: The Making of Doom</code>, originally <em>Game Developer</em> premiere issue, January 1994; reprinted 2009</li>
+<li>URL: https://www.gamedeveloper.com/game-platforms/the-game-developer-archives-monsters-from-the-id-the-making-of-i-doom-i-</li>
+</ul>
+<p>Contemporaneous facts / observations include:
+- id was a seven-person company at the time of reporting;
+- Wolfenstein 3D used shareware distribution and had broken id&rsquo;s earlier Commander Keen shareware record;
+- the article compares shareware direct economics with retail distribution and describes the unusually high retained margin of the former;
+- id&rsquo;s main development environment included NeXTStep; Romero&rsquo;s DoomEd took about five human-months to build;
+- Carmack states that DOOM was primarily written in ANSI C with only a small number of assembler routines, in contrast to assumptions that id relied mainly on assembly;
+- the development environment and editor were explicitly used to reduce iteration/porting friction;
+- Tom Hall&rsquo;s departure is described as a consequence of conflict over the design direction of DOOM;
+- id decided to take over DOOM distribution rather than continue routing orders through Apogee, while outsourcing phone-order handling to Digital Magnetics;
+- id planned to expose technical specifications and tolerated/encouraged player modification rather than treating all modification as hostile;
+- the article documents external contributors/contractors for graphics/models, sound/network support and distribution operations.</p>
+<p>Supports:
+- C002/C010: market/distribution architecture is part of production optionality;
+- C004/C007: toolchain and code-language choices follow team bottlenecks rather than ideology;
+- C011: rapid prior releases and accumulated technology precede DOOM;
+- contributor-boundary audit: DOOM was a small-core production, not a two-person or fully internal product.</p>
+<p>Boundary:
+- sales/profit figures are valuable because they are contemporaneous, but still reported press figures rather than audited company financials.</p>
+<h2 id="e008-wired-1996-on-ids-openmodding-ecology">E008 — WIRED 1996 on id&rsquo;s open/modding ecology</h2>
+<ul>
+<li>Class: P0/S1 — contemporaneous reported profile</li>
+<li>Source: WIRED, <code>The Egos at Id</code>, 1996</li>
+<li>URL: https://www.wired.com/1996/08/id/</li>
+</ul>
+<p>Source-derived observations:
+- id&rsquo;s philosophy of sharing code/specifications and tolerating modification became part of the DOOM phenomenon;
+- publication of specifications helped support a large ecosystem of maps, editors and add-on content;
+- user creativity extended the life and reach of the product even where id did not directly capture all downstream revenue.</p>
+<p>Supports:
+- C010: distribution/community architecture can amplify market access and product longevity;
+- external community can function as a production/perpetuation layer around a small core team.</p>
+<h2 id="e009-john-romeros-doom-guy-and-direct-interviews-as-first-person-correction-layer">E009 — John Romero&rsquo;s <em>DOOM Guy</em> and direct interviews as first-person correction layer</h2>
+<ul>
+<li>Class: P1 — creator memoir / direct retrospective, with normal memoir limitations</li>
+<li>Source: John Romero, <em>DOOM Guy: Life in First Person</em>, Abrams Press, 2023</li>
+<li>Official page: https://romero.com/shop/p/doomguy</li>
+<li>Supporting direct interview: Shacknews, <code>Becoming Doom Guy: John Romero on his memoir and a life in games</code>, 2023</li>
+<li>URL: https://www.shacknews.com/article/136450/becoming-doomguy-john-romero-on-his-memoir-and-a-life-in-games</li>
+</ul>
+<p>Romero explicitly frames the memoir as both autobiography and an id Software/game-history account, covering individual games, development periods and company dynamics.</p>
+<p>Role:
+- use as a first-person correction/expansion layer against <em>Masters of Doom</em>;
+- particularly useful for chronology, Romero&rsquo;s own decisions, tool/design work and his retrospective interpretation of conflicts.</p>
+<p>Boundary:
+- a founder memoir is not neutral arbitration of multi-party disputes; preserve Carmack/Hall/other accounts when motives or blame differ.</p>
+<h2 id="e010-doom-shareware-modding-synthesis-for-later-triangulation">E010 — DOOM shareware / modding synthesis for later triangulation</h2>
+<ul>
+<li>Class: S1 — specialist secondary history with creator quotations</li>
+<li>Source: Richard Moss, <em>Shareware Heroes</em> excerpt, Game Developer, <code>How DOOM turbocharged the shareware revolution</code>, 2022</li>
+<li>URL: https://www.gamedeveloper.com/marketing/book-excerpt-how-i-doom-i-legitimized-the-shareware-revolution</li>
+</ul>
+<p>Useful synthesis:
+- connects Wolfenstein&rsquo;s financial cushion to the freedom to pursue DOOM;
+- traces why id retained shareware while changing the operational distribution model;
+- covers deliberate support for WAD/modding and the tool ecosystem.</p>
+<p>Boundary:
+- use to identify lines of inquiry and corroborate structure; prefer E007/P0 and direct participant sources for critical facts.</p>
+<h2 id="e011-romero-school-computer-access-basic-and-early-publishing-path">E011 — Romero: school computer access, BASIC and early publishing path</h2>
+<ul>
+<li>Class: P1 — direct creator retrospective interview</li>
+<li>Source: Shacknews, <code>Becoming Doom Guy: John Romero on his memoir and a life in games</code>, 2023</li>
+<li>URL: https://www.shacknews.com/article/136450/becoming-doomguy-john-romero-on-his-memoir-and-a-life-in-games</li>
+</ul>
+<p>Romero recalls that after moving to England in January 1983 he attended school on a U.S. military base with an Apple II computer lab and BASIC instruction. In the same interview he discusses submitting and selling early games/code to disk/computer magazines before the id period.</p>
+<p>Supports:
+- biographical reader layer: access to a programmable computer plus publishing outlets provided a concrete conversion path from game interest to making and external feedback;
+- this is evidence of a pathway, not proof that school computer access caused later success.</p>
+<p>Boundary:
+- retrospective autobiographical account; do not turn one school episode into childhood predestination.</p>
+<h2 id="e012-carmack-teenage-game-hacking-and-later-openness-rationale">E012 — Carmack: teenage game hacking and later openness rationale</h2>
+<ul>
+<li>Class: P1 — direct creator retrospective interview</li>
+<li>Source: WIRED, <code>Q&amp;A: Doom's Creator Looks Back on 20 Years of Demonic Mayhem</code>, 2013-12</li>
+<li>URL: https://www.wired.com/2013/12/john-carmack-doom/</li>
+</ul>
+<p>Carmack recalls using sector editing on <em>Ultima II</em> as a teenager to alter game data. He explicitly connects his later preference for exposing source/specifications and enabling modification with wanting future generations to have the deeper access to games that he had wished for earlier.</p>
+<p>Supports:
+- <code>play → reverse-engineering → value preference → platform/product openness</code> as a documented personal chain;
+- reader-layer argument that game consumption and production can be connected by specific modification actions rather than by playtime alone.</p>
+<p>Boundary:
+- retrospective explanation of Carmack&rsquo;s own motives; it does not by itself establish the commercial causal value of openness.</p>
+<h2 id="e013-doom-playersmodders-becoming-professional-level-designers">E013 — Doom players/modders becoming professional level designers</h2>
+<ul>
+<li>Class: P0/S1 — contemporaneous reported industry profile</li>
+<li>Source: WIRED, <code>Legion of Doom</code>, 1998-03</li>
+<li>URL: https://www.wired.com/1998/03/doom/</li>
+</ul>
+<p>The profile follows prominent Doom level creators and describes a transition in which people who had been consumers/fans created professional-quality Doom content, built public reputations, and were interviewed/recruited for full-time game-development work.</p>
+<p>Supports:
+- a concrete historical <code>consumer → modder/level creator → public portfolio/reputation → professional</code> pathway;
+- DOOM&rsquo;s mod ecosystem as talent-discovery/capability infrastructure, not only a content-longevity mechanism.</p>
+<p>Boundary:
+- high-visibility success stories are subject to survivor selection; this proves the pathway existed, not that modding generally guaranteed industry employment.</p>
+<h2 id="e014-quake-era-organization-strain-after-doom-success">E014 — Quake-era organization strain after DOOM success</h2>
+<ul>
+<li>Class: P0/S1 — contemporaneous reported profile with participant quotations</li>
+<li>Source: WIRED, <code>The Egos at Id</code>, 1996-08</li>
+<li>URL: https://www.wired.com/1996/08/id/</li>
+</ul>
+<p>The report documents Quake&rsquo;s delays/false starts, the shift into a concentrated war-room production setup, high pressure inside the team, growing specialization and the company&rsquo;s attempt to ship a more ambitious networked 3D product after DOOM.</p>
+<p>Supports:
+- reader-layer claim that commercial/technical success expanded ambition and available talent but did not automatically provide governance, alignment or low coordination cost;
+- <code>first success → more optionality → new organization problem</code> as a historical transition worth separating from product-design success.</p>
+<p>Boundary:
+- use contemporary observation to describe production strain; do not assign founder blame or diagnose personalities from a magazine profile.</p>
+<h2 id="e015-carmack-on-technology-creating-the-early-id-product-frontier">E015 — Carmack on technology creating the early-id product frontier</h2>
+<ul>
+<li>Class: P1 — direct creator retrospective interview</li>
+<li>Source: WIRED, <code>Q&amp;A: Doom's Creator Looks Back on 20 Years of Demonic Mayhem</code>, 2013-12-10</li>
+<li>URL: https://www.wired.com/2013/12/john-carmack-doom/</li>
+</ul>
+<p>Carmack explicitly rejects a passive “hardware became good enough, therefore DOOM appeared” reading. He describes early id — from 2D scrolling through Wolfenstein / ShadowCaster to DOOM — as repeatedly working at the edge of what was barely possible, then discovering what game could be built around the newly created technical capability. He also stresses that the relation was bidirectional: the team wanted a certain kind of game, pushed technology into that quadrant, then redesigned around what the technology actually achieved.</p>
+<p>For DOOM specifically, Carmack describes technical advances beyond Wolfenstein including non-tile-constrained arbitrary line geometry, dynamic lighting, changing floor / ceiling heights and other rendering/world capabilities; the interview also identifies multiplayer / deathmatch as another major product capability rather than reducing the breakthrough to graphics alone.</p>
+<p>Supports:
+- early id as an <strong>endogenous technical-window creator</strong>, not only a beneficiary of industry diffusion;
+- a <code>desired experience ↔ technical invention ↔ newly feasible design</code> loop rather than one-way technological determinism;
+- the claim that Carmack&rsquo;s graphics / engine work materially expanded the feasible product space that id itself could exploit before the broader industry absorbed those techniques.</p>
+<p>Boundary:
+- Carmack is describing his own historical role retrospectively; use contemporary E007 and independent technical histories for triangulation;
+- do not claim id invented first-person perspective, 3D graphics, BSP as a mathematical concept, or every later FPS convention;
+- distinguish creating / productizing a technical frontier from later industry-wide diffusion and genre standardization.</p>
+<h2 id="e016-2003-doom">E016 — 2003 年《DOOM启世录》的章节级重新摄取</h2>
+<ul>
+<li>Class: S1 — David Kushner, <em>Masters of Doom</em>, Random House, 2003；个人上传的中文 EPUB 用于核对章节</li>
+<li>Bibliography: https://www.penguinrandomhouse.com/books/96382/masters-of-doom-by-david-kushner/9781588362896/</li>
+<li>Related: <a href="/heroes-portal/book/research-notes/masters-of-doom-longitudinal-master-study-001.html">纵向研究 001</a></li>
+</ul>
+<p>Chapter map：第一至二章两位 John 能力前史；第三至四章 Softdisk/工资/出货与职业选择；第五至七章 Keen/Wolfenstein；第八至十章 DOOM 设计与发布；第十一至十三章 Quake 与 id 组织变局；第十四至十六章 Ion Storm/Daikatana 与后续。</p>
+<p>Use: 高信息密度叙事脊柱，生成待核证机制和连续性问题。不得单源承载创始人心理、逐字私人对话、股份/合同/融资金额、销量或过错归属。禁止将用户上传版权 EPUB 全文并入公共仓库。</p>
+<h2 id="e017-romero-2023-direct-accounts-on-quake-and-daikatana">E017 — Romero 2023 direct accounts on Quake and Daikatana</h2>
+<ul>
+<li>Class: P1 — direct creator retrospective</li>
+<li>Sources: GamesBeat, 2023: https://gamesbeat.com/making-doom-and-building-the-fps-industry-at-100-miles-per-hour-john-romero-interview/ ; Tim Ferriss 2023 transcript: https://tim.blog/2023/07/15/john-romero-transcript/</li>
+</ul>
+<p>Romero describes Quake&rsquo;s changing engine capabilities causing earlier-built content/levels to lag behind the final technical possibilities, contributing to burnout and tension. He also says Daikatana&rsquo;s mid-project migration from Quake to Quake II technology created unexpected conversion cost.</p>
+<p>Boundary: first-person hindsight; possible alternative Quake development cycles are counterfactual, not confirmed superior courses; Quake shipped as a successful major game.</p>
+<h2 id="e018-warren-spectors-contemporary-deus-ex-ion-storm-austin-postmortem">E018 — Warren Spector&rsquo;s contemporary Deus Ex / Ion Storm Austin postmortem</h2>
+<ul>
+<li>Class: P1 — project leader contemporaneous production postmortem</li>
+<li>Source: Game Developer, Warren Spector, 2000-12-06, https://www.gamedeveloper.com/design/postmortem-ion-storm-s-i-deus-ex-i-</li>
+</ul>
+<p>Spector reports a positive reception to Deus Ex after June 2000 release, previous Origin / Looking Glass production knowledge embedded in its design, an early two-lead designer structure later repaired, and Dallas-to-Austin remote art management that impaired project manager&rsquo;s hiring/evaluation authority. Negative Dallas publicity also hampered Austin&rsquo;s morale and hiring.</p>
+<p>Supports: same-firm contrasting production results; project-specific authority structures and local repairs matter; Ion Storm should not be equated wholly with Daikatana.</p>
+<p>Boundary: Spector&rsquo;s own project retrospective is not neutral audited accounting. Successful release does not erase his documented management mistakes.</p>
+<h2 id="e019-combined-carmackromero-quake-hindsight">E019 — Combined Carmack/Romero Quake hindsight</h2>
+<ul>
+<li>Class: S1/P1 — journalist&rsquo;s report of creator discussion</li>
+<li>Source: Ars Technica, 2023-12, https://arstechnica.com/gaming/2023/12/dooms-creators-reminisce-about-as-close-to-a-perfect-game-as-anything-we-made/</li>
+</ul>
+<p>Both creators identify Quake&rsquo;s unusually large concurrent new-technology burdens and consider whether alternative technical/production priorities would have been better. Supports the inference that endogenous technical-window expansion can outpace content and organizational absorption; does not establish a single culprit or deterministic counterfactual.</p>
+<h2 id="e020-census-computer-access-and-socioeconomic-filters-1984-1989">E020 — Census computer access and socioeconomic filters (1984 / 1989)</h2>
+<ul>
+<li><strong>Class:</strong> P0, contemporaneous government survey / nationwide CPS aggregates</li>
+<li><strong>Source:</strong> U.S. Census Bureau, <em>Computer Use in the United States: 1984</em> (P23-155, published 1988-03), https://www2.census.gov/library/publications/1988/demographics/p23-155.pdf</li>
+<li><strong>Source:</strong> U.S. Census Bureau, <em>Computer Use in the United States: 1989</em> (P23-171, published 1991-02), https://www2.census.gov/library/publications/1991/demographics/p23-171.pdf</li>
+</ul>
+<p>Observed data: households with computer <strong>8.2% (1984)</strong> and <strong>15.0% (1989)</strong>; 1984 annual household income under $10k <strong>1.7%</strong> ownership versus $50k+ <strong>22.9%</strong>; children 3–17 using computers at school <strong>28% → 46%</strong> (not the percentage of schools with a machine); 1989 <strong>23.0% of home computers</strong> had telephone modems (NOT 23% of all households).</p>
+<p>Supports: hardware access / sustained practice was a materially uneven opportunity, so the famous early-id childhoods are selected cases; magazine/BBS participation required an unusually early and sustained technology pathway.</p>
+<p>Boundary: no individual founder income, exact childhood household computer purchase costs, local school curriculum or developer probability may be inferred from aggregated surveys. Household adoption is not programmer population share.</p>
+<h2 id="e021-ibm-pc-platform-nintendo-console-governance-contemporary-computing-diffusion">E021 — IBM PC platform / Nintendo console governance / contemporary computing diffusion</h2>
+<ul>
+<li><strong>Class:</strong> H1/P0 — corporate historical records and museum object dossier</li>
+<li><strong>Sources:</strong> IBM official PC history https://www.ibm.com/history/personal-computer ; Smithsonian National Museum of American History https://americanhistory.si.edu/collections/nmah_1436726 ; TIME 1982 Machine of the Year cover as contemporary media https://time.com/archive/6699315/a-letter-from-the-publisher-jan-3-1983/</li>
+</ul>
+<p>Observed: IBM PC first launched 1981-08-12, entry model $1,565 before practical peripherals. U.S. home console crash 1983 did not mean all computer game publishing disappeared; NES launched in U.S. 1985 with Nintendo license/lockout architecture, unlike the independently programmable PC/Apple II markets. TIME&rsquo;s 1982 computer cover is evidence of public rhetoric, not household ownership.</p>
+<p>Boundary: do not attribute all game-industry growth to Nintendo or all early-id technical ability to generic “American market freedom”; markets / platforms had distinct gatekeepers. Carmack&rsquo;s PC-scrolling invention is separately evidenced E015.</p>
+<h2 id="e022-tom-halls-first-person-alternative-to-the-dropout-myth">E022 — Tom Hall&rsquo;s first-person alternative to the dropout myth</h2>
+<ul>
+<li><strong>Class:</strong> P1, direct creator retrospective plus university alumni interview</li>
+<li><strong>Sources:</strong> Tom Hall archived interview https://cc314.shikadi.net/oldcc314/interview-th.htm ; University of Wisconsin alumni https://onwisconsin.uwalumni.com/tom-hall-86-video-game-innovator/</li>
+</ul>
+<p>Observed: Apple II purchased for family 1980; many self-produced games; Hall graduated Wisconsin–Madison in CS and made educational software for children with learning disabilities before / during professional early career; later Softdisk, id, and Ion Storm.</p>
+<p>Boundary: early interview archival provenance not equivalent to official university transcript; specific “hundred games” is creator estimate; college experience cannot be generalized as guaranteed positive, but refutes an all-dropout founder story.</p>
+<h2 id="e023-romero-20222023-on-schoolcommunity-lab-and-magazine-publishing">E023 — Romero 2022–2023 on school/community lab and magazine publishing</h2>
+<ul>
+<li><strong>Class:</strong> P1, direct creator interviews</li>
+<li><strong>Sources:</strong> Tim Ferriss 2023 full transcript https://tim.blog/2023/07/15/john-romero-transcript/ ; Shacknews 2023 https://www.shacknews.com/article/136450/becoming-doomguy-john-romero-on-his-memoir-and-a-life-in-games ; Stuff 2022 https://www.stuff.tv/features/stuff-meets-doom-and-wolfenstein-3d-creator-john-romero/</li>
+</ul>
+<p>Observed: at age 11 in 1979, accessible Sierra College terminal and students helped him understand programming; later family Apple II, and 1983 American military-base school in England provided Apple II / BASIC classes; paid game codes published in magazines before id career.</p>
+<p>Boundary: the “$100 Scout Search” and exact family conflicts described in Kushner first chapter are S1 until original editor acceptance, bank receipts or corroboration are located. Having a school computer says nothing by itself about unequal household resources of the other children.</p>
+<h2 id="e024-scott-miller-1987-episodic-shareware-entrepreneurship">E024 — Scott Miller 1987 episodic shareware entrepreneurship</h2>
+<ul>
+<li><strong>Class:</strong> P1, publisher participant retrospective</li>
+<li><strong>Sources:</strong> Apogee official history by Scott Miller https://www.apogeeent.com/devblog/apogeeisback ; Miller interview part 1 https://episodiccontentmag.com/2015/07/17/bigger-in-texas-an-interview-with-scott-miller-part-1/</li>
+</ul>
+<p>Observed: <em>Kingdom of Kroz</em> published 1987, divided into episodic components with a free initial episode distributed through online/BBS services, paid subsequent portions; this was a deliberate solution to publisher/market mismatch rather than “marketing magic”.</p>
+<p>Boundary: source has a self-promotional interest; claim about pioneering shareware as a whole needs broader independent history, since freeware/voluntary-payment precedents predate Kroz. Distinguish id&rsquo;s creator skills from Miller&rsquo;s market production.</p>
+<h2 id="e025-1980s-macro-recession-and-shreveport-local-bust">E025 — 1980s macro recession and Shreveport local bust</h2>
+<ul>
+<li><strong>Class:</strong> P0 — official annual labor data; P0 contemporaneous newspaper report</li>
+<li><strong>Sources:</strong> BLS annual US unemployment series via FRED https://fred.stlouisfed.org/data/USAURNAA ; Los Angeles Times 1987-12-30 https://www.latimes.com/archives/la-xpm-1987-12-30-mn-21621-story.html</li>
+</ul>
+<p>Observed: 1982 national unemployment 9.7%, 1989 5.3%; Shreveport late-1980s oil/industrial downturn and AT&amp;T manufacturing layoffs documented in a 1987 news dispatch.</p>
+<p>Boundary: neither national unemployment averages nor a city newspaper story proves the salary, household runway or job availability of any id founder; location is an opportunity condition, not a demonstrated cause of id forming.</p>
+<h2 id="e026-kushner-2003-on-differentiated-pre-id-household-and-founder-lives">E026 — Kushner 2003 on differentiated pre-id household and founder lives</h2>
+<ul>
+<li><strong>Class:</strong> S1 — researched long-form secondary narrative; user-provided Chinese EPUB read 2026-10-07</li>
+<li><strong>Chapter map:</strong> Ch 1 《摇滚明星》 Romero family/school/1984 magazine/Origin-to-Softdisk; Ch 2 《火箭科学家》 Carmack family/school/juvenile punishment/college/publisher fees; Ch 3 《侵犯版权的戴夫》 Hall/Adrian/Jay/Softdisk and local Shreveport; Ch 4 《买比萨的钱》 publisher Miller / business incentives / family and employer costs.</li>
+<li><strong>Deeper research:</strong> <a href="/heroes-portal/book/research-notes/early-id-1980s-america-life-decisions-001.html">Early id 1980s America and life choices</a></li>
+</ul>
+<p>Book-reported hypotheses: Romero’s family and work reentry obligations, Carmack’s professionally educated family and material support, Hall’s university degree, Adrian’s transition from fine art / hospital wage work, Jay’s hospitality/editor career, Softdisk founder Vekovius’s payroll and ownership claims. This materially complicates the “two gifted children made DOOM alone” story.</p>
+<p>Boundary: private conversations, trauma-to-aesthetic causality, exact family resources, morals, royalties, household burn, employer equipment terms remain <code>BOOK-REPORTED / UNKNOWN</code> unless other participants and records corroborate. Third-party family members are not to be impersonated or treated as NPCs.</p>
+<h2 id="e027-romeros-stepfather-opposed-gaming-and-bought-the-crucial-computer">E027 — Romero&rsquo;s stepfather opposed gaming and bought the crucial computer</h2>
+<ul>
+<li><strong>Class:</strong> P1 — multiple direct Romero interviews / first-person essay; S1 — 2003 Kushner original-book chapter 1</li>
+<li><strong>Romero 1997 author introduction to Halcyon Days:</strong> https://dadgum.com/halcyon/BOOK/MISC/INTRO.HTM ; says parents worried about arcade spending and bought Apple II+ as a way to redirect the fascination.</li>
+<li><strong>Romero 2018 direct interview:</strong> https://gameir.ie/event/interview-with-an-innovator-john-romero/ ; family disapproved of extensive arcade play but approved programming and ultimately bought Apple II; parents did not meaningfully playtest his creations.</li>
+<li><strong>Romero 2023 GamesBeat long interview:</strong> https://gamesbeat.com/making-doom-and-building-the-fps-industry-at-100-miles-per-hour-john-romero-interview/ ; identifies stepfather&rsquo;s job move to Northern California, willingness to hear about university Apple II, and direct purchase of home computer as pivotal; acknowledges physical/emotional abuse and adult reconciliation.</li>
+<li><strong>Kushner 2003, chapter 1:</strong> stepfather arcade restriction / beating, family household context, school/college transition; narrative details S1 pending original contemporaneous documentation.</li>
+<li><strong>Romero 2020 Washington Post oral interview:</strong> https://www.washingtonpost.com/video-games/2020/12/21/john-brenda-romero/ ; direct adult recollection of childhood violence and use of computer time as a refuge.</li>
+</ul>
+<p><strong>Supports:</strong> the same adult could be a severe gatekeeper of recreational game consumption <strong>and</strong> an enabling purchaser of a programmable computer; family financial support / normative consent / physical safety / career consent are separate variables.</p>
+<p><strong>Boundary:</strong> adult reconciliation does NOT retroactively make abuse acceptable; no claim that violence caused creative ability. Do not misrepresent stepfather as universally pro-gaming, nor confuse purchase of computer with knowledge of game-design profession.</p>
+<h2 id="e028-same-generation-family-positive-counterfactual-jordan-mechner-karateka">E028 — Same-generation family-positive counterfactual: Jordan Mechner / Karateka</h2>
+<ul>
+<li><strong>Class:</strong> P1 — direct creator interview incorporating a preserved documentary/game-journal archive</li>
+<li><strong>Source:</strong> Sam Machkovech, <em>The father-and-son of Karateka: how family anchored a classic game&rsquo;s innovations</em>, Game Developer, 2023-08-29</li>
+<li>URL: https://www.gamedeveloper.com/design/the-father-and-son-of-karateka-how-family-anchored-a-classic-game-s-innovations</li>
+</ul>
+<p>Mechner says his father Francis did not play video games but recognized an artistic project, suggested and composed musical leitmotifs for 1984 <em>Karateka</em>, and actively supported production and filming. Mechner explicitly contrasts his positive family environment with John Romero&rsquo;s earlier parental opposition. <em>The Making of Karateka</em> embeds original documentary artifacts and early prototypes, offering less nostalgia-dependent evidence than a memory-only interview.</p>
+<p><strong>Supports:</strong> family assistance may enter directly as aesthetic/production capability, not only cash or permission; external contemporaneous US peer counterexample prevents “successful founders needed to fight parents” myth.</p>
+<p><strong>Boundary:</strong> family wealth, luck and product acceptance are not controlled; no inference that a positive family relationship is necessary or sufficient for success. Avoid promoting Mechner to an indexed Case until a separate production study justifies it.</p>
+<h2 id="e029-1980s-usa-video-game-moral-panic-and-restrictive-local-authority">E029 — 1980s USA video-game moral panic and restrictive local authority</h2>
+<ul>
+<li><strong>Class:</strong> S1/H1 — historical research synthesis by game historian Michael Z. Newman drawing on contemporary coverage/municipal records</li>
+<li><strong>Source:</strong> <em>Children of the 80s Never Fear: Video Games Did Not Ruin Your Life</em>, Smithsonian Magazine, 2017-05-25</li>
+<li>URL: https://www.smithsonianmag.com/history/children-80s-never-fear-video-games-did-not-ruin-your-life-180963452/</li>
+</ul>
+<p>Newman documents US parents, commentators and local officials denouncing video arcades as harmful for learning, crime and adolescence, and restrictive rules/litigation in Mesquite TX (1982), while computer/game advocates simultaneously framed play as technical literacy and some adolescents entered software careers from programming.</p>
+<p><strong>Supports:</strong> early id&rsquo;s historical regime cannot be presented as universally permissive US families; norm sanctions and maker opportunities coexisted in the same society.</p>
+<p><strong>Boundary:</strong> museum magazine essay is researched secondary synthesis, not a national representative parent opinion survey; cannot quantify the frequency or intensity of bans in US vs China from these cases alone. Historical US youth arcade regulation is not equivalent to 2021 Chinese online-game company limits.</p>
+<h2 id="e030-the-strong-museum-primary-artifact-romeros-first-apple-ii-and-notebooks">E030 — The Strong Museum primary artifact: Romero&rsquo;s first Apple II+ and notebooks</h2>
+<ul>
+<li><strong>Class:</strong> P0 (physical object / archived development notebook), P1 (Romero recollection during 2014 installation as recorded by museum curator)</li>
+<li><strong>Source:</strong> The Strong National Museum of Play, Jon-Paul Dyson, 2014-08-01, <em>Preserving John Romero&rsquo;s First Computer at ICHEG</em></li>
+<li>URL: https://www.museumofplay.org/blog/preserving-john-romeros-first-computer-at-icheg/</li>
+</ul>
+<p>The museum holds and displays Romero&rsquo;s donated first Apple II+ and his development notebook. A curator reports Romero&rsquo;s own recollection that <strong>in 1981</strong> his father gave him the Apple II+ with 64k language card, Softcard, printer, Amdek color monitor and Videoterm; <strong>Christmas 1982</strong> his parents provided Roger Wagner&rsquo;s <em>Assembly Line: The Book</em>. During the 1983 family move to Britain the computer spent ~6 months in shipping; he wrote designs in notebooks and then had sustained programming time in summer 1983. His notebooks contain both notes about games he played and original game ideas; later published work came from this preprofessional period.</p>
+<p>Supports:
+- Direct hardware, instructional-material and space/time resources provided by family;
+- Game-playing reference stock and creator idea artifacts appearing <strong>together in contemporary handwritten notes</strong>;
+- Parental mediation is not reducible to “opposed games”: provision of equipment/books enabled deep learning;
+- The 1983 shipping gap is a useful negative interruption case that distinguishes owning a machine from actually having sustained access.</p>
+<p><strong>Date conflict:</strong> Romero&rsquo;s later interviews sometimes place the home Apple II in <strong>1982</strong> (e.g. 2022 Stuff interview); museum curator records participant&rsquo;s installation recollection as <strong>1981</strong>. Prefer “early 1980s / 1981–82” unless contemporaneous purchase documentation confirms a year. Also do not assume museum&rsquo;s generic term “father” resolves all biological/stepfather relations without cross-checking direct 2023 interviews.</p>
+<p>Boundary: artifact ownership and museum curation confirm items existed, not household exact income, per-hour practice, payment receipts or psychological causal necessity. Avoid “he succeeded because his parent was abusive”; material help and harm remain separate.</p>
+<h2 id="e031-kushner-2003-reconciliations-before-and-after-doom-success">E031 — Kushner 2003: reconciliations before and after DOOM success</h2>
+<ul>
+<li><strong>Class:</strong> S1, researched narrative source based on interviews; author-supplied Chinese EPUB / original English <code>Masters of Doom</code></li>
+<li><strong>Edition:</strong> David Kushner, <em>Masters of Doom</em>, Random House, 2003, ISBN 9781588362896; official publisher https://www.penguinrandomhouse.com/books/96382/masters-of-doom-by-david-kushner/9781588362896/</li>
+<li><strong>Book locator A:</strong> pre-DOOM launch, 1993 Dallas / Outback Steakhouse stepfather John Schuneman apologizes to John Romero for wrongly insisting a career must be business applications rather than games, Romero accepts. Book situates it <strong>after Wolfenstein financial success and before DOOM&rsquo;s Dec 1993 launch</strong>.</li>
+<li><strong>Book locator B:</strong> after Keen / Wolfenstein and around Doom success (1992–1994), Carmack&rsquo;s relation with mother Inga improves; the book records that she sometimes plays <em>Commander Keen</em> and contrasts her earlier MIT/IBM educational plan against the now-validated game work.</li>
+<li><strong>Book locator C:</strong> post-Romero split after Quake, the book compares Carmack&rsquo;s choice to remain a small developer using external distribution to his mother&rsquo;s conservative fiscal tendencies.</li>
+<li><strong>Book locator D:</strong> Columbine-era social controversy in <strong>1999</strong>: Schuneman is described defending his son&rsquo;s DOOM against disparagers at a bowling alley, using aggressive language.</li>
+<li><strong>Book locator E:</strong> Romero&rsquo;s wish to be a different father from his own, alongside his 1990s divorce and sons living with their mother in California while he works out of state.</li>
+</ul>
+<p><strong>Supports:</strong> chronology and multi-stage family behavior in Kushner&rsquo;s biographical narrative. The 1993 apology is for <strong>occupational judgment</strong>, not clearly separately for childhood physical violence; the 1999 public defense is a <em>book-reported scene</em>, not independently verified courtroom/recorded evidence. Carmack&rsquo;s work-style parallel to his mother&rsquo;s fiscal philosophy is a <strong>secondary author&rsquo;s reading</strong>, not a proven psychological causal transmission. Divorce/childcare details are only subject-side or author-described; never speak for the children or spouses.</p>
+<p><strong>Boundary:</strong> S1 scene reconstruction must not be quoted as verbatim P0 or treated as fully corroborated by public direct interviews. No long copyrighted text reproduced in repo.</p>
+<h2 id="e032-romero-2023-shacknews-forgiveness-and-boundaries-in-adulthood">E032 — Romero 2023 Shacknews: forgiveness and boundaries in adulthood</h2>
+<ul>
+<li><strong>Class:</strong> P1, subject&rsquo;s retrospective direct interview</li>
+<li><strong>Source:</strong> David L. Craddock, <code>Becoming Doom Guy: John Romero on his memoir and a life in games</code>, Shacknews, 2023-07-28</li>
+<li><strong>URL:</strong> https://www.shacknews.com/article/136450/becoming-doomguy-john-romero-on-his-memoir-and-a-life-in-games</li>
+</ul>
+<p>Romero discusses both birth father and stepfather in adulthood, says he personally chooses forgiveness and emphasizes differing ages/experiences, alcohol and stepfather&rsquo;s drill-sergeant background as life context. Crucially he explicitly recalls stepfather abruptly telling him to leave the home, then getting a higher-paying job and moving out; living separately made relations substantially easier. No direct evidence that all specific abuse was separately acknowledged/apologized for by Schuneman.</p>
+<p><strong>Supports:</strong> <code>PERSONAL FORGIVENESS</code>, <code>AUTONOMY/HOUSING BOUNDARY</code>, not an obligation for every survivor of abusive parenting to reconcile. His self-description cannot by itself establish parents&rsquo; original intentions.</p>
+<h2 id="e033-romero-2023-gamesbeat-two-children-from-the-same-household-remember-differently">E033 — Romero 2023 GamesBeat: two children from the same household remember differently</h2>
+<ul>
+<li><strong>Class:</strong> P1, direct Romero interview; his report of brother&rsquo;s experience <strong>secondhand within P1</strong> (not a first-person interview with Ralph)</li>
+<li><strong>Source:</strong> Dean Takahashi, <code>Making Doom and building the FPS industry at 100 miles per hour</code>, GamesBeat, 2023-08-14</li>
+<li><strong>URL:</strong> https://gamesbeat.com/making-doom-and-building-the-fps-industry-at-100-miles-per-hour-john-romero-interview/</li>
+</ul>
+<p>Romero says his brother read <em>Doom Guy</em> and remembered their biological father and stepfather in notably different and sometimes warmer ways. Romero welcomes his brother&rsquo;s different account. He also talks about his complex family origins and his later wish to move on without grudges.</p>
+<p><strong>Supports:</strong> multivocal biographical method: even siblings in one household need not share the same memories; the historian must not reconstruct an objectively single “father-child relationship” from one autobiography.</p>
+<p><strong>Boundary:</strong> Ralph has not been interviewed here independently; avoid labeling one brother&rsquo;s account true/false, speculating about memory disorders or psychological diagnoses.</p>
+<h2 id="e034-romero-2025-la-repubblica-intergenerational-practice-change-as-a-father">E034 — Romero 2025 la Repubblica: intergenerational practice change as a father</h2>
+<ul>
+<li><strong>Class:</strong> P1, subject&rsquo;s direct retrospective interview in Italian</li>
+<li><strong>Source:</strong> <code>John Romero, leggenda dei videogame: «Non volevo essere famoso. Poi è arrivato Doom»</code>, la Repubblica, 2025-11-03</li>
+<li><strong>URL:</strong> https://www.repubblica.it/tecnologia/2025/11/03/news/john_romero_doom_videogame_autobiografia_intervista-424956718/</li>
+</ul>
+<p>Asked whether he broke the earlier family cycle, Romero says he raises children differently, would not use the physical violence he encountered, and co-plays games with children, daughter, her partner and friends: <em>Minecraft</em> and <em>Dead by Daylight</em> specifically. This is a reported practice and publicly stated value, <strong>not</strong> externally validated as his whole record as a father.</p>
+<p><strong>Supports:</strong> intergenerational difference in how a parent relates to video game consumption and shared family leisure. Do not erase 1990s childcare/separation costs or imply self-reported parenting creates a moral “success grade”.</p>
+<h2 id="e035-romero-2023-on-choosing-to-materially-help-his-family-after-success">E035 — Romero 2023 on choosing to materially help his family after success</h2>
+<ul>
+<li><strong>Class:</strong> P1 direct subject interview</li>
+<li><strong>Source:</strong> Blair Farrell, <code>Interview: The Legendary John Romero Talks Doom Guy: Life in First Person</code>, Comic Book Video Games, 2023-07-17</li>
+<li><strong>URL:</strong> https://comicbookvideogames.com/2023/07/17/interview-the-legendary-john-romero-talks-doom-guy-life-in-first-person/</li>
+</ul>
+<p>Romero discusses giving back to family and community after DOOM financial success despite childhood hardships; he distinguishes the utility of money as enabling continued creative work and as improving others&rsquo; living situations.</p>
+<p><strong>Supports:</strong> successful adult child may provide material support to parents and community, which is different from the parent finally giving the adult child autonomy, or from full emotional redress.</p>
+<p><strong>Boundary:</strong> no audited transfer amounts, dates or recipients. Cannot assert cash gifts themselves caused a particular apology or reconciled every family conflict.</p>
+<h2 id="e036-liang-qiwei-contemporaneous-2010-interview-vs-2014-self-account-unstable-permission-across-stages">E036 — Liang Qiwei, contemporaneous 2010 interview vs 2014 self-account: unstable permission across stages</h2>
+<ul>
+<li><strong>Class:</strong> P0/P1 — participant direct 2010 interview near relevant period, then 2014 retrospective self-account; <strong>not evidence that Chinese parents generally apologize after success</strong></li>
+<li><strong>Source A:</strong> <code>独立游戏与游戏独立——《雨血》作者访谈</code>, 《大众软件》by newtype2001, reposted 3DM on 2010-06-02: https://www.3dmgame.com/news/201006/16603_5.html</li>
+<li><strong>Source B:</strong> 梁其伟, <code>《影之刃》制作人：什么促使我走上独立开发者之路</code>, 触乐 originally 2014-07-29 with author authorization: https://www.chuapp.com/?a=index&amp;c=Article&amp;id=61563</li>
+</ul>
+<p>2010:梁称小时候打游戏导致成绩下降、老师找家长；<strong>考上清华后父母便不再过问</strong>，本人已有更多可支配经济资源因而更广泛接触家用机/掌机。2014：母亲一直收藏其童年世界观画册；2007大三制作《雨血》导致挂科/原有保研资格失效，家长与导师等施压，停做约一年，2008留学后复工。</p>
+<p>Interpretation: parent permission can change upon <strong>credential success (Tsinghua admission)</strong> and tighten again upon <strong>credential loss (graduate recommendation)</strong>; game playing permission is not identical to full-time game production permission.</p>
+<p><strong>CHRONOLOGY CONFLICT:</strong> 2010 biographical sidebar lists <strong>RPG Maker since 2005; first game public July 2007; complete edition February 2008; Rainblood 2 started July 2008</strong>. 2014 essay says found RPG Maker via 66RPG early 2006, almost untouched project mid-2007 to mid-2008, and major VeryCD public upload 2010. Do not silently harmonize first playable, first public upload, full edition, later republishing and sequel timeline. Locate contemporary 2007/2008 download posts/releases and original screenshots/time metadata. Neither source establishes an eventual parent-to-child apology or deep reconciliation.</p>
+<h2 id="e037-parental-conditional-regard-theory-not-a-retroactive-founder-diagnosis">E037 — Parental conditional regard theory, not a retroactive founder diagnosis</h2>
+<ul>
+<li><strong>Class:</strong> P0 scholarly primary empirical article for constructs; NOT a period-specific game founder source</li>
+<li><strong>Source:</strong> Avi Assor, Guy Roth, Edward L. Deci, <code>The Emotional Costs of Parents' Conditional Regard: A Self-Determination Theory Analysis</code>, <em>Journal of Personality</em> 72(1):47–88, 2004</li>
+<li><strong>URL:</strong> https://doi.org/10.1111/j.0022-3506.2004.00256.x</li>
+</ul>
+<p>Original study examined associations between parental conditional regard and subsequent introjection, self-esteem fluctuation, perceived parental disapproval, resentment and other outcomes. One study involved three generations of mothers/daughters and explored perceived parenting transmission. </p>
+<p><strong>Strict limit:</strong> changing a rational belief about whether game creation pays after seeing a real salary or sales is not necessarily affection conditional on achievements. It takes direct household evidence to classify emotional conditional regard. No attempt to clinically label Schuneman, Inga, Liang&rsquo;s family, or any Chinese group. The empirical population cannot provide creator-specific frequency or causal effect without new designs.</p>
+<h2 id="current-evidence-level-conclusions">Current evidence-level conclusions</h2>
+<h3 id="strongly-supported">STRONGLY SUPPORTED</h3>
+<ul>
+<li>Commander Keen was built on top of intensive professional shipping experience;</li>
+<li>original development overlapped paid employment and contractual obligations;</li>
+<li>shareware revenue helped purchase organizational independence;</li>
+<li>finite production time directly shaped scope;</li>
+<li>by the Wolfenstein/DOOM period, id deliberately invested in internal tools and a development environment that reduced iteration/porting friction;</li>
+<li>Carmack directly describes early id as repeatedly creating technical capabilities at the edge of what was barely possible and then building games around the newly opened space; this makes early id a case of endogenous opportunity-window creation, not merely technology adoption;</li>
+<li>DOOM&rsquo;s business boundary changed from publisher/distributor dependence toward more direct strategic control plus outsourced operations;</li>
+<li>the team explicitly tolerated/encouraged modification and technical openness, helping create an external content/tool ecosystem;</li>
+<li>DOOM remained a small-core project with meaningful specialist/external contribution boundaries;</li>
+<li>Romero&rsquo;s pre-id history includes game/computer access, BASIC instruction and publication/submission activity before professional studio success;</li>
+<li>Carmack directly connects teenage game modification with his later preference for making software more inspectable/modifiable;</li>
+<li>Doom&rsquo;s mod/level community demonstrably provided at least some creators with portfolio, reputation and professional-entry pathways;</li>
+<li>Quake-era contemporary reporting documents organization/production strain after DOOM&rsquo;s success rather than a frictionless continuation of the early-id model.</li>
+</ul>
+<h3 id="strongly-supported-as-a-research-method">STRONGLY SUPPORTED AS A RESEARCH METHOD</h3>
+<ul>
+<li><em>Masters of Doom</em> is high-value as a narrative and hypothesis-generating source, but not sufficient as sole evidence for disputed factual claims;</li>
+<li><em>DOOM Guy</em>, contemporary Game Developer/WIRED coverage and other participant accounts should be used to triangulate it;</li>
+<li>biographical claims should identify the conversion action between hobby/play and capability rather than inferring career value from playtime alone.</li>
+</ul>
+<h3 id="partial-next-verify">PARTIAL / NEXT VERIFY</h3>
+<ul>
+<li>exact first Apogee advance/royalty amounts under strongest primary documentation;</li>
+<li>complete economic value of Softdisk hardware/wages;</li>
+<li>audited Wolfenstein/DOOM unit economics and overseas split;</li>
+<li>cost/contract details for Digital Magnetics and other external contributors;</li>
+<li>causal contribution of WAD/modding openness to sales, longevity, recruitment and brand growth;</li>
+<li>how common professional conversion from Doom modding actually was beyond visible recruited creators;</li>
+<li>point-by-point conflict map between Kushner, Romero, Carmack, Hall and other participant accounts.</li>
+</ul><div class="crumbs"><a href="/heroes-portal/">书阁</a> / evidence/CASE-016-early-id-software-source-ledger.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

@@ -1,0 +1,751 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CASE-055 — Factorio：技术能力只有在关闭产品义务时才是杠杆 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl class="on"" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#why-this-case" class="t2">Why this case</a><a href="#1-myth" class="t2">1. Myth</a><a href="#myth-a-factorio" class="t3">Myth A — “Factorio 成功，因为程序员够强，所以自研越深越好”</a><a href="#myth-b-factorio-scope" class="t3">Myth B — “Factorio 没有 scope 问题，只是一直打磨到完美”</a><a href="#2-contextsituationaction-snapshot" class="t2">2. Context–Situation–Action Snapshot</a><a href="#era-production-regime" class="t3">Era / Production Regime</a><a href="#actor-situation" class="t3">Actor Situation</a><a href="#action-maneuver" class="t3">Action / Maneuver</a><a href="#anachronism-check" class="t3">Anachronism Check</a><a href="#3-origin" class="t2">3. Origin</a><a href="#4-capability" class="t2">4. Capability</a><a href="#5-runway-market-coupling" class="t2">5. Runway / Market Coupling</a><a href="#6-product-closure-discipline" class="t2">6. Product-Closure Discipline</a><a href="#a" class="t3">A. “我们可以继续，但不该继续”</a><a href="#b" class="t3">B. “已有简单解的问题，不值得再保留系统复杂度”</a><a href="#c-done-when-done-process" class="t3">C. “done when done” 也可能是错误 process</a><a href="#d-10-descoping-closure" class="t3">D. 1.0：用 descoping 买 closure</a><a href="#7-deep-tech-success-counterpoint-to-limit-theory" class="t2">7. Deep-tech Success Counterpoint to Limit Theory</a><a href="#8-relationship-to-doom" class="t2">8. Relationship to DOOM</a><a href="#9-capabilityproject-fit-audit" class="t2">9. Capability–Project Fit Audit</a><a href="#fit" class="t3">Fit</a><a href="#trap-pressure" class="t3">Trap pressure</a><a href="#countermeasure" class="t3">Countermeasure</a><a href="#10-failure-pressure-boundary" class="t2">10. Failure / Pressure Boundary</a><a href="#11-temporal-validity" class="t2">11. Temporal Validity</a><a href="#12-verdict" class="t2">12. Verdict</a><a href="#strongly-supported" class="t3">Strongly supported</a><a href="#supported-interpretation" class="t3">Supported interpretation</a><a href="#forbidden-inference" class="t3">Forbidden inference</a><a href="#13-transfer" class="t2">13. Transfer</a><a href="#14-non-transfer" class="t2">14. Non-transfer</a><a href="#creator-life-decision-audit" class="t2">Creator Life / Decision Audit</a></aside><article class="doc"><div class="col"><h1 id="case-055-factorio">CASE-055 — Factorio：技术能力只有在关闭产品义务时才是杠杆</h1>
+<ul>
+<li>Case ID: CASE-055</li>
+<li>Subject: Wube Software / Factorio</li>
+<li>Period covered: 2012 first prototype → 2013 crowdfunding / paid alpha → 2014–2019 technical and product expansion → 2020 version 1.0 → 2024 Space Age → 2026 2.1 closure plan</li>
+<li>Research status: RESEARCHING</li>
+<li>Corpus role: <code>DEEP-TECH SUCCESS COUNTERPOINT / TECHNICAL STOP CONDITION / PROGRAMMER-LED STUDIO / PRODUCT-CLOSURE DISCIPLINE</code></li>
+<li>Related Claims: C015</li>
+<li>Evidence Ledger: <a href="/heroes-portal/evidence/CASE-055-factorio-stop-conditions-source-ledger.html">来源账本</a></li>
+</ul>
+<h2 id="why-this-case">Why this case</h2>
+<p class="dc">CASE-054 Limit Theory 建立了一个危险机制：</p>
+<p><code>strong technical capability → more solvable technical subproblems → visible local progress → expanding technical frontier → product closure delayed</code></p>
+<p>Factorio 是目前最干净的成功侧反压力样本之一，因为 Wube 也拥有异常强的：</p>
+<ul>
+<li>C++ / engine / simulation capability；</li>
+<li>performance-optimization culture；</li>
+<li>networking / deterministic simulation capability；</li>
+<li>custom tooling / modding infrastructure；</li>
+<li>长周期自研技术意愿。</li>
+</ul>
+<p>但 Factorio 并没有因为这些能力而自动落入“技术越强，项目越容易完成”。</p>
+<p>真正不同的是：Wube 多次留下了明确的 <strong>stop-condition evidence</strong>。</p>
+<p>团队会反复问：</p>
+<blockquote>
+<p>这个技术目标是否仍然改善我们真正想做的游戏？</p>
+</blockquote>
+<p>当答案开始变成“不再显著”时，他们会：</p>
+<ul>
+<li>停止追更高的多人规模；</li>
+<li>删除维护成本高但解决问题价值低的 mechanic；</li>
+<li>放弃“done when done”式无限 polish；</li>
+<li>公开锁定 release date；</li>
+<li>取消、推迟或砍掉 1.0 前的大型工作；</li>
+<li>在后续版本中继续主动删减系统复杂度。</li>
+</ul>
+<p>这使 Factorio 成为 Limit Theory 的关键对照：</p>
+<blockquote>
+<p><strong>两边都有 programmer-author / deep-tech 倾向；区别不是“一个写技术、一个不写”，而是技术 frontier 是否被 product obligation 和 stop condition 约束。</strong></p>
+</blockquote>
+<h2 id="1-myth">1. Myth</h2>
+<h3 id="myth-a-factorio">Myth A — “Factorio 成功，因为程序员够强，所以自研越深越好”</h3>
+<p>错误。</p>
+<p>Wube 的一手记录恰好说明：</p>
+<blockquote>
+<p>技术能力越强，越需要明确知道什么时候停止。</p>
+</blockquote>
+<p>2016 年多人重写后，团队已经把数十人的目标推进到约 350–400 人规模，却公开承认：继续追 1000 人只是在“跟自己比赛”，因为 Factorio 的目标并不是 MMO。</p>
+<h3 id="myth-b-factorio-scope">Myth B — “Factorio 没有 scope 问题，只是一直打磨到完美”</h3>
+<p>也错误。</p>
+<p>2019 年团队明确说，“done when it is done” 如果继续下去，会让开发基本永远持续。于是他们公开指定 1.0 日期，逼自己只做最重要的事情。</p>
+<p>2020 年又进一步：</p>
+<ul>
+<li>取消新 campaign；</li>
+<li>推迟 fluid algorithm improvements；</li>
+<li>砍掉 GUI rewrite 的很多部分；</li>
+<li>把这些 descoping 视为能够更早发布的重要原因。</li>
+</ul>
+<p>Factorio 的高 polish 不是“没有停止条件”。</p>
+<p>恰恰相反：</p>
+<blockquote>
+<p><strong>它的 polish 能持续很久，是因为团队会不断重新定义什么还值得继续 polish。</strong></p>
+</blockquote>
+<h2 id="2-contextsituationaction-snapshot">2. Context–Situation–Action Snapshot</h2>
+<h3 id="era-production-regime">Era / Production Regime</h3>
+<p>Factorio 2012 年开始开发时：</p>
+<ul>
+<li>Unity / Unreal 已存在，但 Wube 选择自建并长期维护高度定制的 C++ simulation/game stack；</li>
+<li>Steam Early Access 还不是所有独立游戏的默认入口；</li>
+<li>Indiegogo + direct preorder / paid alpha 可以直接把小规模玩家反馈转换为 runway；</li>
+<li>性能、determinism、multiplayer、modding 都是核心产品问题，而不是单纯后台工程；</li>
+<li>当时的现代 ECS、cloud services、商业 middleware、AI-assisted coding 条件与 2026 明显不同。</li>
+</ul>
+<p>因此本案不能被简化成：</p>
+<blockquote>
+<p>“2012 年工具差，所以自研合理。”</p>
+</blockquote>
+<p>研究重点是后续十多年内同一团队如何决定：</p>
+<blockquote>
+<p><strong>哪些技术值得继续深挖，哪些技术已经足够。</strong></p>
+</blockquote>
+<h3 id="actor-situation">Actor Situation</h3>
+<p>Wube 最初是非常工程型的 founding core。</p>
+<p>官方团队史记录：</p>
+<ul>
+<li>Michal Kovařík 从童年起持续编程，长期偏好 simulation、optimization 和 systems；</li>
+<li>Tomáš Kozelek 有 informatics / programming 背景，并在最早阶段负责多个基础系统；</li>
+<li>团队后来继续吸收以 performance、networking、modding、C++ 为强项的开发者；</li>
+<li>Factorio 本身的 factory/automation fantasy 与 simulation / optimization capability 高度耦合。</li>
+</ul>
+<p>这意味着 Factorio 同样具备 FIT-TRAP 的诱因：</p>
+<blockquote>
+<p>一个强工程团队永远都能找到更多值得优化、重写、扩展的技术问题。</p>
+</blockquote>
+<h3 id="action-maneuver">Action / Maneuver</h3>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>技术 / 产品问题</th>
+<th>行动</th>
+<th>Stop condition / closure signal</th>
+<th>对照意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2012–2013</td>
+<td>极小团队需要尽快知道核心 factory loop 是否成立</td>
+<td>早期 demo、alpha、crowdfunding 后直接付费 alpha</td>
+<td>让玩家反馈进入开发，而不是先闭门完成技术平台</td>
+<td>技术与 player truth 同步</td>
+</tr>
+<tr>
+<td>2015–2016</td>
+<td>multiplayer architecture 暴露复杂性、lag 与 packet 问题</td>
+<td>大规模 multiplayer rewrite</td>
+<td>不是因为 rewrite 本身“酷”，而是为了解决真实 online play failure</td>
+<td>技术投资直接关闭 player-facing obligation</td>
+</tr>
+<tr>
+<td>Sep 2016</td>
+<td>rewrite 后多人能力远超原目标，达到数百人</td>
+<td>明确停止继续追 MMO 级并发</td>
+<td>官方直接说 200 人左右已经 enough，不再以更高玩家数为目标</td>
+<td>最强 TECHNICAL STOP CONDITION 证据</td>
+</tr>
+<tr>
+<td>Sep 2016</td>
+<td>massive multiplayer 的真正瓶颈转移到 factory simulation</td>
+<td>把优化重心转回 belts / factory update / general simulation</td>
+<td>同一优化同时改善单机大工厂与多人</td>
+<td>技术工作重新绑定核心 fantasy</td>
+</tr>
+<tr>
+<td>2017</td>
+<td>fluid-wagon tank separation 有功能但价值低</td>
+<td>完全删除该 mechanic</td>
+<td>已有简单替代方案，保留还要付 code/UI/bug cost</td>
+<td>“能做”不等于“值得保留”</td>
+</tr>
+<tr>
+<td>2018</td>
+<td>major feature surface 已很大</td>
+<td>0.16 被明确设为 major-feature wrap-up</td>
+<td>开始向 final 1.0 closure 转移</td>
+<td>新功能入口逐步收紧</td>
+</tr>
+<tr>
+<td>Nov 2019</td>
+<td>polish 可以无限继续</td>
+<td>公开锁定 1.0 date</td>
+<td>团队承认 “done when done” 会让项目基本做不完</td>
+<td>从内部品质标准转向 external closure</td>
+</tr>
+<tr>
+<td>May 2020</td>
+<td>1.0 前仍有 campaign / fluids / GUI 大工作</td>
+<td>取消、推迟、砍掉</td>
+<td>descoping 直接使 release 能提前</td>
+<td>明确让 release obligation 高于局部完美</td>
+</tr>
+<tr>
+<td>2023–2024</td>
+<td>Space Age 新系统原型容易继续堆复杂度</td>
+<td>prototype 中删除 intermediates / mechanics</td>
+<td>只保留在完整 game flow 中产生足够价值的复杂度</td>
+<td>stop-condition 不是 1.0 一次性行为</td>
+</tr>
+<tr>
+<td>2026</td>
+<td>2.1 仍可继续扩 content</td>
+<td>明确 no new planets / enemies / research trees / resource chains，并计划转长期 support</td>
+<td>主动宣布 active gameplay development 接近结束</td>
+<td>长期组织层面的 closure discipline</td>
+</tr>
+</tbody>
+</table>
+<h3 id="anachronism-check">Anachronism Check</h3>
+<ul>
+<li>不能用 2026 的 Unity / Unreal / Godot、现代 ECS、云服务、成熟资产生态或 AI-assisted coding 倒推 2012 年 Wube 的技术选择。</li>
+<li>本案不是用“Factorio 成功”反向证明 custom C++ stack 必然合理；只记录 Wube 实际选择了高度定制的技术路线，并持续用玩家产品结果约束其继续投入。</li>
+<li>2013 paid-alpha / direct-preorder 环境、2016 Steam Early Access 竞争密度与今天不同，不能把当年的长期公开开发周期当作 2026 默认 go-to-market recipe。</li>
+<li>“约 200 人足够”是 Factorio 当时的项目级 stop condition，不是多人游戏的普遍并发上限。</li>
+<li>2026 可迁移的是判断方法：技术目标必须回链 player obligation、maintenance tail 与 release closure，而不是复制具体技术栈或数值阈值。</li>
+</ul>
+<h2 id="3-origin">3. Origin</h2>
+<p>2012 年 10 月官方第一篇博客已经把 Factorio 描述为：</p>
+<blockquote>
+<p>三个朋友围绕一个“自己想玩但市场上没有”的游戏开始工作。</p>
+</blockquote>
+<p>Michal 先离职全职投入，随后其他人加入。</p>
+<p>这不是“市场 genre brief → 招团队”。</p>
+<p>至少在最早阶段，它更接近：</p>
+<blockquote>
+<p><strong>programmer/system taste → factory/automation idea → playable prototype → community feedback</strong></p>
+</blockquote>
+<p>因此 Factorio 与 Limit Theory 都属于高度 engineer-shaped 的项目。</p>
+<p>但两者的 product thesis 有一个关键差别：</p>
+<ul>
+<li>Factorio 的技术复杂度主要服务一个非常清晰、重复可观察的 factory loop；</li>
+<li>Limit Theory 的 “infinite procedural universe + RPG + RTS + sandbox” obligation surface 更开放、更多品类叠加。</li>
+</ul>
+<p>这不是结果倒推“Factorio scope 小”。</p>
+<p>Factorio 本身并不小。</p>
+<p>区别在于：</p>
+<blockquote>
+<p><strong>核心价值函数更集中，技术工作更容易被问“它是否让工厂更大、更顺、更可控、更好玩？”</strong></p>
+</blockquote>
+<h2 id="4-capability">4. Capability</h2>
+<p>Wube 的强项包括：</p>
+<ul>
+<li>C++ / low-level programming；</li>
+<li>deterministic simulation；</li>
+<li>optimization；</li>
+<li>networking；</li>
+<li>tooling；</li>
+<li>modding API / scripting；</li>
+<li>data / debugging infrastructure；</li>
+<li>long-lived codebase maintenance。</li>
+</ul>
+<p>这些能力不是外围。</p>
+<p>它们直接构成 Factorio 的玩家体验：</p>
+<ul>
+<li>数以万计的 entities 同时运转；</li>
+<li>玩家不断扩大 factory；</li>
+<li>multiplayer 必须保持 simulation consistency；</li>
+<li>blueprints / bots / trains 等要求复杂系统稳定交互；</li>
+<li>modding 要求 architecture 可扩展。</li>
+</ul>
+<p>因此 Factorio 不属于“技术只为炫技”的反技术案例。</p>
+<p>它展示的是：</p>
+<blockquote>
+<p><strong>当技术本身就是产品价值的一部分时，仍然需要 boundary。</strong></p>
+</blockquote>
+<h2 id="5-runway-market-coupling">5. Runway / Market Coupling</h2>
+<p>Factorio 很早就建立了 market→production feedback。</p>
+<ul>
+<li>2012 年底已有 public demo；</li>
+<li>2013 Indiegogo 后，支持者可以直接玩 alpha；</li>
+<li>团队公开承认，早期立即给 backers alpha 显著改善了 campaign 成功概率；</li>
+<li>之后转 direct preorder，继续用付费玩家支撑开发；</li>
+<li>2014 官方称 alpha sales 已足以继续开发并适度扩团队；</li>
+<li>2016 Steam；</li>
+<li>2020 1.0。</li>
+</ul>
+<p>这条结构很重要：</p>
+<p><code>playable artifact → paying users → feedback + runway → next development cycle</code></p>
+<p>与 Limit Theory 相比，Factorio 的技术进展更长时间处于一个持续存在的 playable-product feedback loop 中。</p>
+<p>这不证明 Early Access 自动防止 FIT-TRAP。</p>
+<p>但它提供一种现实约束：</p>
+<blockquote>
+<p><strong>玩家可以不断告诉团队“这项技术是否真的让现有游戏变得更好”。</strong></p>
+</blockquote>
+<h2 id="6-product-closure-discipline">6. Product-Closure Discipline</h2>
+<h3 id="a">A. “我们可以继续，但不该继续”</h3>
+<p>2016 年 multiplayer 是最干净的技术停止条件。</p>
+<p>团队从原先期望的 20–50 人，推进到 350+，并开始想 400、1000。</p>
+<p>然后 kovarex 直接提出：</p>
+<blockquote>
+<p>我们到底还在改善 gameplay，还是只是在和自己赛跑？</p>
+</blockquote>
+<p>结论：</p>
+<ul>
+<li>Factorio 不是 MMO；</li>
+<li>约 200 人 good connection 已足够；</li>
+<li>不再以更高并发为目标；</li>
+<li>把优化转回 general factory simulation，因为这同时改善单机大工厂。</li>
+</ul>
+<p>这里不是“技术做不动了”。</p>
+<p>而是：</p>
+<blockquote>
+<p><strong>技术还能继续做，但边际 product value 已经不足。</strong></p>
+</blockquote>
+<p>这是 TECHNICAL STOP CONDITION 的标准形态。</p>
+<h3 id="b">B. “已有简单解的问题，不值得再保留系统复杂度”</h3>
+<p>2017 fluid wagon tank separation 被删除。</p>
+<p>团队明确给出的理由包含：</p>
+<ul>
+<li>玩家已有简单替代方法；</li>
+<li>mechanic 没有解决独特问题；</li>
+<li>保留它还要继续支付 code / UI / bug maintenance；</li>
+<li>everything has a cost，问题是 priorities。</li>
+</ul>
+<p>这是一条非常高价值的 scope rule：</p>
+<blockquote>
+<p><strong>如果一个系统只把已有简单解包装成额外机制，它必须证明自己值得长期维护成本。</strong></p>
+</blockquote>
+<h3 id="c-done-when-done-process">C. “done when done” 也可能是错误 process</h3>
+<p>2019 年团队公开承认：</p>
+<blockquote>
+<p>“It is done when it is done” 在过去有助于品质，但继续下去会让项目事实上无限延长。</p>
+</blockquote>
+<p>解决办法不是再完善 estimation model，而是建立一个外部承诺：</p>
+<ul>
+<li>指定公开 1.0 date；</li>
+<li>接近日期时只做最重要的部分；</li>
+<li>其余以后再说。</li>
+</ul>
+<p>这意味着 stop condition 不只是技术判断，也是 governance device。</p>
+<h3 id="d-10-descoping-closure">D. 1.0：用 descoping 买 closure</h3>
+<p>2020 年最终 release plan 更直接：</p>
+<ul>
+<li>new campaign cancelled；</li>
+<li>fluid improvements postponed；</li>
+<li>GUI rewrite cut；</li>
+<li>团队判断 game 已基本完成；</li>
+<li>因为这些范围已经砍掉，所以能够把 release 提前五周。</li>
+</ul>
+<p>这不是“低标准发布”。</p>
+<p>而是：</p>
+<blockquote>
+<p><strong>把“玩家已经拥有一个完整产品”与“内部仍能想到更多想改的东西”正式分离。</strong></p>
+</blockquote>
+<h2 id="7-deep-tech-success-counterpoint-to-limit-theory">7. Deep-tech Success Counterpoint to Limit Theory</h2>
+<table>
+<thead>
+<tr>
+<th>Diagnostic</th>
+<th>Limit Theory</th>
+<th>Factorio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>强 engine / systems capability</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr>
+<td>custom technology</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr>
+<td>rewrite / deep optimization</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr>
+<td>长周期</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr>
+<td>技术局部成果很强</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr>
+<td>playable product 长期存在</td>
+<td>部分 / 不稳定</td>
+<td>YES</td>
+</tr>
+<tr>
+<td>技术目标有显式 “enough” 判断</td>
+<td>弱</td>
+<td>强</td>
+</tr>
+<tr>
+<td>能否删除已经实现的机制</td>
+<td>evidence weak</td>
+<td>YES</td>
+</tr>
+<tr>
+<td>是否把 release closure 高于内部 polish</td>
+<td>最终 cancellation</td>
+<td>YES</td>
+</tr>
+<tr>
+<td>技术工作是否经常回链核心 player loop</td>
+<td>不稳定</td>
+<td>强</td>
+</tr>
+<tr>
+<td>final outcome</td>
+<td>cancelled</td>
+<td>shipped / long-lived</td>
+</tr>
+</tbody>
+</table>
+<p>所以核心对照不是：</p>
+<blockquote>
+<p>custom engine bad vs custom engine good</p>
+</blockquote>
+<p>也不是：</p>
+<blockquote>
+<p>solo bad vs team good</p>
+</blockquote>
+<p>而是：</p>
+<blockquote>
+<p><strong>technical frontier 是否被 product frontier 约束。</strong></p>
+</blockquote>
+<h2 id="8-relationship-to-doom">8. Relationship to DOOM</h2>
+<p>Early id / DOOM 是更极端的另一种 positive case。</p>
+<p>Carmack 的技术突破直接制造新的 product possibility：</p>
+<p><code>new renderer / engine capability → immediately playable new action-space → shareware artifact → market feedback</code></p>
+<p>Factorio 则补出一个不同机制：</p>
+<p><code>deep technical capability → support core simulation → stop when marginal value falls → redirect to product closure</code></p>
+<p>因此成功侧至少有两种路径：</p>
+<ol>
+<li><strong>Frontier Creation</strong> — 技术突破创造原本不存在的产品空间；</li>
+<li><strong>Frontier Discipline</strong> — 技术能力很强，但只在仍关闭核心 obligation 时继续投资。</li>
+</ol>
+<p>两者共同反驳“不要做底层技术”的廉价结论。</p>
+<h2 id="9-capabilityproject-fit-audit">9. Capability–Project Fit Audit</h2>
+<h3 id="fit">Fit</h3>
+<p><code>FIT-STRONG</code></p>
+<ul>
+<li>founder programming/system taste 与 factory simulation 高度一致；</li>
+<li>studio later recruiting 继续强化 simulation/performance/networking；</li>
+<li>玩家体验本身需要大量系统工程；</li>
+<li>optimization 不是后台 vanity metric，而是决定 factory scale。</li>
+</ul>
+<h3 id="trap-pressure">Trap pressure</h3>
+<p><code>HIGH</code></p>
+<p>同一能力也持续制造：</p>
+<ul>
+<li>更高 entity count；</li>
+<li>更大 multiplayer；</li>
+<li>更复杂 modding；</li>
+<li>更深 engine work；</li>
+<li>更高 polish；</li>
+<li>更多 internal-tool opportunity。</li>
+</ul>
+<h3 id="countermeasure">Countermeasure</h3>
+<p>当前可观察机制：</p>
+<blockquote>
+<p><strong>TECHNICAL STOP CONDITION — research mechanism, not a formal taxonomy label yet</strong></p>
+</blockquote>
+<p>判据：</p>
+<ol>
+<li>团队仍有能力继续做；</li>
+<li>目标已有明确技术进展；</li>
+<li>继续投入的边际 player/product value 开始下降；</li>
+<li>团队明确说 “enough / not our goal / low priority / cut / postpone”；</li>
+<li>资源被转向更高价值 product obligation 或 release closure。</li>
+</ol>
+<p>Factorio 至少有三组独立一手证据满足该结构：</p>
+<ul>
+<li>multiplayer scale stop；</li>
+<li>fluid-wagon feature deletion；</li>
+<li>1.0 deadline + descoping。</li>
+</ul>
+<h2 id="10-failure-pressure-boundary">10. Failure / Pressure Boundary</h2>
+<p>本案不能被英雄化成“Wube 一直非常会控 scope”。</p>
+<p>他们同样有：</p>
+<ul>
+<li>multiplayer architecture 走过错误路线并进行重写；</li>
+<li>1.0 时间严重超过早期估计；</li>
+<li>campaign 最终取消；</li>
+<li>GUI / fluids 等工作被推迟；</li>
+<li>很多系统曾经比预期复杂；</li>
+<li>2019 自己承认开发如果不设截止会基本无限继续。</li>
+</ul>
+<p>Factorio 的价值不在“没有走弯路”。</p>
+<p>恰恰是：</p>
+<blockquote>
+<p><strong>团队能在已经投入之后继续重新判断：这条路值不值得再走。</strong></p>
+</blockquote>
+<p>这比“永远第一遍就做对”更可迁移。</p>
+<h2 id="11-temporal-validity">11. Temporal Validity</h2>
+<ul>
+<li>2012–2014 crowdfunding / direct-preorder economics：<code>HISTORICAL</code>；</li>
+<li>2016–2020 deep-tech / Early Access / public-dev process：<code>PARTIALLY TRANSFERABLE</code>；</li>
+<li>“technical milestone 必须对应 player/product obligation”：<code>DURABLE</code>；</li>
+<li>“达到 enough 后停止继续追内部 benchmark”：<code>DURABLE</code>；</li>
+<li>“公开 deadline 可以作为 closure governance device”：<code>DURABLE WITH CONTEXT</code>；</li>
+<li>具体 C++ / deterministic architecture / network model：<code>PROJECT-SPECIFIC</code>。</li>
+</ul>
+<p>2026 不能照抄 Factorio 的长 Early Access 周期，也不能假设任何项目都有其玩家耐心、收入曲线和工程人才。</p>
+<h2 id="12-verdict">12. Verdict</h2>
+<h3 id="strongly-supported">Strongly supported</h3>
+<ul>
+<li>Factorio 从 programmer-led founding core 起步；</li>
+<li>核心 factory fantasy 与 simulation / optimization capability 高度耦合；</li>
+<li>Wube 愿意进行深层 multiplayer / engine / performance engineering；</li>
+<li>团队明确停止继续追远超产品目标的多人规模；</li>
+<li>团队删除过已实现但独特价值不足、维护成本存在的 mechanic；</li>
+<li>团队公开承认无限 polish 会导致无限开发，并用公开 release date 强制 closure；</li>
+<li>1.0 前主动取消 / 推迟 / 砍掉多个大型工作；</li>
+<li>后续 Space Age / 2.1 仍保留主动删减和结束 active gameplay development 的模式。</li>
+</ul>
+<h3 id="supported-interpretation">Supported interpretation</h3>
+<blockquote>
+<p><strong>Factorio 是 Limit Theory 的强成功侧反压力：技术能力本身既不是罪，也不是自动资本。它成为杠杆的条件之一，是团队能为技术目标设置 product-facing stop condition。</strong></p>
+</blockquote>
+<h3 id="forbidden-inference">Forbidden inference</h3>
+<p>不得写：</p>
+<ul>
+<li>“Factorio 的所有技术投资都很理性”；</li>
+<li>“Wube 从不 scope creep”；</li>
+<li>“Early Access 会自动防止 FIT-TRAP”；</li>
+<li>“只要设置 deadline 就能成功”；</li>
+<li>“custom engine 是成功条件”；</li>
+<li>“多人超过 200 都没有意义”；</li>
+<li>“删 feature 永远比继续 polish 正确”；</li>
+<li>“Limit Theory 如果学 Factorio 就一定能成功”。</li>
+</ul>
+<h2 id="13-transfer">13. Transfer</h2>
+<p>每个 deep-tech task 都应回答：</p>
+<ol>
+<li><strong>Player obligation:</strong> 它关闭哪个玩家可感知问题？</li>
+<li><strong>Core-loop link:</strong> 它是否直接增强核心 fantasy / loop？</li>
+<li><strong>Enough condition:</strong> 到什么指标后就不再继续？</li>
+<li><strong>Marginal value:</strong> 从 90%→95%→99% 的玩家价值分别是什么？</li>
+<li><strong>Maintenance tail:</strong> 它会新增多少长期 code/UI/content/test obligation？</li>
+<li><strong>Alternative:</strong> 玩家已经有简单替代方案吗？</li>
+<li><strong>Release effect:</strong> 做它会让完整产品更接近 release，还是只让技术平台更漂亮？</li>
+<li><strong>Kill rule:</strong> 哪个信号出现时直接 cut / postpone？</li>
+</ol>
+<p>一个实用表达：</p>
+<p><code>technical leverage = player value closed / future obligation created</code></p>
+<p>当分母持续增长、分子趋近于零时：</p>
+<blockquote>
+<p><strong>即使工程仍然成功，也应触发 stop-condition review。</strong></p>
+</blockquote>
+<h2 id="14-non-transfer">14. Non-transfer</h2>
+<p>Factorio 不能证明：</p>
+<ul>
+<li>小团队应该全部自研；</li>
+<li>程序员作者天然更会 scope；</li>
+<li>长开发周期无害；</li>
+<li>玩家社区可以替代 product management；</li>
+<li>任何 simulation game 都应该优先性能；</li>
+<li>任何公开 roadmap 都会提高 execution。</li>
+</ul>
+<p>它真正能证明的是一个更窄的命题：</p>
+<blockquote>
+<p><strong>深技术能力与产品收敛并不矛盾；关键在于能否把“我们还做得到什么”与“玩家还真正需要什么”持续分开。</strong></p>
+</blockquote>
+<h2 id="creator-life-decision-audit">Creator Life / Decision Audit</h2>
+<ul>
+<li><strong>Audit status:</strong> SUBSTANTIAL / PRODUCT-CLOSURE EXTENSION</li>
+<li><strong>Life stage:</strong> 与 CASE-035 同一 Wube / Factorio founder-team 生命周期；本 Case 重点不是重复 household，而是审计强技术团队如何给自己设置“够了”的停止条件。</li>
+<li><strong>Household:</strong> 参见 CASE-035；个人婚育、住房与家庭 burn 仍 <code>UNKNOWN</code>。</li>
+<li><strong>Runway:</strong> founder self-funding → crowdfunding → paid alpha/direct preorder → sustained player revenue → Steam / long-lived commercial runway。</li>
+<li><strong>Household burn:</strong> <code>UNKNOWN</code></li>
+<li><strong>Exit / recovery:</strong> 参见 CASE-035；不因技术职业标签自动评级。</li>
+<li><strong>Capability vector:</strong> C++ / simulation / optimization / networking / tooling / modding infrastructure / long-lived codebase maintenance 极强。</li>
+<li><strong>Problem ownership:</strong> <strong>HIGH</strong> — team 对技术、产品与 release timing 有高控制，并能公开定义 feature / technical stop conditions。</li>
+<li><strong>Validation architecture:</strong> playable demo → paid alpha / direct preorder → continuous player feedback → technical optimization → explicit “enough” decisions → public 1.0 date → descoping / release → Space Age / 2.x 再次使用 stop condition。</li>
+<li><strong>Reality adjudication:</strong> <strong>STRONG</strong> — 技术目标持续被玩家价值、维护成本和 release obligation 重新判卷，而不是只由工程 benchmark 判卷。</li>
+<li><strong>Capability capture risk:</strong> <strong>LOW / ACTIVELY MANAGED</strong> — 和 Limit Theory 的核心对照；技术 frontier 很强，但团队多次停止“还能继续”的技术目标并把资源转回 product closure。</li>
+<li><strong>Market sufficiency / legibility:</strong> <strong>STRONG</strong> — 长期付费 playable product 提供持续 product truth；不是先完成 engine 再等待市场。</li>
+<li><strong>Capability scaling:</strong> <strong>STRONG WITH STOP CONDITIONS</strong> — 技术能力本身不断扩张，但 release / maintenance / player value 被作为治理边界。</li>
+<li><strong>Major unknowns:</strong> household 与个人职业前史；本 Case 的主要研究缺口转为 stop-condition 的组织形成、谁拥有最终否决权、不同阶段是否有反例。</li>
+</ul><div class="crumbs"><a href="/heroes-portal/">书阁</a> / cases/CASE-055-factorio-stop-conditions.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

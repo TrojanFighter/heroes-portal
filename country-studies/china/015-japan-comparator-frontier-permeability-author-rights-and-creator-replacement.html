@@ -1,0 +1,683 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>015 — 中国 × 日本：边疆豁免、作者权位置与创作者代际更新 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl class="on"" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0" class="t2">0. 结论先行：两国都不是“普遍个人主义社会”，关键差异可能是破格发生在哪里</a><a href="#1" class="t2">1. 统一比较单位：不是“自由不自由”，而是作者权经过哪几道门</a><a href="#2" class="t2">2. 中国不是没有“边疆豁免”，而是至少经历过四次不同的边疆窗口</a><a href="#21-1990searly-2000s-pc" class="t3">2.1 第一窗口：1990s—early 2000s 国产PC单机——作者跨度大，但市场庇护极薄</a><a href="#22-2001late-2000s" class="t3">2.2 第二窗口：2001—late 2000s 在线游戏——真正巨大的商业边疆，但前沿权力被重新定义</a><a href="#23-2010s-f2p" class="t3">2.3 第三窗口：2010s 移动/F2P/渠道时代——创业边疆很强，普通雇员作者权未必同步扩张</a><a href="#24-mid-2010s2026-steam-premium" class="t3">2.4 第四窗口：mid-2010s—2026 Steam / 全球premium / 主机——作者权重新外溢到小团队</a><a href="#25-004" class="t2">2.5 日本004之后的重要修正：中国也有长期旁路史，差异更可能在“连续性”而非“存在性”</a><a href="#3" class="t2">3. 第一版中日结构对照：不是“谁自由”，而是作者权的空间位置不同</a><a href="#4-seniority_tax-regime_tax" class="t2">4. 中国的特殊问题可能不是 SENIORITY_TAX，而是 REGIME_TAX / 产业版本税</a><a href="#regime_tax" class="t3">REGIME_TAX / 产业版本税</a><a href="#5" class="t2">5. 为什么早期中国单机人的命运对今天特别重要：有作者权但没有市场壳，也会死</a><a href="#6" class="t2">6. 中国当前最值得关注的改善，不只是“国产单机卖得更好了”</a><a href="#61-exit_to_recombination" class="t3">6.1 EXIT_TO_RECOMBINATION 显著改善</a><a href="#62-capability_repricing" class="t3">6.2 CAPABILITY_REPRICING 已经发生</a><a href="#63-full_cycle_team_density" class="t3">6.3 但 FULL_CYCLE_TEAM_DENSITY 仍是核心未决</a><a href="#7-creator_replacement" class="t2">7. CREATOR_REPLACEMENT：中国研究下一步最缺的分母</a><a href="#_1" class="t3">大组织版本</a><a href="#_2" class="t3">小团队版本</a><a href="#8" class="t2">8. 中国为什么会显得“每一代都重新创业一次”？</a><a href="#authorial_continuity_gap" class="t3">AUTHORIAL_CONTINUITY_GAP / 作者连续性缺口</a><a href="#9-deepseek" class="t2">9. DeepSeek为什么成为非常重要的中国内部反例</a><a href="#10-aih" class="t2">10. AI：可能开启第五次边疆窗口，但目前只能记H</a><a href="#11" class="t2">11. 当前最强比较结论与禁止外推</a><a href="#supported-strong-descriptive" class="t3">SUPPORTED / strong descriptive</a><a href="#h-still-to-test" class="t3">H / still to test</a><a href="#_3" class="t3">禁止写成</a><a href="#12" class="t2">12. 下一轮优先验证</a><a href="#p0-creator_replacement" class="t3">P0 — 中国大厂内部 CREATOR_REPLACEMENT</a><a href="#p0-19952005" class="t3">P0 — 1995–2005“单机作者去哪了”</a><a href="#p1" class="t3">P1 — 中国“退出取得作者权”是否真比日本高</a><a href="#p1_1" class="t3">P1 — 失败后是否还有第二次</a><a href="#p2-ai-native-cohort" class="t3">P2 — AI-native cohort</a><a href="#13" class="t2">13. 需求侧反向链：作者权也由玩家选择定价</a></aside><article class="doc"><div class="col"><h1 id="015">015 — 中国 × 日本：边疆豁免、作者权位置与创作者代际更新</h1>
+<ul>
+<li>Program: C / 中国国情研究 × East Asia comparator</li>
+<li>Status: <strong>SYNTHESIS / MECHANISM COMPARISON / HYPOTHESIS-BUILDING / NOT A NATIONAL-CHARACTER CLAIM</strong></li>
+<li>As-of: 2026-10-08</li>
+<li>Japan comparator: <a href="/heroes-portal/country-studies/japan/001-japan-east-asian-counterexample-weird-kinship-and-game-creator-ecology.html">日本WEIRD反例与作者生态</a></li>
+<li>2026 external entry comparator: <a href="/heroes-portal/country-studies/taiwan/018-east-asian-pre-greenlight-author-support-and-global-premium-proxy.html">台湾018 东亚立项前作者支持与全球产品管线</a>；记录讲谈社2026月奖的作者概念→担当编辑→有条件试制金，作为企业内部作者权以外的日本第三条路径，不能把其历史资金条款当成当下条款。</li>
+<li>China foundations: <a href="/heroes-portal/country-studies/china/009-china-gameworker-creative-subjectivity-fieldwork-2017-2026.html">009 中国游戏雇员创造性劳动</a> / <a href="/heroes-portal/country-studies/china/010-next-studios-greenlight-rights-governance-lifecycle-2017-2024.html">010 NExT立项权</a> / <a href="/heroes-portal/country-studies/china/012-full-cycle-authoring-team-supply-proxy-china-vs-comparators.html">012 Full-cycle Team Density</a> / <a href="/heroes-portal/country-studies/china/014-liang-wenfeng-deepseek-positive-deviant-innovation-organization.html">014 DeepSeek正向偏离</a></li>
+<li>Industry lineage: <a href="/heroes-portal/book/research-notes/china-game-industry-prehistory-002.html">中国游戏产业前史</a> / <a href="/heroes-portal/book/research-notes/china-game-commercial-regime-lineage-003.html">商业制度谱系</a> / <a href="/heroes-portal/book/research-notes/china-indie-dual-environment-capability-transfer-004.html">双层环境与能力迁移</a> / <a href="/heroes-portal/book/research-notes/china-player-worker-generations-009.html">玩家×从业者代际</a> / <a href="/heroes-portal/book/research-notes/china-capability-repricing-black-myth-sultan-013.html">能力重新定价</a></li>
+<li>Boundary: 本文比较的是<strong>作者权、资源权、失败权、退出与重组通道</strong>，不是“中国人 vs 日本人谁更有创造力”。所有宏观差异命题必须保留组内反例与分母缺口。</li>
+</ul>
+<h2 id="0">0. 结论先行：两国都不是“普遍个人主义社会”，关键差异可能是<strong>破格发生在哪里</strong></h2>
+<p class="dc">日本研究的新修正表明，日本游戏黄金时代不能解释成“日本社会宽容怪人”。传统组织同样存在年资、先辈—后辈和高同调压力；但电子游戏作为新产业，曾在部分公司内部创造出<strong>低资历者提前取得完整项目权</strong>的孔洞：</p>
+<pre><code class="language-text">Japan historical hypothesis:
+enter established firm
+→ encounter new-industry frontier / patron / prototype channel
+→ gain unusually early project authority
+→ remain inside organization
+→ accumulate craft for decades
+→ possibly become long-lived director / producer
+</code></pre>
+<p>中国游戏史也反复出现新边疆和破格人物，但现有材料更常显示另一条路径：</p>
+<pre><code class="language-text">China historical hypothesis:
+enter school / commercial studio / old regime
+→ accumulate capability
+→ current objective function does not price author's preferred problem
+→ exit / found / split / rebuild small team
+→ obtain authorial control outside the old organization
+→ face market + financing + household risk directly
+</code></pre>
+<p>因此当前最值得检验的不是“China less individualist”，而是：</p>
+<blockquote>
+<p><strong>日本黄金时代的 <code>FRONTIER_PERMEABILITY</code> 较常发生在企业内部；中国的完整作者权较常集中在创始人层、创业层、离职重组层或新组织层。若这一差异成立，中国普通专业人员从“有能力”到“拥有完整产品问题主权”之间，需要支付更高的 <code>AGENCY_TAX</code>。</strong></p>
+</blockquote>
+<p>Status: <strong>H / strong case convergence, denominator not yet established.</strong></p>
+<h2 id="1">1. 统一比较单位：不是“自由不自由”，而是作者权经过哪几道门</h2>
+<p>以后中日案例都统一拆以下变量，不再用“公司鼓励创新”概括：</p>
+<ul>
+<li><code>PROBLEM_ORIGIN_RIGHT</code>：谁能提出“我们应该做什么”；</li>
+<li><code>PRE_GREENLIGHT_RESOURCE</code>：正式立项前能否拿到带薪时间、工具、人手、服务器/算力；</li>
+<li><code>PROTOTYPE_RIGHT</code>：能否先做出可玩物，再要求组织判断；</li>
+<li><code>GREENLIGHT_RIGHT</code>：谁允许项目进入更高资源级别；</li>
+<li><code>KILL_RIGHT</code>：谁有权终止项目；</li>
+<li><code>RESCOPE_RIGHT</code>：项目有问题时，作者能否缩回小队继续，而不是连人一起清零；</li>
+<li><code>PARENT_BUDGET_RIGHT</code>：工作室之外谁可以撤销整个创新制度的预算；</li>
+<li><code>FAILURE_SHELTER</code>：一次失败后人是否还在、工资是否还在、能否再试；</li>
+<li><code>SECOND_ATTEMPT_CAPACITY</code>：项目失败/首作结束后是否有现实条件再做一次；</li>
+<li><code>TEAM_CONTINUITY</code>：能力和默契是否随项目失败而保存；</li>
+<li><code>CREATOR_REPLACEMENT</code>：成功一代掌权以后，新人是否仍能持续获得同等级作者权；</li>
+<li><code>EXIT_TO_RECOMBINATION</code>：离开旧组织后能否在市场、平台、发行、投资或社区中重新组成生产单位。</li>
+</ul>
+<p>这组权利与<a href="/heroes-portal/country-studies/china/010-next-studios-greenlight-rights-governance-lifecycle-2017-2024.html">010 NExT</a>已有decision-right matrix兼容，不另造互相冲突的schema。</p>
+<h2 id="2">2. 中国不是没有“边疆豁免”，而是至少经历过四次不同的边疆窗口</h2>
+<h3 id="21-1990searly-2000s-pc">2.1 第一窗口：1990s—early 2000s 国产PC单机——作者跨度大，但市场庇护极薄</h3>
+<p>早期国产单机团队本身就具有今天所谓“小团队作者制”的很多特征：
+- 工种分工粗，程序、美术、策划经常跨界；
+- 小核心承担完整作品；
+- 主策 / 主美 / 主程对产品形态有很高直接影响；
+- 因产业尚年轻，二十多岁的开发者能够很早承担完整功能甚至整款产品。</p>
+<p>《刀剑封魔录》制作人刘坤2022年回顾尤其适合作为机制个案：
+- 离开目标软件后，先自己做偏好的动作玩法原型；
+- 多位《秦殇》旧同事因demo加入；
+- 核心团队约10人、开发不到一年；
+- 团队没有专门策划工种，设计由美术和程序直接协商；
+- 但公司几乎没有现金安全垫，只能发很低的生活费；
+- 产品发售后又因发行/结算问题没有得到可持续收入，最后转向网游才形成企业生存。</p>
+<p>Source:
+- GCORES / 刘坤访谈, 2022-03-14: https://www.gcores.com/articles/148493</p>
+<p>这说明第一代不是“没有作者权”，而是：</p>
+<blockquote>
+<p><strong><code>AUTHORIAL_SPAN</code> 高，<code>FAILURE_SHELTER</code>、<code>MARKET_INTERFACE</code>、<code>SECOND_ATTEMPT_CAPACITY</code> 低。</strong></p>
+</blockquote>
+<p>同时，目标软件2002年接受采访时已直接把转向网络游戏和避免盗版、回笼资金联系起来。优秀单机并非没有需求或制作能力，而是持续经营的回报函数迅速偏向在线服务。</p>
+<p>Source:
+- 新浪游戏 / 目标软件刘豫斌访谈, 2002-12-05: https://games.sina.com.cn/newgames/0212/120515201.shtml</p>
+<p>因此中国第一代单机的历史失败不能写成：</p>
+<blockquote>
+<p>“作者不够强，所以被网游淘汰。”</p>
+</blockquote>
+<p>更接近：</p>
+<blockquote>
+<p><strong>作者制已经出现，但没有形成让作者型团队反复试错、稳定现金回流和长期留存的产业壳。</strong></p>
+</blockquote>
+<h3 id="22-2001late-2000s">2.2 第二窗口：2001—late 2000s 在线游戏——真正巨大的商业边疆，但前沿权力被重新定义</h3>
+<p>盛大等公司首先解决的是支付、服务器和全国触达问题。同期SEC材料显示，盛大早期建立了覆盖数十万零售点 / 网吧的支付与分发体系；在线服务能够把盗版环境中的大量玩家转化成可持续现金流。</p>
+<p>参见：
+- <a href="/heroes-portal/book/research-notes/china-game-commercial-regime-lineage-003.html">中国商业制度谱系003</a></p>
+<p>这一阶段当然存在极强创业与产品创新，并不能写成“网游=不创新”。真正改变的是<strong>哪些问题获得最高价值</strong>：
+- server / account persistence；
+- social structure；
+- economy；
+- continuous update；
+- payment；
+- retention；
+- live operations。</p>
+<p>因此边疆豁免仍然存在，但越来越集中在：</p>
+<blockquote>
+<p><strong>能够定义新的在线商业 / 社交 / 服务系统的创业者和项目领导层。</strong></p>
+</blockquote>
+<p>普通员工则随着企业扩大、岗位专业化进入更长的组织链条。</p>
+<p>单隽提供了一个很清楚的个人级转折。他自述学生时代已做过多款游戏；毕业后因大环境进入网游公司，在盛大主导原创《三国豪侠传》，但商业失败使他认识到长期黏着、成长和社交对当时在线市场的重要性。后来他与同事离职，以个人积蓄承担风险，通过XBLA等新数字平台重新进入单机/小团队制作。</p>
+<p>Source:
+- 新浪游戏 / 单隽访谈, 2012-04-28: https://games.sina.com.cn/o/n/2012-04-28/0953609876.shtml</p>
+<p>这条人生路径非常重要：</p>
+<pre><code class="language-text">已有作者倾向
+→ 商业网游内部获得项目权
+→ 市场证明目标函数错配
+→ 学到online production / commercial reality
+→ 退出组织
+→ 新平台降低market-interface cost
+→ 重新取得完整作者权
+</code></pre>
+<p>它既反驳“大厂经验全是负资产”，也说明作者权经常要靠<strong>退出后重组</strong>重新取得。</p>
+<h3 id="23-2010s-f2p">2.3 第三窗口：2010s 移动/F2P/渠道时代——创业边疆很强，普通雇员作者权未必同步扩张</h3>
+<p>智能手机和F2P又创造了一次真正的新产业边疆。大量年轻创始人、旧网游从业者和小团队获得暴涨的市场机会；《刀塔传奇》等产品本身也包含真实玩法重组，不能把这一代写成“纯抄袭”。</p>
+<p>但随着Android渠道、发行、买量和高LTV模型成熟，收入接口会持续奖励：
+- retention；
+- ARPU / LTV；
+- monetization；
+- event cadence；
+- UA；
+- channel negotiation；
+- large-scale live ops。</p>
+<p><a href="/heroes-portal/book/research-notes/china-game-commercial-regime-lineage-003.html">商业制度谱系003</a>已用同期财务资料证明渠道可以拿走很高比例的gross billings，开发商与发行方因此被强烈激励去优化可量化商业函数。</p>
+<p>这一阶段可能形成中国区别于日本黄金期的关键结构：</p>
+<blockquote>
+<p><strong><code>FRONTIER_EXEMPTION</code> 在“新公司创始人 / 项目负责人”层非常强，但并不会自动向普通雇员扩散成同等级 <code>PROBLEM_ORIGIN_RIGHT + GREENLIGHT_RIGHT + SECOND_ATTEMPT_CAPACITY</code>。</strong></p>
+</blockquote>
+<p>2026潘竹涛 / 吴桐雨对42名中国游戏从业者的民族志与访谈提供了当前最直接的劳动现场证据：组织会吸纳玩家身份、创作热情和高投入意愿，但模块化劳动中某些人的高投入比其创作主体性更稳定地被调用；部分人试图通过晋升换取更大创作范围，另一些转向side projects。</p>
+<p>详见：
+- <a href="/heroes-portal/country-studies/china/009-china-gameworker-creative-subjectivity-fieldwork-2017-2026.html">009 中国游戏雇员创造性劳动</a></p>
+<p>这仍是定性样本，<strong>不能写成“中国大厂员工普遍没有创意”</strong>。更合理的命题是：</p>
+<blockquote>
+<p>中国成熟商业工业已经非常擅长生产高水平专业能力，但<code>PRODUCTION_CAPITAL</code>的扩张速度可能快于<code>PRODUCT_PROBLEM_RIGHTS</code>向普通成员扩散的速度。</p>
+</blockquote>
+<h3 id="24-mid-2010s2026-steam-premium">2.4 第四窗口：mid-2010s—2026 Steam / 全球premium / 主机——作者权重新外溢到小团队</h3>
+<p>Steam、主机数字商店、全球支付、通用引擎和creator network逐渐把“离开大组织以后还能不能找到玩家”改写。</p>
+<p>当前中国出现的不是简单“独立游戏突然繁荣”，而是：</p>
+<blockquote>
+<p><strong>旧商业工业积累的能力被重新组合、重新定价。</strong></p>
+</blockquote>
+<p>典型路径已有：
+- Game Science：腾讯PC MMO核心班底 → 创业 → 手游现金流/适配 → 2018以商业线+5–6人单机试作的双轨结构降低战略转型风险 → premium大项目；
+- Double Cross /《苏丹的游戏》：旧商业手游组织衰退后，长期合作老兵缩成小核心，按剩余能力重构scope，让原本被大组织分工切碎的能力获得更宽ownership；
+- 《枪火重生》等提供“商业工业能力 + premium完整产品”的正向转移样本；
+- NExT则是重要的<strong>公司内部反例</strong>：普通员工确实曾获得小组Demo入口、100人日试作和回炉机会，证明中国大组织并非只能通过离职创业释放作者性。</p>
+<p>详见：
+- <a href="/heroes-portal/book/research-notes/china-capability-repricing-black-myth-sultan-013.html">能力重新定价013</a>
+- <a href="/heroes-portal/country-studies/china/010-next-studios-greenlight-rights-governance-lifecycle-2017-2024.html">010 NExT</a></p>
+<p>2025年中国官方产业报告同时显示：
+- 国内游戏市场实销 <strong>3507.89亿元</strong>；
+- 移动仍占 <strong>73.29%</strong>；
+- 客户端收入 <strong>781.6亿元</strong>、同比+14.97%；
+- 主机收入 <strong>83.62亿元</strong>、同比+86.33%。</p>
+<p>Source:
+- 中国音像与数字出版协会，《2025年中国游戏产业报告》: https://www.cadpa.org.cn/3277/202512/41770.html</p>
+<p>因此不能再把2020s中国描述成“仍然只有手游”。更准确的是：</p>
+<blockquote>
+<p><strong>旧F2P/GaaS超级工业仍然占据主体，但premium PC / 主机市场接口已形成显著上升的第二生产生态。</strong></p>
+</blockquote>
+<p>问题转成：这个新生态能不能留下足够多的<strong>第二次尝试团队</strong>，而不只是出现一批首作和少数爆款。</p>
+<h2 id="25-004">2.5 日本004之后的重要修正：中国也有长期旁路史，差异更可能在“连续性”而非“存在性”</h2>
+<p>新增 <a href="/heroes-portal/country-studies/china/016-creator-route-topology-from-66rpg-to-modern-bridges.html">016 中国创作者路网</a> 后，不能再把中日对照写成“日本有同人/旁路，中国没有”。66RPG 2005–2017已形成大规模草根创作共同体，IGF China 2009、GGJ约2011、CiGA/indiePlay/GWB 2015后、China Hero 2016后、TapTap Spotlight 2023后持续增加外部入口。</p>
+<p>更有辨识力的比较改为：
+- <code>ROUTE_HALF_LIFE</code>：基础设施能连续服务多少代创作者；
+- <code>BRIDGE_CONVERSION_STABILITY</code>：作品/原型能否稳定进入资金与市场；
+- <code>ROUTE_SWITCHABILITY</code>：第一条路被堵后能否换第二条；
+- <code>ROUTE_REVERSIBILITY</code>：失败后能否回就业/再独立；
+- <code>SECOND_GENERATION_CREATOR_PRODUCTION</code>：第一代受益者是否开始扶持下一代。</p>
+<p>当前H：日本部分路线更像长期累积；中国多次经历市场/平台/监管/商业regime重写后发生断裂或转形。<strong>这仍是历史结构假说，不是国别发生率结论。</strong></p>
+<h2 id="3">3. 第一版中日结构对照：不是“谁自由”，而是作者权的空间位置不同</h2>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>日本黄金时代假说</th>
+<th>中国历史上更常见的模式</th>
+<th>Current status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>新人早期作者权</td>
+<td>部分大公司内部可破格快速取得project lead / prototype权</td>
+<td>普通雇员内部机会存在，但完整权利更多见于创始人、项目高层、离职/重组</td>
+<td>H / case convergence</td>
+</tr>
+<tr>
+<td>工艺积累</td>
+<td>长期雇佣、师徒、稳定团队可形成深厚tacit craft</td>
+<td>大型商业工业同样形成很强专业能力，但人员/项目/商业regime切换更快</td>
+<td>SUPPORTED descriptive</td>
+</tr>
+<tr>
+<td>资历约束</td>
+<td><code>SENIORITY_TAX</code>显性较强</td>
+<td>传统年功较弱，但职级/KPI/商业成功路径会形成另一种<code>STATUS/REGIME_TAX</code></td>
+<td>H</td>
+</tr>
+<tr>
+<td>Patron作用</td>
+<td>强高层可绕过等级为异端开闸</td>
+<td>NExT等也显示负责人保护重要；patron离场后预算/组织存续仍可能变化</td>
+<td>SUPPORTED cases</td>
+</tr>
+<tr>
+<td>退出后的作者生态</td>
+<td>doujin / circle等长期旁路 + 商业公司</td>
+<td>Steam / indie / startup旁路近十余年快速变厚，早期历史较薄</td>
+<td>strong descriptive / denominator open</td>
+</tr>
+<tr>
+<td>首次失败后的保存</td>
+<td>长期组织可能保留人，但具体分母待核</td>
+<td>早期单机市场壳薄；现代大厂/独立均有回炉与清零两种案例</td>
+<td>OPEN</td>
+</tr>
+<tr>
+<td>创作者代际更新</td>
+<td>大师长寿，需检验新人replacement是否下降</td>
+<td>大厂内代际作者更新缺统一统计；创业/新团队不断产生但连续性薄厚待核</td>
+<td>OPEN</td>
+</tr>
+<tr>
+<td>市场接口</td>
+<td>日本早期本土主机/街机/出版生态较成熟</td>
+<td>中国经历单机回款弱→在线服务→渠道租→全球数字直达的多次重写</td>
+<td>STRONG lineage</td>
+</tr>
+</tbody>
+</table>
+<p>最重要的暂定判断：</p>
+<blockquote>
+<p><strong>中国未必比日本更缺“怪人”；中国更可能长期缺少的是：让普通专业者在不退出整个组织、不自担全部家庭/融资/市场风险的情况下，也能逐步升级到完整作者权的稳定职业阶梯。</strong></p>
+</blockquote>
+<p>NExT是这个命题的重要正向反例，因此必须继续研究它为何能成立、哪些环节依赖沈黎/集团预算，以及后来的组织变化意味着什么。</p>
+<h2 id="4-seniority_tax-regime_tax">4. 中国的特殊问题可能不是 <code>SENIORITY_TAX</code>，而是 <code>REGIME_TAX / 产业版本税</code></h2>
+<p>日本的典型约束是：</p>
+<blockquote>
+<p>你可能很有能力，但先熬资历。</p>
+</blockquote>
+<p>中国游戏业更值得检验的约束可能是：</p>
+<blockquote>
+<p>你可以很快升职，但你的升职建立在某一套已经被市场证明的objective function上。</p>
+</blockquote>
+<p>2010s高回报制度持续奖励：
+- 既有品类benchmark；
+- retention / LTV；
+- 数值与活动；
+- 渠道适配；
+- 发行/买量；
+- 大组织协调。</p>
+<p>这会产生：</p>
+<h3 id="regime_tax"><code>REGIME_TAX / 产业版本税</code></h3>
+<blockquote>
+<p><strong>一个人想把在旧收入制度中积累的职位、收入、团队和声誉兑换成新范式作者权时，需要损失多少既有职业资本？</strong></p>
+</blockquote>
+<p>它与<code>SENIORITY_TAX</code>不同：
+- 日本型：晚辈可能必须等待；
+- 中国商业游戏型：强者可以很快上升，但越成功越可能被旧目标函数高价绑定。</p>
+<p>因此中国的“成功者陷阱”可能比简单新人压制更重要。</p>
+<p><a href="/heroes-portal/book/research-notes/china-catch-up-success-pre-paradigm-creator-016.html">016 追赶成功 / 前范式创作者</a>已经把这一问题定义为<code>Success-Path Version Lock</code>；本文件只把它接入中日比较，不另立平行理论。</p>
+<h2 id="5">5. 为什么早期中国单机人的命运对今天特别重要：有作者权但没有市场壳，也会死</h2>
+<p>日本案例容易把我们带向“只要给作者自由就行”。</p>
+<p>中国1990s—2000s单机恰好提供反证：
+- 小团队；
+- 多面手；
+- 强主创；
+- 真实原创；
+- 甚至能出口海外；</p>
+<p>但仍可能没有：
+- 可靠支付；
+- 数字分发；
+- 可执行发行合同；
+- 稳定现金流；
+- 第二次失败预算。</p>
+<p>《刀剑封魔录》案例尤其清楚：约10人团队拥有极宽设计权，但发售后的分成/发行并未形成足够现金，最后仍靠网游项目让公司延续。</p>
+<p>因此正式模型必须是：</p>
+<pre><code class="language-text">AUTHORIAL AUTONOMY
+×
+MARKET INTERFACE
+×
+FAILURE SHELTER
+×
+SECOND ATTEMPT
+×
+TEAM CONTINUITY
+→
+durable creator ecology
+</code></pre>
+<p>缺任何一项，都可能只留下“天才作品”，留不下“下一代作者产业”。</p>
+<h2 id="6">6. 中国当前最值得关注的改善，不只是“国产单机卖得更好了”</h2>
+<h3 id="61-exit_to_recombination">6.1 <code>EXIT_TO_RECOMBINATION</code> 显著改善</h3>
+<p>和2002相比，今天离开大公司的人拥有更多：
+- Steam / 主机平台；
+- 数字支付；
+- Unity / Unreal / Godot等通用工具；
+- 远程协作；
+- 社交媒体 / creator discovery；
+- 国内外publisher；
+- demo / Next Fest / wishlist等较早市场信号。</p>
+<p>这让“退出”不再自动等于职业自杀。</p>
+<p>但退出改善仍不能替代<strong>公司内部作者阶梯</strong>。如果完整作者权几乎只能靠离职获得，社会仍会向个人收取高额：
+- household risk；
+- salary opportunity cost；
+- insurance / housing risk；
+- financing risk；
+- failed-project reemployment risk。</p>
+<p>即 <code>AGENCY_TAX</code> 仍然存在。</p>
+<h3 id="62-capability_repricing">6.2 <code>CAPABILITY_REPRICING</code> 已经发生</h3>
+<p>Game Science、《苏丹的游戏》等证明：
+- 旧大厂/商业项目经验可以转化成premium生产资本；
+- “被旧制度训练过”不等于被永久锁死；
+- 真正关键是能否重写objective function、scope和market interface。</p>
+<h3 id="63-full_cycle_team_density">6.3 但 <code>FULL_CYCLE_TEAM_DENSITY</code> 仍是核心未决</h3>
+<p><a href="/heroes-portal/country-studies/china/012-full-cycle-authoring-team-supply-proxy-china-vs-comparators.html">012</a>的Steam Top200 wishlist国别代理显示，中国绝对产品并不少，但相对其巨大人口、市场和从业基础，高关注全球PC产品管线仍显得偏薄；与韩国、波兰、瑞典等比较存在数量级压力信号。</p>
+<p>这不是作者型团队数量的直接测量，因此核心命题仍保持OPEN：</p>
+<blockquote>
+<p><strong>中国能否按产业规模持续生产“自己定义产品 → 完整交付 → 接受市场结果 → 核心团队不散 → 再做一次”的团队？</strong></p>
+</blockquote>
+<p>这比“国产游戏有多少爆款”重要。</p>
+<h2 id="7-creator_replacement">7. <code>CREATOR_REPLACEMENT</code>：中国研究下一步最缺的分母</h2>
+<p>日本线已经迫使我们问：</p>
+<blockquote>
+<p>宫本茂之后还有没有下一位年轻宫本？</p>
+</blockquote>
+<p>中国也必须问同一个问题，而且不能只数创业明星。</p>
+<h3 id="_1">大组织版本</h3>
+<p>对腾讯、网易、米哈游、莉莉丝等，不只问：
+- 哪个项目成功；
+- 哪个制作人有名；</p>
+<p>而问：
+- 每年多少2–10人原型组；
+- 发起者首次担任完整项目主创时的年资；
+- 多少项目被砍但人获得下一次原型机会；
+- 同一个负责人是否长期占据作者权；
+- 普通策划/程序/美术能否从craft authority升级为product problem authority；
+- patron离职以后制度是否继续。</p>
+<h3 id="_2">小团队版本</h3>
+<p>不只问Steam首作数量，而问固定首发cohort的：
+- 3年 / 5年第二项目尝试率；
+- 第二款实际发售率；
+- 核心团队保留率；
+- 首作失败后回到大厂 / 转行 / 新组队的比例；
+- publisher / investor是否把失败团队当作能力资产继续投资。</p>
+<p>这就是<code>CREATOR_REPLACEMENT + SECOND_ATTEMPT_CAPACITY</code>的真实分母。</p>
+<h2 id="8">8. 中国为什么会显得“每一代都重新创业一次”？</h2>
+<p>当前产业史允许提出一个新假说：</p>
+<h3 id="authorial_continuity_gap"><code>AUTHORIAL_CONTINUITY_GAP / 作者连续性缺口</code></h3>
+<p>中国并非没有持续出现强创作者，而是每次收入/平台regime重写时：
+- 单机 → MMO；
+- MMO → F2P；
+- PC/页游 → mobile/channel；
+- channel mobile → global/content；
+- mobile industrial talent → premium / console；</p>
+<p>旧团队、旧作品权、旧市场入口和旧职业声望的可迁移性都不完整。</p>
+<p>结果可能是：</p>
+<blockquote>
+<p><strong>人才连续，但作者身份和完整团队连续性不足；每一代人需要重新证明“这种游戏值得做、这种人可以当作者”。</strong></p>
+</blockquote>
+<p>这与日本长寿公司 / 长寿director形成很值得检验的反差。</p>
+<p>但这个命题必须有失败队列和人员迁移数据才能升级；当前状态：<strong>H</strong>。</p>
+<h2 id="9-deepseek">9. DeepSeek为什么成为非常重要的中国内部反例</h2>
+<p>如果把问题写成“中国文化缺乏个人主义，所以年轻人不会原创”，DeepSeek会直接击穿它。</p>
+<p><a href="/heroes-portal/country-studies/china/014-liang-wenfeng-deepseek-positive-deviant-innovation-organization.html">014</a>中的创始人采访至少说明一种可能的中国组织结构：
+- 年轻、本土培养的人才；
+- 自下而上提出问题；
+- 正式大规模greenlight之前能调用真实算力和同事；
+- idea有潜力后再集中资源；
+- 允许一定浪费和失败。</p>
+<p>所以更加可检验的命题不是：</p>
+<blockquote>
+<p>中国教育没有怪人。</p>
+</blockquote>
+<p>而是：</p>
+<blockquote>
+<p><strong>什么组织能让中国已有的高基础能力者，在足够早的时候获得 <code>FRONTIER_PROBLEM_OWNERSHIP + PRE_GREENLIGHT_RESOURCE + FAILURE_CAPACITY</code>？</strong></p>
+</blockquote>
+<p>这也是游戏业该与AI时代比较的真正接口。</p>
+<h2 id="10-aih">10. AI：可能开启第五次边疆窗口，但目前只能记H</h2>
+<p>生成式AI / coding agents / content tools可能降低：
+- prototype cost；
+- specialist coordination cost；
+- translation / content / test成本；
+- 小团队把judgment变成playable artifact的距离。</p>
+<p>因此一个重要H：</p>
+<blockquote>
+<p><strong>AI可能让中国过去更多依赖“离职组齐一支完整团队”才能获得的作者权，部分前移到个人 / 2–5人小组。</strong></p>
+</blockquote>
+<p>但当前不能写成“中国已经因此获得第四次工业革命优势”。仍需观察：
+- 谁真正用AI产出可发行完整产品；
+- AI降低的是现金burn还是只提高scope；
+- 新工具是否反而让更多团队把错误想法做得更大；
+- 平台、版权、品质和市场发现是否成为新瓶颈；
+- 大公司是否把AI用于扩大普通成员的prototype right，还是主要用于提高既定任务产能。</p>
+<p>AI真正值得测的不是“用了多少”，而是：</p>
+<blockquote>
+<p><strong>有没有改变<code>decision rights</code>和<code>time-to-player-truth</code>。</strong></p>
+</blockquote>
+<h2 id="11">11. 当前最强比较结论与禁止外推</h2>
+<h3 id="supported-strong-descriptive">SUPPORTED / strong descriptive</h3>
+<ol>
+<li>中国游戏业并不缺新产业窗口；单机、网游、手游和premium/global都曾重写生产函数。</li>
+<li>早期国产单机已经存在强作者、小团队、多面手和原创产品；其衰退不能仅用创作能力解释。</li>
+<li>在线/F2P/渠道时代产生了极强且真实的专业能力资本，同时改变了最有回报的问题类型。</li>
+<li>中国今天的PC/主机市场接口正在变厚，旧商业人才也已发生能力重新定价。</li>
+<li>中国大组织内部存在NExT等真实prototype/孵化反例，因此“完整作者权只能创业获得”不能写成全称事实。</li>
+</ol>
+<h3 id="h-still-to-test">H / still to test</h3>
+<ol>
+<li>日本黄金期比中国更常把frontier exemption放在公司内部；</li>
+<li>中国更常要求潜在作者通过exit / founding / spinout获得完整问题主权；</li>
+<li>中国的主要约束可能从<code>SENIORITY_TAX</code>转为<code>REGIME_TAX + AGENCY_TAX</code>；</li>
+<li>中国真正短缺的不是idea或执行力，而是<code>FULL_CYCLE_TEAM_DENSITY × SECOND_ATTEMPT_CAPACITY × CREATOR_REPLACEMENT</code>；</li>
+<li>中国存在<code>AUTHORIAL_CONTINUITY_GAP</code>：人才连续性高于作者身份 / 完整团队连续性。</li>
+</ol>
+<h3 id="_3">禁止写成</h3>
+<ul>
+<li>“日本公司尊重天才，中国公司压制天才”；</li>
+<li>“中国人缺个人主义所以做不出原创”；</li>
+<li>“大厂经验必然摧毁作者性”；</li>
+<li>“独立团队天然更自由 / 更创新”；</li>
+<li>“早期国产单机如果没有盗版一定会形成日本式产业”；</li>
+<li>“AI必然解决中国作者权问题”。</li>
+</ul>
+<h2 id="12">12. 下一轮优先验证</h2>
+<h3 id="p0-creator_replacement">P0 — 中国大厂内部 <code>CREATOR_REPLACEMENT</code></h3>
+<p>找3–5家公司建立：
+- 首次director / producer年资；
+- prototype→greenlight真实制度；
+- 被砍项目后的第二次尝试；
+- 同一资深主创长期占权 vs 新人进入。</p>
+<h3 id="p0-19952005">P0 — 1995–2005“单机作者去哪了”</h3>
+<p>不要只写公司转网游；追具体核心人：
+- 留公司转网游；
+- 离职创业；
+- 转行业；
+- 海外；
+- 继续单机；
+并记录其旧作者权是否保留。</p>
+<h3 id="p1">P1 — 中国“退出取得作者权”是否真比日本高</h3>
+<p>构建公开人物样本：
+- 中国：单隽、刘坤、Game Science核心、Double Cross、更多普通失败者；
+- 日本：首次project lead仍留公司者 + 离职创业者；
+统一编码<code>EXIT_REQUIRED_FOR_AUTHORSHIP</code>。</p>
+<h3 id="p1_1">P1 — 失败后是否还有第二次</h3>
+<p>重点不是成功者，而是：
+- 被砍项目主创；
+- 首作商业失败团队；
+- 组织调整后普通成员；
+- 三年 / 五年后是否仍在提出自己的产品。</p>
+<h3 id="p2-ai-native-cohort">P2 — AI-native cohort</h3>
+<p>固定2025–2027首次公开prototype/首作的一批中国2–5人团队，追踪：
+- AI工具实际使用；
+- 首个playable所需时间；
+- 外包 / 专职岗位减少多少；
+- 第二次尝试；
+- 是否真正提高作者密度。</p>
+<h2 id="13">13. 需求侧反向链：作者权也由玩家选择定价</h2>
+<p>本文件此前主要研究“谁在组织内取得作者权”，仍缺反向链。新增中国017后，作者生态统一写为：</p>
+<pre><code class="language-text">social selection
+→ organizational author rights
+→ channel visibility
+→ player selection / refusal
+→ revenue signal
+→ capital reallocates budget and author rights
+↺
+</code></pre>
+<p>因此中日比较不能只看公司是否“尊重作者”，还要看：
+- 玩家是否能识别具体作者/团队，并把认可转成购买；
+- 失败的IP壳替代是否真的被市场惩罚；
+- 小众作者是否有 donation / doujin / mod / community 等补贴机制；
+- premium 与 F2P 的收入投票权重是否不同；
+- 渠道是否先决定玩家能看到什么，再把被塑造后的需求反馈给开发者。</p>
+<p>新的核心H：</p>
+<blockquote>
+<p><strong>当市场不能稳定给作者判断定价时，资本没有充分经济理由购买作者自主权；当玩家能稳定识别并为具体作者判断付费时，作者权本身会成为有价格的生产资料。</strong></p>
+</blockquote>
+<p>Demand-side canonical entry:
+- <a href="/heroes-portal/country-studies/china/017-demand-side-creator-selection-player-veto.html">017 — Demand-Side Creator Selection</a></p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / country-studies/china/015-japan-comparator-frontier-permeability-author-rights-and-creator-replacement.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

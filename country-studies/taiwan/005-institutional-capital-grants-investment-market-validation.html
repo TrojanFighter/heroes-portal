@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>005 — 台湾独立游戏资本梯子：奖励、项目投资、众筹、平台验证与种子资本 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl class="on"" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0" class="t2">0. 第一轮结论</a><a href="#tw-cap-e012021" class="t2">TW-CAP-E01｜2021独立游戏开发奖励获奖名单</a><a href="#tw-cap-e02" class="t2">TW-CAP-E02｜经济部预算公开表：金额存在阶段/累计口径</a><a href="#_1" class="t3">处理规则</a><a href="#tw-cap-e03" class="t2">TW-CAP-E03｜制度后来扩大</a><a href="#tw-cap-e042020-taicca" class="t2">TW-CAP-E04｜2020 TAICCA × 贝壳放大 × 天使放大</a><a href="#tw-cap-e05" class="t2">TW-CAP-E05｜投资形态：项目收益分成，不是普通补助</a><a href="#tw-cap-e06" class="t2">TW-CAP-E06｜这笔投资改变了劳动状态</a><a href="#tw-cap-e07zeczec" class="t2">TW-CAP-E07｜Zeczec《文字游戏》</a><a href="#tw-cap-e08" class="t2">TW-CAP-E08｜公司化发生在众筹前</a><a href="#tw-cap-e092025-vr" class="t2">TW-CAP-E09｜2025 VR商业验证计划</a><a href="#tw-cap-e10" class="t2">TW-CAP-E10｜支持金不是“无条件免费钱”</a><a href="#tw-cap-e11" class="t2">TW-CAP-E11｜独立游戏奖励 → 国发基金/文策院投资转介</a><a href="#tw-cap-e115" class="t2">TW-CAP-E11.5｜首个公开的“奖励→国发基金投资”路径：光之语</a><a href="#tw-cap-e1162026-05" class="t2">TW-CAP-E11.6｜截至2026-05，游戏投资规模已不只是单案试点</a><a href="#tw-cap-e122025-digital-games-fund" class="t2">TW-CAP-E12｜2025 Digital Games Fund</a><a href="#_2" class="t2">不能从这张表推出的东西</a></aside><article class="doc"><div class="col"><h1 id="005">005 — 台湾独立游戏资本梯子：奖励、项目投资、众筹、平台验证与种子资本</h1>
+<ul>
+<li>Status: SOURCE AUDIT / PRE-CLAIM</li>
+<li>Program: C Taiwan comparator + A case finance context</li>
+<li>As of: 2026-10-07</li>
+<li>Core question: 台湾独立游戏团队在什么生产阶段可以接触何种外部资金；资金买走什么权利、要求什么验证、是否改变全职投入与市场接口？</li>
+<li>Restriction: “政府支持”“投资”“奖励金”“众筹”“发行预付”“平台合作”不得混称为补助，也不得把名义金额直接等同总开发预算。</li>
+</ul>
+<h2 id="0">0. 第一轮结论</h2>
+<p class="dc">目前公开证据支持的不是“台湾政府会给独立游戏免费钱”，而是一套逐渐加层的资本与验证接口：</p>
+<ol>
+<li>早期独立游戏开发奖励：用公开评审给公司化团队提供研发奖励金；</li>
+<li>项目收益分成型投资：以未来作品收入换早期现金，目标之一是购买全职开发时间；</li>
+<li>群众募资：同时承担现金、市场验证、传播和预售/履约义务；</li>
+<li>产品化/商业验证支持：在已有原型和公司基础上，把平台、发行、用户测试、营销和收入分成绑定到一起；</li>
+<li>种子阶段股权/机构投资：2025以后进一步把“first check”、公司设立与海外发行放入专业投资机制。</li>
+</ol>
+<p>这是“资本梯子”假说，不代表所有台湾团队都能顺利走完，也不代表该体系的选择公平、规模足够或结果有效。</p>
+<h1 id="05-access-gate2021">0.5. 一个必须前置的Access Gate：2021计划不接受个人开发者</h1>
+<p>2021申请Q&amp;A明确规定：申请人必须是依台湾公司法设立、成立未满5年的公司；个人不能先申请、获奖后再设立公司。官方解释将其与公司资金运用、组织机能和奖励金可确认发放绑定。</p>
+<p>来源：
+https://digiblockc.tca.org.tw/news/3416a75f4cea9109507cacd8e2f2aefc</p>
+<p>这意味着“台湾有独立游戏奖励”不能直接翻译成“台湾卧室开发者容易拿政府钱”。至少2021制度先筛掉了尚未公司化的人。</p>
+<p>《风暴驭使》提供了反向机制证据：创作者2023接受GNN采访时明确说，个人开发遇到资金问题后发现政府奖励与民间投资对个人身份有诸多限制，因此成立碎盾游戏。
+https://gnn.gamer.com.tw/detail.php?sn=260479</p>
+<p>因此公司化既是eligibility gate，也可能是资金制度诱导出来的组织选择。</p>
+<h1 id="1-2020">1. 2020—：独立游戏开发奖励的早期现金接口</h1>
+<h2 id="tw-cap-e012021">TW-CAP-E01｜2021独立游戏开发奖励获奖名单</h2>
+<p>来源：智慧内容创新应用发展计划(digiBlock C)，2021-05-20。<br />
+URL: https://digiblockc.tca.org.tw/news/d645920e395fedad7bbbed0eca3fe2e0</p>
+<p>110年度“独立游戏开发奖励计划”列出8个获奖项目，其中包括：
+- 《艾伦的自动机工坊》
+- 《夜之岛-台湾夜市设计师》
+- 《机辩意识 / 书记官》
+- 《Alina of the Arena》
+- 《活侠传 Legend of Mortal》
+- 《廖添丁-稀代凶贼の最期》
+- 《摇摇星球》
+- 《风暴驭使》</p>
+<p>这说明《活侠传》在正式发售前三年已进入政府独立游戏奖励体系，而不是完全只靠两位主创私人现金推进。</p>
+<h2 id="tw-cap-e02">TW-CAP-E02｜经济部预算公开表：金额存在阶段/累计口径</h2>
+<p>2021年第4季工业局公开表：<br />
+https://www.ida.gov.tw/ctlr?PRO=filepath.DownloadFile&amp;f=executive&amp;id=17642&amp;t=f</p>
+<p>同一核准事项“活侠传 Legend of Mortal”、核准日期110.06.01，当时表内金额为 NT$520,000。</p>
+<p>后续2022年公开汇总表：<br />
+https://www.ida.gov.tw/ctlr?PRO=filepath.DownloadFile&amp;f=executive&amp;id=18784&amp;t=f</p>
+<p>同一项目、同一核准日期被列为 NT$780,000，并归于“参加竞赛企业16家—实境体感暨虚拟科技创新应用推广计划—智慧内容创新应用发展计划”的奖励支出。</p>
+<h3 id="_1">处理规则</h3>
+<ul>
+<li>当前记录：2021 award；公开表内金额从NT$520k进展到后续汇总的NT$780k，暂按累计/调整口径保留。</li>
+<li>不得写“2021一次性拿到78万”。</li>
+<li>需要追回当年奖励契约/拨款阶段说明，判断52→78万是阶段拨款、奖金调整、追加奖励还是不同会计口径。</li>
+<li>无论52万还是78万，都不能直接计算占《活侠传》总预算比例，因为总开发预算未知。</li>
+</ul>
+<h2 id="tw-cap-e03">TW-CAP-E03｜制度后来扩大</h2>
+<p>数位产业署2024年公开资料称：
+- 独立游戏开发奖励每年奖励8家业者；
+- 当时总奖励规模约NT$10.4m；
+- 自2023年起又加入“产品化加值”阶段；
+- 2024规则下，开发奖励分NT$1.6m / 1.3m / 1.0m档，产品化加值最高NT$3m。</p>
+<p>来源：
+- https://moda.gov.tw/ADI/news/latest-news/10399
+- https://digiplus.adi.gov.tw/plan_detail_7.html
+- https://digiplus.adi.gov.tw/assets/game_development_announcement.pdf</p>
+<p>这说明2021《活侠传》不是孤立的一次文化补贴，而是后来继续制度化、提高金额并延伸到产品化阶段的政策工具。</p>
+<p>边界：申请人必须公司化、规则和奖额随年份变化；2024/2026制度不能倒套2021项目。</p>
+<h1 id="2-team9">2. Team9：项目投资先于众筹，而且投资直接购买了“全职时间”</h1>
+<h2 id="tw-cap-e042020-taicca">TW-CAP-E04｜2020 TAICCA × 贝壳放大 × 天使放大</h2>
+<p>TAICCA 2020-05-18官方新闻：<br />
+https://www.taicca.tw/latest_news/news/detail/318</p>
+<p>文策院与贝壳放大共同投资“天使放大”IP开发投资公司，首波合作标的明确包括Team9《文字游戏》。官方描述天使放大使用“投资标的与收入分成”形成回报。</p>
+<p>这里的资本链必须写准确：</p>
+<p>TAICCA / 贝壳放大
+→ 共同投资天使放大这一文化项目投资机构
+→ 天使放大投资《文字游戏》等具体项目</p>
+<p>因此现有资料不能简单写成“文策院直接补助《文字游戏》”。</p>
+<h2 id="tw-cap-e05">TW-CAP-E05｜投资形态：项目收益分成，不是普通补助</h2>
+<p>中央社2020-05-18同期报道：<br />
+https://www.cna.com.tw/news/acul/202005180205.aspx</p>
+<p>报道引述贝壳放大执行长林大涵：
+- 天使放大采用“收益回报型投资”；
+- 以单项专案分润方式投入；
+- 作品发行后的权利金收益抽成构成投资回报。</p>
+<p>当前仍UNKNOWN：
+- 《文字游戏》具体投资金额；
+- 分润百分比和期限；
+- 是否有回收优先权；
+- 是否涉及公司股权；
+- 决策/创作否决权；
+- 天使放大投资与后续众筹款的具体现金顺序。</p>
+<h2 id="tw-cap-e06">TW-CAP-E06｜这笔投资改变了劳动状态</h2>
+<p>2020同期《今周刊》报道引述Team9负责人张文韦：投资使原来业余投入的成员能够转为全职，把时间重新买回来投入项目。<br />
+URL: https://www.businesstoday.com.tw/article/category/183015/post/202005180036/</p>
+<p>这比“拿到投资”本身更重要：它直接提供了一个可观察机制：</p>
+<p>early project investment → members shift from part-time/freelance constraints toward full-time production.</p>
+<p>因此《文字游戏》正式Case如果建立，Runway不能只记录2020末的众筹。</p>
+<h1 id="3-team9">3. Team9：众筹是第二层资本与市场接口，不是第一桶钱</h1>
+<h2 id="tw-cap-e07zeczec">TW-CAP-E07｜Zeczec《文字游戏》</h2>
+<p>https://www.zeczec.com/projects/wordgame</p>
+<ul>
+<li>募资期：2020-11-18—2021-02-09；</li>
+<li>名义目标：NT$9,999；</li>
+<li>实际累计：NT$3,240,193；</li>
+<li>3578次赞助、3263名不重复赞助者。</li>
+</ul>
+<p>FAQ同时说明：
+- 发起主体为烴奈股份有限公司；
+- 商品出货/售后由公司负责；
+- 贝壳放大负责策略执行与营销规划。</p>
+<p>https://www.zeczec.com/projects/wordgame/faqs</p>
+<p>因此：
+- NT$3.24m = crowdfunding gross，不是净开发预算；
+- 名义目标NT$9,999明显不是项目完整资金需求；
+- 众筹发生在天使放大投资之后；
+- 众筹同时带来履约、周边、营销和社区承诺。</p>
+<h2 id="tw-cap-e08">TW-CAP-E08｜公司化发生在众筹前</h2>
+<p>经济部商工登记显示烴奈股份有限公司（Team 9 Ltd.）：
+- 登记日期：2020-03-02；
+- 当前资本总额：NT$3m；
+- 当前实收资本：NT$2.6m；
+- 当前代表人：黄威愷。</p>
+<p>https://findbiz.nat.gov.tw/fts/company/83514899</p>
+<p>团队对外则长期自称“Team9成立于2018年”。</p>
+<p>因此与原始鸟熊类似，应分：
+- creative team / project origin；
+- company legal incorporation；
+- full-time production；
+- external capital。</p>
+<p>公司当前资本额也不能倒推2020开发预算。</p>
+<h1 id="4-2025">4. 2025：支持金也可以带明确平台、发行和收入分成条件</h1>
+<p>Team9的后续轨迹提供了一个很好的“同团队、不同资本工具”比较。</p>
+<h2 id="tw-cap-e092025-vr">TW-CAP-E09｜2025 VR商业验证计划</h2>
+<p>TAICCA 2025-07-14公布：
+- 11件合格申请；
+- 3件入选；
+- 每件获得NT$1.2m制作支持金；
+- 烴奈股份有限公司《A Black Climbing Dog LITE VR游戏开发计划》入选。</p>
+<p>https://taicca.tw/latest_news/plan_bulletin/detail/362?industrys%5B0%5D=5</p>
+<p>计划与法国发行商Astrea、Meta平台连接，目的包括上架、用户/游戏测试、国际市场和商业模式验证。</p>
+<h2 id="tw-cap-e10">TW-CAP-E10｜支持金不是“无条件免费钱”</h2>
+<p>计划规则：<br />
+https://future.taicca.tw/programs/2025VRgame-opencall</p>
+<ul>
+<li>每案支持金最高NT$1.2m；</li>
+<li>申请人自备资金不得低于NT$600k；</li>
+<li>申请人需拥有原创游戏IP；</li>
+<li>项目必须可立即进入Early Access开发；</li>
+<li>Astrea投入制作跟踪、测试、上架、产业链接和营销。</li>
+</ul>
+<p>收入结构：
+1. Meta先取销售总额30%；
+2. Astrea优先回收营销成本；
+3. 之后六个月：Meta 30%、TAICCA 14%、Astrea 14%、申请团队42%；
+4. 第七个月起：Meta 30%、Astrea 21%、申请团队49%。</p>
+<p>因此这类“支持金”在经济上更像：</p>
+<p>production support + mandatory co-investment + publisher/platform access + timed commercial validation + revenue-sharing contract</p>
+<p>而不是传统意义的纯non-dilutive grant。</p>
+<p>这对跨国比较很重要：只比较“政府给了多少钱”会漏掉市场接入和权利成本。</p>
+<h1 id="5-20242026">5. 2024—2026：奖励和机构投资开始被主动串联</h1>
+<h2 id="tw-cap-e11">TW-CAP-E11｜独立游戏奖励 → 国发基金/文策院投资转介</h2>
+<p>2026年立法院公开附件中，数位发展部说明：
+- 自2020起推动独立游戏开发奖励；
+- 至2026时称已协助超过50家新创独立游戏团队；
+- 2023起增加产品化加值；
+- 2024起与TAICCA合作推动“投资+补助”机制；
+- 获奖业者可转介TAICCA申请国发基金与相关资源；
+- 文件称已有4家独立游戏团队获得国发基金投资。</p>
+<p>公开附件：<br />
+https://ppg.ly.gov.tw/ppg/SittingAttachment/download/2026060516/26652190100826596004.pdf</p>
+<p>边界：当前尚未核出这4家具体团队、金额、股权/分润、失败/退出情况。不得把政策自报的“协助”直接等同项目商业成功。</p>
+<h2 id="tw-cap-e115">TW-CAP-E11.5｜首个公开的“奖励→国发基金投资”路径：光之语</h2>
+<p>数位产业署2024-04-22官方新闻确认：
+- 光之语有限公司在2023年获得“独立游戏开发奖励计划”；
+- 同年申请并获得文策院执行的国发基金专案投资；
+- 团队自述前一笔奖励用于新游戏开发，后一笔投资用于扩大IP、漫画/小说跨域及国际行销。</p>
+<p>来源：
+https://web.moda.gov.tw/ADI/news/latest-news/12378</p>
+<p>2023获奖名单同时确认其项目为《倒转方舟 Project: Ahno&rsquo;s Ark》：
+https://digiblockc.tca.org.tw/news/eccbc87e4b5ce2fe28308fd9f2a7baf3</p>
+<p>这提供了第一条真实的“reward → institutional investment”纵向路径，但投资金额、估值、持股/收益权、里程碑、退出条款仍未公开核实。</p>
+<h2 id="tw-cap-e1162026-05">TW-CAP-E11.6｜截至2026-05，游戏投资规模已不只是单案试点</h2>
+<p>2026年立法院公开附件中的政府说明称，截至2026年5月底：
+- 文策院已投资11件游戏公司或项目；
+- 投资总额约NT$170m；
+- 覆盖开发、发行、行销与跨域发展阶段。</p>
+<p>来源：
+https://ppg.ly.gov.tw/ppg/SittingAttachment/download/2026060522/80297965102020166002.pdf</p>
+<p>边界：
+- 11件不等于11家独立工作室，也不等于前述“绿通道4家”；
+- NT$170m为累计机构投资口径，不是奖励/补助总额；
+- 当前尚无完整11案名单、每案金额、回报与失败率，因此只能证明资本工具已达到可见规模，不能证明效率。</p>
+<h2 id="tw-cap-e122025-digital-games-fund">TW-CAP-E12｜2025 Digital Games Fund</h2>
+<p>TAICCA与烏杉资本于2025-11宣布推动“数位游戏基金”：
+- 聚焦seed stage；
+- 希望成为新创团队的first institutional check；
+- 除资本外，目标包括公司设立、营运基础、市场曝光、海外发行和国际合作。</p>
+<p>https://en.taicca.tw/news/detail/197</p>
+<p>这明显不同于独立游戏开发奖励：
+- reward：主要购买研发时间/阶段成果；
+- seed investment：进入公司资本结构与治理；
+- publisher/platform program：交换市场接口和分润；
+- crowdfunding：交换预购/履约/社区承诺。</p>
+<p>当前最大缺口是基金实际投资案例与term sheet，而不是政策口号。</p>
+<h1 id="6">6. 第一版资本梯子</h1>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>公开工具</th>
+<th>典型回报/条件</th>
+<th>已验证案例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>公司化前后 / prototype</td>
+<td>独立游戏开发奖励</td>
+<td>评审、里程碑/成果；历史条款待核</td>
+<td>《活侠传》</td>
+</tr>
+<tr>
+<td>早期production</td>
+<td>项目收益分成型投资</td>
+<td>未来作品收益抽成；具体term未知</td>
+<td>《文字游戏》/天使放大</td>
+</tr>
+<tr>
+<td>production + market test</td>
+<td>群众募资</td>
+<td>产品/周边履约、社区与传播义务</td>
+<td>《文字游戏》</td>
+</tr>
+<tr>
+<td>productization</td>
+<td>产品化加值奖励</td>
+<td>商业模式、发行/行销规划</td>
+<td>制度层已核，个案待补</td>
+</tr>
+<tr>
+<td>platform validation</td>
+<td>TAICCA × Astrea/Meta支持</td>
+<td>自备款、发行/营销、销售分润</td>
+<td>Team9 VR</td>
+</tr>
+<tr>
+<td>seed company capital</td>
+<td>TAICCA × Digital Games Fund</td>
+<td>投资回报、公司治理，terms待核</td>
+<td>2025基金成立；实际case待核</td>
+</tr>
+<tr>
+<td>international co-production</td>
+<td>TAICCA文化科技国际支持</td>
+<td>国际伙伴、配套资金/比例、项目交付</td>
+<td>游戏适用；具体普通PC游戏case待找</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_2">不能从这张表推出的东西</h2>
+<ul>
+<li>台湾普通开发者获得这些资金的概率；</li>
+<li>获资助团队平均存活率；</li>
+<li>台湾资金环境一定优于大陆；</li>
+<li>获资助导致项目成功；</li>
+<li>所有创作者都愿意接受分润/治理成本；</li>
+<li>《九日》或其他明星项目必然使用了上述支持。</li>
+</ul>
+<p>目前对《九日》的本轮官方资料检索没有找到可直接确认的TAICCA/独立游戏奖励记录；只能记为“本轮未发现”，不能写成“没有政府支持”。</p>
+<h1 id="7">7. 对两岸比较真正有用的变量</h1>
+<p>后续不要做“台湾有补助、大陆有没有”的粗比较，而要逐层编码：</p>
+<ol>
+<li>eligibility：个人能否申请？必须公司化多久？国籍/所在地要求？</li>
+<li>selection denominator：多少件申请、多少获选？</li>
+<li>money timing：prototype前、可玩Demo后、发售前还是成功后？</li>
+<li>capital type：奖励/补助、股权、项目分润、发行预付、贷款、众筹？</li>
+<li>creator cash match：是否强制自备资金？</li>
+<li>decision rights：谁能改变scope、发行日期、平台、地区发行权？</li>
+<li>recoup/revenue share：谁先回收，比例和期限？</li>
+<li>market interface：是否带平台、发行、展会、营销、测试？</li>
+<li>failure downside：项目失败是否还款、失股、停权、影响后续资格？</li>
+<li>access inequality：是否要求已有公司、Demo、英语提案、海外伙伴，从而先筛掉最早期开发者？</li>
+<li>conversion：钱是否真的把兼职变全职、把prototype变vertical slice、把本地作品带到海外？</li>
+<li>counterfactual：没有这笔资金时项目会停止、缩scope、延迟，还是照样完成？</li>
+</ol>
+<p>Team9的“投资使业余成员转为全职”是目前第11项最清楚的一条机制证据；《活侠传》奖励金额已核但对实际runway贡献仍UNKNOWN。</p>
+<h1 id="8">8. 下一轮优先级</h1>
+<p>大陆公共资金镜像：<a href="/heroes-portal/country-studies/china/015-public-game-funding-lifecycle-taiwan-mirror.html">中国015 — 公共游戏资金生命周期</a>。当前证据提示大陆地方政策高度异质，不能用“最高奖补金额”直接与台湾开发奖励比较，必须先看资金发生在prototype、版号、上线还是规模化之后。</p>
+<ol>
+<li>找到2021独立游戏开发奖励的完整作业办法/拨款阶段，解决《活侠传》52→78万口径。</li>
+<li>查天使放大《文字游戏》的具体投资额、分润/回收期限与是否持股。</li>
+<li>追2024后4家获得国发基金投资的独立游戏团队，建立reward→institutional investment真实转化案例。</li>
+<li>从历年独立游戏奖励全部获奖名单建立固定起点队列，追踪发售、停更、公司存续和下一作；这会比只研究《活侠传》更能判断政策效果。</li>
+<li>建立大陆同阶段资金工具的同口径表，不以政策名称比较，而以cash timing / control / recoup / selection / conversion比较。</li>
+</ol><div class="crumbs"><a href="/heroes-portal/">书阁</a> / country-studies/taiwan/005-institutional-capital-grants-investment-market-validation.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

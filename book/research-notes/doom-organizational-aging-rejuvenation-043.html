@@ -1,0 +1,900 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>043 — 从答案追赶到问题主权：DOOM 长周期中的组织老化、后发化与再年轻 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl class="on"" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0" class="t2">0. 核心命题</a><a href="#1" class="t2">1. 后发优势、后发劣势，与“后发者模式切换”</a><a href="#latecomer-mode-switch-problem" class="t3">LATECOMER MODE-SWITCH PROBLEM / 后发者模式切换难题</a><a href="#2-incumbent-epistemology" class="t2">2. “春登”不是国籍，而是 incumbent epistemology</a><a href="#incumbent-epistemology" class="t3">春登 / INCUMBENT EPISTEMOLOGY</a><a href="#reality-first-searcher" class="t3">农民发明家 / REALITY-FIRST SEARCHER</a><a href="#3-quakefounder-stack" class="t2">3. Quake：Founder Stack 开始失效</a><a href="#founder-stack-failure" class="t3">FOUNDER-STACK FAILURE / 创始人栈失效</a><a href="#4-romero" class="t2">4. Romero 离开以后：专业化解决了一类问题，也可能固化能力非对称</a><a href="#capability-asymmetry-lock-in" class="t3">CAPABILITY ASYMMETRY LOCK-IN / 能力非对称固化</a><a href="#5-rage" class="t2">5. Rage：技术上的前沿搜索仍然存在，产品问题主权却未必同步</a><a href="#6-doom-4call-of-doom-benchmark-capture" class="t2">6. Doom 4：“Call of Doom”是 Benchmark Capture 的高价值案例</a><a href="#benchmark-capture" class="t3">BENCHMARK CAPTURE / 标杆俘获</a><a href="#7-doom-2016-problem-sovereignty" class="t2">7. DOOM (2016)：重新取得 Problem Sovereignty</a><a href="#problem-sovereignty" class="t3">PROBLEM SOVEREIGNTY / 问题主权</a><a href="#reality-arbitration" class="t3">REALITY ARBITRATION / 现实仲裁</a><a href="#8-2016-1993" class="t2">8. 2016 没有“复刻 1993”，而是提取行为不变量</a><a href="#invariant-recomposition" class="t3">INVARIANT RECOMPOSITION / 不变量重组</a><a href="#doom-1993origin-innovation" class="t3">DOOM 1993：ORIGIN INNOVATION / 原发性范式创新</a><a href="#doom-2016invariant-recomposition" class="t3">DOOM 2016：INVARIANT RECOMPOSITION / 不变量重组创新</a><a href="#9" class="t2">9. 大组织真正困难的不是“想不到”，而是能不能处决沉没成本</a><a href="#sunk-cost-kill-capacity" class="t3">SUNK-COST KILL CAPACITY / 沉没成本处决能力</a><a href="#10-protected-heresy" class="t2">10. Protected Heresy：成熟组织中的“内部退出权”</a><a href="#protected-heresy" class="t3">PROTECTED HERESY / 受保护异端权</a><a href="#11-selective-institutional-amnesia" class="t2">11. Selective Institutional Amnesia：忘掉答案，不忘掉能力</a><a href="#selective-institutional-amnesia" class="t3">SELECTIVE INSTITUTIONAL AMNESIA / 选择性组织失忆</a><a href="#12-mature-team" class="t2">12. Mature team 如何重新成为“农民发明家”</a><a href="#industrialized-reality-first-search" class="t3">INDUSTRIALIZED REALITY-FIRST SEARCH / 工业化现实优先搜索</a><a href="#13-quake-doom-2016" class="t2">13. Quake 与 DOOM 2016：从“拥有创新者”到“拥有创新机制”</a><a href="#135-hall-petersen-mcgee" class="t2">13.5 Hall → Petersen → McGee：能力存在不等于能力拥有出题权</a><a href="#a-tom-hall" class="t3">A. Tom Hall：项目不适配不等于能力低级</a><a href="#capability-misfit-capability-inferiority" class="t3">CAPABILITY MISFIT ≠ CAPABILITY INFERIORITY</a><a href="#b-sandy-petersenid-hall-problem-definition-function" class="t3">B. Sandy Petersen：id 补回了设计产能与局部异质性，但未必补回 Hall 的 problem-definition function</a><a href="#c-american-mcgeelatent-capability" class="t3">C. American McGee：latent capability 可以在组织里存在，却不被激活为新的产品定义</a><a href="#capability-presence-capability-agency" class="t3">CAPABILITY PRESENCE ≠ CAPABILITY AGENCY</a><a href="#d-personnel-amputation-decision-right-amputation" class="t3">D. PERSONNEL AMPUTATION 与 DECISION-RIGHT AMPUTATION 必须拆开</a><a href="#e-solution-diversity-problem-diversity" class="t3">E. SOLUTION DIVERSITY 与 PROBLEM DIVERSITY</a><a href="#f-organizational-cognitive-pruning" class="t3">F. ORGANIZATIONAL COGNITIVE PRUNING / 组织认知修枝</a><a href="#g-prototype" class="t3">G. 对小团队 / prototype 阶段的迁移边界</a><a href="#136-problem-diversity-governance" class="t2">13.6 Problem Diversity Governance：重新出题权不能简化成“扁平化”</a><a href="#a-valve" class="t3">A. Valve：把部分出题权变成人力自选市场</a><a href="#labor-backed-problem-option" class="t3">LABOR-BACKED PROBLEM OPTION / 人力背书式问题期权</a><a href="#b-nintendo" class="t3">B. Nintendo：把“问题意识”训练成设计能力</a><a href="#problem-awareness-apprenticeship" class="t3">PROBLEM-AWARENESS APPRENTICESHIP / 问题意识学徒制</a><a href="#c-looking-glass-ion-storm-austin-artifact" class="t3">C. Looking Glass / Ion Storm Austin：故意保留冲突的问题模型，再用 artifact 收敛</a><a href="#contained-problem-pluralism" class="t3">CONTAINED PROBLEM PLURALISM / 受约束的问题多元</a><a href="#d-problem-reopening-capacity" class="t3">D. 三类机制的共同上层变量：PROBLEM-REOPENING CAPACITY</a><a href="#problem-reopening-capacity" class="t3">PROBLEM-REOPENING CAPACITY / 问题重开能力</a><a href="#e-043" class="t3">E. 对 043 原命题的修正</a><a href="#14" class="t2">14. 对《独立游戏英雄传说》的理论贡献</a><a href="#040" class="t3">040</a><a href="#041" class="t3">041</a><a href="#042" class="t3">042</a><a href="#043" class="t3">043</a><a href="#145-doom-second-answer-test" class="t2">14.5 跨行业升级：从 DOOM 专用假说到 Second-Answer Test</a><a href="#15" class="t2">15. 对后发国家与游戏产业比较的研究启示</a><a href="#16-doom-eternal-the-dark-ages" class="t2">16. 下一阶段压力测试：DOOM Eternal 与 The Dark Ages</a><a href="#a-doom-eternal" class="t3">A. DOOM Eternal：革命理论会不会立刻变成新教条？</a><a href="#b-the-dark-agesid" class="t3">B. The Dark Ages：id 是否真的愿意推翻自己刚建立的新正统？</a><a href="#17" class="t2">17. 当前证据等级与禁写项</a><a href="#_1" class="t3">较强</a><a href="#h" class="t3">H / 需要继续验证</a><a href="#_2" class="t3">禁写</a><a href="#18" class="t2">18. 下一步研究问题</a></aside><article class="doc"><div class="col"><h1 id="043-doom">043 — 从答案追赶到问题主权：DOOM 长周期中的组织老化、后发化与再年轻</h1>
+<ul>
+<li><strong>Status:</strong> RESEARCH NOTE / ORGANIZATION × INNOVATION × PRODUCT EPISTEMOLOGY / PRE-CLAIM / 2026-10-08</li>
+<li><strong>Primary longitudinal anchor:</strong> DOOM (1993) → Quake → post-Romero id / Rage → cancelled Doom 4 → DOOM (2016).</li>
+<li><strong>Core question:</strong> 一个曾经创造范式的组织，为什么会逐渐开始学习别人已经证明的答案；又怎样重新获得“没有标准答案时自己定义问题并让现实裁决”的能力？</li>
+<li><strong>Related:</strong> <a href="/heroes-portal/book/research-notes/early-id-strategic-disloyalty-american-individualism-040.html">040 — strategic disloyalty</a> · <a href="/heroes-portal/book/research-notes/truth-shield-to-narcissism-shield-ion-storm-governance-041.html">041 — truth shield / Ion Storm</a> · <a href="/heroes-portal/book/research-notes/carmack-romero-complementary-error-correction-network-042.html">042 — Carmack × Romero error-correction network</a> · <a href="/heroes-portal/book/research-notes/masters-of-doom-longitudinal-master-study-001.html">DOOM longitudinal master</a>.</li>
+<li><strong>Scope rule:</strong> 不把“春登”“农民发明家”当人格或国民性标签；这里把它们只作为作者研究术语，分别描述<strong>被上一轮成功经验俘获的认知状态</strong>与<strong>在未知问题上通过低成本现实试验搜索解法的工作方式</strong>。任何人物/国家归类都必须由具体机制和数量级证据支持。</li>
+</ul>
+<hr />
+<h2 id="0">0. 核心命题</h2>
+<p class="dc">early id 最初最稀缺的并不是“知道正确答案”，而是：</p>
+<blockquote>
+<p><strong>当正确答案不存在时，仍然能够把技术假说、设计假说和市场假说做成可运行 artifact，并快速接受现实裁决。</strong></p>
+</blockquote>
+<p>这套能力在 1990–1993 的小团队里高度依赖创始人互补和低协调成本；Quake 以后，技术复杂度、团队规模和生产周期上升，原先由几个人直接承担的隐性协调逐渐失效。到了 2000 年代末的 Doom 4，id 甚至出现一个反转：</p>
+<blockquote>
+<p><strong>曾经定义 FPS 答案的公司，开始以当代成功 FPS 的既有答案来定义自己。</strong></p>
+</blockquote>
+<p>DOOM (2016) 的价值因此不只是“成功重启老 IP”，而是一个成熟组织重新获得 <strong>PROBLEM SOVEREIGNTY / 问题主权</strong> 的案例：不再首先问“现代 AAA FPS 应该怎么做”，而重新问“什么玩家行为才使 Doom 成为 Doom”，随后让 prototype、playtest 和系统反馈去裁决具体机制。</p>
+<hr />
+<h2 id="1">1. 后发优势、后发劣势，与“后发者模式切换”</h2>
+<p>杨小凯、Jeffrey Sachs、胡永泰关于“后发劣势”的原始论证主要位于政治经济制度层，不应直接搬来解释游戏公司。相关论文：</p>
+<ul>
+<li>Jeffrey D. Sachs, Wing Thye Woo, Xiaokai Yang, <strong>Economic Reforms and Constitutional Transition</strong> (2000): https://www.jeffsachs.org/bookchapters/7wmkf77rkk2msea84jaet97ehelm8n</li>
+<li>Lin Yifu, <strong>后发优势与后发劣势——与杨小凯教授商榷</strong>，2003，《经济学（季刊）》: https://ccj.pku.edu.cn/Article/info?aid=301469700</li>
+<li>北京大学国家发展研究院存档版：https://nsd.pku.edu.cn/xzyj/cbw/tlg1/19962015a/250612.htm</li>
+</ul>
+<p>可安全抽象出的机制不是“某种制度结论”，而是：</p>
+<ol>
+<li>后发者可以低成本取得先行者已经验证的技术/管理答案；</li>
+<li>这在距离前沿很远时是巨大优势；</li>
+<li>但越接近前沿，现成答案越少；</li>
+<li>如果组织仍把“寻找成熟 benchmark”当成主要认知算法，就会发生 <strong>MODE-SWITCH FAILURE / 模式切换失败</strong>。</li>
+</ol>
+<p>这里提出一个仅用于创新研究的 H 级框架：</p>
+<h3 id="latecomer-mode-switch-problem">LATECOMER MODE-SWITCH PROBLEM / 后发者模式切换难题</h3>
+<table>
+<thead>
+<tr>
+<th>距离前沿</th>
+<th>高收益行为</th>
+<th>主要风险</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>远离前沿</td>
+<td>模仿、吸收、工程化、规模化</td>
+<td>重复探索浪费</td>
+</tr>
+<tr>
+<td>接近前沿</td>
+<td>学习 + 改良 + 局部探索</td>
+<td>benchmark 依赖</td>
+</tr>
+<tr>
+<td>抵达前沿</td>
+<td>problem framing、实验、失败筛选</td>
+<td>仍按追赶逻辑找标准答案</td>
+</tr>
+<tr>
+<td>范式转换</td>
+<td>主动否定旧答案、创建新评估标准</td>
+<td>成功经验反成锁定</td>
+</tr>
+</tbody>
+</table>
+<p>这并非杨小凯原理论的直接延伸结论；这里只借其“容易取得已有成果可能改变更深层能力建设激励”的一般结构，形成产品创新层假说。</p>
+<hr />
+<h2 id="2-incumbent-epistemology">2. “春登”不是国籍，而是 incumbent epistemology</h2>
+<p>本项目内部研究术语：</p>
+<h3 id="incumbent-epistemology">春登 / INCUMBENT EPISTEMOLOGY</h3>
+<p>不是“老”“保守”或“资历高”，而是：</p>
+<blockquote>
+<p><strong>上一范式中的成功经验获得了过高的先验权重，以至于新的问题首先被迫证明自己符合旧答案。</strong></p>
+</blockquote>
+<p>因此：
+- 美国 AAA 老兵可以春登化；
+- 日本大企业管理者可以春登化；
+- 中国大厂制作人可以春登化；
+- 原本极具革命性的创业者本人也可能春登化。</p>
+<p>其危险不在于“经验是错的”，而在于：</p>
+<blockquote>
+<p><strong>把过去系统中的必要条件误认成跨时代充分条件。</strong></p>
+</blockquote>
+<p>与之相对：</p>
+<h3 id="reality-first-searcher">农民发明家 / REALITY-FIRST SEARCHER</h3>
+<p>不是学历、职业或阶级身份，而是一种搜索方式：</p>
+<blockquote>
+<p><strong>当没有可靠标准答案时，先建立可验证 artifact，让现实而非权威决定下一步。</strong></p>
+</blockquote>
+<p>高知识密度的 Carmack 完全可以在此意义上是“农民发明家”；术语强调的是搜索顺序，不是反专业主义。</p>
+<hr />
+<h2 id="3-quakefounder-stack">3. Quake：Founder Stack 开始失效</h2>
+<p><a href="/heroes-portal/book/research-notes/carmack-romero-complementary-error-correction-network-042.html">042</a> 已经将 early id 从“Carmack 技术 + Romero 设计”改写为 <strong>互补纠错网络</strong>。Quake 的关键变化不是“二人突然性格不合”，而是：</p>
+<ul>
+<li>引擎前沿移动得更快、更久；</li>
+<li>design/content 面对不断变化的 affordance；</li>
+<li>技术结果与可玩内容之间的反馈延迟从小时/天拉长到周/月；</li>
+<li>大量隐性协调开始超过创始人直接沟通所能承载的范围。</li>
+</ul>
+<p>这里新增 H 级概念：</p>
+<h3 id="founder-stack-failure">FOUNDER-STACK FAILURE / 创始人栈失效</h3>
+<p>早期组织实际上把：
+- 产品定义；
+- 引擎接口；
+- scope；
+- 反馈；
+- 冲突裁决；
+- 商业判断</p>
+<p>封装在少数创始人之间的高带宽关系中。</p>
+<p>这在小规模时极其高效，但不是可无限扩展的 architecture。复杂度跨过阈值后，<strong>“人本身就是 API”</strong> 会出现：
+- 决策接口不清；
+- 纠错延迟增长；
+- 局部事实被不同角色解释成对方“不工作/不理解”；
+- 关系冲突替代结构化裁决。</p>
+<p>这不是“正式管理一定优于创始团队”，而是说明隐性治理有规模边界。</p>
+<hr />
+<h2 id="4-romero">4. Romero 离开以后：专业化解决了一类问题，也可能固化能力非对称</h2>
+<p>不能把 Quake 后 id 写成“失去 Romero 后停止创新”。Quake II、Quake III、Doom 3 以及后续 id Tech 仍然证明 id 保有极强技术与产品能力。</p>
+<p>更准确的研究问题是：</p>
+<blockquote>
+<p>early id 的异常结果来自多种能力相乘；冲突后，组织是否把其中最稳定、最可制度化的一支能力误认成整个创新函数？</p>
+</blockquote>
+<p>这里提出：</p>
+<h3 id="capability-asymmetry-lock-in">CAPABILITY ASYMMETRY LOCK-IN / 能力非对称固化</h3>
+<p>一种组织曾靠 A × B × C 取得异常结果；</p>
+<p>随后因为治理冲突，优先制度化 A；</p>
+<p>A 的成功继续强化 A 的资源与权威；</p>
+<p>最后组织逐渐把 A 认作自己的“真正核心竞争力”，而忽视原始乘法结构。</p>
+<p>对 id 的具体强弱尚需更多 Rage、Doom 3、内部组织来源验证，因此这里保持 H，不写成“Carmack 技术主义导致 id 产品创新下降”的确定因果。</p>
+<hr />
+<h2 id="5-rage">5. Rage：技术上的前沿搜索仍然存在，产品问题主权却未必同步</h2>
+<p>Rage 不是“吃老本”的证据，反而说明 Carmack/id 仍愿意承担新技术风险：id Tech 5、MegaTexture、跨平台目标、新 IP、车辆和更开放环境都不是保守选择。</p>
+<p>因此 Rage 对本研究的价值是区分：</p>
+<blockquote>
+<p><strong>技术原创 ≠ 产品范式原创。</strong></p>
+</blockquote>
+<p>一个团队可以持续解决世界级工程问题，却仍需要单独回答：
+- 玩家为什么持续做这些动作？
+- 这些系统之间有没有形成高强度行为闭环？
+- 技术优势有没有被转译成清晰、独特、不可替代的 player grammar？</p>
+<p>现阶段本节仍为方向性解释；在升级为正式 Claim 前，应补：
+1. Carmack / Tim Willits / design leads 对 Rage 目标与 production constraints 的直接访谈；
+2. MegaTexture 对内容生产方式的真实收益与成本；
+3. Rage 设计变更、延期和团队结构的同期记录；
+4. 将“技术前沿仍强”与“产品独特性争议”分开测量，避免用评论分数替代机制。</p>
+<hr />
+<h2 id="6-doom-4call-of-doom-benchmark-capture">6. Doom 4：“Call of Doom”是 Benchmark Capture 的高价值案例</h2>
+<p>DOOM (2016) 负责人 Marty Stratton / Hugo Martin 后来回顾，早期 Doom 4 并非“完全做不出来”；核心问题是它越来越不像他们最终认为的 Doom。2017 Game Developer 对二人的访谈直接把被取消版本与更剧情化、受当时主流 shooter 影响的方向联系起来，并记载团队重启后如何以 playtest 和 design filters 收敛。</p>
+<p>来源：
+- Kris Graft, <strong>&lsquo;Make me think, make me move&rsquo;: New Doom&rsquo;s deceptively simple design</strong>, Game Developer, 2017-04-06:
+  https://www.gamedeveloper.com/design/-make-me-think-make-me-move-new-i-doom-i-s-deceptively-simple-design</p>
+<p>这里新增：</p>
+<h3 id="benchmark-capture">BENCHMARK CAPTURE / 标杆俘获</h3>
+<p>定义：</p>
+<blockquote>
+<p><strong>当组织失去问题主权时，最容易采用的“专业”行为是以当前市场赢家的解法来证明自身方案合理。</strong></p>
+</blockquote>
+<p>其危险在于它通常：
+- 有市场数据；
+- 有成功案例；
+- 有成熟 pipeline；
+- 有可解释 feature checklist；
+- 容易获得预算与组织共识。</p>
+<p>所以 benchmark capture 往往不是低水平抄袭，而可能是：</p>
+<blockquote>
+<p><strong>高水平、专业化、昂贵地回答了错误的问题。</strong></p>
+</blockquote>
+<p>Doom 4 的研究价值正在这里：FPS 范式的早期创造者，在新的 AAA 时代内部“后发化”，开始向已经凝固的主流 FPS solution 学习。</p>
+<hr />
+<h2 id="7-doom-2016-problem-sovereignty">7. DOOM (2016)：重新取得 Problem Sovereignty</h2>
+<p>2017 Game Developer 访谈给出的直接材料非常强：</p>
+<p>Marty Stratton 说团队是 <strong>“fun first”</strong>，持续玩游戏，让“the game tell us what it wanted”，然后 <strong>“steered into the fun”</strong>。他们把核心过滤器压缩为：
+- 个性鲜明的 demons；
+- 强烈区分的 guns；
+- fast movement；
+- push-forward combat；
+- combat chess；
+- “make me think, make me move”。</p>
+<p>同一访谈还给出非常重要的反例式迭代：
+- 早期 AI 若同时积极扑向玩家，玩家会自然退到墙边/choke point；
+- 这在别的游戏中完全可以成立；
+- 但它破坏了 Doom 希望玩家主动挑选目标、穿过竞技场的行为；
+- 因此团队让大量非近战敌人更愿意保持位置，把主动穿越战场的责任交回玩家。</p>
+<p>来源同上：
+https://www.gamedeveloper.com/design/-make-me-think-make-me-move-new-i-doom-i-s-deceptively-simple-design</p>
+<p>这使 2016 的创新方法可以定义为：</p>
+<h3 id="problem-sovereignty">PROBLEM SOVEREIGNTY / 问题主权</h3>
+<blockquote>
+<p><strong>组织有权先定义自己真正需要解决的玩家问题，而不是先接受行业 benchmark 已定义的问题。</strong></p>
+</blockquote>
+<h3 id="reality-arbitration">REALITY ARBITRATION / 现实仲裁</h3>
+<blockquote>
+<p><strong>争论不由资历、历史声望或“行业通常这样做”最终裁决，而尽快转成 playable artifact，由实际行为反馈筛选。</strong></p>
+</blockquote>
+<p>二者必须同时存在：
+- 只有问题主权，没有现实仲裁 → 可能变成自恋式异端；
+- 只有现实测试，没有问题主权 → 只能在别人定义的目标函数上优化。</p>
+<hr />
+<h2 id="8-2016-1993">8. 2016 没有“复刻 1993”，而是提取行为不变量</h2>
+<p>DOOM 2016 若只是复古，可以复制：
+- 迷宫形式；
+- 1993 UI；
+- 原样资源分布；
+- 老式关卡节奏。</p>
+<p>它实际做的更接近：</p>
+<h3 id="invariant-recomposition">INVARIANT RECOMPOSITION / 不变量重组</h3>
+<blockquote>
+<p><strong>保留决定玩家行为与体验身份的深层关系，但允许表层机制彻底改变。</strong></p>
+</blockquote>
+<p>示例：
+- 现代 shooter 常见受伤逻辑：受伤 → 退后 → 躲避/恢复；
+- DOOM 2016 用 Glory Kill 将生命恢复绑定到向敌人靠近；
+- 因而“低血量”没有把玩家推出核心行为，而是把玩家重新推回核心行为。</p>
+<p>所以 1993 与 2016 的创新类型不同：</p>
+<h3 id="doom-1993origin-innovation">DOOM 1993：ORIGIN INNOVATION / 原发性范式创新</h3>
+<p>技术突破、空间表现、战斗、多人和分发共同扩大可行域。</p>
+<h3 id="doom-2016invariant-recomposition">DOOM 2016：INVARIANT RECOMPOSITION / 不变量重组创新</h3>
+<p>在成熟类型内重新识别产品 identity 的因果结构，用全新机制实现同一或更强行为关系。</p>
+<p>这正适合与本项目“同构异性创新”研究联动：商业组织并不需要每次发明新类型，能稳定识别真正的结构不变量并以异质机制重组，本身就是高阶创新能力。</p>
+<hr />
+<h2 id="9">9. 大组织真正困难的不是“想不到”，而是能不能处决沉没成本</h2>
+<p>Doom 4 → DOOM 2016 的转向意味着已经存在的：
+- 资产；
+- 工程；
+- narrative work；
+- 管理承诺；
+- 组织声誉；
+- 时间投入</p>
+<p>不能自动获得未来继续投入权。</p>
+<p>这里提出：</p>
+<h3 id="sunk-cost-kill-capacity">SUNK-COST KILL CAPACITY / 沉没成本处决能力</h3>
+<blockquote>
+<p><strong>组织在方向证据恶化时，能否撤销过去的高成本承诺，而不要求那些承诺先在政治上“证明自己没有错”。</strong></p>
+</blockquote>
+<p>这是 mature organization 与 tiny team 的关键差异：
+- 小团队 pivot 的账面损失可能很小；
+- AAA reboot 会触碰预算、职位、里程碑、既有资产和责任归属；
+- 所以“知道方向不对”与“能真正停掉”是两种不同能力。</p>
+<p>现有 2017 访谈足以证明 DOOM 2016 前发生过完整方向取消/重启，但关于 ZeniMax/Bethesda、id 管理层具体谁拥有 kill right、预算如何重置、人员如何迁移，仍需独立来源补证。</p>
+<hr />
+<h2 id="10-protected-heresy">10. Protected Heresy：成熟组织中的“内部退出权”</h2>
+<p>early id 的创新自由很大程度来自真正的 <strong>EXIT</strong>：
+- 离开 Softdisk；
+- 通过 shareware 绕过传统发行；
+- 用收入购买独立。</p>
+<p>大型组织中的开发者通常不能靠“全员辞职”维持每次产品异议。</p>
+<p>因此成熟组织需要另一种等价物：</p>
+<h3 id="protected-heresy">PROTECTED HERESY / 受保护异端权</h3>
+<blockquote>
+<p><strong>团队能够在不先离开组织的情况下，推翻一个已获批准、已有沉没成本的旧方向，并获得重新验证新方向的有限资源。</strong></p>
+</blockquote>
+<p>这可以视作 <strong>internal exit / 内部退出</strong>：
+- 退出旧方案；
+- 不退出组织能力；
+- 保留工具、人才、资金与历史资产；
+- 重开 problem definition。</p>
+<p>它与 1990 年 early id 的 permissionless production 不是同一种机制，但功能相似：都降低“少数判断活到验证日”的成本。</p>
+<hr />
+<h2 id="11-selective-institutional-amnesia">11. Selective Institutional Amnesia：忘掉答案，不忘掉能力</h2>
+<p>组织“返老还童”不能靠真的清空历史。</p>
+<p>更有效的是：</p>
+<h3 id="selective-institutional-amnesia">SELECTIVE INSTITUTIONAL AMNESIA / 选择性组织失忆</h3>
+<p>应该保留：
+- engine capability；
+- production craft；
+- art/AI/tools expertise；
+- shipping experience；
+- IP memory；
+- market access。</p>
+<p>应该允许失效：
+- “我们一直这样做”；
+- 旧 feature checklist；
+- 旧 benchmark；
+- 创始人个人答案的永久权威；
+- 已经无法解释新玩家行为的 production dogma。</p>
+<p>原则：</p>
+<blockquote>
+<p><strong>保留 capability，降权 solution。</strong></p>
+</blockquote>
+<p>这比“年轻人打倒老登”或“全部推倒重来”更可迁移。</p>
+<hr />
+<h2 id="12-mature-team">12. Mature team 如何重新成为“农民发明家”</h2>
+<p>这里给出一个 H 级组织模型，不把 DOOM 2016 神化为充分证明：</p>
+<ol>
+<li>
+<p><strong>Reopen problem definition</strong><br />
+   允许“不够像 Doom”上升到方向问题，而不是只做 polish。</p>
+</li>
+<li>
+<p><strong>Compress to behavioral invariants</strong><br />
+   用少数强原则过滤 feature：movement、guns、demons、push-forward、combat chess。</p>
+</li>
+<li>
+<p><strong>Shorten artifact-feedback loops</strong><br />
+   持续玩、持续删，而不是到 production 末期才做市场验证。</p>
+</li>
+<li>
+<p><strong>Bind authority to kill/rescope rights</strong><br />
+   设计负责人必须能删除已投入系统，而不是只有建议权。</p>
+</li>
+<li>
+<p><strong>Separate valid mechanics from valid-for-this-game mechanics</strong><br />
+   “其他游戏这么做也没错”不等于“这个游戏也该这么做”。</p>
+</li>
+<li>
+<p><strong>Introduce new interpreters without deleting institutional memory</strong><br />
+   传统可以被新一代重新解释，而不是只有创始人有资格定义正统。</p>
+</li>
+</ol>
+<p>这里可称：</p>
+<h3 id="industrialized-reality-first-search">INDUSTRIALIZED REALITY-FIRST SEARCH / 工业化现实优先搜索</h3>
+<p>大型专业团队也可以执行“农民发明家”式搜索；关键不是团队小或反专业，而是<strong>把现实反馈置于权威答案之前，同时保留足够强的生产能力把假说快速做出来。</strong></p>
+<hr />
+<h2 id="13-quake-doom-2016">13. Quake 与 DOOM 2016：从“拥有创新者”到“拥有创新机制”</h2>
+<table>
+<thead>
+<tr>
+<th>Quake 时代风险</th>
+<th>DOOM 2016 重建方向</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>技术前沿长期移动</td>
+<td>先锁定行为目标，再让技术服务目标</td>
+</tr>
+<tr>
+<td>创始人承担大量隐性接口</td>
+<td>明确的 design filters</td>
+</tr>
+<tr>
+<td>返工来自不稳定 frontier 与目标分歧</td>
+<td>主动 playtest / edit / cut</td>
+</tr>
+<tr>
+<td>高质量冲突依赖少数强人格</td>
+<td>把部分判断外置为可共同测试的 artifact</td>
+</tr>
+<tr>
+<td>关系破裂后能力组合不可完整复制</td>
+<td>用组织流程承载一部分原本的人际纠错功能</td>
+</tr>
+</tbody>
+</table>
+<p>因此一个暂定主命题：</p>
+<blockquote>
+<p><strong>1993 的 id 更接近“拥有创新者”；2016 的 id 更接近“尝试拥有创新机制”。</strong></p>
+</blockquote>
+<p>这不是说 2016 不依赖关键人物，也不是说制度可以制造 Carmack；而是说成熟组织若只等待“再来一个天选之子”，无法解决规模化创新问题。必须把部分创新行为转译成：
+- 可重复的问题定义；
+- 快速 artifact；
+- 明确删改权；
+- playtest 反馈；
+- 沉没成本停止规则。</p>
+<hr />
+<h2 id="135-hall-petersen-mcgee">13.5 Hall → Petersen → McGee：能力存在不等于能力拥有出题权</h2>
+<p>前面的 <strong>CAPABILITY ASYMMETRY LOCK-IN</strong> 仍需进一步修正。Tom Hall 离开后，id 并没有简单失去“世界、气氛、叙事、作者性”人才；Sandy Petersen 与 American McGee 都说明相关能力仍然存在。真正需要审计的是：<strong>这些能力在组织内是否仍拥有定义产品问题的合法性与决策权。</strong></p>
+<h3 id="a-tom-hall">A. Tom Hall：项目不适配不等于能力低级</h3>
+<p>Hall 在 early id 里承担的不只是“写剧情”：
+- Carmack 后来回忆 Commander Keen “very much Tom Hall&rsquo;s baby”，Hall 对角色、世界和创意方向有实质贡献；
+- Wolf3D 的 secret/push-wall 争论中，Hall 与 Romero 一起持续推动探索奖励；
+- Doom Bible 则代表更强的角色、连续世界、功能空间与叙事取向。</p>
+<p>这些方向与 1993 年最终形成的高速、抽象、以战斗为核心的 DOOM 发生真实冲突。就 <strong>当前项目收敛</strong> 而言，拒绝其中很多答案完全可能是正确的。</p>
+<p>因此必须区分：</p>
+<h3 id="capability-misfit-capability-inferiority">CAPABILITY MISFIT ≠ CAPABILITY INFERIORITY</h3>
+<blockquote>
+<p><strong>一种能力不适配当前项目，不等于这种能力本身低级，也不等于组织未来不再需要它。</strong></p>
+</blockquote>
+<p>错误的长期外推不是“DOOM 不需要这些 feature”，而是“这类提问不再值得参与产品定义”。</p>
+<h3 id="b-sandy-petersenid-hall-problem-definition-function">B. Sandy Petersen：id 补回了设计产能与局部异质性，但未必补回 Hall 的 problem-definition function</h3>
+<p>Petersen 进入 id 前已经设计《Call of Cthulhu》等桌面 RPG，显然不缺世界、规则与氛围构造经验；加入 DOOM 后，他又高速修改/制作关卡，并在 DOOM II、Quake 延续强烈而异质的空间设计。</p>
+<p>值得注意的不是“Petersen 有没有世界观能力”，而是 id 主要如何调用这些能力：</p>
+<blockquote>
+<p><strong>environment → encounter → pacing → atmosphere</strong></p>
+</blockquote>
+<p>而 Hall 更接近：</p>
+<blockquote>
+<p><strong>character → place → continuity → interaction → world system</strong></p>
+</blockquote>
+<p>因此职位补位不等于认知功能一对一补位。更准确的说法是：</p>
+<blockquote>
+<p><strong>id 很快补回了 level-design throughput 和局部 solution diversity；但“整个产品应该解决什么问题”这一层的 decision rights 未必同步恢复。</strong></p>
+</blockquote>
+<p>Sources / leads:
+- Sandy Petersen interview, 1 More Castle (2013): https://www.1morecastle.com/2013/01/sandy-petersen-an-interview-about-doom-quake-and-aoe/
+- Shacknews, Rocket Jump / Petersen on Doom &amp; Quake level design: https://www.shacknews.com/article/101156/rocket-jump-quake-and-the-golden-age-of-first-person-shooters?page=9
+- Shacknews, Quake degrees of freedom: https://www.shacknews.com/article/124733/the-making-of-quake-part-2-degrees-of-freedom</p>
+<h3 id="c-american-mcgeelatent-capability">C. American McGee：latent capability 可以在组织里存在，却不被激活为新的产品定义</h3>
+<p>McGee 在 id 内从测试/支持等工作逐步进入关卡设计，参与 DOOM、Quake、Quake II；这本身说明 early/mid id 仍具有较强的 <strong>capability discovery</strong>：人可以先进入生产，再由真实表现重定角色。</p>
+<p>但 McGee 后来回忆，看到 Valve 基于 Quake 技术做更叙事化、角色化的演示后，他意识到同一技术还可以服务另一种产品表达；而当时 id 的兴趣中心并没有因此重新开放成“id 可以做什么”。这类回忆属于多年后的个人叙述，当前只作为 H 级组织线索，不升级为“id 明确压制叙事创新”的强因果。</p>
+<p>Source / lead:
+- PC Gamer, McGee on Valve demo and narrative possibility: https://www.pcgamer.com/games/alice-creator-american-mcgee-says-he-was-inspired-by-a-valve-demo-he-saw-while-working-on-quake-2/</p>
+<p>这要求新增一个核心区分：</p>
+<h3 id="capability-presence-capability-agency">CAPABILITY PRESENCE ≠ CAPABILITY AGENCY</h3>
+<p>组织的真实能力不是员工技能简单求和。一个工作模型是：</p>
+<pre><code class="language-text">EFFECTIVE CAPABILITY
+≈ SKILL
+× DECISION RIGHTS
+× RESOURCE ACCESS
+× PROBLEM LEGITIMACY
+</code></pre>
+<p>其中任何一项接近零，组织都可能“拥有这种人才”，却无法让这种人才真正影响产品定义。</p>
+<h3 id="d-personnel-amputation-decision-right-amputation">D. PERSONNEL AMPUTATION 与 DECISION-RIGHT AMPUTATION 必须拆开</h3>
+<h4 id="personnel-amputation">PERSONNEL AMPUTATION / 人员截肢</h4>
+<p>人离开，能力随人离开。</p>
+<h4 id="decision-right-amputation">DECISION-RIGHT AMPUTATION / 决策权截肢</h4>
+<p>人仍在、能力仍在，但只能回答已经被别的认知范式定义好的问题，无法再参与“我们究竟应该做什么”的出题。</p>
+<p>后者更隐蔽，也更适合解释成熟组织的认知收窄：
+- 组织可以同时拥有叙事设计、系统设计、美术、用户研究、技术专家；
+- 但如果 greenlight / product definition 只有一种 worldview 拥有合法性；
+- 那么名义上的能力多样性并不等于真实的认知多样性。</p>
+<h3 id="e-solution-diversity-problem-diversity">E. SOLUTION DIVERSITY 与 PROBLEM DIVERSITY</h3>
+<p>Hall → Petersen → McGee 线索迫使本研究再拆两层：</p>
+<h4 id="solution-diversity">SOLUTION DIVERSITY / 解法多样性</h4>
+<blockquote>
+<p>在同一个已定义问题里，组织允许多少种不同解法竞争？</p>
+</blockquote>
+<p>id 在 DOOM / Quake 关卡、空间、战斗和美术层面长期保持很强的 solution diversity。</p>
+<h4 id="problem-diversity">PROBLEM DIVERSITY / 问题多样性</h4>
+<blockquote>
+<p>组织是否仍允许成员质疑“我们为什么必须继续回答这道题”？</p>
+</blockquote>
+<p>长期风险不一定是“设计师都变得一样”，而可能是：</p>
+<blockquote>
+<p><strong>大家仍能用很多方式设计 FPS，但“id 是否应该重新定义 FPS / 做另一种体验”越来越少进入合法问题空间。</strong></p>
+</blockquote>
+<p>因此“内部异质性下降”不能写得过粗。更安全的假说是：<strong>局部设计异质性可以很高，同时 problem-definition layer 仍逐渐收窄。</strong></p>
+<h3 id="f-organizational-cognitive-pruning">F. ORGANIZATIONAL COGNITIVE PRUNING / 组织认知修枝</h3>
+<p>“组织性截肢”过于二元，更合适的上层概念是：</p>
+<blockquote>
+<p><strong>组织在连续项目中不断强化曾经产生胜利的思考方式，并逐步降低其他思考方式的资源、地位与问题定义权。</strong></p>
+</blockquote>
+<p>其短期收益是真实的：
+- identity 更清楚；
+- production 更稳定；
+- 新人更容易理解好方案；
+- 当前项目更容易 scope down。</p>
+<p>其长期风险同样真实：
+- PROBLEM DIVERSITY ↓
+- latent capability 无法 activation
+- ORTHODOXY HALF-LIFE ↑
+- 组织越来越擅长回答自己已经知道怎样提出的问题。</p>
+<p>这不是“所有修枝都错”。真正需要审计的是：</p>
+<blockquote>
+<p><strong>项目层的 Not Now，是否被错误升级成能力层的 Never Again。</strong></p>
+</blockquote>
+<h3 id="g-prototype">G. 对小团队 / prototype 阶段的迁移边界</h3>
+<p>这一条可以迁移到任何高强度 scale-down 阶段，但不能借此反对 MVP：</p>
+<blockquote>
+<p><strong>CURRENT PRODUCTION PRIORITY ≠ PERMANENT EPISTEMIC HIERARCHY</strong></p>
+</blockquote>
+<p>当前 prototype / vertical-slice 阶段可以正确地砍掉大量叙事、世界模拟、战略层或未来系统；真正危险的是把“当前不生产”误写成“完整产品不需要这类问题/能力”。</p>
+<p>因此成熟的 scope discipline 应同时保存：
+1. <strong>production cut</strong>：现在不做；
+2. <strong>capability memory</strong>：知道未来仍需要谁/哪类认知；
+3. <strong>future-option pool</strong>：区分“垃圾”“当前不适配”“技术/时机尚未成熟”；
+4. <strong>re-entry trigger</strong>：什么证据出现时，允许该问题重新进入 product definition。</p>
+<p>本节目前保持 <strong>H / longitudinal interpretation</strong>。Petersen / McGee 的具体 decision rights、Quake/Quake II 时期正式组织权力结构和 id 对 Valve 式叙事方向的内部反应，仍需更多同期材料，不将后见叙述直接升级为强因果。</p>
+<hr />
+<h2 id="136-problem-diversity-governance">13.6 Problem Diversity Governance：重新出题权不能简化成“扁平化”</h2>
+<p>Hall → Petersen → McGee 暴露的下一层问题不是“组织里有没有不同想法”，而是：</p>
+<blockquote>
+<p><strong>谁有资格把“我们正在回答什么问题”本身重新提交讨论？</strong></p>
+</blockquote>
+<p>这里用 Valve、Nintendo、Looking Glass / Ion Storm Austin 做三个公开样本压力测试。它们都曾保留较强的 problem-definition 能力，但使用的并不是同一种组织结构，因此不能把 PROBLEM DIVERSITY 简化为“扁平公司更创新”。</p>
+<h3 id="a-valve">A. Valve：把部分出题权变成人力自选市场</h3>
+<p>Valve 2012 年公开的 Handbook for New Employees 明确描述：员工并非由经理分配到项目；人可以移动工位并自主选择自己认为最有价值的工作；强项目通过吸引他人加入而获得人力；员工与用户反馈之间尽量减少正式层级。官方 handbook 属于公司自我描述，不能据此假定实际权力完全扁平，但至少证明 Valve 有意把“什么值得做”部分下放给个体的人力配置决定。</p>
+<p>Gabe Newell 后来回顾 Steam 早期时还提供了更强的机制例子：公司内部有人认为 Steam 是坏主意，却不能命令 Steam 团队停止；反对者可以把自己的时间投入 Half-Life 2，而支持者继续用自己的时间证明 Steam。</p>
+<p>管理研究对 Valve 的抽象常称这种结构为 polyarchy / 多中心选择；Felin、Lakhani、Tushman 记录的 rule of three 则进一步说明：少数员工若愿意实际放弃别的机会、共同投入一个方向，这本身可以成为继续探索的内部信号。</p>
+<h3 id="labor-backed-problem-option">LABOR-BACKED PROBLEM OPTION / 人力背书式问题期权</h3>
+<blockquote>
+<p><strong>一个新问题不需要先获得中央委员会批准；它先通过“是否有人愿意把自己的稀缺时间押上去”取得有限生存权。</strong></p>
+</blockquote>
+<p>这与简单“人人都能提建议”不同，因为参与者承担机会成本。</p>
+<p>但 Valve 同样提供反证边界：Jeri Ellsworth 等前员工回忆存在隐性权力网络和项目被非正式势力终止的问题；后续组织研究也指出 flat structure 可能产生 shadow hierarchy、资源协调困难与项目完成问题；游戏开发创业样本研究则显示 flatter hierarchy 往往提高 novelty，却可能牺牲 execution / commercial coordination。</p>
+<p>因此 Valve 不能证明“无老板 = problem diversity”。更安全的结论是：</p>
+<blockquote>
+<p><strong>分散出题权可以降低中央 gate 的 false negative，但如果缺乏透明资源配置与收敛机制，非正式声望也会重新形成 selector。</strong></p>
+</blockquote>
+<p>Sources:
+- Valve, Handbook for New Employees (2012): https://steamcdn-a.akamaihd.net/apps/valve/Valve_Handbook_LowRes.pdf
+- Andrea Peterson, Gabe Newell on what makes Valve tick, Washington Post, 2014-01-03: https://www.washingtonpost.com/news/the-switch/wp/2014/01/03/gabe-newell-on-what-makes-valve-tick/
+- Teppo Felin, Karim R. Lakhani, Michael L. Tushman, Firms, crowds, and innovation, Strategic Organization (2017): https://journals.sagepub.com/doi/10.1177/1476127017706610
+- Katie Scott, Valve&rsquo;s flat management structure &lsquo;like high school&rsquo;, Wired, 2013: https://www.wired.com/story/valve-management-jeri-ellsworth/
+- Saerom Lee, The myth of the flat start-up, Strategic Management Journal (2022): https://doi.org/10.1002/smj.3333</p>
+<h3 id="b-nintendo">B. Nintendo：把“问题意识”训练成设计能力</h3>
+<p>Nintendo 提供的是另一种模型。Iwata Asks 中，Miyamoto 多次把 idea generation 描述为 problem awareness → solution，而不是脱离问题的灵感；他还明确指出，仅把一个年轻人的想法判成“不行”却不理解问题本身，会浪费未来再次利用该 idea 的机会。</p>
+<p>Splatoon 开发回顾提供了更具体的组织样本：
+- 新团队明确以“做 Mario / Zelda 之外的新游戏”为目标；
+- 半年提出约 70 个候选；
+- 最终胜出的早期“豆腐”方案并不是靠 presentation 共识，而是因为已有可玩的 4v4 prototype，基本玩法结构能够直接被体验；
+- 后续角色、世界和表现层大幅变化，但涂地 / 信息读取 / 对抗这一核心 survived。</p>
+<p>Nintendo 的硬件/软件协作材料还显示，软件团队可以反向向硬件团队提出新硬件需求。这意味着“产品问题”并未被既有硬件规格永久预定义。</p>
+<h3 id="problem-awareness-apprenticeship">PROBLEM-AWARENESS APPRENTICESHIP / 问题意识学徒制</h3>
+<blockquote>
+<p><strong>组织通过长期共同制作，让成员学习“什么才是值得解决的问题、哪些缺陷是致命的、哪些只是风险”，并允许新问题通过 prototype 而不是资历取得合法性。</strong></p>
+</blockquote>
+<p>其风险同样明显：如果“问题意识”过度集中在少数资深创意权威身上，组织可能产生 high-quality but correlated selectors；强 mentorship 既能传递 frontier taste，也可能把上一代 problem model 固化成隐性正统。</p>
+<p>因此 Nintendo 证明的不是“强人创意总监比委员会好”，而是：</p>
+<blockquote>
+<p><strong>高质量问题定义可以被训练和传承，但必须继续让 prototype 与玩家/市场反馈拥有降权资深判断的能力。</strong></p>
+</blockquote>
+<p>Sources:
+- Nintendo, Iwata Asks: Super Mario Bros. 25th Anniversary — Context Makes All the Difference: https://www.nintendo.com/en-gb/Iwata-Asks/Super-Mario-Bros-25th-Anniversary/Vol-1-Itoi-asks-Miyamoto/5-Context-Makes-All-the-Difference/5-Context-Makes-All-the-Difference-217381.html
+- Nintendo, Iwata Asks — Write the Problem on a Label: https://www.nintendo.com/en-gb/Iwata-Asks/Super-Mario-Bros-25th-Anniversary/Vol-1-Itoi-asks-Miyamoto/4-Write-the-Problem-on-a-Label/4-Write-the-Problem-on-a-Label-217343.html
+- Nintendo, Iwata Asks: Splatoon (2015): https://www.nintendo.co.jp/wiiu/interview/agmj/vol1/
+- Nintendo, Splatoon — 70 ideas / playable prototype: https://www.nintendo.co.jp/wiiu/interview/agmj/vol1/index2.html
+- Nintendo, 70th AGM Q&amp;A — hardware/software idea catch ball (2010): https://www.nintendo.co.jp/ir/en/stock/meeting/100629qa/06.html</p>
+<h3 id="c-looking-glass-ion-storm-austin-artifact">C. Looking Glass / Ion Storm Austin：故意保留冲突的问题模型，再用 artifact 收敛</h3>
+<p>Ion Storm Austin / Deus Ex 提供第三种模型。Chris Norden 回忆，Looking Glass Austin 关闭后，Spector 核心小组仍希望继续原来的 RPG / simulation 方向；加入 Ion Storm 时的重要条件就是 Austin 保持高度自治。</p>
+<p>Spector 后来又故意建立两支设计队：一支偏 Looking Glass immersive simulation，一支偏 Origin / Ultima RPG。他的意图不是尽快消灭分歧，而是利用两套问题模型的张力创造新东西。结果也暴露了成本：两队竞争一度演变成内部“战争”，最后必须收敛到 Harvey Smith 领导的一套设计组织。</p>
+<p>真正关键的是后半段。Spector 的 Deus Ex postmortem 明确记录：数百页 design document 并不能替代真实玩法；Gabe Newell、Looking Glass / Irrational 同行试玩 proto-missions 后指出 skill / augmentation 缺乏 tension；团队接受反馈，Harvey Smith 大改系统；实际使用暴露了纸面推理无法发现的问题。</p>
+<h3 id="contained-problem-pluralism">CONTAINED PROBLEM PLURALISM / 受约束的问题多元</h3>
+<blockquote>
+<p><strong>在 discovery 阶段允许互相不兼容的问题模型同时存在；但在继续投入前，必须把争论转成共同 artifact，并授权一个明确的收敛机制。</strong></p>
+</blockquote>
+<p>这与“所有意见一直平等”不同。Deus Ex 本身就是重要反例：两套 design team 的并行并没有自动产生 best-of-both-worlds；没有 conflict containment 时，problem diversity 会退化成政治阵营；真正有效的是“异质问题模型活得足够久 → prototype 暴露真实 trade-off → decision rights 收敛”。</p>
+<p>Sources:
+- David Lightbown / Chris Norden, Classic Tools Retrospective: The tools that built Deus Ex, Game Developer, 2018: https://www.gamedeveloper.com/design/classic-tools-retrospective-the-tools-that-built-deus-ex-with-chris-norden
+- Warren Spector, Postmortem: Ion Storm&rsquo;s Deus Ex, Game Developer, 2000: https://www.gamedeveloper.com/design/postmortem-ion-storm-s-i-deus-ex-i-
+- Game Developer, Developing Deus Ex: An oral history, 2015: https://www.gamedeveloper.com/design/developing-i-deus-ex-i-an-oral-history
+- Warren Spector retrospective on design rules / multiple solutions: https://www.gamedeveloper.com/design/warren-spector-traces-i-deus-ex-i-s-development-back-to-a-game-of-d-d</p>
+<h3 id="d-problem-reopening-capacity">D. 三类机制的共同上层变量：PROBLEM-REOPENING CAPACITY</h3>
+<p>三个组织没有共同的 org chart，却有一个共同功能：</p>
+<blockquote>
+<p><strong>既有产品定义不能永久垄断“下一题是什么”。</strong></p>
+</blockquote>
+<h3 id="problem-reopening-capacity">PROBLEM-REOPENING CAPACITY / 问题重开能力</h3>
+<blockquote>
+<p><strong>组织在已有成功范式、正式岗位和 production pipeline 存在时，仍能让一个新问题获得有限资源、进入 artifact，并在证据足够时重写原产品定义。</strong></p>
+</blockquote>
+<p>它至少需要四个可分变量：</p>
+<ol>
+<li>QUESTION LEGITIMACY：是否允许质疑题目本身，而不仅是提交更好的解法。</li>
+<li>OPTION GRANT：少数意见能否获得有限时间/人力/预算做 prototype。</li>
+<li>ARTIFACT ARBITRATION：是否有共同可玩的东西把 worldview conflict 转成可观察差异。</li>
+<li>CONVERGENCE RIGHT：当成本上升时，谁有权收敛、砍掉或合并问题模型。</li>
+</ol>
+<p>由此，真正危险的两个极端是：</p>
+<p>HIGH CONVERGENCE + LOW REOPENING → 生产稳定，但容易认知修枝 / benchmark lock-in。</p>
+<p>HIGH REOPENING + LOW CONVERGENCE → idea 丰富，但容易 faction war / endless exploration。</p>
+<p>因此成熟创新组织追求的不是最大化 Problem Diversity，而是：</p>
+<blockquote>
+<p><strong>在 cheap discovery 阶段提高重新出题率，在 expensive production 阶段提高收敛强度。</strong></p>
+</blockquote>
+<p>这与前文的 ASYMMETRIC BURDEN OF PROOF 属于同一个选择架构。</p>
+<h3 id="e-043">E. 对 043 原命题的修正</h3>
+<p>此前“2016 id 从拥有创新者走向拥有创新机制”应保留 H 级，不应暗示唯一正确组织结构。</p>
+<p>跨案例后，更安全的表述是：</p>
+<blockquote>
+<p><strong>创新机制的关键不是复制 Valve 的扁平、Nintendo 的资深创意体系或 Spector 的双团队冲突，而是明确设计“问题如何被重开、异端如何获得期权、争论如何进入 artifact、何时以及由谁收敛”。</strong></p>
+</blockquote>
+<p>因此：
+- 扁平度不是充分条件；
+- strong auteur 不是充分条件；
+- 多团队竞争也不是充分条件；
+- 真正可迁移的是 problem-definition decision rights 的生命周期设计。</p>
+<p>本节保持 H / cross-case mechanism。三个案例只证明多种组织结构都可能实现 problem reopening；尚不能比较它们的长期成功率，更不能据此做国家或公司总体排名。</p>
+<hr />
+<h2 id="14">14. 对《独立游戏英雄传说》的理论贡献</h2>
+<p>本节点把前几条 DOOM 研究连接起来：</p>
+<h3 id="040">040</h3>
+<p>OPTIONALITY PROTECTION × AUTHORITY DISCOUNTING × REVERSIBLE LOYALTY</p>
+<p>解释 early id 为什么能离开旧关系。</p>
+<h3 id="041">041</h3>
+<p>FEEDBACK INTEGRITY × DECISION-RIGHT ACCOUNTABILITY × SCALE DISCONTINUITY</p>
+<p>解释 Romero/Ion Storm 为什么“相信自己”可以从优势变成风险。</p>
+<h3 id="042">042</h3>
+<p>COMPLEMENTARY ERROR-CORRECTION NETWORK</p>
+<p>解释 Carmack × Romero 为什么不仅是分工，而是相互纠错。</p>
+<h3 id="043">043</h3>
+<p>新增：
+- LATECOMER MODE-SWITCH PROBLEM
+- INCUMBENT EPISTEMOLOGY
+- FOUNDER-STACK FAILURE
+- CAPABILITY ASYMMETRY LOCK-IN
+- BENCHMARK CAPTURE
+- PROBLEM SOVEREIGNTY
+- REALITY ARBITRATION
+- SUNK-COST KILL CAPACITY
+- PROTECTED HERESY
+- SELECTIVE INSTITUTIONAL AMNESIA
+- INVARIANT RECOMPOSITION</p>
+<p>它们共同指向一个书级命题：</p>
+<blockquote>
+<p><strong>学习别人怎样产生答案，比收集别人已经产生的答案更接近前沿创新能力。</strong></p>
+</blockquote>
+<hr />
+<h2 id="145-doom-second-answer-test">14.5 跨行业升级：从 DOOM 专用假说到 Second-Answer Test</h2>
+<p>本节点后续关于 <strong>DOOM Eternal → The Dark Ages</strong> 的压力测试，已上提到跨行业研究：</p>
+<ul>
+<li><a href="/heroes-portal/cross-industry/self-obsolescence-second-answer-test-001.html">Self-Obsolescence / Second-Answer Test</a></li>
+</ul>
+<p>新增的 H 级桥梁变量包括：
+- DOCTRINE HARDENING / 理论硬化；
+- MANDATORY ACTION TAX / 必修动作税；
+- INTERACTION-SURFACE COMPRESSION / 交互表面积压缩；
+- SUCCESS-FORMULA KILL CAPACITY / 成功公式处决能力；
+- ORTHODOXY HALF-LIFE / 正统半衰期；
+- SECOND-ANSWER TEST / 第二答案测试；
+- LAGGED-EVIDENCE TRAP / 滞后证据陷阱。</p>
+<p>跨行业节点用 Intel/Grove、Christensen、Apple、Nintendo 和 Pocketpair 边界样本压力测试这些概念，并明确：<strong>一个项目的创新性不能直接推出公司拥有长期 self-obsolescence；找到个例也不能替代分母和失败对照。</strong></p>
+<h2 id="15">15. 对后发国家与游戏产业比较的研究启示</h2>
+<p>不能从 DOOM 个案直接推出国家层因果，但它帮助把问题改写得更可研究。</p>
+<p>不再只问：</p>
+<blockquote>
+<p>“某国有没有天才/原创游戏？”</p>
+</blockquote>
+<p>而应问数量级与机制：</p>
+<ol>
+<li>一个年轻创作者面对未知问题时，接受的是“找 benchmark”还是“自己先做 artifact”的训练？</li>
+<li>没有 benchmark 时，组织还能否批准 prototype？</li>
+<li>prototype 做错一次的成本多高？</li>
+<li>有多少条直接 market interface 可以绕过同质化专家门控？</li>
+<li>组织里谁拥有 kill / rescope 权？</li>
+<li>上一代成功者的判断是 evidence 还是 oracle？</li>
+<li>一个异端需要连续通过多少同质化 gate 才能获得现实验证？</li>
+<li>同等人口中，允许多少个失败搜索者长期存在？</li>
+</ol>
+<p>因此“能举出一个异类案例”不能证明数量级相同。国家/地区比较必须继续坚持：</p>
+<blockquote>
+<p><strong>案例证明可能性；分母、频率、分布和路径容量决定结构性。</strong></p>
+</blockquote>
+<hr />
+<h2 id="16-doom-eternal-the-dark-ages">16. 下一阶段压力测试：DOOM Eternal 与 The Dark Ages</h2>
+<p>043 暂不把后续结论写死，只建立两个检验问题。</p>
+<h3 id="a-doom-eternal">A. DOOM Eternal：革命理论会不会立刻变成新教条？</h3>
+<p>2016 找到 push-forward combat / combat chess 后，Eternal 将其强化为更明确的资源循环、弱点、武器用途和移动要求。</p>
+<p>直接材料：
+- Bryant Francis, <strong>Q&amp;A: Evolving the combat design of id Software&rsquo;s Doom Eternal</strong>, Game Developer, 2020-01-21:
+  https://www.gamedeveloper.com/design/q-a-evolving-the-combat-design-of-id-software-s-i-doom-eternal-i-
+- <strong>The aggressive resource management of Doom Eternal</strong>, Game Developer:
+  https://www.gamedeveloper.com/design/the-aggressive-resource-management-of-i-doom-eternal-i-
+- id Software, <strong>DOOM Eternal – Demon Slaying 101</strong>:
+  https://slayersclub.bethesda.net/en-AU/news/doom-eternal-demon-slaying-101</p>
+<p>待检：
+- 2016 的自由组合是否被 Eternal 的“正确工具”逻辑收窄？
+- 更强的 combat chess 是 mastery depth，还是过度规定玩家？
+- 玩家争议能否区分“学习成本”与“agency 减少”？
+- 团队怎样解释 Marauder、ammo scarcity、weak points 的设计目的和后续调整？</p>
+<h3 id="b-the-dark-agesid">B. The Dark Ages：id 是否真的愿意推翻自己刚建立的新正统？</h3>
+<p>2025 官方 Developer_Direct 已明确给出：
+- 2016 = “run and gun”
+- Eternal = “jump and shoot”
+- The Dark Ages = “stand and fight”
+- Eternal = fighter jet
+- Dark Ages = iron tank</p>
+<p>官方来源：
+- id/Bethesda, <strong>See DOOM: The Dark Ages at Developer_Direct &lsquo;25</strong>:
+  https://slayersclub.bethesda.net/en-US/news/doom-the-dark-ages-developer-direct
+- Bethesda/id gameplay overview:
+  https://slayersclub.bethesda.net/en-US/news/doom-the-dark-ages-gameplay-revealed</p>
+<p>这恰好可检验本节点最重要的反身性问题：</p>
+<blockquote>
+<p><strong>一个刚刚靠推翻旧教条复兴的组织，会不会把自己的新成功公式重新变成教条？</strong></p>
+</blockquote>
+<p>若 The Dark Ages 真正用 grounded movement、projectile weaving、shield/parry 和更开放空间重构 Doom 的行为不变量，那么它将成为 INVARIANT RECOMPOSITION 的第二次纵向验证，而不是“2016/Eternal 再做一遍”。</p>
+<hr />
+<h2 id="17">17. 当前证据等级与禁写项</h2>
+<h3 id="_1">较强</h3>
+<ul>
+<li>2016 团队明确以 push-forward / combat chess / make me think, make me move 为 design filters；</li>
+<li>playtest 中 AI 过度逼近会诱发退守，因此团队主动改行为以维持玩家主动推进；</li>
+<li>Doom 4 方向被完整取消，2016 不是简单 continuation；</li>
+<li>Eternal 明确把资源循环和敌人用途进一步系统化；</li>
+<li>Dark Ages 官方明确宣称从 fighter jet 改为 iron tank、从 jump and shoot 改为 stand and fight。</li>
+</ul>
+<h3 id="h">H / 需要继续验证</h3>
+<ul>
+<li>“Quake 后 id 能力非对称固化”的强因果；</li>
+<li>Rage 是“技术原创强、产品问题主权弱”的程度；</li>
+<li>ZeniMax/Bethesda 对 Doom reboot 的具体决策权、预算承担和内部政治过程；</li>
+<li>DOOM 2016 是否已经把 innovation institutionalized 到不依赖关键人物；</li>
+<li>Eternal 的争议是否代表“新教条化”，需要玩家行为数据、设计方复盘与后续 Dark Ages 决策三角验证。</li>
+</ul>
+<h3 id="_2">禁写</h3>
+<ul>
+<li>“Carmack 技术主义毁掉 id”；</li>
+<li>“Romero 离开后 id 不会设计游戏”；</li>
+<li>“Doom 4 是纯 COD 抄袭，因此必然失败”；</li>
+<li>“Bethesda 收购拯救/毁掉 id”而无决策链证据；</li>
+<li>“2016 证明大公司比独立团队更能创新”；</li>
+<li>“杨小凯理论已经证明游戏公司的 benchmark trap”。</li>
+</ul>
+<hr />
+<h2 id="18">18. 下一步研究问题</h2>
+<ol>
+<li>补齐 Rage 的产品目标、技术目标与组织结构的一手/同期材料。</li>
+<li>找到 Doom 4 reboot 的具体 kill-right / decision chain：id、ZeniMax、Bethesda 各角色。</li>
+<li>研究 DOOM Eternal 的资源循环为什么从 2016 的“鼓励推进”发展成更强的“主动资源税”。</li>
+<li>研究 Eternal 玩家争议：mastery ceiling 与 agency/自由度是否真的存在 trade-off。</li>
+<li>研究 The Dark Ages 开发方对 Eternal 反馈的直接承认，确认哪些改动是主动反教条。</li>
+<li>将本节点与 Nintendo/Pocketpair、日本后发工业化、中国游戏“同构异性创新”研究建立跨案例矩阵。</li>
+<li>将 PROBLEM SOVEREIGNTY × REALITY ARBITRATION 纳入作者型项目审计，但在未跨案例验证前不升级为 universal prescription。</li>
+</ol><div class="crumbs"><a href="/heroes-portal/">书阁</a> / book/research-notes/doom-organizational-aging-rejuvenation-043.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>

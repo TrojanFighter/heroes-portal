@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>036 — 叙事的来源谱系、反规训自我复制与非功利探索：教育中的三重认识论训练 · 独立游戏英雄传说</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e3b2d'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>传</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ecdc;--paper:#faf6ea;--ink:#2b2417;--muted:#6f6450;--faint:#9a8d76;
+--border:#ddd2ba;--accent:#9e3b2d;--accent-soft:rgba(158,59,45,.08);
+--teal:#1f5f5b;--radius:8px;
+--ink2:#453c2b;--strong:#1f1a10;--code-bg:rgba(43,36,23,.06);--nav-bg:rgba(250,246,234,.92);
+--serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+--mono:"SF Mono",ui-monospace,"JetBrains Mono",Consolas,"Noto Serif SC","Songti SC",monospace}
+[data-theme="dark"]{--bg:#14110c;--paper:#1e1a13;--ink:#e6ddc8;--ink2:#d3c8ae;--strong:#f2ead6;
+--muted:#a3977f;--faint:#7d7260;--border:#3a3220;--accent:#d4674c;--accent-soft:rgba(212,103,76,.14);
+--teal:#5ea8a0;--code-bg:rgba(230,221,200,.08);--nav-bg:rgba(20,17,12,.9)}
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:18px;overflow-x:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+.seal{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:4px;display:grid;place-items:center;font-size:11px;line-height:1;font-weight:700;letter-spacing:0}
+.nav a.nl{color:var(--muted);font-size:14px;white-space:nowrap;padding:4px 2px}
+.nav a.nl.on,.nav a.nl:hover{color:var(--accent);text-decoration:none}
+.nav a.nl.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.col{max-width:760px;margin:0 auto;padding:0 20px}
+.hero{padding:72px 0 40px;border-bottom:1px solid var(--border)}
+.hero .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;line-height:1.15;letter-spacing:.02em;margin:14px 0 10px}
+.hero .en{font-size:clamp(15px,2.4vw,19px);color:var(--muted);font-style:italic}
+.hero .quote{margin-top:26px;max-width:640px;font-size:17px;border-left:3px solid var(--accent);padding-left:18px;color:var(--ink2)}
+.hero .byline{margin-top:18px;color:var(--faint);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:34px 0 0}
+.stat{background:var(--paper);padding:16px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+.sect{padding:44px 0}
+.sect h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+.sect h2 small{font-size:13px;font-weight:400;color:var(--faint);font-family:var(--mono)}
+.sect .lede{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:15px}
+.gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:block;color:var(--ink);transition:border-color .15s,transform .15s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.card:hover::before{transform:scaleX(1)}
+.bignum{position:absolute;right:12px;top:0;font-size:56px;font-weight:900;color:var(--accent);opacity:.09;pointer-events:none;line-height:1}
+a.card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.card h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid var(--border);border-radius:99px;color:var(--muted);margin-left:8px}
+table.atlas{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--border)}
+table.atlas th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+table.atlas td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.atlas tr:last-child td{border-bottom:0}
+table.atlas td.id{font-family:var(--mono);font-size:12px;white-space:nowrap}
+table.atlas tr:nth-child(even) td{background:var(--code-bg)}
+table.atlas tr:hover td{background:var(--accent-soft)}
+.panel{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p,.why li{font-size:14.5px;color:var(--ink2)}
+.why ul{padding-left:20px;margin-top:8px}
+.why li{margin-bottom:6px}
+.feed{list-style:none;padding:0}
+.feed li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.feed .t{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-soft);padding:0 7px;border-radius:99px;white-space:nowrap;background:var(--accent-soft)}
+.feed .m{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.feed li>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+article.doc{padding:44px 0 30px;font-size:16.5px;line-height:1.95}
+article.doc h1{font-size:32px;font-weight:900;line-height:1.3;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:14px}
+article.doc.lit .dc::first-letter{float:left;font-size:3.1em;line-height:.88;font-weight:900;color:var(--accent);padding:6px 10px 0 0}
+article.doc .sub{color:var(--faint);font-family:var(--mono);font-size:13px;margin-bottom:34px}
+article.doc h2{font-size:24px;font-weight:800;margin:2.2em 0 .7em;padding-left:12px;border-left:3px solid var(--accent);line-height:1.4}
+article.doc h3{font-size:19px;font-weight:700;margin:1.8em 0 .6em}
+article.doc h4{font-size:16.5px;margin:1.5em 0 .5em}
+article.doc p{margin:.9em 0}
+article.doc ul,article.doc ol{padding-left:1.6em;margin:.9em 0}
+article.doc li{margin-bottom:.35em}
+article.doc blockquote{border-left:3px solid var(--border);padding:.2em 0 .2em 18px;margin:1.2em 0;color:var(--ink2);font-style:italic}
+article.doc blockquote strong{font-style:normal}
+article.doc strong{color:var(--strong)}
+article.doc code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:2px 6px;border-radius:4px}
+article.doc pre{background:#2b2417;color:#f0e9d6;padding:16px 18px;border-radius:var(--radius);overflow-x:auto;margin:1.2em 0;font-size:13px;line-height:1.6}
+article.doc pre code{background:none;color:inherit;padding:0}
+article.doc table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:14.5px;display:block;overflow-x:auto}
+article.doc th{border-bottom:2px solid var(--ink);text-align:left;padding:8px 10px;font-weight:700;white-space:nowrap}
+article.doc td{border-bottom:1px solid var(--border);padding:8px 10px;vertical-align:top}
+article.doc hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
+article.doc img{max-width:100%;border-radius:var(--radius)}
+article.doc a{text-decoration:underline;text-decoration-color:rgba(158,59,45,.4);text-underline-offset:3px}
+article.doc a:hover{color:var(--accent)}
+.crumbs{font-size:13px;color:var(--faint);padding-top:26px;font-family:var(--mono)}
+.crumbs a{color:var(--muted)}
+.filter{width:100%;max-width:420px;font-family:var(--serif);font-size:15px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--paper);color:var(--ink);margin-bottom:18px}
+.filter:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.foot{border-top:1px solid var(--border);margin-top:20px;padding:28px 0 44px;color:var(--faint);font-size:13px}
+.foot a{color:var(--muted)}
+.tworow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+.tworow>*{min-width:0}
+.feed li{min-width:0}
+@media(max-width:760px){.tworow{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:2px 10px}
+.chip b{color:var(--ink);font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--teal);border:1px solid rgba(31,95,91,.25);border-radius:99px;padding:1px 9px;background:rgba(31,95,91,.06)}
+.status.st-contested{color:#a8622a;border-color:rgba(168,98,42,.35);background:rgba(168,98,42,.08)}
+.status.st-weak,.status.st-unverified{color:var(--faint);border-color:var(--border);background:transparent}
+.status.st-refuted{color:var(--accent);border-color:rgba(158,59,45,.4);background:var(--accent-soft)}
+.stamp{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--accent);color:#fff;font-size:24px;font-weight:900;border-radius:6px;transform:rotate(-8deg);margin-left:16px;vertical-align:middle;box-shadow:0 2px 6px rgba(43,36,23,.3)}
+.tbtn{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:99px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{color:var(--accent);border-color:var(--accent)}
+#prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:60;pointer-events:none}
+#prog i{display:block;height:100%;width:0;background:var(--accent)}
+.lang-sw{font-family:var(--mono);font-size:12px;margin-bottom:22px}
+.lang-sw a{color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:2px 11px;text-decoration:none;opacity:.85}
+.toc{position:fixed;top:96px;right:22px;width:186px;max-height:calc(100vh - 140px);overflow:auto;font-size:12.5px;line-height:1.55;display:none;border-left:1px solid var(--border);padding-left:14px;z-index:40}
+.toc .toc-t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:8px}
+.toc a{display:block;color:var(--muted);padding:2.5px 0;text-decoration:none}
+.toc a.t3{padding-left:12px;font-size:12px}
+.toc a.on,.toc a:hover{color:var(--accent)}
+@media(min-width:1320px){.toc{display:block}}
+.qz-step{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.qz-step h3{font-size:17px;margin-bottom:3px}
+.qz-step .qd{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.qz-opt{display:block;width:100%;text-align:left;font-family:var(--serif);font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.qz-opt:hover{border-color:var(--accent)}
+.qz-opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.qz-opt b{display:block;font-weight:700}
+.qz-opt span{font-size:13px;color:var(--muted)}
+.qz-res{background:var(--paper);border:1px solid var(--accent);border-radius:var(--radius);padding:22px 24px;display:none;margin-top:4px}
+.qz-res h3{font-size:19px}
+.qz-res .qn{font-size:13px;color:var(--muted)}
+.qz-res h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);margin:18px 0 6px;text-transform:uppercase}
+.qz-res ul{padding-left:20px;font-size:14.5px}
+.qz-res li{margin-bottom:4px}
+.qz-note{font-size:13.5px;color:var(--ink2);border-left:3px solid var(--border);padding-left:12px;margin:8px 0}
+.qz-warn{font-size:13px;color:var(--muted);border-top:1px dashed var(--border);margin-top:16px;padding-top:12px}
+.qz-reset{font-family:var(--mono);font-size:12px;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;margin-left:10px;padding:0}
+.sect-grp{margin-bottom:30px}
+.sect-grp h3{font-size:18px;margin-bottom:4px}
+.sect-grp .gd{font-size:13px;color:var(--muted);margin-bottom:10px}
+.sect-grp ul{list-style:none;padding:0;font-size:14px;line-height:2}
+.heroart{display:block;width:100%;max-width:860px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 16px rgba(43,36,23,.14)}
+.thumb{display:block;width:calc(100% + 44px);max-width:none;margin:-20px -22px 14px;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.docfig{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin:16px 0 26px}
+.band{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;aspect-ratio:16/5;object-fit:cover}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gcard{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;color:var(--ink)}
+a.gcard:hover{border-color:var(--accent);text-decoration:none}
+.gcard img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:1px solid var(--border)}
+.gcard .gc-t{padding:10px 14px;font-size:13.5px;line-height:1.4}
+.gcard .gc-t small{display:block;color:var(--faint);font-size:11px;font-family:var(--mono);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brand" href="/heroes-portal/"><span class="seal">传</span>英雄传说 · 书阁</a>
+<a class="nl" href="/heroes-portal/book/START-HERE.html">从这儿读</a>
+<a class="nl" href="/heroes-portal/chapters.html">章节</a>
+<a class="nl" href="/heroes-portal/profiles.html">人物</a>
+<a class="nl" href="/heroes-portal/router.html">决策路由</a>
+<a class="nl" href="/heroes-portal/atlas.html">案例地图</a>
+<a class="nl" href="/heroes-portal/claims.html">命题</a>
+<a class="nl" href="/heroes-portal/notes.html">笔记</a>
+<a class="nl class="on"" href="/heroes-portal/sections.html">分区</a>
+<a class="nl" href="/heroes-portal/gallery.html">图鉴</a>
+<span class="sp"></span>
+<button class="tbtn" id="thm" title="切换明暗主题">◐</button>
+<a class="nl" href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes" target="_blank" rel="noopener">GitHub ↗</a>
+</div></nav>
+<div id="prog"><i id="prog-i"></i></div>
+<aside class="toc"><div class="toc-t">本页目录</div><a href="#0" class="t2">0. 新增发现：不能只教“反说教”，还必须教“材料怎样被改变”</a><a href="#1" class="t2">1. 四个最值得进入教材的材料组</a><a href="#np-01" class="t3">NP-01｜旧台湾国语课本的蒋介石“观鱼”：真正的制度化童年榜样叙事</a><a href="#np-0220032026" class="t3">NP-02｜刘克襄《少年绿皮书》（2003）与2026再传播：独立记述不等于事后制造</a><a href="#np-03" class="t3">NP-03｜多尔衮—史可法书信：历史人物的“仁义”话语可能首先是一项政治行动</a><a href="#np-04" class="t3">NP-04｜“毒教材”争议、婚姻成功学与古典知识门槛：批评者也需要证据</a><a href="#2-kpi" class="t2">2. 我们的两项补充能力不是更多KPI</a><a href="#cap-1knowledge-provenance-narrative-reconstruction" class="t3">CAP-1｜`KNOWLEDGE PROVENANCE &amp;amp; NARRATIVE RECONSTRUCTION / 知识来源与叙事重建`</a><a href="#cap-2free-exploration-without-mandatory-roi" class="t3">CAP-2｜`FREE EXPLORATION WITHOUT MANDATORY ROI / 不预设回报的自主探索`</a><a href="#3-035" class="t2">3. 两堂可以立即编入035的史料课</a><a href="#unit-np-a75" class="t3">UNIT NP-A｜“同一个童年为什么被讲成三种故事？”（建议75分钟）</a><a href="#unit-np-b75" class="t3">UNIT NP-B｜“历史行动者说自己仁义时，我们究竟得到了哪种信息？”（建议75分钟）</a><a href="#4" class="t2">4. 可证伪研究与方法边界</a><a href="#5" class="t2">5. 后续证据债</a><a href="#6-2026-10-10" class="t2">6. 第二轮图片重读：三道审计与“谁有权出题”（2026-10-10增量）</a><a href="#cap-3actorgoalcost-audit" class="t3">CAP-3｜ACTOR–GOAL–COST AUDIT / 行动主体、目标与代价审计</a><a href="#cap-4claim-strength-audit" class="t3">CAP-4｜CLAIM-STRENGTH AUDIT / 主张强度与论证负担审计</a><a href="#cap-5temporal-provenance-causal-clocks" class="t3">CAP-5｜TEMPORAL PROVENANCE &amp;amp; CAUSAL CLOCKS / 时间谱系及因果时钟审计</a><a href="#cap-6problem-definition-audit" class="t3">CAP-6｜PROBLEM-DEFINITION AUDIT / 改革之前先找对问题</a><a href="#_1" class="t3">两节课与验证要求</a></aside><article class="doc"><div class="col"><h1 id="036">036 — 叙事的来源谱系、反规训自我复制与非功利探索：教育中的三重认识论训练</h1>
+<ul>
+<li>Program: C / 教育社会化 × 知识生产与传播 × 历史决策教育 × 作者形成。</li>
+<li>Status: <strong>AUTHOR-ORIGIN THESIS + VERIFIED PUBLIC SOURCE ENTRIES + UNVERIFIED USER-SUPPLIED IMAGE LEADS / CURRICULUM DESIGN, NOT EDUCATION EFFECT ESTIMATE</strong>。</li>
+<li>As-of: 2026-10-09。</li>
+<li>Parents: <a href="/heroes-portal/country-studies/china/031-education-east-asian-discipline-reference-repertoire.html">031 自我教育主权</a>、<a href="/heroes-portal/country-studies/china/032-exam-overfit-routine-expertise-open-domain-transfer.html">032 Exam Overfit</a>、<a href="/heroes-portal/country-studies/china/034-epistemic-discipline-authority-legacy-and-knowledge-aversion.html">034 认识论规训与知识载体污染</a>、<a href="/heroes-portal/country-studies/china/035-party-history-original-sources-decision-education-curriculum.html">035 党史原始材料与决策教育</a>。</li>
+<li>Origin: 作者就旧版人物课文、2026年媒体再报道、历史读物、成功学短视频及网络反驳截图提出的分析方向。本篇<strong>不是复原私人截图的全部原文，也不将截图当作已核来源</strong>。</li>
+<li>Boundary: 不从几个样本推论任何国家教育的普遍程度、因果效应或民族性；不把公众人物童年经历自动视为政治才能的原因；历史征服的合法化文辞不等于行动真实道德属性；反对一种意识形态并不自动使另一种叙述可靠。</li>
+</ul>
+<h2 id="0">0. 新增发现：不能只教“反说教”，还必须教“材料怎样被改变”</h2>
+<p class="dc">此前034的 `KNOWLEDGE-CARRIER AVERSION` 关注说教式包装如何可能污染知识入口；此次补上一条不同方向的机制：</p>
+<p>```text
+原始事件／行动（未必完整可得）
+→ 当事人记录与其目的（可能已经是宣传、辩解、动员）
+→ 同时代见闻、后出史书与编辑选择
+→ 课堂材料、领袖传记、政治故事与媒体转述
+→ 社交平台的截屏／二次评论／视觉重组
+→ 读者误将最后一层的解释当成第一层的原始事实
+```</p>
+<p>候选术语：
+- <strong>`SOURCE-TO-VERDICT COMPRESSION / 从史料到标准判词的压缩`</strong>：复杂材料、多个目的与反例被压成一个结论。
+- <strong>`PROVENANCE COLLAPSE / 来源谱系坍缩`</strong>：后来的节录、解说、动机揣测和一手原貌在传播中混为一谈。
+- <strong>`RETROSPECTIVE PREDESTINATION / 事后必然化`</strong>：从成人成就反向赋予童年行为预测意义。
+- <strong>`COUNTER-DISCIPLINE RECURSION / 反规训的规训式复现`</strong>：反对旧权威者不查证、不分事实推论、直接发明一套新的正确答案。
+- <strong>`NON-INSTRUMENTAL EXPLORATION SPACE / 非功利探索空间`</strong>：青年有权为了好奇、感受、游戏、观察和自主学习而活动，不需要每次先证明分数、职业或作品回报。</p>
+<p>这些概念目前属于<strong>研究用工作假说</strong>。各种传播文本确有实物存在，并不自动证明传播行为造成认知能力退化，更不能推导长期因果强度。</p>
+<h2 id="1">1. 四个最值得进入教材的材料组</h2>
+<h3 id="np-01">NP-01｜旧台湾国语课本的蒋介石“观鱼”：真正的制度化童年榜样叙事</h3>
+<p><strong>可核事实</strong>：
+- 台湾大学 TaDELS 资料库收录国立编译馆《国民小学国语课本》第三册1979年8月初版〈总统蒋公小的时候〉（资料库实际标题为〈總統 蔣公小的時候〉），主题涉及少年观鱼逆流而上、勇气与后来为国家做事之间的关联。
+- 台湾事实查核中心曾按国家教育研究院教科书馆藏查核：网上常见的<strong>具体插画与排版</strong>对应1982—1989年发行的第三册第十一课；1979—1981年虽有故事，但插画/排版不同。<strong>不要把1979年正文与1982年的图片说成同一实物。</strong>
+- 查核机构并指出某些网络上套用此风格、以其他当代人物为主人公的“课本图”属于网民改图，不能算真实教材。</p>
+<p><strong>来源</strong>：
+- <a href="https://itdels.digital.ntu.edu.tw/Item.php?ID=C_0001_0112_1064_6803_034">台大教育法律实证资料档案：1979年版本信息</a>（档案元数据与摘要；不是本笔记逐页核阅的完整纸质课本）。
+- <a href="https://tfc-taiwan.org.tw/fact-check-reports/migration-5152/">台湾事实查核中心：教材图片版本与改图查证</a>（实地对照馆藏的后出调查）。</p>
+<p><strong>教学点</strong>：让学生区分 `DOCUMENT-EXISTS`、`STORY-WAS-PRINTED`、`CHILDHOOD-EVENT-HAPPENED`、`BEHAVIOR-PREDICTED-GREATNESS` 四个强度不同的命题。课本存在与事件真实性不是同一层，事件属实也不证明事后预测逻辑成立。</p>
+<h3 id="np-0220032026">NP-02｜刘克襄《少年绿皮书》（2003）与2026再传播：独立记述不等于事后制造</h3>
+<p><strong>可核事实</strong>：
+- 台湾文学馆作品资料和出版社目录确认：刘克襄《少年绿皮书——我们的岛屿旅行》由玉山社于<strong>2003年7月</strong>出版；ISBN 9789867819246。出版社介绍的是青少年、自然与师长的探索关系。
+- 2026年9月30日前后的新闻记录，书中「三封未寄的绿皮书信」涉及沈伯洋青少年时期参与的生态/乡土走读，讨论稻田、古道、海边，提到独处与自由；出版于当事人后来政治活动广为人知之前。<strong>具体书信内容目前依据2026报道转述；尚未对照2003初版原书及版本之间差异。</strong>
+- 2026年新闻和政治传播可以重新突出某位公众人物早年行为；这属于<strong>后出意义赋予</strong>，不能反推2003年作者出于政治造神目的写作，也不能仅凭走读经验解释当事人后来职业/政治成就。</p>
+<p><strong>来源</strong>：
+- <a href="https://tln.nmtl.gov.tw/ch/m2/nmtl_w1_m2_c_3.aspx?book_number=O01017-10-003">台湾文学馆作品资料：2003/7</a>；
+- <a href="https://www.tipi.com.tw/product/detail207">玉山社出版社目录及原始出版信息</a>；
+- <a href="https://udn.com/news/story/6885/9785491">2026-09-30相关报道及三封信的转述</a>。</p>
+<p><strong>特别值得保留的教育思想</strong>：据报道称，刘克襄并不要求每次自然行走都承担明确“使命”，并借助独处给予孩子自由空间。这提供 `NON-INSTRUMENTAL EXPLORATION` 的<strong>生动个案</strong>，不是台湾教育系统普遍鼓励自由探索的总体证据。还需要避免将“后来成为知名人物”误写为自由探索效果的验证。</p>
+<h3 id="np-03">NP-03｜多尔衮—史可法书信：历史人物的“仁义”话语可能首先是一项政治行动</h3>
+<p><strong>材料边界</strong>：这是一组<strong>1644—1645年政治合法性争夺</strong>的史料线索，不属于现代党史；适合作为035课程的跨时期比较教材。必须区分书信形成与传抄年代、1644年弘光政权合法性争论、1645年扬州军事结局，避免笼统写成同日事件。</p>
+<p><strong>可核事实与问题</strong>：
+- 2019年《扬子晚报》报道南京博物院展出史可法《复多尔衮书》的底稿（存在多份底稿）；文章介绍多尔衮致书利用为崇祯复仇、讨伐李自成及《春秋》大义论证清政权合法性。它是<strong>合法性主张</strong>，不是史家已经确认清军行动“仁义”的结论。
+- 不同文献对书信文字存在异同，署名作者/代笔者存在争议；作为教学训练，应把 `CLAIMED AUTHOR / PHYSICAL MANUSCRIPT / PRINTED EDITION / EDITORIAL RECONSTRUCTION` 区别处理。
+- 史可法复书及后续扬州事件不能只通过输赢双方的“仁义”“忠烈”称号决定其事实、手段和受害者成本；须按同时代双方资料与后出史著比照。</p>
+<p><strong>来源</strong>：
+- <a href="https://k.sina.cn/article_1653603955_628ffe7302000jxsh.html">《扬子晚报》2019-03-15南京博物院展览及书信背景</a>（有署名的媒体报道，不是原稿原文）。
+- <a href="https://zh.wikipedia.org/wiki/%E5%BE%A9%E5%A4%9A%E7%88%BE%E8%A2%9E%E6%9B%B8">《复多尔衮书》传本及作者归属争议的索引</a>（<strong>仅索引</strong>，不是可靠的最终档案）。
+- <a href="https://doosho.com/cn/138/3/2">文献编注举例：不同古籍记录作者与文本异同</a>（后出文献研究页面，版本来源待进一步核证）。</p>
+<p><strong>教学点</strong>：政治主体使用伦理合法性语言，既是可研究的<strong>行为事实</strong>，也是其争取权力的工具；不应因为史料中出现“仁义”就把它变成教材叙述者的验证结论。尤其要区分<strong>人物台词、历史文件中的自我申辩、叙述者判断、编者课后结论</strong>。</p>
+<h3 id="np-04">NP-04｜“毒教材”争议、婚姻成功学与古典知识门槛：批评者也需要证据</h3>
+<p><strong>现有材料等级</strong>：作者上传的网上争议图片及评论是<strong>传播内容线索，尚无书号、教材完整图页、视频原件/统计样本、聊天上下文</strong>。不能补写来源。</p>
+<ul>
+<li>某配套读本封面被解读为某种国家/等级身份寓意：没有出版社说明、图中人物的身份设定与出版/审稿记录，就不能从衣着或构图推出国籍、仆主关系或编者政治意图。</li>
+<li>“听从配偶建议便会发达”：关系伦理不等于可普遍适用的事业成功因果；评论区拿几位失败名人反驳，也不等于发现了相反的总体规律。正反两方都需分母、控制变量、纵向数据。</li>
+<li>使用拉丁文或古典学问可能是切题的知识贡献，也可能是地位/入场门槛信号；一句网络聊天不足以证明说话者意图或某种群体普遍思维模式。</li>
+</ul>
+<p><strong>教育反例价值</strong>：真正的反规训者应能说出“我不赞成这段话，但我还不知道它是真是假”；不能因为批评对象令人讨厌，便豁免自身的证据责任。</p>
+<h2 id="2-kpi">2. 我们的两项补充能力不是更多KPI</h2>
+<h3 id="cap-1knowledge-provenance-narrative-reconstruction">CAP-1｜`KNOWLEDGE PROVENANCE &amp; NARRATIVE RECONSTRUCTION / 知识来源与叙事重建`</h3>
+<p>每次选择一个熟悉故事，给学生五层材料：
+1. <strong>EVENT / 原始事件</strong>：有什么发生、什么不知道；
+2. <strong>ACTOR DOCUMENT / 当事人叙述</strong>：有没有自我利益、宣传、动员、辩护；
+3. <strong>ARCHIVE &amp; EDITION / 档案及版本</strong>：同日/后年材料、文字更动、删节、编者脚注；
+4. <strong>POPULAR RETELLING / 大众改编</strong>：儿童教材、通俗传记、影视叙事；
+5. <strong>VIRAL REINTERPRETATION / 今日传播</strong>：短视频、截图、对立观点与再意义化。</p>
+<p><strong>要求学生给每个命题单独标注</strong> `EXPLICIT / INFERENCE / UNKNOWN / DISPUTED`，尤其建立不同层级的“不能推出”：课本印了≠事情必然发生≠可预示政治才能；历史信里写仁义≠行动被证实仁义；一个网络反例≠总体因果失败。</p>
+<p>该方法迁移到独立游戏英雄传记：<strong>开发者的同期开发日志、新闻采访、发行商营销、自传回忆、第三方销量推测、后来的“天才叙事”均不应相互替代</strong>。和既有时间有效性、分母、`EX ANTE/EX POST`协议共同使用。</p>
+<h3 id="cap-2free-exploration-without-mandatory-roi">CAP-2｜`FREE EXPLORATION WITHOUT MANDATORY ROI / 不预设回报的自主探索`</h3>
+<p>学习者能够为了文学、古道、自然、音乐、游戏、研究、兴趣社群而自由活动；它提供形成参照系与自主目的感的<strong>可能环境</strong>，但不能因为某名人曾经参加就推定该活动产生特定伟大才能。</p>
+<p>真正实践不能只是新的“非功利探索打卡计划”：
+- 学生可以选择题目，也可以不设产出；导师提供必要技能、材料、时间与安全条件，但不负责预先定义一切人生目标。
+- 教育机构可评价自己是否<strong>提供探索空间、可及性和安全保障</strong>，不应把每次探索的感受、意义和职业转化率变成学生的道德评分。
+- 评估长期教育政策可比较自主兴趣持续率、自愿继续研究和跨领域探索，<strong>但这些应主要用于评估制度设计，而非作为个体必须满足的高压KPI</strong>。
+- 非功利探索 ≠ 永远不用承担现实责任，也不否定基础知识/安全约束；它与035中有限时间下的正式决策训练是<strong>互补</strong>而非可以互相替换的目标。</p>
+<h2 id="3-035">3. 两堂可以立即编入035的史料课</h2>
+<h3 id="unit-np-a75">UNIT NP-A｜“同一个童年为什么被讲成三种故事？”（建议75分钟）</h3>
+<p>材料：<a href="https://itdels.digital.ntu.edu.tw/Item.php?ID=C_0001_0112_1064_6803_034">1979课本资料库元数据</a>；<a href="https://tfc-taiwan.org.tw/fact-check-reports/migration-5152/">1982—89版本和现代改图查核</a>；<a href="https://www.tipi.com.tw/product/detail207">2003《少年绿皮书》书目/出版社资料</a>；<a href="https://udn.com/news/story/6885/9785491">2026媒体再报道</a>。</p>
+<p>步骤：①按<strong>出版时间</strong>排序文本；②标清报道与原书阅读的差异；③每人绘一张“原记录→出版物→媒体传播→政治解释”链；④指出哪个事实可以核、哪个因果判断不可证；⑤在不知道人物成年成就时，讨论一次自然旅行如何支持普通孩子的学习与独立性。<strong>不要要求得出人物政治立场结论</strong>。</p>
+<p><strong>最低完成门槛</strong>：指出1979故事与1982—89网上常见图片的版本差异；2003书有早于后来的政治成就的出版记录；2026新闻对原文的节录不是全文原稿。</p>
+<h3 id="unit-np-b75">UNIT NP-B｜“历史行动者说自己仁义时，我们究竟得到了哪种信息？”（建议75分钟）</h3>
+<p>材料：多尔衮致史可法书、史可法复书的各版本和2019南博展览报道。学生分三栏记录：`HISTORICALLY SAID`（确曾如此主张）、`HISTORICALLY DID`（有其他证据证实的行动）、`MORALLY JUSTIFIED`（应独立论证的评价）；再研究南明内部分歧、地方居民的遭遇和后来的教材叙事。</p>
+<p><strong>必须避免</strong>：用1840年代/20世纪的价值术语替代当时语境；以战胜者的自述判定真实性；在信件准确年份和作者争议尚未校勘时假装无争议。完整课堂包当前仍为<strong>候选</strong>，需要原件/可靠校点文本及南明/清双方材料。</p>
+<h2 id="4">4. 可证伪研究与方法边界</h2>
+<table>
+<thead>
+<tr>
+<th>工作命题</th>
+<th>目前证据</th>
+<th>如何测试</th>
+<th>不应得出的结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>`H-NP-01` 叙事压缩可把后出解释伪装成原始事实</td>
+<td>三组公开传播与文献校勘实例</td>
+<td>固定样本对照故事前后版本、编码新增因果/人物评价</td>
+<td>所有教材编辑都故意操控</td>
+</tr>
+<tr>
+<td>`H-NP-02` 反规训的传播同样会用未证身份推断</td>
+<td>争议截图/媒体传播线索，样本选择强</td>
+<td>正反立场帖配对抽样、来源引用率与修正记录</td>
+<td>反对者都不讲证据</td>
+</tr>
+<tr>
+<td>`H-NP-03` 非功利探索时间有助自主目标形成</td>
+<td>刘克襄个案提供“存在性”，无总体效应</td>
+<td>课外时长与家庭背景匹配、对照性探索和决策追踪</td>
+<td>一位名人少年旅行证明台湾制度先进</td>
+</tr>
+<tr>
+<td>`H-NP-04` 来源谱系课可促进跨情境证据判断</td>
+<td>课程方案，效果UNKNOWN</td>
+<td>前后盲测新故事、延迟迁移、替代解释质量</td>
+<td>看完课会做商业决策</td>
+</tr>
+</tbody>
+</table>
+<p><strong>最重要的教材设计警告</strong>：批判传统教条本身不构成一个人的认识论优越性；不尊重证据的“反教条”同样是一种教条。别再用“谁是正道/谁是邪道”的阵营身份给研究答案，而看他如何恢复失去的材料、发现自身推断中的漏洞并修正。</p>
+<h2 id="5">5. 后续证据债</h2>
+<ol>
+<li>寻找1979版及1982—89版《国民小学国语课本》第三册相关页的可信影印并并置；不要误把网民改图当真教材。</li>
+<li>阅读《少年绿皮书》2003初版实际〈三封未寄的绿皮书信〉，核对媒体摘录与语境；<strong>没有原文时不假称已读。</strong></li>
+<li>校点多尔衮致史可法书、史可法复书之不同传本，区分1644政治信件与1645扬州事件，核对底稿实物及作者归属争议。</li>
+<li>若研究“毒教材”封面，请先确定ISBN、版次、完整内页与编辑回应，禁止凭服饰猜测出版意图。</li>
+<li>进行来源标签盲化的识读小实验：同一段文字贴不同权威标签，比较实证主张的可信度评分；对被试双方施加同一套证据规则。</li>
+<li>将课程效果的延迟测量与学习者自主性分开：不能把新教育体系变成“自由探索积分榜”。</li>
+</ol>
+<p><strong>路由</strong>：社会上游与自由时间→031；认识论规训→034；党史来源鉴定与先入局后揭答案→035；本篇集中保存<strong>传播版本的证据谱系、反规训自我复制和非功利探索</strong>，不与既有035的战争决策史料混在同一证据池。</p>
+<hr />
+<h2 id="6-2026-10-10">6. 第二轮图片重读：三道审计与“谁有权出题”（2026-10-10增量）</h2>
+<p><strong>来源声明：</strong> 以下分析起于作者在当前研究讨论中提供的旧教材、历史儿童读物、自然观察、短视频评论、文言文教育争论与文明史聊天截图；目前仍只把截图作为<code>传播文本观察／研究线索</code>。涉及编者真实意图、课程使用范围、出版时点及传播量，均须回原书版权页、完整内页、视频原帖与档案核验。<strong>图中可见某种叙述 ≠ 编者有意训练某一价值观 ≠ 全社会的普遍教育结果</strong>。</p>
+<h3 id="cap-3actorgoalcost-audit">CAP-3｜<code>ACTOR–GOAL–COST AUDIT / 行动主体、目标与代价审计</code></h3>
+<p>故事不只遗漏事实，也可以<strong>在选取叙事主角时先替读者决定“谁在做事、什么叫成功”</strong>。因此在恢复历史行为者的选项之前，新增五问：</p>
+<ol>
+<li><code>WHO SETS THE QUESTION?</code> 谁提出问题、拥有出题权？是不是默认接受了统治者、胜者、经理或教师的目标？</li>
+<li><code>WHO IS THE AGENT?</code> 谁被写成主动行动者，谁只被当成“秩序恢复”的背景、成本或被动受益者？</li>
+<li><code>SUCCESS FOR WHOM?</code> 谁定义成功？秩序、合法性、生命安全、财产权、组织存续、个人自主之间可能相互冲突。</li>
+<li><code>WHO PAYS?</code> 谁承担军事、征收、家庭、环境及自由损失？作者是否在正文中遗漏了代价承担者？</li>
+<li><code>CAN THE GOAL BE REFUSED?</code> 如果不接受既定目标，学生能否重定义问题，而不只是替历史胜者优化手段？</li>
+</ol>
+<p><strong>例：多尔衮读物。</strong> 根据此前提供的两张局部截图，文本以“缓解民族矛盾”、恢复秩序及多尔衮/清军为行动核心。研究任务是分别重建清方政治宣传、北京不同民众、李自成势力及南明官员的目标和信息，而<strong>不是据局部截图断定编者动机、其全国使用情况或已经产生何种意识形态效果</strong>。要区分历史人物说“仁义”、作者转述军令及真实执行效果；“民族矛盾”是现代史学描述层，不可自动当成1644年行动者的原始分类。</p>
+<p><strong>迁移到英雄传记/游戏立项：</strong> 创始人成功后，被写作主角的人是谁？合伙人、玩家、失业员工、家庭与外部受损者承担了什么代价？“扩大规模”“拿到融资”是谁定义的胜利，为什么不是<code>DO NOTHING / SCALE DOWN / CHANGE GOAL</code>？</p>
+<h3 id="cap-4claim-strength-audit">CAP-4｜<code>CLAIM-STRENGTH AUDIT / 主张强度与论证负担审计</code></h3>
+<p>同一传播物里至少要分四层，不准将低强度主张的合理性挪用为高强度结论的证据：</p>
+<table>
+<thead>
+<tr>
+<th>层级</th>
+<th>通用形式</th>
+<th>应承担的证据负担</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>NORMATIVE</code> 伦理/价值</td>
+<td>“伴侣应当相互尊重和倾听”</td>
+<td>价值前提及可能的权利冲突；不是成功率检验</td>
+</tr>
+<tr>
+<td><code>DESCRIPTIVE</code> 描述性断言</td>
+<td>“很多人会听从配偶意见”</td>
+<td>有分母、定义与抽样来源</td>
+</tr>
+<tr>
+<td><code>CAUSAL</code> 经验因果</td>
+<td>“听从配偶意见提高事业成功率”</td>
+<td>对照群体、混杂因素、时间先后与机制</td>
+</tr>
+<tr>
+<td><code>UNIVERSAL / ESSENTIALIST</code> 普遍/本质化</td>
+<td>“某性别直觉天然准确”“照做就会发达”</td>
+<td>更强的跨情境证据，允许异质性与反例</td>
+</tr>
+</tbody>
+</table>
+<p><strong>例：此前视频截图。</strong> 标题的“会发达”、副标题的“第六感准”与正文“尊重与倾听”是不同强度主张；温和伦理结论<strong>不能担保</strong>经验因果。评论区列举某些失败名人，只构成对“无例外必然成功”的反例线索，<strong>不能反过来估计平均效果</strong>。点赞、评论、转发是平台互动计量，不能在没有曝光分母、采样时点和行为数据时解释为总体赞成度或传播者收益机制已被证明。提出“平台可能奖励争议互动”也是需要平台级数据检验的<code>H</code>，不能据单张截图定论。</p>
+<p><strong>应用范围</strong>：政治话语、学校德育、健康养生、投资荐股和游戏发行商营销，都必须把<code>SHOULD / IS / CORRELATES / CAUSES / GUARANTEES</code>逐项标注；不要把“这个道理很美”当作“这件事一定有效”。</p>
+<h3 id="cap-5temporal-provenance-causal-clocks">CAP-5｜<code>TEMPORAL PROVENANCE &amp; CAUSAL CLOCKS / 时间谱系及因果时钟审计</code></h3>
+<p>每份流行材料同时记录五个不应合并的时点：</p>
+<pre><code class="language-text">EVENT_TIME（事件据称发生）
+→ RECORD_TIME（最早可确认的记录写成）
+→ EDITION_TIME（不同出版/修订/插图版本）
+→ RECONTEXTUALIZATION_TIME（后来被赋予的新意义）
+→ CAPTURE_TIME（当下截图及传播）
+</code></pre>
+<p><strong>锚点一</strong>：蒋介石童年“观鱼”故事的1979年教材版本元数据，与1982—1989年网上常见的<strong>特定课文插图版本</strong>是不同史料层；此前拼图中的戏仿或漫画效果更不能自动当成旧教材原页。参见本篇<code>NP-01</code>。</p>
+<p><strong>锚点二</strong>：《少年绿皮书》可确认在2003年出版；2026年对其中一位少年后来政治身份的报道，是<code>RECONTEXTUALIZATION</code>。原书早于政治知名度，但原书内容仍待亲自校验，不应把2026新闻摘要当2003原稿；少年当时能自由观鸟、独处，本身值得教育研究，<strong>不需要其后来成为名人才证明兴趣合法</strong>。参见<code>NP-02</code>。</p>
+<p><strong>锚点三</strong>：此前截图的《语文同步读本·五年级上册》可见“义务教育课程标准实验教科书”等署名标识，说明与特定实验教材体系存在关联，不能轻率说是普通任意课外书；但这既<strong>不证明</strong>它是全国统一必修的主课本，也<strong>不证明</strong>其2026年仍在课堂使用。缺版权页/印次/发行年份/学校采用记录时，“又悄然出现”是传播者的<strong>时效主张</strong>，不是已核实的当年新闻事实。图中人物的身份与编者意图同样<code>UNKNOWN</code>。</p>
+<p><strong>不同尺度的因果时钟</strong>：古典文化传承、近代科学与工业制度创新、个人教育与职业形成、人工智能的生产效率变化、人口年龄结构转移，属于不同时距和机制。不能因文明身份持续，就把千年后的技术、军事成功一次性归因于古典传统；也不能从AI工具几年内扩散推出下一代人口素质/社会创新已发生对应变化。</p>
+<p><strong>课堂任务</strong>：为一个主张列出四条独立因果链及各自<code>TIME WINDOW / COUNTERFACTUAL / DATA SOURCE</code>，注明哪些是长期人口队列数据、哪些是短期工具采用观察。拉丁文或古典知识可能具有真实学术用途，但语言资格不自动证明宏大历史模型正确；一句聊天记录不足以判定说话者居心。</p>
+<h3 id="cap-6problem-definition-audit">CAP-6｜<code>PROBLEM-DEFINITION AUDIT / 改革之前先找对问题</code></h3>
+<p>“取消文言文是否改善语文教育”不能只按古代/现代、拥护/反对二分作答。先定义欲解决的实际缺陷：原始史料接触机会、阅读理解迁移、课业负担、标准答案评分与学生自由时间。若改革仅移除文言文却保留猜标准意图的考评方式，可能出现<code>ACTION WITHOUT PROBLEM SOLVING</code>；若只保留文言文的背诵形式，也同样不能自动恢复学生阅读古代原始材料的能力。</p>
+<p>这一项与<code>CAP-3</code>的出题权有关：<strong>教师、改革者及管理者自己也需要展示开放问题定义能力</strong>，不应默认改革动作越激烈就越符合真实需求。竞争解释包括实际课程时间不足、文言文材料选编差异、教师训练条件及学生语言基础；没有课程样本，不对改革效果作定论。</p>
+<h3 id="_1">两节课与验证要求</h3>
+<ul>
+<li><strong>LAB NP-C：历史主体与目标重写（75分钟）</strong>。先匿名分发一段历史人物叙述，让学生列出行动者、被省略者、既定胜利标准、谁付成本；再加入同时间的不同阵营原始材料，要求提出“改变目标”和“拒绝接受目标”两种方案。评价资料核验、能否识别其他主体，不奖励某个预设政治立场。</li>
+<li><strong>LAB NP-D：四级主张与五时点事实核验（75分钟）</strong>。给学生一条伦理—成功因果混合短视频及一张“旧教材近日又出现”的截图；先标<code>NORMATIVE/DESCRIPTIVE/CAUSAL/UNIVERSAL</code>，再填事件/记录/版次/再传播/截图时间表；允许结论为证据不足，不允许以对立名人轶事替代分母。</li>
+<li><strong>试行而非实证结论</strong>：实验应在不同政治立场材料上作盲化迁移测验，考察是否能识别被叙述者忽略的主体、能否拒绝预设目标、是否准确区分规范与因果、能否追到版本与时点。仅凭某组学员讨论热烈，不得宣布本体系已提高决策能力。</li>
+</ul>
+<p><strong>下一批证据债</strong>：①前述多尔衮儿童读物的ISBN、内页及原始出处；②“语文同步读本”的版权页、印次和实际学校使用年份；③视频原帖完整文字/互动时间序列（如果要研究争议流量机制）；④“文言文改革”不同课程目标与实测阅读迁移；⑤不同政治/文明史叙述的同口径源流和时间分期。以上暂不升级为已查证事实。</p>
+<p><strong>跨文档规则</strong>：本篇主存具体案例、传播版本和CAP-3至CAP-6；<a href="/heroes-portal/country-studies/china/034-epistemic-discipline-authority-legacy-and-knowledge-aversion.html">034认识论规训</a>只保留“谁能决定正确问题”的上位认识论机制；<a href="/heroes-portal/country-studies/china/035-party-history-original-sources-decision-education-curriculum.html">035历史决策课程</a>将目标与主体审计设为所有学生盲读包的必经前置步骤。</p><div class="crumbs"><a href="/heroes-portal/">书阁</a> / country-studies/china/036-narrative-provenance-counter-discipline-free-exploration.md</div></div></article>
+<footer class="foot"><div class="wrap">
+《独立游戏英雄传说》 · 洪荒行者 · 内容取自 <a href="https://github.com/TrojanFighter/IndieGameLegendaryHeroes">IndieGameLegendaryHeroes</a> 仓库（2026-11-14 快照） · <a href="https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b">向 Devin 提修改需求</a>
+</div></footer>
+<script>
+(function(){
+var d=document.documentElement;
+var s=localStorage.getItem('theme');
+if(s){d.dataset.theme=s}else if(matchMedia('(prefers-color-scheme: dark)').matches){d.dataset.theme='dark'}
+var b=document.getElementById('thm'),pi=document.getElementById('prog-i');
+function upd(){b.textContent=d.dataset.theme==='dark'?'☾ 明':'◐ 暗'}upd();
+b.onclick=function(){var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t);upd()};
+addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;pi.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var links=document.querySelectorAll('.toc a');
+if(links.length&&'IntersectionObserver' in window){
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var a=map[e.target.id];if(a&&e.isIntersecting){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on')}})},{rootMargin:'-8% 0px -82% 0px'});
+document.querySelectorAll('article.doc h2[id],article.doc h3[id]').forEach(function(h){io.observe(h)});
+}})();
+</script>
+</body></html>
