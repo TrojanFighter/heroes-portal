@@ -4,7 +4,7 @@ import json, os, re, shutil, html
 import markdown
 
 SRC = "/home/ubuntu/book-src"
-OUT = "/home/ubuntu/heroes-portal/public"
+OUT = os.environ.get("SITE_OUT", "/home/ubuntu/heroes-portal/public")
 DATA = "/home/ubuntu/heroes-portal/data/github.json"
 REPO_URL = "https://github.com/TrojanFighter/IndieGameLegendaryHeroes"
 SESSION_URL = "https://app.devin.ai/sessions/fe81bbb5c74d43ffb7d98d011a5e301b"
@@ -358,7 +358,12 @@ def render_doc(repo_path, docset):
     lang = "en" if repo_path.startswith("translations/en/") else "zh-CN"
     return title, art, nav, lang
 
+BASE = os.environ.get("SITE_BASE", "").rstrip("/")
+BASE_LINK_RE = re.compile(r'(href|src)="/(?!/)')
+
 def write(rel, content):
+    if BASE and rel.endswith(".html"):
+        content = BASE_LINK_RE.sub(r'\1="' + BASE + '/', content)
     p = os.path.join(OUT, rel.lstrip("/"))
     os.makedirs(os.path.dirname(p), exist_ok=True)
     open(p, "w", encoding="utf-8").write(content)
