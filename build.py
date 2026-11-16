@@ -388,8 +388,12 @@ def claim_status(repo_path):
 
 def main():
     if os.path.exists(OUT):
-        shutil.rmtree(OUT)
-    os.makedirs(OUT)
+        for n in os.listdir(OUT):
+            if n == ".git":
+                continue
+            p = os.path.join(OUT, n)
+            shutil.rmtree(p) if os.path.isdir(p) else os.unlink(p)
+    os.makedirs(OUT, exist_ok=True)
     # copy generated art assets (webp only; PNG masters stay in assets/)
     os.makedirs(os.path.join(OUT, "assets"))
     for n in os.listdir("/home/ubuntu/heroes-portal/assets"):
