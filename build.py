@@ -425,6 +425,8 @@ def main():
         out = {}
         for k, (label, rp) in key_map.items():
             href = site_path(rp) if rp in docset else f"{REPO_URL}/blob/main/{rp}"
+            if BASE and href.startswith("/"):
+                href = BASE + href
             out[k] = {"h": href, "t": doc_titles.get(rp, label) or label}
         return out
 
